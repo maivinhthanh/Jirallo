@@ -7,7 +7,7 @@ exports.createGroup = (req, res, next) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     const error = new Error('Validation failed.')
-    error.statusCode = 422
+    error.statusCode = 404
     error.data = errors.array()
     throw error
   }
@@ -63,6 +63,8 @@ exports.addMember = (req, res, next) => {
       if(!result){
         const err = new Error("Không có user")
         err.statusCode = 404
+        error.data = errors.array()
+        res.status(404).json( error );
         throw err
       }
       idMember = result._id
@@ -71,6 +73,8 @@ exports.addMember = (req, res, next) => {
           if(!result){
             const err = new Error("Không có group")
             err.statusCode = 404
+            error.data = errors.array()
+            res.status(404).json( error );
             throw err
           }
           const group = result
@@ -78,6 +82,8 @@ exports.addMember = (req, res, next) => {
           if(finduser !== -1){
             const err = new Error("Thành viên đã có trong group")
             err.statusCode = 404
+            error.data = errors.array()
+            res.status(404).json( error );
             throw err
           }
           
@@ -91,12 +97,14 @@ exports.addMember = (req, res, next) => {
           }).catch(err=>{
             if (!err.statusCode) {
               err.statusCode = 500
+              res.status(500).json(err);
             }
             next(err)
           })
         }).catch(err=>{
           if (!err.statusCode) {
             err.statusCode = 500
+            res.status(500).json(err);
           }
           next(err)
         })
@@ -105,6 +113,7 @@ exports.addMember = (req, res, next) => {
     .catch(err=>{
       if (!err.statusCode) {
         err.statusCode = 500
+        res.status(500).json(err);
       }
       next(err)
     })
@@ -114,8 +123,8 @@ exports.deleteMember = (req, res, next) => {
   const idMember = req.body.idMember
   const idGroup = req.body.idGroup
 
-  Group.findByIdAndUpdate(idGroup,{ $pull: { members: idMember } }).then(e=>{
-    User.findByIdAndUpdate(idMember,{ $pull: { members: idGroup } }).then(f=>{
+  Group.findByIdAndUpdate(idGroup,{ $pull: { members: idMember } },{ 'new': true}).then(e=>{
+    User.findByIdAndUpdate(idMember,{ $pull: { members: idGroup } },{ 'new': true}).then(f=>{
       res.status(200).json({
         statusCode: 200,
         result: e
@@ -123,12 +132,14 @@ exports.deleteMember = (req, res, next) => {
     }).catch(err=>{
       if (!err.statusCode) {
         err.statusCode = 500
+        res.status(500).json(err);
       }
       next(err)
     })
   }).catch(err=>{
     if (!err.statusCode) {
       err.statusCode = 500
+      res.status(500).json(err);
     }
     next(err)
   })

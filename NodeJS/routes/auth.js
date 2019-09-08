@@ -49,9 +49,9 @@ router.post('/login',upload.single('avatar'),
   authController.login,
 );
 
-router.post('/findUser',upload.single('avatar'),
+router.post('/findUser',upload.single('avatar'),isAuth,
   [
-    body('name')
+    body('email')
       .trim()
       .not()
       .isEmpty()
@@ -59,4 +59,37 @@ router.post('/findUser',upload.single('avatar'),
   authController.findUser,
 );
 
+router.put('/editProfile/:iduser', upload.single('avatar'),isAuth,
+  [
+    body('email')
+      .isEmail().withMessage('Nhập sai email')
+      .custom((value, { req }) => {
+        return User.findOne({ email: value }).then(userDoc => {
+          if (userDoc) {
+            return Promise.reject('E-Mail này đã tồn tại');
+          }
+        });
+      })
+      .normalizeEmail(),
+    body('name')
+      .trim().escape()
+      .not()
+      .isEmpty().withMessage('Không bỏ trống tên'),
+    body('password')
+      .trim()
+      .isLength({ min: 5 }).withMessage('Password cần trên 5 ký tự'),
+    body('gender')
+      .trim()
+  ],
+  authController.editProfile,
+)
+router.post('/findUserLikeEmail',upload.single('avatar'),isAuth,
+  [
+    body('email')
+      .trim()
+      .not()
+      .isEmpty()
+  ], 
+  authController.findUserLikeEmail,
+);
 module.exports = router;
