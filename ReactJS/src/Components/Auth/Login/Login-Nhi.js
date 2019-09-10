@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import * as actions from '../../../Store/actions/auth';
 import { Link } from 'react-router-dom' 
 class Login extends Component {
   constructor(props){
@@ -24,6 +26,7 @@ class Login extends Component {
     event.preventDefault();
     const user = [{email:this.state.email, password:this.state.password}]
     localStorage.setItem('userLogin', JSON.stringify(user));
+    this.props.login(this.state.email, this.state.password)
   }
   render() {
     return (
@@ -77,4 +80,20 @@ class Login extends Component {
     )
   }
 }
-export default Login
+
+const mapStateToProps = state => {
+  return {
+      email: state.auth.email,
+      password: state.auth.password,
+      id: state.auth.id,
+      error: state.auth.error
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+      login: (email, password) => dispatch( actions.loginAction(email, password) )
+  };
+};
+
+export default connect( mapStateToProps, mapDispatchToProps )(Login)
