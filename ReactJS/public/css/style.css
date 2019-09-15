@@ -369,12 +369,12 @@ p.movetxt {
 /* /User */
 
 /* TaskWork */
-.taskWork .list-item-left li{
+/* .taskWork .list-item-left li{
   list-style: none;
-}
+} */
 
 /* DesctiptTask */
-.descriptWork h2{
+/* .descriptWork h2{
   text-align: left;
 }
 .modal-log-work {
@@ -413,10 +413,10 @@ p.movetxt {
 }
 .detail-work-task h4{
   text-align: left;
-}
+} */
 
 /* TaskWork */
-.taskWork ul{
+/* .taskWork ul{
   width:100%;
 }
 .taskWork .task-content ul li{
@@ -441,7 +441,7 @@ p.movetxt {
 }
 .taskWork .spinner {
   margin-left:15px;
-}
+} */
 /* .taskWork .badge {
   position: absolute;
   right: 9px;
@@ -467,3 +467,14 @@ p.movetxt {
 }
 
 /* /ContentTask */
+
+
+/* AdminPage */
+.input-search-email{
+  width: 30%;
+  margin-top:30px;
+}
+.detailUser {
+  width: 85%;
+  margin-top:30px;
+}

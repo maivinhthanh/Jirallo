@@ -132,6 +132,7 @@ exports.editProfile = (req, res, next) =>{
 exports.findUserLikeEmail = (req, res, next)=>{
   const email = req.body.email
   User.find({email:{'$regex': email}}).then(e=>{
+    console.log(e);
     if(!e){
       const error = new Error('Không tìm thầy user');
       error.statusCode = 404;
@@ -143,6 +144,7 @@ exports.findUserLikeEmail = (req, res, next)=>{
       result: e
     })
   }).catch(err=>{
+    console.log('Loi',err)
     if (!err.statusCode) {
       err.statusCode = 500
       res.status(500).json(err);
