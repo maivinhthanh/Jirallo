@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
+const Group = require('../models/group');
 
 exports.signup = (req, res, next) => {
   const errors = validationResult(req)
@@ -149,4 +150,21 @@ exports.findUserLikeEmail = (req, res, next)=>{
     }
     next(err)
   })
+}
+
+exports.findInfoUserByEmail = async (req, res, next)=>{
+  try {
+    const email = req.body.email
+    const user  = await User.findOne({email})
+    const GP = await Group.find({_id:user.idgroup})
+
+    res.status(200).json({
+      statusCode: 200,
+      result: user,
+      group: GP
+    })
+  } catch (error) {
+    console.log(error)
+  }
+  
 }
