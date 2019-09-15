@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-
-class Board extends Component {
+import User from './User'
+export default class ListUser extends Component {
   render() {
     return (
       <div>
+        <User/>
       </div>
     )
   }
 }
-export default Board

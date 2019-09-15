@@ -14,19 +14,42 @@ export const loginfail = ( name ) => {
         message: name
     };
 };
+export const register = (data) =>{
+    return {
+        type:actionTypes.Register,
+        id: data.userId
+    }
+}
+export const registerFail = (name) =>{
+    return {
+        type: actionTypes.RegisterFail,
+        message: name
+    }
+}
 export const loginAction = (email, password) => {
     return dispatch => {
         return CallApi('auth/login', 'POST',{
             email: email,
             password: password
           }).then( response => {
-              console.log(response)
             dispatch(login(response.data));
          } )
-         .catch( error => {
-             console.log(error)
+         .catch(error => {
              dispatch(loginfail());
          } );
-        
     };
 };
+export const RegisterAction = (email,password,fullname) =>{
+    return dispatch =>{
+        return CallApi('auth/signup','PUT',{
+            email:email,
+            password:password,
+            name: fullname
+        }).then (response =>{
+            console.log(response.data)
+            dispatch(register(response.data))
+        }).catch (err =>{
+            dispatch(registerFail())
+        })
+    }
+}

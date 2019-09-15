@@ -25,10 +25,20 @@ const loginfail = (state, action) => {
     return updateObject( state, { error: true } );
 };
 
+const register = (state, action) =>{
+   return updateObject( state, {id : action.id} );
+}
+
+const registerFail = (state,action) =>{
+    return updateObject(state,{error : true})
+}
+
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.Login: return login( state, action ); 
         case actionTypes.LoginFail: return loginfail(state, action);
+        case actionTypes.Register : return register(state,action);
+        case actionTypes.RegisterFail : return registerFail(state,action);
         default: return state;
     }
 };

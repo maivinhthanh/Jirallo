@@ -1,40 +1,60 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import * as actions from '../../../Store/actions/auth';
 import { Link } from 'react-router-dom' 
-class Login extends Component {
+
+class Register extends Component {
   constructor(props){
     super(props);
     this.state = {
-      email: '',
-      password: ''
+      email:'',
+      password:'',
+      name: ''
     }
   }
-  handleEmail =(event) =>{
+  handleChangeName =(event) =>{
     event.preventDefault();
     this.setState({
-      email: event.target.value 
+      name: event.target.value
     })
   }
-  handlePass = (event) =>{
+  handleChangeEmail =(event)=>{
+    event.preventDefault();
+    this.setState({
+      email : event.target.value
+    })
+  }
+  handleChangePass =(event)=>{
     event.preventDefault();
     this.setState({
       password : event.target.value
     })
   }
-  handleSubmit =(event) =>{
+  handleSubmit =(event)=>{
     event.preventDefault();
-    const user = [{email:this.state.email, password:this.state.password}]
-    localStorage.setItem('userLogin', JSON.stringify(user));
-    this.props.login(this.state.email, this.state.password)
+    const user = [{email:this.state.email, password:this.state.password,name: this.state.fullname}]
+    console.log(user);
+    this.props.Register(this.state.email,this.state.password,this.state.name);
   }
   render() {
     return (
-      <div className="loginPage">
-      <div className="container form-login">
+      <div className="registerPage">
+      <div className="container form-register">
         <form onSubmit={this.handleSubmit}>
+        <div className="form-group">
+          <h3>Register</h3>
+            <label htmlFor="name">Full name:</label>
+            <input
+              required
+              type="text"
+              className="form-control"
+              id="fullname"
+              placeholder="Enter full name"
+              name="fullname"
+              maxLength='30'
+              value={this.state.name}
+              onChange= {this.handleChangeName}
+            />
+          </div>
           <div className="form-group">
-          <h3>Login</h3>
             <label htmlFor="email">Email:</label>
             <input
               required
@@ -43,10 +63,10 @@ class Login extends Component {
               id="email"
               placeholder="Enter email"
               name="email"
-              value={this.state.email}
-              onChange={this.handleEmail}
               maxLength='30'
               minLength='9'
+              value = {this.state.email}
+              onChange = {this.handleChangeEmail}
             />
           </div>
           <div className="form-group">
@@ -58,11 +78,11 @@ class Login extends Component {
               id="pwd"
               placeholder="Enter password"
               name="pswd"
-              value ={this.state.password}
-              onChange={this.handlePass}
               maxLength='30'
               minLength='5'
-            />
+              onChange= {this.handleChangePass}
+              value = {this.state.password}
+              />
           </div>
           <div className="form-group form-check">
             <label className="form-check-label">
@@ -73,27 +93,11 @@ class Login extends Component {
           <button type="submit" className="submit-btn">
             Submit
           </button>
-          <p className="txtPass" ><Link to="/register">Forgot Password ?</Link> </p>
+          <p className="txtPass" ><Link to="/login">Have a account ?</Link> </p>
         </form>
       </div>
       </div>
     )
   }
 }
-
-const mapStateToProps = state => {
-  return {
-      email: state.auth.email,
-      password: state.auth.password,
-      id: state.auth.id,
-      error: state.auth.error
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-      login: (email, password) => dispatch( actions.loginAction(email, password) )
-  };
-};
-
-export default connect( mapStateToProps, mapDispatchToProps )(Login)
+  export default Register 

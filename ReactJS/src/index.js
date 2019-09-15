@@ -9,11 +9,13 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import authReducer from './Store/reducers/auth';
+import adminReducer from './Store/reducers/admin'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     auth: authReducer,
+    admin: adminReducer,
 });
 
 const store = createStore(rootReducer, composeEnhancers(
