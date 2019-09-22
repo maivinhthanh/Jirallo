@@ -34,11 +34,13 @@ app.use((error, req, res, next) => {
   const status = error.statusCode || 500;
   const message = error.message;
   const data = error.data;
+
   res.status(status).json({ message: message, data: data });
 });
 
 mongoose
   .connect(
+    //'mongodb+srv://tuyetnhi:tuyetnhi10081998@cluster0-uvzix.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true }
     'mongodb+srv://tuyetnhi:tuyetnhi10081998@studytogether-2fwoo.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true }
   )
   .then(result => {

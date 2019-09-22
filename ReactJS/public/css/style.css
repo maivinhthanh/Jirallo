@@ -148,12 +148,12 @@ div#home {
   display: block;
 }
 
-.nav_links>li>a>span {
+.nav_links span {
   font-size: 32px;
   color: #fc6183;
 }
 
-.nav_links>li>a>p {
+.nav_links p {
   color: #000;
   font-size: 15px;
 }
@@ -216,7 +216,9 @@ p.movetxt {
 
 /* Login */
 .loginPage{
-  background-color: rgb(214, 216, 217);
+  background-color: #d9d9d9;
+  padding-top:100px;
+  padding-bottom: 200px;
 }
 .form-login{
   background: url(../images/ser.jpg) no-repeat center;
@@ -231,6 +233,9 @@ p.movetxt {
 .form-login h3{
   font-size: 65px;
   font-family: none;
+}
+.form-login .icon-user {
+  color: white;
 }
 .form-login label{
   float: left;
@@ -276,26 +281,47 @@ p.movetxt {
 /* Login */
 /* Register */
 .registerPage{
-  background-color: rgb(214, 216, 217);
+  background-color: #d9d9d9 ;
+  height: 910px;
+  position: relative;
 }
-.form-register{
-  background: url(../images/ser.jpg) no-repeat center;
+.form-register .img-register {
+  background: url(../images/1.jpg)
+   no-repeat center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   -ms-background-size: cover;
   background-size: cover;
+  position: absolute;
+  top: 100px;
+  width: 500px;
+  height: 740px;
+  left: 455px;
+}
+.form-register{
+  /* background: url(../images/ser.jpg) no-repeat center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -ms-background-size: cover;
+  background-size: cover; */
   min-height: 910px;
+  /* max-width: 800px !important; */
+  float: right;
  
 }
 .form-register h3{
   font-size: 65px;
   font-family: none;
 }
+.form-register .icon-user{
+  color:white;
+}
 .form-register label{
   float: left;
   margin-left:10px;
-  margin-bottom:26px;
+  /* margin-bottom:26px; */
   font-size:23px;
   margin-top:12px;
   font-family: fantasy;
@@ -303,7 +329,7 @@ p.movetxt {
 .form-register form{
   width: 60%;
   margin-left:200px;
-  padding-top:170px;
+  padding-top:56px;
 }
 .form-register input{
   border-radius: 20px;
@@ -317,6 +343,15 @@ p.movetxt {
 }
 .form-register input:valid{
   border: 2px solid black;
+}
+.form-register .form-control-file{
+  border:none !important ;
+  padding-top:0px !important ;
+  border-radius: 0px !important ;
+  padding-left:10px;
+}
+.form-register .gender{
+  margin-top:-30px !important;
 }
 .form-register .submit-btn{
   margin-top: 80px;
@@ -477,4 +512,40 @@ p.movetxt {
 .detailUser {
   width: 85%;
   margin-top:30px;
+
 }
+/* .header-home .nav_links {
+
+} */
+.header-board .user-info{
+  margin-left:auto;
+}
+.header-board .user-info .name-user i {
+  font-size: 50px;
+  padding-left: 10px;
+}
+/* MaibBoard */
+.board-task a {
+  text-align: left !important;
+  /* padding-left:20px; */
+  /* display: contents; */
+}
+.board-task .input-search {
+  display: inline-flex;
+  width: 100%;
+}
+.board-task i {
+  font-size:18px;
+  padding-top:10px;
+}
+.board-task .info-board{
+  padding: 15px 0px;
+    height: auto;
+}
+.board-task .collapse.show{
+  width: 164px;
+}
+.detail-card .epic-blacklog{
+  top: -60px;
+  left: -3px;
+} 

@@ -4,6 +4,7 @@ import _ from "lodash";
 class DetailUser extends Component {
   render() {
     const { admin } = this.props.admin;
+    console.log('admin',admin);
     return (
       <div className="detailUser">
         <div>

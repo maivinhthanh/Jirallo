@@ -1,5 +1,6 @@
 import * as actionTypes from '../constants/auth';
 import { updateObject } from '../utility';
+import { EditUser } from '../actions/auth';
 
 const initialState = {
     id: '',
@@ -17,28 +18,42 @@ const initialState = {
 const login = ( state, action ) => {
     const token = action.token
     document.cookie = 'token='+token
-    console.log(token)
+    console.log(token);
+    let json = {
+        code : 'ok',
+        data : action.id
+    }
+    state = json
+    console.log(state)
     return updateObject( state, {id : action.id} );
 };
 
 const loginfail = (state, action) => {
+    console.log(action);
     return updateObject( state, { error: true } );
 };
 
 const register = (state, action) =>{
-   return updateObject( state, {id : action.id} );
+   return updateObject( state, {id : action.id},  );
 }
 
 const registerFail = (state,action) =>{
     return updateObject(state,{error : true})
 }
-
+const EditUserSuccess = (state, action) =>{
+    return updateObject(state, {result : action.result})
+}
+const EditUserFail = (state, action) =>{
+    return updateObject(state,{error : true})
+}
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.Login: return login( state, action ); 
         case actionTypes.LoginFail: return loginfail(state, action);
         case actionTypes.Register : return register(state,action);
         case actionTypes.RegisterFail : return registerFail(state,action);
+        case actionTypes.EditUserSuccess : return EditUserSuccess(state, action);
+        case actionTypes.EditUserFail : return EditUserFail(state,action)
         default: return state;
     }
 };

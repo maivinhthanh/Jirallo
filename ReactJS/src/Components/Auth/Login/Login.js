@@ -24,7 +24,7 @@ class Login extends Component {
     event.preventDefault();
     const user = [{email:this.state.email, password:this.state.password}]
     localStorage.setItem('userLogin', JSON.stringify(user));
-    this.props.login(this.state.email, this.state.password)
+   this.props.login(this.state.email, this.state.password);
   }
   render() {
     return (
@@ -32,8 +32,8 @@ class Login extends Component {
       <div className="container form-login">
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-          <h3>Login</h3>
-            <label htmlFor="email">Email:</label>
+          <h3>Login <i className="icon-user fas fa-user-plus"></i></h3>
+            <label htmlFor="email">Email: <i class="fa fa-envelope"></i></label>
             <input
               required
               type="email"
@@ -48,7 +48,7 @@ class Login extends Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="pwd">Password:</label>
+            <label htmlFor="pwd">Password: <i class="fa fa-key"></i></label>
             <input
               required
               type="password"
@@ -69,7 +69,7 @@ class Login extends Component {
             </label>
           </div>
           <button type="submit" className="submit-btn">
-            Submit
+            Submit <i class="fas fa-paper-plane"></i>
           </button>
           <p className="txtPass" ><Link to="/register">Forgot Password ?</Link> </p>
         </form>
