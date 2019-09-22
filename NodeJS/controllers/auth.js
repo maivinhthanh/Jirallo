@@ -2,7 +2,9 @@ const { validationResult } = require("express-validator/check");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const User = require("../models/user");
+
+const User = require('../models/user');
+const Group = require('../models/group');
 
 exports.signup = (req, res, next) => {
   const errors = validationResult(req);
@@ -147,6 +149,7 @@ exports.findUserLikeEmail = (req, res, next) => {
         result: e
       });
     })
+<<<<<<< HEAD
     .catch(err => {
       console.log("Loi", err);
       if (!err.statusCode) {
@@ -156,3 +159,31 @@ exports.findUserLikeEmail = (req, res, next) => {
       next(err);
     });
 };
+=======
+  }).catch(err=>{
+    console.log('Loi',err)
+    if (!err.statusCode) {
+      err.statusCode = 500
+      res.status(500).json(err);
+    }
+    next(err)
+  })
+}
+
+exports.findInfoUserByEmail = async (req, res, next)=>{
+  try {
+    const email = req.body.email
+    const user  = await User.findOne({email})
+    const GP = await Group.find({_id:user.idgroup})
+
+    res.status(200).json({
+      statusCode: 200,
+      result: user,
+      group: GP
+    })
+  } catch (error) {
+    console.log(error)
+  }
+  
+}
+>>>>>>> 69e9c2688814095a34f614bd1f4ba8848cb4514d

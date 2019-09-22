@@ -1,5 +1,6 @@
 const express = require('express');
 const { body } = require('express-validator/check');
+const async = require('async')
 
 const User = require('../models/user');
 const authController = require('../controllers/auth');
@@ -92,4 +93,13 @@ router.post('/findUserLikeEmail',upload.single('avatar'),isAuth,
   ], 
   authController.findUserLikeEmail,
 );
+router.post('/findInfoUserByEmail',upload.single('avatar'),isAuth,
+  [
+    body('email')
+      .trim()
+      .not()
+      .isEmpty()
+  ], 
+  authController.findInfoUserByEmail,
+ )
 module.exports = router;
