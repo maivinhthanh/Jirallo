@@ -6,19 +6,43 @@ const projectSchema = new Schema({
     type: String,
     required: true
   },
+  key: {
+    type: String,
+    required: true
+  },
   discription: {
     type: String,
     required: true
   },
-  idgroup:{
-    type: Schema.Types.ObjectId,
-    ref: 'group',
-    required: true
+  image: {
+    type: String
   },
-  idtask:[
+  idmembers:[
     {
       type: Schema.Types.ObjectId,
-      ref: 'task',
+      position: String,
+      ref: 'user',
+      required: true
+    }
+  ],
+  idepic:[
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'epic',
+      required: true
+    }
+  ],
+  idsprint:[
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'sprint',
+      required: true
+    }
+  ],
+  idissues:[
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'issues',
       required: true
     }
   ],

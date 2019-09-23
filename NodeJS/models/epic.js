@@ -1,20 +1,16 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const groupSchema = new Schema({
+const epicSchema = new Schema({
   name: {
     type: String,
     required: true
   },
-  manager:{
-    type: Schema.Types.ObjectId,
-    ref: 'user',
-    required: true
-  },
-  members:[
+  idissues:[
     {
       type: Schema.Types.ObjectId,
-      ref: 'user'
+      ref: 'issues',
+      required: true
     }
   ],
   hidden:{ type: Boolean, default: false },
@@ -22,4 +18,4 @@ const groupSchema = new Schema({
   dateedit: { type: Date }
 });
 
-module.exports = mongoose.model('Group', groupSchema);
+module.exports = mongoose.model('Epic', epicSchema);

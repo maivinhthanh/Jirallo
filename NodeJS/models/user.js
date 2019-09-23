@@ -35,10 +35,10 @@ const userSchema = new Schema({
     type: String,
     enum: Object.values(Genders),
   },
-  idgroup:[
+  idproject:[
     {
       type: Schema.Types.ObjectId,
-      ref: 'group'
+      ref: 'project'
     }
   ],
   hidden:{ type: Boolean, default: false },

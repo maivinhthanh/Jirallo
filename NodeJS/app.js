@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const authRoutes = require('./routes/auth');
-const groupRoutes = require('./routes/group');
 
 const app = express();
 
@@ -26,8 +25,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/auth', authRoutes);
-app.use('/group', groupRoutes);
-
 
 app.use((error, req, res, next) => {
   console.log(error);
