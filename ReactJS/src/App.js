@@ -7,12 +7,16 @@ import Login from './Containers/Auth/Login/LoginContainer'
 import Group from './Components/Group/Group';
 import Register from './Containers/Auth/Register/RegisterContainer'
 import AdminPage from './Page/AdminPage';
+import UserPage from './Page/UserPage';
+import BacklogPage from './Page/BacklogPage';
 function App() {
   return (
     <div className="App">
       <Router>
               <Route path="/" exact component={HomePage} />
+              <Route path="/user" component = {UserPage} />
               <Route path="/board" component={BoardPage} />
+              <Route path="/backlog" component={BacklogPage} />
               <Route path="/login" component={Login} />
               <Route path='/group' component={Group} />
               <Route path="/register" component={Register}/>

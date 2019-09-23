@@ -27,6 +27,7 @@ export const SearchAction = email => {
     )
       .then(respone => {
         if (respone.data.result.length !== 0) {
+          console.log(respone)
           dispatch(Search(respone.data.result));
         } else {
           dispatch(SearchError("Error"));

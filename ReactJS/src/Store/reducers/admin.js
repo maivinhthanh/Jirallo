@@ -8,7 +8,7 @@ const initialState = {
     password: '',
     image:'',
     datecreate:'',
-    idgroup:'',
+    // idgroup:'',
     error: false,
     message: ''
 };

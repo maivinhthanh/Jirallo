@@ -1,11 +1,12 @@
 import * as actionTypes from '../constants/auth';
 import CallApi from '../../until/apiCaller';
 
-export const login = ( data ) => {
+export const login = ( account ) => {
     return {
         type: actionTypes.Login,
-        token: data.token,
-        id: data.userId
+        token: account.data.token,
+        id: account.data.userId,
+        status : account.status
     };
 };
 export const loginfail = ( name ) => {
@@ -26,30 +27,69 @@ export const registerFail = (name) =>{
         message: name
     }
 }
+export const EditUser = (user) =>{
+    return {
+        type: actionTypes.EditUserSuccess,
+        data: user
+    }
+}
+export const EditUserFail = (name) =>{
+    return {
+        type: actionTypes.EditUserFail,
+        message: name
+    }
+}
 export const loginAction = (email, password) => {
+    let result ;
     return dispatch => {
         return CallApi('auth/login', 'POST',{
             email: email,
             password: password
           }).then( response => {
-            dispatch(login(response.data));
+            dispatch(login(response));
+            // result =  dispatch(login(response));
+            // return result
          } )
          .catch(error => {
-             dispatch(loginfail());
+             dispatch(loginfail(error));
          } );
     };
+  
 };
-export const RegisterAction = (email,password,fullname) =>{
+export const RegisterAction = (email,password,fullname,avatar,gender) =>{
     return dispatch =>{
         return CallApi('auth/signup','PUT',{
             email:email,
             password:password,
-            name: fullname
+            name: fullname,
+            image:avatar,
+            gender:gender
         }).then (response =>{
-            console.log(response.data)
+            console.log(response.data);
             dispatch(register(response.data))
         }).catch (err =>{
             dispatch(registerFail())
+        })
+    }
+}
+export const EditUserAction = (id,user) =>{
+    console.log(id,user);
+    console.log(user[0].email)
+    return dispatch =>{
+        return CallApi(`auth/editProfile/${id}`,'PUT',{
+            email : user[0].email,
+            password: user[0].password,
+            name:user[0].name,
+            gender: user[0].gender
+        },
+        document.cookie.split("=")[2]
+        ).then(response =>{
+            if(response.data.result.length !== 0){
+                dispatch(EditUser(response.data.result))
+            }
+        })
+        .catch(err =>{
+           dispatch(EditUserFail(err))
         })
     }
 }

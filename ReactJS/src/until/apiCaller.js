@@ -8,7 +8,6 @@ export default function apiCaller(endPoint, method = "POST", body, headers = nul
     data: body,
     headers : {Authorization: headers}
   }).catch(err =>{
-    console.log(err)
-    // throw(err);
+    throw(err);
   });
 }
