@@ -93,13 +93,13 @@ router.post('/findUserLikeEmail',upload.single('avatar'),isAuth,
   ], 
   authController.findUserLikeEmail,
 );
-router.post('/findInfoUserByEmail',upload.single('avatar'),isAuth,
-  [
-    body('email')
-      .trim()
-      .not()
-      .isEmpty()
-  ], 
-  authController.findInfoUserByEmail,
- )
+// router.post('/findInfoUserByEmail',upload.single('avatar'),isAuth,
+//   [
+//     body('email')
+//       .trim()
+//       .not()
+//       .isEmpty()
+//   ], 
+//   authController.findInfoUserByEmail,
+//  )
 module.exports = router;

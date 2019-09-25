@@ -1,23 +1,29 @@
-const express = require('express')
-const { body } = require('express-validator/check')
+const express = require('express');
+const { body } = require('express-validator/check');
+const async = require('async')
 
-const groupController = require('../controllers/group')
+const Project = require('../models/project');
+const projectController = require('../controllers/project');
 
-const router = express.Router()
+const router = express();
 
 const isAuth = require('../middleware/is-auth')
+
 const upload = require('./uploadfile')
 
-router.post(
-    '/createProject',
-    isAuth,
-    [
-        body('name')
-        .trim()
-        .not()
-        .isEmpty(), 
-    ],
-    groupController.createGroup
-)
+router.post('/createProject',upload.single('avatar'),isAuth,
+  [
+    body('name')
+      .trim()
+      .not()
+      .isEmpty()
+  ], 
+  projectController.createProject,
+);
+router.put('/editInfoProject/:idproject',upload.single('avatar'),isAuth,
+  [
+  ], 
+  projectController.editInfoProject,
+);
 
 module.exports = router;

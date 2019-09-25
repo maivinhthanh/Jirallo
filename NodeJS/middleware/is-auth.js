@@ -9,11 +9,9 @@ module.exports = (req, res, next) => {
     throw error;
   }
   const token = authHeader;
-  console.log(token)
   let decodedToken;
   try {
     decodedToken = jwt.verify(token, 'somesupersecretsecret');
-    console.log(decodedToken)
   } catch (err) {
     err.statusCode = 500;
     res.status(500).json(err)

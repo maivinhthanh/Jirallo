@@ -8,19 +8,16 @@ const projectSchema = new Schema({
   },
   key: {
     type: String,
-    required: true
   },
   discription: {
     type: String,
-    required: true
   },
   image: {
     type: String
   },
   idmembers:[
     {
-      type: Schema.Types.ObjectId,
-      position: String,
+      type: Schema.Types.Mixed,
       ref: 'user',
       required: true
     }

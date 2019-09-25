@@ -5,8 +5,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const authRoutes = require('./routes/auth');
+const projectRoutes = require('./routes/project');
 
-const app = express();
+const app = express(); 
 
 
 app.use(bodyParser.urlencoded({extended: true})); // x-www-form-urlencoded <form>
@@ -25,9 +26,11 @@ app.use((req, res, next) => {
 });
 
 app.use('/auth', authRoutes);
+app.use('/project', projectRoutes);
+
 
 app.use((error, req, res, next) => {
-  console.log(error);
+  console.log(error)
   const status = error.statusCode || 500;
   const message = error.message;
   const data = error.data;
