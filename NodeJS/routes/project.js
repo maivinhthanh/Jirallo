@@ -21,9 +21,15 @@ router.post('/createProject',upload.single('avatar'),isAuth,
   projectController.createProject,
 );
 router.put('/editInfoProject/:idproject',upload.single('avatar'),isAuth,
-  [
-  ], 
+  [], 
   projectController.editInfoProject,
+);
+router.get('/viewInfoProject/:idproject',isAuth, 
+  projectController.viewInfoProject,
+);
+router.put('/AddMember/:idproject',upload.single('avatar'),isAuth,
+  [], 
+  projectController.AddMember,
 );
 
 module.exports = router;

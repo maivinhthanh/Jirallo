@@ -60,3 +60,27 @@ exports.editInfoProject = (req, res, next) => {
       next(err);
     });
 };
+exports.viewInfoProject = (req, res, next) => {
+  const idproject = req.params.idproject;
+  Project.findById(idproject).then(result =>{
+    res.status(201).json({ statusCode: 200 ,result});
+  })
+}
+exports.AddMember = (req, res, next) => {
+  const idproject = req.params.idproject;
+  const iduser = req.body.iduser
+  const position = req.body.position
+  const project = {
+    idmembers: {
+      id: ObjectId(iduser),
+      position: position
+    },
+    dateedit: Date.now(),
+  }
+  Project.findByIdAndUpdate(idproject, {$push: { idmembers: {
+    id: ObjectId(iduser),
+    position: position
+  } }}, { new: true }).then(result =>{
+    res.status(201).json({ statusCode: 200 ,result});
+  })
+}
