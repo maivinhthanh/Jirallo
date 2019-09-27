@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 const authRoutes = require('./routes/auth');
 const projectRoutes = require('./routes/project');
+const epicRoutes = require('./routes/epic');
 
 const app = express(); 
 
@@ -27,7 +28,7 @@ app.use((req, res, next) => {
 
 app.use('/auth', authRoutes);
 app.use('/project', projectRoutes);
-
+app.use('/epic', epicRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error)

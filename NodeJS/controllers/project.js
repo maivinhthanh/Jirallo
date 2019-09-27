@@ -2,6 +2,7 @@ const { validationResult } = require("express-validator/check");
 const {ObjectId} = require('mongodb');
 
 const Project = require('../models/project');
+const User = require('../models/user');
 
 exports.createProject = (req, res, next) => {
     const errors = validationResult(req);
@@ -77,4 +78,13 @@ exports.AddMember = (req, res, next) => {
   } }}, { new: true }).then(result =>{
     res.status(201).json({ statusCode: 200 ,result});
   })
+}
+exports.ViewListProject = async (req, res, next) => {
+    const idproject = req.params.idproject;
+    const userId = req.userId
+    
+    const user = await User.findById(userId)
+    const projects = await user.idproject.map(async (item, index)=>{
+        return epic = await Project.findOne({_id:item})
+    })
 }

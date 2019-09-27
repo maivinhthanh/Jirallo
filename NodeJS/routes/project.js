@@ -1,8 +1,6 @@
 const express = require('express');
 const { body } = require('express-validator/check');
-const async = require('async')
 
-const Project = require('../models/project');
 const projectController = require('../controllers/project');
 
 const router = express();
@@ -21,11 +19,11 @@ router.post('/createProject',upload.single('avatar'),isAuth,
   ], 
   projectController.createProject,
 );
-router.put('/editInfoProject/:idproject',upload.single('avatar'),isAuth,
+router.put('/editInfoProject/:idproject',upload.single('avatar'),isAuth,  isManager,
   [], 
   projectController.editInfoProject,
 );
-router.get('/viewInfoProject/:idproject',isAuth, isManager,
+router.get('/viewInfoProject/:idproject',isAuth,
   projectController.viewInfoProject,
 );
 router.put('/AddMember/:idproject',upload.single('avatar'),isAuth, isManager,
