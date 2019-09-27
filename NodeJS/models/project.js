@@ -9,7 +9,7 @@ const projectSchema = new Schema({
   key: {
     type: String,
   },
-  discription: {
+  description: {
     type: String,
   },
   image: {

@@ -40,12 +40,12 @@ exports.editInfoProject = (req, res, next) => {
   if (req.file !== undefined) {
     image = req.file.path;
   }
-  const discription = req.body.discription;
+  const description = req.body.description;
   const project = {
       name: name,
       key: key,
       image: image,
-      discription: discription,
+      description: description,
       dateedit: Date.now(),
   }
   Project.findByIdAndUpdate(idproject, project, { new: true })
@@ -70,13 +70,7 @@ exports.AddMember = (req, res, next) => {
   const idproject = req.params.idproject;
   const iduser = req.body.iduser
   const position = req.body.position
-  const project = {
-    idmembers: {
-      id: ObjectId(iduser),
-      position: position
-    },
-    dateedit: Date.now(),
-  }
+  
   Project.findByIdAndUpdate(idproject, {$push: { idmembers: {
     id: ObjectId(iduser),
     position: position
