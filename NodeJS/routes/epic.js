@@ -23,8 +23,8 @@ router.put('/editEpic/:idepic',upload.single('avatar'),isAuth,
   [], 
   epicController.editEpic,
 );
-router.get('/viewEpic/:idproject',isAuth,
-  epicController.viewEpic,
+router.get('/viewListEpic/:idproject',isAuth,
+  epicController.viewListEpic,
 );
 
 

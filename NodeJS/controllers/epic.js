@@ -56,7 +56,7 @@ exports.editEpic = (req, res, next) => {
 function delay() {
     return new Promise(resolve => setTimeout(resolve, 300));
   }
-exports.viewEpic = async (req, res, next) => {
+exports.viewListEpic = async (req, res, next) => {
     try{
         const idproject = req.params.idproject;
         const project = await Project.findById(idproject)
