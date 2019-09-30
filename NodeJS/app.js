@@ -2,7 +2,7 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
 const authRoutes = require('./routes/auth');
 const projectRoutes = require('./routes/project');
@@ -39,12 +39,13 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message: message, data: data });
 });
 
-mongoose
-  .connect(
-    //'mongodb+srv://tuyetnhi:tuyetnhi10081998@cluster0-uvzix.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true }
-    'mongodb+srv://tuyetnhi:tuyetnhi10081998@studytogether-2fwoo.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true }
-  )
-  .then(result => {
-    app.listen(8080);
-  })
-  .catch(err => console.log(err));
+module.exports = app;
+// mongoose
+//   .connect(
+//     //'mongodb+srv://tuyetnhi:tuyetnhi10081998@cluster0-uvzix.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true }
+//     'mongodb+srv://tuyetnhi:tuyetnhi10081998@studytogether-2fwoo.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true }
+//   )
+//   .then(result => {
+//     app.listen(8080);
+//   })
+//   .catch(err => console.log(err));
