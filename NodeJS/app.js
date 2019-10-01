@@ -6,6 +6,8 @@ const bodyParser = require('body-parser')
 const authRoutes = require('./routes/auth')
 const projectRoutes = require('./routes/project')
 const epicRoutes = require('./routes/epic')
+const sprintRoutes = require('./routes/sprint')
+const issuesRoutes = require('./routes/issues')
 
 const app = express() 
 
@@ -27,6 +29,8 @@ app.use((req, res, next) => {
 app.use('/auth', authRoutes)
 app.use('/project', projectRoutes)
 app.use('/epic', epicRoutes)
+app.use('/sprint', sprintRoutes)
+app.use('/issues', issuesRoutes)
 
 app.use((error, req, res, next) => {
     console.log(error)

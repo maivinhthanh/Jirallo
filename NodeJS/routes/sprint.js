@@ -19,7 +19,7 @@ router.post('/createSprint',upload.single('avatar'),isAuth,
     ], 
     sprintController.createSprint,
 )
-router.put('/editSprint/:idaprint',upload.single('avatar'),isAuth, 
+router.put('/editSprint/:idsprint',upload.single('avatar'),isAuth, 
     [], 
     sprintController.editSprint,
 )

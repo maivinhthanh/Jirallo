@@ -32,7 +32,7 @@ const taskSchema = new Schema({
         type: String,
         enum: Object.values(Type),
     },
-    discript:{
+    descript:{
         type: String,
         required: true
     },
