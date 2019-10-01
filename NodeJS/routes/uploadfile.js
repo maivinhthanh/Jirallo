@@ -2,12 +2,12 @@ const multer = require('multer')
 
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, './images');
+      cb(null, './images')
     },
     filename: (req, file, cb) => {
-      cb(null, file.fieldname + '-' + Date.now() + file.originalname);
+      cb(null, file.fieldname + '-' + Date.now() + file.originalname)
     }
-});
+})
 
 const fileFilter = (req, file, cb) => {
 if (
@@ -15,11 +15,11 @@ if (
     file.mimetype === 'image/jpg' ||
     file.mimetype === 'image/jpeg'
 ) {
-    cb(null, true);
+    cb(null, true)
 } else {
-    cb(null, false);
+    cb(null, false)
 }
-};
+}
 
 const upload = multer(
 { storage: fileStorage, 
