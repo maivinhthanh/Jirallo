@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../Store/actions/admin";
-import * as actionsGroup from "../../Store/actions/group";
+import * as actionsProject from "../../Store/actions/project";
 import _ from "lodash";
+import { Redirect } from 'react-router-dom';
 import {
   Collapse,
   Navbar,
@@ -28,12 +29,13 @@ class HeaderBoard extends Component {
     this.state = {
       isOpen: false,
       modal: false,
-      nameGroup:''
+      nameProject:'',
+      status: false
     };
     this.toggle = this.toggle.bind(this);
-    this.createGroup = this.createGroup.bind(this);
+    this.createProject = this.createProject.bind(this);
     this.showToggle = this.showToggle.bind(this);
-    this.handleNameGroup = this.handleNameGroup.bind(this);
+    this.handleNameProject = this.handleNameProject.bind(this);
   }
   toggle() {
     this.setState({
@@ -45,17 +47,15 @@ class HeaderBoard extends Component {
       modal: !prevState.modal
     }));
   }
-  handleNameGroup(event){
+  handleNameProject(event){
     event.preventDefault();
     this.setState({
-      nameGroup : event.target.value
+      nameProject : event.target.value
     })
-    console.log(this.state.nameGroup)
   }
-  createGroup(event){
+  createProject(event){
     event.preventDefault();
-    this.props.createGroupAct(this.state.nameGroup)
-    console.log(this.props.group)
+    this.props.createProjectAct(this.state.nameProject)
   }
   componentWillMount() {
     const user = JSON.parse(localStorage.getItem("userLogin"));
@@ -64,6 +64,7 @@ class HeaderBoard extends Component {
   }
   render() {
     const admin = this.props.admin;
+    console.log(admin)
     _.map(admin, item => {
       console.log(item.name);
     });
@@ -87,8 +88,8 @@ class HeaderBoard extends Component {
                     <DropdownToggle nav caret>
                       Options
                     </DropdownToggle>
-                    <DropdownMenu right>
-                      <DropdownItem>Option 1</DropdownItem>
+                    <DropdownMenu right  >
+                      <DropdownItem href="viewAll">View All Project</DropdownItem>
                       <DropdownItem>Option 2</DropdownItem>
                       <DropdownItem divider />
                       <DropdownItem>Reset</DropdownItem>
@@ -97,7 +98,7 @@ class HeaderBoard extends Component {
                   <div>
                     <div>
                       <Button color="success" onClick={this.showToggle}>
-                        createGroup
+                      Create project
                       </Button>
                       <Modal
                         isOpen={this.state.modal}
@@ -105,13 +106,13 @@ class HeaderBoard extends Component {
                         className={this.props.className}
                       >
                         <ModalHeader toggle={this.showToggle}>
-                          Create group
+                          Create project
                         </ModalHeader>
                         <ModalBody>
-                        <Input type="text" onChange={this.handleNameGroup} value={this.state.nameGroup} name="group" id="group" placeholder="with name group" />
+                        <Input type="text" onChange={this.handleNameProject} value={this.state.nameProject} name="project" id="project" placeholder="with name project" />
                         </ModalBody>
                         <ModalFooter>
-                          <Button type="submit" color="primary" onClick={this.createGroup}>
+                          <Button type="submit" color="primary" onClick={this.createProject}>
                             Add
                           </Button>{" "}
                           <Button color="secondary" onClick={this.showToggle}>
@@ -143,13 +144,13 @@ class HeaderBoard extends Component {
 const mapStateToProps = state => {
   return {
     admin: state.admin,
-    group: state.group
+    project: state.project
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
     SearchEmail: email => dispatch(actions.SearchAction(email)),
-    createGroupAct: name => dispatch(actionsGroup.createGroupAct(name))
+    createProjectAct : name => dispatch(actionsProject.createProjectAct(name))
   };
 };
 export default connect(

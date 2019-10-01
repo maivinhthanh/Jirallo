@@ -10,15 +10,16 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import authReducer from './Store/reducers/auth';
 import adminReducer from './Store/reducers/admin';
-import groupReducer from './Store/reducers/group';
+import projectReducer from './Store/reducers/project'
 import userReducer from './Store/reducers/user';
-
+import groupReducer from './Store/reducers/group'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     auth: authReducer,
     admin: adminReducer,
-    group:groupReducer,
+    project : projectReducer,
+    group: groupReducer,
     user: userReducer
 });
 

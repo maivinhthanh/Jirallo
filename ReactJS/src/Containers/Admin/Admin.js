@@ -35,6 +35,7 @@ class Admin extends Component {
   };
   handleSearch = event => {
     event.preventDefault();
+    console.log(this.state.email)
     this.props.SearchEmail(this.state.email);
     this.setState({
       status: false

@@ -8,7 +8,9 @@ import Group from './Components/Group/Group';
 import Register from './Containers/Auth/Register/RegisterContainer'
 import AdminPage from './Page/AdminPage';
 import UserPage from './Page/UserPage';
+import DetailUserPage from './Page/DetailUserPage'
 import BacklogPage from './Page/BacklogPage';
+import ListProjectPage from './Page/ListProjectPage'
 function App() {
   return (
     <div className="App">
@@ -21,6 +23,8 @@ function App() {
               <Route path='/group' component={Group} />
               <Route path="/register" component={Register}/>
               <Route path="/admin" component={AdminPage} />
+              <Route path="/detailUser" component={DetailUserPage} />
+              <Route path="/viewAll" component={ListProjectPage} />
       </Router>
     </div>
   );

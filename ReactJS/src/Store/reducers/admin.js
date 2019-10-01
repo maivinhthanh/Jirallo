@@ -14,6 +14,7 @@ const initialState = {
 };
 
 const getSearchUser = ( state, action ) => {
+    console.log(action)
     return findUserLikeEmail(state,action.data)
 };
 

@@ -17,15 +17,17 @@ export const SearchError = name => {
 export const SearchAction = email => {
   return dispatch => {
     console.log(document.cookie)
+    console.log(document.cookie.split("=")[2])
     return CallApi(
       "auth/findUserLikeEmail",
       "POST",
       {
         email: email
       },
-      document.cookie.split("=")[1]
+      document.cookie.split("=")[2]
     )
       .then(respone => {
+        console.log(respone)
         if (respone.data.result.length !== 0) {
           console.log(respone)
           dispatch(Search(respone.data.result));
