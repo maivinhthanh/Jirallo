@@ -1,5 +1,5 @@
-const Project = require('../models/project');
-const {ObjectId} = require('mongodb');
+const Project = require('../models/project')
+const {ObjectId} = require('mongodb')
 
 module.exports = (req, res, next) => {
     const userId = req.userId
@@ -16,11 +16,11 @@ module.exports = (req, res, next) => {
                 }
                 else{
                     console.log('not ok')
-                    const error = new Error('Not authenticated.');
-                    error.statusCode = 401;
+                    const error = new Error('Not authenticated.')
+                    error.statusCode = 401
                     res.status(500).json(error)
-                    throw error;
+                    throw error
                 }
             })
     })
-};
+}

@@ -49,13 +49,13 @@ exports.signup = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
     try{
-        const errors = validationResult(req);
+        const errors = validationResult(req)
         if (!errors.isEmpty()) {
             const error = new Error("Validation failed.")
-            error.statusCode = 404;
+            error.statusCode = 404
             error.data = errors.array()
             res.status(404).json(error)
-            throw error;
+            throw error
         }
 
         const email = req.body.email
@@ -99,13 +99,13 @@ exports.login = async (req, res, next) => {
 }
 exports.findUser = async (req, res, next) => {
     try{
-        const errors = validationResult(req);
+        const errors = validationResult(req)
         if (!errors.isEmpty()) {
             const error = new Error("Validation failed.")
-            error.statusCode = 404;
+            error.statusCode = 404
             error.data = errors.array()
             res.status(404).json(error)
-            throw error;
+            throw error
         }
 
         const email = req.body.email
@@ -129,13 +129,13 @@ exports.findUser = async (req, res, next) => {
 }
 exports.editProfile = async (req, res, next) => {
     try{
-        const errors = validationResult(req);
+        const errors = validationResult(req)
         if (!errors.isEmpty()) {
             const error = new Error("Validation failed.")
-            error.statusCode = 404;
+            error.statusCode = 404
             error.data = errors.array()
             res.status(404).json(error)
-            throw error;
+            throw error
         }
 
         const iduser = req.params.iduser
@@ -165,13 +165,13 @@ exports.editProfile = async (req, res, next) => {
 }
 exports.findUserLikeEmail = async (req, res, next) => {
     try{
-        const errors = validationResult(req);
+        const errors = validationResult(req)
         if (!errors.isEmpty()) {
             const error = new Error("Validation failed.")
-            error.statusCode = 404;
+            error.statusCode = 404
             error.data = errors.array()
             res.status(404).json(error)
-            throw error;
+            throw error
         }
         const email = req.body.email
         const listuser = await User.find({ email: { $regex: email } })

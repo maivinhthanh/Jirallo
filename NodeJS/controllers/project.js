@@ -1,18 +1,18 @@
-const { validationResult } = require("express-validator/check");
-const {ObjectId} = require('mongodb');
+const { validationResult } = require("express-validator/check")
+const {ObjectId} = require('mongodb')
 
-const Project = require('../models/project');
-const User = require('../models/user');
+const Project = require('../models/project')
+const User = require('../models/user')
 
 exports.createProject = async (req, res, next) => {
     try{
-        const errors = validationResult(req);
+        const errors = validationResult(req)
         if (!errors.isEmpty()) {
             const error = new Error("Validation failed.")
-            error.statusCode = 404;
+            error.statusCode = 404
             error.data = errors.array()
             res.status(404).json(error)
-            throw error;
+            throw error
         }
 
         const name = req.body.name
@@ -34,26 +34,26 @@ exports.createProject = async (req, res, next) => {
             }
         },{ new: true })
 
-        res.status(201).json({ statusCode: 200 ,newproject});
+        res.status(201).json({ statusCode: 200 ,newproject})
     }
     catch (error) {
         if (!error.statusCode) {
-            error.statusCode = 500;
+            error.statusCode = 500
         }
-        res.status(500).json(error);
-        next(error);
+        res.status(500).json(error)
+        next(error)
     }
 }
 
 exports.editInfoProject = async (req, res, next) => {
     try{
-        const errors = validationResult(req);
+        const errors = validationResult(req)
         if (!errors.isEmpty()) {
             const error = new Error("Validation failed.")
-            error.statusCode = 404;
+            error.statusCode = 404
             error.data = errors.array()
             res.status(404).json(error)
-            throw error;
+            throw error
         }
 
         const idproject = req.params.idproject
@@ -74,7 +74,7 @@ exports.editInfoProject = async (req, res, next) => {
 
         const newproject = await Project.findByIdAndUpdate(idproject, project, { new: true })
 
-        res.status(201).json({ statusCode: 200 ,newproject});
+        res.status(201).json({ statusCode: 200 ,newproject})
     }
     catch(err) {
         if (!err.statusCode) {
@@ -87,16 +87,16 @@ exports.editInfoProject = async (req, res, next) => {
 
 exports.viewInfoProject = async (req, res, next) => {
     try{
-        const errors = validationResult(req);
+        const errors = validationResult(req)
         if (!errors.isEmpty()) {
             const error = new Error("Validation failed.")
-            error.statusCode = 404;
+            error.statusCode = 404
             error.data = errors.array()
             res.status(404).json(error)
-            throw error;
+            throw error
         }
         
-        const idproject = req.params.idproject;
+        const idproject = req.params.idproject
 
         const project = await Project.findById(idproject)
 
