@@ -32,7 +32,11 @@ exports.createProject = async (req, res, next) => {
 
         const newproject = await project.save()
 
+<<<<<<< HEAD
+        const user = User.findByIdAndUpdate(iduser,  {
+=======
         const user = await User.findByIdAndUpdate(iduser,  {
+>>>>>>> d95ac2b3d1bf43d3472e444bb1620996b5d1fb62
             $push: { 
                 idproject: ObjectId(newproject._id)
             }
@@ -148,6 +152,10 @@ exports.AddMember = async (req, res, next) => {
     }
 }
 
+function delay() {
+    return new Promise(resolve => setTimeout(resolve, 300))
+}
+
 exports.ViewListProject = async (req, res, next) => {
     try{
 
@@ -158,6 +166,8 @@ exports.ViewListProject = async (req, res, next) => {
             const project = await Project.findOne({_id:item})
             listproject = [...listproject, project]
         })
+        console.log(iduser)
+        console.log("listproject",listproject)
 
         await delay()
 

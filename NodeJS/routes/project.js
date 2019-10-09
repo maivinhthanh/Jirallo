@@ -26,6 +26,9 @@ router.put('/editInfoProject/:idproject',upload.single('avatar'),isAuth,  isMana
 router.get('/viewInfoProject/:idproject',isAuth,
     projectController.viewInfoProject,
 )
+router.get('/ViewListProject/',isAuth,
+    projectController.ViewListProject,
+)
 router.put('/AddMember/:idproject',upload.single('avatar'),isAuth, isManager,
     [], 
     projectController.AddMember,
