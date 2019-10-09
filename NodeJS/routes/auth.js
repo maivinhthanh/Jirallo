@@ -61,23 +61,10 @@ router.post('/findUser',upload.single('avatar'),isAuth,
 
 router.put('/editProfile/:iduser', upload.single('avatar'),isAuth,
     [
-        body('email')
-        .isEmail().withMessage('Nhập sai email')
-        .custom((value, { req }) => {
-            return User.findOne({ email: value }).then(userDoc => {
-            if (userDoc) {
-                return Promise.reject('E-Mail này đã tồn tại')
-            }
-            })
-        })
-        .normalizeEmail(),
         body('name')
         .trim().escape()
         .not()
         .isEmpty().withMessage('Không bỏ trống tên'),
-        body('password')
-        .trim()
-        .isLength({ min: 5 }).withMessage('Password cần trên 5 ký tự'),
         body('gender')
         .trim()
     ],
