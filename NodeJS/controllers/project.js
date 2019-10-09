@@ -32,11 +32,7 @@ exports.createProject = async (req, res, next) => {
 
         const newproject = await project.save()
 
-<<<<<<< HEAD
-        const user = User.findByIdAndUpdate(iduser,  {
-=======
         const user = await User.findByIdAndUpdate(iduser,  {
->>>>>>> d95ac2b3d1bf43d3472e444bb1620996b5d1fb62
             $push: { 
                 idproject: ObjectId(newproject._id)
             }
