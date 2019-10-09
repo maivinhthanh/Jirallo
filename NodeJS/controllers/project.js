@@ -4,6 +4,10 @@ const {ObjectId} = require('mongodb')
 const Project = require('../models/project')
 const User = require('../models/user')
 
+function delay() {
+    return new Promise(resolve => setTimeout(resolve, 300))
+}
+
 exports.createProject = async (req, res, next) => {
     try{
         const errors = validationResult(req)
@@ -28,7 +32,7 @@ exports.createProject = async (req, res, next) => {
 
         const newproject = await project.save()
 
-        const user = findByIdAndUpdate(iduser,  {
+        const user = await User.findByIdAndUpdate(iduser,  {
             $push: { 
                 idproject: ObjectId(newproject._id)
             }
@@ -126,6 +130,12 @@ exports.AddMember = async (req, res, next) => {
                 }
         }, { new: true })
 
+        const user = await User.findByIdAndUpdate(iduser,  {
+            $push: { 
+                idproject: ObjectId(project._id)
+            }
+        },{ new: true })
+
         res.status(201).json({ statusCode: 200 ,project})
     }
     catch(err) {
@@ -143,8 +153,9 @@ exports.ViewListProject = async (req, res, next) => {
         const iduser = req.userId
         const user = await User.findById(iduser)
         let listproject = []
-
+        console.log(user.idproject)
         await user.idproject.map(async (item, index)=>{
+            console.log("item",item)
             const project = await Project.findOne({_id:item})
             listproject = [...listproject, project]
         })
