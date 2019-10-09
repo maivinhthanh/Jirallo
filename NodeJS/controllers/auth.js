@@ -139,7 +139,7 @@ exports.editProfile = async (req, res, next) => {
         }
 
         const iduser = req.params.iduser
-        const image = null
+        let image = null
         if (req.file !== undefined) {
             image = req.file.path
         }
