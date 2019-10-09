@@ -5,12 +5,21 @@ export default class IteamHeader extends Component {
     return (
       <div>
         <ul className="nav_links list-unstyled">
-            <li className="nav-link-list">
+        <li>
+        <Link to="/viewAll">
+          <a href="/viewAll">
+                <span className="fas fa-home" />
+                <p>Home</p>
+              </a>
+            </Link>
+            </li>
+            {/* <li className="nav-link-list">
               <a href="index.html">
                 <span className="fas fa-home" />
                 <p>Home</p>
               </a>
             </li>
+            <li> */}
             <li>
             <Link to="/board">
           <a href="/board">

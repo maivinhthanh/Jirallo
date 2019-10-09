@@ -14,6 +14,27 @@ export const createProject = (data) => {
     result : data
   }
 }
+export const getAllList = (data) => {
+  return {
+    type: actionTypes.getAllList,
+    data: data
+  }
+}
+export const getListProjectAct = () =>{
+  return dispatch => {
+    return CallApi('project/ViewListProject',
+    'GET',
+    {},
+    document.cookie.split("=")[2]
+    ).then(respone => {
+      console.log(respone.data)
+      dispatch(getAllList(respone.data.listproject))
+    }).catch(err =>{
+      dispatch(projectError(err))
+    })
+
+  }
+}
 export const createProjectAct = (name) => {
   return dispatch => {
     return CallApi('project/createProject',
@@ -25,7 +46,7 @@ export const createProjectAct = (name) => {
     )
     .then (respone => {
       console.log(respone)
-      dispatch(createProject(respone.data.result))
+      dispatch(createProject(respone.data.newproject))
     })
     .catch(err =>{
        dispatch(projectError(err))

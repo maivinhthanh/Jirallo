@@ -11,7 +11,9 @@ import {
 } from "reactstrap";
 import MenuBoard from "../Components/Board/MenuBoard";
 class BacklogPage extends Component {
+  
   render() {
+    const { match: { params: { id } } } = this.props
     return (
       <div>
         <div className="detail-card">
@@ -39,7 +41,7 @@ class BacklogPage extends Component {
                 <MenuBoard />
               </div>
               <div className="col-md-2 epic-blacklog">
-               <MenuLog/>
+               <MenuLog params = {id}/>
               </div>
             </div>
           </div>

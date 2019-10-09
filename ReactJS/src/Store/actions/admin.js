@@ -16,8 +16,6 @@ export const SearchError = name => {
 
 export const SearchAction = email => {
   return dispatch => {
-    console.log(document.cookie)
-    console.log(document.cookie.split("=")[2])
     return CallApi(
       "auth/findUserLikeEmail",
       "POST",

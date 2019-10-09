@@ -6,6 +6,12 @@ export default class MenuBoard extends Component {
     return (
       <div>
          <ul className="nav_links list-unstyled">
+         <li className="nav-link-list">
+            <Link to="#">
+                <span className="fas fa-clipboard" />
+                <p>Project</p>
+            </Link>
+            </li>
             <li className="nav-link-list">
               <a href="#">
                 <span className="fas fa-cog" id="toggler" />
@@ -13,11 +19,11 @@ export default class MenuBoard extends Component {
                 <UncontrolledCollapse toggler="#toggler">
                 <Card>
                   <CardBody>
-                  <div className="input-search"> <Input type="text" name="text" id="search-board"/> <i class="fas fa-search"></i></div>
+                  <div className="input-search"> <Input type="text" name="text" id="search-board"/> <i className="fas fa-search"></i></div>
                   <div className="info-board">
                     <ul>Boards in JiraLlo</ul>
-                    <li>ABC</li>
-                    <li>CDE</li>
+                    <p>ABC</p>
+                    <p>CDE</p>
                   </div>
                   <Button color="success">Create Board</Button>
                   </CardBody>
@@ -27,10 +33,8 @@ export default class MenuBoard extends Component {
             </li>
             <li className="nav-link-list">
             <Link to="/backlog">
-            <a href="index.html">
                 <span className="fas fa-clipboard" />
                 <p>Backlog</p>
-              </a>
             </Link>
             </li>
           </ul> 

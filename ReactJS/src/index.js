@@ -13,6 +13,7 @@ import adminReducer from './Store/reducers/admin';
 import projectReducer from './Store/reducers/project'
 import userReducer from './Store/reducers/user';
 import groupReducer from './Store/reducers/group'
+import epicReducer from './Store/reducers/epic'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     admin: adminReducer,
     project : projectReducer,
     group: groupReducer,
-    user: userReducer
+    user: userReducer,
+    epic : epicReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

@@ -35,7 +35,6 @@ class Admin extends Component {
   };
   handleSearch = event => {
     event.preventDefault();
-    console.log(this.state.email)
     this.props.SearchEmail(this.state.email);
     this.setState({
       status: false
@@ -50,7 +49,6 @@ class Admin extends Component {
   showListGroup = event => {
     event.preventDefault();
     this.props.getListAction(this.state.nameGroup);
-    console.log(this.props.group);
   };
   showToggle =() => {
     this.setState(prevState => ({
@@ -71,13 +69,9 @@ class Admin extends Component {
   }
   insertUserToGroup = (event) =>{
     event.preventDefault();
-    console.log(this.state.emailUser, this.state.idGroup);
     this.props.insertUserToGroup(this.state.emailUser, this.state.idGroup)
-    console.log(this.props.user);
-
   }
   render() {
-    console.log(this.props);
     return (
       <div className="adminPage container-fluid">
         <div className="input-search-email">
@@ -167,9 +161,6 @@ class Admin extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log(state.admin);
-  console.log(state.group);
-  console.log(state.user)
   return {
     admin: state.admin,
     group: state.group,

@@ -2,7 +2,7 @@ import * as actionTypes from '../constants/admin';
 import { updateObject,findUserLikeEmail } from '../utility';
 import _ from 'lodash';
 const initialState = {
-    id: '',
+    _id: '',
     name: '',
     email: '',
     password: '',
@@ -10,11 +10,16 @@ const initialState = {
     datecreate:'',
     // idgroup:'',
     error: false,
+    hidden: false,
     message: ''
 };
 
 const getSearchUser = ( state, action ) => {
-    console.log(action)
+    // console.log(action.data[0])
+    // console.log(state)
+    // let cloneState = _.cloneDeep(state);
+    // return {...cloneState, ...action.data[0]}
+    // return updateObject(state, action.data[0])
     return findUserLikeEmail(state,action.data)
 };
 

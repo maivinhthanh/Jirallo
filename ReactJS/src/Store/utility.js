@@ -10,3 +10,9 @@ export const findUserLikeEmail = (oldObject, updateObject) =>{
     newObject = [...updateObject];
     return newObject
 }
+// export const updateArray = (oldArray, updatedArray) => {
+//     return [
+//         ...oldArray,
+//         ...updatedArray
+//     ];
+// }

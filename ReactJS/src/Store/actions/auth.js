@@ -40,7 +40,6 @@ export const EditUserFail = (name) =>{
     }
 }
 export const loginAction = (email, password) => {
-    let result ;
     return dispatch => {
         return CallApi('auth/login', 'POST',{
             email: email,
@@ -54,7 +53,6 @@ export const loginAction = (email, password) => {
              dispatch(loginfail(error));
          } );
     };
-  
 };
 export const RegisterAction = (email,password,fullname,avatar,gender) =>{
     return dispatch =>{
@@ -84,6 +82,7 @@ export const EditUserAction = (id,user) =>{
         },
         document.cookie.split("=")[2]
         ).then(response =>{
+            console.log(response)
             if(response.data.result.length !== 0){
                 dispatch(EditUser(response.data.result))
             }

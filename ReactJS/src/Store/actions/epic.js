@@ -1,0 +1,79 @@
+import CallAPI from '../../until/apiCaller'
+import * as actionTypes from '../constants/epic'
+import { ErrorUser } from './user'
+
+export const createEpic = (data) =>{
+  return {
+    type: actionTypes.createEpic,
+    data
+  }
+}
+export const ErrorEpic = (error) =>{
+  return {
+    type: actionTypes.ErrorEpic,
+    message: error
+  }
+
+}
+export const viewList = (data) => {
+  return {
+    type: actionTypes.viewList,
+    data
+  }
+}
+export const editEpic = (data) => {
+  return {
+    type: actionTypes.editEpic,
+    data
+  }
+}
+export const EditepicAct = (name, id) => {
+  console.log(name, id)
+  debugger
+  return dispatch => {
+    return CallAPI(`epic/editEpic/${id}`,
+    'PUT',
+    { name : name},
+    document.cookie.split('=')[2]
+    ).then(respone => {
+      debugger
+      console.log(respone)
+      dispatch(editEpic(respone.data))
+    }).catch(err => {
+      dispatch(ErrorEpic(err))
+    })
+  }
+}
+export const viewListEpicAct = (idProject) => {
+  return dispatch => {
+    return CallAPI(`epic/viewListEpic/${idProject}`,
+    'GET',
+    {},
+    document.cookie.split("=")[2]
+    ).then (respone => {
+      dispatch(viewList(respone.data))
+    }).catch(err => {
+      dispatch(ErrorEpic(err))
+    })
+  }
+}
+
+export const createEpicAct = (epic) =>{
+  console.log(epic.nameEpic)
+  return dispatch => {
+    return CallAPI('epic/createEpic',
+    'POST',
+    {
+      name: epic.nameEpic,
+      idproject:epic.idProject
+    },
+    document.cookie.split("=")[2]
+    )
+    .then (respone =>{
+      dispatch(createEpic(respone.data))
+    })
+    .catch(err =>{
+      dispatch(ErrorEpic(err))
+    })
+  }
+}

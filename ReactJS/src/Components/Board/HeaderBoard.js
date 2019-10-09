@@ -23,6 +23,8 @@ import {
   ModalFooter,
   Input,
 } from "reactstrap";
+import { Link } from 'react-router-dom' 
+import CreateProject from "../Modal/CreateProject";
 class HeaderBoard extends Component {
   constructor(props) {
     super(props);
@@ -89,39 +91,13 @@ class HeaderBoard extends Component {
                       Options
                     </DropdownToggle>
                     <DropdownMenu right  >
-                      <DropdownItem href="viewAll">View All Project</DropdownItem>
+                      <DropdownItem ><Link to="/viewAll">View All Project</Link></DropdownItem>
                       <DropdownItem>Option 2</DropdownItem>
                       <DropdownItem divider />
                       <DropdownItem>Reset</DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>
-                  <div>
-                    <div>
-                      <Button color="success" onClick={this.showToggle}>
-                      Create project
-                      </Button>
-                      <Modal
-                        isOpen={this.state.modal}
-                        toggle={this.showToggle}
-                        className={this.props.className}
-                      >
-                        <ModalHeader toggle={this.showToggle}>
-                          Create project
-                        </ModalHeader>
-                        <ModalBody>
-                        <Input type="text" onChange={this.handleNameProject} value={this.state.nameProject} name="project" id="project" placeholder="with name project" />
-                        </ModalBody>
-                        <ModalFooter>
-                          <Button type="submit" color="primary" onClick={this.createProject}>
-                            Add
-                          </Button>{" "}
-                          <Button color="secondary" onClick={this.showToggle}>
-                            Cancel
-                          </Button>
-                        </ModalFooter>
-                      </Modal>
-                    </div>
-                  </div>
+                  <CreateProject/>
                 </Nav>
               </Collapse>
             </Navbar>
@@ -129,10 +105,10 @@ class HeaderBoard extends Component {
           <div className="user-info">
             <div className="name-user">
               <p>
-                {_.map(admin, item => {
-                  return <span>{item.name}</span>;
+                {_.map(admin, (item, key) => {
+                  return <span key={item.id}>{item.name}</span>;
                 })}
-                <i class="fas fa-user-tie"></i>
+                <i className="fas fa-user-tie"></i>
               </p>
             </div>
           </div>

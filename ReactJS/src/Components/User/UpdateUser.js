@@ -46,7 +46,7 @@ class UpdateUser extends Component {
   handleSave(e) {
     e.preventDefault();
     const { id } = this.props;
-    console.log(id);
+    console.log(id)
     const updateUser = [
       {
         email: this.state.email,
@@ -62,14 +62,16 @@ class UpdateUser extends Component {
     return (
       <div>
         <div className="container">
-          <button
+          {/* <button
             type="button"
             className="btn btn-success"
             data-toggle="modal"
             data-target="#myModal"
-          >
-            Update User
-          </button>
+          > */}
+          <i data-toggle="modal"
+            data-target="#myModal" className="fas fa-cog"></i> Setting user
+            {/* Update User
+          </button> */}
           {/* The Modal */}
           <div className="modal" id="myModal">
             <div className="modal-dialog">

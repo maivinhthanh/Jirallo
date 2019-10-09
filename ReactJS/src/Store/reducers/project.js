@@ -7,20 +7,30 @@ const initialState = {
     key: '',
     description: '',
     image: '',
-    idmembers : '',
-    idepic : '',
+    idmembers : [],
+    idepic : [],
     idsprint: '',
-    idissues : '',
+    idissues : [],
+    datecreate: '',
+    hidden: false
 };
 
 const createProject = ( state, action ) => {
-  console.log(action)
- return updateObject( state, {action : action} );
+  let cloneState = [...state]
+  cloneState.push(action.result)
+  return cloneState
+//  return updateObject( state, action.result );
 };
-
+const getAllList = (state, action) => {
+    let cloneState = _.clone(state)
+    cloneState = [...action.data]
+    return cloneState
+    // return updateObject(state, action.data)
+}
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case actionTypes.createProject: return createProject( state, action ); 
+        case actionTypes.createProject: return createProject( state, action )
+        case actionTypes.getAllList : return getAllList(state, action)
         default: return state;
     }
 };

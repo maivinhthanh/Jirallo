@@ -17,8 +17,9 @@ function App() {
       <Router>
               <Route path="/" exact component={HomePage} />
               <Route path="/user" component = {UserPage} />
+              <Route path="/backlog/:id?" component={BacklogPage} />
               <Route path="/board" component={BoardPage} />
-              <Route path="/backlog" component={BacklogPage} />
+              {/* <Route path="/backlog" component={BacklogPage} /> */}
               <Route path="/login" component={Login} />
               <Route path='/group' component={Group} />
               <Route path="/register" component={Register}/>
