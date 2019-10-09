@@ -72,13 +72,12 @@ export const RegisterAction = (email,password,fullname,avatar,gender) =>{
 }
 export const EditUserAction = (id,user) =>{
     console.log(id,user);
-    console.log(user[0].email)
     return dispatch =>{
         return CallApi(`auth/editProfile/${id}`,'PUT',{
-            email : user[0].email,
-            password: user[0].password,
+            gender : user[0].gender,
+            avatar: user[0].avatar,
             name:user[0].name,
-            gender: user[0].gender
+            birthdate: user[0].birthday
         },
         document.cookie.split("=")[2]
         ).then(response =>{
@@ -88,6 +87,7 @@ export const EditUserAction = (id,user) =>{
             }
         })
         .catch(err =>{
+            console.log(err)
            dispatch(EditUserFail(err))
         })
     }

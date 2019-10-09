@@ -3,32 +3,34 @@ import { Form, FormGroup, Label, Input } from "reactstrap";
 import "../User/assets/style.css";
 import * as action from "../../Store/actions/auth";
 import { connect } from "react-redux";
+import _ from 'lodash'
 class UpdateUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      pass: "",
       name: "",
-      gender: ""
+      avatar: "",
+      gender: 'male',
+      birthday: ""
     };
-    this.handleEmail = this.handleEmail.bind(this);
-    this.handlePass = this.handlePass.bind(this);
-    this.handleName = this.handleName.bind(this);
+    this.handleAvatar = this.handleAvatar.bind(this);
     this.handleGender = this.handleGender.bind(this);
+    this.handleName = this.handleName.bind(this);
+    this.handleBirthday = this.handleBirthday.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.activeId = ''
   }
-  handleEmail(e) {
+  handleAvatar(e) {
     e.preventDefault();
     this.setState({
-      email: e.target.value
+      avatar: e.target.value
     });
     console.log(this.state.email);
   }
-  handlePass(e) {
+  handleGender(e) {
     e.preventDefault();
     this.setState({
-      pass: e.target.value
+      gender: e.target.value
     });
   }
   handleName(e) {
@@ -37,28 +39,32 @@ class UpdateUser extends Component {
       name: e.target.value
     });
   }
-  handleGender(e) {
+  handleBirthday(e) {
     e.preventDefault();
     this.setState({
-      gender: e.target.value
+      birthday: e.target.value
     });
   }
   handleSave(e) {
     e.preventDefault();
-    const { id } = this.props;
-    console.log(id)
     const updateUser = [
       {
-        email: this.state.email,
-        password: this.state.pass,
+        gender: this.state.gender,
+        avatar: this.state.avatar,
         name: this.state.name,
-        gender: this.state.gender
+        birthday: this.state.birthday
       }
     ];
-    this.props.EditUserAction(id, updateUser);
+    console.log(this.activeId)
+    this.props.EditUserAction(this.activeId, updateUser);
   }
   render() {
-    const { id } = this.props;
+    const props = this.props;
+    const admin = this.props.admin
+    console.log(props)
+      _.map(admin, (item) => {
+        this.activeId = item._id
+      })
     return (
       <div>
         <div className="container">
@@ -88,39 +94,27 @@ class UpdateUser extends Component {
                   <div className="form-user">
                     <Form onSubmit={this.handleSave}>
                       <FormGroup>
-                        <Label for="email">Email</Label>
+                        <Label for="name">Name</Label>
                         <Input
-                          type="email"
-                          name="email"
-                          value={this.state.email}
-                          onChange={this.handleEmail}
-                          id="email"
+                          type="text"
+                          name="text"
+                          value={this.state.name}
+                          onChange={this.handleName}
+                          id="name"
                           required
                           placeholder="with a placeholder"
                         />
                       </FormGroup>
                       <FormGroup>
-                        <Label for="password">Password</Label>
+                        <Label for="avatar">Avatar</Label>
                         <Input
-                          type="password"
-                          name="password"
-                          onChange={this.handlePass}
-                          value={this.state.pass}
-                          id="pass"
-                          required
-                          placeholder="password placeholder"
-                        />
-                      </FormGroup>
-                      <FormGroup>
-                        <Label for="name">Name</Label>
-                        <Input
-                          type="text"
-                          name="text"
-                          id="name"
-                          onChange={this.handleName}
-                          value={this.state.name}
-                          required
-                          placeholder="name placeholder"
+                          type="file"
+                          name="avatar"
+                          onChange={this.handleAvatar}
+                          value={this.state.avatar}
+                          id="avatar"
+                          // required
+                          // placeholder="password placeholder"
                         />
                       </FormGroup>
                       <FormGroup>
@@ -133,6 +127,18 @@ class UpdateUser extends Component {
                           value={this.state.gender}
                           required
                           placeholder="gender placeholder"
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <Label for="day">Birthday</Label>
+                        <Input
+                          type="text"
+                          name="text"
+                          id="day"
+                          onChange={this.handleBirthday}
+                          value={this.state.birthday}
+                          required
+                          placeholder="birthday placeholder"
                         />
                       </FormGroup>
                       <div className="modal-footer">
@@ -158,12 +164,19 @@ class UpdateUser extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    admin: state.admin,
+    project: state.project
+  };
+}
 const mapDispatchToProps = dispatch => {
   return {
     EditUserAction: (id, user) => dispatch(action.EditUserAction(id, user))
   };
 };
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(UpdateUser);

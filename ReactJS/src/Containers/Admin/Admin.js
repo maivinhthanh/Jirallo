@@ -95,7 +95,7 @@ class Admin extends Component {
           {!this.state.status && <DetailUsers admin={this.props} />}
         </div>
         <div>
-          <UpdateUser id="5d786b21f15e5146596ef338" />
+          <UpdateUser />
         </div>
 
         {/* FindGroupLikeName */}
