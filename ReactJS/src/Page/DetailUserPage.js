@@ -42,7 +42,7 @@ class DetailUserPage extends Component {
       this.id = item._id;
     });
     console.log(this.id)
-    console.log(project)
+    console.log(admin)
     return (
       <div className="detail-user">
         <div className="header-detail"></div>
@@ -83,6 +83,9 @@ class DetailUserPage extends Component {
         </div>
         <div className="content-task">
           <Card>
+          <div className="title">
+        <span>Title: Places work</span>
+      </div>
             <div className="detail-task-user">
               <ProjectDetail project={project} />
               {/* <CardBody>

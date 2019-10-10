@@ -73,7 +73,8 @@ export const RegisterAction = (email,password,fullname,avatar,gender) =>{
 export const EditUserAction = (id,user) =>{
     console.log(id,user);
     return dispatch =>{
-        return CallApi(`auth/editProfile/${id}`,'PUT',{
+        return CallApi(`auth/editProfile/${id}`,'PUT',
+        {
             gender : user[0].gender,
             avatar: user[0].avatar,
             name:user[0].name,

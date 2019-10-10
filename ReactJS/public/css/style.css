@@ -613,3 +613,30 @@ p.movetxt {
   margin-right: 10px;
   margin-top: 10px;
 }
+/* Backlog Page */
+.detail-card .issues {
+  width: 100%;
+  text-align: left;
+  border: 1px solid #ccaa;
+  padding: 10px;
+}
+.detail-card .issues-task {
+  margin-top: 50px;
+  float: left;
+  margin-left:70px;
+}
+
+
+/* DetailUserPage */
+
+.detail-user .title {
+  position: absolute;
+    left: -199px;
+    border: 2px solid #caa;
+    padding: 10px;
+    top: 0px;
+    z-index: 2;
+    width: 200px;
+    border-radius: inherit;
+    background: cornflowerblue;
+}

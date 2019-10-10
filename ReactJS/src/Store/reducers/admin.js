@@ -25,12 +25,22 @@ const getSearchUser = ( state, action ) => {
 
 const getError = (state, action) => {
     return updateObject(state, {error: true });
-} 
+}
+const EditUserSuccess = (state, action) =>{
+    console.log(state)
+    console.log(action.result)
+  // return updateObject(state, {result : action.result})
+}
+const EditUserFail = (state, action) =>{
+    return updateObject(state,{error : true})
+}
 
 const reducerAdmin = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.SearchSuccess: return getSearchUser( state, action );
         case actionTypes.SearchError : return getError(state, action);
+        case actionTypes.EditUserSuccess : return EditUserSuccess(state, action);
+        case actionTypes.EditUserFail : return EditUserFail(state,action)
         default: return state;
     }
 };

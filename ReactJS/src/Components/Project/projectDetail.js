@@ -21,7 +21,7 @@ export default class projectDetail extends Component {
             return (
               <Card>
                 <div className="detail-task-user">
-                  <CardBody>
+                  <CardBody style={{ background : 'aliceblue'}}>
                     <CardTitle>{item.name}</CardTitle>
                     <CardSubtitle>Create day: {this.fomatDateTime(item.datecreate)}</CardSubtitle>
                     <Button style={{background:'#d4edda', marginTop:'20px'}}>
