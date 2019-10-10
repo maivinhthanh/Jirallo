@@ -32,11 +32,7 @@ exports.createProject = async (req, res, next) => {
 
         const newproject = await project.save()
 
-<<<<<<< HEAD
-        const user = User.findByIdAndUpdate(iduser,  {
-=======
         const user = await User.findByIdAndUpdate(iduser,  {
->>>>>>> d95ac2b3d1bf43d3472e444bb1620996b5d1fb62
             $push: { 
                 idproject: ObjectId(newproject._id)
             }
@@ -124,7 +120,7 @@ exports.AddMember = async (req, res, next) => {
         const idproject = req.params.idproject
         const iduser = req.body.iduser
         const position = req.body.position
-        
+        console.log(iduser,position)
         const project = await Project.findByIdAndUpdate(idproject, { 
                 $push: { 
                     idmembers: {
@@ -143,6 +139,7 @@ exports.AddMember = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,project})
     }
     catch(err) {
+        console.log(err)
         if (!err.statusCode) {
             err.statusCode = 500
         }
