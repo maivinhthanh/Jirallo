@@ -20,6 +20,24 @@ export const getAllList = (data) => {
     data: data
   }
 }
+export const AddMemberAct =(id,user) => {
+  console.log(id, user);
+  return dispatch => {
+    return CallApi(`project/AddMember/${id}`,
+    'PUT',
+    {
+      iduser: user.email,
+      position: user.position
+    },
+    document.cookie.split("=")[2]
+    ).then(respone => {
+      console.log(respone)
+      // dispatch(addMemberSuccess(respone))
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+}
 export const createIssuesAct =(id, name) => {
   return dispatch => {
     return CallApi('issues/createIssues',

@@ -2,48 +2,47 @@ import React, { Component } from "react";
 import "../Project/assets/style.css";
 import { Link } from "react-router-dom";
 import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button,
+  Table,
+  Input,
   Breadcrumb,
   BreadcrumbItem
 } from "reactstrap";
 import * as actions from "../../Store/actions/project";
+import * as actionsAdmin from "../../Store/actions/admin"
 import { connect } from "react-redux";
 import _ from "lodash";
 import { Redirect } from 'react-router-dom';
 import ProjectDetail from "../../Components/Project/projectDetail";
+import ListProject from "../../Components/Project/listProject";
+import ToggleHome from "../../Components/Modal/ToggleHome";
+import CreateProject from '../../Components/Modal/CreateProject';
 class project extends Component {
   constructor(props) {
     super(props);
     this.state = {
       nameProject: ""
     };
-    // this.handleView = this.handleView.bind(this)
+    this.position = ''
+    // this.findUserLikeEmail = this.findUserLikeEmail.bind(this)
   }
-  handleView(info){
-    console.log(info)
-  }
-
-  // useEffect() {
-  //   this.props.getAllListProject();
-  // }
-
   componentDidMount() {
     this.props.getAllListProject();
   }
-
-  // fomatDateTime(date){
-  //   return _.slice(_.replace(date,/-/g,'/'),0,10)
+  // componentWillMount(){
+  //   const user = JSON.parse(localStorage.getItem("userLogin"));
+  //   console.log(user[0].email);
+  //   this.props.SearchEmail(user[0].email);
   // }
   render() {
     const { project } = this.props;
-    console.log(project)
+    const { admin } = this.props;
+     _.map(project, item => {
+      _.map(item.idmembers, data => {
+        this.position = data.position
+      })
+    })
     return (
+
       <div className="listProject container row">
         <div className="col-md-3 user-tag">
           <div className="content-user">
@@ -55,11 +54,16 @@ class project extends Component {
             </div>
             <div className="blog-title">
               <span>
-                <h1>Ran</h1>
+              {
+                _.map(admin, (item,key) => {
+                  return <h1 key ={item._id}>{item.name}</h1>
+                })
+              }
               </span>
             </div>
             <div className="description">
-              <p>FrontEnd Developer</p>
+              <p>{this.position}</p>
+              <p></p>
               <div className="menu">
                 <ul>
                   <li>
@@ -76,46 +80,62 @@ class project extends Component {
                   </li>
                 </ul>
               </div>
+            
             </div>
           </div>
+          <ToggleHome/>
         </div>
-        <div className="col-md-9 task-list">
-        <ProjectDetail project={project} />
-          {/* {_.map(project, item => {
-            return (
-              <Card>
-                <div className="detail-task-user">
-                  <CardBody>
-                    <CardTitle>{item.name}</CardTitle>
-                    <CardSubtitle>Create day: {this.fomatDateTime(item.datecreate)}</CardSubtitle>
-                    <Button onClick={ this.handleView.bind(this, item) } style={{background:'#d4edda', marginTop:'20px'}}>
-                      {" "}
-                      <Link to ={{ pathname: `/backlog/${item._id}`}}>
-                        <a href="index.html">
-                          <span>View</span>
-                        </a>
-                      </Link>
-                    </Button>
-                  </CardBody>
-                </div>
-              </Card>
-            );
-          })} */}
+        <div className="col-md-3 task-list">
+        <div className="project-task-list">
+        <h1>Project</h1>
+        <ProjectDetail project={project} AddMember={this.props.AddMember} />
+        </div>
+        </div>
+        <div className="col-md-6 project-list">
+        <div className="focus-detail">
+        <div className="search-project">
+        <Input style={{width:'25%', marginBottom:'20px'}} type="text" name="text" id="search" placeholder="search" />
+        </div>
+        <ListProject project={project} admin={admin} SearchEmail={this.props.SearchEmail}/>
+        </div>
+       <div className="modal-create">
+       <CreateProject/>
+       </div>
+        </div>
+        <div className="breadcrumb">
+          <Breadcrumb>
+            <BreadcrumbItem active>
+            <Link to ="/user">Home</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>
+            <Link to ="/Board">
+                <i class="fas fa-user-friends"> Board</i>
+              </Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>
+              <Link to ="/backlog">
+                <i class="fas fa-home"></i> Backlog
+                </Link>
+            </BreadcrumbItem>
+          </Breadcrumb>
         </div>
       </div>
     );
   }
 }
 const mapStateToProps = state => {
+  console.log(state.project, state.admin)
   return {
-    // admin: state.admin,
+    admin: state.admin,
     project: state.project
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    getAllListProject: () => dispatch(actions.getListProjectAct())
-  };
+    getAllListProject: () => dispatch(actions.getListProjectAct()),
+    SearchEmail:(email) => dispatch(actionsAdmin.SearchAction(email)),
+    AddMember:(id,user) => dispatch(actions.AddMemberAct(id,user))
+    };
 };
 export default connect(
   mapStateToProps,

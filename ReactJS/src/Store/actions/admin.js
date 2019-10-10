@@ -49,6 +49,7 @@ export const EditUserAction = (id,user) =>{
   }
 }
 export const SearchAction = email => {
+  console.log(email)
   return dispatch => {
     return CallApi(
       "auth/findUserLikeEmail",

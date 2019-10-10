@@ -640,3 +640,39 @@ p.movetxt {
     border-radius: inherit;
     background: cornflowerblue;
 }
+.detail-user .search {
+  position: absolute;
+  top: 320px;
+  left: 20px;
+  width: 12%;
+}
+.detail-user .icon{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.detail-user .description p{
+  font-size: 18px;
+  border: 1px solid;
+}
+.detail-user .detail .info-user-detail ul li{
+  padding-bottom: 20px;
+}
+.project-list {
+  position: absolute;
+  top: 143px;
+  left: 780px;
+  height: 1030px;
+}
+
+.project-list .focus-detail {
+  width: 200%;
+}
+
+.modal-create{
+  position: absolute;
+  top: -140px;
+  right: -500px;
+}
+
+
