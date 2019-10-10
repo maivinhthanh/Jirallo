@@ -63,6 +63,7 @@ exports.editInfoProject = async (req, res, next) => {
         const idproject = req.params.idproject
         const name = req.body.name
         const key = req.body.key
+        let image = null
         if (req.file !== undefined) {
             image = req.file.path
         }
@@ -158,9 +159,7 @@ exports.ViewListProject = async (req, res, next) => {
         const iduser = req.userId
         const user = await User.findById(iduser)
         let listproject = []
-        console.log(user.idproject)
         await user.idproject.map(async (item, index)=>{
-            console.log("item",item)
             const project = await Project.findOne({_id:item})
             listproject = [...listproject, project]
         })

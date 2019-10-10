@@ -59,14 +59,8 @@ router.post('/findUser',upload.single('avatar'),isAuth,
     authController.findUser,
 )
 
-router.put('/editProfile/:iduser', upload.single('avatar'),isAuth,
+router.put('/editProfile/:iduser', upload.single('avatar'),
     [
-        body('name')
-        .trim().escape()
-        .not()
-        .isEmpty().withMessage('Không bỏ trống tên'),
-        body('gender')
-        .trim()
     ],
     authController.editProfile,
 )
