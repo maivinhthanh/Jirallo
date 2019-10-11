@@ -10,37 +10,42 @@ import {
 from "reactstrap"
 import * as actions from "../../Store/actions/project";
 import { connect } from "react-redux";
-class CreateProject extends Component {
+export default class AddUser extends Component {
   constructor(props){
     super(props);
     this.state = {
-      modal: false,
-      nameProject: ''
+      modal:false,
+      emailUser: '',
+      positionUser:''
     }
     this.showToggle = this.showToggle.bind(this)
-    this.handleNameProject = this.handleNameProject.bind(this)
-    this.createProject = this.createProject.bind(this)
+    this.handleEmailUser = this.handleEmailUser.bind(this)
+    this.handlePostionUser = this.handlePostionUser.bind(this)
+    this.addUser = this.addUser.bind(this)
   }
   showToggle(){
     this.setState(preState => ({
       modal: !preState.modal
     }))
   }
-  handleNameProject(event){
-    event.preventDefault();
+  handleEmailUser(e){
+    e.preventDefault()
     this.setState({
-      nameProject : event.target.value
+      emailUser: e.target.value
     })
   }
-  createProject(event){
-    event.preventDefault();
-    this.props.createProjectAct(this.state.nameProject)
+  handlePostionUser(e){
+    e.preventDefault()
+    this.setState({
+      positionUser: e.target.value
+    })
   }
   render() {
     return (
       <div>
+        <div>
         <Button color="#caa" onClick={this.showToggle}>
-        <i class="fas fa-plus"></i> Create project
+        <i class="fas fa-plus"></i> Add User
         </Button>
         <Modal
           isOpen={this.state.modal}
@@ -48,13 +53,16 @@ class CreateProject extends Component {
           className={this.props.className}
         >
           <ModalHeader toggle={this.showToggle}>
-            Create project
+            Insert user
           </ModalHeader>
           <ModalBody>
-          <Input type="text" onChange={this.handleNameProject} value={this.state.nameProject} name="project" id="project" placeholder="with name project" />
+          <label>Email: </label>
+          <Input type="text" onChange={this.handleEmailUser} value={this.state.emailUser} name="email" id="email" placeholder="with email user" />
+          <label>Position: </label>
+          <Input type="text" onChange={this.handlePostionUser} value={this.state.positionUser} name="position" id="position" placeholder="with position user" />
           </ModalBody>
           <ModalFooter>
-            <Button type="submit" color="primary" onClick={this.createProject}>
+            <Button type="submit" color="primary" onClick={this.addUser}>
               Add
             </Button>{" "}
             <Button color="secondary" onClick={this.showToggle}>
@@ -63,21 +71,7 @@ class CreateProject extends Component {
           </ModalFooter>
         </Modal>
       </div>
+      </div>
     )
   }
 }
-const mapStateToProps = state => {
-  return {
-    project: state.project
-  };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    createProjectAct : name => dispatch(actions.createProjectAct(name))
-  };
-};
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreateProject);
-

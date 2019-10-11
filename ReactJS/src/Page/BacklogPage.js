@@ -10,6 +10,7 @@ import {
   Input,
 } from "reactstrap";
 import MenuBoard from "../Components/Board/MenuBoard";
+import ListIssues from "../Components/BackLog/ListIssues";
 class BacklogPage extends Component {
   
   render() {
@@ -30,11 +31,13 @@ class BacklogPage extends Component {
                     <Button color="secondary">search</Button>
                   </InputGroupAddon>
                 </InputGroup>
+                {/* <Button style={{float: 'right'}} color="warning">create sprint</Button> */}
               </div>
             </div>
             <div className="filter">
               <p>Quick Filters: </p>
               <ListUser />
+           
             </div>
             <div className="row content-backlog board-task">
               <div className="col-md-1">
@@ -43,6 +46,13 @@ class BacklogPage extends Component {
               <div className="col-md-2 epic-blacklog">
                <MenuLog params = {id}/>
               </div>
+              <div className="col-md-8">
+              <Button style={{float: 'right', marginBottom:'35px'}} color="warning" >create sprint</Button>
+                <div className="issues" style={{float: 'left', marginLeft:'75px'}}>
+                  <span>Name Task: </span>
+                </div>
+               <ListIssues params = {id}/>
+              </div>
             </div>
           </div>
         </div>
@@ -50,4 +60,4 @@ class BacklogPage extends Component {
     );
   }
 }
-export default BacklogPage;
+export default BacklogPage

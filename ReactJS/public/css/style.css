@@ -613,3 +613,66 @@ p.movetxt {
   margin-right: 10px;
   margin-top: 10px;
 }
+/* Backlog Page */
+.detail-card .issues {
+  width: 100%;
+  text-align: left;
+  border: 1px solid #ccaa;
+  padding: 10px;
+}
+.detail-card .issues-task {
+  margin-top: 50px;
+  float: left;
+  margin-left:70px;
+}
+
+
+/* DetailUserPage */
+
+.detail-user .title {
+  position: absolute;
+    left: -199px;
+    border: 2px solid #caa;
+    padding: 10px;
+    top: 0px;
+    z-index: 2;
+    width: 200px;
+    border-radius: inherit;
+    background: cornflowerblue;
+}
+.detail-user .search {
+  position: absolute;
+  top: 320px;
+  left: 20px;
+  width: 12%;
+}
+.detail-user .icon{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.detail-user .description p{
+  font-size: 18px;
+  border: 1px solid;
+}
+.detail-user .detail .info-user-detail ul li{
+  padding-bottom: 20px;
+}
+.project-list {
+  position: absolute;
+  top: 143px;
+  left: 780px;
+  height: 1030px;
+}
+
+.project-list .focus-detail {
+  width: 200%;
+}
+
+.modal-create{
+  position: absolute;
+  top: -140px;
+  right: -500px;
+}
+
+

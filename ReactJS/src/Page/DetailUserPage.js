@@ -18,12 +18,19 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import ProjectDetail from "../Components/Project/projectDetail";
 import CreateProject from "../Components/Modal/CreateProject";
+import InfoUser from "../Components/Modal/InfoUser";
 class DetailUserPage extends Component {
   constructor(props) {
     super(props);
+    this.state ={
+      EmailUser: ''
+    }
     this.name = "";
     this.id = "";
+    this.position = ''
     this.getInfoUser = this.getInfoUser.bind(this);
+    this.findUserLikeEmail = this.findUserLikeEmail.bind(this);
+    this.handleEmail = this.handleEmail.bind(this);
   }
   componentDidMount() {
     this.getInfoUser();
@@ -34,6 +41,16 @@ class DetailUserPage extends Component {
     this.props.SearchEmail(user[0].email);
     console.log(this.props.user);
   }
+  handleEmail(e){
+    e.preventDefault()
+    this.setState({
+      EmailUser: e.target.value
+    })
+  }
+  findUserLikeEmail(){
+    console.log(this.state.EmailUser)
+    this.props.SearchEmail(this.state.EmailUser)
+  }
   render() {
     const admin = this.props.admin;
     const project = this.props.project;
@@ -41,10 +58,17 @@ class DetailUserPage extends Component {
       this.name = item.name;
       this.id = item._id;
     });
-    console.log(this.id)
-    console.log(project)
+    _.map(project, item => {
+      _.map(item.idmembers, data => {
+        this.position = data.position
+      })
+    })
     return (
       <div className="detail-user">
+      <div className='search'>
+      <Input type="text" name="text" value={this.EmailUser} onChange={this.handleEmail} id="exampleSelectMulti" placeholder="search"></Input>
+      <i onClick={this.findUserLikeEmail} class="icon fas fa-plus"></i>
+      </div>
         <div className="header-detail"></div>
         <div className="content-user">
           <div className="avatar-image">
@@ -54,16 +78,19 @@ class DetailUserPage extends Component {
             />
           </div>
           <div className="blog-title">
-            <span>
+            <div class="name-user">
               <h1>{this.name}</h1>
-            </span>
+            </div>
+            <div class="detail">
+            <InfoUser admin={admin}/>
+            </div>
           </div>
           <div className="description">
-            <p>FrontEnd Developer</p>
+            <p>{this.position}</p>
             <div>
               <UpdateUser/>
             </div>
-            <div className="menu">
+            <div style={{marginTop:'20px'}} className="menu">
               <ul>
                 <li>
                   <i class="fab fa-twitter"></i>
@@ -83,65 +110,22 @@ class DetailUserPage extends Component {
         </div>
         <div className="content-task">
           <Card>
+          <div className="title">
+        <span>Title: Places work</span>
+      </div>
             <div className="detail-task-user">
               <ProjectDetail project={project} />
-              {/* <CardBody>
-          <CardTitle>Name task</CardTitle>
-          <CardSubtitle>Detail subtitle</CardSubtitle>
-          <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-          <Button><Link to ="/viewAll">
-                <span>View</span>
-              </Link></Button>
-        </CardBody> */}
             </div>
           </Card>
         </div>
         <div className="project">
         <CreateProject/>
-          {/* <div>
-            <Button color="success" onClick={this.showToggle}>
-              <i class="fas fa-plus"></i> Create Project
-            </Button>
-            <Modal
-              isOpen={this.state.modal}
-              toggle={this.showToggle}
-              className={this.props.className}
-            >
-              <ModalHeader toggle={this.showToggle}>Create project</ModalHeader>
-              <ModalBody>
-                <Input
-                  type="text"
-                  onChange={this.handleNameProject}
-                  value={this.state.nameProject}
-                  name="project"
-                  id="project"
-                  placeholder="with name project"
-                />
-              </ModalBody>
-              <ModalFooter>
-                <Button
-                  type="submit"
-                  color="primary"
-                  onClick={this.createProject}
-                >
-                  Add
-                </Button>{" "}
-                <Button color="secondary" onClick={this.showToggle}>
-                  Cancel
-                </Button>
-              </ModalFooter>
-            </Modal>
-          </div> */}
         </div>
         <div className="breadcrumb">
           <Breadcrumb>
             <BreadcrumbItem active>
               <div>
                 <UpdateUser 
-                // email={this.props.email}
-                // password={this.props.password}
-                // name={this.props.name}
-                // female={this.props.female}
                  id={this.id} />
               </div>
             </BreadcrumbItem>

@@ -1,41 +1,130 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import _ from "lodash";
-import {
-  Card,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button,
+import { Card, CardBody, CardTitle, CardSubtitle, Button,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalFooter,
+  Input,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 export default class projectDetail extends Component {
-  fomatDateTime(date){
-    return _.slice(_.replace(date,/-/g,'/'),0,10)
+  constructor(props){
+    super(props);
+    this.state = {
+      modal:false,
+      emailUser: '',
+      positionUser:''
+    }
+    this.showToggle = this.showToggle.bind(this)
+    this.handleEmailUser = this.handleEmailUser.bind(this)
+    this.handlePostionUser = this.handlePostionUser.bind(this)
+    this.addUser = this.addUser.bind(this)
+    this.handleIdProject = ''
+  }
+  fomatDateTime(date) {
+    return _.slice(_.replace(date, /-/g, "/"), 0, 10);
+  }
+  addUser() {
+    const user = {email:this.state.emailUser, position: this.state.positionUser}
+    console.log(user)
+    this.props.AddMember(this.handleIdProject,user)
+  }
+  showToggle(id){
+    this.handleIdProject = id
+    this.setState(preState => ({
+      modal: !preState.modal
+    }))
+  }
+  handleEmailUser(e){
+    e.preventDefault()
+    this.setState({
+      emailUser: e.target.value
+    })
+  }
+  handlePostionUser(e){
+    e.preventDefault()
+    this.setState({
+      positionUser: e.target.value
+    })
   }
   render() {
-    const {project} = this.props
+    const { project } = this.props;
     return (
       <div>
         {_.map(project, item => {
-          console.log(item)
-            return (
-              <Card>
-                <div className="detail-task-user">
-                  <CardBody>
-                    <CardTitle>{item.name}</CardTitle>
-                    <CardSubtitle>Create day: {this.fomatDateTime(item.datecreate)}</CardSubtitle>
-                    <Button style={{background:'#d4edda', marginTop:'20px'}}>
-                      {" "}
-                      <Link to ={{ pathname: `/backlog/${item._id}`}}>
-                          <span>View</span>
-                      </Link>
-                    </Button>
-                  </CardBody>
+          console.log(item);
+          return (
+            <Card>
+              <div className="detail-task-user">
+                <CardBody style={{ background: "aliceblue" }}>
+                  <i
+                    onClick={ this.showToggle.bind(this, item._id) }
+                    style={{ float: "right" }}
+                    class="fas fa-user-plus"
+                  ></i>
+                  <CardTitle>{item.name}</CardTitle>
+                  <CardSubtitle>
+                    Create day: {this.fomatDateTime(item.datecreate)}
+                  </CardSubtitle>
+                  <Button style={{ background: "#d4edda", marginTop: "20px" }}>
+                    {" "}
+                    <Link to={{ pathname: `/backlog/${item._id}` }}>
+                      <span>View</span>
+                    </Link>
+                  </Button>
+                </CardBody>
+                <div>
+                  {/* <Button color="#caa" onClick={this.showToggle}>
+                    <i class="fas fa-plus"></i> Add User
+                  </Button> */}
+                  <Modal
+                    isOpen={this.state.modal}
+                    toggle={ this.showToggle.bind(this, item._id) }
+                    className={this.props.className}
+                  >
+                    <ModalHeader toggle={this.showToggle}>
+                      Insert user
+                    </ModalHeader>
+                    <ModalBody>
+                      <label>Email: </label>
+                      <Input
+                        type="text"
+                        onChange={this.handleEmailUser}
+                        value={this.state.emailUser}
+                        name="email"
+                        id="email"
+                        placeholder="with email user"
+                      />
+                      <label>Position: </label>
+                      <Input
+                        type="text"
+                        onChange={this.handlePostionUser}
+                        value={this.state.positionUser}
+                        name="position"
+                        id="position"
+                        placeholder="with position user"
+                      />
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button
+                        type="submit"
+                        color="primary"
+                        onClick={this.addUser}
+                      >
+                        Add
+                      </Button>{" "}
+                      <Button color="secondary" onClick={this.showToggle.bind(this, item._id)}>
+                        Cancel
+                      </Button>
+                    </ModalFooter>
+                  </Modal>
                 </div>
-              </Card>
-            );
-          })}
+              </div>
+            </Card>
+          );
+        })}
       </div>
-    )
+    );
   }
 }

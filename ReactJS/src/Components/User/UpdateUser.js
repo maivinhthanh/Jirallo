@@ -22,10 +22,10 @@ class UpdateUser extends Component {
   }
   handleAvatar(e) {
     e.preventDefault();
+    console.log(e.target.files[0])
     this.setState({
-      avatar: e.target.value
+      avatar: e.target.files[0]
     });
-    console.log(this.state.email);
   }
   handleGender(e) {
     e.preventDefault();
@@ -47,6 +47,12 @@ class UpdateUser extends Component {
   }
   handleSave(e) {
     e.preventDefault();
+    // const data = new FormData()
+    // data.append('avatar',this.state.avatar)
+    // data.append('gender',this.state.gender)
+    // data.append('name',this.state.name)
+    // data.append('birthdate',this.state.birthday)
+
     const updateUser = [
       {
         gender: this.state.gender,
@@ -55,7 +61,7 @@ class UpdateUser extends Component {
         birthday: this.state.birthday
       }
     ];
-    console.log(this.activeId)
+    // console.log(data)
     this.props.EditUserAction(this.activeId, updateUser);
   }
   render() {
@@ -111,7 +117,7 @@ class UpdateUser extends Component {
                           type="file"
                           name="avatar"
                           onChange={this.handleAvatar}
-                          value={this.state.avatar}
+                          // value={this.state.avatar}
                           id="avatar"
                           // required
                           // placeholder="password placeholder"

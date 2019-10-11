@@ -121,7 +121,7 @@ exports.AddMember = async (req, res, next) => {
         const idproject = req.params.idproject
         const iduser = req.body.iduser
         const position = req.body.position
-        
+        console.log(iduser,position)
         const project = await Project.findByIdAndUpdate(idproject, { 
                 $push: { 
                     idmembers: {
@@ -140,6 +140,7 @@ exports.AddMember = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,project})
     }
     catch(err) {
+        console.log(err)
         if (!err.statusCode) {
             err.statusCode = 500
         }

@@ -25,7 +25,7 @@ const getSearchUser = ( state, action ) => {
 
 const getError = (state, action) => {
     return updateObject(state, {error: true });
-} 
+}
 
 const reducerAdmin = ( state = initialState, action ) => {
     switch ( action.type ) {
