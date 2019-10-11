@@ -1,18 +1,22 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const Author = Object.freeze({
-    Manager: 'manager',
-    Dev: 'dev',
-    Tester: 'tester',
+const Type = Object.freeze({
+    Bug: 'bug',
+    Task: 'task',
 })
 const Process = Object.freeze({
-    Done: 'done',
-    Access: 'access',
-})
-const Type = Object.freeze({
     Todo: 'todo',
-    Bug: 'bug',
+    InProgress: 'inprogress',
+    Review: 'review',
+    Done: 'done',
+})
+const Priority = Object.freeze({
+    Highest: 'highest',
+    High: 'high',
+    Medium: 'medium',
+    Low: 'low',
+    Lowest: 'lowest',
 })
 
 const taskSchema = new Schema({
@@ -20,9 +24,13 @@ const taskSchema = new Schema({
         type: String,
         required: true
     },
-    author: {
-        type: String,
-        enum: Object.values(Author),
+    repoter: {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+    },
+    assignee: {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
     },
     process:{
         type: String,
@@ -32,28 +40,52 @@ const taskSchema = new Schema({
         type: String,
         enum: Object.values(Type),
     },
+    priority:{
+        type: String,
+        enum: Object.values(Priority),
+    },
+    tag:{
+        type: String,
+    },
     descript:{
         type: String,
-        required: true
+    },
+    idepic:{
+        type: Schema.Types.ObjectId,
+        ref: 'epic',
+    },
+    idsprint:{
+        type: Schema.Types.ObjectId,
+        ref: 'sprint',
+    },
+    idproject:{
+        type: Schema.Types.ObjectId,
+        ref: 'project',
     },
     image:[
         {
-            type: String,
-            required: true
+            type: String
         }
     ],
     comment:[
         {
-            
+            type: Schema.Types.ObjectId,
+            ref: 'comment',
         }
-        ],
+    ],
+    watch:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'user',
+        }
+    ],
     hidden:{ type: Boolean, default: false },
     datecreate: { type: Date, default: Date.now },
     dateedit: { type: Date }
 })
 
 Object.assign(taskSchema.statics, {
-    Author,Process,Type
+    Process,Type, Priority
 })
   
 module.exports = mongoose.model('Task', taskSchema)

@@ -20,12 +20,20 @@ exports.createIssues = async (req, res, next) => {
         }
 
         const name = req.body.name
-        const type = req.body.type
+        const type = req.body.type ? req.body.type : 'task'
+        const priority = req.body.priority ? req.body.priority : 'medium'
+        const process = req.body.process ? req.body.process : 'todo'
         const idproject = req.body.idproject
+        const iduser = req.userId
 
         const issues = new Issues({
             name: name,
-            type: type
+            type: type,
+            priority: priority,
+            process: process,
+            repoter: iduser,
+            watch: [iduser],
+            idproject: idproject
         })
 
         const newissues = await issues.save()

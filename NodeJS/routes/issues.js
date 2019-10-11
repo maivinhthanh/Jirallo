@@ -9,17 +9,16 @@ const isAuth = require('../middleware/is-auth')
 
 const upload = require('./uploadfile')
 
-router.post('/createIssues',upload.single('avatar'),isAuth,
+router.post('/createIssues',upload.single('image'),isAuth,
     [
         body('name')
         .trim()
         .not()
-        .isEmpty(),
-        body('idproject')
+        .isEmpty()
     ], 
     issuesController.createIssues,
 )
-router.put('/editIssues/:idissues',upload.single('avatar'),isAuth, 
+router.put('/editIssues/:idissues',upload.single('image'),isAuth, 
     [], 
     issuesController.editIssues,
 )
