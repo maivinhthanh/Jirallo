@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken")
 
 
 const User = require('../models/user')
+const Activities = require('../models/activities')
 
 exports.signup = async (req, res, next) => {
     try{
@@ -86,6 +87,13 @@ exports.login = async (req, res, next) => {
             "somesupersecretsecret"
         )
 
+        const action = new Activities({
+            action: 'Login',
+            iduser: loadedUser._id
+        })
+
+        await action.save()
+
         res.status(200).json({ token: token, userId: loadedUser._id.toString() })
             
     }
@@ -117,6 +125,7 @@ exports.findUser = async (req, res, next) => {
             res.status(404).json(error)
             throw error
         }
+
         res.status(200).json({ user: user })
     }
     catch (error) {
@@ -144,14 +153,30 @@ exports.editProfile = async (req, res, next) => {
             image = req.file.path
         }
 
-        const user = await User.findByIdAndUpdate(iduser, {
+        const dataUpdate = {
             name: req.body.name,
             image: image,
             birthdate: req.body.birthdate,
             gender: req.body.gender,
             dateedit: Date.now()
-        }, 
-        { new: true })
+        }
+
+        const user = await User.findByIdAndUpdate(iduser, dataUpdate)
+
+        const action = new Activities({
+            action: 'editProfile',
+            content: 'auth/editProfile/' + iduser,
+            iduser: req.userId,
+            olddata: {
+                name: user.name,
+                image: user.image,
+                birthdate: user.birthdate,
+                gender: user.gender,
+            },
+            newdata: dataUpdate
+        })
+
+        await action.save()
 
         res.status(200).json({statusCode: 200,result: user})
     }

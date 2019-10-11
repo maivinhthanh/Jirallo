@@ -3,6 +3,7 @@ const {ObjectId} = require('mongodb')
 
 const Sprint = require('../models/sprint')
 const Project = require('../models/project')
+const Activities = require('../models/activities')
 
 function delay() {
     return new Promise(resolve => setTimeout(resolve, 300))
@@ -28,11 +29,20 @@ exports.createSprint = async (req, res, next) => {
 
         const newsprint = await sprint.save()
 
-        const project = await Project.findByIdAndUpdate(idproject, {
+        await Project.findByIdAndUpdate(idproject, {
             $push: { 
                 idsprint: ObjectId(newsprint._id)
             }
         },{ new: true })
+
+        const action = new Activities({
+            action: 'createSprint',
+            content: 'sprint/createSprint',
+            iduser: req.userId,
+            newdata: sprint
+        })
+
+        await action.save()
 
         res.status(201).json({ statusCode: 200 ,newsprint})
     }
@@ -52,14 +62,25 @@ exports.editSprint = async (req, res, next) => {
         const name = req.body.name
         const timebegin = req.body.timebegin
         const deadline = req.body.deadline
-        const sprint = await Sprint.findByIdAndUpdate(idsprint, {
+        const newsprint = {
             name: name,
             timebegin: timebegin,
             deadline: deadline,
             dateedit: Date.now(),
-        }, { new: true })
+        } 
+        const sprint = await Sprint.findByIdAndUpdate(idsprint, newsprint)
 
-        res.status(201).json({ statusCode: 200 ,sprint})
+        const action = new Activities({
+            action: 'editSprint',
+            content: 'sprint/editSprint/' + idsprint,
+            iduser: req.userId,
+            olddata:sprint,
+            newdata: newsprint
+        })
+
+        await action.save()
+
+        res.status(201).json({ statusCode: 200 ,newsprint})
     }
     catch(err) {
         if (!err.statusCode) {

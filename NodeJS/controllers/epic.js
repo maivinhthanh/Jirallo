@@ -3,6 +3,7 @@ const {ObjectId} = require('mongodb')
 
 const Epic = require('../models/epic')
 const Project = require('../models/project')
+const Activities = require('../models/activities')
 
 function delay() {
     return new Promise(resolve => setTimeout(resolve, 300))
@@ -28,11 +29,20 @@ exports.createEpic = async (req, res, next) => {
 
         const newepic = await epic.save()
 
-        const project = await Project.findByIdAndUpdate(idproject, {
+        await Project.findByIdAndUpdate(idproject, {
             $push: { 
                 idepic: ObjectId(newepic._id)
             }
         },{ new: true })
+
+        const action = new Activities({
+            action: 'createEpic',
+            content: 'epic/createEpic',
+            iduser: req.userId,
+            newdata: epic
+        })
+
+        await action.save()
 
         res.status(201).json({ statusCode: 200 ,newepic})
     }
@@ -50,10 +60,23 @@ exports.editEpic = async (req, res, next) => {
     try{
         const idepic = req.params.idepic
         const name = req.body.name
-        const epic = await Epic.findByIdAndUpdate(idepic, {
+        const newepic = {
             name: name,
             dateedit: Date.now(),
-        }, { new: true })
+        }
+        const epic = await Epic.findByIdAndUpdate(idepic, newepic)
+
+        const action = new Activities({
+            action: 'editEpic',
+            content: 'epic/editEpic/' + idepic,
+            iduser: req.userId,
+            olddata:{
+                name: epic.name
+            },
+            newdata: newepic
+        })
+
+        await action.save()
 
         res.status(201).json({ statusCode: 200 ,epic})
     }

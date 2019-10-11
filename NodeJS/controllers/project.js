@@ -3,6 +3,7 @@ const {ObjectId} = require('mongodb')
 
 const Project = require('../models/project')
 const User = require('../models/user')
+const Activities = require('../models/activities')
 
 function delay() {
     return new Promise(resolve => setTimeout(resolve, 300))
@@ -25,18 +26,27 @@ exports.createProject = async (req, res, next) => {
         const project = new Project({
             name: name,
             idmembers: {
-            id: ObjectId(iduser),
-            position: 'Manager'
+                id: ObjectId(iduser),
+                position: 'Manager'
             }
         })
 
         const newproject = await project.save()
 
-        const user = await User.findByIdAndUpdate(iduser,  {
+        await User.findByIdAndUpdate(iduser,  {
             $push: { 
                 idproject: ObjectId(newproject._id)
             }
-        },{ new: true })
+        })
+
+        const action = new Activities({
+            action: 'createProject',
+            content: 'project/createProject',
+            iduser: iduser,
+            newdata: project
+        })
+
+        await action.save()
 
         res.status(201).json({ statusCode: 200 ,newproject})
     }
@@ -77,9 +87,24 @@ exports.editInfoProject = async (req, res, next) => {
             dateedit: Date.now(),
         }
 
-        const newproject = await Project.findByIdAndUpdate(idproject, project, { new: true })
+        const oldproject = await Project.findByIdAndUpdate(idproject, project)
 
-        res.status(201).json({ statusCode: 200 ,newproject})
+        const action = new Activities({
+            action: 'editInfoProject',
+            content: 'project/editInfoProject/' + idproject,
+            iduser: req.userId,
+            olddata: {
+                name: oldproject.name,
+                key: oldproject.key,
+                image: oldproject.image,
+                description: oldproject.description
+            },
+            newdata: project
+        })
+
+        await action.save()
+
+        res.status(201).json({ statusCode: 200 ,oldproject})
     }
     catch(err) {
         if (!err.statusCode) {
@@ -121,7 +146,6 @@ exports.AddMember = async (req, res, next) => {
         const idproject = req.params.idproject
         const iduser = req.body.iduser
         const position = req.body.position
-        console.log(iduser,position)
         const project = await Project.findByIdAndUpdate(idproject, { 
                 $push: { 
                     idmembers: {
@@ -131,26 +155,33 @@ exports.AddMember = async (req, res, next) => {
                 }
         }, { new: true })
 
-        const user = await User.findByIdAndUpdate(iduser,  {
+        await User.findByIdAndUpdate(iduser,  {
             $push: { 
                 idproject: ObjectId(project._id)
             }
         },{ new: true })
 
+        const action = new Activities({
+            action: 'AddMember',
+            content: 'project/AddMember/' + idproject,
+            iduser: req.userId,
+            newdata: {
+                id: ObjectId(iduser),
+                position: position
+            }
+        })
+
+        await action.save()
+
         res.status(201).json({ statusCode: 200 ,project})
     }
     catch(err) {
-        console.log(err)
         if (!err.statusCode) {
             err.statusCode = 500
         }
         res.status(500).json(err)
         next(err)
     }
-}
-
-function delay() {
-    return new Promise(resolve => setTimeout(resolve, 300))
 }
 
 exports.ViewListProject = async (req, res, next) => {
@@ -163,8 +194,6 @@ exports.ViewListProject = async (req, res, next) => {
             const project = await Project.findOne({_id:item})
             listproject = [...listproject, project]
         })
-        console.log(iduser)
-        console.log("listproject",listproject)
 
         await delay()
 
