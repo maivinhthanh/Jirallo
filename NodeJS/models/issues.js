@@ -19,7 +19,7 @@ const Priority = Object.freeze({
     Lowest: 'lowest',
 })
 
-const taskSchema = new Schema({
+const issuesSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -84,8 +84,8 @@ const taskSchema = new Schema({
     dateedit: { type: Date }
 })
 
-Object.assign(taskSchema.statics, {
+Object.assign(issuesSchema.statics, {
     Process,Type, Priority
 })
   
-module.exports = mongoose.model('Task', taskSchema)
+module.exports = mongoose.model('Issues', issuesSchema)
