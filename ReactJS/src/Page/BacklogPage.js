@@ -11,8 +11,9 @@ import {
 } from "reactstrap";
 import MenuBoard from "../Components/Board/MenuBoard";
 import ListIssues from "../Components/BackLog/ListIssues";
+import ListDetailIssues from "../Components/BackLog/ListDetailIssues";
 class BacklogPage extends Component {
-  
+
   render() {
     const { match: { params: { id } } } = this.props
     return (
@@ -46,12 +47,11 @@ class BacklogPage extends Component {
               <div className="col-md-2 epic-blacklog">
                <MenuLog params = {id}/>
               </div>
-              <div className="col-md-8">
+              <div className="col-md-8 defineIssue">
               <Button style={{float: 'right', marginBottom:'35px'}} color="warning" >create sprint</Button>
-                <div className="issues" style={{float: 'left', marginLeft:'75px'}}>
-                  <span>Name Task: </span>
-                </div>
-               <ListIssues params = {id}/>
+               <ListDetailIssues params={id}/>
+               {/* CreateIssue dang an */}
+               {/* <ListIssues params = {id}/> */}
               </div>
             </div>
           </div>

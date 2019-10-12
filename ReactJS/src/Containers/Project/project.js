@@ -64,7 +64,7 @@ class project extends Component {
             <div className="description">
               <p>{this.position}</p>
               <p></p>
-              <div className="menu">
+              <div style={{marginLeft:'-17px'}} className="menu">
                 <ul>
                   <li>
                     <i class="fab fa-twitter"></i>
@@ -102,7 +102,7 @@ class project extends Component {
        <CreateProject/>
        </div>
         </div>
-        <div className="breadcrumb">
+        <div style={{marginBottom:'0rem'}} className="breadcrumb">
           <Breadcrumb>
             <BreadcrumbItem active>
             <Link to ="/user">Home</Link>

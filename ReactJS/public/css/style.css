@@ -542,13 +542,33 @@ p.movetxt {
   padding: 15px 0px;
     height: auto;
 }
+.board-task .custom {
+  width: 73% !important;
+}
 .board-task .collapse.show{
   width: 164px;
+}
+.board-task .content-right .collapse.show{
+  width: auto !important;
+}
+.board-task .content-right
+{
+  position: absolute;
+    right: -145px;
+    top: 74px;
+    width: 400px;
+}
+/* .board-task .content-right .card{
+  height:400px;
+} */
+.board-task .content-right .hidden{
+  display: none !important ;
 }
 .detail-card .epic-blacklog{
   top: -60px;
   left: -3px;
-} 
+}
+
 
 /* project */
 .listProject {
@@ -620,11 +640,15 @@ p.movetxt {
   border: 1px solid #ccaa;
   padding: 10px;
 }
-.detail-card .issues-task {
+.detail-card .defineIssue .issues-task {
   margin-top: 50px;
   float: left;
   margin-left:70px;
+  /* position: absolute;
+    bottom: 15px;
+    left: 79px; */
 }
+
 
 
 /* DetailUserPage */

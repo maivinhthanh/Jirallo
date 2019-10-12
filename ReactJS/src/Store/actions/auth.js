@@ -74,12 +74,13 @@ export const EditUserAction = (id,user) =>{
     console.log(id,user);
     return dispatch =>{
         return CallApi(`auth/editProfile/${id}`,'PUT',
-        {
-            gender : user[0].gender,
-            avatar: user[0].avatar,
-            name:user[0].name,
-            birthdate: user[0].birthday
-        },
+        // {
+        //     name:user[0].name,
+        //     avatar: user[0].avatar,
+        //     gender : user[0].gender,
+        //     birthdate: user[0].birthday,
+        // },
+        user,
         document.cookie.split("=")[2]
         ).then(response =>{
             console.log(response)
