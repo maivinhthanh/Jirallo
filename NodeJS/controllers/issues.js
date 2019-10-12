@@ -3,6 +3,7 @@ const {ObjectId} = require('mongodb')
 
 const Issues = require('../models/issues')
 const Project = require('../models/project')
+const Activities = require('../models/activities')
 
 function delay() {
     return new Promise(resolve => setTimeout(resolve, 300))
@@ -38,11 +39,20 @@ exports.createIssues = async (req, res, next) => {
 
         const newissues = await issues.save()
 
-        const project = await Project.findByIdAndUpdate(idproject, {
+        await Project.findByIdAndUpdate(idproject, {
             $push: { 
                 idissues: ObjectId(newissues._id)
             }
         },{ new: true })
+
+        const action = new Activities({
+            action: 'createIssues',
+            content: 'issues/createIssues',
+            iduser: req.userId,
+            newdata: issues
+        })
+
+        await action.save()
 
         res.status(201).json({ statusCode: 200 ,newissues})
     }
@@ -67,7 +77,7 @@ exports.editIssues = async (req, res, next) => {
         if (req.file !== undefined) {
             image = req.file.path
         }
-        const issues = await Issues.findByIdAndUpdate(idissues, {
+        const newissues = {
             name: name,
             author: author,
             process: process,
@@ -75,9 +85,20 @@ exports.editIssues = async (req, res, next) => {
             descript: descript,
             image: image,
             dateedit: Date.now(),
-        }, { new: true })
+        }
+        const issues = await Issues.findByIdAndUpdate(idissues, newissues, { new: true })
 
-        res.status(201).json({ statusCode: 200 ,issues})
+        const action = new Activities({
+            action: 'editIssues',
+            content: 'issues/editIssues/' + idissues,
+            iduser: req.userId,
+            olddata: issues,
+            newdata: newissues
+        })
+
+        await action.save()
+
+        res.status(201).json({ statusCode: 200 ,newissues})
     }
     catch(err) {
         if (!err.statusCode) {

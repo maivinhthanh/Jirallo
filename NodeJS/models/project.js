@@ -17,9 +17,9 @@ const projectSchema = new Schema({
     },
     idmembers:[
         {
-        type: Schema.Types.Mixed,
-        ref: 'user',
-        required: true
+            type: Schema.Types.Mixed,
+            ref: 'user',
+            required: true
         }
     ],
     idepic:[
