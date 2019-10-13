@@ -24,6 +24,7 @@ exports.createIssues = async (req, res, next) => {
         const type = req.body.type ? req.body.type : 'task'
         const priority = req.body.priority ? req.body.priority : 'medium'
         const process = req.body.process ? req.body.process : 'todo'
+        const tag = req.body.tag ? req.body.tag : null
         const idproject = req.body.idproject
         const iduser = req.userId
 
@@ -32,6 +33,7 @@ exports.createIssues = async (req, res, next) => {
             type: type,
             priority: priority,
             process: process,
+            tag: tag,
             repoter: iduser,
             watch: [iduser],
             idproject: idproject
@@ -70,20 +72,24 @@ exports.editIssues = async (req, res, next) => {
     try{
         const idissues = req.params.idissues
         const name = req.body.name
-        const author = req.body.author
         const process = req.body.process
+        const priority = req.body.priority
         const type = req.body.type
+        const tag = req.body.tag
         const descript = req.body.descript
+        let image = null
         if (req.file !== undefined) {
             image = req.file.path
         }
+
         const newissues = {
             name: name,
-            author: author,
-            process: process,
             type: type,
+            priority: priority,
+            process: process,
             descript: descript,
             image: image,
+            tag: tag,
             dateedit: Date.now(),
         }
         const issues = await Issues.findByIdAndUpdate(idissues, newissues, { new: true })
@@ -124,6 +130,47 @@ exports.viewListIssues = async (req, res, next) => {
         await delay()
 
         res.status(201).json({ statusCode: 200 ,listissues})
+    }
+    catch(err) {
+        if (!err.statusCode) {
+            err.statusCode = 500
+        }
+        res.status(500).json(err)
+        next(err)
+    }
+    
+}
+exports.assignforUser = async (req, res, next) => {
+    try{
+        const idissues = req.params.idissues
+        const iduser = req.body.iduser
+
+        const issues = await findById(idissues)
+
+        if(iduser === issues.assignee){
+            const error = new Error("User had assign")
+            error.statusCode = 404
+            error.data = errors.array()
+            res.status(404).json(error)
+            throw error
+        }
+
+        const dataupdate = {
+            assignee: iduser
+        }
+
+        await findByIdAndUpdate(idissues, dataupdate)
+
+        const action = new Activities({
+            action: 'assignforUser',
+            content: 'issues/assignforUser/' + idissues,
+            iduser: req.userId,
+            olddata: issues.assignee,
+            newdata: iduser
+        })
+
+        await action.save()
+
     }
     catch(err) {
         if (!err.statusCode) {

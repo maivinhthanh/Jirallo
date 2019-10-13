@@ -216,3 +216,19 @@ exports.findUserLikeEmail = async (req, res, next) => {
         next(error)
     }
 }
+exports.FindUserLikeID = async (req, res, next) => {
+    try{
+        const iduser = req.params.iduser
+
+        const user = await findById(iduser)
+
+        res.status(200).json({statusCode: 200,result: user})
+    }
+    catch (error) {
+        if (!error.statusCode) {
+            error.statusCode = 500
+        }
+        res.status(500).json(error)
+        next(error)
+    }
+}

@@ -25,5 +25,9 @@ router.put('/editIssues/:idissues',upload.single('image'),isAuth,
 router.get('/viewListIssues/:idproject',isAuth,
     issuesController.viewListIssues,
 )
+router.put('/assignforUser/:idissues',upload.single('image'),isAuth, 
+    [], 
+    issuesController.assignforUser,
+)
 
 module.exports = router

@@ -73,5 +73,10 @@ router.post('/findUserLikeEmail',upload.single('avatar'),isAuth,
     ], 
     authController.findUserLikeEmail,
 )
+router.get('/FindUserLikeID/:iduser',
+    [
+    ],
+    authController.FindUserLikeID,
+)
 
 module.exports = router
