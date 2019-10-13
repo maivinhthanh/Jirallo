@@ -3,12 +3,16 @@ import { Col, Button, Form, FormGroup, Label, Input, FormText} from 'reactstrap'
 import FormDescript from './FormDescript';
 import ModalLog from '../Modal/ModalLog';
 import '../Task/assets/style.css'
+import _ from 'lodash'
 export default class DescriptTask extends Component {
   render() {
+    const {data} = this.props
+    console.log(data)
     return (
       <div className="descriptWork">
       <div className="list-item-right">
-        <h2>WORKJIRA / NameTask</h2>
+        <div>
+        <h2>WORKJIRA / {data.name}</h2>
         <FormDescript/>
         <div className="container modal-log-work">
            <a href="#" data-toggle="modal" data-target="#myModal" >Log Work</a>
@@ -22,17 +26,17 @@ export default class DescriptTask extends Component {
                 <li>Status:</li>
                 <li>Prioriry:</li>
                 <li>Label:</li>
-                <li>Epic Link:</li>
+                <li>Epic:</li>
                 <li>Type:</li>
               </ul>
             </div>
             <div className="text-detail col-md-10">
               <ul className="item-detail-right">
               <li>Open</li>
-              <li>Medium</li>
+              <li>{data.priority}</li>
               <li>None</li>
               <li>Form Search</li>
-              <li>Bug</li>
+              <li>{data.type}</li>
               </ul>
             </div>
           </div>
@@ -48,7 +52,7 @@ export default class DescriptTask extends Component {
             </div>
             <div className="text-detail col-md-10">
               <ul className="item-detail-right">
-              <li>Nguyen Van A</li>
+              <li>{data.repoter}</li>
               <li>Nguyen Van B</li>
               </ul>
             </div>
@@ -74,6 +78,7 @@ export default class DescriptTask extends Component {
         <Label for="exampleFile">File</Label>
         <Input type="file" name="file" id="exampleFile" />
       </FormGroup>
+       </div>
        </div>
       </div>
     </div>

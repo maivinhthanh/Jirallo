@@ -47,27 +47,27 @@ class UpdateUser extends Component {
   }
   handleSave(e) {
     e.preventDefault();
-    // const data = new FormData()
-    // data.append('avatar',this.state.avatar)
-    // data.append('gender',this.state.gender)
-    // data.append('name',this.state.name)
-    // data.append('birthdate',this.state.birthday)
+    let data = new FormData()
+    data.append('avatar',this.state.avatar)
+    data.append('gender',this.state.gender)
+    data.append('name',this.state.name)
+    data.append('birthdate',this.state.birthday)
+
 
     const updateUser = [
       {
         gender: this.state.gender,
         avatar: this.state.avatar,
         name: this.state.name,
-        birthday: this.state.birthday
+        birthday: this.state.birthday,
       }
     ];
-    // console.log(data)
-    this.props.EditUserAction(this.activeId, updateUser);
+    console.log(data)
+    this.props.EditUserAction(this.activeId, data);
   }
   render() {
     const props = this.props;
     const admin = this.props.admin
-    console.log(props)
       _.map(admin, (item) => {
         this.activeId = item._id
       })
@@ -98,7 +98,7 @@ class UpdateUser extends Component {
                 {/* Modal body */}
                 <div className="modal-body">
                   <div className="form-user">
-                    <Form onSubmit={this.handleSave}>
+                    <Form ref={el => (this.form = el)} onSubmit={this.handleSave}>
                       <FormGroup>
                         <Label for="name">Name</Label>
                         <Input

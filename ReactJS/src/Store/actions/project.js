@@ -38,22 +38,7 @@ export const AddMemberAct =(id,user) => {
     })
   }
 }
-export const createIssuesAct =(id, name) => {
-  return dispatch => {
-    return CallApi('issues/createIssues',
-    'POST',
-    {
-      name: name,
-      idproject: id
-    },
-    document.cookie.split("=")[2]
-    ).then (respone => {
-      console.log(respone)
-    }).catch(err => {
-      console.log(err)
-    })
-  }
-}
+
 export const getListProjectAct = () =>{
   return dispatch => {
     return CallApi('project/ViewListProject',

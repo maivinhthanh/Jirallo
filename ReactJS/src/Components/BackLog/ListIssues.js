@@ -8,12 +8,13 @@ import {
   ModalFooter
 } from "reactstrap";
 import { connect } from "react-redux";
-import * as actions from "../../Store/actions/project";
+import * as actions from "../../Store/actions/issues";
 class ListIssues extends Component {
   constructor(props) {
     super(props);
     this.state = {
       nameIssues: "",
+      typeIssues:"",
       modalIssues: false,
       activeTab: "1"
     };
@@ -21,6 +22,7 @@ class ListIssues extends Component {
     this.showToggleIssues = this.showToggleIssues.bind(this);
     this.handleNameIssues = this.handleNameIssues.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.handleTypeIssues = this.handleTypeIssues.bind(this);
   }
   toggle(tab) {
     if (this.state.activeTab !== tab) {
@@ -34,20 +36,30 @@ class ListIssues extends Component {
       modalIssues: !preState.modalIssues
     }));
   }
-  handleNameIssues (e) {
+  handleNameIssues(e) {
     e.preventDefault();
     this.setState({
       nameIssues: e.target.value
     });
-    console.log(this.state.nameIssues)
+    console.log(this.state.nameIssues);
   }
-  createIssues(e){
+  handleTypeIssues(e){
     e.preventDefault();
-    console.log(this.state.nameIssues, this.props.params)
-    this.props.createIssuesAct(this.props.params, this.state.nameIssues)
+    this.setState({
+      typeIssues: e.target.value
+    })
+  }
+  createIssues(e) {
+    e.preventDefault();
+    const {nameIssues, typeIssues} = this.state
+    console.log(nameIssues, typeIssues)
+    console.log(this.state.nameIssues, this.props.params);
+    this.props.createIssuesAct(this.props.params, nameIssues, typeIssues);
   }
   render() {
+    console.log(this.props)
     // const { match: { params: { id } } } = this.props
+    // console.log(id)
     return (
       <div>
         <div className="issues-task">
@@ -71,6 +83,7 @@ class ListIssues extends Component {
                 Create Issues
               </ModalHeader>
               <ModalBody>
+                <label name="name">Name Issue</label>
                 <Input
                   type="text"
                   onChange={this.handleNameIssues}
@@ -80,6 +93,17 @@ class ListIssues extends Component {
                   id="issue"
                   placeholder="with name issue"
                 />
+                <label name="tyoe">Type</label>
+                <Input
+                  type="select"
+                  name="selectMulti"
+                  id="exampleSelectMulti"
+                  value={this.state.typeIssues}
+                  onChange={this.handleTypeIssues}
+                >
+                  <option value="bug">Bug</option>
+                  <option value="task">Task</option>
+                </Input>
               </ModalBody>
               <ModalFooter>
                 <Button
@@ -102,12 +126,13 @@ class ListIssues extends Component {
 }
 const mapStateToProps = state => {
   return {
-    project: state.project
+    project: state.project,
+    issues : state.issue
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    createIssuesAct: (id, name) => dispatch(actions.createIssuesAct(id, name))
+    createIssuesAct: (id, name, type) => dispatch(actions.createIssuesAct(id, name, type))
   };
 };
 export default connect(
