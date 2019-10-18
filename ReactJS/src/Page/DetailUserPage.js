@@ -121,7 +121,7 @@ class DetailUserPage extends Component {
         <div className="project">
         <CreateProject/>
         </div>
-        <div className="breadcrumb">
+        <div className="breadcrumb-custom">
           <Breadcrumb>
             <BreadcrumbItem active>
               <div>

@@ -544,7 +544,13 @@ p.movetxt {
 }
 .board-task .custom {
   width: 73% !important;
+ 
 }
+/* .board-task .custom .setting-issue{
+  margin-top: -7px;
+  position: absolute;
+  left:937px;
+} */
 .board-task .collapse.show{
   width: 164px;
 }
@@ -555,7 +561,7 @@ p.movetxt {
 {
   position: absolute;
     right: -145px;
-    top: 74px;
+    top: -5px;
     width: 400px;
 }
 /* .board-task .content-right .card{
@@ -565,7 +571,7 @@ p.movetxt {
   display: none !important ;
 }
 .detail-card .epic-blacklog{
-  top: -60px;
+  top: -5px;
   left: -3px;
 }
 
@@ -574,7 +580,11 @@ p.movetxt {
 .listProject {
   margin-top:20px;
 }
-
+.listProject .icon-search{
+  position: absolute;
+  top: 12px;
+  left: 243px;
+}
 .detail-user .header-detail {
   width: auto;
   height: 300px;
@@ -622,9 +632,9 @@ p.movetxt {
 .detail-task-user span{
   color: black;
 }
-.breadcrumb {
+.breadcrumb-custom {
   position: fixed;
-  bottom: 0;
+  bottom: -25px;
   width: 100%;
   right: 0;
 }
@@ -639,6 +649,18 @@ p.movetxt {
   text-align: left;
   border: 1px solid #ccaa;
   padding: 10px;
+  display: flex
+}
+.detail-card .setting-issue{
+  margin-top: -7px;
+  position: absolute;
+  left:1271px;
+}
+.detail-card .custom .setting-issue{
+  margin-top: -7px;
+  position: absolute;
+  left:937px;
+
 }
 .detail-card .defineIssue .issues-task {
   margin-top: 50px;
@@ -697,6 +719,10 @@ p.movetxt {
   position: absolute;
   top: -140px;
   right: -500px;
+}
+.custom-header header{
+  left: 0px !important;
+  top: 0px !important;
 }
 
 

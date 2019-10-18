@@ -5,8 +5,8 @@
 }
 .card-content-epic{
   transform: rotate(90deg);
-  top: 61px;
-  right: 59px;
+  top: 53px;
+  right: 49px;
 }
 .card-content-epic span:nth-child(2){
   float: right;

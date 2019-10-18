@@ -5,12 +5,16 @@ import _ from "lodash";
 // import ContenTask from '../BackLog/ContentTask'
 import { UncontrolledCollapse, Button, CardBody, Card } from "reactstrap";
 import DescriptTask from "../Task/DescriptTask";
+import UpdateUser from "../User/UpdateUser";
+import UpdateIssue from "../Modal/UpdateIssue";
+import { Redirect } from 'react-router-dom';
 class ListDetailIssues extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      modal: false,
     };
+    this.status = false
     this.idActive = ''
   }
   showContent(id) {
@@ -19,6 +23,10 @@ class ListDetailIssues extends Component {
     this.setState({
       modal: true
     });
+  }
+  RedirectToUpdate =() => {
+    this.status = !this.status
+    console.log(this.status)
   }
   componentWillMount() {
     console.log(this.props);
@@ -37,9 +45,14 @@ class ListDetailIssues extends Component {
                 className={`issues ${!modal ? '' : "custom"}`}
                 style={{ float: "left", marginLeft: "75px" }}
               >
+              <div className="nameIssue">
                 <span onClick={() => this.showContent(item._id)}>
-                  {item.name}
+                  {item.name} 
                 </span>
+                </div>
+                <i data-toggle="modal" data-target="#myModal" onClick={this.RedirectToUpdate()}
+            className="fas fa-cog"></i>
+              {this.status && <UpdateIssue params={item._id} data = {item}/> }
               </div>
             );
           })}

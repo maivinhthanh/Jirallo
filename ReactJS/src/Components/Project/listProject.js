@@ -7,30 +7,69 @@ import { Link } from 'react-router-dom'
 export default class listProject extends Component {
   constructor(props){
     super(props)
+    this.state = {
+      staus : true
+    }
+    this.sortStatusName = this.sortStatusName.bind(this)
+    this.cloneProject = []
   }
     componentWillMount(){
     const user = JSON.parse(localStorage.getItem("userLogin"));
-    console.log(user[0].email);
     this.props.SearchEmail(user[0].email);
   }
-  render() {
+  sortStatusName(){
     const { project } = this.props;
-    const { admin } = this.props;
-    console.log(project, admin)
+    project.sort(function(a,b){
+      var nameA = a.name.toUpperCase();
+      var nameB = b.name.toUpperCase();
+      console.log(nameA,nameB)
+      if(nameA < nameB)
+      {
+        return -1
+      }
+      if(nameA > nameB)
+      {
+         return 1
+      }
+      return 0;
+    })
+    this.cloneProject = _.cloneDeep(project)
+    this.setState({
+      status: !this.state.status
+    })
+
+  }
+  render() {
+    const { project, admin } = this.props;
+    const {status} = this.state;
     return (
       <div>
         <Table striped>
         <thead>
           <tr>
             <th>ID</th>
-            <th>Name Project</th>
+            <th>Name Project <i onClick={this.sortStatusName} class="fas fa-sort"></i></th>
             <th>Date</th>
             <th>Lead</th>
           </tr>
         </thead>
         <tbody>
             {
+              !status ?
               _.map(project, (item, key) => {
+                return (
+               <tr>
+               <td>{item._id}</td>
+                <td>{item.name}</td>
+                <td>{item.datecreate}</td>
+                <td>{
+                  _.map(admin, item => {
+                    return <Link style={{borderBottom:'1px solid'}} to="detailUser">{item.name}</Link>
+                  })
+                }</td>
+               </tr>
+                )
+              }) :  _.map(this.cloneProject, (item, key) => {
                 return (
                <tr>
                <td>{item._id}</td>

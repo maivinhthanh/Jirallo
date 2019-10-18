@@ -11,6 +11,7 @@ import UserPage from './Page/UserPage';
 import DetailUserPage from './Page/DetailUserPage'
 import BacklogPage from './Page/BacklogPage';
 import ListProjectPage from './Page/ListProjectPage'
+import MainPage from './Page/MainPage'
 function App() {
   return (
     <div className="App">
@@ -26,6 +27,7 @@ function App() {
               <Route path="/admin" component={AdminPage} />
               <Route path="/detailUser" component={DetailUserPage} />
               <Route path="/viewAll" component={ListProjectPage} />
+              <Route path="/adminPage" component={MainPage}/>
       </Router>
     </div>
   );

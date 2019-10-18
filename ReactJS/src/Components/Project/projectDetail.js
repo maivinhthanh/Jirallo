@@ -27,7 +27,6 @@ export default class projectDetail extends Component {
   }
   addUser() {
     const user = {email:this.state.emailUser, position: this.state.positionUser}
-    console.log(user)
     this.props.AddMember(this.handleIdProject,user)
   }
   showToggle(id){
@@ -53,7 +52,6 @@ export default class projectDetail extends Component {
     return (
       <div>
         {_.map(project, item => {
-          console.log(item);
           return (
             <Card>
               <div className="detail-task-user">
@@ -75,9 +73,6 @@ export default class projectDetail extends Component {
                   </Button>
                 </CardBody>
                 <div>
-                  {/* <Button color="#caa" onClick={this.showToggle}>
-                    <i class="fas fa-plus"></i> Add User
-                  </Button> */}
                   <Modal
                     isOpen={this.state.modal}
                     toggle={ this.showToggle.bind(this, item._id) }

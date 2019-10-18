@@ -11,6 +11,7 @@ import {
 } from "reactstrap";
 import MenuBoard from "../Components/Board/MenuBoard";
 import ListIssues from "../Components/BackLog/ListIssues";
+import CreateSprint from '../Components/Sprint/modalCreate'
 import ListDetailIssues from "../Components/BackLog/ListDetailIssues";
 class BacklogPage extends Component {
 
@@ -48,7 +49,8 @@ class BacklogPage extends Component {
                <MenuLog params = {id}/>
               </div>
               <div className="col-md-8 defineIssue">
-              <Button style={{float: 'right', marginBottom:'35px'}} color="warning" >create sprint</Button>
+              <CreateSprint params={id}/>
+              {/* <Button style={{float: 'right', marginTop:'-65px', marginRight:'-142px'}} color="warning" >create sprint</Button> */}
                <ListDetailIssues params={id}/>
                {/* CreateIssue dang an */}
                {/* <ListIssues params = {id}/> */}

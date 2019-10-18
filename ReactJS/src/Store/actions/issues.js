@@ -21,6 +21,20 @@ export const showListIssue = data => {
   }
 
 }
+export const EditIssuesAct = (id, issue) => {
+  console.log(id, issue);
+  return dispatch => {
+    return CallApi(`issues/editIssues/${id}`,
+    'PUT',
+    issue,
+    document.cookie.split("=")[2]
+    ).then(respone=>{
+      console.log(respone)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+}
 export const showListIssueAct = (id) => {
   return dispatch => {
     return CallApi(`issues/viewListIssues/${id}`,

@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import "../Project/assets/style.css";
 import { Link } from "react-router-dom";
 import {
-  Table,
   Input,
-  Breadcrumb,
-  BreadcrumbItem
 } from "reactstrap";
 import * as actions from "../../Store/actions/project";
 import * as actionsAdmin from "../../Store/actions/admin"
@@ -16,33 +13,58 @@ import ProjectDetail from "../../Components/Project/projectDetail";
 import ListProject from "../../Components/Project/listProject";
 import ToggleHome from "../../Components/Modal/ToggleHome";
 import CreateProject from '../../Components/Modal/CreateProject';
-class project extends Component {
+import HeaderCustom from "../../Components/HeaderCustom";
+class projectContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nameProject: ""
+      nameProject: "",
+      valueSearch: "",
+      status: true
     };
     this.position = ''
-    // this.findUserLikeEmail = this.findUserLikeEmail.bind(this)
+    this.cloneProject = []
+    this.handleChangeInput = this.handleChangeInput.bind(this)
+    this.searchAct = this.searchAct.bind(this)
+    this.clearData = this.clearData.bind(this)
   }
   componentDidMount() {
     this.props.getAllListProject();
   }
-  // componentWillMount(){
-  //   const user = JSON.parse(localStorage.getItem("userLogin"));
-  //   console.log(user[0].email);
-  //   this.props.SearchEmail(user[0].email);
-  // }
+  clearData(e){
+   e.target.value = ''
+   this.setState({
+     status: true
+   })
+  }
+  searchAct(){
+    this.cloneProject = []
+    const {project} = this.props;
+    _.map(project, (item, key) => {
+      if(item.name === this.state.valueSearch){
+        this.cloneProject.push(item)
+        this.setState({
+          status: false
+        })
+      }
+    })
+  }
+  handleChangeInput(e){
+    e.preventDefault();
+    this.setState({
+      valueSearch: e.target.value
+    })
+  }
   render() {
     const { project } = this.props;
     const { admin } = this.props;
+    const {status} = this.state
      _.map(project, item => {
       _.map(item.idmembers, data => {
         this.position = data.position
       })
     })
     return (
-
       <div className="listProject container row">
         <div className="col-md-3 user-tag">
           <div className="content-user">
@@ -80,7 +102,6 @@ class project extends Component {
                   </li>
                 </ul>
               </div>
-            
             </div>
           </div>
           <ToggleHome/>
@@ -94,31 +115,18 @@ class project extends Component {
         <div className="col-md-6 project-list">
         <div className="focus-detail">
         <div className="search-project">
-        <Input style={{width:'25%', marginBottom:'20px'}} type="text" name="text" id="search" placeholder="search" />
+        <Input style={{width:'25%', marginBottom:'20px'}} onFocus={this.clearData} onChange={this.handleChangeInput} value={this.valueSearch} type="text" name="text" id="search" placeholder="search" />
+        <i onClick={this.searchAct} class="icon-search fas fa-search"></i>
         </div>
-        <ListProject project={project} admin={admin} SearchEmail={this.props.SearchEmail}/>
+        {status ? <ListProject project={project} admin={admin} SearchEmail={this.props.SearchEmail}/> :
+        <ListProject project={this.cloneProject} admin={admin} SearchEmail={this.props.SearchEmail}/>
+         }
         </div>
        <div className="modal-create">
        <CreateProject/>
        </div>
         </div>
-        <div style={{marginBottom:'0rem'}} className="breadcrumb">
-          <Breadcrumb>
-            <BreadcrumbItem active>
-            <Link to ="/user">Home</Link>
-            </BreadcrumbItem>
-            <BreadcrumbItem active>
-            <Link to ="/Board">
-                <i class="fas fa-user-friends"> Board</i>
-              </Link>
-            </BreadcrumbItem>
-            <BreadcrumbItem active>
-              <Link to ="/backlog">
-                <i class="fas fa-home"></i> Backlog
-                </Link>
-            </BreadcrumbItem>
-          </Breadcrumb>
-        </div>
+        <HeaderCustom/>
       </div>
     );
   }
@@ -140,4 +148,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(project);
+)(projectContainer);
