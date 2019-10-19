@@ -104,7 +104,7 @@ exports.editIssues = async (req, res, next) => {
 
         await action.save()
 
-        res.status(201).json({ statusCode: 200 ,...newissues, _id: idissues})
+        res.status(201).json({ statusCode: 200 ,newissues, _id: idissues})
     }
     catch(err) {
         if (!err.statusCode) {
