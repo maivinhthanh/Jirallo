@@ -144,8 +144,11 @@ exports.viewInfoProject = async (req, res, next) => {
 exports.AddMember = async (req, res, next) => {
     try{
         const idproject = req.params.idproject
-        const iduser = req.body.iduser
+        const email = req.body.email
         const position = req.body.position
+        const user = await User.findOne({email: email})
+        const iduser = user._id
+        
         const project = await Project.findByIdAndUpdate(idproject, { 
                 $push: { 
                     idmembers: {
