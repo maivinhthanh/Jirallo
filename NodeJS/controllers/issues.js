@@ -82,7 +82,7 @@ exports.editIssues = async (req, res, next) => {
             image = req.file.path
         }
 
-        const newissues = {
+        let newissues = {
             name: name,
             type: type,
             priority: priority,
@@ -104,7 +104,9 @@ exports.editIssues = async (req, res, next) => {
 
         await action.save()
 
-        res.status(201).json({ statusCode: 200 ,newissues, _id: idissues})
+        newissues = {...newissues, id: idissues}
+
+        res.status(201).json({ statusCode: 200 ,newissues})
     }
     catch(err) {
         if (!err.statusCode) {
