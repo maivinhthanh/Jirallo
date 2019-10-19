@@ -146,6 +146,7 @@ exports.AddMember = async (req, res, next) => {
         const idproject = req.params.idproject
         const email = req.body.email
         const position = req.body.position
+
         const user = await User.findOne({email: email})
         const iduser = user._id
         
@@ -157,13 +158,12 @@ exports.AddMember = async (req, res, next) => {
                     }
                 }
         }, { new: true })
-
-        await User.findByIdAndUpdate(iduser,  {
+        await User.findByIdAndUpdate(iduser, {
             $push: { 
-                idproject: ObjectId(project._id)
+                idproject: ObjectId(idproject)
             }
         },{ new: true })
-
+        console.log("a2")
         const action = new Activities({
             action: 'AddMember',
             content: 'project/AddMember/' + idproject,
