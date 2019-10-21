@@ -220,7 +220,21 @@ exports.FindUserLikeID = async (req, res, next) => {
     try{
         const iduser = req.params.iduser
 
-        const user = await findById(iduser)
+        const user = await User.findById(iduser)
+
+        res.status(200).json({statusCode: 200,result: user})
+    }
+    catch (error) {
+        if (!error.statusCode) {
+            error.statusCode = 500
+        }
+        res.status(500).json(error)
+        next(error)
+    }
+}
+exports.getListUser = async (req, res, next) => {
+    try{
+        const user = await User.find({})
 
         res.status(200).json({statusCode: 200,result: user})
     }

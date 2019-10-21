@@ -78,5 +78,10 @@ router.get('/FindUserLikeID/:iduser',
     ],
     authController.FindUserLikeID,
 )
+router.get('/getListUser',
+    [
+    ],
+    authController.getListUser,
+)
 
 module.exports = router
