@@ -29,5 +29,9 @@ router.put('/assignforUser/:idissues',upload.single('image'),isAuth,
     [], 
     issuesController.assignforUser,
 )
+router.put('/addIssueIntoSprint/:idissues',upload.single('image'),isAuth, 
+    [], 
+    issuesController.addIssueIntoSprint,
+)
 
 module.exports = router
