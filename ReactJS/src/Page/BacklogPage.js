@@ -33,13 +33,11 @@ class BacklogPage extends Component {
                     <Button color="secondary">search</Button>
                   </InputGroupAddon>
                 </InputGroup>
-                {/* <Button style={{float: 'right'}} color="warning">create sprint</Button> */}
               </div>
             </div>
             <div className="filter">
               <p>Quick Filters: </p>
-              <ListUser />
-           
+              <ListUser params={id} />
             </div>
             <div className="row content-backlog board-task">
               <div className="col-md-1">
@@ -50,7 +48,6 @@ class BacklogPage extends Component {
               </div>
               <div className="col-md-8 defineIssue">
               <CreateSprint params={id}/>
-              {/* <Button style={{float: 'right', marginTop:'-65px', marginRight:'-142px'}} color="warning" >create sprint</Button> */}
                <ListDetailIssues params={id}/>
                {/* CreateIssue dang an */}
                {/* <ListIssues params = {id}/> */}

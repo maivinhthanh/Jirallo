@@ -71,25 +71,16 @@ export const RegisterAction = (email,password,fullname,avatar,gender) =>{
     }
 }
 export const EditUserAction = (id,user) =>{
-    console.log(id,user);
     return dispatch =>{
         return CallApi(`auth/editProfile/${id}`,'PUT',
-        // {
-        //     name:user[0].name,
-        //     avatar: user[0].avatar,
-        //     gender : user[0].gender,
-        //     birthdate: user[0].birthday,
-        // },
         user,
         document.cookie.split("=")[2]
         ).then(response =>{
-            console.log(response)
             if(response.data.result.length !== 0){
                 dispatch(EditUser(response.data.result))
             }
         })
         .catch(err =>{
-            console.log(err)
            dispatch(EditUserFail(err))
         })
     }

@@ -18,7 +18,6 @@ const initialState = {
     idissues:''
 };
 export const createIssue =(state, action) => {
-  console.log(action.data)
   let cloneState = [...state]
   cloneState.push(action.data.newissues)
   return cloneState
@@ -28,16 +27,24 @@ export const IssueError =(state, action) => {
   return updateObject(state, {error: true})
 }
 export const showListIssue = (state, action) => {
-  console.log(action.data)
   let cloneState = _.clone(state)
   cloneState = [...action.data.listissues]
   return cloneState
+}
+export const EditIssue = (state, action) => {
+  return _.map(_.cloneDeep(_.compact(state)), data => {
+    if(data._id === action.data.id) {
+      return {...data, ...action.data}
+    }
+    return data
+  })
 }
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.createIssue: return createIssue( state, action );
         case actionTypes.IssueError : return IssueError(state, action);
         case actionTypes.showListIssue: return showListIssue(state,action);
+        case actionTypes.EditIssue: return EditIssue(state, action)
         default: return state;
     }
 };

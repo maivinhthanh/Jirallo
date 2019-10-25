@@ -18,18 +18,15 @@ const initialState = {
 const login = ( state, action ) => {
     const token = action.token
     document.cookie = 'token='+token
-    console.log(token);
     let json = {
         code : 'ok',
         data : action.id
     }
     state = json
-    console.log(state)
     return updateObject( state, {id : action.id} );
 };
 
 const loginfail = (state, action) => {
-    console.log(action);
     return updateObject( state, { error: true } );
 };
 

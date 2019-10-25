@@ -26,7 +26,6 @@ export const EditUserFail = (name) =>{
   }
 }
 export const EditUserAction = (id,user) =>{
-  console.log(id,user);
   return dispatch =>{
       return CallApi(`auth/editProfile/${id}`,'PUT',
       {
@@ -37,13 +36,11 @@ export const EditUserAction = (id,user) =>{
       },
       document.cookie.split("=")[2]
       ).then(response =>{
-          console.log(response)
           if(response.data.result.length !== 0){
               dispatch(EditUser(response.data.result))
           }
       })
       .catch(err =>{
-          console.log(err)
          dispatch(EditUserFail(err))
       })
   }
@@ -60,9 +57,7 @@ export const SearchAction = email => {
       document.cookie.split("=")[2]
     )
       .then(respone => {
-        console.log(respone)
         if (respone.data.result.length !== 0) {
-          console.log(respone)
           dispatch(Search(respone.data.result));
         } else {
           dispatch(SearchError("Error"));

@@ -11,20 +11,16 @@ const initialState = {
 };
 
 const getGroup = ( state, action ) => {
-  console.log(action)
   return updateObject( state, {id : action.id} );
 };
 const insertGroup = (state, action) =>{
-    console.log(action);
     let json = {
         userId: action.userId
     }
     state = json ;
-    console.log(state)
     return updateObject(state, {id: action.userId})
 }
 const insertError = (state,action) =>{
-    console.log(action);
     return updateObject(state, {error: true})
 }
 const getListGroup = (state, action) =>{

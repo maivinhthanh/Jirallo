@@ -52,7 +52,6 @@ export const createGroupAct = (name) =>{
     document.cookie.split("=")[2]
     )
     .then (respone =>{
-      console.log(respone.data)
       dispatch(createGroup(respone.data))
     })
     .catch(err =>{

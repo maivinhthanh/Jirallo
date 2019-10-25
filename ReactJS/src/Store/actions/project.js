@@ -21,7 +21,6 @@ export const getAllList = (data) => {
   }
 }
 export const AddMemberAct =(id,user) => {
-  console.log(id, user);
   return dispatch => {
     return CallApi(`project/AddMember/${id}`,
     'PUT',
@@ -46,7 +45,6 @@ export const getListProjectAct = () =>{
     {},
     document.cookie.split("=")[2]
     ).then(respone => {
-      console.log(respone.data)
       dispatch(getAllList(respone.data.listproject))
     }).catch(err =>{
       dispatch(projectError(err))
@@ -64,7 +62,6 @@ export const createProjectAct = (name) => {
     document.cookie.split("=")[2]
     )
     .then (respone => {
-      console.log(respone)
       dispatch(createProject(respone.data.newproject))
     })
     .catch(err =>{

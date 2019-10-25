@@ -28,16 +28,12 @@ export const editEpic = (data) => {
   }
 }
 export const EditepicAct = (name, id) => {
-  console.log(name, id)
-  debugger
   return dispatch => {
     return CallAPI(`epic/editEpic/${id}`,
     'PUT',
     { name : name},
     document.cookie.split('=')[2]
     ).then(respone => {
-      debugger
-      console.log(respone)
       dispatch(editEpic(respone.data))
     }).catch(err => {
       dispatch(ErrorEpic(err))
@@ -59,7 +55,6 @@ export const viewListEpicAct = (idProject) => {
 }
 
 export const createEpicAct = (epic) =>{
-  console.log(epic.nameEpic)
   return dispatch => {
     return CallAPI('epic/createEpic',
     'POST',

@@ -12,16 +12,10 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Button,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Modal,
-  ModalBody,
-  ModalHeader,
-  ModalFooter,
-  Input,
 } from "reactstrap";
 import { Link } from 'react-router-dom' 
 import CreateProject from "../Modal/CreateProject";
@@ -32,12 +26,14 @@ class HeaderBoard extends Component {
       isOpen: false,
       modal: false,
       nameProject:'',
-      status: false
+      status: false,
+      activeUser : []
     };
     this.toggle = this.toggle.bind(this);
     this.createProject = this.createProject.bind(this);
     this.showToggle = this.showToggle.bind(this);
     this.handleNameProject = this.handleNameProject.bind(this);
+    // this.activeUser = []
   }
   toggle() {
     this.setState({
@@ -59,17 +55,32 @@ class HeaderBoard extends Component {
     event.preventDefault();
     this.props.createProjectAct(this.state.nameProject)
   }
-  componentWillMount() {
-    const user = JSON.parse(localStorage.getItem("userLogin"));
-    console.log(user[0].email);
-    this.props.SearchEmail(user[0].email);
+  componentDidUpdate(preState){
+    console.log(preState)
+    !_.isEqual(preState.user, this.props.user) && this.ShowInfoUser()
+  }
+  // componentDidMount(){
+  //   this.ShowInfoUser()
+  // }
+  ShowInfoUser =() => {
+    const userLocal = JSON.parse(localStorage.getItem("userLogin"));
+    const {user} = this.props;
+    console.log(user)
+    // this.props.SearchEmail(user[0].email);
+    _.map(user, (data, index) => {
+      console.log(userLocal[0].email)
+      if(userLocal[0].email === data.email){
+        this.setState({
+          activeUser: data
+        })
+      }
+    })
   }
   render() {
-    const admin = this.props.admin;
-    console.log(admin)
-    _.map(admin, item => {
-      console.log(item.name);
-    });
+    // const admin = this.props.admin;
+    // const {user} = this.props;
+    const { admin, user } = this.props
+    const {activeUser} = this.state
     return (
       <div className="header-board">
         <Navbar color="light" light expand="md">
@@ -105,9 +116,7 @@ class HeaderBoard extends Component {
           <div className="user-info">
             <div className="name-user">
               <p>
-                {_.map(admin, (item, key) => {
-                  return <span key={item.id}>{item.name}</span>;
-                })}
+              <span>{activeUser.name}</span>
                 <i className="fas fa-user-tie"></i>
               </p>
             </div>
@@ -120,7 +129,8 @@ class HeaderBoard extends Component {
 const mapStateToProps = state => {
   return {
     admin: state.admin,
-    project: state.project
+    project: state.project,
+    user: state.user
   };
 };
 const mapDispatchToProps = dispatch => {

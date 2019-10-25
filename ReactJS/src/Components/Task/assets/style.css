@@ -72,5 +72,9 @@
   margin-left:15px;
 }
 /* /TaskWork */
-
+.input-assign{
+  position: absolute;
+  top: 22px;
+  width: 175px;
+}
 

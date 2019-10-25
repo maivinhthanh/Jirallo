@@ -19,19 +19,39 @@ export const showListIssue = data => {
     type: actionTypes.showListIssue,
     data
   }
-
+}
+export const EditIssue = data => {
+  return {
+    type: actionTypes.EditIssue,
+    data
+  }
+}
+export const assignTaskIssueAct = (idissues, idUser) => {
+  console.log(idissues, idUser)
+  return dispatch => {
+    return CallApi(`issues/assignforUser/${idissues}`,
+    'PUT',
+    {
+      iduser: idUser
+    },
+    document.cookie.split("=")[2]
+    ).then(respone => {
+      console.log(respone)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
 }
 export const EditIssuesAct = (id, issue) => {
-  console.log(id, issue);
   return dispatch => {
     return CallApi(`issues/editIssues/${id}`,
     'PUT',
     issue,
     document.cookie.split("=")[2]
     ).then(respone=>{
-      console.log(respone)
+      dispatch(EditIssue(respone.data.newissues))
     }).catch(err => {
-      console.log(err)
+      dispatch(IssueError(err))
     })
   }
 }
@@ -42,10 +62,8 @@ export const showListIssueAct = (id) => {
     {},
     document.cookie.split("=")[2]
     ).then (respone => {
-      console.log(respone)
       dispatch(showListIssue(respone.data))
     }).catch(err => {
-      // console.log(err)
       dispatch(IssueError(err))
     })
   }
@@ -62,10 +80,8 @@ export const createIssuesAct =(id, name, type) => {
     },
     document.cookie.split("=")[2]
     ).then (respone => {
-      console.log(respone)
       dispatch(createIssue(respone.data))
     }).catch(err => {
-      console.log(err)
       dispatch(IssueError(err))
     })
   }

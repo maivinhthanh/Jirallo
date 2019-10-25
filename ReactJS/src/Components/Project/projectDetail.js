@@ -55,7 +55,7 @@ export default class projectDetail extends Component {
           return (
             <Card>
               <div className="detail-task-user">
-                <CardBody style={{ background: "aliceblue" }}>
+                <CardBody style={{ background: "#A4D4FF" }}>
                   <i
                     onClick={ this.showToggle.bind(this, item._id) }
                     style={{ float: "right" }}
@@ -65,7 +65,7 @@ export default class projectDetail extends Component {
                   <CardSubtitle>
                     Create day: {this.fomatDateTime(item.datecreate)}
                   </CardSubtitle>
-                  <Button style={{ background: "#d4edda", marginTop: "20px" }}>
+                  <Button style={{ background: "#41ACF2", marginTop: "20px" }}>
                     {" "}
                     <Link to={{ pathname: `/backlog/${item._id}` }}>
                       <span>View</span>

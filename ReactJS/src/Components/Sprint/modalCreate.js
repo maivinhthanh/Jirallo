@@ -70,7 +70,6 @@ class CreateSprint extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log(state.sprint)
   return {
     sprint: state.sprint
   };

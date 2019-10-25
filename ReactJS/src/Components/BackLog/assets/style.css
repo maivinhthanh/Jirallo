@@ -17,3 +17,13 @@
 .card-content-epic button{
   margin-bottom: 10px;
 }
+.list-sprint ul{
+  list-style: none
+}
+.list-sprint {
+  text-align: left;
+  margin-left: 70px;
+}
+.hover-item {
+  color: red
+}

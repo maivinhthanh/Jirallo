@@ -65,10 +65,7 @@ class DetailUserPage extends Component {
     })
     return (
       <div className="detail-user">
-      <div className='search'>
-      <Input type="text" name="text" value={this.EmailUser} onChange={this.handleEmail} id="exampleSelectMulti" placeholder="search"></Input>
-      <i onClick={this.findUserLikeEmail} class="icon fas fa-plus"></i>
-      </div>
+      
         <div className="header-detail"></div>
         <div className="content-user">
           <div className="avatar-image">
@@ -77,6 +74,7 @@ class DetailUserPage extends Component {
               alt="Hipster"
             />
           </div>
+          <div className="wrap-content">
           <div className="blog-title">
             <div class="name-user">
               <h1>{this.name}</h1>
@@ -88,7 +86,13 @@ class DetailUserPage extends Component {
           <div className="description">
             <p>{this.position}</p>
             <div>
-              <UpdateUser/>
+            {
+                _.map(admin, (item,index) => {
+                  console.log(item)
+                  return <UpdateUser key={index} data ={item}
+                 id={this.id} />
+                })
+              }
             </div>
             <div style={{marginTop:'20px'}} className="menu">
               <ul>
@@ -106,6 +110,11 @@ class DetailUserPage extends Component {
                 </li>
               </ul>
             </div>
+          </div>
+          <div className='search'>
+      <Input type="text" name="text" value={this.EmailUser} onChange={this.handleEmail} id="exampleSelectMulti" placeholder="search"></Input>
+      <i onClick={this.findUserLikeEmail} class="icon fas fa-plus"></i>
+      </div>
           </div>
         </div>
         <div className="content-task">
@@ -125,8 +134,13 @@ class DetailUserPage extends Component {
           <Breadcrumb>
             <BreadcrumbItem active>
               <div>
-                <UpdateUser 
+              {
+                _.map(admin, (item,index) => {
+                  console.log(item)
+                  return <UpdateUser key={index} data ={item}
                  id={this.id} />
+                })
+              }
               </div>
             </BreadcrumbItem>
             <BreadcrumbItem active>

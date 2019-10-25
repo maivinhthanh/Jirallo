@@ -13,12 +13,10 @@ const createEpic =(state, action) =>{
   return updateObject(state, action.data.newepic)
 }
 const viewListEpic = (state, action) => {
-  console.log(action.data.listepic)
   let cloneState = []
  _.map(action.data.listepic, data => {
    cloneState = [...cloneState].concat(data)
  })
- console.log(cloneState)
  return cloneState
 }
 const editEpic = (state, action) => {

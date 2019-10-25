@@ -8,10 +8,10 @@ class UpdateUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      avatar: "",
-      gender: 'male',
-      birthday: ""
+      name: this.props.data.name,
+      avatar: this.props.data.image,
+      gender: this.props.data.gender,
+      birthday: this.props.data.birthdate
     };
     this.handleAvatar = this.handleAvatar.bind(this);
     this.handleGender = this.handleGender.bind(this);
@@ -52,38 +52,20 @@ class UpdateUser extends Component {
     data.append('gender',this.state.gender)
     data.append('name',this.state.name)
     data.append('birthdate',this.state.birthday)
-
-
-    const updateUser = [
-      {
-        gender: this.state.gender,
-        avatar: this.state.avatar,
-        name: this.state.name,
-        birthday: this.state.birthday,
-      }
-    ];
-    console.log(data)
     this.props.EditUserAction(this.activeId, data);
   }
   render() {
-    const props = this.props;
+    // const props = this.props;
     const admin = this.props.admin
       _.map(admin, (item) => {
         this.activeId = item._id
       })
+    console.log(this.props.data)
     return (
       <div>
         <div className="container">
-          {/* <button
-            type="button"
-            className="btn btn-success"
-            data-toggle="modal"
-            data-target="#myModal"
-          > */}
           <i data-toggle="modal"
             data-target="#myModal" className="fas fa-cog"></i> Setting user
-            {/* Update User
-          </button> */}
           {/* The Modal */}
           <div className="modal" id="myModal">
             <div className="modal-dialog">
@@ -117,10 +99,7 @@ class UpdateUser extends Component {
                           type="file"
                           name="avatar"
                           onChange={this.handleAvatar}
-                          // value={this.state.avatar}
                           id="avatar"
-                          // required
-                          // placeholder="password placeholder"
                         />
                       </FormGroup>
                       <FormGroup>

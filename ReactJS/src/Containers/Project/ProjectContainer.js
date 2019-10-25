@@ -56,8 +56,7 @@ class projectContainer extends Component {
     })
   }
   render() {
-    const { project } = this.props;
-    const { admin } = this.props;
+    const { project, admin } = this.props;
     const {status} = this.state
      _.map(project, item => {
       _.map(item.idmembers, data => {
@@ -74,6 +73,7 @@ class projectContainer extends Component {
                 alt="Hipster"
               />
             </div>
+            <div className="wrap-content">
             <div className="blog-title">
               <span>
               {
@@ -102,6 +102,7 @@ class projectContainer extends Component {
                   </li>
                 </ul>
               </div>
+            </div>
             </div>
           </div>
           <ToggleHome/>
@@ -132,7 +133,6 @@ class projectContainer extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log(state.project, state.admin)
   return {
     admin: state.admin,
     project: state.project

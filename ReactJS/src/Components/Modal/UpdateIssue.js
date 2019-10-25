@@ -1,21 +1,20 @@
 import React, { Component } from "react";
 import { Form, FormGroup, Label, Input } from "reactstrap";
 import "../User/assets/style.css";
-import * as action from "../../Store/actions/issues";
+// import * as action from "../../Store/actions/issues";
 import { connect } from "react-redux";
 import _ from 'lodash'
 class UpdateIssue extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      avatar: "",
-      priority: '',
-      process: "",
-      type:"",
-      descript: "",
-      tag: ""
-
+      name: this.props.data.name,
+      avatar: this.props.data.image,
+      priority: this.props.data.priority,
+      process: this.props.data.process,
+      type:this.props.data.type,
+      descript: this.props.data.descript,
+      tag: this.props.data.tag,
     };
     this.handleAvatar = this.handleAvatar.bind(this);
     this.handlePriority = this.handlePriority.bind(this);
@@ -80,36 +79,32 @@ class UpdateIssue extends Component {
     data.append('descript',this.state.descript);
     data.append('process', this.state.process)
     data.append('tag', this.state.tag)
-    console.log(this.activeId, data)
     this.props.EditIssuesAct(this.activeId, data)
   }
-  // componentDidUpdate(prevProps){
-  //   !_.isEqual(prevProps.data, this.props.data) && this.handleTranferData()
-  // }
-  // handleTranferData =() => {
-  //   const {data} = this.props
-  //   this.setState({
-  //     name: data.name,
-  //     type: data.type,
-  //     process: data.process,
-  //     tag: data.tag,
-  //     descript: data.comment,
-  //     priority: data.priority,
-  //     avatar: data.avatar
-  //   })
-  //   console.log('ab',this.state.name)
-  // }
+  componentWillReceiveProps(prevProps){
+    !_.isEqual(prevProps.data, this.props.data) && this.handleTranferData(prevProps.data)
+  }
+  handleTranferData =(data) => {
+    // const {data} = this.props
+    this.setState({
+      name: data.name, 
+      type: data.type,
+      process: data.process,
+      tag: data.tag,
+      descript: data.descript,
+      priority: data.priority,
+      avatar: data.avatar
+    })
+  }
   render() {
     const {params} = this.props
     const {data} = this.props
-    console.log(params, data)
     this.activeId = params
     return (
       <div>
-        <div className="container setting-issue">
+        <div className="container">
           {/* <i data-toggle="modal"
             data-target="#myModal" className="fas fa-cog"></i> */}
-          {/* <div className="modal" id="myModal"> */}
           <div className="modal" id="myModal" >
             <div className="modal-dialog">
               <div className="modal-content">
@@ -231,19 +226,18 @@ class UpdateIssue extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  return {
-    user: state.user,
-    admin: state.admin,
-    project: state.project
-  };
-}
-const mapDispatchToProps = dispatch => {
-  return {
-    EditIssuesAct: (id, data) => dispatch(action.EditIssuesAct(id, data))
-  };
-};
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UpdateIssue);
+export default UpdateIssue
+// const mapStateToProps = state => {
+//   return {
+//    issues: state.issue
+//   };
+// }
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     EditIssuesAct: (id, data) => dispatch(action.EditIssuesAct(id, data))
+//   };
+// };
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(UpdateIssue);

@@ -14,7 +14,26 @@ export const errorSprint = error => {
     message: error
   }
 }
-
+export const showListSprint = data => {
+  return {
+    type: actionTypes.showListSprint,
+    data
+  }
+}
+export const showListSprintAct = (id) => {
+  return dispatch => {
+    return CallApi(`sprint/viewListSprint/${id}`,
+    'GET',
+    {},
+    document.cookie.split("=")[2]
+    ).then (respone => {
+      console.log(respone)
+      dispatch(showListSprint(respone.data.listsprint))
+    }).catch(err => {
+      dispatch(errorSprint(err))
+    })
+  }
+}
 export const createSprintAct = (data, id) => {
   console.log(data, id)
   return dispatch => {

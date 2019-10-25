@@ -13,6 +13,46 @@ export const ErrorUser = name =>{
     message: name
   }
 }
+export const getListUser = data => {
+  return {
+    type: actionTypes.GetListUser,
+    data
+  }
+}
+export const findUserLikeId = data => {
+  return {
+    type: actionTypes.FindUserLikeId,
+    data
+  }
+}
+export const findUserLikeIDAct = (id) => {
+  console.log(id)
+  return dispatch => {
+    return CallApi(`auth/FindUserLikeID/${id}`,
+    "GET",
+    {},
+    document.cookie.split("=")[2]
+    ).then(respone => {
+      console.log(respone)
+      dispatch(findUserLikeId(respone.data.result))
+    }).catch(err => {
+      dispatch(ErrorUser(err))
+    })
+  }
+}
+export const getListUserAct = () => {
+  return dispatch => {
+    return CallApi("auth/getListUser",
+    "GET",
+    {},
+    document.cookie.split("=")[2]
+    ).then (respone => {
+      dispatch(getListUser(respone.data.result))
+    }).catch(err => {
+      dispatch(ErrorUser(err))
+    })
+  }
+}
 export const insertUserToGroup = (email,id) =>{
   return dispatch =>{
     return CallApi("group/addMember",
@@ -24,7 +64,6 @@ export const insertUserToGroup = (email,id) =>{
     document.cookie.split("=")[2]
     )
     .then (respone =>{
-      console.log(respone);
       dispatch(AddUserSuccess(respone.data.result))
     })
     .catch(err =>{

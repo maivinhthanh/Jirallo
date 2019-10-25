@@ -4,7 +4,7 @@ export default class ModalLog extends Component {
   render() {
     return (
       <div>
-         <div className="modal" id="myModal">
+         <div className="modal" id="myModal1">
           <div className="modal-dialog">
             <div className="modal-content">
               {/* Modal Header */}

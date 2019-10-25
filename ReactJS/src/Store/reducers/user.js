@@ -20,12 +20,22 @@ const AddUserSuccess = ( state, action ) => {
 
 const ErrorUser = (state, action) => {
   return updateObject(state, {error: true });
-} 
+}
+const GetListUser = (state, action) => {
+  let cloneState = _.cloneDeep(state);
+  cloneState = [...action.data]
+  return cloneState
+}
+const FindUserLikeId = (state, action) => {
+  return updateObject(state, action.data)
+}
 
 const reducerUser = ( state = initialState, action ) => {
   switch ( action.type ) {
       case actionTypes.AddUserSuccess: return AddUserSuccess( state, action );
       case actionTypes.ErrorUser : return ErrorUser(state, action);
+      case actionTypes.GetListUser : return GetListUser(state, action);
+      case actionTypes.FindUserLikeId : return FindUserLikeId(state, action);
       default: return state;
   }
 };

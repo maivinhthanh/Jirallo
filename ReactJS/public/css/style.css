@@ -616,14 +616,17 @@ p.movetxt {
     display: flex;
 }
 .menu ul li {
-  margin-left: 15px;
+  margin-left: 25px;
   font-size: 27px;
 }
 .content-task {
-  width: 500px;
+  width: 450px;
   position: absolute;
   top: 243px;
   right: 576px;
+}
+.wrap-content {
+  margin-left: -36px;
 }
 .detail-task-user {
   background-color: #999;
@@ -686,15 +689,15 @@ p.movetxt {
     border-radius: inherit;
     background: cornflowerblue;
 }
-.detail-user .search {
+/* .detail-user .search {
   position: absolute;
   top: 320px;
   left: 20px;
   width: 12%;
-}
+} */
 .detail-user .icon{
   position: absolute;
-  top: 10px;
+  top: 356px;
   right: 10px;
 }
 .detail-user .description p{
@@ -724,5 +727,9 @@ p.movetxt {
   left: 0px !important;
   top: 0px !important;
 }
-
+.chooseOptionEdit{
+  position: absolute;
+  right: 28px;
+  top: -10px;
+}
 

@@ -7,7 +7,7 @@ export default class FormDescript extends Component {
       <Form>
          <FormGroup row>
          <Col sm={10}>
-           <Input type="textarea" name="text" id="exampleText" />
+           <Input type="textarea" name="text" id="exampleText" value={this.props.description} />
          </Col>
        </FormGroup>
          </Form>
