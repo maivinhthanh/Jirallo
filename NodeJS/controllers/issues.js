@@ -3,6 +3,7 @@ const {ObjectId} = require('mongodb')
 
 const Issues = require('../models/issues')
 const Project = require('../models/project')
+const Sprint = require('../models/sprint')
 const Activities = require('../models/activities')
 
 function delay() {
@@ -147,7 +148,7 @@ exports.assignforUser = async (req, res, next) => {
         const idissues = req.params.idissues
         const iduser = req.body.iduser
 
-        const issues = await findById(idissues)
+        const issues = await Issues.findById(idissues)
 
         if(iduser === issues.assignee){
             const error = new Error("User had assign")
@@ -161,7 +162,7 @@ exports.assignforUser = async (req, res, next) => {
             assignee: iduser
         }
 
-        await findByIdAndUpdate(idissues, dataupdate)
+        await Issues.findByIdAndUpdate(idissues, dataupdate)
 
         const action = new Activities({
             action: 'assignforUser',
@@ -173,6 +174,8 @@ exports.assignforUser = async (req, res, next) => {
 
         await action.save()
 
+        res.status(201).json({ statusCode: 200 ,data:dataupdate})
+
     }
     catch(err) {
         if (!err.statusCode) {
@@ -183,3 +186,34 @@ exports.assignforUser = async (req, res, next) => {
     }
     
 }
+
+exports.addIssueIntoSprint = async (req, res, next) => {
+    try{
+        const idissues = req.params.idissues
+        const idsprint = req.body.idsprint
+
+        await Issues.findByIdAndUpdate(idissues, {idsprint: idsprint})
+        await Sprint.findByIdAndUpdate(idsprint, {idissues: idissues})
+
+        const action = new Activities({
+            action: 'addIssueIntoSprint',
+            content: 'issues/addIssueIntoSprint/' + idissues,
+            iduser: req.userId,
+            newdata: {idsprint: idsprint, idsprint: idsprint}
+        })
+
+        await action.save()
+
+        res.status(201).json({ statusCode: 200 })
+
+    }
+    catch(err) {
+        if (!err.statusCode) {
+            err.statusCode = 500
+        }
+        res.status(500).json(err)
+        next(err)
+    }
+    
+}
+
