@@ -31,7 +31,7 @@ export const findUserLikeIDAct = (id) => {
     return CallApi(`auth/FindUserLikeID/${id}`,
     "GET",
     {},
-    document.cookie.split("=")[2]
+    'token'
     ).then(respone => {
       console.log(respone)
       dispatch(findUserLikeId(respone.data.result))
@@ -45,7 +45,7 @@ export const getListUserAct = () => {
     return CallApi("auth/getListUser",
     "GET",
     {},
-    document.cookie.split("=")[2]
+    'token'
     ).then (respone => {
       dispatch(getListUser(respone.data.result))
     }).catch(err => {
@@ -61,7 +61,7 @@ export const insertUserToGroup = (email,id) =>{
       email: email,
       idGroup: id
     },
-    document.cookie.split("=")[2]
+   'token'
     )
     .then (respone =>{
       dispatch(AddUserSuccess(respone.data.result))

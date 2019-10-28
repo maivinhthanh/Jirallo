@@ -6,8 +6,20 @@ export default function apiCaller(endPoint, method = "POST", body, headers = nul
     method : method,
     url :  Config.API_URL  + "/" + endPoint,
     data: body,
-    headers : {Authorization: headers}
+    headers : {Authorization: getCookie(headers)}
   }).catch(err =>{
     throw(err);
   });
+}
+
+function getCookie(name) {
+  var cookieArr = document.cookie.split(";");
+  for(var i = 0; i < cookieArr.length; i++) {
+      var cookiePair = cookieArr[i].split("=");
+      
+      if(name == cookiePair[0].trim()) {
+          return decodeURIComponent(cookiePair[1]);
+      }
+  }
+  return null;
 }

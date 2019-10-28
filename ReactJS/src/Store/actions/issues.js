@@ -27,14 +27,13 @@ export const EditIssue = data => {
   }
 }
 export const assignTaskIssueAct = (idissues, idUser) => {
-  console.log(idissues, idUser)
   return dispatch => {
     return CallApi(`issues/assignforUser/${idissues}`,
     'PUT',
     {
       iduser: idUser
     },
-    document.cookie.split("=")[2]
+   'token'
     ).then(respone => {
       console.log(respone)
     }).catch(err => {
@@ -47,7 +46,7 @@ export const EditIssuesAct = (id, issue) => {
     return CallApi(`issues/editIssues/${id}`,
     'PUT',
     issue,
-    document.cookie.split("=")[2]
+   'token'
     ).then(respone=>{
       dispatch(EditIssue(respone.data.newissues))
     }).catch(err => {
@@ -60,7 +59,7 @@ export const showListIssueAct = (id) => {
     return CallApi(`issues/viewListIssues/${id}`,
     'GET',
     {},
-    document.cookie.split("=")[2]
+    'token'
     ).then (respone => {
       dispatch(showListIssue(respone.data))
     }).catch(err => {
@@ -78,7 +77,7 @@ export const createIssuesAct =(id, name, type) => {
       idproject: id,
       type: type
     },
-    document.cookie.split("=")[2]
+    'token'
     ).then (respone => {
       dispatch(createIssue(respone.data))
     }).catch(err => {

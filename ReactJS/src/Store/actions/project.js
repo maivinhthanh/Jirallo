@@ -28,7 +28,7 @@ export const AddMemberAct =(id,user) => {
       iduser: user.email,
       position: user.position
     },
-    document.cookie.split("=")[2]
+    'token'
     ).then(respone => {
       console.log(respone)
       // dispatch(addMemberSuccess(respone))
@@ -44,7 +44,7 @@ export const getListProjectAct = () =>{
     return CallApi('project/ViewListProject',
     'GET',
     {},
-    document.cookie.split("=")[2]
+    'token'
     ).then(respone => {
       dispatch(getAllList(respone.data.listproject))
     }).catch(err =>{
@@ -60,7 +60,7 @@ export const createProjectAct = (name) => {
     {
       name : name
     },
-    document.cookie.split("=")[2]
+    'token'
     )
     .then (respone => {
       dispatch(createProject(respone.data.newproject))
