@@ -26,5 +26,16 @@ router.put('/editSprint/:idsprint',upload.single('avatar'),isAuth,
 router.get('/viewListSprint/:idproject',isAuth,
     sprintController.viewListSprint,
 )
+router.get('/viewListIssuesInSprint/:idsprint',isAuth,
+    sprintController.viewListIssuesInSprint,
+)
+router.put('/completeSprint/:idsprint',upload.single('avatar'),isAuth, 
+    [], 
+    sprintController.completeSprint,
+)
+router.put('/deleteSprint/:idsprint',upload.single('avatar'),isAuth, 
+    [], 
+    sprintController.deleteSprint,
+)
 
 module.exports = router

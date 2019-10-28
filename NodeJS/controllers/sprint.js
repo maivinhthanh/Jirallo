@@ -4,6 +4,7 @@ const {ObjectId} = require('mongodb')
 const Sprint = require('../models/sprint')
 const Project = require('../models/project')
 const Activities = require('../models/activities')
+const Issues = require('../models/issues')
 
 function delay() {
     return new Promise(resolve => setTimeout(resolve, 300))
@@ -115,4 +116,84 @@ exports.viewListSprint = async (req, res, next) => {
         next(err)
     }
     
+}
+exports.completeSprint = async (req, res, next) => {
+    try{
+        const idsprint = req.params.idsprint
+
+        const newsprint = {
+            isfinish: true,
+            dateedit: Date.now(),
+        } 
+        await Sprint.findByIdAndUpdate(idsprint, newsprint)
+
+        const action = new Activities({
+            action: 'completeSprint',
+            content: 'sprint/completeSprint/' + idsprint,
+            iduser: req.userId,
+        })
+
+        await action.save()
+
+        res.status(201).json({ statusCode: 200 ,newsprint})
+    }
+    catch(err) {
+        if (!err.statusCode) {
+            err.statusCode = 500
+        }
+        res.status(500).json(err)
+        next(err)
+    }
+}
+exports.deleteSprint = async (req, res, next) => {
+    try{
+        const idsprint = req.params.idsprint
+
+        const newsprint = {
+            hidden: true,
+            dateedit: Date.now(),
+        } 
+        await Sprint.findByIdAndUpdate(idsprint, newsprint)
+
+        const action = new Activities({
+            action: 'deleteSprint',
+            content: 'sprint/deleteSprint/' + idsprint,
+            iduser: req.userId,
+        })
+
+        await action.save()
+
+        res.status(201).json({ statusCode: 200 })
+    }
+    catch(err) {
+        if (!err.statusCode) {
+            err.statusCode = 500
+        }
+        res.status(500).json(err)
+        next(err)
+    }
+}
+exports.viewListIssuesInSprint = async (req, res, next) => {
+    try{
+        const idsprint = req.params.idsprint
+        let listissues = []
+
+        const sprint = await Sprint.findById(idsprint)
+
+        await sprint.idissues.map(async (item, index)=>{
+            const issues = await Issues.findOne({_id:item})
+            listissues = [...listissues, issues]
+        })
+
+        await delay()
+
+        res.status(201).json({ statusCode: 200, listissues: listissues })
+    }
+    catch(err) {
+        if (!err.statusCode) {
+            err.statusCode = 500
+        }
+        res.status(500).json(err)
+        next(err)
+    }
 }

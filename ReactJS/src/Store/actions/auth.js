@@ -40,6 +40,7 @@ export const EditUserFail = (name) =>{
     }
 }
 export const loginAction = (email, password) => {
+    
     return dispatch => {
         return CallApi('auth/login', 'POST',{
             email: email,

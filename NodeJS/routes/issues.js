@@ -33,5 +33,13 @@ router.put('/addIssueIntoSprint/:idissues',upload.single('image'),isAuth,
     [], 
     issuesController.addIssueIntoSprint,
 )
+router.put('/changeProcessIssues/:idissues',upload.single('image'),isAuth, 
+    [], 
+    issuesController.changeProcessIssues,
+)
+router.put('/deleteIssues/:idissues',upload.single('image'),isAuth, 
+    [], 
+    issuesController.addIssueIntoSprint,
+)
 
 module.exports = router
