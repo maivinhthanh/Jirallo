@@ -34,7 +34,7 @@ export const EditUserAction = (id,user) =>{
           name:user[0].name,
           birthdate: user[0].birthday
       },
-      document.cookie.split("=")[2]
+      'token'
       ).then(response =>{
           if(response.data.result.length !== 0){
               dispatch(EditUser(response.data.result))
@@ -46,7 +46,6 @@ export const EditUserAction = (id,user) =>{
   }
 }
 export const SearchAction = email => {
-  console.log(email)
   return dispatch => {
     return CallApi(
       "auth/findUserLikeEmail",
@@ -54,7 +53,7 @@ export const SearchAction = email => {
       {
         email: email
       },
-      document.cookie.split("=")[2]
+      'token'
     )
       .then(respone => {
         if (respone.data.result.length !== 0) {

@@ -25,9 +25,8 @@ export const showListSprintAct = (id) => {
     return CallApi(`sprint/viewListSprint/${id}`,
     'GET',
     {},
-    document.cookie.split("=")[2]
+   'token'
     ).then (respone => {
-      console.log(respone)
       dispatch(showListSprint(respone.data.listsprint))
     }).catch(err => {
       dispatch(errorSprint(err))
@@ -35,7 +34,6 @@ export const showListSprintAct = (id) => {
   }
 }
 export const createSprintAct = (data, id) => {
-  console.log(data, id)
   return dispatch => {
     return CallApi(`sprint/createSprint`,
     'POST',
@@ -43,12 +41,10 @@ export const createSprintAct = (data, id) => {
       name: data,
       idproject : id
     },
-    document.cookie.split("=")[2]
+   'token'
     ).then(respone => {
-      console.log(respone);
       dispatch(createSprint(respone.data))
     }).catch(err => {
-      console.log(err)
       dispatch(errorSprint(err))
       // console.log(err)
     })

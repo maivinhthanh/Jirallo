@@ -46,8 +46,6 @@ export const loginAction = (email, password) => {
             password: password
           }).then( response => {
             dispatch(login(response));
-            // result =  dispatch(login(response));
-            // return result
          } )
          .catch(error => {
              dispatch(loginfail(error));
@@ -63,7 +61,6 @@ export const RegisterAction = (email,password,fullname,avatar,gender) =>{
             image:avatar,
             gender:gender
         }).then (response =>{
-            console.log(response.data);
             dispatch(register(response.data))
         }).catch (err =>{
             dispatch(registerFail())
@@ -74,7 +71,7 @@ export const EditUserAction = (id,user) =>{
     return dispatch =>{
         return CallApi(`auth/editProfile/${id}`,'PUT',
         user,
-        document.cookie.split("=")[2]
+        'token'
         ).then(response =>{
             if(response.data.result.length !== 0){
                 dispatch(EditUser(response.data.result))
