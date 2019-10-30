@@ -16,6 +16,7 @@ import groupReducer from './Store/reducers/group';
 import epicReducer from './Store/reducers/epic';
 import issueReducer from './Store/reducers/issues';
 import sprintReducer from './Store/reducers/sprint'
+import memberReducer from './Store/reducers/member'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
     user: userReducer,
     epic : epicReducer,
     issue: issueReducer,
-    sprint: sprintReducer
+    sprint: sprintReducer,
+    member: memberReducer,
 });
 
 const store = createStore(rootReducer, composeEnhancers(

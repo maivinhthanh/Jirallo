@@ -8,26 +8,42 @@ import { Card, CardBody, CardTitle, CardSubtitle, Button,
   Input,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+// import { AddMemberAct } from "../../Store/actions/project";
 export default class projectDetail extends Component {
   constructor(props){
     super(props);
     this.state = {
       modal:false,
       emailUser: '',
-      positionUser:''
+      positionUser:'',
+      // idUser: '',
+      // userAdd : [],
     }
     this.showToggle = this.showToggle.bind(this)
     this.handleEmailUser = this.handleEmailUser.bind(this)
     this.handlePostionUser = this.handlePostionUser.bind(this)
-    this.addUser = this.addUser.bind(this)
+    // this.addUser = this.addUser.bind(this)
     this.handleIdProject = ''
+    this.hanleUserActive = ''
   }
   fomatDateTime(date) {
     return _.slice(_.replace(date, /-/g, "/"), 0, 10);
   }
-  addUser() {
-    const user = {email:this.state.emailUser, position: this.state.positionUser}
-    this.props.AddMember(this.handleIdProject,user)
+  addUser =(idproject)=> {
+    this.props.findUserEmail(this.state.emailUser)
+    this.handleIdProject = idproject
+    console.log(this.handleIdProject)
+    // const userAdd = {_id:this.hanleUserActive, position: this.state.positionUser}
+    // console.log(userAdd)
+    // this.props.AddMemberAct(idproject,userAdd)
+  }
+  componentDidUpdate(preState){
+    console.log(preState.member, this.props.member)
+    !_.isEqual(preState.member, this.props.member) && this.handleAdd(this.props.member)
+  }
+  handleAdd(member){
+    const userAdd = {_id:member[0]._id, position: this.state.positionUser}
+    this.props.AddMemberAct(this.handleIdProject,userAdd)
   }
   showToggle(id){
     this.handleIdProject = id
@@ -49,6 +65,12 @@ export default class projectDetail extends Component {
   }
   render() {
     const { project } = this.props;
+    // this.hanleUserActive = this.props.admin
+    // console.log(this.hanleUserActive)
+    _.map(this.props.member, (item) => {
+      this.hanleUserActive = item._id
+    })
+    console.log(this.hanleUserActive)
     return (
       <div>
         {_.map(project, item => {
@@ -105,7 +127,7 @@ export default class projectDetail extends Component {
                       <Button
                         type="submit"
                         color="primary"
-                        onClick={this.addUser}
+                        onClick={this.addUser.bind(this, item._id)}
                       >
                         Add
                       </Button>{" "}

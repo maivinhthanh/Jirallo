@@ -20,20 +20,28 @@ export const getAllList = (data) => {
     data: data
   }
 }
-export const AddMemberAct =(id,user) => {
+export const addMemberSuccess = (data) => {
+  return {
+    type: actionTypes.addSuccess,
+    data
+  }
+}
+export const AddMemberAct =(idproject,user) => {
+  console.log(idproject, user)
   return dispatch => {
-    return CallApi(`project/AddMember/${id}`,
+    return CallApi(`project/AddMember/${idproject}`,
     'PUT',
     {
-      iduser: user.email,
+      iduser: user._id,
       position: user.position
     },
     'token'
     ).then(respone => {
       console.log(respone)
-      // dispatch(addMemberSuccess(respone))
+      dispatch(addMemberSuccess(respone.data))
     }).catch(err => {
       console.log(err)
+      dispatch(projectError(err))
     })
   }
 }
