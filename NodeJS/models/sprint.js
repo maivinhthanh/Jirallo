@@ -19,6 +19,7 @@ const sprintSchema = new Schema({
         required: true
         }
     ],
+    isfinish:{ type: Boolean, default: false },
     hidden:{ type: Boolean, default: false },
     datecreate: { type: Date, default: Date.now },
     dateedit: { type: Date }

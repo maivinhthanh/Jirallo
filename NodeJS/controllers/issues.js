@@ -217,3 +217,66 @@ exports.addIssueIntoSprint = async (req, res, next) => {
     
 }
 
+exports.changeProcessIssues = async (req, res, next) => {
+    try{
+        const idissues = req.params.idissues
+        const process = req.body.process
+
+        const dataupdate = {
+            process: process
+        }
+
+        const issues = await Issues.findByIdAndUpdate(idissues, dataupdate)
+
+        const action = new Activities({
+            action: 'changeProcessIssues',
+            content: 'issues/changeProcessIssues/' + idissues,
+            iduser: req.userId,
+            olddata: issues.process,
+            newdata: process
+        })
+
+        await action.save()
+
+        res.status(201).json({ statusCode: 200 ,data:dataupdate})
+
+    }
+    catch(err) {
+        if (!err.statusCode) {
+            err.statusCode = 500
+        }
+        res.status(500).json(err)
+        next(err)
+    }
+    
+}
+exports.deleteIssues = async (req, res, next) => {
+    try{
+        const idissues = req.params.idissues
+
+        const dataupdate = {
+            hidden: true
+        }
+
+        await Issues.findByIdAndUpdate(idissues, dataupdate)
+
+        const action = new Activities({
+            action: 'deleteIssues',
+            content: 'issues/deleteIssues/' + idissues,
+            iduser: req.userId,
+        })
+
+        await action.save()
+
+        res.status(201).json({ statusCode: 200 })
+
+    }
+    catch(err) {
+        if (!err.statusCode) {
+            err.statusCode = 500
+        }
+        res.status(500).json(err)
+        next(err)
+    }
+    
+}

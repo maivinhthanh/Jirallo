@@ -47,6 +47,7 @@ export const AddMemberAct =(idproject,user) => {
 }
 
 export const getListProjectAct = () =>{
+  console.log(document.cookie)
   return dispatch => {
     return CallApi('project/ViewListProject',
     'GET',
