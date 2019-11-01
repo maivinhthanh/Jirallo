@@ -192,8 +192,16 @@ exports.addIssueIntoSprint = async (req, res, next) => {
         const idissues = req.params.idissues
         const idsprint = req.body.idsprint
 
-        await Issues.findByIdAndUpdate(idissues, {idsprint: idsprint})
-        await Sprint.findByIdAndUpdate(idsprint, {idissues: idissues})
+        await Issues.findByIdAndUpdate(idissues, 
+            {
+                $push: {idsprint: idsprint}
+            }
+        )
+        await Sprint.findByIdAndUpdate(idsprint,
+            {
+                $push: {idissues: idissues}
+            }
+        )
 
         const action = new Activities({
             action: 'addIssueIntoSprint',
