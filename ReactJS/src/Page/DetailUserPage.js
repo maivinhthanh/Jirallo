@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import UpdateUser from "../Components/User/UpdateUser";
 import * as actions from "../Store/actions/admin";
 import * as actionsProject from "../Store/actions/project";
+import * as actionsMember from '../Store/actions/member';
 import { connect } from "react-redux";
 import _ from "lodash";
 import ProjectDetail from "../Components/Project/projectDetail";
@@ -52,8 +53,11 @@ class DetailUserPage extends Component {
     this.props.SearchEmail(this.state.EmailUser)
   }
   render() {
-    const admin = this.props.admin;
-    const project = this.props.project;
+    // const admin = this.props.admin;
+    // const project = this.props.project;
+    // const user = this.props.user;
+    // const {member} = this.props
+    const {admin, project, user, member} = this.props
     _.map(admin, item => {
       this.name = item.name;
       this.id = item._id;
@@ -85,7 +89,7 @@ class DetailUserPage extends Component {
           </div>
           <div className="description">
             <p>{this.position}</p>
-            <div>
+            {/* <div>
             {
                 _.map(admin, (item,index) => {
                   console.log(item)
@@ -93,7 +97,7 @@ class DetailUserPage extends Component {
                  id={this.id} />
                 })
               }
-            </div>
+            </div> */}
             <div style={{marginTop:'20px'}} className="menu">
               <ul>
                 <li>
@@ -123,7 +127,7 @@ class DetailUserPage extends Component {
         <span>Title: Places work</span>
       </div>
             <div className="detail-task-user">
-              <ProjectDetail project={project} />
+              <ProjectDetail member={member} project={project} AddMemberAct={this.props.AddMemberAct} findUserEmail={this.props.findUserEmail} />
             </div>
           </Card>
         </div>
@@ -132,17 +136,16 @@ class DetailUserPage extends Component {
         </div>
         <div className="breadcrumb-custom">
           <Breadcrumb>
-            <BreadcrumbItem active>
+            {/* <BreadcrumbItem active>
               <div>
               {
                 _.map(admin, (item,index) => {
-                  console.log(item)
                   return <UpdateUser key={index} data ={item}
                  id={this.id} />
                 })
               }
               </div>
-            </BreadcrumbItem>
+            </BreadcrumbItem> */}
             <BreadcrumbItem active>
               <a href="#">
                 <i class="fas fa-user-friends"></i> People
@@ -161,8 +164,10 @@ class DetailUserPage extends Component {
   }
 }
 const mapStateToProps = state => {
+  console.log(state.member)
   return {
     user: state.user,
+    member: state.member,
     admin: state.admin,
     project: state.project
   };
@@ -170,7 +175,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     SearchEmail: email => dispatch(actions.SearchAction(email)),
-    getAllListProject: () => dispatch(actionsProject.getListProjectAct())
+    getAllListProject: () => dispatch(actionsProject.getListProjectAct()),
+    findUserEmail: email => dispatch(actionsMember.SearchAction(email)),
+    AddMemberAct: (idproject, user) => dispatch(actionsProject.AddMemberAct(idproject, user))
   };
 };
 export default connect(

@@ -12,7 +12,8 @@ const initialState = {
     idsprint: '',
     idissues : [],
     datecreate: '',
-    hidden: false
+    hidden: false,
+    error: false
 };
 
 const createProject = ( state, action ) => {
@@ -27,10 +28,19 @@ const getAllList = (state, action) => {
     return cloneState
     // return updateObject(state, action.data)
 }
+const addSuccess = (state, action) => {
+    let cloneState = _.clone(state)
+    console.log(cloneState, action.data)
+}
+const projectError = (state, action) => {
+    return updateObject(state, {error: true})
+}
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.createProject: return createProject( state, action )
         case actionTypes.getAllList : return getAllList(state, action)
+        case actionTypes.addSuccess : return addSuccess(state, action)
+        case actionTypes.projectError : return projectError(state, action)
         default: return state;
     }
 };

@@ -41,7 +41,6 @@ class ListIssues extends Component {
     this.setState({
       nameIssues: e.target.value
     });
-    console.log(this.state.nameIssues);
   }
   handleTypeIssues(e){
     e.preventDefault();
@@ -52,12 +51,9 @@ class ListIssues extends Component {
   createIssues(e) {
     e.preventDefault();
     const {nameIssues, typeIssues} = this.state
-    console.log(nameIssues, typeIssues)
-    console.log(this.state.nameIssues, this.props.params);
     this.props.createIssuesAct(this.props.params, nameIssues, typeIssues);
   }
   render() {
-    console.log(this.props)
     // const { match: { params: { id } } } = this.props
     // console.log(id)
     return (

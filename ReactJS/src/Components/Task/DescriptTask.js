@@ -58,8 +58,6 @@ export default class DescriptTask extends Component {
     this.setState(preState => ({
       status: !preState.status
     }))
-    // console.log(this.props.admin)
-    // this.props.assignTaskIssueAct(data._id,this.props.admin._id)
   }
   render() {
     const { data } = this.props;
