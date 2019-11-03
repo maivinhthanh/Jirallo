@@ -114,3 +114,29 @@ exports.viewListEpic = async (req, res, next) => {
     }
     
 }
+exports.viewListIssuesInEpic = async (req, res, next) => {
+    try{
+        const idepic = req.params.idepic
+        let listissues = []
+
+        const epic = await Epic.findById(idepic)
+        
+        await epic.idissues.map(async (item, index)=>{
+            const issues = await Epic.findOne({_id:item})
+            listissues = [...listissues, issues]
+        })
+
+        await delay()
+
+        res.status(201).json({ statusCode: 200 ,listissues})
+    }
+    catch(err) {
+        if (!err.statusCode) {
+            err.statusCode = 500
+        }
+        res.status(500).json(err)
+        next(err)
+    }
+    
+}
+
