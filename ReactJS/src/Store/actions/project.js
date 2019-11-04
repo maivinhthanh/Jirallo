@@ -54,6 +54,7 @@ export const getListProjectAct = () =>{
     {},
     'token'
     ).then(respone => {
+      console.log(respone.data.listproject)
       dispatch(getAllList(respone.data.listproject))
     }).catch(err =>{
       dispatch(projectError(err))

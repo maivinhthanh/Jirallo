@@ -42,7 +42,8 @@
     "reactstrap": "^8.0.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
-    "simple-line-icons": "^2.4.1"
+    "simple-line-icons": "^2.4.1",
+    "sweetalert": "^2.1.2"
   },
   "devDependencies": {
     "react-scripts": "^3.0.1"

@@ -26,6 +26,22 @@ export const EditIssue = data => {
     data
   }
 }
+export const AddIssueIntoSprint = (idIssue, idSprint) => {
+  console.log(idIssue, idSprint)
+  return dispatch => {
+    return CallApi(`issues/addIssueIntoSprint/${idIssue}`,
+    'PUT',
+    {
+      idsprint: idSprint
+    },
+    'token'
+    ).then(respone => {
+      console.log(respone)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+}
 export const assignTaskIssueAct = (idissues, idUser) => {
   return dispatch => {
     return CallApi(`issues/assignforUser/${idissues}`,

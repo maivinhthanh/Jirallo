@@ -17,12 +17,6 @@ import * as action from "../../Store/actions/user";
 import { connect } from "react-redux";
 import _ from "lodash";
 class User extends Component {
-  // componentWillMount(){
-  //   const {listUser} = this.props
-  //   _.map(listUser, (item, key) => {
-  //     this.props.findUserLikeIDAct(item.id)
-  //   })
-  // }
   constructor(props) {
     super(props);
     this.listUserAttendProject = [];
@@ -32,7 +26,7 @@ class User extends Component {
     _.map(user, (data, index) => {
       _.map(listUser, (item, index1) => {
         if (data._id === item.id) {
-          this.listUserAttendProject.push(data);
+          return this.listUserAttendProject.push(data);
         }
       });
     });

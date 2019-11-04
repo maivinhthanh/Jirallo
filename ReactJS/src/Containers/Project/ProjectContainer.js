@@ -57,6 +57,7 @@ class projectContainer extends Component {
   }
   render() {
     const { project, admin } = this.props;
+    console.log(project)
     const {status} = this.state
      _.map(project, item => {
       _.map(item.idmembers, data => {

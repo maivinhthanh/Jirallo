@@ -25,7 +25,7 @@ class ListUser extends Component {
   FilterUser(){
     _.map(this.projectClone, (data, key) => {
       _.map(data.idmembers, (member, index)=> {
-          return this.cloneUser.push(member)
+          this.cloneUser.push(member)
       })
     })
   }

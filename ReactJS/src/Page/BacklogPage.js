@@ -50,7 +50,7 @@ class BacklogPage extends Component {
               <CreateSprint params={id}/>
                <ListDetailIssues params={id}/>
                {/* CreateIssue dang an */}
-               {/* <ListIssues params = {id}/> */}
+               <ListIssues params = {id}/>
               </div>
             </div>
           </div>
