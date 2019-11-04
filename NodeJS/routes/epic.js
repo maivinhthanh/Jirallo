@@ -26,5 +26,7 @@ router.put('/editEpic/:idepic',upload.single('avatar'),isAuth,
 router.get('/viewListEpic/:idproject',isAuth,
     epicController.viewListEpic,
 )
-
+router.get('/viewListIssuesInEpic/:idepic',isAuth,
+    epicController.viewListIssuesInEpic,
+)
 module.exports = router

@@ -6,8 +6,8 @@ const Project = require('../models/project')
 const Activities = require('../models/activities')
 const Issues = require('../models/issues')
 
-function delay() {
-    return new Promise(resolve => setTimeout(resolve, 300))
+function delay(time = 300) {
+    return new Promise(resolve => setTimeout(resolve, time))
 }
 
 exports.createSprint = async (req, res, next) => {
@@ -181,11 +181,11 @@ exports.viewListIssuesInSprint = async (req, res, next) => {
         const sprint = await Sprint.findById(idsprint)
 
         await sprint.idissues.map(async (item, index)=>{
-            const issues = await Issues.findOne({_id:item})
+            const issues = await Issues.findById(item)
             listissues = [...listissues, issues]
         })
 
-        await delay()
+        await delay(400)
 
         res.status(201).json({ statusCode: 200, listissues: listissues })
     }

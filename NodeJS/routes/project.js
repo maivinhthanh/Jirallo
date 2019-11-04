@@ -34,7 +34,7 @@ router.put('/AddMember/:idproject',upload.single('avatar'),isAuth, isManager,
     projectController.AddMember,
 )
 router.get('/viewListProject',isAuth,
-projectController.ViewListProject,
+    projectController.ViewListProject,
 )
 
 module.exports = router
