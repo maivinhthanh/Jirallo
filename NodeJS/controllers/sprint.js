@@ -6,10 +6,6 @@ const Project = require('../models/project')
 const Activities = require('../models/activities')
 const Issues = require('../models/issues')
 
-function delay(time = 300) {
-    return new Promise(resolve => setTimeout(resolve, time))
-}
-
 exports.createSprint = async (req, res, next) => {
     try{
         const errors = validationResult(req)
@@ -95,18 +91,10 @@ exports.editSprint = async (req, res, next) => {
 exports.viewListSprint = async (req, res, next) => {
     try{
         const idproject = req.params.idproject
-        let listsprint = []
 
-        const project = await Project.findById(idproject)
-        
-        await project.idsprint.map(async (item, index)=>{
-            const sprint = await Sprint.findOne({_id:item})
-            listsprint = [...listsprint, sprint]
-        })
+        const project = await Project.findById(idproject).populate('idsprint')
 
-        await delay()
-
-        res.status(201).json({ statusCode: 200 ,listsprint})
+        res.status(201).json({ statusCode: 200 ,listsprint: project.idsprint})
     }
     catch(err) {
         if (!err.statusCode) {
@@ -176,18 +164,10 @@ exports.deleteSprint = async (req, res, next) => {
 exports.viewListIssuesInSprint = async (req, res, next) => {
     try{
         const idsprint = req.params.idsprint
-        let listissues = []
 
-        const sprint = await Sprint.findById(idsprint)
+        const sprint = await Sprint.findById(idsprint).populate('idissues')
 
-        await sprint.idissues.map(async (item, index)=>{
-            const issues = await Issues.findById(item)
-            listissues = [...listissues, issues]
-        })
-
-        await delay(400)
-
-        res.status(201).json({ statusCode: 200, listissues: listissues })
+        res.status(201).json({ statusCode: 200, listissues: sprint.idissues })
     }
     catch(err) {
         if (!err.statusCode) {

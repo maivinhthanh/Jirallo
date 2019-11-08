@@ -5,10 +5,6 @@ const Epic = require('../models/epic')
 const Project = require('../models/project')
 const Activities = require('../models/activities')
 
-function delay() {
-    return new Promise(resolve => setTimeout(resolve, 300))
-}
-
 exports.createEpic = async (req, res, next) => {
     try{
         const errors = validationResult(req)
@@ -92,18 +88,10 @@ exports.editEpic = async (req, res, next) => {
 exports.viewListEpic = async (req, res, next) => {
     try{
         const idproject = req.params.idproject
-        let listepic = []
 
-        const project = await Project.findById(idproject)
-        
-        await project.idepic.map(async (item, index)=>{
-            const epic = await Epic.findOne({_id:item})
-            listepic = [...listepic, epic]
-        })
+        const project = await Project.findById(idproject).populate('idepic')
 
-        await delay()
-
-        res.status(201).json({ statusCode: 200 ,listepic})
+        res.status(201).json({ statusCode: 200 ,listepic: project.idepic})
     }
     catch(err) {
         if (!err.statusCode) {
@@ -117,18 +105,10 @@ exports.viewListEpic = async (req, res, next) => {
 exports.viewListIssuesInEpic = async (req, res, next) => {
     try{
         const idepic = req.params.idepic
-        let listissues = []
 
-        const epic = await Epic.findById(idepic)
-        
-        await epic.idissues.map(async (item, index)=>{
-            const issues = await Epic.findOne({_id:item})
-            listissues = [...listissues, issues]
-        })
+        const epic = await Epic.findById(idepic).populate('idissues')
 
-        await delay()
-
-        res.status(201).json({ statusCode: 200 ,listissues})
+        res.status(201).json({ statusCode: 200 ,listissues: epic.idissues})
     }
     catch(err) {
         if (!err.statusCode) {

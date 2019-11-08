@@ -38,9 +38,9 @@ const projectSchema = new Schema({
     ],
     idissues:[
         {
-        type: Schema.Types.ObjectId,
-        ref: 'issues',
-        required: true
+            type: Schema.Types.ObjectId,
+            ref: 'Issues',
+            required: true
         }
     ],
     hidden:{ type: Boolean, default: false },
