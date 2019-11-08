@@ -9,7 +9,7 @@ const epicSchema = new Schema({
     idissues:[
         {
         type: Schema.Types.ObjectId,
-        ref: 'issues',
+        ref: 'Issues',
         required: true
         }
     ],

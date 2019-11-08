@@ -18,21 +18,21 @@ const projectSchema = new Schema({
     idmembers:[
         {
             type: Schema.Types.Mixed,
-            ref: 'user',
+            ref: 'User',
             required: true
         }
     ],
     idepic:[
         {
         type: Schema.Types.ObjectId,
-        ref: 'epic',
+        ref: 'Epic',
         required: true
         }
     ],
     idsprint:[
         {
         type: Schema.Types.ObjectId,
-        ref: 'sprint',
+        ref: 'Sprint',
         required: true
         }
     ],

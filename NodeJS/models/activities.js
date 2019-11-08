@@ -8,7 +8,7 @@ const activitiesSchema = new Schema({
     },
     iduser:{
         type: Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'User'
     },
     content:{
         type: String,
