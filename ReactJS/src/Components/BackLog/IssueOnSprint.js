@@ -37,6 +37,12 @@ export default class IssueOnSprint extends Component {
       modal: true
     });
   }
+  getIssueOnSprint = (id) => {
+    this.props.ViewListIssueInSprint(id)
+  }
+  // componentWillReceiveProps(nextProps){
+  //   this.getIssueOnSprint(nextProps.filterSprint._id)
+  // }
   renderSprint = () => {
     const { issues, filterSprint, user, admin } = this.props;
     let arrayList = [];
@@ -62,11 +68,10 @@ export default class IssueOnSprint extends Component {
           {/* <ChildSprint showContent={this.showContent()} data={this.activeIssue} modal={modal} /> */}
           <React.Fragment>
             {_.map(this.activeIssue, (item, key) => {
-              console.log(item)
               return (
                 <div
                   className={`issues ${!modal ? "" : "custom"}`}
-                  style={{ float: "left", marginLeft: "75px" }}
+                  style={{ float: "left", marginLeft: "75px", marginBottom:'15px' }}
                 >
                   <div className="nameIssue">
                     <span>
@@ -83,7 +88,7 @@ export default class IssueOnSprint extends Component {
                     <UncontrolledDropdown>
                       <DropdownToggle caret>
                         <i
-                          class="fas fa-ellipsis-h"
+                          class="fas fa-ellipsis-h setting-addsprint"
                           // onClick={() => this.getIdIssue(item._id)}
                           style={{ color: "black", marginTop: "-7px" }}
                         ></i>
@@ -128,6 +133,7 @@ export default class IssueOnSprint extends Component {
                     findUserLikeEmail={this.props.findUserLikeEmail}
                     AddFlagIssueAct={this.AddFlagIssueAct}
                     RemoveFlag={this.RemoveFlag}
+                    // removeIssue={this.props.removeIssue}
                   />
                 );
               }

@@ -20,6 +20,7 @@ import _ from "lodash";
 import ProjectDetail from "../Components/Project/projectDetail";
 import CreateProject from "../Components/Modal/CreateProject";
 import InfoUser from "../Components/Modal/InfoUser";
+import * as Config from '../Config';
 class DetailUserPage extends Component {
   constructor(props) {
     super(props);
@@ -53,11 +54,9 @@ class DetailUserPage extends Component {
     this.props.SearchEmail(this.state.EmailUser)
   }
   render() {
-    // const admin = this.props.admin;
-    // const project = this.props.project;
-    // const user = this.props.user;
-    // const {member} = this.props
     const {admin, project, user, member} = this.props
+    console.log(admin)
+    console.log(admin.image)
     _.map(admin, item => {
       this.name = item.name;
       this.id = item._id;
@@ -73,17 +72,25 @@ class DetailUserPage extends Component {
         <div className="header-detail"></div>
         <div className="content-user">
           <div className="avatar-image">
-            <img
+            {/* <img
               src="https://66.media.tumblr.com/avatar_76339a619be6_128.pnj"
               alt="Hipster"
+            /> */}
+            {
+              _.map(admin,(data, index) => {
+                return <img key={index}
+                src={Config.API_URL  + "/" + data.image}
+              alt="Hipster"
             />
+              })
+            }
           </div>
           <div className="wrap-content">
           <div className="blog-title">
-            <div class="name-user">
+            <div className="name-user">
               <h1>{this.name}</h1>
             </div>
-            <div class="detail">
+            <div className="detail">
             <InfoUser admin={admin}/>
             </div>
           </div>
@@ -101,23 +108,23 @@ class DetailUserPage extends Component {
             <div style={{marginTop:'20px'}} className="menu">
               <ul>
                 <li>
-                  <i class="fab fa-twitter"></i>
+                  <i className="fab fa-twitter"></i>
                 </li>
                 <li>
-                  <i class="fab fa-facebook"></i>
+                  <i className="fab fa-facebook"></i>
                 </li>
                 <li>
-                  <i class="fab fa-instagram"></i>
+                  <i className="fab fa-instagram"></i>
                 </li>
                 <li>
-                  <i class="fab fa-github"></i>
+                  <i className="fab fa-github"></i>
                 </li>
               </ul>
             </div>
           </div>
           <div className='search'>
       <Input type="text" name="text" value={this.EmailUser} onChange={this.handleEmail} id="exampleSelectMulti" placeholder="search"></Input>
-      <i onClick={this.findUserLikeEmail} class="icon fas fa-plus"></i>
+      <i onClick={this.findUserLikeEmail} className="icon fas fa-plus"></i>
       </div>
           </div>
         </div>
@@ -148,13 +155,13 @@ class DetailUserPage extends Component {
             </BreadcrumbItem> */}
             <BreadcrumbItem active>
               <a href="#">
-                <i class="fas fa-user-friends"></i> People
+                <i className="fas fa-user-friends"></i> People
               </a>
             </BreadcrumbItem>
             <BreadcrumbItem active>
               <a href="">
                 {" "}
-                <i class="fas fa-home"></i> Home
+                <i className="fas fa-home"></i> Home
               </a>
             </BreadcrumbItem>
           </Breadcrumb>

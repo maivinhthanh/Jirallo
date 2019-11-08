@@ -1,7 +1,7 @@
 import React from 'react'
 export default function HeaderCustom() {
   return (
-    <div class="custom-header">
+    <div className="custom-header">
     <div className="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
       <header className="app-header navbar">
         <button className="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">

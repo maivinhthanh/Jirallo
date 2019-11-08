@@ -20,14 +20,14 @@ export default class InfoUser extends Component {
     const {admin} = this.props
     return (
       <div className="info-user-detail">
-      <i onClick={this.toggle} class="fas fa-book-open"></i>
+      <i onClick={this.toggle} className="fas fa-book-open"></i>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Information User</ModalHeader>
           <ModalBody >
           {
-          _.map(admin, (item,key) => {
+          _.map(admin, (item,index) => {
             return (
-            <ul key={item._id} style={{listStyle:'none'}}>
+            <ul key={index} style={{listStyle:'none'}}>
             <li>ID: {item._id}</li>
             <li>Email: {item.email}</li>
             <li>Name: {item.name}</li>

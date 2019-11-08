@@ -77,4 +77,9 @@
   top: 22px;
   width: 175px;
 }
-
+.chooseOptionEdit{
+  background: transparent
+}
+button.custom-issue.dropdown-toggle.btn.btn-secondary{
+  color: black;
+}

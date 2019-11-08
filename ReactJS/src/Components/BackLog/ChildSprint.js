@@ -57,18 +57,11 @@ export default class ChildSprint extends Component {
                 <UncontrolledDropdown>
                   <DropdownToggle caret>
                     <i
-                      class="fas fa-ellipsis-h"
+                      class="fas fa-ellipsis-h setting-addsprint"
                       style={{ color: "black", marginTop: "-7px" }}
                     ></i>
                   </DropdownToggle>
                   <DropdownMenu>
-                    {/* {_.map(filterSprint, (data, index) => {
-                      return (
-                        <DropdownItem key={index}>
-                          {data.name}
-                        </DropdownItem>
-                      );
-                    })} */}
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </div>

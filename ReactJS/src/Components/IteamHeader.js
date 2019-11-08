@@ -7,10 +7,8 @@ export default class IteamHeader extends Component {
         <ul className="nav_links list-unstyled">
         <li>
         <Link to="/viewAll">
-          <a href="/viewAll">
                 <span className="fas fa-home" />
                 <p>Home</p>
-              </a>
             </Link>
             </li>
             {/* <li className="nav-link-list">
@@ -22,10 +20,8 @@ export default class IteamHeader extends Component {
             <li> */}
             <li>
             <Link to="/board">
-          <a href="/board">
                 <span className="fas fa-question" />
                 <p>Board</p>
-              </a>
             </Link>
             </li>
             <li>
@@ -42,10 +38,8 @@ export default class IteamHeader extends Component {
             </li>
             <li>
             <Link to = "/login">
-            <a href="/login">
                 <span className="fa fa-users" />
                 <p>Team</p>
-              </a>
             </Link>
             </li>
           </ul>

@@ -169,13 +169,15 @@ class MenuLog extends Component {
                     All issues
                   </Button>
                   <div id="demo" className="collapse">
+                  <React.Fragment>
                   {
-                    _.map(epic, (item, key) => {
-                      if(key < 5){
-                        return<tr style={{textAlign:'initial'}}><td  key={item.id}>{item.name} <i onClick={() => this.showToggleEpic (item._id, item.name)} style={{float:'right', marginLeft: '20px', marginTop:'-8px'}} className="fas fa-cog"></i></td></tr>
+                    _.map(epic, (item, index) => {
+                      if(index < 5){
+                        return<tr key={index} style={{textAlign:'initial'}}><td key={item.id}>{item.name} <i onClick={() => this.showToggleEpic (item._id, item.name)} style={{float:'right', marginLeft: '20px', marginTop:'-8px'}} className="fas fa-cog"></i></td></tr>
                       }
                     })
                   }
+                  </React.Fragment>
                   <div>
                       <Modal
                         isOpen={this.state.modalEpic}

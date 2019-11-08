@@ -665,6 +665,14 @@ p.movetxt {
   left:937px;
 
 }
+.detail-card .setting-addsprint{
+  margin-top: -7px;
+  left:1074px;
+}
+.detail-card .custom .setting-addsprint{
+  margin-left:-601px
+
+}
 .detail-card .defineIssue .issues-task {
   margin-top: 50px;
   float: left;

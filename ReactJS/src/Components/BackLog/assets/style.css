@@ -66,3 +66,9 @@ button.dropdown-toggle.btn.btn-secondary {
   background: transparent;
   border: aliceblue;
 }
+.customSprint{
+  display: flex
+}
+.layoutSprint:nth-child(2){
+  display: flow-root
+}

@@ -39,12 +39,28 @@ export const EditIssue = (state, action) => {
     return data
   })
 }
+export const removeIssueSucces = (state, action) => {
+  console.log(state, action.data)
+  let cloneState = _.cloneDeep(state);
+  _.map(_.compact(cloneState), (item, index) => {
+    if(item._id == action.data){
+        cloneState.splice(index, 1)
+    }
+  })
+  console.log(cloneState)
+  return cloneState
+}
+export const AddIssueSuccess = (state, action) => {
+  console.log(state, action)
+}
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.createIssue: return createIssue( state, action );
         case actionTypes.IssueError : return IssueError(state, action);
         case actionTypes.showListIssue: return showListIssue(state,action);
         case actionTypes.EditIssue: return EditIssue(state, action)
+        case actionTypes.removeIssueSucces : return removeIssueSucces(state, action);
+        case actionTypes.AddIssueSuccess : return AddIssueSuccess(state, action);
         default: return state;
     }
 };

@@ -14,6 +14,7 @@ import ListProject from "../../Components/Project/listProject";
 import ToggleHome from "../../Components/Modal/ToggleHome";
 import CreateProject from '../../Components/Modal/CreateProject';
 import HeaderCustom from "../../Components/HeaderCustom";
+import * as Config from '../../../src/Config';
 class projectContainer extends Component {
   constructor(props) {
     super(props);
@@ -69,17 +70,22 @@ class projectContainer extends Component {
         <div className="col-md-3 user-tag">
           <div className="content-user">
             <div className="avatar-image">
-              <img
-                src="https://66.media.tumblr.com/avatar_76339a619be6_128.pnj"
+            {
+              _.map(admin, (item, index)=> {
+                return <img key={index}
+                src={Config.API_URL  + "/" + item.image}
+                // src="https://66.media.tumblr.com/avatar_76339a619be6_128.pnj"
                 alt="Hipster"
               />
+              })
+            }
             </div>
             <div className="wrap-content">
             <div className="blog-title">
               <span>
               {
-                _.map(admin, (item,key) => {
-                  return <h1 key ={item._id}>{item.name}</h1>
+                _.map(admin, (item,index) => {
+                  return <h1 key ={index}>{item.name}</h1>
                 })
               }
               </span>
@@ -90,16 +96,16 @@ class projectContainer extends Component {
               <div style={{marginLeft:'-17px'}} className="menu">
                 <ul>
                   <li>
-                    <i class="fab fa-twitter"></i>
+                    <i className="fab fa-twitter"></i>
                   </li>
                   <li>
-                    <i class="fab fa-facebook"></i>
+                    <i className="fab fa-facebook"></i>
                   </li>
                   <li>
-                    <i class="fab fa-instagram"></i>
+                    <i className="fab fa-instagram"></i>
                   </li>
                   <li>
-                    <i class="fab fa-github"></i>
+                    <i className="fab fa-github"></i>
                   </li>
                 </ul>
               </div>
@@ -118,7 +124,7 @@ class projectContainer extends Component {
         <div className="focus-detail">
         <div className="search-project">
         <Input style={{width:'25%', marginBottom:'20px'}} onFocus={this.clearData} onChange={this.handleChangeInput} value={this.valueSearch} type="text" name="text" id="search" placeholder="search" />
-        <i onClick={this.searchAct} class="icon-search fas fa-search"></i>
+        <i onClick={this.searchAct} className="icon-search fas fa-search"></i>
         </div>
         {status ? <ListProject project={project} admin={admin} SearchEmail={this.props.SearchEmail}/> :
         <ListProject project={this.cloneProject} admin={admin} SearchEmail={this.props.SearchEmail}/>

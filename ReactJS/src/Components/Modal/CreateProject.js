@@ -40,7 +40,7 @@ class CreateProject extends Component {
     return (
       <div>
         <Button color="#caa" onClick={this.showToggle}>
-        <i class="fas fa-plus"></i> Create project
+        <i className="fas fa-plus"></i> Create project
         </Button>
         <Modal
           isOpen={this.state.modal}

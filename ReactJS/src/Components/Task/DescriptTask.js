@@ -23,6 +23,7 @@ export default class DescriptTask extends Component {
     this.showInputAssign = this.showInputAssign.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.assignTask = this.assignTask.bind(this)
+    this.remove = this.remove.bind(this)
   }
   AddFlag(idActive) {
     this.props.AddFlagIssueAct(idActive);
@@ -59,6 +60,10 @@ export default class DescriptTask extends Component {
       status: !preState.status
     }))
   }
+  remove(id){
+    console.log(id)
+    this.props.removeIssue(id)
+  }
   render() {
     const { data } = this.props;
     const { user, admin } = this.props;
@@ -67,7 +72,7 @@ export default class DescriptTask extends Component {
       <div className="descriptWork">
         <div className="list-item-right dropdown">
           <div>
-            <h2>
+            <h4 style={{textAlign:'initial'}}>
               WORKJIRA /
               <span>
                 {data.name}{" "}
@@ -83,13 +88,13 @@ export default class DescriptTask extends Component {
                       <DropdownItem onClick={() => this.RemoveFlag(data._id)}>
                         Move Flag
                       </DropdownItem>
-                      <DropdownItem>Another Action</DropdownItem>
-                      <DropdownItem>Another Action</DropdownItem>
+                      <DropdownItem onClick={() => this.remove(data._id)}>Remove</DropdownItem>
+                      <DropdownItem>Clone</DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>
                 </div>
               </span>
-            </h2>
+            </h4>
             {/* <FormDescript description={data.descript} /> */}
             <FormGroup>
               <Input

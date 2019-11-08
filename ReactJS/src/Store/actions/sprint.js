@@ -20,6 +20,21 @@ export const showListSprint = data => {
     data
   }
 }
+
+export const ViewListIssueInSprint = (id) => {
+  console.log(id)
+  return dispatch => {
+    return CallApi(`sprint/completeSprint/${id}`,
+    'PUT',
+    {},
+    'token'
+    ).then(respone => {
+      console.log(respone)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+}
 export const showListSprintAct = (id) => {
   return dispatch => {
     return CallApi(`sprint/viewListSprint/${id}`,

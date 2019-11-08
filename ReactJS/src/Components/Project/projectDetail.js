@@ -73,15 +73,15 @@ export default class projectDetail extends Component {
     console.log(this.hanleUserActive)
     return (
       <div>
-        {_.map(project, item => {
+        {_.map(project, (item, index) => {
           return (
-            <Card>
+            <Card key={index}>
               <div className="detail-task-user">
                 <CardBody style={{ background: "#A4D4FF" }}>
                   <i
                     onClick={ this.showToggle.bind(this, item._id) }
                     style={{ float: "right" }}
-                    class="fas fa-user-plus"
+                    className="fas fa-user-plus"
                   ></i>
                   <CardTitle>{item.name}</CardTitle>
                   <CardSubtitle>

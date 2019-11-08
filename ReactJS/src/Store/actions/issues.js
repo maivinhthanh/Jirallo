@@ -26,6 +26,34 @@ export const EditIssue = data => {
     data
   }
 }
+export const removeIssueSucces = data => {
+  return {
+    type: actionTypes.removeIssueSucces,
+    data
+  }
+}
+export const AddIssueSuccess = data => {
+  return {
+    type: actionTypes.AddIssueSuccess,
+    data
+  }
+}
+export const removeIssue = (idissues) => {
+  console.log('idIssue', idissues)
+  return dispatch => {
+    return CallApi(`issues/deleteIssues/${idissues}`,
+    'PUT',
+    {},
+    'token'
+    ).then(respone => {
+      console.log(respone)
+      dispatch(removeIssueSucces(idissues))
+    }).catch(err => {
+      console.log(err)
+      dispatch(IssueError(err))
+    })
+  }
+}
 export const AddIssueIntoSprint = (idIssue, idSprint) => {
   console.log(idIssue, idSprint)
   return dispatch => {
@@ -37,8 +65,9 @@ export const AddIssueIntoSprint = (idIssue, idSprint) => {
     'token'
     ).then(respone => {
       console.log(respone)
+      // dispatch(AddIssueSuccess(respone))
     }).catch(err => {
-      console.log(err)
+      dispatch(IssueError(err))
     })
   }
 }

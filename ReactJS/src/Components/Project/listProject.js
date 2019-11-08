@@ -48,7 +48,7 @@ export default class listProject extends Component {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Name Project <i onClick={this.sortStatusName} class="fas fa-sort"></i></th>
+            <th>Name Project <i onClick={this.sortStatusName} className="fas fa-sort"></i></th>
             <th>Date</th>
             <th>Lead</th>
           </tr>
@@ -56,22 +56,22 @@ export default class listProject extends Component {
         <tbody>
             {
               !status ?
-              _.map(project, (item, key) => {
+              _.map(project, (item, index) => {
                 return (
-               <tr>
+               <tr key={index}>
                <td>{item._id}</td>
                 <td>{item.name}</td>
                 <td>{item.datecreate}</td>
                 <td>{
-                  _.map(admin, item => {
-                    return <Link style={{borderBottom:'1px solid'}} to="detailUser">{item.name}</Link>
+                  _.map(admin, (item, index) => {
+                    return <Link key={index} style={{borderBottom:'1px solid'}} to="detailUser">{item.name}</Link>
                   })
                 }</td>
                </tr>
                 )
-              }) :  _.map(this.cloneProject, (item, key) => {
+              }) :  _.map(this.cloneProject, (item, index) => {
                 return (
-               <tr>
+               <tr key={index}>
                <td>{item._id}</td>
                 <td>{item.name}</td>
                 <td>{item.datecreate}</td>

@@ -33,9 +33,9 @@ class User extends Component {
     return (
       <div className="user-list">
         <Nav tabs>
-          {_.map(this.listUserAttendProject, (listUser, key) => {
+          {_.map(this.listUserAttendProject, (listUser, index) => {
             return (
-              <NavItem>
+              <NavItem key={index}>
                 <NavLink>{listUser.name}</NavLink>
               </NavItem>
             );
