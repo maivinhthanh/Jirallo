@@ -8,9 +8,10 @@ export default class ListSprintDetail extends Component {
     return (
       <div>
         {_.map(sprint, (data, key) => {
+          console.log(data)
           return (
-            <div className={`container sprint ${!modal ? "" : "layoutSprint"}`}>
-              <li style={{ marginLeft: "-27px" }} key={key}>
+            <div className={`container sprint ${!modal ? "" : "layoutSprint"}`} key={key}>
+              <li style={{ marginLeft: "-27px" }} >
                 {data.name}
               </li>
               <div className={`optionbtn ${!modal ? "" : "custom"}`}>

@@ -69,7 +69,7 @@ export default class IssueOnSprint extends Component {
           <React.Fragment>
             {_.map(this.activeIssue, (item, key) => {
               return (
-                <div
+                <div key = {key}
                   className={`issues ${!modal ? "" : "custom"}`}
                   style={{ float: "left", marginLeft: "75px", marginBottom:'15px' }}
                 >
@@ -88,7 +88,7 @@ export default class IssueOnSprint extends Component {
                     <UncontrolledDropdown>
                       <DropdownToggle caret>
                         <i
-                          class="fas fa-ellipsis-h setting-addsprint"
+                          className="fas fa-ellipsis-h setting-addsprint"
                           // onClick={() => this.getIdIssue(item._id)}
                           style={{ color: "black", marginTop: "-7px" }}
                         ></i>

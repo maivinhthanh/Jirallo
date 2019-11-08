@@ -39,7 +39,7 @@ router.put('/changeProcessIssues/:idissues',upload.single('image'),isAuth,
 )
 router.put('/deleteIssues/:idissues',upload.single('image'),isAuth, 
     [], 
-    issuesController.addIssueIntoSprint,
+    issuesController.deleteIssues,
 )
 
 module.exports = router
