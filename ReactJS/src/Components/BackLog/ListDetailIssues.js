@@ -98,8 +98,6 @@ class ListDetailIssues extends Component {
     // !_.isEqual(preState.sprint, this.props.sprint) && this.setState({loadData: true})
     if (preState.sprint !== this.props.sprint) {
       this.renderListSprint(this.props.sprint)
-    } else {
-      this.renderListSprint(preState.sprint)
     }
   }
   // hiddenTask() {
