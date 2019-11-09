@@ -191,6 +191,8 @@ exports.addIssueIntoSprint = async (req, res, next) => {
             }
         )
 
+        const sprint = await Sprint.findById(idsprint).populate('idissues')
+
         const action = new Activities({
             action: 'addIssueIntoSprint',
             content: 'issues/addIssueIntoSprint/' + idissues,
@@ -200,7 +202,7 @@ exports.addIssueIntoSprint = async (req, res, next) => {
 
         await action.save()
 
-        res.status(201).json({ statusCode: 200 })
+        res.status(201).json({ statusCode: 200, listissues: sprint.idissues })
 
     }
     catch(err) {

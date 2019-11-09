@@ -7,7 +7,7 @@ function connect() {
         if (process.env.NODE_ENV === 'test') {
         const Mockgoose = require('mockgoose').Mockgoose
         const mockgoose = new Mockgoose(mongoose)
-
+        
         mockgoose.prepareStorage()
             .then(() => {
             mongoose.connect(DB_URI,
@@ -18,6 +18,7 @@ function connect() {
                 })
             })
         } else {
+            mongoose.set('useFindAndModify', false);
             mongoose.connect(DB_URI,
             { useNewUrlParser: true, useCreateIndex: true })
             .then((res, err) => {
