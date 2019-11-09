@@ -83,3 +83,8 @@
 button.custom-issue.dropdown-toggle.btn.btn-secondary{
   color: black;
 }
+.processIssue{
+  width: 37%;
+  margin-left: 14px;
+  margin-top: 15px;
+}

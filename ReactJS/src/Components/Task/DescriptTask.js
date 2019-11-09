@@ -18,12 +18,15 @@ export default class DescriptTask extends Component {
     super(props);
     this.state = {
       status: false,
-      email: ''
+      email: "",
+      process: this.props.data.process,
+      newData: this.props.data
     };
     this.showInputAssign = this.showInputAssign.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.assignTask = this.assignTask.bind(this)
-    this.remove = this.remove.bind(this)
+    this.assignTask = this.assignTask.bind(this);
+    this.remove = this.remove.bind(this);
+    this.handleChangeProcess = this.handleChangeProcess.bind(this);
   }
   AddFlag(idActive) {
     this.props.AddFlagIssueAct(idActive);
@@ -36,33 +39,47 @@ export default class DescriptTask extends Component {
       status: !preState.status
     }));
   }
-  onChangeEmail(event){
+  onChangeEmail(event) {
     event.preventDefault();
     this.setState({
       email: event.target.value
-    })
+    });
   }
-  componentDidUpdate(preState){
-    if(this.state.status === false){
-      !_.isEqual(preState.data.admin, this.props.admin) && this.tranferDataToAssign()
+  componentDidUpdate(preState) {
+    if (this.state.status === false) {
+      !_.isEqual(preState.admin, this.props.admin) &&
+        this.tranferDataToAssign();
     }
   }
-  tranferDataToAssign(){
-    const {data} = this.props
+  tranferDataToAssign() {
+    const { data } = this.props;
     _.map(this.props.admin, item => {
-      this.props.assignTaskIssueAct(data._id,item._id)
-    })
+      this.props.assignTaskIssueAct(data._id, item._id);
+    });
   }
-  assignTask(e){
-    e.preventDefault()
-    this.props.findUserLikeEmail(this.state.email)
+  assignTask(e) {
+    e.preventDefault();
+    this.props.findUserLikeEmail(this.state.email);
     this.setState(preState => ({
       status: !preState.status
-    }))
+    }));
   }
-  remove(id){
-    console.log(id)
-    this.props.removeIssue(id)
+  remove(id) {
+    console.log(id);
+    this.props.removeIssue(id);
+  }
+  handleChangeProcess(e) {
+    e.preventDefault();
+    const {data, issues} = this.props
+    this.setState({
+      process: e.target.value
+    });
+    _.map(issues, (item, key) => {
+      if(data._id === item._id){
+        item.process = e.target.value
+      }
+    })
+    this.props.changeProcessIssue(data._id, e.target.value)
   }
   render() {
     const { data } = this.props;
@@ -72,7 +89,7 @@ export default class DescriptTask extends Component {
       <div className="descriptWork">
         <div className="list-item-right dropdown">
           <div>
-            <h4 style={{textAlign:'initial'}}>
+            <h4 style={{ textAlign: "initial" }}>
               WORKJIRA /
               <span>
                 {data.name}{" "}
@@ -88,7 +105,9 @@ export default class DescriptTask extends Component {
                       <DropdownItem onClick={() => this.RemoveFlag(data._id)}>
                         Move Flag
                       </DropdownItem>
-                      <DropdownItem onClick={() => this.remove(data._id)}>Remove</DropdownItem>
+                      <DropdownItem onClick={() => this.remove(data._id)}>
+                        Remove
+                      </DropdownItem>
                       <DropdownItem>Clone</DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>
@@ -109,6 +128,17 @@ export default class DescriptTask extends Component {
                 Log Work
               </a>
               <ModalLog />
+            </div>
+            <div className="processIssue">
+            <div className="form-group">
+            <label for="sel1" style={{marginLeft:'-85px'}}>STATUS:</label>
+              <select class="form-control" id="sel1" name="sellist1" onChange={this.handleChangeProcess} value={this.state.process}>
+                <option value="Todo">Todo</option>
+                <option value="Review">Review</option>
+                <option value="Done">Done</option>
+                <option value="InProgress">InProgress</option>
+              </select>
+              </div>
             </div>
             <div className="detail-work-task">
               <h4>Details</h4>
@@ -154,11 +184,9 @@ export default class DescriptTask extends Component {
                     </li>
                     <li>
                       <span>
-                        {
-                          _.map(admin,(item,key)=> {
-                           return <span key={key}>{item.name}</span>
-                          })
-                        }
+                        {_.map(admin, (item, key) => {
+                          return <span key={key}>{item.name}</span>;
+                        })}
                         <i
                           onClick={this.showInputAssign}
                           className="fas fa-pen"
@@ -166,14 +194,19 @@ export default class DescriptTask extends Component {
                       </span>
                     </li>
                     {status && (
-                     <div className="input-assign">
-                     <InputGroup>
-                        <Input value ={this.state.email} onChange={this.onChangeEmail} />
-                        <InputGroupAddon addonType="append">
-                          <Button onClick={this.assignTask} color="secondary">Assign</Button>
-                        </InputGroupAddon>
-                      </InputGroup>
-                     </div>
+                      <div className="input-assign">
+                        <InputGroup>
+                          <Input
+                            value={this.state.email}
+                            onChange={this.onChangeEmail}
+                          />
+                          <InputGroupAddon addonType="append">
+                            <Button onClick={this.assignTask} color="secondary">
+                              Assign
+                            </Button>
+                          </InputGroupAddon>
+                        </InputGroup>
+                      </div>
                     )}
                   </ul>
                 </div>

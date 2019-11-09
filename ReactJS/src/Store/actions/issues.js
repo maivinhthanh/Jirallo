@@ -38,6 +38,27 @@ export const AddIssueSuccess = data => {
     data
   }
 }
+export const changeProcessSuccess = (data) => {
+  return {
+    type: actionTypes.changeProcessSuccess,
+    data
+  }
+}
+export const changeProcessIssue = (idissues, processes) => {
+  console.log(idissues, processes);
+  return dispatch => {
+    return CallApi(`issues/changeProcessIssues/${idissues}`,
+    'PUT',
+    {process: processes},
+    'token'
+    ).then(respone => {
+      console.log(respone)
+      dispatch(changeProcessSuccess(respone))
+    }).catch(err => {
+      dispatch(IssueError(err))
+    })
+  }
+}
 export const removeIssue = (idissues) => {
   console.log('idIssue', idissues)
   return dispatch => {

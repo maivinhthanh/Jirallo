@@ -45,16 +45,13 @@ export default class IssueOnSprint extends Component {
   // }
   renderSprint = () => {
     const { issues, filterSprint, user, admin } = this.props;
-    let arrayList = [];
+    this.activeIssue = [];
     _.map(issues, (item, key) => {
       _.map(filterSprint.idissues, (data, index) => {
         if (data === item._id) {
-          arrayList.push(item);
+          this.activeIssue.push(item);
         }
       });
-    });
-    _.map(arrayList, (list, index1) => {
-      this.activeIssue.push(list);
     });
   };
 
@@ -86,13 +83,6 @@ export default class IssueOnSprint extends Component {
                   ></i>
                   <div className="option-add">
                     <UncontrolledDropdown>
-                      <DropdownToggle caret>
-                        <i
-                          className="fas fa-ellipsis-h setting-addsprint"
-                          // onClick={() => this.getIdIssue(item._id)}
-                          style={{ color: "black", marginTop: "-7px" }}
-                        ></i>
-                      </DropdownToggle>
                       <DropdownMenu>
                       {_.map(filterSprint, (data, index) => {
                         return (

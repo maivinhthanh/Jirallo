@@ -100,9 +100,6 @@ class ListDetailIssues extends Component {
       this.renderListSprint(this.props.sprint)
     }
   }
-  // hiddenTask() {
-  //   this.setState({modal: false})
-  // }
   renderListSprint = (sprintCustom) => {
     console.log(sprintCustom)
     const { issues, sprint, user, admin } = this.props;
@@ -194,6 +191,7 @@ class ListDetailIssues extends Component {
               if (item._id === this.idActive) {
                 return (
                   <DescriptTask
+                    issues ={issues}
                     key={key}
                     data={item}
                     user={user}
@@ -203,6 +201,7 @@ class ListDetailIssues extends Component {
                     AddFlagIssueAct={this.AddFlagIssueAct}
                     RemoveFlag={this.RemoveFlag}
                     removeIssue={this.props.removeIssue}
+                    changeProcessIssue={this.props.changeProcessIssue}
                   />
                 );
               }
@@ -233,7 +232,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(actionIssue.AddIssueIntoSprint(idIssue, idSprint)),
     ViewListIssueInSprint: id =>
       dispatch(actionSprint.ViewListIssueInSprint(id)),
-    removeIssue: id => dispatch(actionIssue.removeIssue(id))
+    removeIssue: id => dispatch(actionIssue.removeIssue(id)),
+    changeProcessIssue:(idIssue, process) => dispatch(actionIssue.changeProcessIssue(idIssue,process))
     // findUserLikeIDAct: (idUser) => dispatch(actionUser.findUserLikeIDAct(idUser))
   };
 };
