@@ -6,10 +6,6 @@ const Project = require('../models/project')
 const Sprint = require('../models/sprint')
 const Activities = require('../models/activities')
 
-function delay() {
-    return new Promise(resolve => setTimeout(resolve, 300))
-}
-
 exports.createIssues = async (req, res, next) => {
     try{
         const errors = validationResult(req)
@@ -121,18 +117,10 @@ exports.editIssues = async (req, res, next) => {
 exports.viewListIssues = async (req, res, next) => {
     try{
         const idproject = req.params.idproject
-        let listissues = []
 
-        const project = await Project.findById(idproject)
-        
-        await project.idissues.map(async (item, index)=>{
-            const issues = await Issues.findOne({_id:item})
-            listissues = [...listissues, issues]
-        })
+        const project = await Project.findById(idproject).populate('idissues')
 
-        await delay()
-
-        res.status(201).json({ statusCode: 200 ,listissues})
+        res.status(201).json({ statusCode: 200 ,listissues: project.idissues})
     }
     catch(err) {
         if (!err.statusCode) {
@@ -243,7 +231,7 @@ exports.changeProcessIssues = async (req, res, next) => {
             olddata: issues.process,
             newdata: process
         })
-
+      
         await action.save()
 
         res.status(201).json({ statusCode: 200 ,data:dataupdate})

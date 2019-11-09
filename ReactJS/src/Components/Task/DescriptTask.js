@@ -79,7 +79,7 @@ export default class DescriptTask extends Component {
                 <div className="chooseOptionEdit">
                   <UncontrolledDropdown>
                     <DropdownToggle className="custom-issue" caret>
-                      <i class="icon fas fa-ellipsis-h"></i>
+                      <i className="icon fas fa-ellipsis-h"></i>
                     </DropdownToggle>
                     <DropdownMenu>
                       <DropdownItem onClick={() => this.AddFlag(data._id)}>
@@ -156,12 +156,12 @@ export default class DescriptTask extends Component {
                       <span>
                         {
                           _.map(admin,(item,key)=> {
-                           return <span>{item.name}</span>
+                           return <span key={key}>{item.name}</span>
                           })
                         }
                         <i
                           onClick={this.showInputAssign}
-                          class="fas fa-pen"
+                          className="fas fa-pen"
                         ></i>
                       </span>
                     </li>

@@ -26,11 +26,11 @@ const issuesSchema = new Schema({
     },
     repoter: {
         type: Schema.Types.ObjectId,
-        ref: 'user',
+        ref: 'User',
     },
     assignee: {
         type: Schema.Types.ObjectId,
-        ref: 'user',
+        ref: 'User',
     },
     process:{
         type: String,
@@ -52,17 +52,17 @@ const issuesSchema = new Schema({
     },
     idepic:{
         type: Schema.Types.ObjectId,
-        ref: 'epic',
+        ref: 'Epic',
     },
     idsprint:[
         {
             type: Schema.Types.ObjectId,
-            ref: 'sprint',
+            ref: 'Sprint',
         }
     ],
     idproject:{
         type: Schema.Types.ObjectId,
-        ref: 'project',
+        ref: 'Project',
     },
     image:[
         {
@@ -72,13 +72,13 @@ const issuesSchema = new Schema({
     comment:[
         {
             type: Schema.Types.ObjectId,
-            ref: 'comment',
+            ref: 'Comment',
         }
     ],
     watch:[
         {
             type: Schema.Types.ObjectId,
-            ref: 'user',
+            ref: 'User',
         }
     ],
     hidden:{ type: Boolean, default: false },

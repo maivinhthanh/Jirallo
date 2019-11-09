@@ -18,7 +18,7 @@ import {
   DropdownToggle
 } from "reactstrap";
 // import * as actionUser from '../../Store/actions/user';
-import swal from "sweetalert";
+// import swal from "sweetalert";
 import IssueOnSprint from "./IssueOnSprint";
 import ListSprintDetail from "./ListSprintDetail";
 class ListDetailIssues extends Component {
@@ -104,6 +104,7 @@ class ListDetailIssues extends Component {
   //   this.setState({modal: false})
   // }
   renderListSprint = (sprintCustom) => {
+    console.log(sprintCustom)
     const { issues, sprint, user, admin } = this.props;
     const { modal, status, loadData } = this.state;
       return (

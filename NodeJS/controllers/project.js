@@ -5,10 +5,6 @@ const Project = require('../models/project')
 const User = require('../models/user')
 const Activities = require('../models/activities')
 
-function delay() {
-    return new Promise(resolve => setTimeout(resolve, 300))
-}
-
 exports.createProject = async (req, res, next) => {
     try{
         const errors = validationResult(req)
@@ -188,16 +184,9 @@ exports.ViewListProject = async (req, res, next) => {
     try{
 
         const iduser = req.userId
-        const user = await User.findById(iduser)
-        let listproject = []
-        await user.idproject.map(async (item, index)=>{
-            const project = await Project.findOne({_id:item})
-            listproject = [...listproject, project]
-        })
+        const user = await User.findById(iduser).populate('idproject')
 
-        await delay()
-
-        res.status(201).json({ statusCode: 200 ,listproject})
+        res.status(201).json({ statusCode: 200 ,listproject: user.idproject})
     }
     catch(err) {
         if (!err.statusCode) {

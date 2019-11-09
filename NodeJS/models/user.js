@@ -37,8 +37,8 @@ const userSchema = new Schema({
     },
     idproject:[
         {
-        type: Schema.Types.ObjectId,
-        ref: 'project'
+            type: Schema.Types.ObjectId,
+            ref: 'Project'
         }
     ],
     hidden:{ type: Boolean, default: false },
