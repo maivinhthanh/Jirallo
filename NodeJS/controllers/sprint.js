@@ -4,7 +4,6 @@ const {ObjectId} = require('mongodb')
 const Sprint = require('../models/sprint')
 const Project = require('../models/project')
 const Activities = require('../models/activities')
-const Issues = require('../models/issues')
 
 exports.createSprint = async (req, res, next) => {
     try{
@@ -92,7 +91,12 @@ exports.viewListSprint = async (req, res, next) => {
     try{
         const idproject = req.params.idproject
 
-        const project = await Project.findById(idproject).populate('idsprint')
+        const project = await Project.findById(idproject).populate({
+            path: 'idsprint',
+            match:{
+                hidden: false
+            }
+        })
 
         res.status(201).json({ statusCode: 200 ,listsprint: project.idsprint})
     }
@@ -165,7 +169,12 @@ exports.viewListIssuesInSprint = async (req, res, next) => {
     try{
         const idsprint = req.params.idsprint
 
-        const sprint = await Sprint.findById(idsprint).populate('idissues')
+        const sprint = await Sprint.findById(idsprint).populate({
+            path: 'idissues',
+            match:{
+                hidden: false
+            }
+        })
 
         res.status(201).json({ statusCode: 200, listissues: sprint.idissues })
     }

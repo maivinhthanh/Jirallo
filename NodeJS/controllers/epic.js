@@ -89,7 +89,12 @@ exports.viewListEpic = async (req, res, next) => {
     try{
         const idproject = req.params.idproject
 
-        const project = await Project.findById(idproject).populate('idepic')
+        const project = await Project.findById(idproject).populate({
+            path: 'idepic',
+            match:{
+                hidden: false
+            }
+        })
 
         res.status(201).json({ statusCode: 200 ,listepic: project.idepic})
     }
@@ -106,7 +111,12 @@ exports.viewListIssuesInEpic = async (req, res, next) => {
     try{
         const idepic = req.params.idepic
 
-        const epic = await Epic.findById(idepic).populate('idissues')
+        const epic = await Epic.findById(idepic).populate({
+            path: 'idissues',
+            match:{
+                hidden: false
+            }
+        })
 
         res.status(201).json({ statusCode: 200 ,listissues: epic.idissues})
     }
