@@ -24,18 +24,23 @@ const projectSchema = new Schema({
     ],
     idepic:[
         {
-        type: Schema.Types.ObjectId,
-        ref: 'Epic',
-        required: true
+            type: Schema.Types.ObjectId,
+            ref: 'Epic',
+            required: true
         }
     ],
     idsprint:[
         {
+            type: Schema.Types.ObjectId,
+            ref: 'Sprint',
+            required: true
+        }
+    ],
+    activesprint: {
         type: Schema.Types.ObjectId,
         ref: 'Sprint',
         required: true
-        }
-    ],
+    },
     idissues:[
         {
             type: Schema.Types.ObjectId,

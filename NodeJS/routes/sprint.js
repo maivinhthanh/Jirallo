@@ -6,6 +6,7 @@ const sprintController = require('../controllers/sprint')
 const router = express()
 
 const isAuth = require('../middleware/is-auth')
+const isManager = require('../middleware/is-Manager')
 
 const upload = require('./uploadfile')
 
@@ -23,13 +24,17 @@ router.put('/editSprint/:idsprint',upload.single('avatar'),isAuth,
     [], 
     sprintController.editSprint,
 )
+router.put('/beginsprint/:idproject',upload.single('avatar'),isAuth, isManager,
+    [], 
+    sprintController.beginsprint,
+)
 router.get('/viewListSprint/:idproject',isAuth,
     sprintController.viewListSprint,
 )
 router.get('/viewListIssuesInSprint/:idsprint',isAuth,
     sprintController.viewListIssuesInSprint,
 )
-router.put('/completeSprint/:idsprint',upload.single('avatar'),isAuth, 
+router.put('/completeSprint/:idproject',upload.single('avatar'),isAuth, 
     [], 
     sprintController.completeSprint,
 )

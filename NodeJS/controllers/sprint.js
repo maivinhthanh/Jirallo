@@ -109,20 +109,88 @@ exports.viewListSprint = async (req, res, next) => {
     }
     
 }
+exports.beginsprint = async (req, res, next) => {
+    try{
+        const idsprint = req.body.idsprint
+        const idproject = req.params.idproject
+
+        const idsprintactiving = await Project.findById(idproject).activesprint
+
+        if(!idsprintactiving){
+            const newsprint = {
+                timebegin: Date.now(),
+                dateedit: Date.now()
+            } 
+    
+            await Sprint.findByIdAndUpdate(idsprint, newsprint)
+            await Project.findByIdAndUpdate(idproject, {
+                activesprint: idsprint
+            })
+
+            res.status(201).json({ statusCode: 200 ,newsprint})
+        }
+        else{
+            res.status(201).json({ statusCode: 400 ,data: {
+                msg: "Sprint haven't complete"
+            }})
+        }
+
+        const action = new Activities({
+            action: 'beginsprint',
+            content: 'sprint/beginsprint/' + idproject,
+            iduser: req.userId,
+            olddata: idsprint
+        })
+
+        await action.save()
+
+        
+    }
+    catch(err) {
+        if (!err.statusCode) {
+            err.statusCode = 500
+        }
+        res.status(500).json(err)
+        next(err)
+    }
+
+}
 exports.completeSprint = async (req, res, next) => {
     try{
-        const idsprint = req.params.idsprint
+        const idsprint = req.body.idsprint
+        const idproject = req.params.idproject
+
+        const infosprint = await Sprint.findById(idsprint).populate({
+            path: 'idissues',
+            match:{
+                hidden: false
+            },
+            select:['name', 'process', 'type', 'priority', 'tag']
+        })
+
+        infosprint.idissues.map((item, index)=>{
+            
+        })
 
         const newsprint = {
             isfinish: true,
+            timeend: Date.now(),
+            report:{
+                listissues: clone,
+
+            },
             dateedit: Date.now(),
         } 
         await Sprint.findByIdAndUpdate(idsprint, newsprint)
+        await Project.findByIdAndUpdate(idproject, {
+            activesprint: null
+        })
 
         const action = new Activities({
             action: 'completeSprint',
-            content: 'sprint/completeSprint/' + idsprint,
+            content: 'sprint/completeSprint/' + idproject,
             iduser: req.userId,
+            olddata: idsprint
         })
 
         await action.save()

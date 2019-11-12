@@ -12,11 +12,17 @@ const sprintSchema = new Schema({
     deadline: {
         type: Date
     },
+    timeend: {
+        type: Date
+    },
+    report:{
+        type: Schema.Types.Mixed,
+    },
     idissues:[
         {
-        type: Schema.Types.ObjectId,
-        ref: 'Issues',
-        required: true
+            type: Schema.Types.ObjectId,
+            ref: 'Issues',
+            required: true
         }
     ],
     isfinish:{ type: Boolean, default: false },
