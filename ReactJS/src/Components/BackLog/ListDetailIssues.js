@@ -111,6 +111,7 @@ class ListDetailIssues extends Component {
           admin={admin}
           modal={modal}
           issues={issues}
+          handleDeleteSprint={this.props.handleDeleteSprint}
         />
       );
   };
@@ -124,7 +125,16 @@ class ListDetailIssues extends Component {
           className={`list-sprint item-issue ${!modal ? "" : "customSprint"}`}
         >
           <ul>
-            {this.renderListSprint(sprint)}
+          <ListSprintDetail
+          sprint={sprint}
+          user={user}
+          admin={admin}
+          modal={modal}
+          issues={issues}
+          handleDeleteSprint={this.props.handleDeleteSprint}
+          completeSprintAct={this.props.completeSprintAct}
+        />
+            {/* {this.renderListSprint(sprint)} */}
           </ul>
         </div>
         <div className="item-issue">
@@ -233,7 +243,9 @@ const mapDispatchToProps = dispatch => {
     ViewListIssueInSprint: id =>
       dispatch(actionSprint.ViewListIssueInSprint(id)),
     removeIssue: id => dispatch(actionIssue.removeIssue(id)),
-    changeProcessIssue:(idIssue, process) => dispatch(actionIssue.changeProcessIssue(idIssue,process))
+    changeProcessIssue:(idIssue, process) => dispatch(actionIssue.changeProcessIssue(idIssue,process)),
+    handleDeleteSprint: (id) => dispatch(actionSprint.deleteSprint(id)),
+    completeSprintAct: (id) => dispatch(actionSprint.completeSprintAct(id))
     // findUserLikeIDAct: (idUser) => dispatch(actionUser.findUserLikeIDAct(idUser))
   };
 };

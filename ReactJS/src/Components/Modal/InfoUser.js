@@ -20,7 +20,8 @@ export default class InfoUser extends Component {
     const {admin} = this.props
     return (
       <div className="info-user-detail">
-      <i onClick={this.toggle} className="fas fa-book-open"></i>
+      <span onClick={this.toggle}>Manage your account</span>
+      {/* <i onClick={this.toggle} className="fas fa-book-open"></i> */}
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Information User</ModalHeader>
           <ModalBody >

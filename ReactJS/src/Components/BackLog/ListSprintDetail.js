@@ -2,6 +2,18 @@ import React, { Component } from "react";
 import IssueOnSprint from "./IssueOnSprint";
 import _ from "lodash";
 export default class ListSprintDetail extends Component {
+  deleteSprint(id){
+    const {sprint} = this.props
+    _.map(sprint, (item, index) => {
+      if(item._id === id){
+        sprint.splice(index, 1)
+      }
+    })
+    this.props.handleDeleteSprint(id)
+  }
+  completeSprint(id){
+    this.props.completeSprintAct(id)
+  }
   render() {
     const { sprint, user, admin, issues, modal } = this.props;
     console.log(sprint);
@@ -25,12 +37,15 @@ export default class ListSprintDetail extends Component {
                     <i className="fas fa-ellipsis-h setting-addsprint" style={{color: 'black'}}></i>
                   </button>
                   <div className="dropdown-menu">
-                    <a className="dropdown-item" href="#">
+                    <span className="dropdown-item">
                       Edit
-                    </a>
-                    <a className="dropdown-item" href="#">
+                    </span>
+                    <span className="dropdown-item" onClick={()=>this.deleteSprint(data._id)}>
                       Delete
-                    </a>
+                    </span>
+                    <span className="dropdown-item" onClick={()=>this.completeSprint(data._id)}>
+                      Complete
+                    </span>
                   </div>
                 </div>
               </li>

@@ -251,17 +251,19 @@ p.movetxt {
   padding-top:170px;
 }
 .form-login input{
-  border-radius: 20px;
+  /* border-radius: 20px; */
   padding-top: 26px;
   padding-bottom: 30px;
   font-family: fantasy;
   border: 2px solid black;
 }
 .form-login input:invalid{
-  border: 2px solid red;
+  border: 2px solid white;
+  border-block-end: 5px solid #6EA6FF;
 }
 .form-login input:valid{
   border: 2px solid black;
+  border-block-end: 5px solid #6EA6FF;
 }
 .form-login .submit-btn{
   margin-top: 80px;
@@ -620,10 +622,22 @@ p.movetxt {
   font-size: 27px;
 }
 .content-task {
-  width: 450px;
+  width: 937px;
   position: absolute;
-  top: 243px;
-  right: 576px;
+  top: 331px;
+  right: 216px;
+}
+.content-task h4 {
+  text-align: left;
+  margin-bottom: 20px;
+}
+.table-work-with {
+  background: rgb(244, 245, 247);
+}
+.table-work-with .img {
+  width: 210px;
+  height: 200px;
+  border: 1px solid;
 }
 .wrap-content {
   margin-left: -36px;
@@ -663,6 +677,9 @@ p.movetxt {
   margin-top: -7px;
   position: absolute;
   left:937px;
+}
+.detail-card .custom .issues {
+  width: 135%
 }
 .detail-card .setting-addsprint{
   margin-top: -7px;
@@ -704,15 +721,30 @@ p.movetxt {
 } */
 .detail-user .icon{
   position: absolute;
-  top: 356px;
+  top: 343px;
   right: 10px;
 }
 .detail-user .description p{
   font-size: 18px;
   border: 1px solid;
 }
+.detail-user .top-about ul {
+  list-style: none;
+  text-align: left;
+}
+.detail-user .top-about ul li {
+  padding-bottom:20px;
+}
 .detail-user .detail .info-user-detail ul li{
   padding-bottom: 20px;
+}
+.detail-user .top-about h4{
+  text-align: left;
+}
+.detail-user .setting {
+  position: absolute;
+  left: 200px;
+  top: 184px;
 }
 .project-list {
   position: absolute;

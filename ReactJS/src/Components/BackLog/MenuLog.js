@@ -8,7 +8,8 @@ import {
   Card,
   Button,
   CardTitle,
-  CardText,
+  CardBody,
+  UncontrolledCollapse,
   Row,
   Col,
   Modal,
@@ -19,47 +20,50 @@ import {
 } from "reactstrap";
 import classnames from "classnames";
 import "./assets/style.css";
-import { connect } from 'react-redux';
-import * as actions from '../../Store/actions/epic'
-import _ from 'lodash'
+import { connect } from "react-redux";
+import * as actions from "../../Store/actions/epic";
+import _ from "lodash";
 class MenuLog extends Component {
   constructor(props) {
     super(props);
-    this.nameItem = null
+    this.nameItem = null;
     this.state = {
       activeTab: "1",
       modal: false,
       modalEpic: false,
-      nameEpic: '',
-      idProject: '',
-      nameEpicEdit : this.nameItem
+      nameEpic: "",
+      idProject: "",
+      nameEpicEdit: this.nameItem
     };
     this.toggle = this.toggle.bind(this);
     this.showToggle = this.showToggle.bind(this);
     this.handleIdProject = this.handleIdProject.bind(this);
     this.handleNameEpic = this.handleNameEpic.bind(this);
     this.createEpic = this.createEpic.bind(this);
-    this.showToggleEpic = this.showToggleEpic.bind(this)
-    this.Editepic = this.Editepic.bind(this)
+    this.showToggleEpic = this.showToggleEpic.bind(this);
+    this.Editepic = this.Editepic.bind(this);
     this.handleNameEpicEdit = this.handleNameEpicEdit.bind(this);
-    this.activeItem = null
+    this.activeItem = null;
   }
-  createEpic(e){
+  createEpic(e) {
     e.preventDefault();
-    const Epic = {nameEpic: this.state.nameEpic, idProject: this.state.idProject}
+    const Epic = {
+      nameEpic: this.state.nameEpic,
+      idProject: this.state.idProject
+    };
     this.props.createEpic(Epic);
   }
-  handleIdProject(e){
+  handleIdProject(e) {
     e.preventDefault();
     this.setState({
       idProject: e.target.value
-    })
+    });
   }
-  handleNameEpic(e){
+  handleNameEpic(e) {
     e.preventDefault();
     this.setState({
       nameEpic: e.target.value
-    })
+    });
   }
 
   showToggle() {
@@ -67,11 +71,11 @@ class MenuLog extends Component {
       modal: !prevState.modal
     }));
   }
-  showToggleEpic(id, name){
-    this.activeItem = id
-    this.nameItem = name
+  showToggleEpic(id, name) {
+    this.activeItem = id;
+    this.nameItem = name;
     this.setState(prevState => ({
-      modalEpic: !prevState.modalEpic,
+      modalEpic: !prevState.modalEpic
     }));
   }
   toggle(tab) {
@@ -81,95 +85,134 @@ class MenuLog extends Component {
       });
     }
   }
-  componentDidMount(){
-    this.props.viewListEpic(this.props.params)
-}
-  Editepic (e){
-    e.preventDefault();
-    this.props.EditepicAct(this.state.nameEpic, this.activeItem)
-    this.showToggleEpic()
+  componentDidMount() {
+    this.props.viewListEpic(this.props.params);
   }
-  handleNameEpicEdit(e){
+  Editepic(e) {
+    e.preventDefault();
+    this.props.EditepicAct(this.state.nameEpic, this.activeItem);
+    this.showToggleEpic();
+  }
+  handleNameEpicEdit(e) {
     e.preventDefault();
     this.setState({
-      nameEpic : e.target.value
-    })
+      nameEpic: e.target.value
+    });
   }
   render() {
-    const epic = this.props.Epic
+    const epic = this.props.Epic;
     return (
       <div className="show-epic">
-        <Nav tabs>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === "1" })}
-              onClick={() => {
-                this.toggle("1");
-              }}
-            >
-              Epic
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === "2" })}
-              onClick={() => {
-                this.toggle("2");
-              }}
-            >
-              Moar Tabs
-            </NavLink>
-          </NavItem>
-        </Nav>
-        <TabContent activeTab={this.state.activeTab}>
-          <TabPane tabId="1">
-            <Row>
-              <Col sm="12">
-                <Card body className="card-content-epic">
-                  <CardTitle>
-                    <span>Epic</span> <span><button className="btn btn-success" onClick={this.showToggle}>Create Epic</button></span>
-                    <div>
-                      <Modal
-                        isOpen={this.state.modal}
-                        toggle={this.showToggle}
-                        className={this.props.className}
-                      >
-                        <ModalHeader toggle={this.showToggle}>
-                          Create Epic
-                        </ModalHeader>
-                        <ModalBody>
-                        <Input type="text" onChange={this.handleNameEpic} value={this.state.nameEpic} style = {{ marginBottom: '10px'}} name="epic" id="ecpic" placeholder="with name ecpic" />
-                        <Input type="text" onChange={this.handleIdProject} value={this.state.idProject}  name="Idproject" id="Idproject" placeholder="with name idproject" />
-                        </ModalBody>
-                        <ModalFooter>
-                          <Button type="submit" color="primary" onClick={this.createEpic}>
-                            Add
-                          </Button>{" "}
-                          <Button color="secondary" onClick={this.showToggle}>
-                            Cancel
-                          </Button>
-                        </ModalFooter>
-                      </Modal>
-                    </div>
-                  </CardTitle>
-                  <Button
-                    data-toggle="collapse"
-                    data-target="#demo"
-                    outline
-                    color="warning"
+        <Row>
+          <Col sm="12">
+            <Card body className="card-content-epic">
+              <CardTitle>
+                <span>Epic</span>{" "}
+                <span onClick={this.showToggle}>Create Epic</span>
+                <div>
+                  <Modal
+                    isOpen={this.state.modal}
+                    toggle={this.showToggle}
+                    className={this.props.className}
                   >
-                    All Epics
-                  </Button>
-                  <Button
+                    <ModalHeader toggle={this.showToggle}>
+                      Create Epic
+                    </ModalHeader>
+                    <ModalBody>
+                      <Input
+                        type="text"
+                        onChange={this.handleNameEpic}
+                        value={this.state.nameEpic}
+                        style={{ marginBottom: "10px" }}
+                        name="epic"
+                        id="ecpic"
+                        placeholder="with name ecpic"
+                      />
+                      <Input
+                        type="text"
+                        onChange={this.handleIdProject}
+                        value={this.state.idProject}
+                        name="Idproject"
+                        id="Idproject"
+                        placeholder="with name idproject"
+                      />
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button
+                        type="submit"
+                        color="primary"
+                        onClick={this.createEpic}
+                      >
+                        Add
+                      </Button>{" "}
+                      <Button color="secondary" onClick={this.showToggle}>
+                        Cancel
+                      </Button>
+                    </ModalFooter>
+                  </Modal>
+                </div>
+              </CardTitle>
+              <React.Fragment>
+                {_.map(epic, (item, index) => {
+                  if (index < 5) {
+                    return (
+                      <tr key={index} style={{ textAlign: "initial" }}>
+                        <td id="toggler" key={item.id}>
+                          {item.name}{" "}
+                          <i
+                            onClick={() =>
+                              this.showToggleEpic(item._id, item.name)
+                            }
+                            style={{
+                              float: "right",
+                              marginLeft: "185px",
+                              marginTop: "-8px"
+                            }}
+                            className="fas fa-cog"
+                          ></i>
+                        </td>
+                      </tr>
+                    );
+                  }
+                })}
+                 <Button
+                  color="primary"
+                  id="toggler1"
+                  style={{ marginBottom: "1rem" }}
+                >
+                  Toggle
+                </Button>
+                <UncontrolledCollapse toggler="#toggler1" style={{width:'100%'}}>
+                  <Card>
+                    <CardBody>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Nesciunt magni, voluptas debitis similique porro a
+                      molestias consequuntur earum odio officiis natus, amet
+                      hic, iste sed dignissimos esse fuga! Minus, alias.
+                    </CardBody>
+                  </Card>
+                </UncontrolledCollapse>
+              </React.Fragment>
+              <div>
+                {/* <Button
+                  color="primary"
+                  id="toggler"
+                  style={{ marginBottom: "1rem" }}
+                >
+                  Toggle
+                </Button> */}
+                
+              </div>
+              {/* <Button
                     data-toggle="collapse"
                     data-target="#demo1"
                     outline
                     color="warning"
                   >
                     All issues
-                  </Button>
-                  <div id="demo" className="collapse">
-                  <React.Fragment>
+                  </Button> */}
+              <div id="demo" className="collapse">
+                {/* <React.Fragment>
                   {
                     _.map(epic, (item, index) => {
                       if(index < 5){
@@ -177,64 +220,63 @@ class MenuLog extends Component {
                       }
                     })
                   }
-                  </React.Fragment>
-                  <div>
-                      <Modal
-                        isOpen={this.state.modalEpic}
-                        toggle={this.showToggleEpic}
-                        className={this.props.className}
+                  </React.Fragment> */}
+                <div>
+                  <Modal
+                    isOpen={this.state.modalEpic}
+                    toggle={this.showToggleEpic}
+                    className={this.props.className}
+                  >
+                    <ModalHeader toggle={this.showToggleEpic}>
+                      Edit Epic
+                    </ModalHeader>
+                    <ModalBody>
+                      <Input
+                        type="text"
+                        onChange={this.handleNameEpicEdit}
+                        value={this.nameEpic}
+                        style={{ marginBottom: "10px" }}
+                        name="epic"
+                        id="ecpic1"
+                        placeholder="with name epic"
+                      />
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button
+                        type="submit"
+                        color="primary"
+                        onClick={this.Editepic}
                       >
-                        <ModalHeader toggle={this.showToggleEpic}>
-                          Edit Epic
-                        </ModalHeader>
-                        <ModalBody>
-                        <Input type="text" onChange={this.handleNameEpicEdit} value={this.nameEpic} style = {{ marginBottom: '10px'}} name="epic" id="ecpic1" placeholder="with name epic" />
-                        </ModalBody>
-                        <ModalFooter>
-                          <Button type="submit" color="primary" onClick={this.Editepic}>
-                            Edit
-                          </Button>{" "}
-                          <Button color="secondary" onClick={this.showToggleEpic}>
-                            Cancel
-                          </Button>
-                        </ModalFooter>
-                      </Modal>
-                    </div>
-                  </div>
-                </Card>
-              </Col>
-            </Row>
-          </TabPane>
-          <TabPane tabId="2">
-            <Row>
-              <Col>
-                <Card body>
-                  <CardTitle>Special Title Treatment</CardTitle>
-                  <CardText>
-                    With supporting text below as a natural lead-in to
-                    additional content.
-                  </CardText>
-                  <Button>Go somewhere</Button>
-                </Card>
-              </Col>
-            </Row>
-          </TabPane>
-        </TabContent>
+                        Edit
+                      </Button>{" "}
+                      <Button color="secondary" onClick={this.showToggleEpic}>
+                        Cancel
+                      </Button>
+                    </ModalFooter>
+                  </Modal>
+                </div>
+              </div>
+            </Card>
+          </Col>
+        </Row>
       </div>
     );
   }
 }
 
-const mapStateToProps = state =>{
+const mapStateToProps = state => {
   return {
     Epic: state.epic
-  }
-}
-const mapDispatchToProps = dispatch =>{
+  };
+};
+const mapDispatchToProps = dispatch => {
   return {
     createEpic: epic => dispatch(actions.createEpicAct(epic)),
-    viewListEpic: (idProject) => dispatch(actions.viewListEpicAct(idProject)),
-    EditepicAct : (nameEpic, id) => dispatch(actions.EditepicAct(nameEpic, id))
-  }
-}
-export default connect(mapStateToProps,mapDispatchToProps)(MenuLog)
+    viewListEpic: idProject => dispatch(actions.viewListEpicAct(idProject)),
+    EditepicAct: (nameEpic, id) => dispatch(actions.EditepicAct(nameEpic, id))
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MenuLog);

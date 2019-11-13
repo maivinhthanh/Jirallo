@@ -86,7 +86,7 @@ export const AddIssueIntoSprint = (idIssue, idSprint) => {
     'token'
     ).then(respone => {
       console.log(respone)
-      // dispatch(AddIssueSuccess(respone))
+      dispatch(AddIssueSuccess(respone))
     }).catch(err => {
       dispatch(IssueError(err))
     })

@@ -52,6 +52,7 @@ class UpdateUser extends Component {
     data.append('gender',this.state.gender)
     data.append('name',this.state.name)
     data.append('birthdate',this.state.birthday)
+    console.log(data);
     this.props.EditUserAction(this.activeId, data);
   }
   render() {
@@ -65,7 +66,7 @@ class UpdateUser extends Component {
       <div>
         <div className="container">
           <i data-toggle="modal"
-            data-target="#myModal" className="fas fa-cog"></i> Setting user
+            data-target="#myModal" className="fas fa-cog"></i>
           {/* The Modal */}
           <div className="modal" id="myModal">
             <div className="modal-dialog">
@@ -100,6 +101,7 @@ class UpdateUser extends Component {
                           name="avatar"
                           onChange={this.handleAvatar}
                           id="avatar"
+                          // value={this.state.avatar}
                         />
                       </FormGroup>
                       <FormGroup>

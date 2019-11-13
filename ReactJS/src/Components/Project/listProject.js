@@ -39,9 +39,13 @@ export default class listProject extends Component {
     })
 
   }
+  fomatDateTime(date) {
+    return _.slice(_.replace(date, /-/g, "-"), 0, 10);
+  }
   render() {
     const { project, admin } = this.props;
     const {status} = this.state;
+    console.log(project)
     return (
       <div>
         <Table striped>
@@ -59,9 +63,9 @@ export default class listProject extends Component {
               _.map(project, (item, index) => {
                 return (
                <tr key={index}>
-               <td>{item._id}</td>
+               <td>{index + 1}</td>
                 <td>{item.name}</td>
-                <td>{item.datecreate}</td>
+                <td>{this.fomatDateTime(item.datecreate)}</td>
                 <td>{
                   _.map(admin, (item, index) => {
                     return <Link key={index} style={{borderBottom:'1px solid'}} to="detailUser">{item.name}</Link>
@@ -72,9 +76,9 @@ export default class listProject extends Component {
               }) :  _.map(this.cloneProject, (item, index) => {
                 return (
                <tr key={index}>
-               <td>{item._id}</td>
+               <td>{index + 1}</td>
                 <td>{item.name}</td>
-                <td>{item.datecreate}</td>
+                <td>{this.fomatDateTime(item.datecreate)}</td>
                 <td>{
                   _.map(admin, item => {
                     return <Link style={{borderBottom:'1px solid'}} to="detailUser">{item.name}</Link>
