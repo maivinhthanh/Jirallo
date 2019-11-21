@@ -153,7 +153,7 @@ exports.AddMember = async (req, res, next) => {
         }, { new: true })
         await User.findByIdAndUpdate(iduser, {
             $push: { 
-                idproject: idproject
+                idproject: ObjectId(idproject)
             }
         },{ new: true })
 
