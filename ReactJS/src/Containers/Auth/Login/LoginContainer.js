@@ -27,7 +27,9 @@ class LoginContainer extends Component {
   render() {
     return (
       <div>
-      <Login email={this.props.email} password={this.props.password} login={this.props.login} />
+      <Login email={this.props.email} password={this.props.password} login={this.props.login}
+          loginbyfacebook = {this.props.loginbyfacebook} loginbygoogle = {this.props.loginbygoogle}
+      />
       {this.haveRedirect()}
       </div>
     )
@@ -46,7 +48,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-      login: (email, password) => dispatch( actions.loginAction(email, password) )
+      login: (email, password) => dispatch( actions.loginAction(email, password) ),
+      loginbyfacebook: (data) => dispatch( actions.loginByFacebookAction(data) ),
+      loginbygoogle: (data) => dispatch( actions.loginByGoogleAction(data) )
   };
 };
 

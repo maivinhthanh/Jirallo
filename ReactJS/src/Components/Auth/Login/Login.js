@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { Link, Route } from 'react-router-dom' 
+import FacebookLogin from 'react-facebook-login'
+import GoogleLogin from 'react-google-login';
+
 class Login extends Component {
   constructor(props){
     super(props);
@@ -24,7 +27,16 @@ class Login extends Component {
     event.preventDefault();
     const user = [{email:this.state.email, password:this.state.password}]
     localStorage.setItem('userLogin', JSON.stringify(user));
-   this.props.login(this.state.email, this.state.password);
+    this.props.login(this.state.email, this.state.password);
+  }
+  responseFacebook = (response) => {
+    console.log(response);
+    this.props.loginbyfacebook(response)
+
+  }
+  responseGoogle = (response) => {
+    console.log(response.profileObj);
+    this.props.loginbygoogle(response.profileObj)
   }
   render() {
     return (
@@ -73,7 +85,24 @@ class Login extends Component {
           </button>
           <p className="txtPass" ><Link to="/register">Forgot Password ?</Link> </p>
         </form>
+        <div className="App">
+
+        <FacebookLogin
+          appId="2237218073191697" //APP ID NOT CREATED YET
+          fields="name,email,picture"
+          callback={this.responseFacebook}
+        />
+        <br />
+        <GoogleLogin
+          clientId="919009151118-m817ir6400ear78nlir3cpgo2nrjle1n.apps.googleusercontent.com" //CLIENTID NOT CREATED YET
+          buttonText="LOGIN WITH GOOGLE"
+          onSuccess={this.responseGoogle}
+          onFailure={this.responseGoogle}
+        />
+
+        </div>
       </div>
+      
       </div>
     )
   }

@@ -216,11 +216,27 @@ exports.findUserLikeEmail = async (req, res, next) => {
         next(error)
     }
 }
-exports.FindUserLikeID = async (req, res, next) => {
+exports.FindUserID = async (req, res, next) => {
     try{
         const iduser = req.params.iduser
 
         const user = await User.findById(iduser)
+
+        res.status(200).json({statusCode: 200,result: user})
+    }
+    catch (error) {
+        if (!error.statusCode) {
+            error.statusCode = 500
+        }
+        res.status(500).json(error)
+        next(error)
+    }
+}
+exports.getMyInfo = async (req, res, next) => {
+    try{
+        const iduser = req.userId
+        console.log(iduser)
+        const user = await User.findById(iduser).select('email _id name image')
 
         res.status(200).json({statusCode: 200,result: user})
     }
@@ -237,6 +253,130 @@ exports.getListUser = async (req, res, next) => {
         const user = await User.find({})
 
         res.status(200).json({statusCode: 200,result: user})
+    }
+    catch (error) {
+        if (!error.statusCode) {
+            error.statusCode = 500
+        }
+        res.status(500).json(error)
+        next(error)
+    }
+}
+exports.loginbyfacebook = async (req, res, next) => {
+    try{
+        const idfacebook = req.body.idfacebook
+        const image = req.body.image
+        const name = req.body.name
+        const email = req.body.email
+
+        let user = await User.findOne({idfacebook: idfacebook})
+        if(!user){
+            user = new User({
+                idfacebook: idfacebook,
+                name: name,
+                avatar: image,
+                email: email
+            })
+            const newuser = await user.save()
+            const token = jwt.sign(
+                {
+                    email: null,
+                    userId: newuser._id.toString()
+                },
+                "somesupersecretsecret"
+            )
+
+            const action = new Activities({
+                action: 'loginbyfacebook',
+                iduser: newuser._id
+            })
+    
+            await action.save()
+
+            res.status(200).json({token: token, userId: newuser._id.toString()})
+        }
+        else{
+            const token = jwt.sign(
+                {
+                    email: email,
+                    userId: newuser._id.toString()
+                },
+                "somesupersecretsecret"
+            )
+
+            const action = new Activities({
+                action: 'loginbyfacebook',
+                iduser: user._id
+            })
+    
+            await action.save()
+    
+            res.status(200).json({token: token, userId: user._id.toString()})
+        }
+
+        
+    }
+    catch (error) {
+        if (!error.statusCode) {
+            error.statusCode = 500
+        }
+        res.status(500).json(error)
+        next(error)
+    }
+}
+exports.loginbygoogle = async (req, res, next) => {
+    try{
+        const idgoogle = req.body.idgoogle
+        const image = req.body.image
+        const email = req.body.email
+        const name = req.body.name
+        
+        let user = await User.findOne({idgoogle: idgoogle})
+        if(!user){
+            user = new User({
+                idgoogle: idgoogle,
+                name: name,
+                avatar: image,
+                email: email
+            })
+            const newuser = await user.save()
+            const token = jwt.sign(
+                {
+                    email: null,
+                    userId: newuser._id.toString()
+                },
+                "somesupersecretsecret"
+            )
+
+            const action = new Activities({
+                action: 'loginbygoogle',
+                iduser: newuser._id
+            })
+    
+            await action.save()
+
+            res.status(200).json({token: token, userId: newuser._id.toString()})
+        }
+        else{
+            const token = jwt.sign(
+                {
+                    email: email,
+                    userId: user._id.toString()
+                },
+                "somesupersecretsecret"
+            )
+
+            const action = new Activities({
+                action: 'loginbygoogle',
+                iduser: user._id
+            })
+    
+            await action.save()
+    
+            res.status(200).json({token: token, userId: user._id.toString()})
+        }
+
+        
     }
     catch (error) {
         if (!error.statusCode) {

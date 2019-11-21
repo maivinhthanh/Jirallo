@@ -68,7 +68,6 @@ exports.editInfoProject = async (req, res, next) => {
 
         const idproject = req.params.idproject
         const name = req.body.name
-        const key = req.body.key
         let image = null
         if (req.file !== undefined) {
             image = req.file.path
@@ -77,7 +76,6 @@ exports.editInfoProject = async (req, res, next) => {
 
         const project = {
             name: name,
-            key: key,
             image: image,
             description: description,
             dateedit: Date.now(),
@@ -91,7 +89,6 @@ exports.editInfoProject = async (req, res, next) => {
             iduser: req.userId,
             olddata: {
                 name: oldproject.name,
-                key: oldproject.key,
                 image: oldproject.image,
                 description: oldproject.description
             },

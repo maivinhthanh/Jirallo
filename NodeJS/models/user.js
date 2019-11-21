@@ -11,12 +11,18 @@ const Genders = Object.freeze({
 const userSchema = new Schema({
     email: {
         type: String,
-        required: true,
+        unique: true,
+    },
+    idfacebook: {
+        type: String,
+        unique: true,
+    },
+    idgoogle: {
+        type: String,
         unique: true,
     },
     password: {
         type: String,
-        required: true
     },
     oldpassword: {
         type: String
@@ -24,6 +30,9 @@ const userSchema = new Schema({
     name: {
         type: String,
         required: true
+    },
+    avatar:{
+        type: String
     },
     image: {
         type: String

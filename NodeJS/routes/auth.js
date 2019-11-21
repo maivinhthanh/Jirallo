@@ -73,15 +73,32 @@ router.post('/findUserLikeEmail',upload.single('avatar'),isAuth,
     ], 
     authController.findUserLikeEmail,
 )
-router.get('/FindUserLikeID/:iduser',
+router.get('/findUserID/:iduser',
     [
     ],
-    authController.FindUserLikeID,
+    authController.FindUserID,
 )
 router.get('/getListUser',
     [
     ],
     authController.getListUser,
 )
-
+router.post('/loginbyfacebook',upload.single('avatar'),
+    [
+       
+    ], 
+    authController.loginbyfacebook,
+)
+router.post('/loginbygoogle',upload.single('avatar'),
+    [
+       
+    ], 
+    authController.loginbygoogle,
+)
+router.get('/getMyInfo',upload.single('avatar'),isAuth,
+    [
+       
+    ], 
+    authController.getMyInfo,
+)
 module.exports = router
