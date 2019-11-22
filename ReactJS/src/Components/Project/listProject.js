@@ -14,8 +14,8 @@ export default class listProject extends Component {
     this.cloneProject = []
   }
     componentWillMount(){
-    const user = JSON.parse(localStorage.getItem("userLogin"));
-    this.props.SearchEmail(user[0].email);
+    const user = JSON.parse(localStorage.getItem("user"));
+    this.props.SearchUser(user._id);
   }
   sortStatusName(){
     const { project } = this.props;

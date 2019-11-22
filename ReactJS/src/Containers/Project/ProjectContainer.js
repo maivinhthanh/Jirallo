@@ -58,7 +58,7 @@ class projectContainer extends Component {
   }
   render() {
     const { project, admin } = this.props;
-    console.log(project)
+    console.log("ccc",admin)
     const {status} = this.state
      _.map(project, item => {
       _.map(item.idmembers, data => {
@@ -73,7 +73,7 @@ class projectContainer extends Component {
             {
               _.map(admin, (item, index)=> {
                 return <img key={index}
-                src={Config.API_URL  + "/" + item.image}
+                src={item.avatar? item.avatar : Config.API_URL  + "/" + item.image } //Config.API_URL  + "/" + item.image || 
                 // src="https://66.media.tumblr.com/avatar_76339a619be6_128.pnj"
                 alt="Hipster"
               />
@@ -126,8 +126,8 @@ class projectContainer extends Component {
         <Input style={{width:'25%', marginBottom:'20px'}} onFocus={this.clearData} onChange={this.handleChangeInput} value={this.valueSearch} type="text" name="text" id="search" placeholder="search" />
         <i onClick={this.searchAct} className="icon-search fas fa-search"></i>
         </div>
-        {status ? <ListProject project={project} admin={admin} SearchEmail={this.props.SearchEmail}/> :
-        <ListProject project={this.cloneProject} admin={admin} SearchEmail={this.props.SearchEmail}/>
+        {status ? <ListProject project={project} admin={admin} SearchUser={this.props.SearchUser}/> :
+        <ListProject project={this.cloneProject} admin={admin} SearchUser={this.props.SearchUser}/>
          }
         </div>
        <div className="modal-create">
@@ -148,7 +148,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getAllListProject: () => dispatch(actions.getListProjectAct()),
-    SearchEmail:(email) => dispatch(actionsAdmin.SearchAction(email)),
+    SearchUser:(id) => dispatch(actionsAdmin.FindUserAction(id)),
     AddMember:(id,user) => dispatch(actions.AddMemberAct(id,user))
     };
 };
