@@ -28,7 +28,7 @@ export default class InfoUser extends Component {
           {
           _.map(admin, (item,index) => {
             return (
-            <ul key={index} style={{listStyle:'none'}}>
+            <ul className="detail-info" key={index} style={{listStyle:'none'}}>
             <li>ID: {item._id}</li>
             <li>Email: {item.email}</li>
             <li>Name: {item.name}</li>

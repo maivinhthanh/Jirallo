@@ -54,8 +54,6 @@ class ListIssues extends Component {
     this.props.createIssuesAct(this.props.params, nameIssues, typeIssues);
   }
   render() {
-    // const { match: { params: { id } } } = this.props
-    // console.log(id)
     return (
       <div>
         <div className="issues-task">

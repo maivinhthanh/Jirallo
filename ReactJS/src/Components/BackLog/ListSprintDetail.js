@@ -16,7 +16,6 @@ export default class ListSprintDetail extends Component {
   }
   render() {
     const { sprint, user, admin, issues, modal } = this.props;
-    console.log(sprint);
     return (
       <div>
         {_.map(sprint, (data, key) => {

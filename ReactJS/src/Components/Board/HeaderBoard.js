@@ -56,7 +56,6 @@ class HeaderBoard extends Component {
     this.props.createProjectAct(this.state.nameProject)
   }
   componentDidUpdate(preState){
-    console.log(preState)
     !_.isEqual(preState.user, this.props.user) && this.ShowInfoUser()
   }
   // componentDidMount(){
@@ -65,10 +64,8 @@ class HeaderBoard extends Component {
   ShowInfoUser =() => {
     const userLocal = JSON.parse(localStorage.getItem("userLogin"));
     const {user} = this.props;
-    console.log(user)
     // this.props.SearchEmail(user[0].email);
     _.map(user, (data, index) => {
-      console.log(userLocal[0].email)
       if(userLocal[0].email === data.email){
         this.setState({
           activeUser: data

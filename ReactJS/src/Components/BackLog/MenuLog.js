@@ -37,7 +37,7 @@ class MenuLog extends Component {
     };
     this.toggle = this.toggle.bind(this);
     this.showToggle = this.showToggle.bind(this);
-    this.handleIdProject = this.handleIdProject.bind(this);
+    // this.handleIdProject = this.handleIdProject.bind(this);
     this.handleNameEpic = this.handleNameEpic.bind(this);
     this.createEpic = this.createEpic.bind(this);
     this.showToggleEpic = this.showToggleEpic.bind(this);
@@ -49,16 +49,17 @@ class MenuLog extends Component {
     e.preventDefault();
     const Epic = {
       nameEpic: this.state.nameEpic,
-      idProject: this.state.idProject
+      idProject: this.props.params
     };
     this.props.createEpic(Epic);
+    this.showToggle()
   }
-  handleIdProject(e) {
-    e.preventDefault();
-    this.setState({
-      idProject: e.target.value
-    });
-  }
+  // handleIdProject(e) {
+  //   e.preventDefault();
+  //   this.setState({
+  //     idProject: e.target.value
+  //   });
+  // }
   handleNameEpic(e) {
     e.preventDefault();
     this.setState({
@@ -128,14 +129,14 @@ class MenuLog extends Component {
                         id="ecpic"
                         placeholder="with name ecpic"
                       />
-                      <Input
+                      {/* <Input
                         type="text"
                         onChange={this.handleIdProject}
                         value={this.state.idProject}
                         name="Idproject"
                         id="Idproject"
                         placeholder="with name idproject"
-                      />
+                      /> */}
                     </ModalBody>
                     <ModalFooter>
                       <Button
@@ -165,7 +166,7 @@ class MenuLog extends Component {
                             }
                             style={{
                               float: "right",
-                              marginLeft: "185px",
+                              marginLeft: "150px",
                               marginTop: "-8px"
                             }}
                             className="fas fa-cog"

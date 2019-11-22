@@ -34,8 +34,7 @@ export default class ChildSprint extends Component {
   // }
   render() {
     const { data, modal } = this.props;
-    // const {modal} = this.state
-    console.log(data);
+
     return (
       <React.Fragment>
         {_.map(data, (item, key) => {

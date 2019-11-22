@@ -23,6 +23,7 @@ class User extends Component {
   }
   render() {
     const { listUser, user } = this.props;
+    console.log(listUser)
     _.map(user, (data, index) => {
       _.map(listUser, (item, index1) => {
         if (data._id === item.id) {
@@ -30,6 +31,7 @@ class User extends Component {
         }
       });
     });
+    console.log(this.listUserAttendProject)
     return (
       <div className="user-list">
         <Nav tabs>

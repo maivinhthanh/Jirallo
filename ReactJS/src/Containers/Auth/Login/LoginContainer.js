@@ -12,7 +12,6 @@ class LoginContainer extends Component {
     }
   }
   componentWillUpdate(nextProps){
-    console.log(nextProps)
     if(nextProps.user.code === 'ok'){
       this.setState({
         redirect: true

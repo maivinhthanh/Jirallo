@@ -23,7 +23,6 @@ const login = ( state, action ) => {
         data : action.id
     }
     state = json
-    console.log(token)
     return updateObject( state, {id : action.id} );
 };
 

@@ -771,4 +771,7 @@ p.movetxt {
   right: 28px;
   top: -10px;
 }
-
+.detail-info li {
+  padding: 10px;
+  border-bottom: 1px solid #caa;
+}

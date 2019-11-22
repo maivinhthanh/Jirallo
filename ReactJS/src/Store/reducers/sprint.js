@@ -10,7 +10,10 @@ const initialState = {
    error: false,
 };
 export const createSprint =(state, action) => {
-  return updateObject(state, action.data.newsprint)
+  let cloneState = _.cloneDeep(state)
+  cloneState.push(action.data.newsprint)
+  return cloneState
+  // return updateObject(state, action.data.newsprint)
 }
 export const errorSprint =(state, action) => {
   return updateObject(state, {error: true})

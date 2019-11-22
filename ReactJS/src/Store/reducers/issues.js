@@ -40,21 +40,18 @@ export const EditIssue = (state, action) => {
   })
 }
 export const removeIssueSucces = (state, action) => {
-  console.log(state, action.data)
   let cloneState = _.cloneDeep(state);
   _.map(_.compact(cloneState), (item, index) => {
     if(item._id == action.data){
         cloneState.splice(index, 1)
     }
   })
-  console.log(cloneState)
   return cloneState
 }
 export const AddIssueSuccess = (state, action) => {
   console.log(state, action)
 }
 export const changeProcessSuccess = (state, action) => {
-  console.log(state, action.data)
   return state
 }
 const reducer = ( state = initialState, action ) => {

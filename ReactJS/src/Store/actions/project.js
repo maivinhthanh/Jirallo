@@ -26,8 +26,45 @@ export const addMemberSuccess = (data) => {
     data
   }
 }
+export const getInfoSuccess = (data) => {
+  return {
+    type: actionTypes.getInfoSuccess,
+    data
+  }
+}
+export const EditProject = (project) => {
+  return dispatch => {
+    return CallApi(`project/editInfoProject/${project.idproject}`,
+    'PUT',
+    {
+      name: project.name,
+      datecreate: project.datecreate,
+      dateedit: project.dateedit,
+      description: project.description,
+      image: project.image
+    },
+    'token'
+    ).then(respone => {
+      console.log(respone)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+}
+export const getInfoProject = (id) => {
+  return dispatch => {
+    return CallApi(`project/viewInfoProject/${id}`, 
+    'GET',
+    {},
+    'token'
+    ).then (respone => {
+      dispatch(getInfoSuccess(respone.data))
+    }).catch(err => {
+      dispatch(projectError(err))
+    })
+  }
+}
 export const AddMemberAct =(idproject,user) => {
-  console.log(idproject, user)
   return dispatch => {
     return CallApi(`project/AddMember/${idproject}`,
     'PUT',
@@ -37,24 +74,20 @@ export const AddMemberAct =(idproject,user) => {
     },
     'token'
     ).then(respone => {
-      console.log(respone)
       dispatch(addMemberSuccess(respone.data))
     }).catch(err => {
-      console.log(err)
       dispatch(projectError(err))
     })
   }
 }
 
 export const getListProjectAct = () =>{
-  console.log(document.cookie)
   return dispatch => {
     return CallApi('project/ViewListProject',
     'GET',
     {},
     'token'
     ).then(respone => {
-      console.log(respone.data.listproject)
       dispatch(getAllList(respone.data.listproject))
     }).catch(err =>{
       dispatch(projectError(err))

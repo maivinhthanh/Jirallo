@@ -26,14 +26,12 @@ export const findUserLikeId = data => {
   }
 }
 export const findUserLikeIDAct = (id) => {
-  console.log(id)
   return dispatch => {
     return CallApi(`auth/FindUserLikeID/${id}`,
     "GET",
     {},
     'token'
     ).then(respone => {
-      console.log(respone)
       dispatch(findUserLikeId(respone.data.result))
     }).catch(err => {
       dispatch(ErrorUser(err))

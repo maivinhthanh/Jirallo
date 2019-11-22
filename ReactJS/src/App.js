@@ -12,6 +12,7 @@ import DetailUserPage from './Page/DetailUserPage'
 import BacklogPage from './Page/BacklogPage';
 import ListProjectPage from './Page/ListProjectPage'
 import MainPage from './Page/MainPage'
+import ProfileProject from './Page/ProfileProject'
 function App() {
   return (
     <div className="App">
@@ -19,6 +20,7 @@ function App() {
               <Route path="/" exact component={HomePage} />
               <Route path="/user" component = {UserPage} />
               <Route path="/backlog/:id?" component={BacklogPage} />
+              <Route path="/Profile/:id?" component={ProfileProject}/>
               <Route path="/board" component={BoardPage} />
               <Route path="/login" component={Login}>
               </Route>

@@ -15,11 +15,6 @@ const initialState = {
 };
 
 const getSearchUser = ( state, action ) => {
-    // console.log(action.data[0])
-    // console.log(state)
-    // let cloneState = _.cloneDeep(state);
-    // return {...cloneState, ...action.data[0]}
-    // return updateObject(state, action.data[0])
     return findUserLikeEmail(state,action.data)
 };
 

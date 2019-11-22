@@ -80,7 +80,6 @@ class ListDetailIssues extends Component {
   };
   addIssueToSprint = id => {
     this.arrayList.push(id);
-    console.log(this.arrayList);
     this.props.AddIssueIntoSprint(this.idIssue, this.arrayList);
     // swal({
     //   title: "Insert success!",
@@ -94,14 +93,12 @@ class ListDetailIssues extends Component {
     this.props.showListSprint(this.props.params);
   }
   componentDidUpdate(preState) {
-    console.log(preState.sprint, this.props.sprint);
     // !_.isEqual(preState.sprint, this.props.sprint) && this.setState({loadData: true})
     if (preState.sprint !== this.props.sprint) {
       this.renderListSprint(this.props.sprint)
     }
   }
   renderListSprint = (sprintCustom) => {
-    console.log(sprintCustom)
     const { issues, sprint, user, admin } = this.props;
     const { modal, status, loadData } = this.state;
       return (
@@ -118,7 +115,6 @@ class ListDetailIssues extends Component {
   render() {
     const { issues, sprint, user, admin } = this.props;
     const { modal, status, loadData } = this.state;
-    console.log(issues);
     return (
       <div>
         <div

@@ -34,7 +34,6 @@ export const completeSprintAct =(id) => {
   }
 }
 export const deleteSprint = (id) => {
-  console.log(id)
   return dispatch => {
     return CallApi(`sprint/deleteSprint/${id}`,
     'PUT',
@@ -48,7 +47,6 @@ export const deleteSprint = (id) => {
   }
 }
 export const ViewListIssueInSprint = (id) => {
-  console.log(id)
   return dispatch => {
     return CallApi(`sprint/completeSprint/${id}`,
     'PUT',
@@ -87,7 +85,6 @@ export const createSprintAct = (data, id) => {
       dispatch(createSprint(respone.data))
     }).catch(err => {
       dispatch(errorSprint(err))
-      // console.log(err)
     })
   }
 }

@@ -20,7 +20,6 @@ class FormUser extends Component {
     this.setState({
       email: e.target.value
     })
-    console.log(this.state.email)
   }
   handlePass(e){
     e.preventDefault();

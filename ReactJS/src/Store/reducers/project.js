@@ -25,12 +25,20 @@ const createProject = ( state, action ) => {
 const getAllList = (state, action) => {
     let cloneState = _.clone(state)
     cloneState = [...action.data]
+    console.log('adsd',cloneState)
     return cloneState
     // return updateObject(state, action.data)
 }
 const addSuccess = (state, action) => {
+    state[0].idmembers = [...action.data.project.idmembers]
+    return state
+}
+const getInfoSuccess = (state, action) => {
     let cloneState = _.clone(state)
-    console.log(cloneState, action.data)
+    let array = []
+    cloneState = {...action.data.project}
+    array.push(cloneState)
+    return array
 }
 const projectError = (state, action) => {
     return updateObject(state, {error: true})
@@ -41,6 +49,7 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.getAllList : return getAllList(state, action)
         case actionTypes.addSuccess : return addSuccess(state, action)
         case actionTypes.projectError : return projectError(state, action)
+        case actionTypes.getInfoSuccess: return getInfoSuccess(state, action);
         default: return state;
     }
 };

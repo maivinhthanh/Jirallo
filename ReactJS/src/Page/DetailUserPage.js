@@ -41,7 +41,6 @@ class DetailUserPage extends Component {
   getInfoUser() {
     const user = JSON.parse(localStorage.getItem("userLogin"));
     this.props.SearchEmail(user[0].email);
-    console.log(this.props.user);
   }
   handleEmail(e) {
     e.preventDefault();
@@ -50,13 +49,10 @@ class DetailUserPage extends Component {
     });
   }
   findUserLikeEmail() {
-    console.log(this.state.EmailUser);
     this.props.SearchEmail(this.state.EmailUser);
   }
   render() {
     const { admin, project, user, member } = this.props;
-    console.log(admin);
-    console.log(admin.image);
     _.map(admin, item => {
       this.name = item.name;
       this.id = item._id;
@@ -165,7 +161,6 @@ class DetailUserPage extends Component {
           <table class="table table-hover">
             <tbody>
               {_.map(project, (item, index) => {
-                console.log(item)
                 return (
                   <tr>
                     <td>{item.name}</td>
@@ -235,7 +230,6 @@ class DetailUserPage extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log(state.member);
   return {
     user: state.user,
     member: state.member,

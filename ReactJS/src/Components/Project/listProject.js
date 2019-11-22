@@ -22,7 +22,6 @@ export default class listProject extends Component {
     project.sort(function(a,b){
       var nameA = a.name.toUpperCase();
       var nameB = b.name.toUpperCase();
-      console.log(nameA,nameB)
       if(nameA < nameB)
       {
         return -1
@@ -45,7 +44,6 @@ export default class listProject extends Component {
   render() {
     const { project, admin } = this.props;
     const {status} = this.state;
-    console.log(project)
     return (
       <div>
         <Table striped>

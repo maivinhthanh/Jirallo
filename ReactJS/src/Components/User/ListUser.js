@@ -3,38 +3,45 @@ import User from './User'
 import { connect } from "react-redux";
 import * as actions from '../../Store/actions/user'
 import _ from 'lodash'
+import * as actionProject from '../../Store/actions/project'
 class ListUser extends Component {
   constructor(props){
     super(props)
+    this.project = []
     this.projectClone = []
     this.cloneUser = []
+    this.getInfoProject = this.getInfoProject.bind(this)
+    // this.FilterUser = this.FilterUser.bind(this)
   }
   componentWillMount(){
     this.props.getListUserAct()
+    this.props.getListProject()
     this.getInfoProject()
-    this.FilterUser()
+    // this.FilterUser()
+    // console.log('asdsa')
   }
   getInfoProject(){
     const {params, project} = this.props
     _.map(project, (item, key)=> {
       if(item._id == params){
-        return this.projectClone.push(item)
+        this.projectClone.push(item)
       }
     })
-  }
-  FilterUser(){
-    _.map(this.projectClone, (data, key) => {
+     _.map(this.projectClone, (data, key) => {
       _.map(data.idmembers, (member, index)=> {
-          this.cloneUser.push(member)
+        this.cloneUser = this.cloneUser.concat(member)
+        return this.cloneUser
       })
     })
   }
   render() {
     const {user} = this.props
+    console.log(this.cloneUser)
     return (
       <div>
         <User listUser = {this.cloneUser} user={user}/>
-        {/* {this.FilterUser()} */}
+        {/* {this.FilterUser()}
+        {this.getInfoProject()} */}
         {/* {this.getInfoProject()} */}
       </div>
     )
@@ -48,7 +55,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    getListUserAct: () => dispatch(actions.getListUserAct())
+    getListUserAct: () => dispatch(actions.getListUserAct()),
+    getListProject:() => dispatch(actionProject.getListProjectAct())
   };
 };
 export default connect(mapStateToProps,mapDispatchToProps) (ListUser)

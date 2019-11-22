@@ -32,14 +32,12 @@ class Register extends Component {
     })
   }
   handleChangeFile =(event) =>{
-    console.log(event.target.value)
     event.preventDefault();
     this.setState({
       avatar: event.target.value
     })
   }
   handleChangeGender = (event) =>{
-    console.log(event.target.value)
     event.preventDefault();
     this.setState({
       gender: event.target.value
@@ -48,7 +46,6 @@ class Register extends Component {
   handleSubmit =(event)=>{
     event.preventDefault();
     const user = [{email:this.state.email, password:this.state.password,name: this.state.name,avatar:this.state.avatar,gender:this.state.gender}]
-    console.log(user);
     this.props.Register(this.state.email,this.state.password,this.state.name,this.state.avatar,this.state.gender);
   }
   render() {

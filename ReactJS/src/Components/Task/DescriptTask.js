@@ -65,7 +65,6 @@ export default class DescriptTask extends Component {
     }));
   }
   remove(id) {
-    console.log(id);
     this.props.removeIssue(id);
   }
   handleChangeProcess(e) {

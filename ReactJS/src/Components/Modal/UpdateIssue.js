@@ -40,7 +40,6 @@ class UpdateIssue extends Component {
   }
   handleAvatar(e) {
     e.preventDefault();
-    console.log(e.target.files[0])
     this.setState({
       avatar: e.target.files[0]
     });

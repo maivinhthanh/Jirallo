@@ -10,7 +10,10 @@ const initialState = {
   dateedit: '',
 }
 const createEpic =(state, action) =>{
-  return updateObject(state, action.data.newepic)
+  let cloneState = _.clone(state)
+  cloneState.push(action.data.newepic)
+  return cloneState
+  // return updateObject(state, action.data.newepic)
 }
 const viewListEpic = (state, action) => {
   let cloneState = []

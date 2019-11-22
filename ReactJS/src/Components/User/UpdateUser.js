@@ -22,7 +22,6 @@ class UpdateUser extends Component {
   }
   handleAvatar(e) {
     e.preventDefault();
-    console.log(e.target.files[0])
     this.setState({
       avatar: e.target.files[0]
     });
@@ -52,7 +51,6 @@ class UpdateUser extends Component {
     data.append('gender',this.state.gender)
     data.append('name',this.state.name)
     data.append('birthdate',this.state.birthday)
-    console.log(data);
     this.props.EditUserAction(this.activeId, data);
   }
   render() {
@@ -61,7 +59,6 @@ class UpdateUser extends Component {
       _.map(admin, (item) => {
         this.activeId = item._id
       })
-    console.log(this.props.data)
     return (
       <div>
         <div className="container">

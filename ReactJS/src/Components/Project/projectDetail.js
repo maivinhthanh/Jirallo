@@ -32,13 +32,8 @@ export default class projectDetail extends Component {
   addUser =(idproject)=> {
     this.props.findUserEmail(this.state.emailUser)
     this.handleIdProject = idproject
-    console.log(this.handleIdProject)
-    // const userAdd = {_id:this.hanleUserActive, position: this.state.positionUser}
-    // console.log(userAdd)
-    // this.props.AddMemberAct(idproject,userAdd)
   }
   componentDidUpdate(preState){
-    console.log(preState.member, this.props.member)
     !_.isEqual(preState.member, this.props.member) && this.handleAdd(this.props.member)
   }
   handleAdd(member){
@@ -65,12 +60,9 @@ export default class projectDetail extends Component {
   }
   render() {
     const { project } = this.props;
-    // this.hanleUserActive = this.props.admin
-    // console.log(this.hanleUserActive)
     _.map(this.props.member, (item) => {
       this.hanleUserActive = item._id
     })
-    console.log(this.hanleUserActive)
     return (
       <div>
         {_.map(project, (item, index) => {
@@ -91,6 +83,12 @@ export default class projectDetail extends Component {
                     {" "}
                     <Link to={{ pathname: `/backlog/${item._id}` }}>
                       <span>View</span>
+                    </Link>
+                  </Button>
+                  <Button style={{ background: "#41ACF2", marginTop: "20px" }}>
+                    {" "}
+                    <Link to={{ pathname: `/Profile/${item._id}` }}>
+                      <span>Info </span>
                     </Link>
                   </Button>
                 </CardBody>
