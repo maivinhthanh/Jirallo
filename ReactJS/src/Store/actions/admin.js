@@ -79,22 +79,31 @@ export const SearchAction = email => {
       });
   };
 };
+// return CallApi(
+//   "auth/findUserID/" + id,
+//   "GET",{},
+//   'token'
+// )
 export const FindUserAction = id => {
+  console.log(id)
   return dispatch => {
-    return CallApi(
-      "auth/findUserID/" + id,
-      "GET",{},
-      'token'
+    return CallApi(`auth/findUserID/${id}`,
+    'GET',
+    {},
+    'token'
     )
       .then(respone => {
+        console.log(respone)
         if (respone.data.result.length !== 0) {
+          console.log(respone.data.result)
           dispatch(Find(respone.data.result));
         } else {
           dispatch(FindError("Error"));
         }
       })
       .catch(error => {
-        dispatch(FindError(error));
+        console.log(error)
+        // dispatch(FindError(error));
       });
   };
 };

@@ -34,9 +34,10 @@ class Login extends Component {
     this.props.loginbyfacebook(response)
 
   }
-  responseGoogle = (response) => {
+  responseGoogle = async (response) => {
     console.log(response.profileObj);
-    this.props.loginbygoogle(response.profileObj)
+    setTimeout( await this.props.loginbygoogle(response.profileObj), 500)
+    
   }
   render() {
     return (

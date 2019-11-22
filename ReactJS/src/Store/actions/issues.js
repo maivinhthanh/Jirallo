@@ -95,6 +95,7 @@ export const assignTaskIssueAct = (idissues, idUser) => {
    'token'
     ).then(respone => {
       console.log(respone)
+      // dispatch()
     }).catch(err => {
       console.log(err)
     })

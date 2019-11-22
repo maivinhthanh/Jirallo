@@ -32,13 +32,32 @@ export const getInfoSuccess = (data) => {
     data
   }
 }
+export const findProjectSuccess = (data) => {
+  return {
+    type: actionTypes.findProjectSuccess,
+    data
+  }
+}
+export const findProjectLikeId = (id) => {
+  return dispatch => {
+    return CallApi(`project/FindProjectByID/${id}`,
+    'GET',
+    {},
+    'token'
+    ).then(respone => {
+      dispatch(findProjectSuccess(respone.data.project))
+    }).catch(err => {
+     dispatch(projectError(err))
+    })
+  }
+}
 export const EditProject = (project) => {
+  console.log(project)
   return dispatch => {
     return CallApi(`project/editInfoProject/${project.idproject}`,
     'PUT',
     {
       name: project.name,
-      datecreate: project.datecreate,
       dateedit: project.dateedit,
       description: project.description,
       image: project.image

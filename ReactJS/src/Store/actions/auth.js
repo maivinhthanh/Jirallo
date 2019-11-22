@@ -60,7 +60,7 @@ export const loginByFacebookAction = (data) => {
     return dispatch => {
         return CallApi('auth/loginbyfacebook', 'POST',{
             idfacebook: data.id,
-            image: data.picture.data.url,
+            // image: data.picture.data.url,
             email: data.email,
             name: data.name
           }).then( response => {
@@ -72,7 +72,7 @@ export const loginByFacebookAction = (data) => {
     };
 };
 export const loginByGoogleAction = (data) => {
-    
+    console.log(data)
     return dispatch => {
         return CallApi('auth/loginbygoogle', 'POST',{
             idgoogle: data.googleId,
@@ -80,6 +80,7 @@ export const loginByGoogleAction = (data) => {
             email: data.email,
             name: data.name
           }).then( response => {
+              console.log(response)
             dispatch(login(response));
          } )
          .catch(error => {

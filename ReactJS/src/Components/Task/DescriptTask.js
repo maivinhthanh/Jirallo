@@ -28,6 +28,10 @@ export default class DescriptTask extends Component {
     this.remove = this.remove.bind(this);
     this.handleChangeProcess = this.handleChangeProcess.bind(this);
   }
+  componentDidMount(){
+    const {data} = this.props
+    this.props.dataAssignee(data)
+  }
   AddFlag(idActive) {
     this.props.AddFlagIssueAct(idActive);
   }
@@ -45,12 +49,13 @@ export default class DescriptTask extends Component {
       email: event.target.value
     });
   }
-  componentDidUpdate(preState) {
-    if (this.state.status === false) {
-      !_.isEqual(preState.admin, this.props.admin) &&
-        this.tranferDataToAssign();
-    }
-  }
+  // componentDidUpdate(preState) {
+  //   if (this.state.status === false) {
+  //     this.tranferDataToAssign();
+  //     // !_.isEqual(preState.admin, this.props.admin) &&
+  //     //   this.tranferDataToAssign();
+  //   }
+  // }
   tranferDataToAssign() {
     const { data } = this.props;
     _.map(this.props.admin, item => {
@@ -69,12 +74,12 @@ export default class DescriptTask extends Component {
   }
   handleChangeProcess(e) {
     e.preventDefault();
-    const {data, issues} = this.props
+    const { data, issues } = this.props
     this.setState({
       process: e.target.value
     });
     _.map(issues, (item, key) => {
-      if(data._id === item._id){
+      if (data._id === item._id) {
         item.process = e.target.value
       }
     })
@@ -84,6 +89,7 @@ export default class DescriptTask extends Component {
     const { data } = this.props;
     const { user, admin } = this.props;
     const { status } = this.state;
+    console.log(data)
     return (
       <div className="descriptWork">
         <div className="list-item-right dropdown">
@@ -129,14 +135,14 @@ export default class DescriptTask extends Component {
               <ModalLog />
             </div>
             <div className="processIssue">
-            <div className="form-group">
-            <label for="sel1" style={{marginLeft:'-85px'}}>STATUS:</label>
-              <select class="form-control" id="sel1" name="sellist1" onChange={this.handleChangeProcess} value={this.state.process}>
-                <option value="Todo">Todo</option>
-                <option value="Review">Review</option>
-                <option value="Done">Done</option>
-                <option value="InProgress">InProgress</option>
-              </select>
+              <div className="form-group">
+                <label for="sel1" style={{ marginLeft: '-85px' }}>STATUS:</label>
+                <select class="form-control" id="sel1" name="sellist1" onChange={this.handleChangeProcess} value={this.state.process}>
+                  <option value="Todo">Todo</option>
+                  <option value="Review">Review</option>
+                  <option value="Done">Done</option>
+                  <option value="InProgress">InProgress</option>
+                </select>
               </div>
             </div>
             <div className="detail-work-task">
@@ -183,9 +189,13 @@ export default class DescriptTask extends Component {
                     </li>
                     <li>
                       <span>
-                        {_.map(admin, (item, key) => {
-                          return <span key={key}>{item.name}</span>;
-                        })}
+                        {
+                          _.map(admin, (item, key) => {
+                            console.log(item)
+                          return <span>{item.name}</span>
+                          })
+                        }
+                      {/* <span>{data.assignee}</span> */}
                         <i
                           onClick={this.showInputAssign}
                           className="fas fa-pen"

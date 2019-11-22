@@ -21,17 +21,30 @@ class User extends Component {
     super(props);
     this.listUserAttendProject = [];
   }
+  // componentWillMount(){
+  //   const {listUser, user} = this.props
+  //   console.log(listUser, user)
+  //   _.map(user, (data, index) => {
+  //     _.map(listUser, (item, index1) => {
+  //       if (data._id === item.id) {
+  //         return this.listUserAttendProject.push(data);
+  //       }
+  //     });
+  //   });
+  //   console.log(this.listUserAttendProject)
+  // }
   render() {
     const { listUser, user } = this.props;
     console.log(listUser)
+    console.log(this.listUserAttendProject)
     _.map(user, (data, index) => {
       _.map(listUser, (item, index1) => {
         if (data._id === item.id) {
+          console.log(data)
           return this.listUserAttendProject.push(data);
         }
       });
     });
-    console.log(this.listUserAttendProject)
     return (
       <div className="user-list">
         <Nav tabs>

@@ -43,6 +43,14 @@ class ListDetailIssues extends Component {
       modal: !this.state.modal
       // modal: true
     });
+    // console.log(id)
+    // console.log(this.props.issues)
+    // const issueFilter = _.filter(this.props.issues,item => item._id === id)
+    // console.log(issueFilter)
+    // _.map(issueFilter, (item, key) => {
+    //   console.log(item)
+    //   this.props.findUserLikeId(item.assignee)
+    // })
   }
   RedirectToUpdate = item => {
     this.setState({
@@ -112,9 +120,15 @@ class ListDetailIssues extends Component {
         />
       );
   };
+  dataAssignee=(data)=>{
+    console.log(data)
+    this.props.findUserLikeId(data.assignee)
+  }
   render() {
     const { issues, sprint, user, admin } = this.props;
     const { modal, status, loadData } = this.state;
+    console.log(admin)
+    // console.log(this.dataAssignee)
     return (
       <div>
         <div
@@ -208,6 +222,8 @@ class ListDetailIssues extends Component {
                     RemoveFlag={this.RemoveFlag}
                     removeIssue={this.props.removeIssue}
                     changeProcessIssue={this.props.changeProcessIssue}
+                    findUserLikeId={this.props.findUserLikeId}
+                    dataAssignee={this.dataAssignee}
                   />
                 );
               }
@@ -241,7 +257,8 @@ const mapDispatchToProps = dispatch => {
     removeIssue: id => dispatch(actionIssue.removeIssue(id)),
     changeProcessIssue:(idIssue, process) => dispatch(actionIssue.changeProcessIssue(idIssue,process)),
     handleDeleteSprint: (id) => dispatch(actionSprint.deleteSprint(id)),
-    completeSprintAct: (id) => dispatch(actionSprint.completeSprintAct(id))
+    completeSprintAct: (id) => dispatch(actionSprint.completeSprintAct(id)),
+    findUserLikeId: (id) => dispatch(actionAdmin.FindUserAction(id))
     // findUserLikeIDAct: (idUser) => dispatch(actionUser.findUserLikeIDAct(idUser))
   };
 };

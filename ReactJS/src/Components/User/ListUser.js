@@ -7,47 +7,55 @@ import * as actionProject from '../../Store/actions/project'
 class ListUser extends Component {
   constructor(props){
     super(props)
+    this.state = {
+      list : []
+    }
     this.project = []
     this.projectClone = []
     this.cloneUser = []
     this.getInfoProject = this.getInfoProject.bind(this)
-    // this.FilterUser = this.FilterUser.bind(this)
   }
   componentWillMount(){
     this.props.getListUserAct()
-    this.props.getListProject()
     this.getInfoProject()
-    // this.FilterUser()
-    // console.log('asdsa')
   }
-  getInfoProject(){
+  async getInfoProject(){
+    await this.props.findProjectLikeId(this.props.params)
     const {params, project} = this.props
-    _.map(project, (item, key)=> {
-      if(item._id == params){
-        this.projectClone.push(item)
-      }
-    })
-     _.map(this.projectClone, (data, key) => {
+    console.log(project)
+     _.map(project, (data, key) => {
       _.map(data.idmembers, (member, index)=> {
         this.cloneUser = this.cloneUser.concat(member)
+        console.log(this.cloneUser)
         return this.cloneUser
       })
     })
   }
+  // componentWillReceiveProps(nextProps){
+  //   const {project} = this.props
+  //   console.log(nextProps.project, this.props.project)
+  //   // if(nextProps.project !== this.props.project){
+  //   //   _.map(project, (data, key) => {
+  //   //     _.map(data.idmembers, (member, index)=> {
+  //   //       this.cloneUser = this.cloneUser.concat(member)
+  //   //       console.log(this.cloneUser)
+  //   //       return this.cloneUser
+  //   //     })
+  //   //   })
+  //   // }
+  // }
   render() {
-    const {user} = this.props
+    const {user, project} = this.props
     console.log(this.cloneUser)
     return (
       <div>
         <User listUser = {this.cloneUser} user={user}/>
-        {/* {this.FilterUser()}
-        {this.getInfoProject()} */}
-        {/* {this.getInfoProject()} */}
       </div>
     )
   }
 }
 const mapStateToProps = state => {
+  console.log(state.project)
   return {
     user : state.user,
     project: state.project
@@ -56,7 +64,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getListUserAct: () => dispatch(actions.getListUserAct()),
-    getListProject:() => dispatch(actionProject.getListProjectAct())
+    findProjectLikeId: (id) => dispatch(actionProject.findProjectLikeId(id))
+    // getListProject:() => dispatch(actionProject.getListProjectAct())
   };
 };
 export default connect(mapStateToProps,mapDispatchToProps) (ListUser)

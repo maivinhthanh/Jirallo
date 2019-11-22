@@ -24,28 +24,35 @@ class tableProject extends Component {
         this.editProject = this.editProject.bind(this)
         this.hanleChangename = this.hanleChangename.bind(this)
         this.handleChangeDateEdit = this.handleChangeDateEdit.bind(this)
-        this.hanleChangeDateCreate = this.hanleChangeDateCreate.bind(this)
+        // this.hanleChangeDateCreate = this.hanleChangeDateCreate.bind(this)
         this.handleChangeImage = this.handleChangeImage.bind(this)
         this.hanleChangeDescript = this.hanleChangeDescript.bind(this)
-        this.editProject = this.editProject.bind(this)
+        this.loadDataForm = this.loadDataForm.bind(this)
     }
-    editProject(){
-        const project = {
-            idproject: this.props.params,
-            name: this.state.name,
-            datecreate: this.state.datecreate,
-            dateedit: this.state.dateedit,
-            description: this.state.description,
-            image: this.state.image
-        }
-        this.props.EditProject(project)
-    }
-    hanleChangeDateCreate(e){
+    editProject(e){
         e.preventDefault()
-        this.setState({
-            datecreate: e.target.value
-        })
+        let data = new FormData()
+        data.append('avatar', this.state.image)
+        data.append('idproject',this.props.params)
+        data.append('dateedit',this.state.dateedit)
+        data.append('description',this.state.description)
+        data.append('name',this.state.name)
+        // const project = {
+        //     idproject: this.props.params,
+        //     name: this.state.name,
+        //     dateedit: this.state.dateedit,
+        //     description: this.state.description,
+        //     image: this.state.image
+        // }
+        console.log(data)
+        this.props.EditProject(data)
     }
+    // hanleChangeDateCreate(e){
+    //     e.preventDefault()
+    //     this.setState({
+    //         datecreate: e.target.value
+    //     })
+    // }
     hanleChangeDescript(e){
         e.preventDefault();
         this.setState({
@@ -99,11 +106,11 @@ class tableProject extends Component {
             selected: e.target.value
         })
     }
-    editProject(){
+    loadDataForm(){
+        console.log(this.project)
         _.map(this.project,(item, key) => {
             this.setState({
                 name: item.name,
-                datecreate: item.datecreate,
                 dateedit: item.dateedit,
                 descript: item.description,
                 image: item.image
@@ -140,7 +147,7 @@ class tableProject extends Component {
                                         <td>{item.discription}</td>
                                         <td>{item.image}</td>
                                         <td>
-                                            <button type="button" className='btn btn-danger' onClick={this.editProject} data-toggle="modal" data-target="#myModal1">Edit</button>
+                                            <button type="button" className='btn btn-danger' onClick={this.loadDataForm} data-toggle="modal" data-target="#myModal1">Edit</button>
                                             <button type="button" className='btn btn-danger ml-2' data-toggle="modal" data-target="#myModal">Add user</button>
                                         </td>
                                     </tr>
@@ -212,32 +219,26 @@ class tableProject extends Component {
                                     <div className="form-group">
                                         <label htmlFor="uname">Name project:</label>
                                         <input type="text" className="form-control" onChange={this.hanleChangename} value={this.state.name} id="uname" placeholder="Enter username" name="uname" required />
-                                        <div className="valid-feedback">Valid.</div>
-                                        <div className="invalid-feedback">Please fill out this field.</div>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="uname">Date-create:</label>
-                                        <input type="text" className="form-control" onChange={this.hanleChangeDateCreate}  value={this.state.datecreate} id="datecreate" placeholder="Enter datecreate" name="datecreate" required />
-                                        <div className="valid-feedback">Valid.</div>
-                                        <div className="invalid-feedback">Please fill out this field.</div>
+                                        {/* <div className="valid-feedback">Valid.</div>
+                                        <div className="invalid-feedback">Please fill out this field.</div> */}
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="uname">Date-edit:</label>
                                         <input type="text" className="form-control" onChange={this.handleChangeDateEdit} value={this.state.dateedit} id="dateedit" placeholder="Enter dateedit" name="dateedit" />
-                                        <div className="valid-feedback">Valid.</div>
-                                        <div className="invalid-feedback">Please fill out this field.</div>
+                                        {/* <div className="valid-feedback">Valid.</div>
+                                        <div className="invalid-feedback">Please fill out this field.</div> */}
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="uname">Descripton:</label>
                                         <input type="text" className="form-control" onChange={this.hanleChangeDescript} value={this.state.descript} id="description" placeholder="Enter description" name="description" />
-                                        <div className="valid-feedback">Valid.</div>
-                                        <div className="invalid-feedback">Please fill out this field.</div>
+                                        {/* <div className="valid-feedback">Valid.</div>
+                                        <div className="invalid-feedback">Please fill out this field.</div> */}
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="uname">Image:</label>
                                         <input type="file" className="form-control" onChange={this.handleChangeImage}  value={this.state.image} id="image" name="image" />
-                                        <div className="valid-feedback">Valid.</div>
-                                        <div className="invalid-feedback">Please fill out this field.</div>
+                                        {/* <div className="valid-feedback">Valid.</div>
+                                        <div className="invalid-feedback">Please fill out this field.</div> */}
                                     </div>
                                   
                                 </form>
