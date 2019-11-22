@@ -24,7 +24,8 @@ exports.createProject = async (req, res, next) => {
             idmembers: {
                 id: ObjectId(iduser),
                 position: 'Manager'
-            }
+            },
+            
         })
 
         const newproject = await project.save()

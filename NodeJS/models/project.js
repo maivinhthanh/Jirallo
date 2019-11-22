@@ -39,7 +39,6 @@ const projectSchema = new Schema({
     activesprint: {
         type: Schema.Types.ObjectId,
         ref: 'Sprint',
-        required: true
     },
     idissues:[
         {
