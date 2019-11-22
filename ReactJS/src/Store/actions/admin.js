@@ -13,6 +13,18 @@ export const SearchError = name => {
     message: name
   };
 };
+export const Find = data => {
+  return {
+    type: actionTypes.FindSuccess,
+    data: data
+  };
+};
+export const FindError = name => {
+  return {
+    type: actionTypes.FindError,
+    message: name
+  };
+};
 export const EditUser = (user) =>{
   return {
       type: actionTypes.EditUserSuccess,
@@ -64,6 +76,25 @@ export const SearchAction = email => {
       })
       .catch(error => {
         dispatch(SearchError(error));
+      });
+  };
+};
+export const FindUserAction = id => {
+  return dispatch => {
+    return CallApi(
+      "auth/findUserID/" + id,
+      "GET",{},
+      'token'
+    )
+      .then(respone => {
+        if (respone.data.result.length !== 0) {
+          dispatch(Find(respone.data.result));
+        } else {
+          dispatch(FindError("Error"));
+        }
+      })
+      .catch(error => {
+        dispatch(FindError(error));
       });
   };
 };

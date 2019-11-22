@@ -1,5 +1,7 @@
 import * as actionTypes from '../constants/auth';
 import { updateObject } from '../utility';
+import Cookies from 'js-cookie'
+import CallApi from '../../until/apiCaller';
 import { EditUser } from '../actions/auth';
 
 const initialState = {
@@ -17,12 +19,21 @@ const initialState = {
 
 const login = ( state, action ) => {
     const token = action.token
-    document.cookie = 'token='+token
+    Cookies.set('token', token, { expires: 7 });
     let json = {
         code : 'ok',
         data : action.id
     }
     state = json
+    console.log(token)
+    CallApi('auth/getMyInfo', 'GET',{})
+    .then( response => {
+        localStorage.setItem('user', JSON.stringify(response.data.result));
+        
+     } )
+     .catch(error => {
+        
+     } );
     return updateObject( state, {id : action.id} );
 };
 

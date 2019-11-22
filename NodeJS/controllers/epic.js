@@ -60,7 +60,7 @@ exports.editEpic = async (req, res, next) => {
             name: name,
             dateedit: Date.now(),
         }
-        const epic = await Epic.findByIdAndUpdate(idepic, newepic)
+        const epic = await Epic.findByIdAndUpdate(idepic, newepic,{ new: true })
 
         const action = new Activities({
             action: 'editEpic',
