@@ -161,7 +161,7 @@ exports.editProfile = async (req, res, next) => {
             dateedit: Date.now()
         }
 
-        const user = await User.findByIdAndUpdate(iduser, dataUpdate)
+        const user = await User.findByIdAndUpdate(iduser, dataUpdate,{ new: true })
 
         const action = new Activities({
             action: 'editProfile',
