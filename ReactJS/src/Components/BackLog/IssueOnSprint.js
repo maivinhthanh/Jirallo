@@ -84,7 +84,13 @@ export default class IssueOnSprint extends Component {
                   <div className="option-add">
                     <UncontrolledDropdown>
                       <DropdownMenu>
-                      {_.map(filterSprint, (data, index) => {
+                          <DropdownItem
+                            // onClick={() => this.addIssueToSprint(data._id)}
+                          >
+                            {filterSprint.name}
+                          </DropdownItem>
+                      {/* {_.map(filterSprint, (data, index) => {
+                        console.log(filterSprint)
                         return (
                           <DropdownItem
                             // onClick={() => this.addIssueToSprint(data._id)}
@@ -93,7 +99,7 @@ export default class IssueOnSprint extends Component {
                             {data.name}
                           </DropdownItem>
                         );
-                      })}
+                      })} */}
                       </DropdownMenu>
                     </UncontrolledDropdown>
                   </div>

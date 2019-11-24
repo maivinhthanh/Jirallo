@@ -52,6 +52,7 @@ class UpdateUser extends Component {
     data.append('name',this.state.name)
     data.append('birthdate',this.state.birthday)
     this.props.EditUserAction(this.activeId, data);
+    
   }
   render() {
     // const props = this.props;

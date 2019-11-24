@@ -117,18 +117,16 @@ class ListDetailIssues extends Component {
           modal={modal}
           issues={issues}
           handleDeleteSprint={this.props.handleDeleteSprint}
+          updateNameAct={this.props.updateNameAct}
         />
       );
   };
   dataAssignee=(data)=>{
-    console.log(data)
     this.props.findUserLikeId(data.assignee)
   }
   render() {
     const { issues, sprint, user, admin } = this.props;
     const { modal, status, loadData } = this.state;
-    console.log(admin)
-    // console.log(this.dataAssignee)
     return (
       <div>
         <div
@@ -143,6 +141,7 @@ class ListDetailIssues extends Component {
           issues={issues}
           handleDeleteSprint={this.props.handleDeleteSprint}
           completeSprintAct={this.props.completeSprintAct}
+          updateNameAct={this.props.updateNameAct}
         />
             {/* {this.renderListSprint(sprint)} */}
           </ul>
@@ -258,7 +257,8 @@ const mapDispatchToProps = dispatch => {
     changeProcessIssue:(idIssue, process) => dispatch(actionIssue.changeProcessIssue(idIssue,process)),
     handleDeleteSprint: (id) => dispatch(actionSprint.deleteSprint(id)),
     completeSprintAct: (id) => dispatch(actionSprint.completeSprintAct(id)),
-    findUserLikeId: (id) => dispatch(actionAdmin.FindUserAction(id))
+    findUserLikeId: (id) => dispatch(actionAdmin.FindUserAction(id)),
+    updateNameAct:(name,id) => dispatch(actionSprint.updateNameAct(name, id))
     // findUserLikeIDAct: (idUser) => dispatch(actionUser.findUserLikeIDAct(idUser))
   };
 };

@@ -20,6 +20,22 @@ export const showListSprint = data => {
     data
   }
 }
+export const updateNameAct = (name, id) => {
+  console.log(name, id)
+  return dispatch => {
+    return CallApi(`sprint/editSprint/${id}`,
+    'PUT',
+    {
+      name: name,
+    },
+    'token'
+    ).then(respone => {
+      console.log(respone)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+}
 export const completeSprintAct =(id) => {
   return dispatch => {
     return CallApi(`sprint/completeSprint/${id}`,

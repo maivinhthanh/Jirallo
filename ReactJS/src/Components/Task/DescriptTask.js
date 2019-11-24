@@ -13,6 +13,7 @@ import {
   InputGroupAddon,
   Button
 } from "reactstrap";
+import InputField from '../InputEdit/inputField'
 export default class DescriptTask extends Component {
   constructor(props) {
     super(props);
@@ -85,6 +86,9 @@ export default class DescriptTask extends Component {
     })
     this.props.changeProcessIssue(data._id, e.target.value)
   }
+  updateNameIssue =(data, name) => {
+    console.log(data, name)
+  }
   render() {
     const { data } = this.props;
     const { user, admin } = this.props;
@@ -97,7 +101,8 @@ export default class DescriptTask extends Component {
             <h4 style={{ textAlign: "initial" }}>
               WORKJIRA /
               <span>
-                {data.name}{" "}
+              <InputField isssue={data} changeName={(item,name) => this.updateNameIssue(item, data._id)}>{data.name}</InputField>
+                {/* {data.name} */}
                 <div className="chooseOptionEdit">
                   <UncontrolledDropdown>
                     <DropdownToggle className="custom-issue" caret>
