@@ -47,6 +47,7 @@ const findProjectSuccess = (state, action) => {
     console.log(cloneState)
     return cloneState
 }
+
 const projectError = (state, action) => {
     return updateObject(state, {error: true})
 }
@@ -58,6 +59,7 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.projectError : return projectError(state, action)
         case actionTypes.getInfoSuccess: return getInfoSuccess(state, action);
         case actionTypes.findProjectSuccess: return findProjectSuccess(state, action)
+
         default: return state;
     }
 };

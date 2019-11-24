@@ -1,7 +1,7 @@
 const app = require('./app.js')
 const db = require('./database')
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 8088
 
 db.connect()
     .then(() => {

@@ -38,6 +38,13 @@ export const findProjectSuccess = (data) => {
     data
   }
 }
+export const viewListIssuesInProjectSuccess = (data) => {
+  console.log(data)
+  return {
+    type: actionTypes.viewListIssuesInProjectSuccess,
+    data
+  }
+}
 export const findProjectLikeId = (id) => {
   return dispatch => {
     return CallApi(`project/FindProjectByID/${id}`,
@@ -46,6 +53,19 @@ export const findProjectLikeId = (id) => {
     'token'
     ).then(respone => {
       dispatch(findProjectSuccess(respone.data.project))
+    }).catch(err => {
+     dispatch(projectError(err))
+    })
+  }
+}
+export const viewListIssuesInProject = (id) => {
+  return dispatch => {
+    return CallApi(`project/viewListIssuesInProject/${id}`,
+    'GET',
+    {},
+    'token'
+    ).then(respone => {
+      dispatch(viewListIssuesInProjectSuccess(respone.data.project))
     }).catch(err => {
      dispatch(projectError(err))
     })

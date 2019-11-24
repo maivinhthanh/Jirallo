@@ -10,6 +10,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import authReducer from './Store/reducers/auth';
 import adminReducer from './Store/reducers/admin';
+import listissuesReducer from './Store/reducers/listissues';
 import projectReducer from './Store/reducers/project'
 import userReducer from './Store/reducers/user';
 import groupReducer from './Store/reducers/group';
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
     issue: issueReducer,
     sprint: sprintReducer,
     member: memberReducer,
+    listissues: listissuesReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

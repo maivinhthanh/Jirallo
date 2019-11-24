@@ -210,3 +210,25 @@ exports.FindProjectByID = async (req, res, next) => {
         next(err)
     }
 }
+exports.viewListIssuesInProject = async (req, res, next) => {
+    try{
+        const idproject = req.params.idproject
+
+        const project = await Project.findById(idproject).populate({
+            path: 'idissues',
+            match:{
+                hidden: false
+            },
+            select:['idissues','name', 'assignee', 'process', 'type', 'priority', 'tag']
+        })
+
+        res.status(201).json({ statusCode: 200 ,project: project.idissues})
+    }
+    catch(err) {
+        if (!err.statusCode) {
+            err.statusCode = 500
+        }
+        res.status(500).json(err)
+        next(err)
+    }
+}

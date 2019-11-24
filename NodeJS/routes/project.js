@@ -39,5 +39,7 @@ router.get('/viewListProject',isAuth,
 router.get('/FindProjectByID/:idproject',isAuth,
     projectController.FindProjectByID,
 )
-
+router.get('/viewListIssuesInProject/:idproject',isAuth,
+    projectController.viewListIssuesInProject,
+)
 module.exports = router

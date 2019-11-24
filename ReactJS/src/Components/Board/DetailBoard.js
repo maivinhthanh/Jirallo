@@ -29,7 +29,7 @@ export default class DetailBoard extends Component {
         <ListUser/>
         {/* API load user in task */}
       </div>
-        <ItemBoard/>
+        <ItemBoard project={this.props.project}/>
       </div>
       </div>
       </div>

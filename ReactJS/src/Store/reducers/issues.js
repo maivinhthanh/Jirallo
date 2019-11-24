@@ -54,6 +54,7 @@ export const AddIssueSuccess = (state, action) => {
 export const changeProcessSuccess = (state, action) => {
   return state
 }
+
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.createIssue: return createIssue( state, action );
@@ -63,6 +64,7 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.removeIssueSucces : return removeIssueSucces(state, action);
         case actionTypes.AddIssueSuccess : return AddIssueSuccess(state, action);
         case actionTypes.changeProcessSuccess: return changeProcessSuccess(state, action);
+
         default: return state;
     }
 };

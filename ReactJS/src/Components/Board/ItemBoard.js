@@ -3,9 +3,7 @@ import MainBoard from '../Board/MainBoard'
 export default class ItemBoard extends Component {
   render() {
     return (
-      <React.Fragment>
-      <MainBoard/>
-    </React.Fragment>
+      <MainBoard project={this.props.project}/>
     )
   }
 }

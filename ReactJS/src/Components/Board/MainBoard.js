@@ -1,23 +1,25 @@
 import React, { Component, Fragment } from 'react'
-import TaskWork from '../Task/TaskWork'
-import DescriptTask from '../Task/DescriptTask'
+
+import { useRef, useEffect} from "react"
 import { Link } from 'react-router-dom'
 import { UncontrolledCollapse, Input, CardBody, Card, Button } from 'reactstrap';
 import MenuBoard from './MenuBoard';
+import ActiveSprints from './ActiveSprints'
+
 export default class MainBoard extends Component {
+  
   render() {
     return (
+      
       <React.Fragment>
       <div className="row">
-      <div className="col-md-1 board-task">
-        <MenuBoard/>
-      </div>
-        <div className="col-md-9">
-          <TaskWork/>
+        <div className="col-1 board-task">
+          <MenuBoard/>
         </div>
-        <div className="col-md-2">
-          <DescriptTask/>
+        <div className="col-11" style={{ width: '100%',height: '400px'}}>
+          <ActiveSprints />
         </div>
+        
       </div>
     </React.Fragment>
     )

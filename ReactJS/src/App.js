@@ -13,15 +13,18 @@ import BacklogPage from './Page/BacklogPage';
 import ListProjectPage from './Page/ListProjectPage'
 import MainPage from './Page/MainPage'
 import ProfileProject from './Page/ProfileProject'
+import { DndProvider } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 function App() {
   return (
+    <DndProvider backend={HTML5Backend}>
     <div className="App">
       <Router>
               <Route path="/" exact component={HomePage} />
               <Route path="/user" component = {UserPage} />
               <Route path="/backlog/:id?" component={BacklogPage} />
               <Route path="/Profile/:id?" component={ProfileProject}/>
-              <Route path="/board" component={BoardPage} />
+              <Route path="/board/:id?" component={BoardPage} />
               <Route path="/login" component={Login}>
               </Route>
               <Route path='/group' component={Group} />
@@ -31,7 +34,9 @@ function App() {
               <Route path="/viewAll" component={ListProjectPage} />
               <Route path="/adminPage" component={MainPage}/>
       </Router>
+      
     </div>
+    </DndProvider>
   );
 }
 
