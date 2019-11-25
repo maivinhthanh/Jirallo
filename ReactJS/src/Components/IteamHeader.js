@@ -39,12 +39,7 @@ export default class IteamHeader extends Component {
                 <p>Blog</p>
               </a>
             </li>
-            <li>
-              <Link to = "/login">
-                  <span className="fa fa-users" />
-                  <p>Team</p>
-              </Link>
-            </li>
+            
             <li>
               <a href="#user">
                   <img className="avatar-image" src={!user.avatar? user.avatar : Config.API_URL  + "/" + user.image} height={96} width={96}/>

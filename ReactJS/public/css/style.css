@@ -580,7 +580,7 @@ p.movetxt {
 
 /* project */
 .listProject {
-  margin-top:20px;
+  /* margin-top:20px; */
 }
 .listProject .icon-search{
   position: absolute;
@@ -748,9 +748,9 @@ p.movetxt {
   top: 184px;
 }
 .project-list {
-  position: absolute;
+  /* position: absolute; */
   top: 10%;
-  left: 50%;
+  /* left: 50%; */
   height: 100%;
 }
 

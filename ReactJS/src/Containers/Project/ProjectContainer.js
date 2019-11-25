@@ -68,7 +68,7 @@ class projectContainer extends Component {
       })
     })
     return (
-      <div className="listProject container row">
+      <div className="listProject row">
         <nav className="nav-top">
           <div className="logo">
             <h1>
@@ -79,13 +79,14 @@ class projectContainer extends Component {
           </div>
           <IteamHeader/>
         </nav>
-        <div className="col-4 task-list">
+        <div className="col-1"></div>
+        <div className="col-4" >
           <div className="project-task-list" style={{height: '890px',overflow: 'auto'}}>
             <h1>Project</h1>
             <ProjectDetail project={project} AddMember={this.props.AddMember} />
           </div>
         </div>
-        <div className="col-6 project-list">
+        <div className="col-7">
           <div className="focus-detail">
             <div className="search-project">
               <Input style={{width:'25%', marginBottom:'20px'}} onFocus={this.clearData} onChange={this.handleChangeInput} value={this.valueSearch} type="text" name="text" id="search" placeholder="search" />
