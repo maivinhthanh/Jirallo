@@ -115,7 +115,7 @@ class projectContainer extends Component {
           <ToggleHome/>
         </div>
         <div className="col-md-3 task-list">
-        <div className="project-task-list">
+        <div className="project-task-list" style={{height: '930px',overflow: 'auto'}}>
         <h1>Project</h1>
         <ProjectDetail project={project} AddMember={this.props.AddMember} />
         </div>

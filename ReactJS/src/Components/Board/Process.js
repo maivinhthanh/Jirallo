@@ -16,35 +16,45 @@ export default function Process({ black, process, children ,handleChange}) {
     }),
   })
   return (
-    <div className="row"
-    ref={drop}
-    style={{
+    <div style={{
         position: 'relative',
         width: '100%',
         height: '100%',
-    }} 
-    >
-      <div style={{ backgroundColor: fill, width: '100%',
-      height: '100%', border: '1px black solid',
-      borderRadius: '12px'}} >
-          {
-            item
-          }
+    }}>
+      <div className="process">
+        {process}
       </div>
-      {isOver && (
-                <div
-                style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    height: '100%',
-                    width: '100%',
-                    zIndex: 1,
-                    opacity: 0.5,
-                    backgroundColor: 'yellow',
-                }}
-                />
-        )}
+      <div className="row"
+      ref={drop}
+      style={{
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+      }} 
+      >
+        <div style={{ backgroundColor: fill, width: '100%',
+        height: '100%', border: '1px black solid',
+        borderRadius: '12px'}} >
+            {
+              item
+            }
+        </div>
+        {isOver && (
+                  <div
+                  style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      height: '100%',
+                      width: '100%',
+                      zIndex: 1,
+                      opacity: 1,
+                      border: '4px black dotted',
+                      backgroundColor: 'whitesmoke',
+                  }}
+                  />
+          )}
+      </div>
     </div>
   )
 }

@@ -10,7 +10,7 @@ class Header extends Component {
           {/* Created By Bogdan Nagorniy */}
           <div className="logo">
             <h1>
-              <a href="index.html"><img className="logo-menu" src="/logo-menu.jpg" /></a>
+              <a href="/"><img className="logo-menu" src="/logo-menu.jpg" /></a>
             </h1>
           </div>
           <IteamHeader/>

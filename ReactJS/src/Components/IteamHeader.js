@@ -20,8 +20,8 @@ export default class IteamHeader extends Component {
             <li> */}
             <li>
             <Link to="/board">
-                <span className="fas fa-question" />
-                <p>Board</p>
+                <span class="fas fa-columns"></span>
+                <p>ActiveSprint</p>
             </Link>
             </li>
             <li>
