@@ -45,13 +45,15 @@ export const changeProcessSuccess = (data) => {
   }
 }
 export const changeProcessIssue = (idissues, processes) => {
+  console.log("1",idissues, processes)
   return dispatch => {
     return CallApi(`issues/changeProcessIssues/${idissues}`,
     'PUT',
     {process: processes},
     'token'
     ).then(respone => {
-      dispatch(changeProcessSuccess(respone))
+      console.log(respone)
+      dispatch(changeProcessSuccess(respone.data.issues))
     }).catch(err => {
       dispatch(IssueError(err))
     })

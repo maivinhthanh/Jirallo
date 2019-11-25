@@ -1,4 +1,5 @@
-import * as actionTypes from '../constants/project';
+import * as actionTypesProject from '../constants/project';
+import * as actionTypesIssues from '../constants/issues';
 import { updateObject } from '../utility';
 import _ from 'lodash';
 
@@ -12,15 +13,21 @@ const initialState = [{
     _id: ""
 }];
 const viewListIssuesInProjectSuccess = (state, action) => {
-    console.log(action.data)
     let cloneState = _.clone(state)
     cloneState = [...action.data]
     return cloneState
 }
+export const changeProcessSuccess = (state, action) => {
+    const index = _.findIndex(state, (item,index)=>item._id === action.data._id)
+    const clone = _.clone(state)
+    clone[index] = action.data
+    return clone
+}
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
 
-        case actionTypes.viewListIssuesInProjectSuccess: return viewListIssuesInProjectSuccess(state, action)
+        case actionTypesProject.viewListIssuesInProjectSuccess: return viewListIssuesInProjectSuccess(state, action)
+        case actionTypesIssues.changeProcessSuccess: return changeProcessSuccess(state, action);
         default: return state;
     }
 };

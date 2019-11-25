@@ -1,24 +1,20 @@
 import React, { Component, Fragment } from 'react'
 import Process from './Process'
 import Issues from './Issues'
-import { move } from './Move'
+import * as actions from '../../Store/actions/issues'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
 class ActiveSprint extends Component {
     constructor(props) {
-        super(props);
-        console.log(this.props.listissues)
-        
+        super(props);        
         this.cloneO = this.props.listissues
+        this.changeProcessIssue = this.props.changeProcessIssue
     }
     componentWillUpdate(nextProps, nextState, snapshot) {
-        console.log(nextProps.listissues)
-        // debugger
+
         if (nextProps.listissues != this.props.listissues) {
-            this.cloneO = nextProps.listissues
-            console.log(this.cloneO)
-            
+            this.cloneO = nextProps.listissues            
         }
       }
     
@@ -32,7 +28,7 @@ class ActiveSprint extends Component {
         
             <div className="row " style={{ width: '100%',height: '400px'}}>
                 <div className="col-6" style={{ width: '100%',height: '400px'}} >
-                    <Process white process={'todo'}>
+                    <Process white process={'todo'} handleChange={(id, process) => this.props.changeProcessIssue(id, process)}>
                         {
                              _.map(this.cloneO, (item, index)=>{
                                 if(item.process === 'todo'){
@@ -46,7 +42,7 @@ class ActiveSprint extends Component {
                     </Process>
                 </div>
                 <div className="col-6" style={{ width: '100%',height: '400px'}} >
-                    <Process white process={'done'}>
+                    <Process white process={'done'} handleChange={(id, process) => this.props.changeProcessIssue(id, process)}>
                         {
                              _.map(this.cloneO, (item, index)=>{
                                 if(item.process === 'done'){
@@ -68,10 +64,10 @@ const mapStateToProps = state => {
     return {
         listissues: state.listissues,
     }
-  }
-  const mapDispatchToProps = dispatch => {
+}
+const mapDispatchToProps = dispatch => {
     return {
-        
+        changeProcessIssue: (id, process) => dispatch(actions.changeProcessIssue(id, process))
     }
-  }
-  export default connect(mapStateToProps, mapDispatchToProps)(ActiveSprint)
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ActiveSprint)

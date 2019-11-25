@@ -3,23 +3,13 @@ import { useDrop } from 'react-dnd'
 import _ from 'lodash'
 import CallApi from '../../until/apiCaller';
 
-export default function Process({ black, process, children }) {
+export default function Process({ black, process, children ,handleChange}) {
   let item = children[1]
   const fill = black ? 'black' : 'white'
   const [{ isOver }, drop] = useDrop({
     accept: 'issues',
     drop: (item) =>{
-      console.log(item.id._id)
-      CallApi(`issues/changeProcessIssues/${item.id._id}`,
-      'PUT',
-      {process: process},
-      'token'
-      ).then(respone => {
-        // dispatch(changeProcessSuccess(respone))
-        console.log(respone)
-      }).catch(err => {
-        // dispatch(IssueError(err))
-      })
+      handleChange(item.id._id, process)
     },
     collect: monitor => ({
       isOver: !!monitor.isOver(),
@@ -32,7 +22,7 @@ export default function Process({ black, process, children }) {
         position: 'relative',
         width: '100%',
         height: '100%',
-    }}
+    }} 
     >
       <div style={{ backgroundColor: fill, width: '100%',
       height: '100%', border: '1px black solid',

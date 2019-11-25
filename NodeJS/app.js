@@ -23,7 +23,7 @@ app.use((req, res, next) => {
         'OPTIONS, GET, POST, PUT, PATCH, DELETE'
     )
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-    next()
+    return next()
 })
 
 app.use('/auth', authRoutes)
@@ -39,6 +39,7 @@ app.use((error, req, res, next) => {
     const data = error.data
 
     res.status(status).json({ message: message, data: data })
+    return next(); 
 })
 
 module.exports = app
