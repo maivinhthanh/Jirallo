@@ -14,6 +14,8 @@ import ListProject from "../../Components/Project/listProject";
 import ToggleHome from "../../Components/Modal/ToggleHome";
 import CreateProject from '../../Components/Modal/CreateProject';
 import HeaderCustom from "../../Components/HeaderCustom";
+import IteamHeader from "../../Components/IteamHeader";
+
 import * as Config from '../../../src/Config';
 class projectContainer extends Component {
   constructor(props) {
@@ -67,74 +69,37 @@ class projectContainer extends Component {
     })
     return (
       <div className="listProject container row">
-        <div className="col-md-3 user-tag">
-          <div className="content-user">
-            <div className="avatar-image">
-            {
-              _.map(admin, (item, index)=> {
-                return <img key={index}
-                src={item.avatar? item.avatar : Config.API_URL  + "/" + item.image } //Config.API_URL  + "/" + item.image || 
-                // src="https://66.media.tumblr.com/avatar_76339a619be6_128.pnj"
-                alt="Hipster"
-              />
-              })
-            }
-            </div>
-            <div className="wrap-content">
-            <div className="blog-title">
-              <span>
-              {
-                _.map(admin, (item,index) => {
-                  return <h1 key ={index}>{item.name}</h1>
-                })
-              }
-              </span>
-            </div>
-            <div className="description">
-              <p>{this.position}</p>
-              <p></p>
-              <div style={{marginLeft:'-17px'}} className="menu">
-                <ul>
-                  <li>
-                    <i className="fab fa-twitter"></i>
-                  </li>
-                  <li>
-                    <i className="fab fa-facebook"></i>
-                  </li>
-                  <li>
-                    <i className="fab fa-instagram"></i>
-                  </li>
-                  <li>
-                    <i className="fab fa-github"></i>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            </div>
+        <nav className="nav-top">
+          <div className="logo">
+            <h1>
+              <a href="/">
+                <img className="logo-menu" src="/logo-menu.jpg" />
+              </a>
+            </h1>
           </div>
-          <ToggleHome/>
+          <IteamHeader/>
+        </nav>
+        <div className="col-4 task-list">
+          <div className="project-task-list" style={{height: '890px',overflow: 'auto'}}>
+            <h1>Project</h1>
+            <ProjectDetail project={project} AddMember={this.props.AddMember} />
+          </div>
         </div>
-        <div className="col-md-3 task-list">
-        <div className="project-task-list" style={{height: '930px',overflow: 'auto'}}>
-        <h1>Project</h1>
-        <ProjectDetail project={project} AddMember={this.props.AddMember} />
-        </div>
-        </div>
-        <div className="col-md-6 project-list">
-        <div className="focus-detail">
-        <div className="search-project">
-        <Input style={{width:'25%', marginBottom:'20px'}} onFocus={this.clearData} onChange={this.handleChangeInput} value={this.valueSearch} type="text" name="text" id="search" placeholder="search" />
-        <i onClick={this.searchAct} className="icon-search fas fa-search"></i>
-        </div>
-        {status ? <ListProject project={project} admin={admin} SearchUser={this.props.SearchUser}/> :
-        <ListProject project={this.cloneProject} admin={admin} SearchUser={this.props.SearchUser}/>
-         }
-        </div>
-       <div className="modal-create">
+        <div className="col-6 project-list">
+          <div className="focus-detail">
+            <div className="search-project">
+              <Input style={{width:'25%', marginBottom:'20px'}} onFocus={this.clearData} onChange={this.handleChangeInput} value={this.valueSearch} type="text" name="text" id="search" placeholder="search" />
+              <i onClick={this.searchAct} className="icon-search fas fa-search"></i>
+            </div>
+          {status ? <ListProject project={project} admin={admin} SearchUser={this.props.SearchUser}/> :
+          <ListProject project={this.cloneProject} admin={admin} SearchUser={this.props.SearchUser}/>
+          }
+          </div>
+        <div className="modal-create">
        <CreateProject/>
        </div>
         </div>
-        <HeaderCustom/>
+        {/* <HeaderCustom/> */}
       </div>
     );
   }

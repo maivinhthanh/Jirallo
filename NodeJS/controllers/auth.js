@@ -232,7 +232,7 @@ exports.getMyInfo = async (req, res, next) => {
     try{
         const iduser = req.userId
         console.log(iduser)
-        const user = await User.findById(iduser).select('email _id name image')
+        const user = await User.findById(iduser).select('email _id name image avatar')
 
         res.status(200).json({statusCode: 200,result: user})
     }

@@ -17,8 +17,8 @@
 .task-list {
   position: absolute;
   width: 400px;
-  top: 100px;
-  left: 305px;
+  top: 0px;
+  left: 10%;
 }
 .detail-task-user {
   /* border: 1px solid; */
