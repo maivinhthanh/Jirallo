@@ -20,18 +20,13 @@ export default function Process({ black, process, children ,handleChange}) {
         position: 'relative',
         width: '100%',
         height: '100%',
+        padding: '15px 0px',
+        backgroundColor: '#B3C6E6',
     }}>
-      <div className="process">
-        {process}
+      <div style={{fontSize: '30px'}}>
+        <b>{process}</b>
       </div>
-      <div className="row"
-      ref={drop}
-      style={{
-          position: 'relative',
-          width: '100%',
-          height: '100%',
-      }} 
-      >
+      <div ref={drop} style={{position: 'relative',width: '100%',height: '100%',}} >
         <div style={{ backgroundColor: fill, width: '100%',
         height: '100%', border: '1px black solid',
         borderRadius: '12px'}} >
@@ -40,20 +35,10 @@ export default function Process({ black, process, children ,handleChange}) {
             }
         </div>
         {isOver && (
-                  <div
-                  style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      height: '100%',
-                      width: '100%',
-                      zIndex: 1,
-                      opacity: 1,
-                      border: '4px black dotted',
-                      backgroundColor: 'whitesmoke',
-                  }}
-                  />
-          )}
+          <div  style={{position: 'absolute',top: 0,left: 0,height: '100%',width: '100%',zIndex: 1,
+                opacity: 1,border: '4px black dotted',backgroundColor: 'whitesmoke',}}
+          />
+        )}
       </div>
     </div>
   )
