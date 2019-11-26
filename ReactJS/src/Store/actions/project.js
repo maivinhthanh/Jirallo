@@ -45,6 +45,14 @@ export const viewListIssuesInProjectSuccess = (data) => {
     data
   }
 }
+export const getListUserInProjectSuccess = (data) => {
+  console.log(data)
+  return {
+    type: actionTypes.getListUserInProjectSuccess,
+    data
+  }
+}
+
 export const findProjectLikeId = (id) => {
   return dispatch => {
     return CallApi(`project/FindProjectByID/${id}`,
@@ -53,6 +61,19 @@ export const findProjectLikeId = (id) => {
     'token'
     ).then(respone => {
       dispatch(findProjectSuccess(respone.data.project))
+    }).catch(err => {
+     dispatch(projectError(err))
+    })
+  }
+}
+export const getListUserInProject = (id) => {
+  return dispatch => {
+    return CallApi(`project/getListUserInProject/${id}`,
+    'GET',
+    {},
+    'token'
+    ).then(respone => {
+      dispatch(getListUserInProjectSuccess(respone.data.listuser))
     }).catch(err => {
      dispatch(projectError(err))
     })

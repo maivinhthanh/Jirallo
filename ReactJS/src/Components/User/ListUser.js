@@ -10,62 +10,40 @@ class ListUser extends Component {
     this.state = {
       list : []
     }
-    this.project = []
-    this.projectClone = []
     this.cloneUser = []
-    this.getInfoProject = this.getInfoProject.bind(this)
   }
   componentWillMount(){
-    this.props.getListUserAct()
-    this.getInfoProject()
+    this.props.getListUserInProject(this.props.params)
+
   }
-  async getInfoProject(){
-    await this.props.findProjectLikeId(this.props.params)
-    const {params, project} = this.props
-    console.log(project)
-     _.map(project, (data, key) => {
-      _.map(data.idmembers, (member, index)=> {
-        this.cloneUser = this.cloneUser.concat(member)
-        console.log(this.cloneUser)
-        return this.cloneUser
-      })
-    })
+  componentWillUpdate(nextProps, nextState, snapshot) {
+
+    if (nextProps.listuser != this.props.listuser) {
+        this.cloneUser = nextProps.listuser            
+    }
   }
-  // componentWillReceiveProps(nextProps){
-  //   const {project} = this.props
-  //   console.log(nextProps.project, this.props.project)
-  //   // if(nextProps.project !== this.props.project){
-  //   //   _.map(project, (data, key) => {
-  //   //     _.map(data.idmembers, (member, index)=> {
-  //   //       this.cloneUser = this.cloneUser.concat(member)
-  //   //       console.log(this.cloneUser)
-  //   //       return this.cloneUser
-  //   //     })
-  //   //   })
-  //   // }
-  // }
+
+  shouldComponentUpdate(nextProps, nextState){
+    
+    return this.props.listuser != nextProps.listuser;
+}
+  
   render() {
-    const {user, project} = this.props
-    console.log(this.cloneUser)
     return (
       <div>
-        <User listUser = {this.cloneUser} user={user}/>
+        <User listuser = {this.props.listuser} />
       </div>
     )
   }
 }
 const mapStateToProps = state => {
-  console.log(state.project)
   return {
-    user : state.user,
-    project: state.project
+    listuser: state.listuser
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    getListUserAct: () => dispatch(actions.getListUserAct()),
-    findProjectLikeId: (id) => dispatch(actionProject.findProjectLikeId(id))
-    // getListProject:() => dispatch(actionProject.getListProjectAct())
+    getListUserInProject: (id) => dispatch(actionProject.getListUserInProject(id))
   };
 };
 export default connect(mapStateToProps,mapDispatchToProps) (ListUser)

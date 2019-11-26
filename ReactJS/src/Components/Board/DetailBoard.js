@@ -22,9 +22,9 @@ export default class DetailBoard extends Component {
         <div className="col-11">
           <HeaderBoard/>
           <div className="filter">
-            <ListUser/>
+            <ListUser params={this.props.params}/>
           </div>
-          <MainBoard project={this.props.project}/>
+          <MainBoard params={this.props.params}/>
         </div>
       </div>
     )

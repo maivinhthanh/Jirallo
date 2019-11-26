@@ -18,6 +18,8 @@ import epicReducer from './Store/reducers/epic';
 import issueReducer from './Store/reducers/issues';
 import sprintReducer from './Store/reducers/sprint'
 import memberReducer from './Store/reducers/member'
+import listuserReducer from './Store/reducers/listuser'
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
@@ -30,7 +32,8 @@ const rootReducer = combineReducers({
     issue: issueReducer,
     sprint: sprintReducer,
     member: memberReducer,
-    listissues: listissuesReducer
+    listissues: listissuesReducer,
+    listuser: listuserReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

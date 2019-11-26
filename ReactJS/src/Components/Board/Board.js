@@ -12,7 +12,7 @@ class Board extends Component {
   render() {
     return (
       <div>
-      <DetailBoard />
+      <DetailBoard params={this.props.params}/>
       </div>
     )
   }

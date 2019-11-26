@@ -33,7 +33,7 @@ class HeaderBoard extends Component {
           <InputGroup onMouseOver={() =>this.onFocus(true)} onMouseLeave={() =>this.onFocus(false)} >
             <Input value={keyseach} onChange={this.handleKeySeach}/>
             <InputGroupAddon addonType="append">
-              <InputGroupText><i class="fas fa-search"></i></InputGroupText>
+              <InputGroupText><i className="fas fa-search"></i></InputGroupText>
             </InputGroupAddon>
           </InputGroup>
         </div>

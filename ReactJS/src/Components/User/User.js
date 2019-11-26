@@ -1,57 +1,33 @@
 import React, { Component } from "react";
 import {
-  TabContent,
-  TabPane,
   Nav,
   NavItem,
   NavLink,
-  Card,
-  Button,
-  CardTitle,
-  CardText,
-  Row,
-  Col
 } from "reactstrap";
-import ListUser from "./ListUser";
-import * as action from "../../Store/actions/user";
-import { connect } from "react-redux";
+import * as Config from '../../Config';
 import _ from "lodash";
 class User extends Component {
-  constructor(props) {
-    super(props);
-    this.listUserAttendProject = [];
+
+  shouldComponentUpdate(nextProps, nextState){
+    return this.props.listuser != nextProps.listuser;
+
   }
-  // componentWillMount(){
-  //   const {listUser, user} = this.props
-  //   console.log(listUser, user)
-  //   _.map(user, (data, index) => {
-  //     _.map(listUser, (item, index1) => {
-  //       if (data._id === item.id) {
-  //         return this.listUserAttendProject.push(data);
-  //       }
-  //     });
-  //   });
-  //   console.log(this.listUserAttendProject)
-  // }
+  
   render() {
-    const { listUser, user } = this.props;
-    console.log(listUser)
-    console.log(this.listUserAttendProject)
-    _.map(user, (data, index) => {
-      _.map(listUser, (item, index1) => {
-        if (data._id === item.id) {
-          console.log(data)
-          return this.listUserAttendProject.push(data);
-        }
-      });
-    });
+    const { listuser } = this.props;
     return (
       <div className="user-list">
         <Nav tabs>
-          {_.map(this.listUserAttendProject, (listUser, index) => {
+          {_.map(listuser, (user, index) => {
             return (
               <NavItem key={index}>
-                <NavLink>{listUser.name}</NavLink>
+                <NavLink>
+                  <div>
+                    <img className="avatar-image" src={!user.avatar? user.avatar : Config.API_URL 
+                    + "/" + user.image} height={40} width={40}/>
+                    <p>{user.id.name}</p>
+                  </div>
+                </NavLink>
               </NavItem>
             );
           })}
@@ -60,17 +36,5 @@ class User extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  return {
-    user: state.user
-  };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    findUserLikeIDAct: id => dispatch(action.findUserLikeIDAct(id))
-  };
-};
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(User);
+
+export default User;
