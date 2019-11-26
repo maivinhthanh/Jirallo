@@ -68,6 +68,7 @@ class projectContainer extends Component {
     })
     return (
       <div className="row">
+        
         <nav className="nav-top">
           <div className="logo">
             <h1>
@@ -77,7 +78,9 @@ class projectContainer extends Component {
             </h1>
           </div>
           <IteamHeader/>
+          
         </nav>
+        
         <div className="col-1"></div>
         <div className="col-11">
           <HeaderProject />

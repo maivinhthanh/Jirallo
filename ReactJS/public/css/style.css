@@ -139,6 +139,14 @@ div#home {
   overflow-y: auto;
 }
 
+.SettingUser >.popover.show.bs-popover-auto{
+  left: 100px !important;
+}
+
+.InputField:hover{
+  border: 1px dotted black;
+}
+
 .nav_links>li {
   margin-top: 2em;
 }

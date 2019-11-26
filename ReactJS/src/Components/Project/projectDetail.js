@@ -74,7 +74,7 @@ export default class projectDetail extends Component {
                   <div className="row">
                     <div className="col-5" >
                       <div id={'Popover-' + index}>
-                        <img className="avatar-image" src={ Config.API_URL  + "/" + item.image}
+                        <img className="avatar-image avatar-project" src={ Config.API_URL  + "/" + item.image}
                           height={96} width={96}/>
                       </div>
                     </div>

@@ -34,7 +34,7 @@ class InputField extends Component {
     var name = this.props.children;
     return (
       <div ref={(input)=>{this.txtName = input}} style={{fontSize : size, marginBottom : arrow, fontFamily: font}} 
-      onBlur={this.onInput}  value={name} className={`InputField ${this.props.class}`}  contenteditable="true" >
+      onBlur={this.onInput}  value={name} className={`InputField`}  contenteditable="true" >
         {name}
       </div>
     );

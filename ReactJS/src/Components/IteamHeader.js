@@ -1,8 +1,18 @@
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import * as Config from '../Config';
+import SettingUser from './SettingUser'
 
 export default class IteamHeader extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      status : true
+    }
+  }
+  showSetting = () =>{
+
+  }
   render() {
     const user = JSON.parse(localStorage.getItem('user'))
     return (
@@ -41,11 +51,13 @@ export default class IteamHeader extends Component {
             </li>
             
             <li>
-              <a href="#user">
+              <a id='Popover-avatar'>
                   <img className="avatar-image" src={!user.avatar? user.avatar : Config.API_URL  + "/" + user.image} height={96} width={96}/>
               </a>
+              
             </li>
           </ul>
+          <SettingUser/>
       </div>
     )
   }
