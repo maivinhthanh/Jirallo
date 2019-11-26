@@ -19,6 +19,7 @@ export default class DescriptTask extends Component {
     super(props);
     this.state = {
       status: false,
+      changeData: false,
       email: "",
       process: this.props.data.process,
       newData: this.props.data
@@ -50,13 +51,12 @@ export default class DescriptTask extends Component {
       email: event.target.value
     });
   }
-  // componentDidUpdate(preState) {
-  //   if (this.state.status === false) {
-  //     this.tranferDataToAssign();
-  //     // !_.isEqual(preState.admin, this.props.admin) &&
-  //     //   this.tranferDataToAssign();
-  //   }
-  // }
+  componentDidUpdate(preState) {
+    if (this.state.changeData === true) {
+     !_.isEqual(preState.admin, this.props.admin) &&
+        this.tranferDataToAssign();
+    }
+  }
   tranferDataToAssign() {
     const { data } = this.props;
     _.map(this.props.admin, item => {
@@ -67,7 +67,9 @@ export default class DescriptTask extends Component {
     e.preventDefault();
     this.props.findUserLikeEmail(this.state.email);
     this.setState(preState => ({
+      changeData: !preState.changeData,
       status: !preState.status
+
     }));
   }
   remove(id) {
@@ -87,13 +89,12 @@ export default class DescriptTask extends Component {
     this.props.changeProcessIssue(data._id, e.target.value)
   }
   updateNameIssue =(data, name) => {
-    console.log(data, name)
+    this.props.updateNameIssue(data, name)
   }
   render() {
     const { data } = this.props;
     const { user, admin } = this.props;
     const { status } = this.state;
-    console.log(data)
     return (
       <div className="descriptWork">
         <div className="list-item-right dropdown">
@@ -101,7 +102,7 @@ export default class DescriptTask extends Component {
             <h4 style={{ textAlign: "initial" }}>
               WORKJIRA /
               <span>
-              <InputField isssue={data} changeName={(item,name) => this.updateNameIssue(item, data._id)}>{data.name}</InputField>
+              <InputField nameInput={'issue'} isssue={data} changeName={(item,name) => this.updateNameIssue(item, data._id)}>{data.name}</InputField>
                 {/* {data.name} */}
                 <div className="chooseOptionEdit">
                   <UncontrolledDropdown>
@@ -142,7 +143,7 @@ export default class DescriptTask extends Component {
             <div className="processIssue">
               <div className="form-group">
                 <label for="sel1" style={{ marginLeft: '-85px' }}>STATUS:</label>
-                <select class="form-control" id="sel1" name="sellist1" onChange={this.handleChangeProcess} value={this.state.process}>
+                <select className="form-control" id="sel1" name="sellist1" onChange={this.handleChangeProcess} value={this.state.process}>
                   <option value="Todo">Todo</option>
                   <option value="Review">Review</option>
                   <option value="Done">Done</option>
@@ -196,7 +197,6 @@ export default class DescriptTask extends Component {
                       <span>
                         {
                           _.map(admin, (item, key) => {
-                            console.log(item)
                           return <span>{item.name}</span>
                           })
                         }

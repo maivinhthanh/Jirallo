@@ -8,6 +8,7 @@ import { Card, CardBody, CardTitle, CardSubtitle, Button,
   Input,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import InputField from "../InputEdit/inputField";
 // import { AddMemberAct } from "../../Store/actions/project";
 export default class projectDetail extends Component {
   constructor(props){
@@ -58,6 +59,10 @@ export default class projectDetail extends Component {
       positionUser: e.target.value
     })
   }
+  updateNameProject(item, id){
+    console.log(item, id)
+    this.props.editEditNameProject(item, id)
+  }
   render() {
     const { project } = this.props;
     _.map(this.props.member, (item) => {
@@ -75,7 +80,9 @@ export default class projectDetail extends Component {
                     style={{ float: "right" }}
                     className="fas fa-user-plus"
                   ></i>
-                  <CardTitle>{item.name}</CardTitle>
+                  <CardTitle>
+                  <InputField nameInput={'project'} project={project} editData={(newdata,name) => this.updateNameProject(newdata, item._id)}>{item.name}</InputField>
+                  </CardTitle>
                   <CardSubtitle>
                     Create day: {this.fomatDateTime(item.datecreate)}
                   </CardSubtitle>

@@ -117,7 +117,10 @@ class projectContainer extends Component {
         <div className="col-md-3 task-list">
         <div className="project-task-list">
         <h1>Project</h1>
-        <ProjectDetail project={project} AddMember={this.props.AddMember} />
+        <ProjectDetail
+        project={project}
+        AddMember={this.props.AddMember} 
+        editEditNameProject={this.props.editEditNameProject} />
         </div>
         </div>
         <div className="col-md-6 project-list">
@@ -149,7 +152,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getAllListProject: () => dispatch(actions.getListProjectAct()),
     SearchUser:(id) => dispatch(actionsAdmin.FindUserAction(id)),
-    AddMember:(id,user) => dispatch(actions.AddMemberAct(id,user))
+    AddMember:(id,user) => dispatch(actions.AddMemberAct(id,user)),
+    editEditNameProject:(name, id) => dispatch(actions.editEditNameProject(name, id))
     };
 };
 export default connect(

@@ -27,6 +27,32 @@ export const editEpic = (data) => {
     data
   }
 }
+export const showListIssueOfEpicAct = (id) => {
+  return dispatch => {
+    return CallAPI(`epic/viewListIssuesInEpic/${id}`,
+    'GET',
+    {},
+    'token'
+    ).then(repsone => {
+      console.log(repsone);
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+}
+export const updateNameEpic = (name, id) => {
+  return dispatch => {
+    return CallAPI(`epic/editEpic/${id}`,
+    'PUT',
+    { name : name},
+    'token'
+    ).then(respone => {
+      dispatch(editEpic(respone.data))
+    }).catch(err => {
+      dispatch(ErrorEpic(err))
+    })
+  }
+}
 export const EditepicAct = (name, id) => {
   return dispatch => {
     return CallAPI(`epic/editEpic/${id}`,

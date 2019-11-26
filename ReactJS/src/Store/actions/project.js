@@ -45,6 +45,21 @@ export const viewListIssuesInProjectSuccess = (data) => {
     data
   }
 }
+export const editEditNameProject = (name, id) => {
+  return dispatch => {
+    return CallApi(`project/editInfoProject/${id}`,
+    'PUT',
+    {
+      name: name
+    },
+    'token'
+    ).then(respone => {
+      console.log(respone)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+}
 export const findProjectLikeId = (id) => {
   return dispatch => {
     return CallApi(`project/FindProjectByID/${id}`,
@@ -71,16 +86,16 @@ export const viewListIssuesInProject = (id) => {
     })
   }
 }
-export const EditProject = (project) => {
-  console.log(project)
+export const EditProject = (id, project) => {
+  console.log(project.get('avatar').name)
   return dispatch => {
-    return CallApi(`project/editInfoProject/${project.idproject}`,
+    return CallApi(`project/editInfoProject/${id}`,
     'PUT',
     {
-      name: project.name,
-      dateedit: project.dateedit,
-      description: project.description,
-      image: project.image
+      name: project.get('name'),
+      dateedit: project.get('dateedit'),
+      description: project.get('description'),
+      image: project.get('avatar').name
     },
     'token'
     ).then(respone => {

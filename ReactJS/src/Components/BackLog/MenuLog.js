@@ -23,6 +23,7 @@ import "./assets/style.css";
 import { connect } from "react-redux";
 import * as actions from "../../Store/actions/epic";
 import _ from "lodash";
+import InputField from '../InputEdit/inputField'
 class MenuLog extends Component {
   constructor(props) {
     super(props);
@@ -38,10 +39,10 @@ class MenuLog extends Component {
     this.toggle = this.toggle.bind(this);
     this.showToggle = this.showToggle.bind(this);
     // this.handleIdProject = this.handleIdProject.bind(this);
-    this.handleNameEpic = this.handleNameEpic.bind(this);
+    // this.handleNameEpic = this.handleNameEpic.bind(this);
     this.createEpic = this.createEpic.bind(this);
     this.showToggleEpic = this.showToggleEpic.bind(this);
-    this.Editepic = this.Editepic.bind(this);
+    // this.showListIssueOfEpic = this.showListIssueOfEpic.bind(this);
     this.handleNameEpicEdit = this.handleNameEpicEdit.bind(this);
     this.activeItem = null;
   }
@@ -54,19 +55,9 @@ class MenuLog extends Component {
     this.props.createEpic(Epic);
     this.showToggle()
   }
-  // handleIdProject(e) {
-  //   e.preventDefault();
-  //   this.setState({
-  //     idProject: e.target.value
-  //   });
-  // }
-  handleNameEpic(e) {
-    e.preventDefault();
-    this.setState({
-      nameEpic: e.target.value
-    });
+  showListIssueOfEpic(id){
+    this.props.showListIssueOfEpicAct(id)
   }
-
   showToggle() {
     this.setState(prevState => ({
       modal: !prevState.modal
@@ -89,16 +80,21 @@ class MenuLog extends Component {
   componentDidMount() {
     this.props.viewListEpic(this.props.params);
   }
-  Editepic(e) {
-    e.preventDefault();
-    this.props.EditepicAct(this.state.nameEpic, this.activeItem);
-    this.showToggleEpic();
-  }
+
+  // Editepic(e) {
+  //   e.preventDefault();
+  //   this.props.EditepicAct(this.state.nameEpic, this.activeItem);
+  //   this.showToggleEpic();
+  // }
   handleNameEpicEdit(e) {
     e.preventDefault();
     this.setState({
       nameEpic: e.target.value
     });
+  }
+  updateNameEpic = (name, id) => {
+    // console.log(name, id)
+    this.props.updateNameEpic(name,id)
   }
   render() {
     const epic = this.props.Epic;
@@ -158,9 +154,12 @@ class MenuLog extends Component {
                   if (index < 5) {
                     return (
                       <tr key={index} style={{ textAlign: "initial" }}>
-                        <td id="toggler" key={item.id}>
-                          {item.name}{" "}
-                          <i
+                        <td id="toggler" key={item._id}>
+                          <span className="epic-name" onClick={() => this.showListIssueOfEpic(item._id)}>
+                          <InputField nameInput={'epic'} epic={epic} editNameEpic={(data,name) => this.updateNameEpic(data,item._id)}>{item.name}</InputField>
+                          {/* <i class="fas fa-angle-double-down" onClick={this.showListIssueOfEpic(item._id)}></i> */}
+                          </span>
+                          {/* <i
                             onClick={() =>
                               this.showToggleEpic(item._id, item.name)
                             }
@@ -170,7 +169,7 @@ class MenuLog extends Component {
                               marginTop: "-8px"
                             }}
                             className="fas fa-cog"
-                          ></i>
+                          ></i> */}
                         </td>
                       </tr>
                     );
@@ -194,7 +193,7 @@ class MenuLog extends Component {
                   </Card>
                 </UncontrolledCollapse>
               </React.Fragment>
-              <div>
+              {/* <div> */}
                 {/* <Button
                   color="primary"
                   id="toggler"
@@ -203,7 +202,7 @@ class MenuLog extends Component {
                   Toggle
                 </Button> */}
                 
-              </div>
+              {/* </div> */}
               {/* <Button
                     data-toggle="collapse"
                     data-target="#demo1"
@@ -212,16 +211,7 @@ class MenuLog extends Component {
                   >
                     All issues
                   </Button> */}
-              <div id="demo" className="collapse">
-                {/* <React.Fragment>
-                  {
-                    _.map(epic, (item, index) => {
-                      if(index < 5){
-                        return<tr key={index} style={{textAlign:'initial'}}><td key={item.id}>{item.name} <i onClick={() => this.showToggleEpic (item._id, item.name)} style={{float:'right', marginLeft: '20px', marginTop:'-8px'}} className="fas fa-cog"></i></td></tr>
-                      }
-                    })
-                  }
-                  </React.Fragment> */}
+              {/* <div id="demo" className="collapse">
                 <div>
                   <Modal
                     isOpen={this.state.modalEpic}
@@ -256,7 +246,7 @@ class MenuLog extends Component {
                     </ModalFooter>
                   </Modal>
                 </div>
-              </div>
+              </div> */}
             </Card>
           </Col>
         </Row>
@@ -274,7 +264,9 @@ const mapDispatchToProps = dispatch => {
   return {
     createEpic: epic => dispatch(actions.createEpicAct(epic)),
     viewListEpic: idProject => dispatch(actions.viewListEpicAct(idProject)),
-    EditepicAct: (nameEpic, id) => dispatch(actions.EditepicAct(nameEpic, id))
+    EditepicAct: (nameEpic, id) => dispatch(actions.EditepicAct(nameEpic, id)),
+    updateNameEpic:(name, id) => dispatch(actions.updateNameEpic(name, id)),
+    showListIssueOfEpicAct:(id) => dispatch(actions.showListIssueOfEpicAct(id))
   };
 };
 export default connect(

@@ -49,7 +49,7 @@
 }
 .list-sprint {
   text-align: left;
-  margin-left: 70px;
+  margin-left: 83px;
 }
 .hover-item {
   color: red
@@ -67,8 +67,16 @@ button.dropdown-toggle.btn.btn-secondary {
   border: aliceblue;
 }
 .customSprint{
-  display: flex
+  display: flex;
+  margin-left:91px
 }
 .layoutSprint:nth-child(2){
   display: flow-root
+}
+.epic-name{
+  padding: 12px;
+  padding-right: 170px;
+}
+.epic-name:hover{
+  background: aliceblue;
 }

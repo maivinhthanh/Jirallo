@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 // import './InputField.css';
 import {connect} from 'react-redux';
 // import * as actions from './../../../actions/info.action';
-
-
+import _ from 'lodash'
 var size = "";
 var arrow = "";
 var font = "";
@@ -11,10 +10,11 @@ var font = "";
 class InputField extends Component {
 
   onInput = (e)=>{
-    if(this.props.newdata){
-      this.props.newdata(this.txtName.textContent);
-    }
-    this.props.changeName(this.txtName.textContent)
+    _.isEqual(this.props.nameInput, 'sprint') && this.props.newdata(this.txtName.textContent);
+    _.isEqual(this.props.nameInput, 'issue') && this.props.changeName(this.txtName.textContent);
+    _.isEqual(this.props.nameInput, 'epic') && this.props.editNameEpic(this.txtName.textContent)
+    _.isEqual(this.props.nameInput, 'project') && this.props.editData(this.txtName.textContent)
+    // this.props.changeName(this.txtName.textContent)
   }
   
   // shouldComponentUpdate(nextProps){
@@ -31,7 +31,6 @@ class InputField extends Component {
 //   }
 
   render() {
-    console.log(this.props)
     var name = this.props.children;
     return (
       <div ref={(input)=>{this.txtName = input}} style={{fontSize : size, marginBottom : arrow, fontFamily: font}} 

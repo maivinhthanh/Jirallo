@@ -20,6 +20,7 @@ class profileDetail extends Component {
                         member={member}
                         EditProject={this.props.EditProject}
                         AddMemberIntoProject={this.props.AddMemberIntoProject}
+                        EditProject={this.props.EditProject}
                         searchEmail={this.props.searchEmail} />
                 </div>
             </div>
@@ -37,7 +38,7 @@ const mapDispatchToProps = dispatch => {
         getInfoProject: (id) => dispatch(action.getInfoProject(id)),
         searchEmail: (email) => dispatch(actionAuth.SearchAction(email)),
         AddMemberIntoProject : (idproject, user) => dispatch(action.AddMemberAct(idproject,user)),
-        EditProject : (project) => dispatch(action.EditProject(project))
+        EditProject : (id, project) => dispatch(action.EditProject(id, project))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(profileDetail)

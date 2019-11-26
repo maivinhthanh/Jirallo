@@ -100,33 +100,34 @@ class ListDetailIssues extends Component {
     this.props.showListIssue(this.props.params);
     this.props.showListSprint(this.props.params);
   }
-  componentDidUpdate(preState) {
-    // !_.isEqual(preState.sprint, this.props.sprint) && this.setState({loadData: true})
-    if (preState.sprint !== this.props.sprint) {
-      this.renderListSprint(this.props.sprint)
-    }
-  }
-  renderListSprint = (sprintCustom) => {
-    const { issues, sprint, user, admin } = this.props;
-    const { modal, status, loadData } = this.state;
-      return (
-        <ListSprintDetail
-          sprint={sprintCustom}
-          user={user}
-          admin={admin}
-          modal={modal}
-          issues={issues}
-          handleDeleteSprint={this.props.handleDeleteSprint}
-          updateNameAct={this.props.updateNameAct}
-        />
-      );
-  };
+  // componentDidUpdate(preState) {
+  //   // !_.isEqual(preState.sprint, this.props.sprint) && this.setState({loadData: true})
+  //   if (preState.sprint !== this.props.sprint) {
+  //     this.renderListSprint(this.props.sprint)
+  //   }
+  // }
+  // renderListSprint = (sprintCustom) => {
+  //   const { issues, sprint, user, admin } = this.props;
+  //   const { modal, status, loadData } = this.state;
+  //     return (
+  //       <ListSprintDetail
+  //         sprint={sprintCustom}
+  //         user={user}
+  //         admin={admin}
+  //         modal={modal}
+  //         issues={issues}
+  //         handleDeleteSprint={this.props.handleDeleteSprint}
+  //         updateNameAct={this.props.updateNameAct}
+  //       />
+  //     );
+  // };
   dataAssignee=(data)=>{
     this.props.findUserLikeId(data.assignee)
   }
   render() {
-    const { issues, sprint, user, admin } = this.props;
+    const { issues, sprint, user, admin, params } = this.props;
     const { modal, status, loadData } = this.state;
+    console.log(this.props.issues)
     return (
       <div>
         <div
@@ -134,6 +135,7 @@ class ListDetailIssues extends Component {
         >
           <ul>
           <ListSprintDetail
+          params={params}
           sprint={sprint}
           user={user}
           admin={admin}
@@ -142,13 +144,15 @@ class ListDetailIssues extends Component {
           handleDeleteSprint={this.props.handleDeleteSprint}
           completeSprintAct={this.props.completeSprintAct}
           updateNameAct={this.props.updateNameAct}
+          beginSprint={this.props.beginSprint}
         />
             {/* {this.renderListSprint(sprint)} */}
           </ul>
         </div>
         <div className="item-issue">
           <p style={{ textAlign: "left", marginLeft: "72px" }}>BackLog</p>
-          {_.map(_.compact(issues), (item, index) => {
+          {_.map( _.filter(_.compact(issues),(item, key) => item.hidden == false), (item, index) => {
+            
             return (
               <div
                 className={`issues ${!modal ? "" : "custom"}`}
@@ -223,6 +227,7 @@ class ListDetailIssues extends Component {
                     changeProcessIssue={this.props.changeProcessIssue}
                     findUserLikeId={this.props.findUserLikeId}
                     dataAssignee={this.dataAssignee}
+                    updateNameIssue={this.props.updateNameIssue}
                   />
                 );
               }
@@ -258,7 +263,9 @@ const mapDispatchToProps = dispatch => {
     handleDeleteSprint: (id) => dispatch(actionSprint.deleteSprint(id)),
     completeSprintAct: (id) => dispatch(actionSprint.completeSprintAct(id)),
     findUserLikeId: (id) => dispatch(actionAdmin.FindUserAction(id)),
-    updateNameAct:(name,id) => dispatch(actionSprint.updateNameAct(name, id))
+    updateNameAct:(name,id) => dispatch(actionSprint.updateNameAct(name, id)),
+    updateNameIssue:(name, id) => dispatch(actionIssue.updateNameIssue(name, id)),
+    beginSprint:(idSprint, idProject) => dispatch(actionSprint.beginSprint(idSprint, idProject))
     // findUserLikeIDAct: (idUser) => dispatch(actionUser.findUserLikeIDAct(idUser))
   };
 };

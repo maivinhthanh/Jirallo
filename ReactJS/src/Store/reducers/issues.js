@@ -50,9 +50,34 @@ export const removeIssueSucces = (state, action) => {
 }
 export const AddIssueSuccess = (state, action) => {
   console.log(state, action)
+//   0:
+// idIssue: "5da1581753d577119204d7af"
+// respone: {assignee: "5d786b21f15e5146596ef338"}
 }
 export const changeProcessSuccess = (state, action) => {
   return state
+}
+export const assignTaskIssue = (state, action) => {
+//   idIssue: "5da02372ededd5282a064f0b"
+// respone: {assignee: "5d786cc1827c2b4801038a40"}
+  // console.log(state, action.data[0].idIssue)
+  // const data = _.filter(state, (item, key) => item._id === action.data[0].idIssue)
+  // console.log(data)
+  // const filter =  _.map(data, (item, key) => {
+  //   console.log(action.data[0].respone.assignee)
+  //   item.assignee = action.data[0].respone.assignee
+  // })
+  // console.log(filter)
+  let cloneState = _.cloneDeep(state)
+   _.map(cloneState, (data, key) => {
+    if(data._id == action.data[0].idIssue){
+      data.assignee = action.data[0].respone.assignee
+      console.log(cloneState)
+    }
+  })
+  return cloneState
+ 
+  // return cloneState 
 }
 
 const reducer = ( state = initialState, action ) => {
@@ -64,6 +89,7 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.removeIssueSucces : return removeIssueSucces(state, action);
         case actionTypes.AddIssueSuccess : return AddIssueSuccess(state, action);
         case actionTypes.changeProcessSuccess: return changeProcessSuccess(state, action);
+        case actionTypes.assignTaskIssue : return assignTaskIssue(state, action);
 
         default: return state;
     }
