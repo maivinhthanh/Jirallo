@@ -1,124 +1,43 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../Store/actions/admin";
-import * as actionsProject from "../../Store/actions/project";
 import _ from "lodash";
-import { Redirect } from 'react-router-dom';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from "reactstrap";
-import { Link } from 'react-router-dom' 
-import CreateProject from "../Modal/CreateProject";
+import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+
 class HeaderBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false,
-      modal: false,
-      nameProject:'',
-      status: false,
-      activeUser : []
+      active: false,
+      keyseach: ''
     };
-    this.toggle = this.toggle.bind(this);
-    this.createProject = this.createProject.bind(this);
-    this.showToggle = this.showToggle.bind(this);
-    this.handleNameProject = this.handleNameProject.bind(this);
-    // this.activeUser = []
   }
-  toggle() {
+  onFocus =(data)=>{
     this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
-  showToggle() {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }));
-  }
-  handleNameProject(event){
-    event.preventDefault();
-    this.setState({
-      nameProject : event.target.value
+      active:data
     })
   }
-  createProject(event){
+  handleKeySeach =(event) =>{
     event.preventDefault();
-    this.props.createProjectAct(this.state.nameProject)
-  }
-  componentDidUpdate(preState){
-    !_.isEqual(preState.user, this.props.user) && this.ShowInfoUser()
-  }
-  // componentDidMount(){
-  //   this.ShowInfoUser()
-  // }
-  ShowInfoUser =() => {
-    const userLocal = JSON.parse(localStorage.getItem("userLogin"));
-    const {user} = this.props;
-    // this.props.SearchEmail(user[0].email);
-    _.map(user, (data, index) => {
-      if(userLocal[0].email === data.email){
-        this.setState({
-          activeUser: data
-        })
-      }
+    this.setState({
+      keyseach: event.target.value 
     })
   }
+  
   render() {
-    // const admin = this.props.admin;
-    // const {user} = this.props;
-    const { admin, user } = this.props
-    const {activeUser} = this.state
+    const {active, keyseach} = this.state
     return (
-      <div className="header-board">
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Jirallo</NavbarBrand>
-          <NavbarToggler />
-          <div>
-            <Navbar color="light" light expand="md">
-              <NavbarToggler onClick={this.toggle} />
-              <Collapse isOpen={this.state.isOpen} navbar>
-                <Nav className="ml-auto" navbar>
-                  <NavItem>
-                    <NavLink href="#">Components</NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink href="#">DashBoard</NavLink>
-                  </NavItem>
-                  <UncontrolledDropdown nav inNavbar>
-                    <DropdownToggle nav caret>
-                      Options
-                    </DropdownToggle>
-                    <DropdownMenu right  >
-                      <DropdownItem ><Link to="/viewAll">View All Project</Link></DropdownItem>
-                      <DropdownItem>Option 2</DropdownItem>
-                      <DropdownItem divider />
-                      <DropdownItem>Reset</DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                  <CreateProject/>
-                </Nav>
-              </Collapse>
-            </Navbar>
-          </div>
-          <div className="user-info">
-            <div className="name-user">
-              <p>
-              <span>{activeUser.name}</span>
-                <i className="fas fa-user-tie"></i>
-              </p>
-            </div>
-          </div>
-        </Navbar>
+      <div className="row" style={{height: '60px',padding: '10px 0px',backgroundColor: '#6A8DCD',marginBottom: '20px'}}>
+        <div className={active ? 'col-3' : 'col-4'}></div>
+        <div className={active ? 'col-6' : 'col-4'}>
+          <InputGroup onMouseOver={() =>this.onFocus(true)} onMouseLeave={() =>this.onFocus(false)} >
+            <Input value={keyseach} onChange={this.handleKeySeach}/>
+            <InputGroupAddon addonType="append">
+              <InputGroupText><i class="fas fa-search"></i></InputGroupText>
+            </InputGroupAddon>
+          </InputGroup>
+        </div>
+        <div className={active ? 'col-3' : 'col-4'}></div>
       </div>
     );
   }
@@ -133,7 +52,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     SearchEmail: email => dispatch(actions.SearchAction(email)),
-    createProjectAct : name => dispatch(actionsProject.createProjectAct(name))
   };
 };
 export default connect(

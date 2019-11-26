@@ -58,7 +58,6 @@ exports.login = async (req, res, next) => {
             res.status(404).json(error)
             throw error
         }
-
         const email = req.body.email
         const password = req.body.password
 
@@ -67,18 +66,16 @@ exports.login = async (req, res, next) => {
             const error = new Error("Không tìm thấy user.")
             error.statusCode = 404
             res.status(500).json(error)
-            throw error
+            // throw error
+            return next()
         }
-
         const isEqual = await bcrypt.compare(password, loadedUser.password)
-
         if (!isEqual) {
             const error = new Error("Wrong password!")
             error.statusCode = 404
             res.status(404).json(error)
-            throw error
+            return 
         }
-
         const token = jwt.sign(
             {
                 email: loadedUser.email,
@@ -86,7 +83,6 @@ exports.login = async (req, res, next) => {
             },
             "somesupersecretsecret"
         )
-
         const action = new Activities({
             action: 'Login',
             iduser: loadedUser._id
@@ -95,7 +91,7 @@ exports.login = async (req, res, next) => {
         await action.save()
 
         res.status(200).json({ token: token, userId: loadedUser._id.toString() })
-            
+        return next();
     }
     catch (error) {
         if (!error.statusCode) {
@@ -236,7 +232,7 @@ exports.getMyInfo = async (req, res, next) => {
     try{
         const iduser = req.userId
         console.log(iduser)
-        const user = await User.findById(iduser).select('email _id name image')
+        const user = await User.findById(iduser).select('email _id name image avatar')
 
         res.status(200).json({statusCode: 200,result: user})
     }

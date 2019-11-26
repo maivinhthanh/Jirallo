@@ -34,7 +34,7 @@ class ListDetailIssues extends Component {
     this.itemACtive = [];
     this.itemFlag = "";
     this.idIssue = "";
-    this.arrayList = [];
+    // this.arrayList = [];
     this.dataTranfer = false;
   }
   showContent(id) {
@@ -87,8 +87,9 @@ class ListDetailIssues extends Component {
     this.idIssue = idIssue;
   };
   addIssueToSprint = id => {
-    this.arrayList.push(id);
-    this.props.AddIssueIntoSprint(this.idIssue, this.arrayList);
+    console.log(id)
+    // this.arrayList.push(id);
+    this.props.AddIssueIntoSprint(this.idIssue, id);
     // swal({
     //   title: "Insert success!",
     //   text: "Complete!",

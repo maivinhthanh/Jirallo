@@ -1,37 +1,31 @@
 import React, { Component } from 'react'
-import ItemBoard from '../Board/ItemBoard'
-import HeaderBoard from '../Board/HeaderBoard'
-import { InputGroup, InputGroupAddon, Button, Input } from 'reactstrap';
+import MainBoard from '../Board/MainBoard'
 import ListUser from '../User/ListUser';
+import IteamHeader from "../IteamHeader";
+import HeaderBoard from './HeaderBoard'
+
 export default class DetailBoard extends Component {
   render() {
     return (
-      <div>
-        <div className="detail-card">
-      <div className="board-header">
-        <HeaderBoard/>
-      </div>
-      <div className="container-fluid">
-      <div className="title-board">
-        <p>Main Board</p>
-        <div className="search-form">
-        <InputGroup>
-        <Input />
-        <InputGroupAddon addonType="append">
-          <Button color="secondary">search</Button>
-        </InputGroupAddon>
-      </InputGroup>
+      <div className="listProject row">
+        <nav className="nav-top">
+          <div className="logo">
+            <h1>
+              <a href="/">
+                <img className="logo-menu" src="/logo-menu.jpg" />
+              </a>
+            </h1>
+          </div>
+          <IteamHeader/>
+        </nav>
+        <div className="col-1"></div>
+        <div className="col-11">
+          <HeaderBoard/>
+          <div className="filter">
+            <ListUser/>
+          </div>
+          <MainBoard project={this.props.project}/>
         </div>
-        {/* add Iteam */}
-      </div>
-      <div className="filter">
-        <p>Quick Filters: </p>
-        <ListUser/>
-        {/* API load user in task */}
-      </div>
-        <ItemBoard project={this.props.project}/>
-      </div>
-      </div>
       </div>
     )
   }

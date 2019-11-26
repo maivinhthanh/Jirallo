@@ -224,7 +224,7 @@ exports.changeProcessIssues = async (req, res, next) => {
             process: process
         }
 
-        const issues = await Issues.findByIdAndUpdate(idissues, dataupdate)
+        const issues = await Issues.findByIdAndUpdate(idissues, dataupdate, { new: true })
 
         const action = new Activities({
             action: 'changeProcessIssues',
@@ -236,7 +236,7 @@ exports.changeProcessIssues = async (req, res, next) => {
       
         await action.save()
 
-        res.status(201).json({ statusCode: 200 ,data:dataupdate})
+        res.status(201).json({ statusCode: 200 ,issues:issues})
 
     }
     catch(err) {
@@ -256,7 +256,7 @@ exports.deleteIssues = async (req, res, next) => {
             hidden: true
         }
 
-        await Issues.findByIdAndUpdate(idissues, dataupdate)
+        await Issues.findByIdAndUpdate(idissues, dataupdate,{ new: true })
 
         const action = new Activities({
             action: 'deleteIssues',

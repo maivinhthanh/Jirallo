@@ -32,10 +32,12 @@ const userSchema = new Schema({
         required: true
     },
     avatar:{
-        type: String
+        type: String,
+        default: null
     },
     image: {
-        type: String
+        type: String,
+        default: null
     },
     birthdate: {
         type: Date

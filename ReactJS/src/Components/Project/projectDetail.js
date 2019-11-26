@@ -74,30 +74,44 @@ export default class projectDetail extends Component {
           return (
             <Card key={index}>
               <div className="detail-task-user">
-                <CardBody style={{ background: "#A4D4FF" }}>
-                  <i
-                    onClick={ this.showToggle.bind(this, item._id) }
-                    style={{ float: "right" }}
-                    className="fas fa-user-plus"
-                  ></i>
-                  <CardTitle>
-                  <InputField nameInput={'project'} project={project} editData={(newdata,name) => this.updateNameProject(newdata, item._id)}>{item.name}</InputField>
-                  </CardTitle>
-                  <CardSubtitle>
-                    Create day: {this.fomatDateTime(item.datecreate)}
-                  </CardSubtitle>
-                  <Button style={{ background: "#41ACF2", marginTop: "20px" }}>
-                    {" "}
-                    <Link to={{ pathname: `/backlog/${item._id}` }}>
-                      <span>View</span>
-                    </Link>
-                  </Button>
-                  <Button style={{ background: "#41ACF2", marginTop: "20px" }}>
-                    {" "}
-                    <Link to={{ pathname: `/Profile/${item._id}` }}>
-                      <span>Info </span>
-                    </Link>
-                  </Button>
+                <CardBody style={{ background: "#B3C6E6" }}>
+                  <div className="row">
+                    <div className="col-10 text-center">
+                      <CardTitle><h4> <InputField nameInput={'project'} project={project} editData={(data,name) => this.updateNameProject(data, item._id)}>{item.name}</InputField></h4></CardTitle>
+                    </div>
+                    <div className="col-2">
+                        <i
+                          onClick={ this.showToggle.bind(this, item._id) }
+                          style={{ float: "right", fontSize: '20px', color: '#1F53B6'}}
+                          className="fas fa-user-plus"
+                        ></i>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-10 text-center">
+                      <CardSubtitle>
+                        Create day: {this.fomatDateTime(item.datecreate)}
+                      </CardSubtitle>
+                    </div>
+                    <div className="col-2"></div>
+                  </div>
+                  
+                  <div className="row">
+                    <div className="col-6 text-center">
+                      <Button style={{ background: "#1F53B6", marginTop: "20px" }}>
+                        <Link to={{ pathname: `/backlog/${item._id}` }}>
+                          <b style={{color: 'black'}}>View</b>
+                        </Link>
+                      </Button>
+                    </div>
+                    <div className="col-6 text-center">
+                      <Button style={{ background: "#1F53B6", marginTop: "20px" }}>
+                        <Link to={{ pathname: `/Profile/${item._id}` }}>
+                          <b style={{color: 'black'}}>Info </b>
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
                 </CardBody>
                 <div>
                   <Modal

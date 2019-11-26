@@ -9,7 +9,7 @@ export default class HeaderHome extends Component {
             {/* Created By Bogdan Nagorniy */}
             <div className="logo">
               <h1>
-                <a href="index.html">
+                <a href="/">
                   <img className="logo-menu" src="/logo-menu.jpg" />
                 </a>
               </h1>
@@ -17,16 +17,14 @@ export default class HeaderHome extends Component {
             <ul className="nav_links list-unstyled">
               <li className="nav-link-list">
                 <Link to="/login">
-                    <span className="fas fa-home" />
+                    <span class="fas fa-sign-in-alt"></span>
                     <p>Login</p>
                 </Link>
               </li>
               <li className="nav-link-list">
                 <Link to="/register">
-                  <a href="index.html">
-                    <span className="fas fa-home" />
+                    <span class="fas fa-user-plus"></span>
                     <p>Register</p>
-                  </a>
                 </Link>
               </li>
             </ul>
