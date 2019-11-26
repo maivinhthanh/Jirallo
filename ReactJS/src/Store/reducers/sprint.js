@@ -24,6 +24,12 @@ export const showListSprint = (state, action) => {
   cloneState = [...customData]
   return cloneState
 }
+export const deleteSprintSuccess = (state, action) => {
+  // console.log(state, action.data)
+  let cloneState = _.cloneDeep(state)
+  console.log(cloneState)
+  return cloneState
+}
 // export const showListIssue = (state, action) => {
 //   console.log(action.data)
 //   let cloneState = _.clone(state)
@@ -35,6 +41,7 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.createSprint: return createSprint( state, action );
         case actionTypes.errorSprint : return errorSprint(state, action);
         case actionTypes.showListSprint: return showListSprint(state, action);
+        case actionTypes.deleteSprintSuccess: return deleteSprintSuccess(state, action);
         default: return state;
     }
 };

@@ -20,6 +20,25 @@ export const showListSprint = data => {
     data
   }
 }
+export const deleteSprintSuccess = data => {
+  return {
+    type: actionTypes.deleteSprintSuccess,
+    data
+  }
+}
+export const beginSprint = (idSprint, idProject) => {
+  return dispatch => {
+    return CallApi(`sprint/beginsprint/${idProject}`,
+    'PUT',
+    {idsprint: idSprint},
+    'token'
+    ).then(respone => {
+      console.log(respone)
+    }).catch(err => {
+      console.log(err)
+    }) 
+  }
+}
 export const updateNameAct = (name, id) => {
   console.log(name, id)
   return dispatch => {
@@ -57,8 +76,9 @@ export const deleteSprint = (id) => {
     'token'
     ).then(respone => {
       console.log(respone)
+      dispatch(deleteSprintSuccess(respone.data))
     }).catch(err => {
-      console.log(err)
+      dispatch(errorSprint(err))
     })
   }
 }

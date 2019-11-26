@@ -33,9 +33,9 @@ class tableProject extends Component {
         e.preventDefault()
         let data = new FormData()
         data.append('avatar', this.state.image)
-        data.append('idproject',this.props.params)
+        // data.append('idproject',this.props.params)
         data.append('dateedit',this.state.dateedit)
-        data.append('description',this.state.description)
+        data.append('description',this.state.descript)
         data.append('name',this.state.name)
         // const project = {
         //     idproject: this.props.params,
@@ -45,7 +45,7 @@ class tableProject extends Component {
         //     image: this.state.image
         // }
         console.log(data)
-        this.props.EditProject(data)
+        this.props.EditProject(this.props.params, data)
     }
     // hanleChangeDateCreate(e){
     //     e.preventDefault()
@@ -61,8 +61,9 @@ class tableProject extends Component {
     }
     handleChangeImage(e){
         e.preventDefault()
+        console.log(e.target.files)
         this.setState({
-            image: e.target.value
+            image: e.target.files[0]
         })
     }
     handleChangeDateEdit(e){
@@ -121,6 +122,7 @@ class tableProject extends Component {
         const { project, member } = this.props
         const { status } = this.state
         this.project = _.cloneDeep(this.props.project)
+        console.log(project)
         return (
             <div>
                 <table class="table table-hover">
@@ -144,7 +146,7 @@ class tableProject extends Component {
                                         <td>{item.name}</td>
                                         <td>{this.fomatDateTime(item.datecreate)}</td>
                                         <td>{this.fomatDateTime(item.datecreate)}</td>
-                                        <td>{item.discription}</td>
+                                        <td>{item.description}</td>
                                         <td>{item.image}</td>
                                         <td>
                                             <button type="button" className='btn btn-danger' onClick={this.loadDataForm} data-toggle="modal" data-target="#myModal1">Edit</button>
@@ -236,7 +238,7 @@ class tableProject extends Component {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="uname">Image:</label>
-                                        <input type="file" className="form-control" onChange={this.handleChangeImage}  value={this.state.image} id="image" name="image" />
+                                        <input type="file" className="form-control" onChange={this.handleChangeImage} id="image" name="image" />
                                         {/* <div className="valid-feedback">Valid.</div>
                                         <div className="invalid-feedback">Please fill out this field.</div> */}
                                     </div>

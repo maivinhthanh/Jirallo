@@ -8,6 +8,7 @@ import { Card, CardBody, CardTitle, CardSubtitle, Button,
   Input,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import InputField from "../InputEdit/inputField";
 // import { AddMemberAct } from "../../Store/actions/project";
 export default class projectDetail extends Component {
   constructor(props){
@@ -58,6 +59,10 @@ export default class projectDetail extends Component {
       positionUser: e.target.value
     })
   }
+  updateNameProject(item, id){
+    console.log(item, id)
+    this.props.editEditNameProject(item, id)
+  }
   render() {
     const { project } = this.props;
     _.map(this.props.member, (item) => {
@@ -72,7 +77,7 @@ export default class projectDetail extends Component {
                 <CardBody style={{ background: "#B3C6E6" }}>
                   <div className="row">
                     <div className="col-10 text-center">
-                      <CardTitle><h4>{item.name}</h4></CardTitle>
+                      <CardTitle><h4> <InputField nameInput={'project'} project={project} editData={(data,name) => this.updateNameProject(data, item._id)}>{item.name}</InputField></h4></CardTitle>
                     </div>
                     <div className="col-2">
                         <i

@@ -44,6 +44,27 @@ export const changeProcessSuccess = (data) => {
     data
   }
 }
+export const assignTaskIssue = (data) => {
+    return {
+      type: actionTypes.assignTaskIssue,
+      data
+    }
+}
+export const updateNameIssue = (name, id) => {
+  return dispatch => {
+      return CallApi(`issues/editIssues/${id}`,
+      'PUT',
+      {
+        name: name
+      },
+     'token'
+      ).then(respone=>{
+        dispatch(EditIssue(respone.data.newissues))
+      }).catch(err => {
+        dispatch(IssueError(err))
+      })
+    }
+}
 export const changeProcessIssue = (idissues, processes) => {
   console.log("1",idissues, processes)
   return dispatch => {
@@ -73,6 +94,7 @@ export const removeIssue = (idissues) => {
   }
 }
 export const AddIssueIntoSprint = (idIssue, idSprint) => {
+  console.log(idIssue, idSprint)
   return dispatch => {
     return CallApi(`issues/addIssueIntoSprint/${idIssue}`,
     'PUT',
@@ -81,6 +103,7 @@ export const AddIssueIntoSprint = (idIssue, idSprint) => {
     },
     'token'
     ).then(respone => {
+      console.log(respone)
       dispatch(AddIssueSuccess(respone))
     }).catch(err => {
       dispatch(IssueError(err))
@@ -88,6 +111,7 @@ export const AddIssueIntoSprint = (idIssue, idSprint) => {
   }
 }
 export const assignTaskIssueAct = (idissues, idUser) => {
+  console.log(idissues, idUser)
   return dispatch => {
     return CallApi(`issues/assignforUser/${idissues}`,
     'PUT',
@@ -96,10 +120,12 @@ export const assignTaskIssueAct = (idissues, idUser) => {
     },
    'token'
     ).then(respone => {
-      console.log(respone)
-      // dispatch()
+      console.log(respone.data.data)
+      const data = [{respone: respone.data.data, idIssue: idissues}]
+      console.log(data)
+      dispatch(assignTaskIssue(data))
     }).catch(err => {
-      console.log(err)
+      dispatch(IssueError(err))
     })
   }
 }
