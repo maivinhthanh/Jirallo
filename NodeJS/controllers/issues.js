@@ -179,18 +179,20 @@ exports.addIssueIntoSprint = async (req, res, next) => {
     try{
         const idissues = req.params.idissues
         const idsprint = req.body.idsprint
-
-        await Issues.findByIdAndUpdate(idissues, 
-            {
-                $push: {idsprint: idsprint}
-            }
-        )
+        console.log("0", typeof idissues, typeof idsprint)
         await Sprint.findByIdAndUpdate(idsprint,
             {
-                $push: {idissues: idissues}
-            }
+                $push: {idissues: (idissues)}
+            },{ new: true }
         )
-
+       
+        console.log("1")
+        await Issues.findByIdAndUpdate(idissues, 
+            {
+                $push: {idsprint: (idsprint)}
+            }, { new: true }
+        )
+        console.log("2")
         const sprint = await Sprint.findById(idsprint).populate('idissues')
 
         const action = new Activities({

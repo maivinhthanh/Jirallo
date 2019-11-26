@@ -17,9 +17,15 @@ const projectSchema = new Schema({
     },
     idmembers:[
         {
-            type: Schema.Types.Mixed,
-            ref: 'User',
-            required: true
+            id:{
+                type: Schema.Types.ObjectId,
+                ref: 'User',
+                required: true
+            },
+            position: {
+                type: String
+            }
+            
         }
     ],
     idepic:[

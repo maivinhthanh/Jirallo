@@ -42,4 +42,7 @@ router.get('/FindProjectByID/:idproject',isAuth,
 router.get('/viewListIssuesInProject/:idproject',isAuth,
     projectController.viewListIssuesInProject,
 )
+router.get('/getListUserInProject/:idproject',isAuth,
+    projectController.getListUserInProject,
+)
 module.exports = router

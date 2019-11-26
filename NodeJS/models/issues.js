@@ -58,6 +58,7 @@ const issuesSchema = new Schema({
         {
             type: Schema.Types.ObjectId,
             ref: 'Sprint',
+            required: true
         }
     ],
     idproject:{
