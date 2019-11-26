@@ -14,7 +14,7 @@ class CreateProject extends Component {
   constructor(props){
     super(props);
     this.state = {
-      modal: false,
+      modal: true,
       nameProject: ''
     }
     this.showToggle = this.showToggle.bind(this)

@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { Card, CardBody, CardTitle, CardSubtitle, Button,
-  Modal,
-  ModalBody,
-  ModalHeader,
-  ModalFooter,
-  Input,
+  Modal, ModalBody, ModalHeader, ModalFooter,
+  Input, 
+  PopoverHeader, PopoverBody, UncontrolledPopover 
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import InputField from "../InputEdit/inputField";
-// import { AddMemberAct } from "../../Store/actions/project";
+import * as Config from '../../Config';
+
 export default class projectDetail extends Component {
   constructor(props){
     super(props);
@@ -17,8 +16,6 @@ export default class projectDetail extends Component {
       modal:false,
       emailUser: '',
       positionUser:'',
-      // idUser: '',
-      // userAdd : [],
     }
     this.showToggle = this.showToggle.bind(this)
     this.handleEmailUser = this.handleEmailUser.bind(this)
@@ -60,9 +57,9 @@ export default class projectDetail extends Component {
     })
   }
   updateNameProject(item, id){
-    console.log(item, id)
     this.props.editEditNameProject(item, id)
   }
+  
   render() {
     const { project } = this.props;
     _.map(this.props.member, (item) => {
@@ -73,45 +70,67 @@ export default class projectDetail extends Component {
         {_.map(project, (item, index) => {
           return (
             <Card key={index}>
-              <div className="detail-task-user">
                 <CardBody style={{ background: "#B3C6E6" }}>
                   <div className="row">
-                    <div className="col-10 text-center">
-                      <CardTitle><h4> <InputField nameInput={'project'} project={project} editData={(data,name) => this.updateNameProject(data, item._id)}>{item.name}</InputField></h4></CardTitle>
+                    <div className="col-5" >
+                      <div id={'Popover-' + index}>
+                        <img className="avatar-image" src={ Config.API_URL  + "/" + item.image}
+                          height={96} width={96}/>
+                      </div>
                     </div>
-                    <div className="col-2">
-                        <i
+                    <UncontrolledPopover  placement="right" trigger="legacy" 
+                      target={'Popover-' + index} 
+                    >
+                      <PopoverHeader>Setting</PopoverHeader>
+                      <PopoverBody>
+                        <div
                           onClick={ this.showToggle.bind(this, item._id) }
-                          style={{ float: "right", fontSize: '20px', color: '#1F53B6'}}
-                          className="fas fa-user-plus"
-                        ></i>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-10 text-center">
+                          className="row"
+                        >
+                          <div className="col-3"><i className="fas fa-user-plus"></i></div>
+                          <div className="col-9">
+                            <b style={{color: 'black'}}>Add member</b>
+                          </div>
+                          
+                        </div>
+                        <br/>
+                        <div className="row">
+                          <div className="col-3"><i className="fas fa-eye"></i></div>
+                          <div className="col-9">
+                            <Link to={{ pathname: `/backlog/${item._id}` }}>
+                              <b style={{color: 'black'}}>View</b>
+                            </Link>
+                          </div>
+                          
+                        </div>
+                        <br/>
+                        <div className="row">
+                          <div className="col-3"><i className="fas fa-info-circle"></i></div>
+                          <div className="col-9">
+                            <Link to={{ pathname: `/Profile/${item._id}` }}>
+                              <b style={{color: 'black'}}>Info </b>
+                            </Link>
+                          </div>
+                          
+                        </div>
+                      </PopoverBody>
+                    </UncontrolledPopover >
+                    <div className="col-7">
+                      <CardTitle>
+                        <h4> 
+                          <InputField nameInput={'project'} 
+                            project={project} editData={(data,name) => this.updateNameProject(data, item._id)}
+                          >
+                            {item.name}
+                          </InputField>
+                        </h4>
+                      </CardTitle>
                       <CardSubtitle>
                         Create day: {this.fomatDateTime(item.datecreate)}
                       </CardSubtitle>
                     </div>
-                    <div className="col-2"></div>
                   </div>
                   
-                  <div className="row">
-                    <div className="col-6 text-center">
-                      <Button style={{ background: "#1F53B6", marginTop: "20px" }}>
-                        <Link to={{ pathname: `/backlog/${item._id}` }}>
-                          <b style={{color: 'black'}}>View</b>
-                        </Link>
-                      </Button>
-                    </div>
-                    <div className="col-6 text-center">
-                      <Button style={{ background: "#1F53B6", marginTop: "20px" }}>
-                        <Link to={{ pathname: `/Profile/${item._id}` }}>
-                          <b style={{color: 'black'}}>Info </b>
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
                 </CardBody>
                 <div>
                   <Modal
@@ -156,7 +175,6 @@ export default class projectDetail extends Component {
                     </ModalFooter>
                   </Modal>
                 </div>
-              </div>
             </Card>
           );
         })}

@@ -1,22 +1,17 @@
 import React, { Component } from "react";
+import _ from "lodash";
+import { connect } from "react-redux";
+
 import "../Project/assets/style.css";
-import { Link } from "react-router-dom";
-import {
-  Input,
-} from "reactstrap";
+
 import * as actions from "../../Store/actions/project";
 import * as actionsAdmin from "../../Store/actions/admin"
-import { connect } from "react-redux";
-import _ from "lodash";
-import { Redirect } from 'react-router-dom';
+
 import ProjectDetail from "../../Components/Project/projectDetail";
 import ListProject from "../../Components/Project/listProject";
-import ToggleHome from "../../Components/Modal/ToggleHome";
-import CreateProject from '../../Components/Modal/CreateProject';
-import HeaderCustom from "../../Components/HeaderCustom";
 import IteamHeader from "../../Components/IteamHeader";
+import HeaderProject from '../../Components/Project/HeaderProject'
 
-import * as Config from '../../../src/Config';
 class projectContainer extends Component {
   constructor(props) {
     super(props);
@@ -31,15 +26,18 @@ class projectContainer extends Component {
     this.searchAct = this.searchAct.bind(this)
     this.clearData = this.clearData.bind(this)
   }
+
   componentDidMount() {
     this.props.getAllListProject();
   }
+
   clearData(e){
    e.target.value = ''
    this.setState({
      status: true
    })
   }
+
   searchAct(){
     this.cloneProject = []
     const {project} = this.props;
@@ -52,15 +50,16 @@ class projectContainer extends Component {
       }
     })
   }
+
   handleChangeInput(e){
     e.preventDefault();
     this.setState({
       valueSearch: e.target.value
     })
   }
+
   render() {
     const { project, admin } = this.props;
-    console.log("ccc",admin)
     const {status} = this.state
      _.map(project, item => {
       _.map(item.idmembers, data => {
@@ -68,7 +67,7 @@ class projectContainer extends Component {
       })
     })
     return (
-      <div className="listProject row">
+      <div className="row">
         <nav className="nav-top">
           <div className="logo">
             <h1>
@@ -80,37 +79,39 @@ class projectContainer extends Component {
           <IteamHeader/>
         </nav>
         <div className="col-1"></div>
-        <div className="col-4" >
-          <div className="project-task-list" style={{height: '890px',overflow: 'auto'}}>
-            <h1>Project</h1>
-            <ProjectDetail project={project} AddMember={this.props.AddMember} editEditNameProject={this.props.editEditNameProject} />
-          </div>
-        </div>
-        <div className="col-7">
-          <div className="focus-detail">
-            <div className="search-project">
-              <Input style={{width:'25%', marginBottom:'20px'}} onFocus={this.clearData} onChange={this.handleChangeInput} value={this.valueSearch} type="text" name="text" id="search" placeholder="search" />
-              <i onClick={this.searchAct} className="icon-search fas fa-search"></i>
+        <div className="col-11">
+          <HeaderProject />
+          <div className="row">
+            <div className="col-4" >
+              
+              <div className="project-task-list" style={{height: '700px',overflow: 'auto'}}>
+                <ProjectDetail project={project} AddMember={this.props.AddMember} editEditNameProject={this.props.editEditNameProject} />
+              </div>
             </div>
-          {status ? <ListProject project={project} admin={admin} SearchUser={this.props.SearchUser}/> :
-          <ListProject project={this.cloneProject} admin={admin} SearchUser={this.props.SearchUser}/>
-          }
+            <div className="col-8">
+              <div className="focus-detail">
+                
+                {status ? <ListProject project={project} admin={admin} SearchUser={this.props.SearchUser}/> :
+                <ListProject project={this.cloneProject} admin={admin} SearchUser={this.props.SearchUser}/>
+                }
+              </div>
+            </div>
           </div>
-        <div className="modal-create">
-       <CreateProject/>
-       </div>
         </div>
-        {/* <HeaderCustom/> */}
+        
+        
       </div>
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     admin: state.admin,
     project: state.project
   };
-};
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     getAllListProject: () => dispatch(actions.getListProjectAct()),
@@ -119,6 +120,7 @@ const mapDispatchToProps = dispatch => {
     editEditNameProject:(name, id) => dispatch(actions.editEditNameProject(name, id))
     };
 };
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

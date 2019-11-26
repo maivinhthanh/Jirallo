@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import User from './User'
 import { connect } from "react-redux";
-import * as actions from '../../Store/actions/user'
 import _ from 'lodash'
 import * as actionProject from '../../Store/actions/project'
+import ShowError from '../Modal/ShowError'
 class ListUser extends Component {
   constructor(props){
     super(props)
@@ -13,6 +13,7 @@ class ListUser extends Component {
     this.cloneUser = []
   }
   componentWillMount(){
+    
     this.props.getListUserInProject(this.props.params)
 
   }
@@ -26,12 +27,25 @@ class ListUser extends Component {
   shouldComponentUpdate(nextProps, nextState){
     
     return this.props.listuser != nextProps.listuser;
-}
+  }
+  showModal = () =>{
+    if(this.props.params){
+      return (
+          <User listuser = {this.props.listuser} />
+        )
+    }
+    else{
+      return(
+        <ShowError isshow={true} type={'warning'} message={"Hiện tại bạn chưa có project nào hiển thị tại đây"}/>
+      )
+    }
+  }
+  
   
   render() {
     return (
       <div>
-        <User listuser = {this.props.listuser} />
+        {this.showModal()}
       </div>
     )
   }
