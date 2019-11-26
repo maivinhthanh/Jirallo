@@ -232,3 +232,24 @@ exports.viewListIssuesInProject = async (req, res, next) => {
         next(err)
     }
 }
+exports.getListUserInProject = async (req, res, next) => {
+    try{
+        const idproject = req.params.idproject
+
+        const project = await Project.findById(idproject).populate({
+            path: 'idmembers.id',
+            match:{
+                hidden: false
+            },
+        })
+
+        res.status(201).json({ statusCode: 200 ,listuser: project.idmembers})
+    }
+    catch(err) {
+        if (!err.statusCode) {
+            err.statusCode = 500
+        }
+        res.status(500).json(err)
+        next(err)
+    }
+}
