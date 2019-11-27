@@ -144,10 +144,10 @@ export default class DescriptTask extends Component {
               <div className="form-group">
                 <label for="sel1" style={{ marginLeft: '-85px' }}>STATUS:</label>
                 <select className="form-control" id="sel1" name="sellist1" onChange={this.handleChangeProcess} value={this.state.process}>
-                  <option value="Todo">Todo</option>
-                  <option value="Review">Review</option>
-                  <option value="Done">Done</option>
-                  <option value="InProgress">InProgress</option>
+                  <option value="todo">Todo</option>
+                  <option value="review">Review</option>
+                  <option value="done">Done</option>
+                  <option value="inProgress">InProgress</option>
                 </select>
               </div>
             </div>

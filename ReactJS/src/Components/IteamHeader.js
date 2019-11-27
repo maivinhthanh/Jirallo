@@ -10,29 +10,27 @@ export default class IteamHeader extends Component {
       status : true
     }
   }
-  showSetting = () =>{
-
-  }
+  // shouldComponentUpdate(nextProps, nextState){
+  //   const user = JSON.parse(localStorage.getItem('user'))
+  //   return user === null;
+  // }
   render() {
-    const user = JSON.parse(localStorage.getItem('user'))
+    let user = JSON.parse(localStorage.getItem('user'))
+    const idproject = localStorage.getItem('idproject')
+    if(user === null){
+      user = {image : null}
+    }
     return (
       <div>
         <ul className="nav_links list-unstyled">
-          <li>
-            <Link to="/viewAll">
-              <span className="fas fa-home" />
-              <p>Home</p>
-            </Link>
-            </li>
-            {/* <li className="nav-link-list">
-              <a href="index.html">
+            <li>
+              <Link to="/viewAll">
                 <span className="fas fa-home" />
                 <p>Home</p>
-              </a>
+              </Link>
             </li>
-            <li> */}
             <li>
-              <Link to="/board">
+              <Link to={{ pathname: `/board/${idproject}` }}>
                   <span className="fas fa-columns"></span>
                   <p>ActiveSprint</p>
               </Link>
@@ -52,12 +50,12 @@ export default class IteamHeader extends Component {
             
             <li>
               <a id='Popover-avatar'>
-                  <img className="avatar-image" src={!user.avatar? user.avatar : Config.API_URL  + "/" + user.image} height={96} width={96}/>
+                  <img className="avatar-image" src={user.image !== null? Config.API_URL  + "/" + user.image : user.avatar} height={96} width={96}/>
               </a>
               
             </li>
           </ul>
-          <SettingUser/>
+          <SettingUser name={user.name}/>
       </div>
     )
   }

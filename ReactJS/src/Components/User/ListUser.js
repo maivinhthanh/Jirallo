@@ -29,7 +29,7 @@ class ListUser extends Component {
     return this.props.listuser != nextProps.listuser;
   }
   showModal = () =>{
-    if(this.props.params){
+    if(this.props.params !== null && this.props.params !== 'null'){
       return (
           <User listuser = {this.props.listuser} />
         )

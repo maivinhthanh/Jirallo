@@ -59,7 +59,10 @@ export default class projectDetail extends Component {
   updateNameProject(item, id){
     this.props.editEditNameProject(item, id)
   }
-  
+  activeProject = (id)=>{
+    console.log(id)
+    localStorage.setItem('idproject', id)
+  }
   render() {
     const { project } = this.props;
     _.map(this.props.member, (item) => {
@@ -97,7 +100,7 @@ export default class projectDetail extends Component {
                         <div className="row">
                           <div className="col-3"><i className="fas fa-eye"></i></div>
                           <div className="col-9">
-                            <Link to={{ pathname: `/backlog/${item._id}` }}>
+                            <Link to={{ pathname: `/backlog/${item._id}` }} onClick={() =>this.activeProject(item._id)}>
                               <b style={{color: 'black'}}>View</b>
                             </Link>
                           </div>

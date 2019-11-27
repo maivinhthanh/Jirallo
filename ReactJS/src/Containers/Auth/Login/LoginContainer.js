@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import * as actions from '../../../Store/actions/auth';
-import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import Login from '../../../Components/Auth/Login/Login'
 class LoginContainer extends Component {
