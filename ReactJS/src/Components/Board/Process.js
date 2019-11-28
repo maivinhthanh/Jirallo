@@ -3,13 +3,13 @@ import { useDrop } from 'react-dnd'
 import _ from 'lodash'
 import CallApi from '../../until/apiCaller';
 
-export default function Process({ black, process, children ,handleChange}) {
+export default function Process({ black, process, children, handleChange }) {
   console.log(children[1])
   let item = children[1]
   const fill = black ? 'black' : 'white'
   const [{ isOver }, drop] = useDrop({
     accept: 'issues',
-    drop: (item) =>{
+    drop: (item) => {
       handleChange(item.id._id, process)
     },
     collect: monitor => ({
@@ -18,26 +18,30 @@ export default function Process({ black, process, children ,handleChange}) {
   })
   return (
     <div style={{
-        position: 'relative',
-        width: '100%',
-        height: '100%',
-        padding: '15px 0px',
-        backgroundColor: '#B3C6E6',
+      position: 'relative',
+      width: '100%',
+      height: '100%',
+      padding: '15px 0px',
+      backgroundColor: '#B3C6E6',
     }}>
-      <div style={{fontSize: '30px'}}>
+      <div style={{ fontSize: '30px' }}>
         <b>{process}</b>
       </div>
-      <div ref={drop} style={{position: 'relative',width: '100%',height: '100%',}} >
-        <div style={{ backgroundColor: fill, width: '100%',
-        height: '100%', border: '1px black solid',
-        borderRadius: '12px'}} >
-            {
-              item
-            }
+      <div ref={drop} style={{ position: 'relative', width: '100%', height: '100%', }} >
+        <div style={{
+          backgroundColor: fill, width: '100%',
+          height: '100%', border: '1px black solid',
+          borderRadius: '12px'
+        }} >
+          {
+            item
+          }
         </div>
         {isOver && (
-          <div  style={{position: 'absolute',top: 0,left: 0,height: '100%',width: '100%',zIndex: 1,
-                opacity: 1,border: '4px black dotted',backgroundColor: 'whitesmoke',}}
+          <div style={{
+            position: 'absolute', top: 0, left: 0, height: '100%', width: '100%', zIndex: 1,
+            opacity: 1, border: '4px black dotted', backgroundColor: 'whitesmoke',
+          }}
           />
         )}
       </div>

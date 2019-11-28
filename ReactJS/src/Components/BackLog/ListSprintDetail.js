@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import IssueOnSprint from "./IssueOnSprint";
 import _ from "lodash";
 import InputField from './../InputEdit/inputField'
+import WrapperDrop from "./WrapperDrop";
+import Process from "../Board/Process";
 export default class ListSprintDetail extends Component {
   deleteSprint(id){
     const {sprint} = this.props

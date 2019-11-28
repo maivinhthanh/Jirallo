@@ -7,20 +7,15 @@ import UpdateIssue from "../Modal/UpdateIssue";
 import * as actionIssue from "../../Store/actions/issues";
 import * as actionSprint from "../../Store/actions/sprint";
 import * as actionAdmin from "../../Store/actions/admin";
-import {
-  Button,
-  UncontrolledCollapse,
-  Card,
-  CardBody,
-  UncontrolledDropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle
-} from "reactstrap";
+import IssueInBackLog from '../BackLog/IssueInBackLog';
+
 // import * as actionUser from '../../Store/actions/user';
 // import swal from "sweetalert";
 import IssueOnSprint from "./IssueOnSprint";
 import ListSprintDetail from "./ListSprintDetail";
+import Process from '../Board/Process'
+import Issue from '../Board/Issues';
+import WrapperDrop from "./WrapperDrop";
 class ListDetailIssues extends Component {
   constructor(props) {
     super(props);
@@ -37,31 +32,7 @@ class ListDetailIssues extends Component {
     // this.arrayList = [];
     this.dataTranfer = false;
   }
-  showContent(id) {
-    this.idActive = id;
-    this.setState({
-      modal: !this.state.modal
-      // modal: true
-    });
-    // console.log(id)
-    // console.log(this.props.issues)
-    // const issueFilter = _.filter(this.props.issues,item => item._id === id)
-    // console.log(issueFilter)
-    // _.map(issueFilter, (item, key) => {
-    //   console.log(item)
-    //   this.props.findUserLikeId(item.assignee)
-    // })
-  }
-  RedirectToUpdate = item => {
-    this.setState({
-      status: true
-    });
-    this.itemACtive = item;
-  };
   AddFlagIssueAct = item => {
-    // this.setState({
-    //   highlightItems: [...this.state.highlightItems, item._id]
-    // })
     const { issues } = this.props;
     _.map(_.compact(issues), (data, key) => {
       if (data._id === item) {
@@ -86,49 +57,22 @@ class ListDetailIssues extends Component {
   getIdIssue = idIssue => {
     this.idIssue = idIssue;
   };
-  addIssueToSprint = id => {
-    console.log(id)
-    // this.arrayList.push(id);
-    this.props.AddIssueIntoSprint(this.idIssue, id);
-    // swal({
-    //   title: "Insert success!",
-    //   text: "Complete!",
-    //   type: "success",
-    //   confirmButtonText: "Cool"
-    // });
-  };
   componentWillMount() {
     this.props.showListIssue(this.props.params);
     this.props.showListSprint(this.props.params);
   }
-  // componentDidUpdate(preState) {
-  //   // !_.isEqual(preState.sprint, this.props.sprint) && this.setState({loadData: true})
-  //   if (preState.sprint !== this.props.sprint) {
-  //     this.renderListSprint(this.props.sprint)
-  //   }
-  // }
-  // renderListSprint = (sprintCustom) => {
-  //   const { issues, sprint, user, admin } = this.props;
-  //   const { modal, status, loadData } = this.state;
-  //     return (
-  //       <ListSprintDetail
-  //         sprint={sprintCustom}
-  //         user={user}
-  //         admin={admin}
-  //         modal={modal}
-  //         issues={issues}
-  //         handleDeleteSprint={this.props.handleDeleteSprint}
-  //         updateNameAct={this.props.updateNameAct}
-  //       />
-  //     );
-  // };
   dataAssignee=(data)=>{
     this.props.findUserLikeId(data.assignee)
+  }
+  callbackFunction = (data, id) => {
+    this.setState({
+      modal: !data
+    })
+    this.idActive = id
   }
   render() {
     const { issues, sprint, user, admin, params } = this.props;
     const { modal, status, loadData } = this.state;
-    console.log(this.props.issues)
     return (
       <div>
         <div
@@ -152,55 +96,15 @@ class ListDetailIssues extends Component {
         </div>
         <div className="item-issue">
           <p style={{ textAlign: "left", marginLeft: "72px" }}>BackLog</p>
-          {_.map( _.filter(_.compact(issues),(item, key) => item.hidden == false), (item, index) => {
-            
-            return (
-              <div
-                className={`issues ${!modal ? "" : "custom"}`}
-                key={index}
-                style={{
-                  float: "left",
-                  marginLeft: "75px",
-                  marginBottom: "15px"
-                }}
-              >
-                <div className="nameIssue">
-                  <span onClick={() => this.showContent(item._id)}>
-                    {item.name}
-                  </span>
-                </div>
-                <i
-                  data-toggle="modal"
-                  data-target="#myModal"
-                  className="fas fa-cog setting-issue"
-                  onClick={() => this.RedirectToUpdate(item)}
-                ></i>
-                <div className="option-add">
-                  <UncontrolledDropdown>
-                    <DropdownToggle caret>
-                      <i
-                        className="fas fa-ellipsis-h setting-addsprint"
-                        onClick={() => this.getIdIssue(item._id)}
-                        style={{ color: "black", marginTop: "-7px" }}
-                      ></i>
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      {_.map(sprint, (data, index) => {
-                        return (
-                          <DropdownItem
-                            onClick={() => this.addIssueToSprint(data._id)}
-                            key={index}
-                          >
-                            {data.name}
-                          </DropdownItem>
-                        );
-                      })}
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                </div>
-              </div>
-            );
-          })}
+              {/* <Process white process={'todo'} handleChange={(id, process) => this.props.changeProcessIssue(id, process)}></Process> */}
+            <IssueInBackLog
+            name={issues}
+            modal={modal}
+            issues={issues}
+            AddIssueIntoSprint={this.props.AddIssueIntoSprint}
+            parentCallBack = {this.callbackFunction}
+            sprint={sprint}/>
+          {/* <Process/> */}
         </div>
         {status == true && (
           <UpdateIssue
