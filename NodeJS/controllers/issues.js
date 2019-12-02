@@ -23,6 +23,7 @@ exports.createIssues = async (req, res, next) => {
         const process = req.body.process ? req.body.process : 'todo'
         const tag = req.body.tag ? req.body.tag : null
         const idproject = req.body.idproject
+        const idsprint = req.body.idsprint?[req.body.idsprint]:[]
         const iduser = req.userId
 
         const issues = new Issues({
@@ -33,6 +34,7 @@ exports.createIssues = async (req, res, next) => {
             tag: tag,
             repoter: iduser,
             watch: [iduser],
+            idsprint:idsprint,
             idproject: idproject
         })
 
