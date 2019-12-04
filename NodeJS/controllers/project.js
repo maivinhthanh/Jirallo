@@ -25,7 +25,7 @@ exports.createProject = async (req, res, next) => {
                 id: ObjectId(iduser),
                 position: 'Manager'
             },
-            
+            process: ['todo', 'done']
         })
 
         const newproject = await project.save()
