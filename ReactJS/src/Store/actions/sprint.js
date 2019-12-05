@@ -28,7 +28,12 @@ export const deleteSprintSuccess = data => {
     data
   }
 }
-
+export const AddSuccess= (data) => {
+  return {
+    type: actionTypes.AddSuccess,
+    data
+  }
+}
 export const beginSprint = (idSprint, idProject) => {
   return dispatch => {
     return CallApi(`sprint/beginsprint/${idProject}`,
@@ -95,6 +100,22 @@ export const ViewListIssueInSprint = (id) => {
       console.log(respone)
     }).catch(err => {
       dispatch(actionError.AlertError(err))
+    })
+  }
+}
+export const AddIssueIntoSprint = (idSprint, idIssue) => {
+  return dispatch => {
+    return CallApi(`issues/addIssueIntoSprint/${idIssue}`,
+    'PUT',
+    {
+      idsprint: idSprint
+    },
+    'token'
+    ).then(respone => {
+      console.log(respone)
+      dispatch(AddSuccess(respone.data))
+    }).catch(err => {
+      dispatch(errorSprint(err))
     })
   }
 }

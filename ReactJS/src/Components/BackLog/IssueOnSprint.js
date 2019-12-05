@@ -14,6 +14,7 @@ import swal from "sweetalert";
 import DescriptTask from "../Task/DescriptTask";
 import UpdateIssue from "../Modal/UpdateIssue";
 import ChildSprint from "./ChildSprint";
+import Sprint from "./sprint";
 export default class IssueOnSprint extends Component {
   constructor(props) {
     super(props);
@@ -40,9 +41,6 @@ export default class IssueOnSprint extends Component {
   getIssueOnSprint = (id) => {
     this.props.ViewListIssueInSprint(id)
   }
-  // componentWillReceiveProps(nextProps){
-  //   this.getIssueOnSprint(nextProps.filterSprint._id)
-  // }
   renderSprint = () => {
     const { issues, filterSprint, user, admin } = this.props;
     this.activeIssue = [];
@@ -63,50 +61,7 @@ export default class IssueOnSprint extends Component {
         <div className="item-issue">
           {this.renderSprint()}
           {/* <ChildSprint showContent={this.showContent()} data={this.activeIssue} modal={modal} /> */}
-          <React.Fragment>
-            {_.map(this.activeIssue, (item, key) => {
-              return (
-                <div key = {key}
-                  className={`issues ${!modal ? "" : "custom"}`}
-                  style={{ float: "left", marginLeft: "75px", marginBottom:'15px' }}
-                >
-                  <div className="nameIssue">
-                    <span>
-                      {item.name}
-                    </span>
-                  </div>
-                  <i
-                    data-toggle="modal"
-                    data-target="#myModal"
-                    className="fas fa-cog setting-issue"
-                    // onClick={() => this.RedirectToUpdate(item)}
-                  ></i>
-                  <div className="option-add">
-                    <UncontrolledDropdown>
-                      <DropdownMenu>
-                          <DropdownItem
-                            // onClick={() => this.addIssueToSprint(data._id)}
-                          >
-                            {filterSprint.name}
-                          </DropdownItem>
-                      {/* {_.map(filterSprint, (data, index) => {
-                        console.log(filterSprint)
-                        return (
-                          <DropdownItem
-                            // onClick={() => this.addIssueToSprint(data._id)}
-                            key={index}
-                          >
-                            {data.name}
-                          </DropdownItem>
-                        );
-                      })} */}
-                      </DropdownMenu>
-                    </UncontrolledDropdown>
-                  </div>
-                </div>
-              );
-            })}
-          </React.Fragment>
+          <Sprint activeIssue={this.activeIssue} modal={modal} issues={issues} filterSprint={filterSprint}/>
         </div>
         {status == true && (
           <UpdateIssue

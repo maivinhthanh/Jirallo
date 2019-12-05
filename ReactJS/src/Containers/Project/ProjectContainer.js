@@ -1,16 +1,13 @@
-import React, { Component } from "react";
-import _ from "lodash";
-import { connect } from "react-redux";
-
-import "../Project/assets/style.css";
-
-import * as actions from "../../Store/actions/project";
+import _ from "lodash"
+import { connect } from "react-redux"
+import "../Project/assets/style.css"
+import React, { Component } from "react"
+import IteamHeader from "../../Components/IteamHeader"
+import * as actions from "../../Store/actions/project"
 import * as actionsAdmin from "../../Store/actions/admin"
-
-import ProjectDetail from "../../Components/Project/projectDetail";
-import ListProject from "../../Components/Project/listProject";
-import IteamHeader from "../../Components/IteamHeader";
+import ListProject from "../../Components/Project/listProject"
 import HeaderProject from '../../Components/Project/HeaderProject'
+import ProjectDetail from "../../Components/Project/projectDetail"
 
 class projectContainer extends Component {
   constructor(props) {
@@ -31,18 +28,18 @@ class projectContainer extends Component {
     this.props.getAllListProject();
   }
 
-  clearData(e){
-   e.target.value = ''
-   this.setState({
-     status: true
-   })
+  clearData(e) {
+    e.target.value = ''
+    this.setState({
+      status: true
+    })
   }
 
-  searchAct(){
+  searchAct() {
     this.cloneProject = []
-    const {project} = this.props;
+    const { project } = this.props;
     _.map(project, (item, key) => {
-      if(item.name === this.state.valueSearch){
+      if (item.name === this.state.valueSearch) {
         this.cloneProject.push(item)
         this.setState({
           status: false
@@ -51,7 +48,7 @@ class projectContainer extends Component {
     })
   }
 
-  handleChangeInput(e){
+  handleChangeInput(e) {
     e.preventDefault();
     this.setState({
       valueSearch: e.target.value
@@ -60,15 +57,14 @@ class projectContainer extends Component {
 
   render() {
     const { project, admin } = this.props;
-    const {status} = this.state
-     _.map(project, item => {
+    const { status } = this.state
+    _.map(project, item => {
       _.map(item.idmembers, data => {
         this.position = data.position
       })
     })
     return (
       <div className="row">
-        
         <nav className="nav-top">
           <div className="logo">
             <h1>
@@ -77,32 +73,26 @@ class projectContainer extends Component {
               </a>
             </h1>
           </div>
-          <IteamHeader/>
-          
+          <IteamHeader />
         </nav>
-        
         <div className="col-1"></div>
         <div className="col-11">
           <HeaderProject />
           <div className="row">
             <div className="col-4" >
-              
-              <div className="project-task-list" style={{height: '700px',overflow: 'auto'}}>
+              <div className="project-task-list" style={{ height: '700px', overflow: 'auto' }}>
                 <ProjectDetail project={project} AddMember={this.props.AddMember} editEditNameProject={this.props.editEditNameProject} />
               </div>
             </div>
             <div className="col-8">
               <div className="focus-detail">
-                
-                {status ? <ListProject project={project} admin={admin} SearchUser={this.props.SearchUser}/> :
-                <ListProject project={this.cloneProject} admin={admin} SearchUser={this.props.SearchUser}/>
+                {status ? <ListProject project={project} admin={admin} SearchUser={this.props.SearchUser} /> :
+                  <ListProject project={this.cloneProject} admin={admin} SearchUser={this.props.SearchUser} />
                 }
               </div>
             </div>
           </div>
         </div>
-        
-        
       </div>
     );
   }
@@ -117,11 +107,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    SearchUser: (id) => dispatch(actionsAdmin.FindUserAction(id)),
     getAllListProject: () => dispatch(actions.getListProjectAct()),
-    SearchUser:(id) => dispatch(actionsAdmin.FindUserAction(id)),
-    AddMember:(id,user) => dispatch(actions.AddMemberAct(id,user)),
-    editEditNameProject:(name, id) => dispatch(actions.editEditNameProject(name, id))
-    };
+    AddMember: (id, user) => dispatch(actions.AddMemberAct(id, user)),
+    editEditNameProject: (name, id) => dispatch(actions.editEditNameProject(name, id))
+  };
 };
 
 export default connect(

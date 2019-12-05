@@ -70,6 +70,9 @@ button.dropdown-toggle.btn.btn-secondary {
   display: flex;
   margin-left:91px
 }
+.layoutSprint {
+  width: 1128px;
+}
 .layoutSprint:nth-child(2){
   display: flow-root
 }

@@ -19,23 +19,12 @@ class BacklogPage extends Component {
   render() {
     const { match: { params: { id } } } = this.props
     return (
-      <div>
-        <div className="detail-card">
+      <div className="row">
+        <div className="col-md-12 detail-card">
           <div className="board-header">
             <HeaderBoard />
           </div>
-          <div className="container-fluid">
-            <div className="title-board">
-              <p>Main Board</p>
-              <div className="search-form">
-                <InputGroup>
-                  <Input />
-                  <InputGroupAddon addonType="append">
-                    <Button color="secondary">search</Button>
-                  </InputGroupAddon>
-                </InputGroup>
-              </div>
-            </div>
+          <div className="col-md-12 container-fluid">
             <div className="filter">
               <p>Quick Filters: </p>
               <ListUser params={id} />
@@ -48,6 +37,7 @@ class BacklogPage extends Component {
                <MenuLog params = {id}/>
               </div>
               <div className="col-md-8 defineIssue">
+              {/* className={`list-sprint item-issue ${!modal ? "" : "customSprint"}`} */}
               <CreateSprint params={id}/>
                <ListDetailIssues params={id}/>
                {/* CreateIssue dang an */}

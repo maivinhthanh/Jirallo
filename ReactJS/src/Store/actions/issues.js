@@ -97,7 +97,6 @@ export const removeIssue = (idissues) => {
   }
 }
 export const AddIssueIntoSprint = (idIssue, idSprint) => {
-  console.log(idIssue, idSprint)
   return dispatch => {
     return CallApi(`issues/addIssueIntoSprint/${idIssue}`,
     'PUT',
@@ -107,7 +106,7 @@ export const AddIssueIntoSprint = (idIssue, idSprint) => {
     'token'
     ).then(respone => {
       console.log(respone)
-      dispatch(AddIssueSuccess(respone))
+      dispatch(AddIssueSuccess(respone.data))
     }).catch(err => {
       dispatch(actionError.AlertError(err))
     })

@@ -11,6 +11,7 @@
     -moz-transition: 0.5s all;
     -o-transition: 0.5s all;
     -ms-transition: 0.5s all;
+    /* background: lightblue url("/images/1.jpg") no-repeat fixed center; */
 }
   
 .avatar-project:hover {
