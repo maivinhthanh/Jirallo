@@ -65,6 +65,73 @@ exports.createIssues = async (req, res, next) => {
     
 }
 
+exports.createIssuesInSprint = async (req, res, next) => {
+    try{
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            const error = new Error("Validation failed.")
+            error.statusCode = 404
+            error.data = errors.array()
+            res.status(404).json(error)
+            throw error
+        }
+
+        const name = req.body.name
+        const type = req.body.type ? req.body.type : 'task'
+        const priority = req.body.priority ? req.body.priority : 'medium'
+        const process = req.body.process ? req.body.process : 'todo'
+        const tag = req.body.tag ? req.body.tag : null
+        const idproject = req.body.idproject
+        const idsprint = req.body.idsprint
+        const iduser = req.userId
+
+        const issues = new Issues({
+            name: name,
+            type: type,
+            priority: priority,
+            process: process,
+            tag: tag,
+            repoter: iduser,
+            watch: [iduser],
+            idsprint:[idsprint],
+            idproject: idproject
+        })
+
+        const newissues = await issues.save()
+
+        await Project.findByIdAndUpdate(idproject, {
+            $push: { 
+                idissues: ObjectId(newissues._id)
+            }
+        },{ new: true })
+
+        await Sprint.findByIdAndUpdate(idsprint, 
+            {
+                $push: {idissues: ObjectId(newissues._id)}
+            }, { new: true }
+        )
+
+        const action = new Activities({
+            action: 'createIssuesInSprint',
+            content: 'issues/createIssuesInSprint',
+            iduser: req.userId,
+            newdata: issues
+        })
+
+        await action.save()
+
+        res.status(201).json({ statusCode: 200 ,newissues})
+    }
+    catch (error) {
+        if (!error.statusCode) {
+            error.statusCode = 500
+        }
+        res.status(500).json(error)
+        next(error)
+    }
+    
+}
+
 exports.editIssues = async (req, res, next) => {
     try{
         const idissues = req.params.idissues
@@ -131,6 +198,26 @@ exports.viewListIssues = async (req, res, next) => {
     }
     
 }
+exports.viewListIssuesInBackLog = async (req, res, next) => {
+    try{
+        const idproject = req.params.idproject
+
+        const issues = await Issues.find({
+            "idsprint":{$exists:false},
+            idproject: idproject
+        })
+
+        res.status(201).json({ statusCode: 200 ,listissues: issues})
+    }
+    catch(err) {
+        if (!err.statusCode) {
+            err.statusCode = 500
+        }
+        res.status(500).json(err)
+        next(err)
+    }
+    
+}
 exports.assignforUser = async (req, res, next) => {
     try{
         const idissues = req.params.idissues
@@ -179,20 +266,17 @@ exports.addIssueIntoSprint = async (req, res, next) => {
     try{
         const idissues = req.params.idissues
         const idsprint = req.body.idsprint
-        console.log("0", typeof idissues, typeof idsprint)
         await Sprint.findByIdAndUpdate(idsprint,
             {
                 $push: {idissues: (idissues)}
             },{ new: true }
         )
        
-        console.log("1")
         await Issues.findByIdAndUpdate(idissues, 
             {
                 $push: {idsprint: (idsprint)}
             }, { new: true }
         )
-        console.log("2")
         const sprint = await Sprint.findById(idsprint).populate('idissues')
 
         const action = new Activities({
