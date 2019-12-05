@@ -19,12 +19,13 @@ class User extends Component {
       <div className="user-list">
         <Nav tabs>
           {_.map(listuser, (user, index) => {
+            console.log(user.id.image)
             return (
               <NavItem key={index}>
                 <NavLink>
                   <div>
-                    <img className="avatar-image" src={user.avatar? user.avatar : Config.API_URL 
-                    + "/" + user.image} height={40} width={40}/>
+                    <img className="avatar-image" src={!user.id.image ? Config.API_LOCAL + '/' + 'images/user-1.png' : Config.API_URL 
+                    + "/" + user.id.image} height={40} width={40}/>
                     <p>{user.id.name}</p>
                   </div>
                 </NavLink>

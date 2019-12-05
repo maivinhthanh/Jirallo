@@ -13,7 +13,13 @@ import {
   InputGroupAddon,
   Button
 } from "reactstrap";
+import Select from 'react-select'
 import InputField from '../InputEdit/inputField'
+// export const list = [
+//   {  label: 'Ocean', color: '#00B8D9', isFixed: true },
+//   {label: 'Ads', color: '#00B8D9', isFixed: true },
+//   {  label: 'Ocasaean', color: '#00B8D9', isFixed: true },
+// ]
 export default class DescriptTask extends Component {
   constructor(props) {
     super(props);
@@ -21,18 +27,30 @@ export default class DescriptTask extends Component {
       status: false,
       changeData: false,
       email: "",
+      isClearable: true,
+      isDisabled: false,
+      isLoading: false,
+      isSearchable:true,
+      isRtl: false,
       process: this.props.data.process,
       newData: this.props.data
     };
     this.showInputAssign = this.showInputAssign.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.assignTask = this.assignTask.bind(this);
+    // this.assignTask = this.assignTask.bind(this);
     this.remove = this.remove.bind(this);
     this.handleChangeProcess = this.handleChangeProcess.bind(this);
+    this.custom = []
   }
   componentDidMount(){
-    const {data} = this.props
+    const {data, params, listuser} = this.props
     this.props.dataAssignee(data)
+    // console.log(this.props.admin)
+    this.props.getListUserInProject(params)
+    _.map(listuser, (item, key) => {
+      item.id.label = item.id.name
+      this.custom.push(item.id)
+    })
   }
   AddFlag(idActive) {
     this.props.AddFlagIssueAct(idActive);
@@ -45,33 +63,31 @@ export default class DescriptTask extends Component {
       status: !preState.status
     }));
   }
-  onChangeEmail(event) {
-    event.preventDefault();
-    this.setState({
-      email: event.target.value
-    });
+  onChangeEmail(obj) {
+    const {data} = this.props
+    this.props.assignTaskIssueAct(data._id, obj._id);
   }
-  componentDidUpdate(preState) {
-    if (this.state.changeData === true) {
-     !_.isEqual(preState.admin, this.props.admin) &&
-        this.tranferDataToAssign();
-    }
-  }
-  tranferDataToAssign() {
-    const { data } = this.props;
-    _.map(this.props.admin, item => {
-      this.props.assignTaskIssueAct(data._id, item._id);
-    });
-  }
-  assignTask(e) {
-    e.preventDefault();
-    this.props.findUserLikeEmail(this.state.email);
-    this.setState(preState => ({
-      changeData: !preState.changeData,
-      status: !preState.status
+  // componentDidUpdate(preState) {
+  //   if (this.state.changeData === true) {
+  //    !_.isEqual(preState.admin, this.props.admin) &&
+  //       this.tranferDataToAssign();
+  //   }
+  // }
+  // tranferDataToAssign() {
+  //   const { data } = this.props;
+  //   _.map(this.props.admin, item => {
+  //     this.props.assignTaskIssueAct(data._id, item._id);
+  //   });
+  // }
+  // assignTask(e) {
+  //   e.preventDefault();
+  //   this.props.findUserLikeEmail(this.state.email);
+  //   this.setState(preState => ({
+  //     changeData: !preState.changeData,
+  //     status: !preState.status
 
-    }));
-  }
+  //   }));
+  // }
   remove(id) {
     this.props.removeIssue(id);
   }
@@ -93,8 +109,9 @@ export default class DescriptTask extends Component {
   }
   render() {
     const { data } = this.props;
-    const { user, admin } = this.props;
-    const { status } = this.state;
+    const { user, admin, listuser } = this.props;
+    const { status, isClearable, isLoading, isSearchable, isRtl, isDisabled } = this.state;
+    console.log(admin)
     return (
       <div className="descriptWork">
         <div className="list-item-right dropdown">
@@ -187,7 +204,7 @@ export default class DescriptTask extends Component {
                   <ul className="item-detail-right">
                     {/* {this.findUserLikeID(data.repoter)} */}
                     <li>
-                      {_.map(user, (item, key) => {
+                      {_.map(this.custom, (item, key) => {
                         if (item._id === data.repoter) {
                           return item.name;
                         }
@@ -203,13 +220,26 @@ export default class DescriptTask extends Component {
                       {/* <span>{data.assignee}</span> */}
                         <i
                           onClick={this.showInputAssign}
-                          className="fas fa-pen"
+                          className="fas fa-search"
                         ></i>
                       </span>
                     </li>
                     {status && (
                       <div className="input-assign">
-                        <InputGroup>
+                        <Select
+                            className="basic-single"
+                            classNamePrefix="select"
+                            defaultValue={this.custom[0]}
+                            isDisabled={isDisabled}
+                            isLoading={isLoading}
+                            isClearable={isClearable}
+                            isRtl={isRtl}
+                            isSearchable={isSearchable}
+                            name="color"
+                            options={this.custom}
+                            onChange={this.onChangeEmail}
+                          />
+                        {/* <InputGroup>
                           <Input
                             value={this.state.email}
                             onChange={this.onChangeEmail}
@@ -219,7 +249,7 @@ export default class DescriptTask extends Component {
                               Assign
                             </Button>
                           </InputGroupAddon>
-                        </InputGroup>
+                        </InputGroup> */}
                       </div>
                     )}
                   </ul>

@@ -40,7 +40,7 @@ class CreateSprint extends Component {
   render() {
     return (
       <div>
-      <Button  onClick={this.showToggle} style={{float: 'right', marginTop:'-65px', marginRight:'-142px'}} color="warning" >create sprint</Button>
+      <Button  onClick={this.showToggle} style={{float: 'right', marginTop:'-65px', marginRight:'-142px', backgroundColor:'rgb(106, 141, 205)'}}>create sprint</Button>
         {/* <Button color="#caa" onClick={this.showToggle}>
         <i class="fas fa-plus"></i> Create project
         </Button> */}

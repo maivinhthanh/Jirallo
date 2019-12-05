@@ -1,26 +1,18 @@
-import React, { Component } from "react";
 import {
-  Card,
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
   Input,
-  Button,
   Breadcrumb,
   BreadcrumbItem
 } from "reactstrap";
-import { Link } from "react-router-dom";
-import UpdateUser from "../Components/User/UpdateUser";
-import * as actions from "../Store/actions/admin";
-import * as actionsProject from "../Store/actions/project";
-import * as actionsMember from "../Store/actions/member";
-import { connect } from "react-redux";
 import _ from "lodash";
-import ProjectDetail from "../Components/Project/projectDetail";
-import CreateProject from "../Components/Modal/CreateProject";
-import InfoUser from "../Components/Modal/InfoUser";
 import * as Config from "../Config";
+import { connect } from "react-redux";
+import React, { Component } from "react";
+import * as actions from "../Store/actions/admin";
+import InfoUser from "../Components/Modal/InfoUser";
+import UpdateUser from "../Components/User/UpdateUser";
+import * as actionsMember from "../Store/actions/member";
+import * as actionsProject from "../Store/actions/project";
+import CreateProject from "../Components/Modal/CreateProject";
 class DetailUserPage extends Component {
   constructor(props) {
     super(props);
@@ -31,8 +23,8 @@ class DetailUserPage extends Component {
     this.id = "";
     this.position = "";
     this.getInfoUser = this.getInfoUser.bind(this);
-    this.findUserLikeEmail = this.findUserLikeEmail.bind(this);
     this.handleEmail = this.handleEmail.bind(this);
+    this.findUserLikeEmail = this.findUserLikeEmail.bind(this);
   }
   componentDidMount() {
     this.getInfoUser();
@@ -67,10 +59,6 @@ class DetailUserPage extends Component {
         <div className="header-detail"></div>
         <div className="content-user">
           <div className="avatar-image">
-            {/* <img
-              src="https://66.media.tumblr.com/avatar_76339a619be6_128.pnj"
-              alt="Hipster"
-            /> */}
             {_.map(admin, (data, index) => {
               return (
                 <img
@@ -232,18 +220,17 @@ class DetailUserPage extends Component {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    member: state.member,
     admin: state.admin,
+    member: state.member,
     project: state.project
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
     SearchEmail: email => dispatch(actions.SearchAction(email)),
-    getAllListProject: () => dispatch(actionsProject.getListProjectAct()),
     findUserEmail: email => dispatch(actionsMember.SearchAction(email)),
-    AddMemberAct: (idproject, user) =>
-      dispatch(actionsProject.AddMemberAct(idproject, user))
+    getAllListProject: () => dispatch(actionsProject.getListProjectAct()),
+    AddMemberAct: (idproject, user) =>dispatch(actionsProject.AddMemberAct(idproject, user))
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(DetailUserPage);

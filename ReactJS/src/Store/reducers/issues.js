@@ -49,10 +49,8 @@ export const removeIssueSucces = (state, action) => {
   return cloneState
 }
 export const AddIssueSuccess = (state, action) => {
-  console.log(state, action)
-//   0:
-// idIssue: "5da1581753d577119204d7af"
-// respone: {assignee: "5d786b21f15e5146596ef338"}
+  console.log(state, action) 
+  
 }
 export const changeProcessSuccess = (state, action) => {
   return state

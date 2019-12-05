@@ -16,6 +16,7 @@ import ListSprintDetail from "./ListSprintDetail";
 import Process from '../Board/Process'
 import Issue from '../Board/Issues';
 import WrapperDrop from "./WrapperDrop";
+import * as actionProject from '../../Store/actions/project'
 class ListDetailIssues extends Component {
   constructor(props) {
     super(props);
@@ -62,6 +63,7 @@ class ListDetailIssues extends Component {
     this.props.showListSprint(this.props.params);
   }
   dataAssignee=(data)=>{
+    console.log(data)
     this.props.findUserLikeId(data.assignee)
   }
   callbackFunction = (data, id) => {
@@ -70,9 +72,15 @@ class ListDetailIssues extends Component {
     })
     this.idActive = id
   }
+  showUpdateIssue =() => {
+    this.setState({
+      status: true
+    })
+  }
   render() {
-    const { issues, sprint, user, admin, params } = this.props;
+    const { issues, sprint, user, admin, params, listuser } = this.props;
     const { modal, status, loadData } = this.state;
+    console.log(this.props)
     return (
       <div>
         <div
@@ -95,7 +103,9 @@ class ListDetailIssues extends Component {
           </ul>
         </div>
         <div className="item-issue">
-          <p style={{ textAlign: "left", marginLeft: "72px" }}>BackLog</p>
+          <p style={{ textAlign: "left", marginLeft: "72px" }}>BackLog <span style={{marginLeft: '10px', color: '#7A869A'}}>{issues.length} issues</span></p>
+         
+             {/* <span>{issues.datecreate}</span> */}
               {/* <Process white process={'todo'} handleChange={(id, process) => this.props.changeProcessIssue(id, process)}></Process> */}
             <IssueInBackLog
             name={issues}
@@ -103,6 +113,8 @@ class ListDetailIssues extends Component {
             issues={issues}
             AddIssueIntoSprint={this.props.AddIssueIntoSprint}
             parentCallBack = {this.callbackFunction}
+            showUpdateIssue = {this.showUpdateIssue}
+            // addIssueOnSprint={this.props.addIssueOnSprint}
             sprint={sprint}/>
           {/* <Process/> */}
         </div>
@@ -119,11 +131,13 @@ class ListDetailIssues extends Component {
               if (item._id === this.idActive) {
                 return (
                   <DescriptTask
+                    params={params}
                     issues ={issues}
                     key={key}
                     data={item}
                     user={user}
                     admin={admin}
+                    listuser={listuser}
                     assignTaskIssueAct={this.props.assignTaskIssueAct}
                     findUserLikeEmail={this.props.findUserLikeEmail}
                     AddFlagIssueAct={this.AddFlagIssueAct}
@@ -133,6 +147,7 @@ class ListDetailIssues extends Component {
                     findUserLikeId={this.props.findUserLikeId}
                     dataAssignee={this.dataAssignee}
                     updateNameIssue={this.props.updateNameIssue}
+                    getListUserInProject ={this.props.getListUserInProject}
                   />
                 );
               }
@@ -148,7 +163,8 @@ const mapStateToProps = state => {
     issues: state.issue,
     sprint: state.sprint,
     user: state.user,
-    admin: state.admin
+    admin: state.admin,
+    listuser: state.listuser
   };
 };
 const mapDispatchToProps = dispatch => {
@@ -159,8 +175,8 @@ const mapDispatchToProps = dispatch => {
     findUserLikeEmail: email => dispatch(actionAdmin.SearchAction(email)),
     assignTaskIssueAct: (idIssue, idUser) =>
       dispatch(action.assignTaskIssueAct(idIssue, idUser)),
-    AddIssueIntoSprint: (idIssue, idSprint) =>
-      dispatch(actionIssue.AddIssueIntoSprint(idIssue, idSprint)),
+    // AddIssueIntoSprint: (idIssue, idSprint) =>
+    //   dispatch(actionIssue.AddIssueIntoSprint(idIssue, idSprint)),
     ViewListIssueInSprint: id =>
       dispatch(actionSprint.ViewListIssueInSprint(id)),
     removeIssue: id => dispatch(actionIssue.removeIssue(id)),
@@ -170,7 +186,9 @@ const mapDispatchToProps = dispatch => {
     findUserLikeId: (id) => dispatch(actionAdmin.FindUserAction(id)),
     updateNameAct:(name,id) => dispatch(actionSprint.updateNameAct(name, id)),
     updateNameIssue:(name, id) => dispatch(actionIssue.updateNameIssue(name, id)),
-    beginSprint:(idSprint, idProject) => dispatch(actionSprint.beginSprint(idSprint, idProject))
+    beginSprint:(idSprint, idProject) => dispatch(actionSprint.beginSprint(idSprint, idProject)),
+    AddIssueIntoSprint: (idSprint, idIssue) => dispatch(actionSprint.AddIssueIntoSprint(idSprint, idIssue)),
+    getListUserInProject: (id) => dispatch(actionProject.getListUserInProject(id))
     // findUserLikeIDAct: (idUser) => dispatch(actionUser.findUserLikeIDAct(idUser))
   };
 };
