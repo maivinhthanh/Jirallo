@@ -5,7 +5,7 @@ const epicController = require('../controllers/epic')
 
 const router = express()
 
-const isAuth = require('../middleware/is-auth')
+const isAuth = require('../middleware/AuthMiddleware')
 
 const upload = require('./uploadfile')
 

@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux"
+
 import ListUser from "../Components/User/ListUser";
 import HeaderBoard from "../Components/Board/HeaderBoard";
 import MenuLog from '../Components/BackLog/MenuLog';
@@ -58,4 +60,13 @@ class BacklogPage extends Component {
     );
   }
 }
-export default BacklogPage
+const mapStateToProps = state => {
+  return {
+    error: state.error,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(BacklogPage)

@@ -1,4 +1,6 @@
 import * as actionTypes from '../constants/group';
+import * as actionError from "./error";
+
 import CallApi from '../../until/apiCaller';
 
 export const getGroup = (data) =>{
@@ -25,6 +27,7 @@ export const getListGroup = (data) =>{
     data: data
   }
 }
+
 export const getListAction = (name) =>{
     return dispatch =>{
       return CallApi(`group/getGroup/${name}`,
@@ -38,7 +41,7 @@ export const getListAction = (name) =>{
         dispatch(getListGroup(respone.data.result))
       })
       .catch(err =>{
-        dispatch(createError(err))
+        dispatch(actionError.AlertError(err))
       })
     }
 };
@@ -55,7 +58,7 @@ export const createGroupAct = (name) =>{
       dispatch(createGroup(respone.data))
     })
     .catch(err =>{
-      dispatch(createError(err))
+      dispatch(actionError.AlertError(err))
     })
   }
 } 

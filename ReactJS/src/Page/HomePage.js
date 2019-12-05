@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux"
+
 // import Header from '../Components/Header';
 import BannerLeft from '../Components/BannerLeft';
 import HeaderHome from '../Components/HeaderHome';
 import Headers from '../Components/Header';
 
-export default class HomePage extends Component {
+class HomePage extends Component {
   header=()=>{
     if(localStorage.getItem('user')){
       return(
@@ -29,3 +31,13 @@ export default class HomePage extends Component {
     )
   }
 }
+const mapStateToProps = state => {
+  return {
+    error: state.error,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(HomePage)

@@ -1,4 +1,6 @@
 import * as actionTypes from "../constants/sprint";
+import * as actionError from "./error";
+
 import CallApi from "../../until/apiCaller";
 
 
@@ -26,6 +28,7 @@ export const deleteSprintSuccess = data => {
     data
   }
 }
+
 export const beginSprint = (idSprint, idProject) => {
   return dispatch => {
     return CallApi(`sprint/beginsprint/${idProject}`,
@@ -35,7 +38,7 @@ export const beginSprint = (idSprint, idProject) => {
     ).then(respone => {
       console.log(respone)
     }).catch(err => {
-      console.log(err)
+      dispatch(actionError.AlertError(err))
     }) 
   }
 }
@@ -51,7 +54,7 @@ export const updateNameAct = (name, id) => {
     ).then(respone => {
       console.log(respone)
     }).catch(err => {
-      console.log(err)
+      dispatch(actionError.AlertError(err))
     })
   }
 }
@@ -64,7 +67,7 @@ export const completeSprintAct =(id) => {
     ).then(respone => {
       console.log(respone)
     }).catch(err => {
-      console.log(err)
+      dispatch(actionError.AlertError(err))
     })
   }
 }
@@ -78,7 +81,7 @@ export const deleteSprint = (id) => {
       console.log(respone)
       dispatch(deleteSprintSuccess(respone.data))
     }).catch(err => {
-      dispatch(errorSprint(err))
+      dispatch(actionError.AlertError(err))
     })
   }
 }
@@ -91,7 +94,7 @@ export const ViewListIssueInSprint = (id) => {
     ).then(respone => {
       console.log(respone)
     }).catch(err => {
-      console.log(err)
+      dispatch(actionError.AlertError(err))
     })
   }
 }
@@ -104,7 +107,7 @@ export const showListSprintAct = (id) => {
     ).then (respone => {
       dispatch(showListSprint(respone.data.listsprint))
     }).catch(err => {
-      dispatch(errorSprint(err))
+      dispatch(actionError.AlertError(err))
     })
   }
 }
@@ -120,7 +123,7 @@ export const createSprintAct = (data, id) => {
     ).then(respone => {
       dispatch(createSprint(respone.data))
     }).catch(err => {
-      dispatch(errorSprint(err))
+      dispatch(actionError.AlertError(err))
     })
   }
 }

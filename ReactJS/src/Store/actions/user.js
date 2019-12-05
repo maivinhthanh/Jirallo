@@ -1,4 +1,6 @@
 import * as actionTypes from "../constants/user";
+import * as actionError from "./error";
+
 import CallApi from "../../until/apiCaller";
 
 export const AddUserSuccess = data =>{
@@ -25,6 +27,7 @@ export const findUserLikeId = data => {
     data
   }
 }
+
 export const findUserLikeIDAct = (id) => {
   return dispatch => {
     return CallApi(`auth/FindUserLikeID/${id}`,
@@ -34,7 +37,7 @@ export const findUserLikeIDAct = (id) => {
     ).then(respone => {
       dispatch(findUserLikeId(respone.data.result))
     }).catch(err => {
-      dispatch(ErrorUser(err))
+      dispatch(actionError.AlertError(err))
     })
   }
 }
@@ -47,7 +50,7 @@ export const getListUserAct = () => {
     ).then (respone => {
       dispatch(getListUser(respone.data.result))
     }).catch(err => {
-      dispatch(ErrorUser(err))
+      dispatch(actionError.AlertError(err))
     })
   }
 }
@@ -65,7 +68,7 @@ export const insertUserToGroup = (email,id) =>{
       dispatch(AddUserSuccess(respone.data.result))
     })
     .catch(err =>{
-      dispatch(ErrorUser(err))
+      dispatch(actionError.AlertError(err))
     })
   }
 }

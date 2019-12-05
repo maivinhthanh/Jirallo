@@ -7,7 +7,7 @@ const authController = require('../controllers/auth')
 
 const router = express()
 
-const isAuth = require('../middleware/is-auth')
+const isAuth = require('../middleware/AuthMiddleware')
 
 const upload = require('./uploadfile')
 // const upload = multer({dest: 'images/'})
@@ -47,6 +47,10 @@ router.post('/login',upload.single('avatar'),
         .trim()
     ], 
     authController.login,
+)
+
+router.post('/refreshToken',upload.single('avatar'),
+    authController.refreshToken,
 )
 
 router.post('/findUser',upload.single('avatar'),isAuth,

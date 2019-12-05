@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux"
+
 import Headers from '../Components/Header';
 import BannerLeft from '../Components/BannerLeft';
-export default class UserPage extends Component {
+
+class UserPage extends Component {
   render() {
     return (
       <div>
@@ -11,3 +14,13 @@ export default class UserPage extends Component {
     )
   }
 }
+const mapStateToProps = state => {
+  return {
+    error: state.error,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(UserPage)

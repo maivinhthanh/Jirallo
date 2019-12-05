@@ -1,4 +1,6 @@
 import * as actionTypes from '../constants/project';
+import * as actionError from "./error";
+
 import CallApi from '../../until/apiCaller';
 
 
@@ -64,7 +66,7 @@ export const editEditNameProject = (name, id) => {
     ).then(respone => {
       console.log(respone)
     }).catch(err => {
-      console.log(err)
+      dispatch(actionError.AlertError(err))
     })
   }
 }
@@ -77,7 +79,7 @@ export const findProjectLikeId = (id) => {
     ).then(respone => {
       dispatch(findProjectSuccess(respone.data.project))
     }).catch(err => {
-     dispatch(projectError(err))
+      dispatch(actionError.AlertError(err))
     })
   }
 }
@@ -90,7 +92,7 @@ export const getListUserInProject = (id) => {
     ).then(respone => {
       dispatch(getListUserInProjectSuccess(respone.data.listuser))
     }).catch(err => {
-     dispatch(projectError(err))
+      dispatch(actionError.AlertError(err))
     })
   }
 }
@@ -108,7 +110,6 @@ export const viewListIssuesInProject = (id) => {
   }
 }
 export const EditProject = (id, project) => {
-  console.log(project.get('avatar').name)
   return dispatch => {
     return CallApi(`project/editInfoProject/${id}`,
     'PUT',
@@ -163,9 +164,11 @@ export const getListProjectAct = () =>{
     {},
     'token'
     ).then(respone => {
+      console.log(respone)
       dispatch(getAllList(respone.data.listproject))
     }).catch(err =>{
-      dispatch(projectError(err))
+      console.log(err)
+      dispatch(actionError.AlertError(err))
     })
 
   }

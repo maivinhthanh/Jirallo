@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux"
+
 import Header from '../Components/Header';
 import ProfileDetail from '../Components/Project/profileDetail'
-export default class ProfileProject extends Component {
+class ProfileProject extends Component {
   render() {
     const { match: { params: { id } } } = this.props
     return (
@@ -13,3 +15,13 @@ export default class ProfileProject extends Component {
     )
   }
 }
+const mapStateToProps = state => {
+  return {
+    error: state.error,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(ProfileProject)

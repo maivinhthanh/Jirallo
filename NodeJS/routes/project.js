@@ -5,7 +5,7 @@ const projectController = require('../controllers/project')
 
 const router = express()
 
-const isAuth = require('../middleware/is-auth')
+const isAuth = require('../middleware/AuthMiddleware')
 const isManager = require('../middleware/is-Manager')
 
 const upload = require('./uploadfile')

@@ -32,14 +32,11 @@ app.use('/epic', epicRoutes)
 app.use('/sprint', sprintRoutes)
 app.use('/issues', issuesRoutes)
 
-app.use((error, req, res, next) => {
-    console.log(error)
-    const status = error.statusCode || 500
-    const message = error.message
-    const data = error.data
-
-    res.status(status).json({ message: message, data: data })
-    return next(); 
+app.use((err, req, res, next) => {
+    res.status(500).json({
+        message: 'Error',
+    });
+    return next(err); 
 })
 
 module.exports = app

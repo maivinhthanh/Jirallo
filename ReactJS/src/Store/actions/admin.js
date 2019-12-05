@@ -1,4 +1,6 @@
 import * as actionTypes from "../constants/admin";
+import * as actionError from "./error";
+
 import CallApi from "../../until/apiCaller";
 
 export const Search = data => {
@@ -37,6 +39,7 @@ export const EditUserFail = (name) =>{
       message: name
   }
 }
+
 export const EditUserAction = (id,user) =>{
   return dispatch =>{
       return CallApi(`auth/editProfile/${id}`,'PUT',
@@ -53,7 +56,7 @@ export const EditUserAction = (id,user) =>{
           }
       })
       .catch(err =>{
-         dispatch(EditUserFail(err))
+         dispatch(actionError.AlertError(err))
       })
   }
 }
@@ -71,11 +74,11 @@ export const SearchAction = email => {
         if (respone.data.result.length !== 0) {
           dispatch(Search(respone.data.result));
         } else {
-          dispatch(SearchError("Error"));
+          dispatch(actionError.AlertError("Error"));
         }
       })
       .catch(error => {
-        dispatch(SearchError(error));
+        dispatch(actionError.AlertError(error));
       });
   };
 };
@@ -98,12 +101,12 @@ export const FindUserAction = id => {
           console.log(respone.data.result)
           dispatch(Find(respone.data.result));
         } else {
-          dispatch(FindError("Error"));
+          dispatch(actionError.AlertError("Error"));
         }
       })
       .catch(error => {
         console.log(error)
-        // dispatch(FindError(error));
+        dispatch(actionError.AlertError(error));
       });
   };
 };

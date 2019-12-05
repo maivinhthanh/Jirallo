@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
-const DB_URI = 'mongodb+srv://tuyetnhi:tuyetnhi10081998@studytogether-2fwoo.mongodb.net/test?retryWrites=true&w=majority'
+require('dotenv').config()
+
+const DB_URI = 
+`mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_CLUSTER}-2fwoo.mongodb.net/${process.env.DATABASE_DATABASE}?retryWrites=true&w=majority`
 
 function connect() {
     return new Promise((resolve, reject) => {

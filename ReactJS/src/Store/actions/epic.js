@@ -1,5 +1,7 @@
 import CallAPI from '../../until/apiCaller'
 import * as actionTypes from '../constants/epic'
+import * as actionError from "./error";
+
 import { ErrorUser } from './user'
 
 export const createEpic = (data) =>{
@@ -27,6 +29,7 @@ export const editEpic = (data) => {
     data
   }
 }
+
 export const showListIssueOfEpicAct = (id) => {
   return dispatch => {
     return CallAPI(`epic/viewListIssuesInEpic/${id}`,
@@ -36,7 +39,7 @@ export const showListIssueOfEpicAct = (id) => {
     ).then(repsone => {
       console.log(repsone);
     }).catch(err => {
-      console.log(err)
+      dispatch(actionError.AlertError(err))
     })
   }
 }
@@ -49,7 +52,7 @@ export const updateNameEpic = (name, id) => {
     ).then(respone => {
       dispatch(editEpic(respone.data))
     }).catch(err => {
-      dispatch(ErrorEpic(err))
+      dispatch(actionError.AlertError(err))
     })
   }
 }
@@ -62,7 +65,7 @@ export const EditepicAct = (name, id) => {
     ).then(respone => {
       dispatch(editEpic(respone.data))
     }).catch(err => {
-      dispatch(ErrorEpic(err))
+      dispatch(actionError.AlertError(err))
     })
   }
 }
@@ -75,7 +78,7 @@ export const viewListEpicAct = (idProject) => {
     ).then (respone => {
       dispatch(viewList(respone.data))
     }).catch(err => {
-      dispatch(ErrorEpic(err))
+      dispatch(actionError.AlertError(err))
     })
   }
 }
@@ -94,7 +97,7 @@ export const createEpicAct = (epic) =>{
       dispatch(createEpic(respone.data))
     })
     .catch(err =>{
-      dispatch(ErrorEpic(err))
+      dispatch(actionError.AlertError(err))
     })
   }
 }

@@ -53,6 +53,11 @@ const projectSchema = new Schema({
             required: true
         }
     ],
+    process:[
+        {
+            type: String,
+        }
+    ],
     hidden:{ type: Boolean, default: false },
     datecreate: { type: Date, default: Date.now },
     dateedit: { type: Date }

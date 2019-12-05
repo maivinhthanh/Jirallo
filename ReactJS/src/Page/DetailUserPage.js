@@ -234,7 +234,8 @@ const mapStateToProps = state => {
     user: state.user,
     member: state.member,
     admin: state.admin,
-    project: state.project
+    project: state.project,
+    error: state.error
   };
 };
 const mapDispatchToProps = dispatch => {

@@ -1,11 +1,16 @@
 import * as actionTypes from '../constants/auth';
+import * as actionError from "./error";
+
+import Cookies from 'js-cookie'
+
 import CallApi from '../../until/apiCaller';
 
 export const login = ( account ) => {
-    
+    console.log(account)
     return {
         type: actionTypes.Login,
         token: account.data.token,
+        refreshtoken: account.data.refreshToken,
         id: account.data.userId,
         status : account.status
     };
@@ -51,7 +56,7 @@ export const loginAction = (email, password) => {
             dispatch(login(response));
          } )
          .catch(error => {
-             dispatch(loginfail(error));
+             dispatch(actionError.AlertError(error));
          } );
     };
 };
@@ -67,7 +72,7 @@ export const loginByFacebookAction = (data) => {
             dispatch(login(response));
          } )
          .catch(error => {
-             dispatch(loginfail(error));
+             dispatch(actionError.AlertError(error));
          } );
     };
 };
@@ -84,7 +89,7 @@ export const loginByGoogleAction = (data) => {
             dispatch(login(response));
          } )
          .catch(error => {
-             dispatch(loginfail(error));
+             dispatch(actionError.AlertError(error));
          } );
     };
 };
@@ -99,7 +104,7 @@ export const RegisterAction = (email,password,fullname,avatar,gender) =>{
         }).then (response =>{
             dispatch(register(response.data))
         }).catch (err =>{
-            dispatch(registerFail())
+            dispatch(actionError.AlertError())
         })
     }
 }
@@ -114,7 +119,24 @@ export const EditUserAction = (id,user) =>{
             }
         })
         .catch(err =>{
-           dispatch(EditUserFail(err))
+           dispatch(actionError.AlertError(err))
+        })
+    }
+}
+export const refreshToken = () =>{
+    const refreshToken = Cookies.get('refreshtoken')
+    console.log(refreshToken)
+    return dispatch =>{
+        return CallApi(`auth/refreshToken`,'POST',
+        {refreshToken: refreshToken},
+        'token'
+        ).then(response =>{
+            console.log(response.data)
+            Cookies.set('token', response.data.accessToken, { expires: 1 });
+            dispatch(actionError.CancelError())
+        })
+        .catch(err =>{
+           dispatch(actionError.AlertError(err))
         })
     }
 }

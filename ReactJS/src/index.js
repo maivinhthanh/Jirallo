@@ -19,6 +19,7 @@ import issueReducer from './Store/reducers/issues';
 import sprintReducer from './Store/reducers/sprint'
 import memberReducer from './Store/reducers/member'
 import listuserReducer from './Store/reducers/listuser'
+import errorReducer from './Store/reducers/error'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -33,7 +34,8 @@ const rootReducer = combineReducers({
     sprint: sprintReducer,
     member: memberReducer,
     listissues: listissuesReducer,
-    listuser: listuserReducer
+    listuser: listuserReducer,
+    error: errorReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(
