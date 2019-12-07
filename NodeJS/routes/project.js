@@ -33,6 +33,10 @@ router.put('/AddMember/:idproject',upload.single('avatar'),isAuth, isManager,
     [], 
     projectController.AddMember,
 )
+router.put('/addAndSortIssuesInBackLog/:idproject',upload.single('avatar'),isAuth,
+    [], 
+    projectController.addAndSortIssuesInBackLog,
+)
 router.get('/viewListProject',isAuth,
     projectController.ViewListProject,
 )

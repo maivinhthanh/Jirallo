@@ -236,3 +236,20 @@ exports.viewListIssuesInSprint = async (req, res, next) => {
         next(err)
     }
 }
+exports.addAndSortIssuesInSprint = async (req, res, next) => {
+    try{
+        const idsprint = req.params.idsprint
+        const listissues = req.body.listissues
+
+        const sprint = await Sprint.findByIdAndUpdate(idsprint,
+            {
+                idissues : listissues
+            } ,{new: true})
+
+        res.status(201).json({ statusCode: 200, listissues: sprint.idissues })
+    }
+    catch(err) {
+        
+        next(err)
+    }
+}

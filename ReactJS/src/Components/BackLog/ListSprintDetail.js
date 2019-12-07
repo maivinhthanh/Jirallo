@@ -4,7 +4,7 @@ import _ from "lodash";
 import InputField from './../InputEdit/inputField'
 import WrapperDrop from "./WrapperDrop";
 import Process from "../Board/Process";
-import Select from 'react-select';
+// import Select from 'react-select';
 // export const colourOptions = [
 //   { value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true },
 //   { value: 'blue', label: 'Blue', color: '#0052CC', disabled: true },

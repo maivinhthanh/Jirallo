@@ -42,5 +42,8 @@ router.put('/deleteSprint/:idsprint',upload.single('avatar'),isAuth,
     [], 
     sprintController.deleteSprint,
 )
-
+router.put('/addAndSortIssuesInSprint/:idsprint',upload.single('avatar'),isAuth, 
+    [], 
+    sprintController.addAndSortIssuesInSprint,
+)
 module.exports = router

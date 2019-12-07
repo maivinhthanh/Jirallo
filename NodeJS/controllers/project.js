@@ -221,3 +221,20 @@ exports.getListUserInProject = async (req, res, next) => {
         next(err)
     }
 }
+exports.addAndSortIssuesInBackLog = async (req, res, next) => {
+    try{
+        const idproject = req.params.idproject
+        const listissues = req.body.listissues
+
+        const project = await Project.findByIdAndUpdate(idproject,
+            {
+                idissues : listissues
+            } ,{new: true})
+
+        res.status(201).json({ statusCode: 200, listissues: project.idissues })
+    }
+    catch(err) {
+        
+        next(err)
+    }
+}
