@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import GoogleLogin from 'react-google-login'
 import { Link, Route } from 'react-router-dom'
 import FacebookLogin from 'react-facebook-login'
+import './main.css'
 
 class Login extends Component {
   constructor(props) {
@@ -39,67 +40,84 @@ class Login extends Component {
   }
   render() {
     return (
-      <div className="loginPage">
-        <div className="container form-login">
-          <form onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <h3>Login <i className="icon-user fas fa-user-plus"></i></h3>
-              <label htmlFor="email">Email: <i className="fa fa-envelope"></i></label>
-              <input
-                required
-                type="email"
-                className="form-control"
-                id="email"
+      <div className="limiter">
+        <div className="container-login100">
+          <div className="wrap-login100">
+            <div className="login100-pic js-tilt" data-tilt>
+              <img src="images/logo-login.jpg" alt="IMG" />
+            </div>
+
+            <form className="login100-form validate-form">
+              <span className="login100-form-title">
+                User Login
+              </span>
+
+              <div className="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                <input className="input100" type="text" required
                 placeholder="Enter email"
                 name="email"
                 value={this.state.email}
                 onChange={this.handleEmail}
                 maxLength='30'
-                minLength='9'
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="pwd">Password: <i className="fa fa-key"></i></label>
-              <input
-                required
-                type="password"
-                className="form-control"
-                id="pwd"
+                minLength='9' />
+                <span className="focus-input100"></span>
+                <span className="symbol-input100">
+                  <i className="fa fa-envelope" aria-hidden="true"></i>
+                </span>
+              </div>
+
+              <div className="wrap-input100 validate-input" data-validate = "Password is required">
+                <input className="input100" required
                 placeholder="Enter password"
-                name="pswd"
                 value={this.state.password}
                 onChange={this.handlePass}
                 maxLength='30'
-                minLength='5'
-              />
-            </div>
-            <div className="form-group form-check">
-              <label className="form-check-label">
-                <input className="form-check-input" type="checkbox" name="remember" />
-                Remember me
-            </label>
-            </div>
-            <button type="submit" className="submit-btn">
-              Submit <i className="fas fa-paper-plane"></i>
-            </button>
-            <p className="txtPass" ><Link to="/register">Forgot Password ?</Link> </p>
-          </form>
-          <div className="App">
+                minLength='5' type="password" name="pass" />
+                <span className="focus-input100"></span>
+                <span className="symbol-input100">
+                  <i className="fa fa-lock" aria-hidden="true"></i>
+                </span>
+              </div>
+              
+              <div className="container-login100-form-btn">
+                <button className="btn-login login100-form-btn" onClick={this.handleSubmit}>
+                <i className="fas fa-sign-in-alt"></i>
+                  Login
+                </button>
+              </div>
+              <div className=" container-login100-form-btn">
 
-            <FacebookLogin
-              fields="name,email,picture"
-              callback={this.responseFacebook}
-            />
-            <br />
-            <GoogleLogin
-              clientId="919009151118-m817ir6400ear78nlir3cpgo2nrjle1n.apps.googleusercontent.com"
-              buttonText="LOGIN WITH GOOGLE"
-              onSuccess={this.responseGoogle}
-              onFailure={this.responseGoogle}
-            />
+                  <FacebookLogin cssClass="btn-face login100-form-btn"
+                    fields="name,email,picture" textButton="Facebook" icon="fab fa-facebook"
+                    callback={this.responseFacebook}
+                  />
+              </div>
+
+              <div className="container-login100-form-btn">
+                <GoogleLogin
+                  className="btn-google login100-form-btn" buttonText="Google" 
+                  clientId="919009151118-m817ir6400ear78nlir3cpgo2nrjle1n.apps.googleusercontent.com"
+                  onSuccess={this.responseGoogle}
+                  onFailure={this.responseGoogle}
+                />
+              </div>
+
+              <div className="text-center p-t-12">
+                <span className="txt1">
+                  Forgot
+                </span>
+                <a className="txt2" href="#">
+                  Username / Password?
+                </a>
+              </div>
+
+              <div className="text-center p-t-136">
+                <Link to="/register">Sign up</Link>
+              </div>
+            </form>
           </div>
         </div>
-      </div>
+	    </div>
     )
   }
 }

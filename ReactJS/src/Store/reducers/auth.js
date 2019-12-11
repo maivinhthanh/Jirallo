@@ -2,7 +2,6 @@ import * as actionTypes from '../constants/auth';
 import { updateObject } from '../utility';
 import Cookies from 'js-cookie'
 import CallApi from '../../until/apiCaller';
-import { EditUser } from '../actions/auth';
 
 const initialState = {
     id: '',
@@ -20,7 +19,7 @@ const initialState = {
 const login = ( state, action ) => {
     const token = action.token
     const refreshtoken = action.refreshtoken
-    Cookies.set('token', token, { expires: 1 });
+    Cookies.set('token', token, { expires: 365 });
     Cookies.set('refreshtoken', refreshtoken, { expires: 365 });
     let json = {
         code : 'ok',

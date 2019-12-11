@@ -19,19 +19,19 @@ class ListProjectPage extends Component {
     
   // }
   render() {
-    console.log(this.props.error.message !== '')
-    if(this.props.error.message !== ''){
-      return(
-        <ShowError isshow={true} type={'warning'} message={this.props.error.message}/>
-      )
-    }
-    else{
+    // console.log(this.props.error.message !== '')
+    // if(this.props.error.message !== ''){
+    //   return(
+    //     <ShowError isshow={true} type={'warning'} message={this.props.error.message}/>
+    //   )
+    // }
+    // else{
       return (
         <div className="viewAll">
           <Project/>
         </div>
       )
-    }
+    // }
     
   }
 }

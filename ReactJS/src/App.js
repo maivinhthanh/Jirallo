@@ -1,5 +1,7 @@
 import './App.css';
-import React from 'react';
+import React, { Component } from 'react'
+import { connect } from 'react-redux';
+
 import UserPage from './Page/UserPage';
 import HomePage from './Page/HomePage'
 import MainPage from './Page/MainPage'
@@ -15,28 +17,58 @@ import ListProjectPage from './Page/ListProjectPage'
 import Login from './Containers/Auth/Login/LoginContainer'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Register from './Containers/Auth/Register/RegisterContainer'
-function App() {
-  return (
-    <DndProvider backend={HTML5Backend}>
-      <div className="App">
-        <Router>
-          <Route path="/" exact component={HomePage} />
-          <Route path="/user" component={UserPage} />
-          <Route path="/backlog/:id?" component={BacklogPage} />
-          <Route path="/Profile/:id?" component={ProfileProject} />
-          <Route path="/board/:id?" component={BoardPage} />
-          <Route path="/login" component={Login} />
-          <Route path='/group' component={Group} />
-          <Route path="/register" component={Register} />
-          <Route path="/admin" component={AdminPage} />
-          <Route path="/detailUser" component={DetailUserPage} />
-          <Route path="/viewAll" component={ListProjectPage} />
-          <Route path="/adminPage" component={MainPage} />
-        </Router>
+import PrivateRoute from './PrivateRoute'
+import Cookies from 'js-cookie'
+import jwtDecode from 'jwt-decode'
 
-      </div>
-    </DndProvider>
-  );
+class App extends Component {
+  shouldComponentUpdate(nextProps, nextState){
+    console.log("as")
+    return nextProps.user.code !== this.props.user.code
+  }
+  render(){
+    let isAuth = false
+    let token
+    if ((Cookies.get('token') && Cookies.get('refreshtoken')) ||
+      (Cookies.get('token') === undefined && Cookies.get('refreshtoken') === undefined) ||
+      (Cookies.get('token') === null && Cookies.get('refreshtoken') === null )){
+      console.log("2")
+      token = {
+        token : jwtDecode(Cookies.get('token')),
+        refreshtoken : jwtDecode(Cookies.get('refreshtoken'))
+      }
+      isAuth = 1000 * token.refreshtoken.exp > (new Date()).getTime()
+    }
+    console.log("3")
+    return (
+      <DndProvider backend={HTML5Backend}>
+        <div className="App">
+          <Router>
+            <PrivateRoute path="/" isAuth={isAuth}  exact component={HomePage} />
+            <PrivateRoute path="/user" isAuth={isAuth} component={UserPage} />
+            <PrivateRoute path="/backlog/:id?" isAuth={isAuth} component={BacklogPage} />
+            <PrivateRoute path="/Profile/:id?" isAuth={isAuth} component={ProfileProject} />
+            <PrivateRoute path="/board/:id?" isAuth={isAuth} component={BoardPage} />
+            <Route path="/login" component={Login} />
+            <PrivateRoute path='/group' isAuth={isAuth} component={Group} />
+            <Route path="/register" component={Register} />
+            <PrivateRoute path="/admin" isAuth={isAuth} component={AdminPage} />
+            <PrivateRoute path="/detailUser" isAuth={isAuth} component={DetailUserPage} />
+            <PrivateRoute path="/viewAll" isAuth={isAuth} component={ListProjectPage} />
+            <PrivateRoute path="/adminPage" isAuth={isAuth} component={MainPage} />
+          </Router>
+
+        </div>
+      </DndProvider>
+    );
+  }
+  
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+      user : state.auth
+  };
+};
+
+export default connect( mapStateToProps, null )(App);

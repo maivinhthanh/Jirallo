@@ -10,7 +10,6 @@ class Register extends Component {
       password:'',
       name: '',
       avatar :'',
-      gender:'female',
     }
   }
   handleChangeName =(event) =>{
@@ -37,12 +36,6 @@ class Register extends Component {
       avatar: event.target.value
     })
   }
-  handleChangeGender = (event) =>{
-    event.preventDefault();
-    this.setState({
-      gender: event.target.value
-    })
-  }
   handleSubmit =(event)=>{
     event.preventDefault();
     const user = [{email:this.state.email, password:this.state.password,name: this.state.name,avatar:this.state.avatar,gender:this.state.gender}]
@@ -50,82 +43,70 @@ class Register extends Component {
   }
   render() {
     return (
-      <div className="registerPage">
-      <div className="container form-register">
-      <div className="img-register">
-      </div>
-        <form onSubmit={this.handleSubmit}>
-        <div className="form-group">
-          <h3>Register <i className="icon-user fas fa-user-plus"></i></h3>
-            <label htmlFor="name">Full name:</label>
-            <input
-              required
-              type="text"
-              className="form-control"
-              id="fullname"
-              placeholder="Enter full name"
-              name="fullname"
-              maxLength='30'
-              value={this.state.name}
-              onChange= {this.handleChangeName}
-            />
+      <div className="limiter">
+        <div className="container-login100">
+          <div className="wrap-login100">
+            <div className="login100-pic js-tilt" data-tilt>
+              <img src="images/logo-login.jpg" alt="IMG" />
+            </div>
+
+            <form className="login100-form validate-form">
+              <span className="login100-form-title">
+                New user
+              </span>
+
+              <div className="wrap-input100 validate-input" data-validate = "Your name">
+                <input className="input100" type="text" required
+                placeholder="Enter full name"
+                name="fullname"
+                maxLength='30'
+                value={this.state.name}
+                onChange= {this.handleChangeName} />
+                <span className="focus-input100"></span>
+                <span className="symbol-input100">
+                  <i className="fa fa-envelope" aria-hidden="true"></i>
+                </span>
+              </div>
+              <div className="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                <input className="input100" type="text" required
+                placeholder="Enter email"
+                name="email"
+                maxLength='30'
+                minLength='9'
+                value = {this.state.email}
+                onChange = {this.handleChangeEmail} />
+                <span className="focus-input100"></span>
+                <span className="symbol-input100">
+                  <i className="fa fa-envelope" aria-hidden="true"></i>
+                </span>
+              </div>
+              <div className="wrap-input100 validate-input" data-validate = "Password is required">
+                <input className="input100" required
+                placeholder="Enter password"
+                value={this.state.password}
+                onChange={this.handlePass}
+                maxLength='30'
+                minLength='5' type="password" name="pass" />
+                <span className="focus-input100"></span>
+                <span className="symbol-input100">
+                  <i className="fa fa-lock" aria-hidden="true"></i>
+                </span>
+              </div>
+              
+              <div className="container-login100-form-btn">
+                <button className="btn-login login100-form-btn" onClick={this.handleSubmit}>
+                <i className="fas fa-sign-in-alt"></i>
+                  Sign Up
+                </button>
+              </div>
+
+              <div className="text-center p-t-136">
+                <Link to="/login">Log in</Link>
+              </div>
+            </form>
           </div>
-          <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input
-              required
-              type="email"
-              className="form-control"
-              id="email"
-              placeholder="Enter email"
-              name="email"
-              maxLength='30'
-              minLength='9'
-              value = {this.state.email}
-              onChange = {this.handleChangeEmail}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="pwd">Password:</label>
-            <input
-              required
-              type="password"
-              className="form-control"
-              id="pwd"
-              placeholder="Enter password"
-              name="pswd"
-              maxLength='30'
-              minLength='5'
-              onChange= {this.handleChangePass}
-              value = {this.state.password}
-              />
-          </div>
-          <div className="form-group">
-            <label htmlFor="pwd">Avatar:</label>
-            <input onChange={this.handleChangeFile} value={this.state.avatar} type="file" class="form-control-file"></input>
-          </div>
-          <div className="form-group gender">
-          <FormGroup>
-          <Label for="exampleSelect">Gender</Label>
-          <Input type="select" name="select" value={this.state.gender} onChange={this.handleChangeGender} id="exampleSelect">
-            <option value="female">Female</option>
-            <option value="male">Male</option>
-          </Input>
-        </FormGroup>
-          </div>
-          <div className="form-group form-check">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox" name="remember" />
-              Remember me
-            </label>
-          </div>
-          <button type="submit" className="submit-btn">
-            Submit  <i class="fas fa-paper-plane"></i>
-          </button>
-          <p className="txtPass" ><Link to="/login">Have a account ?</Link> </p>
-        </form>
-      </div>
-      </div>
+        </div>
+	    </div>
     )
   }
 }

@@ -19,6 +19,7 @@ class LoginContainer extends Component {
   }
   haveRedirect(){
     if(this.state.redirect === true){
+      console.log(".ss")
       return <Redirect to="/user" />
     }
   }
