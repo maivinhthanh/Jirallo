@@ -45,6 +45,12 @@ export const EditUserFail = (name) =>{
         message: name
     }
 }
+export const LogOut = (data) =>{
+    return {
+        type: actionTypes.LogOut,
+        data: data
+    }
+}
 export const loginAction = (email, password) => {
     
     return dispatch => {
@@ -123,15 +129,30 @@ export const EditUserAction = (id,user) =>{
         })
     }
 }
+export const logout = () =>{
+    const refreshToken = Cookies.get('refreshtoken')
+    return dispatch =>{
+        return CallApi(`auth/logout`,'POST',
+        {refreshToken: refreshToken},
+        'token'
+        ).then(response =>{
+            localStorage.clear('user')
+            Cookies.remove('token');
+            Cookies.remove('refreshtoken');
+            dispatch(LogOut(response.data))
+        })
+        .catch(err =>{
+           dispatch(actionError.AlertError(err))
+        })
+    }
+}
 export const refreshToken = () =>{
     const refreshToken = Cookies.get('refreshtoken')
-    console.log(refreshToken)
     return dispatch =>{
         return CallApi(`auth/refreshToken`,'POST',
         {refreshToken: refreshToken},
         'token'
         ).then(response =>{
-            console.log(response.data)
             Cookies.set('token', response.data.accessToken, { expires: 1 });
             dispatch(actionError.CancelError())
         })

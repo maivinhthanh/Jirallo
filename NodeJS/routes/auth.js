@@ -53,6 +53,10 @@ router.post('/refreshToken',upload.single('avatar'),
     authController.refreshToken,
 )
 
+router.post('/logout',upload.single('avatar'),
+    authController.logout,
+)
+
 router.post('/findUser',upload.single('avatar'),isAuth,
     [
         body('email')

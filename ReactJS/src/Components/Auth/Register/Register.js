@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom' 
-import { FormGroup, Label, Input } from 'reactstrap';
+import Tilt from 'react-tilt'
+
 class Register extends Component {
   constructor(props){
     super(props);
@@ -46,8 +47,12 @@ class Register extends Component {
       <div className="limiter">
         <div className="container-login100">
           <div className="wrap-login100">
-            <div className="login100-pic js-tilt" data-tilt>
-              <img src="images/logo-login.jpg" alt="IMG" />
+            <div className="login100-pic js-tilt" >
+              <Tilt className="Tilt" options={{ max : 40 }} style={{ height: 400, width: 400 }} >
+                <div className="Tilt-inner"> 
+                  <img src="images/logo-login.jpg" alt="IMG" />
+                </div>
+              </Tilt>
             </div>
 
             <form className="login100-form validate-form">

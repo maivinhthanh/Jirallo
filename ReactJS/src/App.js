@@ -29,17 +29,13 @@ class App extends Component {
   render(){
     let isAuth = false
     let token
-    if ((Cookies.get('token') && Cookies.get('refreshtoken')) ||
-      (Cookies.get('token') === undefined && Cookies.get('refreshtoken') === undefined) ||
-      (Cookies.get('token') === null && Cookies.get('refreshtoken') === null )){
-      console.log("2")
+    if (!(!Cookies.get('token') && !Cookies.get('refreshtoken')) ){
       token = {
         token : jwtDecode(Cookies.get('token')),
         refreshtoken : jwtDecode(Cookies.get('refreshtoken'))
       }
       isAuth = 1000 * token.refreshtoken.exp > (new Date()).getTime()
     }
-    console.log("3")
     return (
       <DndProvider backend={HTML5Backend}>
         <div className="App">

@@ -3,6 +3,7 @@ import GoogleLogin from 'react-google-login'
 import { Link, Route } from 'react-router-dom'
 import FacebookLogin from 'react-facebook-login'
 import './main.css'
+import Tilt from 'react-tilt'
 
 class Login extends Component {
   constructor(props) {
@@ -43,8 +44,13 @@ class Login extends Component {
       <div className="limiter">
         <div className="container-login100">
           <div className="wrap-login100">
-            <div className="login100-pic js-tilt" data-tilt>
-              <img src="images/logo-login.jpg" alt="IMG" />
+            <div className="login100-pic js-tilt" >
+            <Tilt className="Tilt" options={{ max : 40 }} style={{ height: 400, width: 400 }} >
+              <div className="Tilt-inner"> 
+                <img src="images/logo-login.jpg" alt="IMG" />
+              </div>
+            </Tilt>
+              
             </div>
 
             <form className="login100-form validate-form">

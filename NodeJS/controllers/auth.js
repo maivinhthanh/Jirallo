@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator/check")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+const {ObjectId} = require('mongodb')
 
 const User = require('../models/user')
 const Activities = require('../models/activities')
@@ -140,7 +141,7 @@ exports.logout = async (req, res, next) => {
     const refreshTokenFromClient = req.body.refreshToken;
     
     const checktoken = await Token.findOne({refreshtoken: refreshTokenFromClient})
-    await Token.findOneAndDelete(checktoken._id)
+    await Token.findByIdAndRemove(ObjectId(checktoken._id))
     if (checktoken) {
       try {
         const decoded = await jwtHelper.verifyToken(refreshTokenFromClient, refreshTokenSecret);
@@ -313,13 +314,19 @@ exports.loginbyfacebook = async (req, res, next) => {
                 email: email
             })
             const newuser = await user.save()
-            const token = jwt.sign(
-                {
-                    email: null,
-                    userId: newuser._id.toString()
-                },
-                "somesupersecretsecret"
-            )
+            const userFakeData = {
+                email: newuser.email,
+                userId: newuser._id.toString(),
+            }
+    
+            const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife)
+            const refreshToken = await jwtHelper.generateToken(userFakeData, refreshTokenSecret, refreshTokenLife)
+            
+            const tokendata = new Token({
+                refreshtoken: refreshToken
+            })
+
+            await tokendata.save()
 
             const action = new Activities({
                 action: 'loginbyfacebook',
@@ -328,16 +335,22 @@ exports.loginbyfacebook = async (req, res, next) => {
     
             await action.save()
 
-            res.status(200).json({token: token, userId: newuser._id.toString()})
+            res.status(200).json({token: accessToken, refreshToken: refreshtoken, userId: newuser._id.toString()})
         }
         else{
-            const token = jwt.sign(
-                {
-                    email: email,
-                    userId: newuser._id.toString()
-                },
-                "somesupersecretsecret"
-            )
+            const userFakeData = {
+                email: email,
+                userId: user._id.toString()
+            }
+    
+            const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife)
+            const refreshToken = await jwtHelper.generateToken(userFakeData, refreshTokenSecret, refreshTokenLife)
+            
+            const tokendata = new Token({
+                refreshtoken: refreshToken
+            })
+    
+            await tokendata.save()
 
             const action = new Activities({
                 action: 'loginbyfacebook',
@@ -346,7 +359,7 @@ exports.loginbyfacebook = async (req, res, next) => {
     
             await action.save()
     
-            res.status(200).json({token: token, userId: user._id.toString()})
+            res.status(200).json({token: accessToken, refreshToken: refreshtoken, userId: user._id.toString()})
         }
 
         
@@ -372,13 +385,21 @@ exports.loginbygoogle = async (req, res, next) => {
                 email: email
             })
             const newuser = await user.save()
-            const token = jwt.sign(
-                {
-                    email: null,
-                    userId: newuser._id.toString()
-                },
-                "somesupersecretsecret"
-            )
+
+            const userFakeData = {
+                email: newuser.email,
+                userId: newuser._id.toString(),
+            }
+    
+            const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife)
+            const refreshToken = await jwtHelper.generateToken(userFakeData, refreshTokenSecret, refreshTokenLife)
+            
+            const tokendata = new Token({
+                refreshtoken: refreshToken
+            })
+    
+            await tokendata.save()
+    
 
             const action = new Activities({
                 action: 'loginbygoogle',
@@ -387,16 +408,22 @@ exports.loginbygoogle = async (req, res, next) => {
     
             await action.save()
 
-            res.status(200).json({token: token, userId: newuser._id.toString()})
+            res.status(200).json({token: accessToken, refreshToken: refreshtoken, userId: newuser._id.toString()})
         }
         else{
-            const token = jwt.sign(
-                {
-                    email: email,
-                    userId: user._id.toString()
-                },
-                "somesupersecretsecret"
-            )
+            const userFakeData = {
+                email: email,
+                userId: user._id.toString()
+            }
+    
+            const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife)
+            const refreshToken = await jwtHelper.generateToken(userFakeData, refreshTokenSecret, refreshTokenLife)
+            
+            const tokendata = new Token({
+                refreshtoken: refreshToken
+            })
+    
+            await tokendata.save()
 
             const action = new Activities({
                 action: 'loginbygoogle',
@@ -405,7 +432,7 @@ exports.loginbygoogle = async (req, res, next) => {
     
             await action.save()
     
-            res.status(200).json({token: token, userId: user._id.toString()})
+            res.status(200).json({token: accessToken, refreshToken: refreshtoken, userId: user._id.toString()})
         }
 
         

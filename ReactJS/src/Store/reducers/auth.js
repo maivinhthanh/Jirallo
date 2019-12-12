@@ -54,6 +54,9 @@ const EditUserSuccess = (state, action) =>{
 const EditUserFail = (state, action) =>{
     return updateObject(state,{error : true})
 }
+const LogOut = (state, action) =>{
+    return updateObject(state,{error : true})
+}
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.Login: return login( state, action ); 
@@ -62,6 +65,8 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.RegisterFail : return registerFail(state,action);
         case actionTypes.EditUserSuccess : return EditUserSuccess(state, action);
         case actionTypes.EditUserFail : return EditUserFail(state,action)
+        case actionTypes.LogOut : return LogOut(state,action)
+
         default: return state;
     }
 };
