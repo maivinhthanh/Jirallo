@@ -5,6 +5,7 @@ import { connect } from "react-redux"
 import BannerLeft from '../Components/BannerLeft';
 import HeaderHome from '../Components/HeaderHome';
 import Headers from '../Components/Header';
+import MenuUser from '../Components/MenuUser/Menu'
 
 class HomePage extends Component {
   header=()=>{
@@ -22,9 +23,10 @@ class HomePage extends Component {
   render() {
     return (
       <div>
-        {
+        <MenuUser/>
+        {/* {
             this.header()
-        }
+        } */}
 
       <BannerLeft/>
       </div>

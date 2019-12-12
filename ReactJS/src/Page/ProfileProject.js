@@ -3,13 +3,14 @@ import { connect } from "react-redux"
 
 import Header from '../Components/Header';
 import ProfileDetail from '../Components/Project/profileDetail'
+import MenuUser from '../Components/MenuUser/Menu'
+
 class ProfileProject extends Component {
   render() {
     const { match: { params: { id } } } = this.props
     return (
       <div>
-      {/* <Header/> */}
-      <Header/>
+      <MenuUser/>
       <ProfileDetail params = {id}/>
       </div>
     )

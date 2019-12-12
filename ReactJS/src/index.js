@@ -13,6 +13,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import rootReducer from './Store/reducers'
 
+import Register from './Containers/Auth/Register/RegisterContainer'
+import Login from './Containers/Auth/Login/LoginContainer'
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const persistedFilter = createFilter(
     'auth', ['access', 'refresh']
@@ -34,7 +38,11 @@ persistStore(store)
 const app = (
     <Provider store={store}>
         <BrowserRouter>
-            <App />
+            <Router>
+                <App />
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
+            </Router>
         </BrowserRouter>
     </Provider>
 );

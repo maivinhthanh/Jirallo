@@ -14,16 +14,13 @@ import DetailUserPage from './Page/DetailUserPage'
 import ProfileProject from './Page/ProfileProject'
 import HTML5Backend from 'react-dnd-html5-backend'
 import ListProjectPage from './Page/ListProjectPage'
-import Login from './Containers/Auth/Login/LoginContainer'
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Register from './Containers/Auth/Register/RegisterContainer'
 import PrivateRoute from './PrivateRoute'
 import Cookies from 'js-cookie'
 import jwtDecode from 'jwt-decode'
 
 class App extends Component {
   shouldComponentUpdate(nextProps, nextState){
-    console.log("as")
     return nextProps.user.code !== this.props.user.code
   }
   render(){
@@ -39,15 +36,14 @@ class App extends Component {
     return (
       <DndProvider backend={HTML5Backend}>
         <div className="App">
+          {/* <MenuUser/> */}
           <Router>
             <PrivateRoute path="/" isAuth={isAuth}  exact component={HomePage} />
             <PrivateRoute path="/user" isAuth={isAuth} component={UserPage} />
             <PrivateRoute path="/backlog/:id?" isAuth={isAuth} component={BacklogPage} />
             <PrivateRoute path="/Profile/:id?" isAuth={isAuth} component={ProfileProject} />
             <PrivateRoute path="/board/:id?" isAuth={isAuth} component={BoardPage} />
-            <Route path="/login" component={Login} />
             <PrivateRoute path='/group' isAuth={isAuth} component={Group} />
-            <Route path="/register" component={Register} />
             <PrivateRoute path="/admin" isAuth={isAuth} component={AdminPage} />
             <PrivateRoute path="/detailUser" isAuth={isAuth} component={DetailUserPage} />
             <PrivateRoute path="/viewAll" isAuth={isAuth} component={ListProjectPage} />

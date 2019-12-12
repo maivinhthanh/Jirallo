@@ -65,18 +65,7 @@ class projectContainer extends Component {
     })
     return (
       <div className="row">
-        <nav className="nav-top">
-          <div className="logo">
-            <h1>
-              <a href="/">
-                <img className="logo-menu" src="/logo-menu.jpg" />
-              </a>
-            </h1>
-          </div>
-          <IteamHeader />
-        </nav>
-        <div className="col-1"></div>
-        <div className="col-11">
+        <div className="col-12">
           <HeaderProject />
           <div className="row">
             <div className="col-4" >

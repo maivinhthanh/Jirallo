@@ -16,11 +16,6 @@ class HeaderBoard extends Component {
       showModal: false
     };
   }
-  onFocus =(data)=>{
-    this.setState({
-      active:data
-    })
-  }
   handleKeySeach =(event) =>{
     event.preventDefault();
     this.setState({
@@ -37,16 +32,17 @@ class HeaderBoard extends Component {
     const {active, keyseach, showModal} = this.state
     return (
       <div className="row" style={{height: '60px',padding: '10px 0px',backgroundColor: '#6A8DCD',marginBottom: '20px'}}>
-        <div className={active ? 'col-3' : 'col-4'}></div>
-        <div className={active ? 'col-6' : 'col-4'}>
-          <InputGroup onMouseOver={() =>this.onFocus(true)} onMouseLeave={() =>this.onFocus(false)} >
+        <div className='col-1'></div>
+        <div className='col-4'>
+          <InputGroup >
             <Input value={keyseach} onChange={this.handleKeySeach}/>
             <InputGroupAddon addonType="append">
               <InputGroupText><i className="fas fa-search"></i></InputGroupText>
             </InputGroupAddon>
           </InputGroup>
         </div>
-        <div className={active ? 'col-3 text-right' : 'col-4 text-right'} >
+        <div className='col-1'></div>
+        <div className='col-6 text-center' >
           <Button color="success" onClick={()=>this.isShowModal()} style={{border: '1px solid'}}
           ><b>Create Project</b></Button>
           <div className="modal-create">

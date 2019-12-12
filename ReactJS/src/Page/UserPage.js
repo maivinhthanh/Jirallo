@@ -3,12 +3,13 @@ import { connect } from "react-redux"
 
 import Headers from '../Components/Header';
 import BannerLeft from '../Components/BannerLeft';
+import MenuUser from '../Components/MenuUser/Menu'
 
 class UserPage extends Component {
   render() {
     return (
       <div>
-        <Headers/>
+        <MenuUser/>
         <BannerLeft/>
       </div>
     )

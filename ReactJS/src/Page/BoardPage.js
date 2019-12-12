@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from "react-redux"
 
 import Board from '../Components/Board/Board';
+import MenuUser from '../Components/MenuUser/Menu'
 
 class BoardPage extends Component {
   
@@ -9,6 +10,7 @@ class BoardPage extends Component {
     const { match: { params: { id } } } = this.props
     return (
       <div>
+        <MenuUser/>
         <Board params = {id}/>
       </div>
     )

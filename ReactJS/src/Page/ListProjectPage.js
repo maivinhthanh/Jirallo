@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from "react-redux"
 
 import Project from '../Containers/Project/ProjectContainer'
-import ShowError from '../Components/Modal/ShowError'
+import MenuUser from '../Components/MenuUser/Menu'
 
 class ListProjectPage extends Component {
   constructor(props) {
@@ -12,26 +12,14 @@ class ListProjectPage extends Component {
   shouldComponentUpdate(nextProps, nextState){
     return this.props.error != nextProps.error
   }
-  // componentWillUpdate(nextProps, nextState, snapshot){
-  //   if (nextProps.error != this.props.error) {
-  //     this.clone = nextProps.error            
-  //   }
-    
-  // }
+
   render() {
-    // console.log(this.props.error.message !== '')
-    // if(this.props.error.message !== ''){
-    //   return(
-    //     <ShowError isshow={true} type={'warning'} message={this.props.error.message}/>
-    //   )
-    // }
-    // else{
       return (
         <div className="viewAll">
+          <MenuUser/>
           <Project/>
         </div>
       )
-    // }
     
   }
 }
