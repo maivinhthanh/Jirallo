@@ -1,11 +1,12 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import * as Config from '../../Config';
-import { Link } from "react-router-dom";
 import InputField from "../InputEdit/inputField";
 import {
-  Card, CardBody, CardTitle, CardSubtitle, Button,Modal, ModalBody, ModalHeader, ModalFooter, Input, PopoverHeader, PopoverBody, UncontrolledPopover
+  Card, CardBody, CardTitle, CardSubtitle, Button,Modal, ModalBody, ModalHeader, ModalFooter, Input
 } from "reactstrap";
+import { Link } from 'react-router-dom'
+
 export default class projectDetail extends Component {
   constructor(props) {
     super(props);
@@ -55,69 +56,27 @@ export default class projectDetail extends Component {
   updateNameProject(item, id) {
     this.props.editEditNameProject(item, id)
   }
-  activeProject = (id) => {
-    localStorage.setItem('idproject', id)
-  }
-  render() {
-    const { project } = this.props;
-    _.map(this.props.member, (item) => {
-      this.hanleUserActive = item._id
-    })
-    return (
-      <div>
-        {_.map(project, (item, index) => {
-          return (
-            <Card key={index}>
+  showCard = () =>{
+    const { project } = this.props
+    return(
+      _.map(project, (item, index) => {
+        return(
+            <Card key={index} style={{width : '22rem',marginRight: '20px'}}>
               <CardBody style={{ background: "#B3C6E6" }}>
                 <div className="row">
                   <div className="col-5" >
-                    <div id={'Popover-' + index}>
-                      {
-                        !_.isEmpty(item.image) ?
-                          <img className="avatar-image avatar-project" src={Config.API_URL + "/" + item.image}
-                            height={96} width={96} />
-                          : <img className="avatar-image avatar-project" src={'images/12.jpeg'}
-                            height={96} width={96} />
-                      }
+                    <div >
+                      <Link to={{ pathname: `/backlog/${item._id}` }} >
+                        {
+                          !_.isEmpty(item.image) ?
+                            <img className="avatar-image avatar-project" src={Config.API_URL + "/" + item.image}
+                              height={96} width={96} />
+                            : <img className="avatar-image avatar-project" src={'images/12.jpeg'}
+                              height={96} width={96} />
+                        }
+                      </Link>
                     </div>
                   </div>
-                  <UncontrolledPopover placement="right" trigger="legacy"
-                    target={'Popover-' + index}
-                  >
-                    <PopoverHeader>Setting</PopoverHeader>
-                    <PopoverBody>
-                      <div
-                        onClick={this.showToggle.bind(this, item._id)}
-                        className="row"
-                      >
-                        <div className="col-3"><i className="fas fa-user-plus"></i></div>
-                        <div className="col-9">
-                          <b style={{ color: 'black' }}>Add member</b>
-                        </div>
-
-                      </div>
-                      <br />
-                      <div className="row">
-                        <div className="col-3"><i className="fas fa-eye"></i></div>
-                        <div className="col-9">
-                          <Link to={{ pathname: `/backlog/${item._id}` }} onClick={() => this.activeProject(item._id)}>
-                            <b style={{ color: 'black' }}>View</b>
-                          </Link>
-                        </div>
-
-                      </div>
-                      <br />
-                      <div className="row">
-                        <div className="col-3"><i className="fas fa-info-circle"></i></div>
-                        <div className="col-9">
-                          <Link to={{ pathname: `/Profile/${item._id}` }}>
-                            <b style={{ color: 'black' }}>Info </b>
-                          </Link>
-                        </div>
-
-                      </div>
-                    </PopoverBody>
-                  </UncontrolledPopover >
                   <div className="col-7">
                     <CardTitle>
                       <h4>
@@ -179,9 +138,22 @@ export default class projectDetail extends Component {
                 </Modal>
               </div>
             </Card>
-          );
-        })}
+        )
+      })
+    )
+  }
+  render() {
+    const { project } = this.props;
+    console.log(project)
+    _.map(this.props.member, (item) => {
+      this.hanleUserActive = item._id
+    })
+    return (
+      <div className="row">
+          {
+            this.showCard()
+          }
       </div>
-    );
+    )
   }
 }

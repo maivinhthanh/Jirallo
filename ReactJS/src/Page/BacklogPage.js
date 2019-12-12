@@ -4,22 +4,19 @@ import { connect } from "react-redux"
 import ListUser from "../Components/User/ListUser";
 import HeaderBoard from "../Components/Board/HeaderBoard";
 import MenuLog from '../Components/BackLog/MenuLog';
-import {
-  InputGroup,
-  InputGroupAddon,
-  Button,
-  Input,
-} from "reactstrap";
 import MenuBoard from "../Components/Board/MenuBoard";
 import ListIssues from "../Components/BackLog/ListIssues";
 import CreateSprint from '../Components/Sprint/modalCreate'
 import ListDetailIssues from "../Components/BackLog/ListDetailIssues";
+import MenuUser from '../Components/MenuUser/Menu'
+
 class BacklogPage extends Component {
 
   render() {
     const { match: { params: { id } } } = this.props
     return (
       <div className="row">
+        <MenuUser/>
         <div className="col-md-12 detail-card">
           <div className="board-header">
             <HeaderBoard />
