@@ -38,7 +38,6 @@ class App extends Component {
       <DndProvider backend={HTML5Backend}>
         <div className="App">
           {/* <MenuUser/> */}
-          <Router>
             <PrivateRoute path="/" isAuth={isAuth}  exact component={HomePage} />
             <PrivateRoute path="/user" isAuth={isAuth} component={UserPage} />
             <PrivateRoute path="/backlog/:id?" isAuth={isAuth} component={BacklogPage} />
@@ -50,7 +49,6 @@ class App extends Component {
             <PrivateRoute path="/infouser/:id" isAuth={isAuth} component={InfoUserPage} />
             <PrivateRoute path="/viewAll" isAuth={isAuth} component={ListProjectPage} />
             <PrivateRoute path="/adminPage" isAuth={isAuth} component={MainPage} />
-          </Router>
 
         </div>
       </DndProvider>
