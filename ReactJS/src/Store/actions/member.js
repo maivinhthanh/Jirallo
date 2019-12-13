@@ -34,7 +34,7 @@ export const SearchAction = email => {
         }
       })
       .catch(err => {
-        dispatch(actionError.AlertError(err))
+        console.log(err)
       });
   };
 };

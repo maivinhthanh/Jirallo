@@ -64,7 +64,7 @@ export const updateNameIssue = (name, id) => {
       ).then(respone=>{
         dispatch(EditIssue(respone.data.newissues))
       }).catch(err => {
-        dispatch(actionError.AlertError(err))
+        console.log(err)
       })
     }
 }
@@ -79,7 +79,7 @@ export const changeProcessIssue = (idissues, processes) => {
       console.log(respone)
       dispatch(changeProcessSuccess(respone.data.issues))
     }).catch(err => {
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 }
@@ -92,7 +92,7 @@ export const removeIssue = (idissues) => {
     ).then(respone => {
       dispatch(removeIssueSucces(idissues))
     }).catch(err => {
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 }
@@ -108,7 +108,7 @@ export const AddIssueIntoSprint = (idIssue, idSprint) => {
       console.log(respone)
       dispatch(AddIssueSuccess(respone.data))
     }).catch(err => {
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 }
@@ -125,7 +125,7 @@ export const assignTaskIssueAct = (idissues, idUser) => {
       const data = [{respone: respone.data.data, idIssue: idissues}]
       dispatch(assignTaskIssue(data))
     }).catch(err => {
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 }
@@ -138,7 +138,7 @@ export const EditIssuesAct = (id, issue) => {
     ).then(respone=>{
       dispatch(EditIssue(respone.data.newissues))
     }).catch(err => {
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 }
@@ -151,7 +151,7 @@ export const showListIssueAct = (id) => {
     ).then (respone => {
       dispatch(showListIssue(respone.data))
     }).catch(err => {
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 }
@@ -169,7 +169,7 @@ export const createIssuesAct =(id, name, type) => {
     ).then (respone => {
       dispatch(createIssue(respone.data))
     }).catch(err => {
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 }

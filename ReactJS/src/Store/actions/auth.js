@@ -62,7 +62,7 @@ export const loginAction = (email, password) => {
             dispatch(login(response));
          } )
          .catch(error => {
-             dispatch(actionError.AlertError(error));
+             console.log(error);
          } );
     };
 };
@@ -78,7 +78,7 @@ export const loginByFacebookAction = (data) => {
             dispatch(login(response));
          } )
          .catch(error => {
-             dispatch(actionError.AlertError(error));
+             console.log(error);
          } );
     };
 };
@@ -95,7 +95,7 @@ export const loginByGoogleAction = (data) => {
             dispatch(login(response));
          } )
          .catch(error => {
-             dispatch(actionError.AlertError(error));
+             console.log(error);
          } );
     };
 };
@@ -125,7 +125,7 @@ export const EditUserAction = (id,user) =>{
             }
         })
         .catch(err =>{
-           dispatch(actionError.AlertError(err))
+           console.log(err)
         })
     }
 }
@@ -142,7 +142,7 @@ export const logout = () =>{
             dispatch(LogOut(response.data))
         })
         .catch(err =>{
-           dispatch(actionError.AlertError(err))
+           console.log(err)
         })
     }
 }
@@ -157,7 +157,7 @@ export const refreshToken = () =>{
             dispatch(actionError.CancelError())
         })
         .catch(err =>{
-           dispatch(actionError.AlertError(err))
+           console.log(err)
         })
     }
 }

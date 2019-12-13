@@ -3,8 +3,10 @@ import { connect } from "react-redux"
 import _ from "lodash";
 
 import Calendar from '../InputEdit/Calendar'
+import UploadImage from '../InputEdit/UploadImage'
 import MenuUser from '../MenuUser/Menu'
 import * as actionsAdmin from "../../Store/actions/admin";
+import * as action from "../../Store/actions/auth";
 
 class InfoUser extends Component {
   constructor(props) {
@@ -15,6 +17,7 @@ class InfoUser extends Component {
       gender: this.props.admin.gender,
       birthday: this.props.admin.birthdate
     };     
+    this.activeId = ''
   }
   shouldComponentUpdate(nextProps, nextState){
     return this.props.admin != nextProps.admin
@@ -23,10 +26,9 @@ class InfoUser extends Component {
     const { match: { params: { id } } } = this.props
     this.props.FindUserAction(id)
   }
-  handleAvatar = (e) => {
-    e.preventDefault();
+  setAvatar = (data) => {
     this.setState({
-      avatar: e.target.files[0]
+      avatar: data
     });
   }
   handleGender = (e) => {
@@ -46,9 +48,28 @@ class InfoUser extends Component {
       birthday: data
     });
   }
-
+  handleSave = () => {
+    let data = new FormData()
+    data.append('avatar',this.state.avatar)
+    data.append('gender',this.state.gender)
+    data.append('name',this.state.name)
+    data.append('birthdate',this.state.birthday)
+    this.props.EditUserAction(this.activeId, data);
+    
+  }
+  delete = () =>{
+    this.setState({
+      name: '',
+      avatar: '',
+      gender: '',
+      birthday: ''
+    });
+  }
   render() {
       const {admin} = this.props
+      _.map(admin, (item) => {
+        this.activeId = item._id
+      })
       return (
         <div >
             <MenuUser isUserPage={true}/>
@@ -80,10 +101,11 @@ class InfoUser extends Component {
                                         <p>Gender</p>
                                       </div>
                                       <div className="col-8">
-                                        <input className="form-control" 
-                                         value={item.gender}
-                                         onChange={this.handleGender}
-                                        />
+                                        <select className="form-control" onChange={this.handleGender} value={item.gender}>
+                                          <option value="male">Male</option>
+                                          <option value="female">Female</option>
+                                        </select>
+                                        
                                       </div>
                                     </div>
                                     <br/>
@@ -96,7 +118,21 @@ class InfoUser extends Component {
                                         
                                       </div>
                                     </div>
-                                    
+                                    <div>
+                                      <UploadImage setAvatar={this.setAvatar} />
+                                    </div>
+                                    <div className="row">
+                                      <div className="col-6 text-center">
+                                        <button onClick={()=>this.handleSave()} className="btn btn-success">
+                                          Save
+                                        </button>
+                                      </div>
+                                      <div className="col-6 text-center">
+                                        <button onClick={this.delete()} className="btn btn-danger">
+                                          Cancel
+                                        </button>
+                                      </div>
+                                    </div>
                                 </div>
                             </div>
                             <div className="col-6 container" >
@@ -121,6 +157,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         FindUserAction: email => dispatch(actionsAdmin.FindUserAction(email)),
+        EditUserAction: (id, user) => dispatch(action.EditUserAction(id, user))
     };
   };
 export default connect(

@@ -55,10 +55,10 @@ const mapStateToProps = state => {
     };
   };
   
-  const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => {
     return {
         logout: () => dispatch( actions.logout() ),
 
     };
-  };
+};
 export default connect( mapStateToProps, mapDispatchToProps )(SettingUser)

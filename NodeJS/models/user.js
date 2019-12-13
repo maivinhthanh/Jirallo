@@ -3,8 +3,7 @@ const Schema = mongoose.Schema
 
 const Genders = Object.freeze({
     Male: 'male',
-    Female: 'female',
-    Other: 'other',
+    Female: 'female'
 })
 
 

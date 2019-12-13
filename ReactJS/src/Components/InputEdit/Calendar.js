@@ -37,12 +37,13 @@ class Calendar extends Component {
             </div>
             { 
             this.state.openSchedule?
-                <InfiniteCalendar
-                width={400}
-                height={600}
-                disabledDays={[0,6]}
-                onSelect={this.setdate}
-                />:null
+              <div className="Calendar" style={{position: 'absolute',left: '100%',top: '-475%'}}> 
+                  <InfiniteCalendar
+                  width={400}
+                  height={200}
+                  onSelect={this.setdate}
+                  />
+              </div>:null
             }
         </div>
         

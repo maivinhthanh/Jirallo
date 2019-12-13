@@ -66,7 +66,7 @@ export const editEditNameProject = (name, id) => {
     ).then(respone => {
       console.log(respone)
     }).catch(err => {
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 }
@@ -79,7 +79,7 @@ export const findProjectLikeId = (id) => {
     ).then(respone => {
       dispatch(findProjectSuccess(respone.data.project))
     }).catch(err => {
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 }
@@ -92,7 +92,7 @@ export const getListUserInProject = (id) => {
     ).then(respone => {
       dispatch(getListUserInProjectSuccess(respone.data.listuser))
     }).catch(err => {
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 }
@@ -168,7 +168,7 @@ export const getListProjectAct = () =>{
       dispatch(getAllList(respone.data.listproject))
     }).catch(err =>{
       console.log(err)
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
 
   }

@@ -56,7 +56,7 @@ export const EditUserAction = (id,user) =>{
           }
       })
       .catch(err =>{
-         dispatch(actionError.AlertError(err))
+         console.log(err)
       })
   }
 }
@@ -78,7 +78,7 @@ export const SearchAction = email => {
         }
       })
       .catch(error => {
-        dispatch(actionError.AlertError(error));
+        console.log(error);
       });
   };
 };
@@ -106,7 +106,7 @@ export const FindUserAction = id => {
       })
       .catch(error => {
         console.log(error)
-        dispatch(actionError.AlertError(error));
+        console.log(error);
       });
   };
 };

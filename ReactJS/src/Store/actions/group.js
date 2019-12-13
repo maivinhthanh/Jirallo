@@ -41,7 +41,7 @@ export const getListAction = (name) =>{
         dispatch(getListGroup(respone.data.result))
       })
       .catch(err =>{
-        dispatch(actionError.AlertError(err))
+        console.log(err)
       })
     }
 };
@@ -58,7 +58,7 @@ export const createGroupAct = (name) =>{
       dispatch(createGroup(respone.data))
     })
     .catch(err =>{
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 } 

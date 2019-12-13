@@ -39,7 +39,7 @@ export const showListIssueOfEpicAct = (id) => {
     ).then(repsone => {
       console.log(repsone);
     }).catch(err => {
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 }
@@ -52,7 +52,7 @@ export const updateNameEpic = (name, id) => {
     ).then(respone => {
       dispatch(editEpic(respone.data))
     }).catch(err => {
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 }
@@ -65,7 +65,7 @@ export const EditepicAct = (name, id) => {
     ).then(respone => {
       dispatch(editEpic(respone.data))
     }).catch(err => {
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 }
@@ -78,7 +78,7 @@ export const viewListEpicAct = (idProject) => {
     ).then (respone => {
       dispatch(viewList(respone.data))
     }).catch(err => {
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 }
@@ -97,7 +97,7 @@ export const createEpicAct = (epic) =>{
       dispatch(createEpic(respone.data))
     })
     .catch(err =>{
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 }

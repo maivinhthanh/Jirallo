@@ -37,7 +37,7 @@ export const findUserLikeIDAct = (id) => {
     ).then(respone => {
       dispatch(findUserLikeId(respone.data.result))
     }).catch(err => {
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 }
@@ -50,7 +50,7 @@ export const getListUserAct = () => {
     ).then (respone => {
       dispatch(getListUser(respone.data.result))
     }).catch(err => {
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 }
@@ -68,7 +68,7 @@ export const insertUserToGroup = (email,id) =>{
       dispatch(AddUserSuccess(respone.data.result))
     })
     .catch(err =>{
-      dispatch(actionError.AlertError(err))
+      console.log(err)
     })
   }
 }
