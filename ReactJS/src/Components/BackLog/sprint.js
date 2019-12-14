@@ -10,30 +10,48 @@ class sprint extends Component {
         super(props);
         // this.addIssueOnSprint = this.props.addIssueOnSprint
     }
-    addIssueOnSprint(itemDrag, itemDrop){
+    addIssueOnSprint(itemDrop, itemDrag){
         const {activeIssue, issues} = this.props
-        console.log(itemDrag.item, itemDrop.issue)
         let vtx, vty;
-        _.filter(issues, (data, key) => {
+        _.filter(activeIssue, (data, key) => {
+            if(data._id === itemDrag.issue._id){
+                vtx = key
+            }
+        })
+        _.filter(activeIssue, (data, key) => {
+            if(data._id === itemDrop.item._id){
+                vty = key
+            }
+        })
+        _.map(activeIssue, (data, index) => {
+            if(index === vtx){
+                activeIssue[index] = itemDrop.item
+            } else {    
+                if(index === vty){
+                    activeIssue[index] = itemDrag.issue
+                }
+            }
+        })
+        console.log(activeIssue)
+    }
+    IssueToSprint(itemDrag, itemDrop){
+        console.log(itemDrop, itemDrag)
+        // Keo, tha
+        const {activeIssue, issues} = this.props
+        let vtx, vty;
+        _.filter(activeIssue, (data, key) => {
             if(data._id === itemDrag.item._id){
                 vtx = key
             }
         })
-        _.filter(issues, (data, key) => {
-            if(data._id === itemDrop.issue._id){
-                vty = key
-            }
-        })
-        _.map(issues, (data, index) => {
-            if(index === vtx){
-                issues[index] = itemDrop.issue
-            } else {
-                if(index === vty){
-                    issues[index] = itemDrag.item
-                }
-            }
-        })
-        console.log(issues)
+        for(let i = activeIssue.length; i>= vtx ; i--){
+            activeIssue[i] = activeIssue[i-1]
+        }
+        activeIssue[vtx] = itemDrop.issue;
+        // activeIssue.length ++ ;
+
+        // FindIssueInSprint 
+        console.log(activeIssue)
     }
     render() {
         const {filterSprint, modal, activeIssue, issues} = this.props
@@ -42,7 +60,7 @@ class sprint extends Component {
                 {/* <WrapperDrop white filterSprint={filterSprint} handleChange={(id, issue) => this.props.addIssueOnSprint(id, issue)} > */}
                     {_.map(activeIssue, (data, index) => {
                         return (
-                            <IssueAdd  white filterSprint={filterSprint} handleAdd={(id, issue) => this.addIssueOnSprint(id, issue)}  modal={modal} filterSprint={filterSprint} item={data} key={index} />
+                            <IssueAdd  white filterSprint={filterSprint} handleAddIssueIntoSprint={(id, issue) => this.IssueToSprint(id, issue)} handleAdd={(id, issue) => this.addIssueOnSprint(id, issue)}  modal={modal} filterSprint={filterSprint} item={data} key={index} />
                         );
                     })}
                 {/* </WrapperDrop> */}

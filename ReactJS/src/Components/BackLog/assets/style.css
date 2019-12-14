@@ -54,10 +54,10 @@
 .hover-item {
   color: red
 }
-.option-add{
+/* .option-add{
   position: absolute;
-  left: 1200px;
-}
+  left: 1287px;
+} */
 .option-add .button{
   background: transparent
 }
@@ -82,4 +82,11 @@ button.dropdown-toggle.btn.btn-secondary {
 }
 .epic-name:hover{
   background: aliceblue;
+}
+.hidden {
+  display: none;
+}
+.option {
+  position: absolute;
+  left: 870px;
 }

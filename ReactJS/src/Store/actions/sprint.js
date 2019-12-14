@@ -91,6 +91,7 @@ export const deleteSprint = (id) => {
   }
 }
 export const ViewListIssueInSprint = (id) => {
+  console.log(id)
   return dispatch => {
     return CallApi(`sprint/completeSprint/${id}`,
     'PUT',

@@ -1,4 +1,7 @@
 /* Description */
+.descriptWork {
+  padding-right: 10px;
+}
 .descriptWork h2{
   text-align: left;
 }

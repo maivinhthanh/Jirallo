@@ -45,7 +45,6 @@ export default class DescriptTask extends Component {
   componentDidMount(){
     const {data, params, listuser} = this.props
     this.props.dataAssignee(data)
-    // console.log(this.props.admin)
     this.props.getListUserInProject(params)
     _.map(listuser, (item, key) => {
       item.id.label = item.id.name
@@ -111,7 +110,6 @@ export default class DescriptTask extends Component {
     const { data } = this.props;
     const { user, admin, listuser } = this.props;
     const { status, isClearable, isLoading, isSearchable, isRtl, isDisabled } = this.state;
-    console.log(admin)
     return (
       <div className="descriptWork">
         <div className="list-item-right dropdown">

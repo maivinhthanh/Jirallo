@@ -44,7 +44,6 @@ class tableProject extends Component {
         //     description: this.state.description,
         //     image: this.state.image
         // }
-        console.log(data)
         this.props.EditProject(this.props.params, data)
     }
     // hanleChangeDateCreate(e){
@@ -61,7 +60,6 @@ class tableProject extends Component {
     }
     handleChangeImage(e){
         e.preventDefault()
-        console.log(e.target.files)
         this.setState({
             image: e.target.files[0]
         })
@@ -108,7 +106,6 @@ class tableProject extends Component {
         })
     }
     loadDataForm(){
-        console.log(this.project)
         _.map(this.project,(item, key) => {
             this.setState({
                 name: item.name,
@@ -122,7 +119,6 @@ class tableProject extends Component {
         const { project, member } = this.props
         const { status } = this.state
         this.project = _.cloneDeep(this.props.project)
-        console.log(project)
         return (
             <div>
                 <table class="table table-hover">
