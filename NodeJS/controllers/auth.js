@@ -148,6 +148,14 @@ exports.logout = async (req, res, next) => {
         
         const userFakeData = decoded.data;
         const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife);
+
+        const action = new Activities({
+            action: 'Logout',
+            iduser: loadedUser._id
+        })
+
+        await action.save()
+
         return res.status(200).json({accessToken});
       } catch (error) {
         res.status(403).json({

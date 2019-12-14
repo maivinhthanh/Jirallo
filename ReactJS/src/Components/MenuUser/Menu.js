@@ -83,7 +83,7 @@ class MenuUser extends Component {
                             </li>
                             <li>
                                 <Link to="/">
-                                    <span className="fas fa-home" />
+                                    <img src="/logo-menu.jpg" />
                                 </Link>
                             </li>
                             <li>

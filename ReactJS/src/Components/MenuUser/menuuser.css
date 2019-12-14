@@ -141,6 +141,14 @@ body {
   -moz-transition: opacity 1, color 0.3s;
   transition: opacity 1, color 0.3s;
 }
+.csstransforms.cn-wrapper li a img {
+  vertical-align: middle;
+  width: 80px;
+  margin-top: -60px;
+  border-style: none;
+  height: 80px;
+  transform: rotate(-180deg);
+}
 
 .csstransforms.cn-wrapper li a span {
   z-index: 32;

@@ -6,6 +6,7 @@ import {
   Card, CardBody, CardTitle, CardSubtitle, Button,Modal, ModalBody, ModalHeader, ModalFooter, Input
 } from "reactstrap";
 import { Link } from 'react-router-dom'
+import Tilt from 'react-tilt'
 
 export default class projectDetail extends Component {
   constructor(props) {
@@ -61,6 +62,8 @@ export default class projectDetail extends Component {
     return(
       _.map(project, (item, index) => {
         return(
+        <Tilt className="Tilt" options={{ max : 40 }} style={{ height: 150, width: 350 }} >
+            <div className="Tilt-inner"> 
             <Card key={index} style={{width : '22rem',marginRight: '20px'}}>
               <CardBody style={{ background: "#B3C6E6" }}>
                 <div className="row">
@@ -138,6 +141,8 @@ export default class projectDetail extends Component {
                 </Modal>
               </div>
             </Card>
+            </div>
+            </Tilt>
         )
       })
     )

@@ -5,6 +5,7 @@ import _ from "lodash";
 import Calendar from '../InputEdit/Calendar'
 import UploadImage from '../InputEdit/UploadImage'
 import MenuUser from '../MenuUser/Menu'
+import Activities from './Activities'
 import * as actionsAdmin from "../../Store/actions/admin";
 import * as action from "../../Store/actions/auth";
 
@@ -73,15 +74,17 @@ class InfoUser extends Component {
       return (
         <div >
             <MenuUser isUserPage={true}/>
-            {
+            <div className="row">
+              <div className="col-6">
+              {
                 _.map(admin, (item, index) =>{
                     return(
                         <div className="row" key={index}>
-                            <div className="col-6" style={{height: '100px', backgroundColor: '#B3C6E6'}}>
+                            <div className="col-12" style={{height: '100px', backgroundColor: '#B3C6E6'}}>
                                 <h1>{item.name}</h1>
                             </div>
-                            <div className="col-6" style={{height: '100px', backgroundColor: '#B3C6E6'}}></div>
-                            <div className="col-6" >
+                            
+                            <div className="col-12" >
                                 <div className="container">
                                     <h3>Manager User</h3>
                                     <br/>
@@ -135,15 +138,22 @@ class InfoUser extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-6 container" >
-                                
-                            </div>
+                            
                         </div>
                     )
                     
                 })
-            }
-            
+              }
+              </div>
+              <div className="col-6">
+                <div className="row text-center">
+                  <div className="col-12" style={{height: '100px', backgroundColor: '#B3C6E6'}}></div>
+                  <div className="col-12 " >
+                      <Activities/>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
       )
     
@@ -159,7 +169,7 @@ const mapDispatchToProps = dispatch => {
         FindUserAction: email => dispatch(actionsAdmin.FindUserAction(email)),
         EditUserAction: (id, user) => dispatch(action.EditUserAction(id, user))
     };
-  };
+};
 export default connect(
   mapStateToProps,
   mapDispatchToProps
