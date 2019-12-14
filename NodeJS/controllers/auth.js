@@ -1,10 +1,17 @@
 const { validationResult } = require("express-validator/check")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
-
+const {ObjectId} = require('mongodb')
 
 const User = require('../models/user')
 const Activities = require('../models/activities')
+const Token = require('../models/token')
+
+const jwtHelper = require("../helpers/jwt.helper")
+const accessTokenLife = process.env.TOKEN_LIFE || '365d'
+const accessTokenSecret = process.env.ACCESS_TOKEN || "s0me-secr3t-goes-here"
+const refreshTokenLife = process.env.REFRESH_TOKEN_LIFE || "365d"
+const refreshTokenSecret = process.env.REFRESH_TOKEN || "some-s3cret-refre2h-token"
 
 exports.signup = async (req, res, next) => {
     try{
@@ -50,12 +57,12 @@ exports.signup = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
     try{
+        
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            const error = new Error("Validation failed.")
-            error.statusCode = 404
-            error.data = errors.array()
-            res.status(404).json(error)
+            res.status(401).json({
+                message: 'Validation failed..',
+            });
             throw error
         }
         const email = req.body.email
@@ -63,26 +70,33 @@ exports.login = async (req, res, next) => {
 
         let loadedUser = await User.findOne({ email: email })
         if (!loadedUser) {
-            const error = new Error("Không tìm thấy user.")
-            error.statusCode = 404
-            res.status(500).json(error)
-            // throw error
+            res.status(401).json({
+                message: 'Not found user',
+            });
             return next()
         }
         const isEqual = await bcrypt.compare(password, loadedUser.password)
         if (!isEqual) {
-            const error = new Error("Wrong password!")
-            error.statusCode = 404
-            res.status(404).json(error)
+            res.status(401).json({
+                message: 'Wrong password!',
+            });
             return 
         }
-        const token = jwt.sign(
-            {
-                email: loadedUser.email,
-                userId: loadedUser._id.toString()
-            },
-            "somesupersecretsecret"
-        )
+        
+        const userFakeData = {
+            email: loadedUser.email,
+            userId: loadedUser._id.toString(),
+        }
+
+        const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife)
+        const refreshToken = await jwtHelper.generateToken(userFakeData, refreshTokenSecret, refreshTokenLife)
+        
+        const tokendata = new Token({
+            refreshtoken: refreshToken
+        })
+
+        await tokendata.save()
+
         const action = new Activities({
             action: 'Login',
             iduser: loadedUser._id
@@ -90,25 +104,78 @@ exports.login = async (req, res, next) => {
 
         await action.save()
 
-        res.status(200).json({ token: token, userId: loadedUser._id.toString() })
-        return next();
+        res.status(200).json({ token: accessToken, refreshToken: refreshToken, userId: loadedUser._id.toString() })
+        // return next();
     }
     catch (error) {
-        if (!error.statusCode) {
-            error.statusCode = 500
-        }
-        res.status(500).json(error)
+        
         next(error)
     }
 }
+exports.refreshToken = async (req, res, next) => {
+    try {
+        const refreshTokenFromClient = req.body.refreshToken;
+        console.log(refreshTokenFromClient)
+        const checktoken = await Token.findOne({refreshtoken: refreshTokenFromClient})
+        console.log(checktoken)
+        if (checktoken) {
+        
+            const decoded = await jwtHelper.verifyToken(refreshTokenFromClient, refreshTokenSecret);
+            
+            const userFakeData = decoded.data;
+            const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife);
+            return res.status(200).json({accessToken});
+        } else {
+        return res.status(403).send({
+            message: 'No token provided.',
+        });
+        }
+    }
+    catch (error) {
+        res.status(403).json({
+            message: 'Invalid refresh token.',
+        });
+    }
+};
+exports.logout = async (req, res, next) => {
+    const refreshTokenFromClient = req.body.refreshToken;
+    
+    const checktoken = await Token.findOne({refreshtoken: refreshTokenFromClient})
+    await Token.findByIdAndRemove(ObjectId(checktoken._id))
+    if (checktoken) {
+      try {
+        const decoded = await jwtHelper.verifyToken(refreshTokenFromClient, refreshTokenSecret);
+        
+        const userFakeData = decoded.data;
+        const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife);
+
+        const action = new Activities({
+            action: 'Logout',
+            iduser: loadedUser._id
+        })
+
+        await action.save()
+
+        return res.status(200).json({accessToken});
+      } catch (error) {
+        res.status(403).json({
+          message: 'Invalid refresh token.',
+        });
+      }
+    } else {
+      return res.status(403).send({
+        message: 'No token provided.',
+      });
+    }
+};
+  
 exports.findUser = async (req, res, next) => {
     try{
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            const error = new Error("Validation failed.")
-            error.statusCode = 404
-            error.data = errors.array()
-            res.status(404).json(error)
+            res.status(404).json({
+                message: 'Validation failed',
+            });
             throw error
         }
 
@@ -116,19 +183,16 @@ exports.findUser = async (req, res, next) => {
 
         const user = await User.findOne({ email: email })
         if (!user) {
-            const error = new Error("Không tìm thầy user")
-            error.statusCode = 404
-            res.status(404).json(error)
+            res.status(404).json({
+                message: 'Not Found user',
+            });
             throw error
         }
 
         res.status(200).json({ user: user })
     }
     catch (error) {
-        if (!error.statusCode) {
-            error.statusCode = 500
-        }
-        res.status(500).json(error)
+        
         next(error)
     }
 }
@@ -136,10 +200,9 @@ exports.editProfile = async (req, res, next) => {
     try{
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            const error = new Error("Validation failed.")
-            error.statusCode = 404
-            error.data = errors.array()
-            res.status(404).json(error)
+            res.status(404).json({
+                message: 'Error',
+            });
             throw error
         }
 
@@ -177,10 +240,9 @@ exports.editProfile = async (req, res, next) => {
         res.status(200).json({statusCode: 200,result: user})
     }
     catch (error) {
-        if (!error.statusCode) {
-            error.statusCode = 500
-        }
-        res.status(500).json(error)
+        res.status(500).json({
+            message: 'Validation failed',
+        });
         next(error)
     }
 }
@@ -188,10 +250,9 @@ exports.findUserLikeEmail = async (req, res, next) => {
     try{
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            const error = new Error("Validation failed.")
-            error.statusCode = 404
-            error.data = errors.array()
-            res.status(404).json(error)
+            res.status(404).json({
+                message: 'Validation failed',
+            });
             throw error
         }
         const email = req.body.email
@@ -205,10 +266,7 @@ exports.findUserLikeEmail = async (req, res, next) => {
         res.status(200).json({statusCode: 200,result: listuser})
     }
     catch (error) {
-        if (!error.statusCode) {
-            error.statusCode = 500
-        }
-        res.status(500).json(error)
+        
         next(error)
     }
 }
@@ -221,26 +279,19 @@ exports.FindUserID = async (req, res, next) => {
         res.status(200).json({statusCode: 200,result: user})
     }
     catch (error) {
-        if (!error.statusCode) {
-            error.statusCode = 500
-        }
-        res.status(500).json(error)
+        
         next(error)
     }
 }
 exports.getMyInfo = async (req, res, next) => {
     try{
         const iduser = req.userId
-        console.log(iduser)
         const user = await User.findById(iduser).select('email _id name image avatar')
 
         res.status(200).json({statusCode: 200,result: user})
     }
     catch (error) {
-        if (!error.statusCode) {
-            error.statusCode = 500
-        }
-        res.status(500).json(error)
+        
         next(error)
     }
 }
@@ -251,10 +302,7 @@ exports.getListUser = async (req, res, next) => {
         res.status(200).json({statusCode: 200,result: user})
     }
     catch (error) {
-        if (!error.statusCode) {
-            error.statusCode = 500
-        }
-        res.status(500).json(error)
+        
         next(error)
     }
 }
@@ -274,13 +322,19 @@ exports.loginbyfacebook = async (req, res, next) => {
                 email: email
             })
             const newuser = await user.save()
-            const token = jwt.sign(
-                {
-                    email: null,
-                    userId: newuser._id.toString()
-                },
-                "somesupersecretsecret"
-            )
+            const userFakeData = {
+                email: newuser.email,
+                userId: newuser._id.toString(),
+            }
+    
+            const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife)
+            const refreshToken = await jwtHelper.generateToken(userFakeData, refreshTokenSecret, refreshTokenLife)
+            
+            const tokendata = new Token({
+                refreshtoken: refreshToken
+            })
+
+            await tokendata.save()
 
             const action = new Activities({
                 action: 'loginbyfacebook',
@@ -289,16 +343,22 @@ exports.loginbyfacebook = async (req, res, next) => {
     
             await action.save()
 
-            res.status(200).json({token: token, userId: newuser._id.toString()})
+            res.status(200).json({token: accessToken, refreshToken: refreshtoken, userId: newuser._id.toString()})
         }
         else{
-            const token = jwt.sign(
-                {
-                    email: email,
-                    userId: newuser._id.toString()
-                },
-                "somesupersecretsecret"
-            )
+            const userFakeData = {
+                email: email,
+                userId: user._id.toString()
+            }
+    
+            const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife)
+            const refreshToken = await jwtHelper.generateToken(userFakeData, refreshTokenSecret, refreshTokenLife)
+            
+            const tokendata = new Token({
+                refreshtoken: refreshToken
+            })
+    
+            await tokendata.save()
 
             const action = new Activities({
                 action: 'loginbyfacebook',
@@ -307,16 +367,13 @@ exports.loginbyfacebook = async (req, res, next) => {
     
             await action.save()
     
-            res.status(200).json({token: token, userId: user._id.toString()})
+            res.status(200).json({token: accessToken, refreshToken: refreshtoken, userId: user._id.toString()})
         }
 
         
     }
     catch (error) {
-        if (!error.statusCode) {
-            error.statusCode = 500
-        }
-        res.status(500).json(error)
+        
         next(error)
     }
 }
@@ -336,13 +393,21 @@ exports.loginbygoogle = async (req, res, next) => {
                 email: email
             })
             const newuser = await user.save()
-            const token = jwt.sign(
-                {
-                    email: null,
-                    userId: newuser._id.toString()
-                },
-                "somesupersecretsecret"
-            )
+
+            const userFakeData = {
+                email: newuser.email,
+                userId: newuser._id.toString(),
+            }
+    
+            const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife)
+            const refreshToken = await jwtHelper.generateToken(userFakeData, refreshTokenSecret, refreshTokenLife)
+            
+            const tokendata = new Token({
+                refreshtoken: refreshToken
+            })
+    
+            await tokendata.save()
+    
 
             const action = new Activities({
                 action: 'loginbygoogle',
@@ -351,16 +416,22 @@ exports.loginbygoogle = async (req, res, next) => {
     
             await action.save()
 
-            res.status(200).json({token: token, userId: newuser._id.toString()})
+            res.status(200).json({token: accessToken, refreshToken: refreshtoken, userId: newuser._id.toString()})
         }
         else{
-            const token = jwt.sign(
-                {
-                    email: email,
-                    userId: user._id.toString()
-                },
-                "somesupersecretsecret"
-            )
+            const userFakeData = {
+                email: email,
+                userId: user._id.toString()
+            }
+    
+            const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife)
+            const refreshToken = await jwtHelper.generateToken(userFakeData, refreshTokenSecret, refreshTokenLife)
+            
+            const tokendata = new Token({
+                refreshtoken: refreshToken
+            })
+    
+            await tokendata.save()
 
             const action = new Activities({
                 action: 'loginbygoogle',
@@ -369,16 +440,13 @@ exports.loginbygoogle = async (req, res, next) => {
     
             await action.save()
     
-            res.status(200).json({token: token, userId: user._id.toString()})
+            res.status(200).json({token: accessToken, refreshToken: refreshtoken, userId: user._id.toString()})
         }
 
         
     }
     catch (error) {
-        if (!error.statusCode) {
-            error.statusCode = 500
-        }
-        res.status(500).json(error)
+        
         next(error)
     }
 }

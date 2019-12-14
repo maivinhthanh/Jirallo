@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Admin from '../Containers/Admin/Admin'
+import { connect } from "react-redux"
 
-export default class AdminPage extends Component {
+class AdminPage extends Component {
   render() {
     return (
       <div>
@@ -10,3 +11,13 @@ export default class AdminPage extends Component {
     )
   }
 }
+const mapStateToProps = state => {
+  return {
+    error: state.error,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(AdminPage);

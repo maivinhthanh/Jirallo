@@ -13,16 +13,14 @@ class profileDetail extends Component {
         const { project, member } = this.props
         return (
             <div className="profileProject">
-                <div className="content-left">
-                    <TableProject
-                        params={this.props.params}
-                        project={project}
-                        member={member}
-                        EditProject={this.props.EditProject}
-                        AddMemberIntoProject={this.props.AddMemberIntoProject}
-                        EditProject={this.props.EditProject}
-                        searchEmail={this.props.searchEmail} />
-                </div>
+                <TableProject
+                    params={this.props.params}
+                    project={project}
+                    member={member}
+                    EditProject={this.props.EditProject}
+                    AddMemberIntoProject={this.props.AddMemberIntoProject}
+                    EditProject={this.props.EditProject}
+                    searchEmail={this.props.searchEmail} />
             </div>
         )
     }

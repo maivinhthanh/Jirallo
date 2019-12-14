@@ -1,4 +1,6 @@
 import * as actionTypes from '../constants/issues';
+import * as actionError from "./error";
+
 import CallApi from '../../until/apiCaller';
 
 export const createIssue = data => {
@@ -50,12 +52,16 @@ export const assignTaskIssue = (data) => {
       data
     }
 }
+<<<<<<< HEAD
 export const ListIssueInBackLog = (data) => {
   return {
     type: actionTypes.showListIssueInBackLog,
     data
   }
 }
+=======
+
+>>>>>>> d2b246b1cc734b40260279b37896cee72fa5d807
 export const updateNameIssue = (name, id) => {
   return dispatch => {
       return CallApi(`issues/editIssues/${id}`,
@@ -67,7 +73,7 @@ export const updateNameIssue = (name, id) => {
       ).then(respone=>{
         dispatch(EditIssue(respone.data.newissues))
       }).catch(err => {
-        dispatch(IssueError(err))
+        console.log(err)
       })
     }
 }
@@ -81,7 +87,7 @@ export const changeProcessIssue = (idissues, processes) => {
       console.log(respone)
       dispatch(changeProcessSuccess(respone.data.issues))
     }).catch(err => {
-      dispatch(IssueError(err))
+      console.log(err)
     })
   }
 }
@@ -94,7 +100,7 @@ export const removeIssue = (idissues) => {
     ).then(respone => {
       dispatch(removeIssueSucces(idissues))
     }).catch(err => {
-      dispatch(IssueError(err))
+      console.log(err)
     })
   }
 }
@@ -109,7 +115,7 @@ export const AddIssueIntoSprint = (idIssue, idSprint) => {
     ).then(respone => {
       dispatch(AddIssueSuccess(respone.data))
     }).catch(err => {
-      dispatch(IssueError(err))
+      console.log(err)
     })
   }
 }
@@ -125,7 +131,7 @@ export const assignTaskIssueAct = (idissues, idUser) => {
       const data = [{respone: respone.data.data, idIssue: idissues}]
       dispatch(assignTaskIssue(data))
     }).catch(err => {
-      dispatch(IssueError(err))
+      console.log(err)
     })
   }
 }
@@ -138,7 +144,7 @@ export const EditIssuesAct = (id, issue) => {
     ).then(respone=>{
       dispatch(EditIssue(respone.data.newissues))
     }).catch(err => {
-      dispatch(IssueError(err))
+      console.log(err)
     })
   }
 }
@@ -166,7 +172,7 @@ export const showListIssueAct = (id) => {
     ).then (respone => {
       dispatch(showListIssue(respone.data))
     }).catch(err => {
-      dispatch(IssueError(err))
+      console.log(err)
     })
   }
 }
@@ -184,7 +190,7 @@ export const createIssuesAct =(id, name, type) => {
     ).then (respone => {
       dispatch(createIssue(respone.data))
     }).catch(err => {
-      dispatch(IssueError(err))
+      console.log(err)
     })
   }
 }

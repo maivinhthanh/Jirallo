@@ -28,8 +28,8 @@ class HeaderBoard extends Component {
     const {active, keyseach} = this.state
     return (
       <div className="row" style={{height: '60px',padding: '10px 0px',backgroundColor: '#6A8DCD',marginBottom: '20px'}}>
-        <div className={active ? 'col-3' : 'col-4'}></div>
-        <div className={active ? 'col-6' : 'col-4'}>
+        <div className='col-1'></div>
+        <div className='col-4'>
           <InputGroup onMouseOver={() =>this.onFocus(true)} onMouseLeave={() =>this.onFocus(false)} >
             <Input value={keyseach} onChange={this.handleKeySeach}/>
             <InputGroupAddon addonType="append">
@@ -37,7 +37,7 @@ class HeaderBoard extends Component {
             </InputGroupAddon>
           </InputGroup>
         </div>
-        <div className={active ? 'col-3' : 'col-4'}></div>
+        <div className='col-7'></div>
       </div>
     );
   }

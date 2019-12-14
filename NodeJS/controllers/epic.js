@@ -9,10 +9,9 @@ exports.createEpic = async (req, res, next) => {
     try{
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            const error = new Error("Validation failed.")
-            error.statusCode = 404
-            error.data = errors.array()
-            res.status(404).json(error)
+            res.status(400).json({
+                message: 'Error',
+            });
             throw error
         }
 
@@ -43,10 +42,7 @@ exports.createEpic = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,newepic})
     }
     catch (error) {
-        if (!error.statusCode) {
-            error.statusCode = 500
-        }
-        res.status(500).json(error)
+        
         next(error)
     }
     
@@ -77,10 +73,7 @@ exports.editEpic = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,epic})
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        
         next(err)
     }
 }
@@ -99,10 +92,7 @@ exports.viewListEpic = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,listepic: project.idepic})
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        
         next(err)
     }
     
@@ -121,10 +111,7 @@ exports.viewListIssuesInEpic = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,listissues: epic.idissues})
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        
         next(err)
     }
     

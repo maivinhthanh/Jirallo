@@ -1,4 +1,6 @@
 import * as actionTypes from "../constants/member";
+import * as actionError from "./error";
+
 import CallApi from "../../until/apiCaller";
 
 export const Search = data => {
@@ -13,6 +15,7 @@ export const SearchError = name => {
     message: name
   };
 };
+
 export const SearchAction = email => {
   return dispatch => {
     return CallApi(
@@ -27,11 +30,11 @@ export const SearchAction = email => {
         if (respone.data.result.length !== 0) {
           dispatch(Search(respone.data.result));
         } else {
-          dispatch(SearchError("Error"));
+          dispatch(actionError.AlertError('err'))
         }
       })
-      .catch(error => {
-        dispatch(SearchError(error));
+      .catch(err => {
+        console.log(err)
       });
   };
 };

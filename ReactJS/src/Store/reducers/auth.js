@@ -2,7 +2,6 @@ import * as actionTypes from '../constants/auth';
 import { updateObject } from '../utility';
 import Cookies from 'js-cookie'
 import CallApi from '../../until/apiCaller';
-import { EditUser } from '../actions/auth';
 
 const initialState = {
     id: '',
@@ -19,14 +18,15 @@ const initialState = {
 
 const login = ( state, action ) => {
     const token = action.token
-    Cookies.set('token', token, { expires: 7 });
+    const refreshtoken = action.refreshtoken
+    Cookies.set('token', token, { expires: 365 });
+    Cookies.set('refreshtoken', refreshtoken, { expires: 365 });
     let json = {
         code : 'ok',
         data : action.id
     }
     state = json
-    console.log(token)
-    CallApi('auth/getMyInfo', 'GET',{})
+    CallApi('auth/getMyInfo', 'GET',{},'token')
     .then( response => {
         localStorage.setItem('user', JSON.stringify(response.data.result));
         
@@ -54,6 +54,9 @@ const EditUserSuccess = (state, action) =>{
 const EditUserFail = (state, action) =>{
     return updateObject(state,{error : true})
 }
+const LogOut = (state, action) =>{
+    return updateObject(state,{error : true})
+}
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.Login: return login( state, action ); 
@@ -62,6 +65,8 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.RegisterFail : return registerFail(state,action);
         case actionTypes.EditUserSuccess : return EditUserSuccess(state, action);
         case actionTypes.EditUserFail : return EditUserFail(state,action)
+        case actionTypes.LogOut : return LogOut(state,action)
+
         default: return state;
     }
 };

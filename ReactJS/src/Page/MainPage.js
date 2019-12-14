@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux"
 
-export default class MainPage extends Component {
+class MainPage extends Component {
   render() {
     return (
       <div>
@@ -297,3 +298,13 @@ export default class MainPage extends Component {
     )
   }
 }
+const mapStateToProps = state => {
+  return {
+    error: state.error,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(MainPage)

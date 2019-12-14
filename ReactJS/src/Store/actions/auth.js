@@ -1,11 +1,16 @@
 import * as actionTypes from '../constants/auth';
+import * as actionError from "./error";
+
+import Cookies from 'js-cookie'
+
 import CallApi from '../../until/apiCaller';
 
 export const login = ( account ) => {
-    
+    console.log(account)
     return {
         type: actionTypes.Login,
         token: account.data.token,
+        refreshtoken: account.data.refreshToken,
         id: account.data.userId,
         status : account.status
     };
@@ -40,6 +45,12 @@ export const EditUserFail = (name) =>{
         message: name
     }
 }
+export const LogOut = (data) =>{
+    return {
+        type: actionTypes.LogOut,
+        data: data
+    }
+}
 export const loginAction = (email, password) => {
     
     return dispatch => {
@@ -51,7 +62,7 @@ export const loginAction = (email, password) => {
             dispatch(login(response));
          } )
          .catch(error => {
-             dispatch(loginfail(error));
+             console.log(error);
          } );
     };
 };
@@ -67,7 +78,7 @@ export const loginByFacebookAction = (data) => {
             dispatch(login(response));
          } )
          .catch(error => {
-             dispatch(loginfail(error));
+             console.log(error);
          } );
     };
 };
@@ -82,7 +93,7 @@ export const loginByGoogleAction = (data) => {
             dispatch(login(response));
          } )
          .catch(error => {
-             dispatch(loginfail(error));
+             console.log(error);
          } );
     };
 };
@@ -97,7 +108,7 @@ export const RegisterAction = (email,password,fullname,avatar,gender) =>{
         }).then (response =>{
             dispatch(register(response.data))
         }).catch (err =>{
-            dispatch(registerFail())
+            dispatch(actionError.AlertError())
         })
     }
 }
@@ -112,7 +123,39 @@ export const EditUserAction = (id,user) =>{
             }
         })
         .catch(err =>{
-           dispatch(EditUserFail(err))
+           console.log(err)
+        })
+    }
+}
+export const logout = () =>{
+    const refreshToken = Cookies.get('refreshtoken')
+    return dispatch =>{
+        return CallApi(`auth/logout`,'POST',
+        {refreshToken: refreshToken},
+        'token'
+        ).then(response =>{
+            localStorage.clear('user')
+            Cookies.remove('token');
+            Cookies.remove('refreshtoken');
+            dispatch(LogOut(response.data))
+        })
+        .catch(err =>{
+           console.log(err)
+        })
+    }
+}
+export const refreshToken = () =>{
+    const refreshToken = Cookies.get('refreshtoken')
+    return dispatch =>{
+        return CallApi(`auth/refreshToken`,'POST',
+        {refreshToken: refreshToken},
+        'token'
+        ).then(response =>{
+            Cookies.set('token', response.data.accessToken, { expires: 1 });
+            dispatch(actionError.CancelError())
+        })
+        .catch(err =>{
+           console.log(err)
         })
     }
 }

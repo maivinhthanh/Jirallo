@@ -79,10 +79,7 @@ exports.editSprint = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,newsprint})
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        
         next(err)
     }
 }
@@ -101,10 +98,7 @@ exports.viewListSprint = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,listsprint: project.idsprint})
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        
         next(err)
     }
     
@@ -147,10 +141,7 @@ exports.beginsprint = async (req, res, next) => {
         
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        
         next(err)
     }
 
@@ -198,10 +189,7 @@ exports.completeSprint = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,newsprint})
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        
         next(err)
     }
 }
@@ -226,10 +214,7 @@ exports.deleteSprint = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 })
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        
         next(err)
     }
 }
@@ -247,10 +232,24 @@ exports.viewListIssuesInSprint = async (req, res, next) => {
         res.status(201).json({ statusCode: 200, listissues: sprint.idissues })
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        
+        next(err)
+    }
+}
+exports.addAndSortIssuesInSprint = async (req, res, next) => {
+    try{
+        const idsprint = req.params.idsprint
+        const listissues = req.body.listissues
+
+        const sprint = await Sprint.findByIdAndUpdate(idsprint,
+            {
+                idissues : listissues
+            } ,{new: true})
+
+        res.status(201).json({ statusCode: 200, listissues: sprint.idissues })
+    }
+    catch(err) {
+        
         next(err)
     }
 }

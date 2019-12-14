@@ -1,4 +1,6 @@
 import * as actionTypes from "../constants/sprint";
+import * as actionError from "./error";
+
 import CallApi from "../../until/apiCaller";
 
 
@@ -84,7 +86,7 @@ export const deleteSprint = (id) => {
       console.log(respone)
       dispatch(deleteSprintSuccess(respone.data))
     }).catch(err => {
-      dispatch(errorSprint(err))
+      console.log(err)
     })
   }
 }
@@ -127,7 +129,7 @@ export const showListSprintAct = (id) => {
     ).then (respone => {
       dispatch(showListSprint(respone.data.listsprint))
     }).catch(err => {
-      dispatch(errorSprint(err))
+      console.log(err)
     })
   }
 }
@@ -143,7 +145,7 @@ export const createSprintAct = (data, id) => {
     ).then(respone => {
       dispatch(createSprint(respone.data))
     }).catch(err => {
-      dispatch(errorSprint(err))
+      console.log(err)
     })
   }
 }

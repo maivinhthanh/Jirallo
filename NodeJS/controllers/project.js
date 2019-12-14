@@ -9,10 +9,9 @@ exports.createProject = async (req, res, next) => {
     try{
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            const error = new Error("Validation failed.")
-            error.statusCode = 404
-            error.data = errors.array()
-            res.status(404).json(error)
+            res.status(400).json({
+                message: 'Error',
+            });
             throw error
         }
 
@@ -48,10 +47,7 @@ exports.createProject = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,newproject})
     }
     catch (error) {
-        if (!error.statusCode) {
-            error.statusCode = 500
-        }
-        res.status(500).json(error)
+        
         next(error)
     }
 }
@@ -60,10 +56,9 @@ exports.editInfoProject = async (req, res, next) => {
     try{
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            const error = new Error("Validation failed.")
-            error.statusCode = 404
-            error.data = errors.array()
-            res.status(404).json(error)
+            res.status(404).json({
+                message: 'Error',
+            });
             throw error
         }
 
@@ -101,10 +96,7 @@ exports.editInfoProject = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,oldproject})
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        
         next(err)
     }
 }
@@ -113,10 +105,9 @@ exports.viewInfoProject = async (req, res, next) => {
     try{
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            const error = new Error("Validation failed.")
-            error.statusCode = 404
-            error.data = errors.array()
-            res.status(404).json(error)
+            res.status(404).json({
+                message: 'Error',
+            });
             throw error
         }
         
@@ -127,10 +118,7 @@ exports.viewInfoProject = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,project})
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        
         next(err)
     }
 }
@@ -170,10 +158,6 @@ exports.AddMember = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,project})
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
         next(err)
     }
 }
@@ -187,10 +171,6 @@ exports.ViewListProject = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,listproject: user.idproject})
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
         next(err)
     }
 }
@@ -203,10 +183,6 @@ exports.FindProjectByID = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,project: project})
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
         next(err)
     }
 }
@@ -225,10 +201,6 @@ exports.viewListIssuesInProject = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,project: project.idissues})
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
         next(err)
     }
 }
@@ -246,10 +218,23 @@ exports.getListUserInProject = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,listuser: project.idmembers})
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        next(err)
+    }
+}
+exports.addAndSortIssuesInBackLog = async (req, res, next) => {
+    try{
+        const idproject = req.params.idproject
+        const listissues = req.body.listissues
+
+        const project = await Project.findByIdAndUpdate(idproject,
+            {
+                idissues : listissues
+            } ,{new: true})
+
+        res.status(201).json({ statusCode: 200, listissues: project.idissues })
+    }
+    catch(err) {
+        
         next(err)
     }
 }

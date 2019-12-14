@@ -5,7 +5,7 @@ const sprintController = require('../controllers/sprint')
 
 const router = express()
 
-const isAuth = require('../middleware/is-auth')
+const isAuth = require('../middleware/AuthMiddleware')
 const isManager = require('../middleware/is-Manager')
 
 const upload = require('./uploadfile')
@@ -42,5 +42,8 @@ router.put('/deleteSprint/:idsprint',upload.single('avatar'),isAuth,
     [], 
     sprintController.deleteSprint,
 )
-
+router.put('/addAndSortIssuesInSprint/:idsprint',upload.single('avatar'),isAuth, 
+    [], 
+    sprintController.addAndSortIssuesInSprint,
+)
 module.exports = router

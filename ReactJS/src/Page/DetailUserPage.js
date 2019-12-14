@@ -220,6 +220,8 @@ const mapStateToProps = state => {
   return {
     user: state.user,
     admin: state.admin,
+    project: state.project,
+    error: state.error,
     member: state.member,
     project: state.project
   };

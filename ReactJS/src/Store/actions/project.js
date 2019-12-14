@@ -1,4 +1,6 @@
 import * as actionTypes from '../constants/project';
+import * as actionError from "./error";
+
 import CallApi from '../../until/apiCaller';
 
 
@@ -75,7 +77,7 @@ export const findProjectLikeId = (id) => {
     ).then(respone => {
       dispatch(findProjectSuccess(respone.data.project))
     }).catch(err => {
-     dispatch(projectError(err))
+      console.log(err)
     })
   }
 }
@@ -88,7 +90,7 @@ export const getListUserInProject = (id) => {
     ).then(respone => {
       dispatch(getListUserInProjectSuccess(respone.data.listuser))
     }).catch(err => {
-     dispatch(projectError(err))
+      console.log(err)
     })
   }
 }
@@ -160,9 +162,11 @@ export const getListProjectAct = () =>{
     {},
     'token'
     ).then(respone => {
+      console.log(respone)
       dispatch(getAllList(respone.data.listproject))
     }).catch(err =>{
-      dispatch(projectError(err))
+      console.log(err)
+      console.log(err)
     })
 
   }

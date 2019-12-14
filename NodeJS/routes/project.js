@@ -5,7 +5,7 @@ const projectController = require('../controllers/project')
 
 const router = express()
 
-const isAuth = require('../middleware/is-auth')
+const isAuth = require('../middleware/AuthMiddleware')
 const isManager = require('../middleware/is-Manager')
 
 const upload = require('./uploadfile')
@@ -32,6 +32,10 @@ router.get('/ViewListProject/',isAuth,
 router.put('/AddMember/:idproject',upload.single('avatar'),isAuth, isManager,
     [], 
     projectController.AddMember,
+)
+router.put('/addAndSortIssuesInBackLog/:idproject',upload.single('avatar'),isAuth,
+    [], 
+    projectController.addAndSortIssuesInBackLog,
 )
 router.get('/viewListProject',isAuth,
     projectController.ViewListProject,

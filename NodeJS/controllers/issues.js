@@ -56,10 +56,7 @@ exports.createIssues = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,newissues})
     }
     catch (error) {
-        if (!error.statusCode) {
-            error.statusCode = 500
-        }
-        res.status(500).json(error)
+        
         next(error)
     }
     
@@ -123,10 +120,7 @@ exports.createIssuesInSprint = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,newissues})
     }
     catch (error) {
-        if (!error.statusCode) {
-            error.statusCode = 500
-        }
-        res.status(500).json(error)
+        
         next(error)
     }
     
@@ -173,10 +167,7 @@ exports.editIssues = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,newissues})
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        
         next(err)
     }
 }
@@ -190,10 +181,7 @@ exports.viewListIssues = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,listissues: project.idissues})
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        
         next(err)
     }
     
@@ -210,10 +198,7 @@ exports.viewListIssuesInBackLog = async (req, res, next) => {
         res.status(201).json({ statusCode: 200 ,listissues: issues})
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        
         next(err)
     }
     
@@ -253,10 +238,7 @@ exports.assignforUser = async (req, res, next) => {
 
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        
         next(err)
     }
     
@@ -292,10 +274,7 @@ exports.addIssueIntoSprint = async (req, res, next) => {
 
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        
         next(err)
     }
     
@@ -326,10 +305,7 @@ exports.changeProcessIssues = async (req, res, next) => {
 
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        
         next(err)
     }
     
@@ -356,10 +332,7 @@ exports.deleteIssues = async (req, res, next) => {
 
     }
     catch(err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        }
-        res.status(500).json(err)
+        
         next(err)
     }
     

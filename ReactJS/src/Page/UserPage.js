@@ -1,13 +1,27 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux"
+
 import Headers from '../Components/Header';
 import BannerLeft from '../Components/BannerLeft';
-export default class UserPage extends Component {
+import MenuUser from '../Components/MenuUser/Menu'
+
+class UserPage extends Component {
   render() {
     return (
       <div>
-        <Headers/>
+        <MenuUser/>
         <BannerLeft/>
       </div>
     )
   }
 }
+const mapStateToProps = state => {
+  return {
+    error: state.error,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(UserPage)
