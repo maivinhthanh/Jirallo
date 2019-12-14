@@ -39,14 +39,12 @@ export const findProjectSuccess = (data) => {
   }
 }
 export const viewListIssuesInProjectSuccess = (data) => {
-  console.log(data)
   return {
     type: actionTypes.viewListIssuesInProjectSuccess,
     data
   }
 }
 export const getListUserInProjectSuccess = (data) => {
-  console.log(data)
   return {
     type: actionTypes.getListUserInProjectSuccess,
     data
@@ -108,7 +106,6 @@ export const viewListIssuesInProject = (id) => {
   }
 }
 export const EditProject = (id, project) => {
-  console.log(project.get('avatar').name)
   return dispatch => {
     return CallApi(`project/editInfoProject/${id}`,
     'PUT',

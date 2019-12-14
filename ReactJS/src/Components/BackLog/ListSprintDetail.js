@@ -56,14 +56,15 @@ export default class ListSprintDetail extends Component {
         {_.map(_.filter(sprint,(item) => item.hidden == false), (data, key) => {
           return (
             <div
-              className={`container sprint ${!modal ? "" : "layoutSprint"}`}
+            className='sprint'
+              // className={`container sprint ${!modal ? "" : "layoutSprint"}`}
               key={key}
             >
               <li style={{ marginLeft: "-27px" }}>
               <i className="fas fa-ellipsis-h setting-addsprint" style={{color: 'black', marginRight:'10px'}}></i>
               <InputField nameInput={'sprint'} sprint={sprint} newdata={(item,name) => this.updateName(item, data._id)}>{data.name}</InputField>
               <span style={{marginLeft: '10px', color: '#7A869A'}}>{data.idissues.length} issues</span>
-             <span style={{position:'absolute', top:'27px', left:'120px', color: '#7A869A'}}>{data.datecreate}</span>
+             <span style={{position:'absolute', top:'27px', left:'103px', color: '#7A869A'}}>{data.datecreate}</span>
                 {/* <InputField sprint={(data,name) => this.updateName(data, this.props.sprint.name)}>{data.name}</InputField> */}
                 <div className="dropdown" style={{top:'-26px', left:'161px'}}>
                   <button
@@ -89,7 +90,8 @@ export default class ListSprintDetail extends Component {
                   </div>
                 </div>
               </li>
-              <div className={`optionbtn ${!modal ? "" : "custom"}`}>
+              <div className='optionbtn'>
+              {/* <div className={`optionbtn ${!modal ? "" : "custom"}`}> */}
                 <IssueOnSprint
                   user={user}
                   admin={admin}

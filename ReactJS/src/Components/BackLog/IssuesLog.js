@@ -9,12 +9,6 @@ import _ from 'lodash'
 import { useDrag } from 'react-dnd'
 import { useDrop } from 'react-dnd'
 function IssuesLog(props) {
-    // handleAddIssue: ƒ handleAddIssue(id, issue)
-    // item: {idsprint: Array(0), image: null, comment: Array(0), watch: Array(1), hidden: false, …}
-    // modal: false
-    // parentCallBack: ƒ (data, active)
-    // sprint: [{…}]
-    // white: true
     let idIssue = "";
     let itemACtive = [];
     let idActive = ''
@@ -52,81 +46,79 @@ function IssuesLog(props) {
         props.parentCallBack(props.modal, idActive);
     }
     return (
-        // <div
-        // style={{
-        //     position: 'relative',
-        //     width: '100%',
-        //     height: '100%',
-        //     padding: '15px 0px',}}
-        // >
-        <div ref={drop} style={{ position: 'relative', width: '100%', height: '100%', }} >
-            <div style={{
-                backgroundColor: fill, width: '100%',
+        <div
+            style={{
+                position: 'relative',
+                width: '100%',
                 height: '100%',
-            }} >
-                <div ref={drag}
-                    style={{
-                        opacity: isDragging ? 1 : 1,
-                        fontSize: 25,
-                        fontWeight: 'bold',
-                        cursor: 'move',
-                        border: '1px solid',
-                        margin: '12px',
-                        borderRadius: '12px'
-                    }}
-                    className={`issues ${!props.modal ? "" : "custom"}`}
-                    style={{
-                        float: "left",
-                        marginLeft: "75px",
-                        marginBottom: "15px"
-                    }}
-                >
-                    <div className="nameIssue"
+                padding: '15px 0px',
+            }}
+        >
+            <div ref={drop} style={{ position: 'relative', width: '100%', height: '100%', }} >
+                <div style={{
+                    backgroundColor: fill, width: '100%',
+                    height: '100%',
+                }} >
+                    <div ref={drag}
+                        style={{
+                            opacity: isDragging ? 1 : 1,
+                            cursor: 'move',
+                            marginLeft: '70px'
+                        }}
+                        className={`row issues ${!props.modal ? "" : "col-md-12"}`}
                     >
-                        <span onClick={() => showContent(props.item._id)}>
-                            {props.item.name}
-                        </span>
-                    </div>
-                    <i
-                            data-toggle="modal"
-                            data-target="#myModal"
-                            className="fas fa-cog setting-issue"
-                            onClick={() => RedirectToUpdate(props.item)}
-                        ></i>
-                    <div className="option-add">
-                        <UncontrolledDropdown>
-                            <DropdownToggle caret>
+                            <div className="col-md-11">
+                                <div className="nameIssue"
+                                >
+                                    <span onClick={() => showContent(props.item._id)}>
+                                        {props.item.name}
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="col-md-1" style={{display:'flex'}}>
                                 <i
-                                    className="fas fa-ellipsis-h setting-addsprint"
-                                    onClick={() => getIdIssue(props.item._id)}
-                                    style={{ color: "black", marginTop: "-7px" }}
+                                    data-toggle="modal"
+                                    data-target="#myModal"
+                                    className="fas fa-cog"
+                                    onClick={() => RedirectToUpdate(props.item)}
                                 ></i>
-                            </DropdownToggle>
-                            <DropdownMenu>
-                                {_.map(props.sprint, (data, index) => {
-                                    return (
-                                        <DropdownItem
-                                            onClick={() => addIssueToSprint(data._id)}
-                                            key={index}
-                                        >
-                                            {data.name}
-                                        </DropdownItem>
-                                    );
-                                })}
-                            </DropdownMenu>
-                        </UncontrolledDropdown>
+                                {/* <div className={`option-add ${!props.modal ? "" : "option"}`}> */}
+                                <div className='option-add'>
+                                    <UncontrolledDropdown>
+                                        <DropdownToggle caret>
+                                            <i
+                                                className="fas fa-ellipsis-h setting-addsprint"
+                                                onClick={() => getIdIssue(props.item._id)}
+                                                style={{ color: "black", marginTop: "-7px" }}
+                                            ></i>
+                                        </DropdownToggle>
+                                        <DropdownMenu>
+                                            {_.map(props.sprint, (data, index) => {
+                                                return (
+                                                    <DropdownItem
+                                                        onClick={() => addIssueToSprint(data._id)}
+                                                        key={index}
+                                                    >
+                                                        {data.name}
+                                                    </DropdownItem>
+                                                );
+                                            })}
+                                        </DropdownMenu>
+                                    </UncontrolledDropdown>
+                                </div>
+                            </div>
+                        {/* Nut update issue */}
                     </div>
                 </div>
+                {isOver && (
+                    <div style={{
+                        position: 'absolute', top: 0, left: '71px', height: '100%', width: '90%', zIndex: 1,
+                        opacity: 1, border: '4px black dotted', backgroundColor: 'whitesmoke',
+                    }}
+                    />
+                )}
             </div>
-            {isOver && (
-                <div style={{
-                    position: 'absolute', top: 0, left: 0, height: '100%', width: '100%', zIndex: 1,
-                    opacity: 1, backgroundColor: 'whitesmoke',
-                }}
-                />
-            )}
         </div>
-        // </div>
     );
 }
 export default IssuesLog;

@@ -1,6 +1,7 @@
 import * as actionTypes from '../constants/issues';
 import { updateObject } from '../utility';
 import _ from 'lodash';
+import { ListIssueInBackLog } from '../actions/issues';
 const initialState = {
     comment: [],
     name: '',
@@ -29,6 +30,7 @@ export const IssueError =(state, action) => {
 export const showListIssue = (state, action) => {
   let cloneState = _.clone(state)
   cloneState = [...action.data.listissues]
+  console.log('asd',cloneState)
   return cloneState
 }
 export const EditIssue = (state, action) => {
@@ -77,7 +79,13 @@ export const assignTaskIssue = (state, action) => {
  
   // return cloneState 
 }
-
+export const showListIssueInBackLog = (state, action) => {
+  console.log(state, action.data.listissues)
+  let cloneState = _.cloneDeep(state)
+  cloneState = _.cloneDeep(action.data.listissues)
+  console.log(cloneState)
+  return cloneState
+}
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.createIssue: return createIssue( state, action );
@@ -88,6 +96,7 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.AddIssueSuccess : return AddIssueSuccess(state, action);
         case actionTypes.changeProcessSuccess: return changeProcessSuccess(state, action);
         case actionTypes.assignTaskIssue : return assignTaskIssue(state, action);
+        case actionTypes.showListIssueInBackLog : return showListIssueInBackLog(state, action);
 
         default: return state;
     }

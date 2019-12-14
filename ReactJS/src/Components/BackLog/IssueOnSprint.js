@@ -70,7 +70,7 @@ export default class IssueOnSprint extends Component {
             data={this.itemActive}
           />
         )}
-        <div className="content-right">
+        {/* <div className="content-right">
           <div className={`${modal ? "" : "hidden"}`}>
             {_.map(_.compact(issues), (item, key) => {
               if (item._id === this.idActive) {
@@ -90,7 +90,7 @@ export default class IssueOnSprint extends Component {
               }
             })}
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }

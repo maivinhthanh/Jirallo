@@ -6,7 +6,6 @@ import WrapperDrop from '../BackLog/WrapperDrop'
 import Process from '../Board/Process';
 
 class IssueInBackLog extends Component {
-    // console.log(props.name)
     // const [{ isDragging }, drag] = useDrag({
     //     item: { type: 'issue', id: props.name },
     //     collect: monitor => ({
@@ -24,12 +23,12 @@ class IssueInBackLog extends Component {
         // this.props.addIssueOnSprint(id, issue)
     }
     AddIssueIntoSprint = (idIssue, id) => {
-        console.log(idIssue, id)
         this.props.AddIssueIntoSprint(idIssue, id)
     }
     render(){
+        console.log(this.props.issues)
     return (
-        <div >
+        <div className="col-md-12" >
             {/* <WrapperDrop white process={'todo'} handleChange={(id, issue) => this.changeIssue(id, issue)}> */}
             {_.map(_.filter(_.compact(this.props.issues), (item, index) => item.hidden == false), (item, index) => {
                 return (

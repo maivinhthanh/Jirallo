@@ -672,7 +672,7 @@ p.movetxt {
 }
 /* Backlog Page */
 .detail-card .issues {
-  width: 100%;
+  width: 90%;
   text-align: left;
   border: 1px solid #ccaa;
   padding: 10px;
@@ -777,9 +777,7 @@ p.movetxt {
   top: 0px !important;
 }
 .chooseOptionEdit{
-  position: absolute;
-  right: 28px;
-  top: -10px;
+  display: inline-flex;
 }
 .detail-info li {
   padding: 10px;

@@ -85,7 +85,6 @@ export const SearchAction = email => {
 //   'token'
 // )
 export const FindUserAction = id => {
-  console.log(id)
   return dispatch => {
     return CallApi(`auth/findUserID/${id}`,
     'GET',
@@ -93,9 +92,7 @@ export const FindUserAction = id => {
     'token'
     )
       .then(respone => {
-        console.log(respone)
         if (respone.data.result.length !== 0) {
-          console.log(respone.data.result)
           dispatch(Find(respone.data.result));
         } else {
           dispatch(FindError("Error"));

@@ -25,19 +25,25 @@ export default function IssueAdd(props) {
     let item = props.item[1]
     const fill = props.white ? 'white' : 'white'
     const [{ isOver }, drop] = useDrop({
-      accept: 'issue',
-      drop: (item) =>{
-        props.handleAdd(props, item)
-        // props.handleAdd(props.filterSprint._id, item.issue._id)
-      },
-      collect: monitor => ({
-        isOver: !!monitor.isOver(),
-      }),
+        accept: 'issue',
+        drop: (item) => {
+            props.handleAdd(props, item)
+        },
+        collect: monitor => ({
+            isOver: !!monitor.isOver(),
+        }),
+        accept: 'issueIn',
+        drop: (item) => {
+            props.handleAddIssueIntoSprint(props, item)
+        },
+        collect: monitor => ({
+            isOver: !!monitor.isOver(),
+        }),
     })
     return (
         <div style={{
             position: 'relative',
-            width: '100%',
+            width: '90%',
             height: '100%',
             padding: '15px 0px',
             // backgroundColor: '#B3C6E6',
@@ -46,7 +52,7 @@ export default function IssueAdd(props) {
             <div ref={drop} style={{ position: 'relative', width: '100%', height: '100%', }} >
                 <div style={{
                     backgroundColor: fill, width: '100%',
-                    height: '100%', 
+                    height: '100%',
                     // border: '1px black solid',
                 }} >
                     <div
@@ -57,8 +63,9 @@ export default function IssueAdd(props) {
                             cursor: 'move',
                             border: '1px solid #ccaa',
                             // margin: '12px',
-                            padding:'5px'
+                            padding: '5px'
                         }}
+                        className={`${!props.modal ? "" : "col-md-12"}`}
                     >
                         {props.item.name}
                         {/* <div

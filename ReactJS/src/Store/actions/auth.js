@@ -72,7 +72,6 @@ export const loginByFacebookAction = (data) => {
     };
 };
 export const loginByGoogleAction = (data) => {
-    console.log(data)
     return dispatch => {
         return CallApi('auth/loginbygoogle', 'POST',{
             idgoogle: data.googleId,
@@ -80,7 +79,6 @@ export const loginByGoogleAction = (data) => {
             email: data.email,
             name: data.name
           }).then( response => {
-              console.log(response)
             dispatch(login(response));
          } )
          .catch(error => {

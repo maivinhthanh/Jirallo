@@ -91,7 +91,6 @@ class DetailUserPage extends Component {
               {/* <div>
             {
                 _.map(admin, (item,index) => {
-                  console.log(item)
                   return <UpdateUser key={index} data ={item}
                  id={this.id} />
                 })

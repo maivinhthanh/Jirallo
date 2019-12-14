@@ -6,14 +6,12 @@ function WrapperDrop(props) {
     const [{ isOver }, drop] = useDrop({
       accept: 'issue',
       drop: (item) =>{
-        console.log(item)
         props.handleChange(props.filterSprint._id, item.issue._id)
       },
       collect: monitor => ({
         isOver: !!monitor.isOver(),
       }),
     })
-    console.log(item)
         return (
             <div style={{
                 position: 'relative',
