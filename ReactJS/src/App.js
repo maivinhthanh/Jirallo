@@ -15,14 +15,19 @@ import DetailUserPage from './Page/DetailUserPage'
 import ProfileProject from './Page/ProfileProject'
 import HTML5Backend from 'react-dnd-html5-backend'
 import ListProjectPage from './Page/ListProjectPage'
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import PrivateRoute from './PrivateRoute'
 import Cookies from 'js-cookie'
 import jwtDecode from 'jwt-decode'
 
+import * as actions from './Store/actions/auth';
+
 class App extends Component {
   shouldComponentUpdate(nextProps, nextState){
     return nextProps.user.code !== this.props.user.code
+  }
+  componentDidMount(){
+    this.props.refreshToken()
+    setInterval(this.props.refreshToken(), 1000 * 60 * 60 * 24);
   }
   render(){
     let isAuth = false
@@ -62,5 +67,9 @@ const mapStateToProps = state => {
       user : state.auth
   };
 };
-
-export default connect( mapStateToProps, null )(App);
+const mapDispatchToProps = dispatch => {
+  return {
+    refreshToken: () => dispatch(actions.refreshToken())
+  };
+};
+export default connect( mapStateToProps, mapDispatchToProps )(App);

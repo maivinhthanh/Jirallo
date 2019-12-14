@@ -19,7 +19,6 @@ class User extends Component {
       <div className="user-list">
         <Nav tabs>
           {_.map(listuser, (user, index) => {
-            console.log(user.id.image)
             return (
               <NavItem key={index}>
                 <NavLink>
