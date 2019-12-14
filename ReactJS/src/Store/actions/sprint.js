@@ -34,6 +34,29 @@ export const AddSuccess= (data) => {
     data
   }
 }
+export const DragSuccess = (data) => {
+  return {
+    type: actionTypes.DragSuccess,
+    data
+  }
+}
+export const DragIssueToSprint = (listIssueId, idSprint) => {
+  return dispatch => {
+    return CallApi(`sprint/addAndSortIssuesInSprint/${idSprint}`,
+    'PUT',
+    {
+      listissues: listIssueId
+    },
+    'token'
+    ).then(respone => {
+      console.log(respone.data)
+      dispatch(DragSuccess(respone.data))
+    }).catch(err => {
+      console.log(err)
+      dispatch(errorSprint(err))
+    })
+  }
+}
 export const beginSprint = (idSprint, idProject) => {
   return dispatch => {
     return CallApi(`sprint/beginsprint/${idProject}`,

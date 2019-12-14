@@ -86,6 +86,11 @@ export const showListIssueInBackLog = (state, action) => {
   console.log(cloneState)
   return cloneState
 }
+export const addAndSortSuccess = (state, action) => {
+  console.log(state, action.data)
+  
+  return state
+}
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.createIssue: return createIssue( state, action );
@@ -97,6 +102,7 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.changeProcessSuccess: return changeProcessSuccess(state, action);
         case actionTypes.assignTaskIssue : return assignTaskIssue(state, action);
         case actionTypes.showListIssueInBackLog : return showListIssueInBackLog(state, action);
+        case actionTypes.addAndSortSuccess : return addAndSortSuccess(state, action)
 
         default: return state;
     }

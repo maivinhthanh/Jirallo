@@ -61,7 +61,7 @@ class ListDetailIssues extends Component {
   componentWillMount() {
     this.props.showListIssue(this.props.params);
     this.props.showListSprint(this.props.params);
-    // this.props.showListIssueInBackLog(this.props.params);
+    this.props.showListIssueInBackLog(this.props.params);
   }
   dataAssignee = (data) => {
     this.props.findUserLikeId(data.assignee)
@@ -80,6 +80,7 @@ class ListDetailIssues extends Component {
   render() {
     const { issues, sprint, user, admin, params, listuser } = this.props;
     const { modal, status, loadData } = this.state;
+    console.log(this.issues)
     return (
       <div className="row">
        <div className={`${modal ? "col-md-9" : "col-md-12"}`}>
@@ -113,13 +114,14 @@ class ListDetailIssues extends Component {
                 {/* <span>{issues.datecreate}</span> */}
                 {/* <Process white process={'todo'} handleChange={(id, process) => this.props.changeProcessIssue(id, process)}></Process> */}
                 <IssueInBackLog
-                  name={issues}
+                  params={params}
                   modal={modal}
                   issues={issues}
                   showListIssueInBackLog={this.props.showListIssueInBackLog}
                   AddIssueIntoSprint={this.props.AddIssueIntoSprint}
                   parentCallBack={this.callbackFunction}
                   showUpdateIssue={this.showUpdateIssue}
+                  AddAndSortIssueInBacklog={this.props.AddAndSortIssueInBacklog}
                   // addIssueOnSprint={this.props.addIssueOnSprint}
                   sprint={sprint} />
                 {/* <Process/> */}
@@ -196,7 +198,8 @@ const mapDispatchToProps = dispatch => {
     beginSprint: (idSprint, idProject) => dispatch(actionSprint.beginSprint(idSprint, idProject)),
     AddIssueIntoSprint: (idSprint, idIssue) => dispatch(actionSprint.AddIssueIntoSprint(idSprint, idIssue)),
     getListUserInProject: (id) => dispatch(actionProject.getListUserInProject(id)),
-    showListIssueInBackLog: id => dispatch(actionIssue.showListIssueInBackLog(id))
+    showListIssueInBackLog: id => dispatch(actionIssue.showListIssueInBackLog(id)),
+    AddAndSortIssueInBacklog : (listIssue, idProject) => dispatch(actionIssue.AddAndSortIssueInBacklog(listIssue,idProject))
     // findUserLikeIDAct: (idUser) => dispatch(actionUser.findUserLikeIDAct(idUser))
   };
 };

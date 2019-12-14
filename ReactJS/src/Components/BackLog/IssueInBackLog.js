@@ -19,14 +19,33 @@ class IssueInBackLog extends Component {
         this.props.changeIssue(id, issue)
     }
     addIssue = (DragItem, DropItem) => {
-        console.log(DragItem, DropItem)
+        const {issues, params} = this.props
+        let vtx, vty;
+        let listissues = []
+        _.filter(issues, (data, key) => {
+            if(data._id === DragItem.item._id){
+                vtx = key
+            }
+        })
+        for(let i = issues.length; i>= vtx ; i--){
+            issues[i] = issues[i-1]
+        }
+        issues[vtx] = DropItem.issue;
+
+        console.log(issues)
+        _.map(issues, (data) => {
+            listissues.push(data._id)
+        })
+        console.log(listissues, params)
+        this.props.AddAndSortIssueInBacklog(listissues,params)
         // this.props.addIssueOnSprint(id, issue)
     }
     AddIssueIntoSprint = (idIssue, id) => {
         this.props.AddIssueIntoSprint(idIssue, id)
     }
     render(){
-        console.log(this.props.issues)
+    console.log(this.props.issues)
+    console.log(this.props)
     return (
         <div className="col-md-12" >
             {/* <WrapperDrop white process={'todo'} handleChange={(id, issue) => this.changeIssue(id, issue)}> */}

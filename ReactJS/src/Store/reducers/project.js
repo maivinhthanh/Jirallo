@@ -48,6 +48,7 @@ const findProjectSuccess = (state, action) => {
     return cloneState
 }
 
+
 const projectError = (state, action) => {
     return updateObject(state, {error: true})
 }
