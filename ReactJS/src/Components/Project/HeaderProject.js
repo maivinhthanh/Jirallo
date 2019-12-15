@@ -2,10 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { InputGroup, InputGroupAddon, InputGroupText, Input,Button } from 'reactstrap';
 import _ from "lodash";
-
-import * as actions from "../../Store/actions/admin";
-
-import CreateProject from '../Modal/CreateProject';
+import {
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalFooter
+}
+from "reactstrap"
+import * as actionsAdmin from "../../Store/actions/admin";
+import * as actionsProject from "../../Store/actions/project";
 
 class HeaderBoard extends Component {
   constructor(props) {
@@ -13,7 +18,9 @@ class HeaderBoard extends Component {
     this.state = {
       active: false,
       keyseach: '',
-      showModal: false
+      showModal: false,
+      modal: false,
+      nameProject: ''
     };
   }
   handleKeySeach =(event) =>{
@@ -26,10 +33,25 @@ class HeaderBoard extends Component {
     this.setState({
       showModal: !this.state.showModal
     })
+    this.props.isShowModal(this.state.showModal)
   }
-  
+  showToggle = () => {
+    this.setState(preState => ({
+      modal: !preState.modal
+    }))
+  }
+  handleNameProject = (event) => {
+    event.preventDefault();
+    this.setState({
+      nameProject : event.target.value
+    })
+  }
+  createProject = (event)=>{
+    event.preventDefault();
+    this.props.createProjectAct(this.state.nameProject)
+  }
   render() {
-    const {active, keyseach, showModal} = this.state
+    const {active, keyseach} = this.state
     return (
       <div className="row" style={{height: '60px',padding: '10px 0px',backgroundColor: '#6A8DCD',marginBottom: '20px'}}>
         <div className='col-1'></div>
@@ -43,13 +65,29 @@ class HeaderBoard extends Component {
         </div>
         <div className='col-1'></div>
         <div className='col-6 text-center' >
-          <Button color="success" onClick={()=>this.isShowModal()} style={{border: '1px solid'}}
+          <Button color="success" onClick={()=>this.showToggle()} style={{border: '1px solid'}}
           ><b>Create Project</b></Button>
           <div className="modal-create">
-            {showModal == true && (
-              <CreateProject />
-            )}
-            
+          <Modal
+            isOpen={this.state.modal}
+            toggle={this.showToggle}
+            className={this.props.className}
+          >
+            <ModalHeader toggle={this.showToggle}>
+              Create project
+            </ModalHeader>
+            <ModalBody>
+            <Input type="text" onChange={this.handleNameProject} value={this.state.nameProject} name="project" id="project" placeholder="with name project" />
+            </ModalBody>
+            <ModalFooter>
+              <Button type="submit" color="primary" onClick={this.createProject}>
+                Add
+              </Button>{" "}
+              <Button color="secondary" onClick={this.showToggle}>
+                Cancel
+              </Button>
+            </ModalFooter>
+          </Modal>
           </div>
         </div>
       </div>
@@ -65,7 +103,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    SearchEmail: email => dispatch(actions.SearchAction(email)),
+    SearchEmail: email => dispatch(actionsAdmin.SearchAction(email)),
+    createProjectAct : name => dispatch(actionsProject.createProjectAct(name))
   };
 };
 export default connect(

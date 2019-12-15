@@ -52,16 +52,13 @@ export const assignTaskIssue = (data) => {
       data
     }
 }
-<<<<<<< HEAD
 export const ListIssueInBackLog = (data) => {
   return {
     type: actionTypes.showListIssueInBackLog,
     data
   }
 }
-=======
 
->>>>>>> d2b246b1cc734b40260279b37896cee72fa5d807
 export const updateNameIssue = (name, id) => {
   return dispatch => {
       return CallApi(`issues/editIssues/${id}`,

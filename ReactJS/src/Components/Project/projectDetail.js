@@ -149,7 +149,6 @@ export default class projectDetail extends Component {
   }
   render() {
     const { project } = this.props;
-    console.log(project)
     _.map(this.props.member, (item) => {
       this.hanleUserActive = item._id
     })

@@ -149,7 +149,8 @@ class InfoUser extends Component {
                 <div className="row text-center">
                   <div className="col-12" style={{height: '100px', backgroundColor: '#B3C6E6'}}></div>
                   <div className="col-12 " >
-                      <Activities/>
+                    <h3>Activities</h3>
+                    <Activities/>
                   </div>
                 </div>
               </div>
