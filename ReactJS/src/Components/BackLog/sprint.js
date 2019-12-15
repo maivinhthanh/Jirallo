@@ -11,6 +11,7 @@ class sprint extends Component {
         // this.addIssueOnSprint = this.props.addIssueOnSprint
     }
     addIssueOnSprint(itemDrop, itemDrag){
+        debugger
         const {activeIssue, issues} = this.props
         let vtx, vty;
         _.filter(activeIssue, (data, key) => {
@@ -35,7 +36,8 @@ class sprint extends Component {
         console.log(activeIssue)
     }
     IssueToSprint(itemDrag, itemDrop){
-        console.log(itemDrop, itemDrag)
+        console.log(itemDrag, itemDrop)
+        let listIssueId = []
         // Keo, tha
         const {activeIssue, issues} = this.props
         let vtx, vty;
@@ -49,12 +51,20 @@ class sprint extends Component {
         }
         activeIssue[vtx] = itemDrop.issue;
         // activeIssue.length ++ ;
-
+            
         // FindIssueInSprint 
         console.log(activeIssue)
+        // Filter id trong activeIssue push vao mang
+        _.map(activeIssue, (issue, key) =>{
+            listIssueId.push(issue._id)
+        })
+        console.log(listIssueId)
+        // console.log(itemDrag.filterSprint._id)
+        this.props.DragIssueToSprint(listIssueId, itemDrag.filterSprint._id)
     }
     render() {
         const {filterSprint, modal, activeIssue, issues} = this.props
+        console.log(activeIssue)
         return (
             <div>
                 {/* <WrapperDrop white filterSprint={filterSprint} handleChange={(id, issue) => this.props.addIssueOnSprint(id, issue)} > */}
@@ -70,7 +80,9 @@ class sprint extends Component {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        addIssueOnSprint: (id, issue) => dispatch(action.AddIssueIntoSprint(id, issue))
+        addIssueOnSprint: (id, issue) => dispatch(action.AddIssueIntoSprint(id, issue)),
+        DragIssueToSprint:(listIssueId, idSprint) => dispatch(action.DragIssueToSprint(listIssueId, idSprint))
+
     }
 
 }

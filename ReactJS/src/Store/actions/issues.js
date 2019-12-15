@@ -58,6 +58,29 @@ export const ListIssueInBackLog = (data) => {
     data
   }
 }
+export const AddAndSortSuccess = (data) => {
+  return {
+    type: actionTypes.addAndSortSuccess,
+    data
+  }
+}
+
+export const AddAndSortIssueInBacklog = (listIssue, idProject) => {
+  return dispatch => {
+    return CallApi(`project/addAndSortIssuesInBackLog/${idProject}`,
+    'PUT',
+    {
+      listissues:listIssue
+    },
+    'token'
+    ).then(respone => {
+      console.log(respone)
+      dispatch(AddAndSortSuccess(respone.data))
+    }).catch(err => {
+      dispatch(IssueError(err))
+    })
+  }
+}
 
 export const updateNameIssue = (name, id) => {
   return dispatch => {

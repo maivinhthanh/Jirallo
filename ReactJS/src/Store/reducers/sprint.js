@@ -22,6 +22,7 @@ export const showListSprint = (state, action) => {
   let customData = _.compact(action.data)
   let cloneState = _.clone(state)
   cloneState = [...customData]
+  console.log(cloneState)
   return cloneState
 }
 export const deleteSprintSuccess = (state, action) => {
@@ -40,6 +41,14 @@ export const AddSuccess = (state, action) => {
   })
   return cloneState
 }
+export const DragSuccess = (state, action) => {
+  let cloneState = _.cloneDeep(state)
+  _.map(cloneState, (sprint) => {
+    sprint.idissues = _.cloneDeep(action.data.listissues)
+  })
+  console.log(cloneState)
+  return cloneState
+}
 // export const showListIssue = (state, action) => {
 //   console.log(action.data)
 //   let cloneState = _.clone(state)
@@ -53,6 +62,7 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.showListSprint: return showListSprint(state, action);
         case actionTypes.deleteSprintSuccess: return deleteSprintSuccess(state, action);
         case actionTypes.AddSuccess : return AddSuccess(state, action);
+        case actionTypes.DragSuccess : return DragSuccess(state, action);
         default: return state;
     }
 };
