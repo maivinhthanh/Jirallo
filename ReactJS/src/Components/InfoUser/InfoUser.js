@@ -80,7 +80,7 @@ class InfoUser extends Component {
                 _.map(admin, (item, index) =>{
                     return(
                         <div className="row" key={index}>
-                            <div className="col-12" style={{height: '100px', backgroundColor: '#B3C6E6'}}>
+                            <div className="col-12" style={{height: '100px', backgroundColor: '#6A8DCD'}}>
                                 <h1>{item.name}</h1>
                             </div>
                             
@@ -147,7 +147,7 @@ class InfoUser extends Component {
               </div>
               <div className="col-6">
                 <div className="row text-center">
-                  <div className="col-12" style={{height: '100px', backgroundColor: '#B3C6E6'}}></div>
+                  <div className="col-12" style={{height: '100px', backgroundColor: '#6A8DCD'}}></div>
                   <div className="col-12 " >
                     <h3>Activities</h3>
                     <Activities/>

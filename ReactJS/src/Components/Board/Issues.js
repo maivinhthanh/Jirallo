@@ -1,5 +1,9 @@
 import React from 'react'
 import { useDrag } from 'react-dnd'
+import {
+  Card, CardText, CardBody,
+  CardTitle
+} from 'reactstrap';
 
 export default function Issues({ name }) {
   const [{isDragging}, drag] = useDrag({
@@ -19,8 +23,36 @@ export default function Issues({ name }) {
           margin: '12px',
           borderRadius: '12px'
         }}>
-          <h4>{name.name}</h4>
-          <h4>{name.process}</h4>
+          <Card>
+              <CardTitle>{name.name}</CardTitle>
+              <CardText>
+                <div className="row">
+                  <div className="col-4">
+                    {
+                      name.type === 'task'  
+                        ?<i className="fas fa-circle"></i>
+                        :<i className="fas fa-bug"></i>
+                    }
+                  </div>
+                  <div className="col-4">
+                  {
+                      name.priority == 'highest'  
+                        ?<i className="fas fa-arrow-up" style={{color: 'red'}}></i>: 
+                      name.priority == 'high'
+                        ?<i className="fas fa-up" style={{color: 'black'}}></i>:
+                      name.priority == 'medium'
+                        ?<i className="fas fa-minus" style={{color: 'black'}}></i>:
+                      name.priority == 'low'
+                        ?<i className="fas fa-arrow-down" style={{color: 'black'}}></i>:
+                        <i className="fas fa-arrow-down" style={{color: 'red'}}></i>
+                    }
+                  </div>
+                  <div className="col-4">
+                    <i className="fas fa-tag">{name.tag}</i>
+                  </div>
+                </div>
+              </CardText>
+          </Card>
       </div>
   )
 }

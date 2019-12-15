@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 
-import Headers from '../Components/Header';
 import BannerLeft from '../Components/BannerLeft';
 import MenuUser from '../Components/MenuUser/Menu'
 

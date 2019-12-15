@@ -15,7 +15,6 @@ import { connect } from "react-redux";
 import * as actions from "../../Store/actions/admin";
 import * as actionGroup from "../../Store/actions/group";
 import * as actionUser from "../../Store/actions/user";
-import UpdateUser from "../../Components/User/UpdateUser";
 class Admin extends Component {
   constructor(props) {
     super(props);
@@ -93,9 +92,6 @@ class Admin extends Component {
         </div>
         <div className="detailUser">
           {!this.state.status && <DetailUsers admin={this.props} />}
-        </div>
-        <div>
-          <UpdateUser />
         </div>
 
         {/* FindGroupLikeName */}
