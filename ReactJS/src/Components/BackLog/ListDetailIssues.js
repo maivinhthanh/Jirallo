@@ -77,6 +77,9 @@ class ListDetailIssues extends Component {
       status: true
     })
   }
+  LoadData = (idSprint) => {
+    this.props.showListIssue(idSprint)
+  }
   render() {
     const { issues, sprint, user, admin, params, listuser } = this.props;
     const { modal, status, loadData } = this.state;
@@ -122,6 +125,7 @@ class ListDetailIssues extends Component {
                   parentCallBack={this.callbackFunction}
                   showUpdateIssue={this.showUpdateIssue}
                   AddAndSortIssueInBacklog={this.props.AddAndSortIssueInBacklog}
+                  LoadData = {this.LoadData}
                   // addIssueOnSprint={this.props.addIssueOnSprint}
                   sprint={sprint} />
                 {/* <Process/> */}

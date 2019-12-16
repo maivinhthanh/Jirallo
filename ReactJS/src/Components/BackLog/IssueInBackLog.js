@@ -20,24 +20,28 @@ class IssueInBackLog extends Component {
     }
     addIssue = (DragItem, DropItem) => {
         const {issues, params} = this.props
-        let vtx, vty;
+        let vtx = -1, vty = -1, tam;
         let listissues = []
-        _.filter(issues, (data, key) => {
-            if(data._id === DragItem.item._id){
-                vtx = key
+        _.map(issues,(data, index) => {
+            if(data._id === DragItem.item._id) {
+                vtx = index
+            }
+            else {
+                if(data._id === DropItem.issue._id) {
+                    vty = index
+                }
             }
         })
-        for(let i = issues.length; i>= vtx ; i--){
-            issues[i] = issues[i-1]
+        if(vtx !== -1 && vty !== -1) {
+            tam = issues[vtx]
+            issues[vtx] = _.clone(issues[vty])
+            issues[vty] = _.clone(tam)
         }
-        issues[vtx] = DropItem.issue;
-
-        console.log(issues)
         _.map(issues, (data) => {
             listissues.push(data._id)
         })
-        console.log(listissues, params)
-        this.props.AddAndSortIssueInBacklog(listissues,params)
+       this.props.AddAndSortIssueInBacklog(listissues,params)
+       this.props.LoadData(params)
         // this.props.addIssueOnSprint(id, issue)
     }
     AddIssueIntoSprint = (idIssue, id) => {

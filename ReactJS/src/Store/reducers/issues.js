@@ -87,8 +87,6 @@ export const showListIssueInBackLog = (state, action) => {
   return cloneState
 }
 export const addAndSortSuccess = (state, action) => {
-  console.log(state, action.data)
-  
   return state
 }
 const reducer = ( state = initialState, action ) => {

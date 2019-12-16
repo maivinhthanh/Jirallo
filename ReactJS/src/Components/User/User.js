@@ -15,6 +15,7 @@ class User extends Component {
   
   render() {
     const { listuser } = this.props;
+    debugger
     return (
       <div className="user-list">
         <Nav tabs>
