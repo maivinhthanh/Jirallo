@@ -18,9 +18,12 @@ const viewListIssuesInProjectSuccess = (state, action) => {
     return cloneState
 }
 export const changeProcessSuccess = (state, action) => {
+    console.log(state, action.data)
     const index = _.findIndex(state, (item,index)=>item._id === action.data._id)
-    const clone = _.clone(state)
+    console.log(index)
+    let clone = _.clone(state)
     clone[index] = action.data
+    console.log(clone)
     return clone
 }
 const reducer = ( state = initialState, action ) => {

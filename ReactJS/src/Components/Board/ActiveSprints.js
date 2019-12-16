@@ -19,15 +19,16 @@ class ActiveSprint extends Component {
       }
     
     shouldComponentUpdate(nextProps, nextState){
-        
         return this.props.listissues != nextProps.listissues;
     }
     
     render(){
+        console.log(this.cloneO)
+        const heightProcess = this.cloneO.lenght * 100
         return (
         
             <div className="row " style={{ width: '100%',height: '400px'}}>
-                <div className="col-6" style={{ width: '100%',height: '400px'}} >
+                <div className="col-6" style={{ width: '100%',height: heightProcess}} >
                     <Process white process={'todo'} handleChange={(id, process) => this.props.changeProcessIssue(id, process)}>
                         {
                              _.map(this.cloneO, (item, index)=>{
@@ -41,7 +42,7 @@ class ActiveSprint extends Component {
                        }
                     </Process>
                 </div>
-                <div className="col-6" style={{ width: '100%',height: '400px'}} >
+                <div className="col-6" style={{ width: '100%',height: heightProcess}} >
                     <Process white process={'done'} handleChange={(id, process) => this.props.changeProcessIssue(id, process)}>
                         {
                              _.map(this.cloneO, (item, index)=>{

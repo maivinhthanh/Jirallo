@@ -4,7 +4,6 @@ import { connect } from "react-redux"
 import ListUser from "../Components/User/ListUser";
 import HeaderBoard from "../Components/Board/HeaderBoard";
 import MenuLog from '../Components/BackLog/MenuLog';
-import MenuBoard from "../Components/Board/MenuBoard";
 import ListIssues from "../Components/BackLog/ListIssues";
 import CreateSprint from '../Components/Sprint/modalCreate'
 import ListDetailIssues from "../Components/BackLog/ListDetailIssues";
@@ -23,7 +22,7 @@ class BacklogPage extends Component {
           </div>
           <div className='row content-backlog board-task'>
             <div className='col-md-1' style={{paddingLeft:'40px'}}>
-              <IteamHeader />
+              <IteamHeader params={id} />
             </div>
             <div className='col-md-11'>
               <div className='row'>

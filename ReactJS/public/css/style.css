@@ -139,10 +139,6 @@ div#home {
   overflow-y: auto;
 }
 
-.SettingUser >.popover.show.bs-popover-auto{
-  left: 150px !important;
-  /* transform: translate3d(0px, 401px, 0px)!important; */
-}
 
 .InputField:hover{
   border: 1px dotted black;

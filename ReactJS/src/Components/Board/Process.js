@@ -4,7 +4,7 @@ import _ from 'lodash'
 import CallApi from '../../until/apiCaller';
 
 export default function Process({ black, process, children, handleChange }) {
-  let item = children[1]
+  let item = children
   const fill = black ? 'black' : 'white'
   const [{ isOver }, drop] = useDrop({
     accept: 'issues',

@@ -8,16 +8,15 @@ class ListProjectPage extends Component {
   constructor(props) {
     super(props);        
     this.clone = this.props.error
-  }
-  shouldComponentUpdate(nextProps, nextState){
-    return this.props.error != nextProps.error
+
   }
 
   render() {
+
       return (
         <div className="viewAll">
           <MenuUser/>
-          <Project/>
+          <Project />
         </div>
       )
     
