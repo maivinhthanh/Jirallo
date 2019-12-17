@@ -51,7 +51,7 @@ function IssuesLog(props) {
                 position: 'relative',
                 width: '100%',
                 height: '100%',
-                padding: '15px 0px',
+                padding: '7px 0px',
             }}
         >
             <div ref={drop} style={{ position: 'relative', width: '100%', height: '100%', }} >
@@ -63,9 +63,11 @@ function IssuesLog(props) {
                         style={{
                             opacity: isDragging ? 1 : 1,
                             cursor: 'move',
-                            marginLeft: '70px'
+                            marginLeft: '70px',
+                            border: '1px solid rgba(204, 204, 170, 0.667)',
+                            padding: '5px'
                         }}
-                        className={`row issues ${!props.modal ? "" : "col-md-12"}`}
+                        className={`row issues ${!props.modal ? "" : "col-md-12"}` }
                     >
                             <div className="col-md-11">
                                 <div className="nameIssue"

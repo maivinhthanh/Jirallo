@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import * as Config from '../Config';
 
 export default class IteamHeader extends Component {
   constructor(props){
@@ -32,10 +31,10 @@ export default class IteamHeader extends Component {
               </Link>
             </li>
             <li>
-              <a href="#services">
-                <span className="fas fa-cog" />
-                <p>Config</p>
-              </a>
+              <Link to={{ pathname: `/config/${idproject}` }}>
+                  <span className="fas fa-cog"></span>
+                  <p>Config</p>
+              </Link>
             </li>
             <li>
               <a href="#blog">

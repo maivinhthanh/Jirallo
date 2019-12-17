@@ -16,36 +16,36 @@ class BacklogPage extends Component {
     return (
       <div className="row">
         <MenuUser/>
-        <div className="col-md-12 detail-card">
+        <div className="col-12">
           <div className="board-header">
             <HeaderBoard />
           </div>
-          <div className='row content-backlog board-task'>
-            <div className='col-md-1' style={{paddingLeft:'40px'}}>
+          <div className='row'>
+            <div className='col-1'>
               <IteamHeader params={id} />
             </div>
-            <div className='col-md-11'>
+            <div className='col-11'>
               <div className='row'>
-                <div className='col-md-12'>
+                <div className='col-12'>
                   <div className="filter">
                     <p>Quick Filters: </p>
                     <ListUser params={id} />
                   </div>
                 </div>
-                <div className='col-md-12'>
+                <div className='col-12'>
                   <div className='row'>
-                  <div className="col-md-2 epic-blacklog">
+                  <div className="col-2 epic-blacklog">
                     <MenuLog params={id} />
                   </div>
-                  <div className="col-md-10 defineIssue">
+                  <div className="col-10 defineIssue">
                     <div className="row">
-                      <div className="col-md-12">
+                      <div className="col-12">
                         <CreateSprint params={id} />
                       </div>
-                      <div className="col-md-12">
+                      <div className="col-12">
                         <ListDetailIssues params={id} />
                       </div>
-                      <div className="col-md-12">
+                      <div className="col-12">
                         <ListIssues params={id} />
                       </div>
                     </div>

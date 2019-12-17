@@ -45,7 +45,7 @@ export default function IssueAdd(props) {
             position: 'relative',
             width: '90%',
             height: '100%',
-            padding: '15px 0px',
+            padding: '7px 0px',
             // backgroundColor: '#B3C6E6',
         }}>
 
