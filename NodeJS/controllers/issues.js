@@ -310,6 +310,25 @@ exports.changeProcessIssues = async (req, res, next) => {
     }
     
 }
+exports.getInfoIssues = async (req, res, next) => {
+    try{
+        const idissues = req.params.idissues
+
+        const dataupdate = {
+            process: process
+        }
+
+        const issues = await Issues.findById(idissues)
+
+        res.status(201).json({ statusCode: 200 ,issues:issues})
+
+    }
+    catch(err) {
+        
+        next(err)
+    }
+    
+}
 exports.deleteIssues = async (req, res, next) => {
     try{
         const idissues = req.params.idissues

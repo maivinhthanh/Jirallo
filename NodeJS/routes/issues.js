@@ -40,6 +40,9 @@ router.put('/changeProcessIssues/:idissues',upload.single('image'),isAuth,
     [], 
     issuesController.changeProcessIssues,
 )
+router.get('/getInfoIssues/:idissues',isAuth,
+    issuesController.getInfoIssues,
+)
 router.put('/deleteIssues/:idissues',upload.single('image'),isAuth, 
     [], 
     issuesController.deleteIssues,
