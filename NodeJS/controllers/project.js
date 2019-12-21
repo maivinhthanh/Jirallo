@@ -161,7 +161,32 @@ exports.AddMember = async (req, res, next) => {
         next(err)
     }
 }
+exports.AddProcess = async (req, res, next) => {
+    try{
+        const idproject = req.params.idproject
+        const process = req.body.process
+        
+        const project = await Project.findByIdAndUpdate(idproject, { 
+            process: process
+        }, { new: true })
+    
+        const action = new Activities({
+            action: 'AddProcess',
+            content: 'project/AddProcess/' ,
+            iduser: req.userId,
+            newdata: {
+                process: process
+            }
+        })
 
+        await action.save()
+
+        res.status(201).json({ statusCode: 200 ,project: project})
+    }
+    catch(err) {
+        next(err)
+    }
+}
 exports.ViewListProject = async (req, res, next) => {
     try{
 
@@ -189,14 +214,31 @@ exports.FindProjectByID = async (req, res, next) => {
 exports.viewListIssuesInProject = async (req, res, next) => {
     try{
         const idproject = req.params.idproject
+        const user = req.body.user
+        let project
 
-        const project = await Project.findById(idproject).populate({
-            path: 'idissues',
-            match:{
-                hidden: false
-            },
-            select:['idissues','name', 'assignee', 'process', 'type', 'priority', 'tag']
-        })
+        if(user !== null){
+            console.log("1",user)
+            project = await Project.findById(idproject).populate({
+                path: 'idissues',
+                match:{
+                    hidden: false,
+                    assignee : ObjectId(user)
+                },
+                select:['idissues','name', 'assignee', 'process', 'type', 'priority', 'tag']
+            })
+        }
+        else{
+            console.log("2",user)
+            project = await Project.findById(idproject).populate({
+                path: 'idissues',
+                match:{
+                    hidden: false,
+                },
+                select:['idissues','name', 'assignee', 'process', 'type', 'priority', 'tag']
+            })
+        }
+        
 
         res.status(201).json({ statusCode: 200 ,project: project.idissues})
     }

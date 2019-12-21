@@ -29,6 +29,7 @@ exports.signup = async (req, res, next) => {
         const password = req.body.password
         const gender = req.body.gender
         const image = null
+
         if (req.file !== undefined) {
             image = req.file.path
         }
@@ -42,8 +43,8 @@ exports.signup = async (req, res, next) => {
             gender: gender,
             image: image
         })
-        const newuser = await user.save()
 
+        const newuser = await user.save()
         res.status(201).json({ statusCode: 200, userId: newuser._id })
     }
     catch (error) {
@@ -383,7 +384,7 @@ exports.loginbygoogle = async (req, res, next) => {
         const image = req.body.image
         const email = req.body.email
         const name = req.body.name
-        
+        console.log("1")
         let user = await User.findOne({idgoogle: idgoogle})
         if(!user){
             user = new User({
@@ -392,30 +393,31 @@ exports.loginbygoogle = async (req, res, next) => {
                 avatar: image,
                 email: email
             })
+            console.log("2")
             const newuser = await user.save()
-
+            console.log("3")
             const userFakeData = {
                 email: newuser.email,
                 userId: newuser._id.toString(),
             }
-    
+            console.log("4")
             const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife)
             const refreshToken = await jwtHelper.generateToken(userFakeData, refreshTokenSecret, refreshTokenLife)
-            
+            console.log("5")
             const tokendata = new Token({
                 refreshtoken: refreshToken
             })
-    
+            console.log("6")
             await tokendata.save()
     
-
+            console.log("7")
             const action = new Activities({
                 action: 'loginbygoogle',
                 iduser: newuser._id
             })
     
             await action.save()
-
+            console.log("8")
             res.status(200).json({token: accessToken, refreshToken: refreshtoken, userId: newuser._id.toString()})
         }
         else{
@@ -423,14 +425,14 @@ exports.loginbygoogle = async (req, res, next) => {
                 email: email,
                 userId: user._id.toString()
             }
-    
+            console.log("9")
             const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife)
             const refreshToken = await jwtHelper.generateToken(userFakeData, refreshTokenSecret, refreshTokenLife)
             
             const tokendata = new Token({
                 refreshtoken: refreshToken
             })
-    
+            console.log("10")
             await tokendata.save()
 
             const action = new Activities({
@@ -439,8 +441,8 @@ exports.loginbygoogle = async (req, res, next) => {
             })
     
             await action.save()
-    
-            res.status(200).json({token: accessToken, refreshToken: refreshtoken, userId: user._id.toString()})
+            console.log("11")
+            res.status(200).json({token: accessToken, refreshToken: refreshToken, userId: user._id.toString()})
         }
 
         
