@@ -40,17 +40,25 @@ export const DragSuccess = (data) => {
     data
   }
 }
-export const DragIssueToSprint = (listIssueId, idSprint) => {
+export const ViewListIssue = (data) => {
+  return {
+    type: actionTypes.ViewListIssue,
+    data
+  }
+}
+export const DragIssueToSprint = (listIssueId, idSprint, newissue) => {
   return dispatch => {
     return CallApi(`sprint/addAndSortIssuesInSprint/${idSprint}`,
     'PUT',
     {
-      listissues: listIssueId
+      listissues: listIssueId,
+      newissues: newissue
     },
     'token'
     ).then(respone => {
       console.log(respone.data)
-      dispatch(DragSuccess(respone.data))
+      let data = {newData: respone.data.listissues, idSprint: idSprint}
+      dispatch(DragSuccess(data))
     }).catch(err => {
       console.log(err)
       dispatch(errorSprint(err))
@@ -116,14 +124,15 @@ export const deleteSprint = (id) => {
 export const ViewListIssueInSprint = (id) => {
   console.log(id)
   return dispatch => {
-    return CallApi(`sprint/completeSprint/${id}`,
-    'PUT',
+    return CallApi(`sprint/viewListIssuesInSprint/${id}`,
+    'GET',
     {},
     'token'
     ).then(respone => {
       console.log(respone)
+      dispatch(ViewListIssue(respone.data))
     }).catch(err => {
-      console.log(err)
+      dispatch(errorSprint(err))
     })
   }
 }
@@ -136,7 +145,7 @@ export const AddIssueIntoSprint = (idSprint, idIssue) => {
     },
     'token'
     ).then(respone => {
-      console.log(respone)
+      console.log(respone.data)
       dispatch(AddSuccess(respone.data))
     }).catch(err => {
       dispatch(errorSprint(err))

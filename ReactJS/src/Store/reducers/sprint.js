@@ -32,7 +32,9 @@ export const deleteSprintSuccess = (state, action) => {
   return cloneState
 }
 export const AddSuccess = (state, action) => {
-  console.log(state, action.data.listissues)
+  // let cloneState = _.cloneDeep(state)
+  // cloneState = _.cloneDeep(action.data.listissues)
+  // console.log(cloneState)
   let cloneState = _.cloneDeep(state)
   _.map(action.data.listissues, (item, index) => {
     if(index === action.data.listissues.length -1){
@@ -40,13 +42,16 @@ export const AddSuccess = (state, action) => {
     }
   })
   return cloneState
+  // return cloneState
 }
 export const DragSuccess = (state, action) => {
   let cloneState = _.cloneDeep(state)
   _.map(cloneState, (sprint) => {
-    sprint.idissues = _.cloneDeep(action.data.listissues)
+    if(sprint._id === action.data.idSprint) {
+      sprint.idissues = _.cloneDeep(action.data.newData)
+
+    }
   })
-  console.log(cloneState)
   return cloneState
 }
 // export const showListIssue = (state, action) => {

@@ -11,7 +11,6 @@ class sprint extends Component {
         // this.addIssueOnSprint = this.props.addIssueOnSprint
     }
     addIssueOnSprint(itemDrop, itemDrag){
-        debugger
         const {activeIssue, issues} = this.props
         let vtx, vty;
         _.filter(activeIssue, (data, key) => {
@@ -58,21 +57,23 @@ class sprint extends Component {
         _.map(activeIssue, (issue, key) =>{
             listIssueId.push(issue._id)
         })
-        console.log(listIssueId)
+        // console.log(listIssueId)
         // console.log(itemDrag.filterSprint._id)
-        this.props.DragIssueToSprint(listIssueId, itemDrag.filterSprint._id)
+        this.props.DragIssueToSprint(listIssueId, itemDrag.filterSprint._id, itemDrop.issue._id)
+        this.props.ViewListIssueInSprint(itemDrag.filterSprint._id)
     }
     render() {
         const {filterSprint, modal, activeIssue, issues} = this.props
-        console.log(activeIssue)
+        console.log(issues)
         return (
-            <div>
+            <div className='sprint-detail-drag'>
                 {/* <WrapperDrop white filterSprint={filterSprint} handleChange={(id, issue) => this.props.addIssueOnSprint(id, issue)} > */}
                     {_.map(activeIssue, (data, index) => {
                         return (
-                            <IssueAdd  white filterSprint={filterSprint} handleAddIssueIntoSprint={(id, issue) => this.IssueToSprint(id, issue)} handleAdd={(id, issue) => this.addIssueOnSprint(id, issue)}  modal={modal} filterSprint={filterSprint} item={data} key={index} />
+                            <IssueAdd  white filterSprint={filterSprint} handleAddIssueIntoSprint={(id, issue) => this.IssueToSprint(id, issue)} handleAdd={(id, issue) => this.addIssueOnSprint(id, issue)}  modal={modal} item={data} key={index} />
                         );
                     })}
+        
                 {/* </WrapperDrop> */}
             </div>
         );
@@ -81,7 +82,9 @@ class sprint extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         addIssueOnSprint: (id, issue) => dispatch(action.AddIssueIntoSprint(id, issue)),
-        DragIssueToSprint:(listIssueId, idSprint) => dispatch(action.DragIssueToSprint(listIssueId, idSprint))
+        DragIssueToSprint:(listIssueId, idSprint) => dispatch(action.DragIssueToSprint(listIssueId, idSprint)),
+        // ViewListIssueInSprint: (idSprint) => dispatch(action.ViewListIssueInSprint(idSprint))
+
 
     }
 

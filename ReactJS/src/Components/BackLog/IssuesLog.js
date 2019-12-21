@@ -67,11 +67,11 @@ function IssuesLog(props) {
                             border: '1px solid rgba(204, 204, 170, 0.667)',
                             padding: '5px'
                         }}
-                        className={`row issues ${!props.modal ? "" : "col-md-12"}` }
+                        // className={`row issues ${props.modal ? "" : "col-md-12"}` 
+                        className="row issues"
                     >
                             <div className="col-md-11">
-                                <div className="nameIssue"
-                                >
+                                <div className="nameIssue" style={{textAlign: 'left'}}>
                                     <span onClick={() => showContent(props.item._id)}>
                                         {props.item.name}
                                     </span>

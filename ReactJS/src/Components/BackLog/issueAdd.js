@@ -43,18 +43,14 @@ export default function IssueAdd(props) {
     return (
         <div style={{
             position: 'relative',
-            width: '90%',
+            width: '100%',
             height: '100%',
-            padding: '7px 0px',
-            // backgroundColor: '#B3C6E6',
-        }}>
-
+            padding: '7px 0px', }}>
+           
             <div ref={drop} style={{ position: 'relative', width: '100%', height: '100%', }} >
                 <div style={{
                     backgroundColor: fill, width: '100%',
-                    height: '100%',
-                    // border: '1px black solid',
-                }} >
+                    height: '100%', }} >
                     <div
                         ref={drag}
                         style={{
@@ -63,10 +59,8 @@ export default function IssueAdd(props) {
                             cursor: 'move',
                             border: '1px solid #ccaa',
                             // margin: '12px',
-                            padding: '5px'
-                        }}
-                        className={`${!props.modal ? "" : "col-md-12"}`}
-                    >
+                            padding: '5px'}}
+                        className={`${!props.modal ? "" : "col-md-12"}`}>
                         {props.item.name}
                         {/* <div
                             className={`issues ${!props.modal ? "" : "custom"}`}

@@ -184,12 +184,14 @@ export const showListIssueInBackLog = (id) => {
 }
 
 export const showListIssueAct = (id) => {
+  console.log(id)
   return dispatch => {
     return CallApi(`issues/viewListIssues/${id}`,
     'GET',
     {},
     'token'
     ).then (respone => {
+      console.log(respone.data)
       dispatch(showListIssue(respone.data))
     }).catch(err => {
       console.log(err)
@@ -208,6 +210,7 @@ export const createIssuesAct =(id, name, type) => {
     },
     'token'
     ).then (respone => {
+      console.log(respone.data)
       dispatch(createIssue(respone.data))
     }).catch(err => {
       console.log(err)
