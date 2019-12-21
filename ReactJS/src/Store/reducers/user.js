@@ -29,6 +29,11 @@ const GetListUser = (state, action) => {
 const FindUserLikeId = (state, action) => {
   return updateObject(state, action.data)
 }
+const findUserLikeEmail = (state, action) => {
+  let cloneState = _.cloneDeep(state);
+  cloneState = [...action.data]
+  return cloneState
+}
 
 const reducerUser = ( state = initialState, action ) => {
   switch ( action.type ) {
@@ -36,6 +41,7 @@ const reducerUser = ( state = initialState, action ) => {
       case actionTypes.ErrorUser : return ErrorUser(state, action);
       case actionTypes.GetListUser : return GetListUser(state, action);
       case actionTypes.FindUserLikeId : return FindUserLikeId(state, action);
+      case actionTypes.findUserLikeEmail: return findUserLikeEmail(state, action);
       default: return state;
   }
 };

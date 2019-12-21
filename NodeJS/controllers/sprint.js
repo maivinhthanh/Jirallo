@@ -2,6 +2,7 @@ const { validationResult } = require("express-validator/check")
 const {ObjectId} = require('mongodb')
 
 const Sprint = require('../models/sprint')
+const Issuses = require('../models/issues')
 const Project = require('../models/project')
 const Activities = require('../models/activities')
 
@@ -240,12 +241,24 @@ exports.addAndSortIssuesInSprint = async (req, res, next) => {
     try{
         const idsprint = req.params.idsprint
         const listissues = req.body.listissues
+        const newissues = req.body.newissues
 
         const sprint = await Sprint.findByIdAndUpdate(idsprint,
             {
                 idissues : listissues
             } ,{new: true})
-
+        // listissues.map(async (item, index)=>{
+        //     const issues = await Issuses.findById(item)
+        //     let flag = false
+        //     issues.idsprint.map(id =>{
+        //         if(id === idsprint){
+        //             flag = true
+        //         }
+        //     })
+        // })
+        await Issuses.findByIdAndUpdate(newissues, {
+            $push: { idsprint : idsprint }
+        })
         res.status(201).json({ statusCode: 200, listissues: sprint.idissues })
     }
     catch(err) {

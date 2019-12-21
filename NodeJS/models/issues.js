@@ -34,7 +34,7 @@ const issuesSchema = new Schema({
     },
     process:{
         type: String,
-        enum: Object.values(Process),
+        // enum: Object.values(Process),
     },
     type:{
         type: String,

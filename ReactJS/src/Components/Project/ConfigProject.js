@@ -7,20 +7,25 @@ import IteamHeader from '../IteamHeader'
 import AddMember from './AddMember'
 import AddProcess from './AddProcess'
 import EditProject from './EditProject'
+import HeaderProject from './HeaderProject'
 
 class ConfigProject extends Component {
 
   render() {
     const { params } = this.props
     return (
-        <div className="row container">
+        <div className="row">
+            <div className="col-12">
+            <HeaderProject/>
+            </div>
+            
             <div className="col-1" >
                 <IteamHeader params={params}/>
             </div>
-            <div className="col-11" >
-                <ul className="nav nav-tabs">
-                    <li className="nav-item">
-                        <Link className="nav-link" to={{ pathname: `/config/${params}/edit` }}>
+            <div className="col-11 container" >
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <Link class="nav-link" to={{ pathname: `/config/${params}/edit` }}>
                             <p>Edit Project</p>
                         </Link>
                     </li>
@@ -37,7 +42,7 @@ class ConfigProject extends Component {
                    
                 </ul>
                 <Switch>
-                        <Route path={`/config/${params}/edit`} >
+                        <Route exact path={`/config/${params}/edit`} >
                             <EditProject params={params} />
                         </Route>
                         <Route path={`/config/${params}/addmember`} >

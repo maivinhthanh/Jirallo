@@ -27,6 +27,12 @@ export const findUserLikeId = data => {
     data
   }
 }
+export const findUserLikeEmail = data => {
+  return {
+    type: actionTypes.findUserLikeEmail,
+    data
+  }
+}
 
 export const findUserLikeIDAct = (id) => {
   return dispatch => {
@@ -36,6 +42,19 @@ export const findUserLikeIDAct = (id) => {
     'token'
     ).then(respone => {
       dispatch(findUserLikeId(respone.data.result))
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+}
+export const findUserLikeEmailAct = (email) => {
+  return dispatch => {
+    return CallApi(`auth/findUserLikeEmail`,
+    "POST",
+    {email: email},
+    'token'
+    ).then(respone => {
+      dispatch(findUserLikeEmail(respone.data.result))
     }).catch(err => {
       console.log(err)
     })
