@@ -52,6 +52,13 @@ const findProjectSuccess = (state, action) => {
 const projectError = (state, action) => {
     return updateObject(state, {error: true})
 }
+const addProcess = (state, action) => {
+    let cloneState = _.cloneDeep(state)
+    cloneState = [action.data]
+    console.log(cloneState)
+    return cloneState
+
+}
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.createProject: return createProject( state, action )
@@ -60,7 +67,7 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.projectError : return projectError(state, action)
         case actionTypes.getInfoSuccess: return getInfoSuccess(state, action);
         case actionTypes.findProjectSuccess: return findProjectSuccess(state, action)
-
+        case actionTypes.addProcess: return addProcess(state, action)
         default: return state;
     }
 };

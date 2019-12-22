@@ -23,9 +23,9 @@ class ConfigProject extends Component {
                 <IteamHeader params={params}/>
             </div>
             <div className="col-11 container" >
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <Link class="nav-link" to={{ pathname: `/config/${params}/edit` }}>
+                <ul className="nav nav-tabs">
+                    <li className="nav-item">
+                        <Link className="nav-link" to={{ pathname: `/config/${params}/edit` }}>
                             <p>Edit Project</p>
                         </Link>
                     </li>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDrag } from 'react-dnd'
 import {
-  Card, CardText, CardBody,
+  Card, CardBody,
   CardTitle
 } from 'reactstrap';
 
@@ -25,7 +25,7 @@ export default function Issues({ name }) {
         }}>
           <Card>
               <CardTitle>{name.name}</CardTitle>
-              <CardText>
+              <CardBody>
                 <div className="row">
                   <div className="col-4">
                     {
@@ -51,7 +51,7 @@ export default function Issues({ name }) {
                     <i className="fas fa-tag">{name.tag}</i>
                   </div>
                 </div>
-              </CardText>
+              </CardBody>
           </Card>
       </div>
   )

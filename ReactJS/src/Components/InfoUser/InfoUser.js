@@ -13,16 +13,14 @@ class InfoUser extends Component {
   constructor(props) {
     super(props);  
     this.state = {
-      name: this.props.admin.name,
-      avatar: this.props.admin.image,
-      gender: this.props.admin.gender,
-      birthday: this.props.admin.birthdate
+      name: '',
+      avatar: '',
+      gender: '',
+      birthday: ''
     };     
     this.activeId = ''
   }
-  shouldComponentUpdate(nextProps, nextState){
-    return this.props.admin != nextProps.admin
-  }
+  
   componentWillMount(){
     const { match: { params: { id } } } = this.props
     this.props.FindUserAction(id)
@@ -94,7 +92,7 @@ class InfoUser extends Component {
                                       </div>
                                       <div className="col-8">
                                         <input className="form-control" 
-                                          value={item.name}
+                                          value={this.state.name}
                                           onChange={this.handleName} />
                                       </div>
                                     </div>
@@ -104,7 +102,7 @@ class InfoUser extends Component {
                                         <p>Gender</p>
                                       </div>
                                       <div className="col-8">
-                                        <select className="form-control" onChange={this.handleGender} value={item.gender}>
+                                        <select className="form-control" onChange={this.handleGender} value={this.state.gender}>
                                           <option value="male">Male</option>
                                           <option value="female">Female</option>
                                         </select>
@@ -131,7 +129,7 @@ class InfoUser extends Component {
                                         </button>
                                       </div>
                                       <div className="col-6 text-center">
-                                        <button onClick={this.delete()} className="btn btn-danger">
+                                        <button onClick={this.delete} className="btn btn-danger">
                                           Cancel
                                         </button>
                                       </div>

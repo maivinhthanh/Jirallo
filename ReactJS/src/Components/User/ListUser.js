@@ -8,30 +8,27 @@ class ListUser extends Component {
   constructor(props){
     super(props)
     this.state = {
-      list : []
     }
-    this.cloneUser = []
   }
   componentWillMount(){
     
     this.props.getListUserInProject(this.props.params)
 
   }
-  componentWillUpdate(nextProps, nextState, snapshot) {
-
-    if (nextProps.listuser != this.props.listuser) {
-        this.cloneUser = nextProps.listuser            
-    }
-  }
+  
 
   shouldComponentUpdate(nextProps, nextState){
     
     return this.props.listuser != nextProps.listuser;
   }
+  ChangeActive = (index, id, status)=>{
+    this.props.ChangeActive(index)
+    this.props.ChangeUser(id, status)
+  }
   showModal = () =>{
     if(this.props.params !== null && this.props.params !== 'null'){
       return (
-          <User listuser = {this.props.listuser} />
+          <User listuser = {this.props.listuser} ChangeActive = {this.ChangeActive}/>
         )
     }
     else{
@@ -57,7 +54,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    getListUserInProject: (id) => dispatch(actionProject.getListUserInProject(id))
+    getListUserInProject: (id) => dispatch(actionProject.getListUserInProject(id)),
+    ChangeActive: index => dispatch(actionProject.ChangeActive(index))
   };
 };
 export default connect(mapStateToProps,mapDispatchToProps) (ListUser)

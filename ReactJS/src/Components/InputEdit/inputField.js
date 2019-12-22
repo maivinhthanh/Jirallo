@@ -6,6 +6,7 @@ import _ from 'lodash'
 var size = "";
 var arrow = "";
 var font = "";
+var margin = "";
 
 class InputField extends Component {
 
@@ -33,8 +34,10 @@ class InputField extends Component {
   render() {
     var name = this.props.children;
     return (
-      <div ref={(input)=>{this.txtName = input}} style={{fontSize : size, marginBottom : arrow, fontFamily: font, display:'inline'}} 
-      onBlur={this.onInput}  value={name} className={`InputField`}  contenteditable="true" >
+      <div ref={(input)=>{this.txtName = input}} 
+        style={{fontSize : size || this.props.size, marginBottom : arrow || this.props.arrow,
+        fontFamily: font, display:'inline', margin: margin || this.props.margin}} 
+        onBlur={this.onInput}  value={name} className={`InputField`}  contenteditable="true" >
         {name}
       </div>
     );

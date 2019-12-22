@@ -247,15 +247,7 @@ exports.addAndSortIssuesInSprint = async (req, res, next) => {
             {
                 idissues : listissues
             } ,{new: true})
-        // listissues.map(async (item, index)=>{
-        //     const issues = await Issuses.findById(item)
-        //     let flag = false
-        //     issues.idsprint.map(id =>{
-        //         if(id === idsprint){
-        //             flag = true
-        //         }
-        //     })
-        // })
+        
         await Issuses.findByIdAndUpdate(newissues, {
             $push: { idsprint : idsprint }
         })
