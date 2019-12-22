@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { useDrop } from 'react-dnd'
 import * as action from '../../Store/actions/sprint'
+import * as actionIssue from '../../Store/actions/issues'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import WrapperDrop from './WrapperDrop';
@@ -61,6 +62,7 @@ class sprint extends Component {
         // console.log(itemDrag.filterSprint._id)
         this.props.DragIssueToSprint(listIssueId, itemDrag.filterSprint._id, itemDrop.issue._id)
         this.props.ViewListIssueInSprint(itemDrag.filterSprint._id)
+        this.props.loadDataIssue('5d8d84a297c3b62d33e0caeb')
     }
     render() {
         const {filterSprint, modal, activeIssue, issues} = this.props
@@ -82,7 +84,9 @@ class sprint extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         addIssueOnSprint: (id, issue) => dispatch(action.AddIssueIntoSprint(id, issue)),
-        DragIssueToSprint:(listIssueId, idSprint) => dispatch(action.DragIssueToSprint(listIssueId, idSprint)),
+        DragIssueToSprint:(listIssueId, idSprint, newIssue) => dispatch(action.DragIssueToSprint(listIssueId, idSprint, newIssue)),
+        showListIssueInBackLog: id => dispatch(actionIssue.showListIssueInBackLog(id)),
+
         // ViewListIssueInSprint: (idSprint) => dispatch(action.ViewListIssueInSprint(idSprint))
 
 
