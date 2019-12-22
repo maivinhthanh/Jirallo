@@ -280,3 +280,21 @@ exports.addAndSortIssuesInBackLog = async (req, res, next) => {
         next(err)
     }
 }
+exports.hasAuth = async (req, res, next) => {
+    const userId = req.userId
+    const idproject = req.params.idproject
+    let flag = false
+
+    await Project.findById(idproject).then(e=>{
+        e.idmembers.map((item, index)=>{
+
+            if(item.id.toString() === userId && item.position === "Manager"){
+                flag = true
+            }
+        })
+        
+    })
+
+    res.status(201).json({ statusCode: 200, hasAuth: flag })
+
+}

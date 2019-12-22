@@ -175,11 +175,11 @@ export const EditIssuesAct = (id, issue) => {
     })
   }
 }
-export const showListIssueInBackLog = (id) => {
+export const showListIssueInBackLog = (id, iduser = null) => {
   return dispatch => {
     return CallApi(`issues/viewListIssuesInBackLog/${id}`,
-    'GET',
-    {},
+    'POST',
+    {iduser:iduser},
     'token'
     ).then (respone => {
       console.log(respone.data)

@@ -16,8 +16,8 @@ import InfoUserPage from './Page/InfoUserPage';
 import ProfileProject from './Page/ProfileProject'
 import HTML5Backend from 'react-dnd-html5-backend'
 import ListProjectPage from './Page/ListProjectPage'
-import ConfigProjectPage from './Page/ConfigProjectPage'
 import IssuesPage from './Page/IssuesPage'
+import NotPage from './Page/NotPage'
 import PrivateRoute from './PrivateRoute'
 
 import * as actions from './Store/actions/auth';
@@ -46,7 +46,7 @@ class App extends Component {
       <DndProvider backend={HTML5Backend}>
         <div className="App">
           {/* <MenuUser/> */}
-            <PrivateRoute path="/" isAuth={isAuth}  exact component={HomePage} />
+            <PrivateRoute path="/" isAuth={isAuth} exact component={HomePage} />
             <PrivateRoute path="/user" isAuth={isAuth} component={UserPage} />
             <PrivateRoute path="/backlog/:id?" isAuth={isAuth} component={BacklogPage} />
             <PrivateRoute path="/Profile/:id?" isAuth={isAuth} component={ProfileProject} />
@@ -56,8 +56,8 @@ class App extends Component {
             <PrivateRoute path="/infouser/:id" isAuth={isAuth} component={InfoUserPage} />
             <PrivateRoute path="/viewAll" isAuth={isAuth} component={ListProjectPage} />
             <PrivateRoute path="/adminPage" isAuth={isAuth} component={MainPage} />
-            <PrivateRoute path="/config/:id?" isAuth={isAuth} component={ConfigProjectPage} />
             <PrivateRoute path="/issues/:idproject/:idissues" isAuth={isAuth} component={IssuesPage} />
+            <PrivateRoute path="*" isAuth={isAuth} component={NotPage} />
         </div>
       </DndProvider>
     );

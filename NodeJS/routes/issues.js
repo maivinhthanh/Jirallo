@@ -25,7 +25,7 @@ router.put('/editIssues/:idissues',upload.single('image'),isAuth,
 router.get('/viewListIssues/:idproject',isAuth,
     issuesController.viewListIssues,
 )
-router.get('/viewListIssuesInBackLog/:idproject',isAuth,
+router.post('/viewListIssuesInBackLog/:idproject',isAuth,
     issuesController.viewListIssuesInBackLog,
 )
 router.put('/assignforUser/:idissues',upload.single('image'),isAuth, 

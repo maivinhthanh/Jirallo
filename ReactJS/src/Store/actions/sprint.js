@@ -152,11 +152,11 @@ export const AddIssueIntoSprint = (idSprint, idIssue) => {
     })
   }
 }
-export const showListSprintAct = (id) => {
+export const showListSprintAct = (id,iduser = null) => {
   return dispatch => {
     return CallApi(`sprint/viewListSprint/${id}`,
-    'GET',
-    {},
+    'POST',
+    {iduser:iduser},
    'token'
     ).then (respone => {
       dispatch(showListSprint(respone.data.listsprint))

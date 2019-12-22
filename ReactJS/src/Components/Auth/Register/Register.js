@@ -87,19 +87,11 @@ class Register extends Component {
               </div>
               <div className="wrap-input100 validate-input" data-validate = "Password is required">
                 <input className="input100" required
-<<<<<<< HEAD
-                placeholder="Enter password"
-                value={this.state.password}
-                onChange={this.handleChangePass}
-                maxLength='30'
-                minLength='5' type="password" name="pass" />
-=======
                   placeholder="Enter password"
                   value={this.state.password}
                   onChange={this.handleChangePass}
                   maxLength='30'
                   minLength='5' type="password" name="pass" />
->>>>>>> 174aaa0bdbf3650ef4ff28f162793e8623a35409
                 <span className="focus-input100"></span>
                 <span className="symbol-input100">
                   <i className="fa fa-lock" aria-hidden="true"></i>

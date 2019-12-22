@@ -2,23 +2,40 @@ import React, { Component } from "react";
 import { connect } from "react-redux"
 
 import ListUser from "../Components/User/ListUser";
-import HeaderBoard from "../Components/Board/HeaderBoard";
+import HeaderBackLog from "../Components/BackLog/HeaderBackLog";
 import MenuLog from '../Components/BackLog/MenuLog';
-import ListIssues from "../Components/BackLog/ListIssues";
-import CreateSprint from '../Components/Sprint/modalCreate'
 import ListDetailIssues from "../Components/BackLog/ListDetailIssues";
 import IteamHeader from '../Components/IteamHeader'
 import MenuUser from '../Components/MenuUser/Menu'
+import * as actionIssue from "../Store/actions/issues";
+import * as actionSprint from "../Store/actions/sprint";
+
 class BacklogPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      iduser: null,
+    };
+    
+  }
   ChangeUser = (id, status) =>{
-    console.log(id)
-    if(status){
-      // this.props.viewListIssuesInProject(this.props.params, null)
+    const { match: { params } } = this.props
+    if(!status){
+      this.setState({
+        iduser: id
+      })
+      this.props.showListIssueInBackLog(params.id, id)
+      this.props.showListSprint(params.id, id)
     }
     else{
-      // this.props.viewListIssuesInProject(this.props.params, id)
+      this.props.showListIssueInBackLog(params.id, null)
+      this.props.showListSprint(params.id, null)
     }
     
+    
+  }
+  showListIssueInBackLog(id){
+    this.props.showListIssueInBackLog(id, this.state.iduser)
   }
   render() {
     const { match: { params: { id } } } = this.props
@@ -27,7 +44,7 @@ class BacklogPage extends Component {
         <MenuUser/>
         <div className="col-12">
           <div className="board-header">
-            <HeaderBoard />
+            <HeaderBackLog params={id}/>
           </div>
           <div className='row'>
             <div className='col-1'>
@@ -37,27 +54,23 @@ class BacklogPage extends Component {
               <div className='row'>
                 <div className='col-12'>
                   <div className="filter">
-                    <p>Quick Filters: </p>
                     <ListUser params={id} ChangeUser={this.ChangeUser}/>
                   </div>
                 </div>
                 <div className='col-12'>
                   <div className='row'>
-                  <div className="col-2 epic-blacklog">
-                    <MenuLog params={id} />
-                  </div>
-                  <div className="col-10 defineIssue">
-                    <div className="row">
-                      {/* <div className="col-12">
-                        <CreateSprint params={id} />
-                      </div> */}
-                      <div className="col-12">
-                        <ListDetailIssues params={id} />
-                      </div>
-                      {/* <div className="col-12">
-                        <ListIssues params={id} />
-                      </div> */}
+                    <div className="col-2 epic-blacklog">
+                      <MenuLog params={id} />
                     </div>
+                    <div className="col-10 defineIssue">
+                      <div className="row">
+                        
+                        <div className="col-12">
+                          <ListDetailIssues params={id} 
+                            showListIssueInBackLog={(id) =>this.showListIssueInBackLog(id)}/>
+                        </div>
+                        
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -98,10 +111,16 @@ class BacklogPage extends Component {
 const mapStateToProps = state => {
   return {
     error: state.error,
-  };
-};
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    showListIssueInBackLog: (id, iduser) => dispatch(actionIssue.showListIssueInBackLog(id, iduser)),
+    showListSprint: (id, iduser) => dispatch(actionSprint.showListSprintAct(id, iduser)),
 
+  }
+}
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(BacklogPage)
