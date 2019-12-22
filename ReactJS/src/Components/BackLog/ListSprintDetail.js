@@ -101,6 +101,7 @@ export default class ListSprintDetail extends Component {
                   filterSprint={data}
                   issues={issues}
                   ViewListIssueInSprint={this.props.ViewListIssueInSprint}
+                  loadDataIssue={this.props.loadDataIssue}
                 />
               </div>
               {/* <div className="create">

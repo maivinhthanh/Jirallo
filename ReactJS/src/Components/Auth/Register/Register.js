@@ -89,7 +89,7 @@ class Register extends Component {
                 <input className="input100" required
                 placeholder="Enter password"
                 value={this.state.password}
-                onChange={this.handlePass}
+                onChange={this.handleChangePass}
                 maxLength='30'
                 minLength='5' type="password" name="pass" />
                 <span className="focus-input100"></span>

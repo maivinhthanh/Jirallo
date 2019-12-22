@@ -3,24 +3,39 @@ import { connect } from 'react-redux';
 import * as actions from '../../../Store/actions/auth';
 import { Redirect } from 'react-router-dom';
 import Login from '../../../Components/Auth/Login/Login'
+import { Toast, ToastBody, ToastHeader } from 'reactstrap';
+import swal from "sweetalert";
+import _ from 'lodash'
 class LoginContainer extends Component {
   constructor(props){
     super(props);
     this.state ={
-      redirect: false
+      redirect: false,
+      error: false
     }
   }
   componentWillUpdate(nextProps){
+    console.log(nextProps)
     if(nextProps.user.code === 'ok'){
       this.setState({
         redirect: true
       })
+    }
+    if(nextProps.errorLogin.type === 'errorToken' && _.isEmpty(nextProps.user) ) {
+    return (
+      swal(`${nextProps.errorLogin.message}`)
+    )
     }
   }
   haveRedirect(){
     if(this.state.redirect === true){
       return <Redirect to="/user" />
     }
+    // if(this.state.error === true){
+    //   return (
+    //     swal("Hello world!")
+    //   )
+    // }
   }
   render() {
     return (
@@ -40,6 +55,7 @@ const mapStateToProps = state => {
       password: state.auth.password,
       id: state.auth.id,
       error: state.auth.error,
+      errorLogin: state.error,
       user : state.auth
   };
 };

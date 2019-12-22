@@ -64,10 +64,6 @@ export default class IssueOnSprint extends Component {
         this.activeIssue = _.clone(issueOnSprint)
       }
     })
-    // _.isEmpty(issueOnSprint) ? this.activeIssue = _.clone(this.activeIssue) : this.activeIssue = _.clone(issueOnSprint)
-    //   console.log(issueOnSprint)
-    // Neu issueOneSprint rong => this.activeIssue chinh no => 
-
   }
 
   render() {
@@ -82,6 +78,7 @@ export default class IssueOnSprint extends Component {
             modal={modal}
              issues={issues}
              ViewListIssueInSprint={this.props.ViewListIssueInSprint}
+             loadDataIssue={this.props.loadDataIssue}
              filterSprint={filterSprint}/>
           {/* <div ref={drop} style={{ position: 'relative', width: '100%', height: '100%', }} >
             <div style={{

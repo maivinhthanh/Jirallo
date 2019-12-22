@@ -58,11 +58,11 @@ export const loginAction = (email, password) => {
             email: email,
             password: password
           }).then( response => {
-            
             dispatch(login(response));
          } )
          .catch(error => {
              console.log(error);
+             dispatch(actionError.AlertError(error))
          } );
     };
 };
@@ -108,7 +108,7 @@ export const RegisterAction = (email,password,fullname,avatar,gender) =>{
         }).then (response =>{
             dispatch(register(response.data))
         }).catch (err =>{
-            dispatch(actionError.AlertError())
+            dispatch(registerFail(err))
         })
     }
 }

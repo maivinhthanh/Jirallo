@@ -96,6 +96,10 @@ class ListDetailIssues extends Component {
   //   this.issueDrag = this.props.issues
   //   console.log(this.issueDrag)
   // }
+  loadDataIssue = (idProject) => {
+    console.log('sads',idProject)
+    this.props.showListIssueInBackLog(idProject)
+  } 
 
   render() {
     const { issues, sprint, user, admin, params, listuser, issueOnSprint } = this.props;
@@ -124,6 +128,8 @@ class ListDetailIssues extends Component {
                     completeSprintAct={this.props.completeSprintAct}
                     updateNameAct={this.props.updateNameAct}
                     beginSprint={this.props.beginSprint}
+                    loadDataIssue={this.loadDataIssue}
+                    
                   />
                   {/* {this.renderListSprint(sprint)} */}
                 </ul>

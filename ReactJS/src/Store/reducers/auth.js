@@ -42,10 +42,11 @@ const loginfail = (state, action) => {
 };
 
 const register = (state, action) =>{
-   return updateObject( state, {id : action.id},  );
+   return updateObject( state, {id : action.id, error:false},);
 }
 
 const registerFail = (state,action) =>{
+    console.log(state, action)
     return updateObject(state,{error : true})
 }
 const EditUserSuccess = (state, action) =>{
