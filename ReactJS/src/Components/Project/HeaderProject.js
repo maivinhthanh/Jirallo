@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { InputGroup, InputGroupAddon, InputGroupText, Input,Button } from 'reactstrap';
+import { InputGroup, InputGroupAddon, InputGroupText, Input, Button } from 'reactstrap';
 import _ from "lodash";
 import {
   Modal,
@@ -8,9 +8,12 @@ import {
   ModalHeader,
   ModalFooter
 }
-from "reactstrap"
+  from "reactstrap"
 import * as actionsAdmin from "../../Store/actions/admin";
 import * as actionsProject from "../../Store/actions/project";
+import { Toast, ToastBody, ToastHeader } from 'reactstrap';
+// import swal from "sweetalert";
+var swal = require("sweetalert2")
 
 class HeaderBoard extends Component {
   constructor(props) {
@@ -20,16 +23,17 @@ class HeaderBoard extends Component {
       keyseach: '',
       showModal: false,
       modal: false,
-      nameProject: ''
+      nameProject: '',
+      show: false
     };
   }
-  handleKeySeach =(event) =>{
+  handleKeySeach = (event) => {
     event.preventDefault();
     this.setState({
-      keyseach: event.target.value 
+      keyseach: event.target.value
     })
   }
-  isShowModal = () =>{
+  isShowModal = () => {
     this.setState({
       showModal: !this.state.showModal
     })
@@ -43,21 +47,28 @@ class HeaderBoard extends Component {
   handleNameProject = (event) => {
     event.preventDefault();
     this.setState({
-      nameProject : event.target.value
+      nameProject: event.target.value
     })
   }
-  createProject = (event)=>{
+  createProject = (event) => {
     event.preventDefault();
     this.props.createProjectAct(this.state.nameProject)
+    swal.fire({
+      position: 'center-center',
+      icon: 'success',
+      title: 'Create project success',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
   render() {
-    const {active, keyseach} = this.state
+    const { active, keyseach, show } = this.state
     return (
-      <div className="row" style={{height: '60px',padding: '10px 0px',backgroundColor: '#6A8DCD',marginBottom: '20px'}}>
+      <div className="row" style={{ height: '60px', padding: '10px 0px', backgroundColor: '#6A8DCD', marginBottom: '20px' }}>
         <div className='col-1'></div>
         <div className='col-4'>
           <InputGroup >
-            <Input value={keyseach} onChange={this.handleKeySeach}/>
+            <Input value={keyseach} onChange={this.handleKeySeach} />
             <InputGroupAddon addonType="append">
               <InputGroupText><i className="fas fa-search"></i></InputGroupText>
             </InputGroupAddon>
@@ -65,30 +76,31 @@ class HeaderBoard extends Component {
         </div>
         <div className='col-1'></div>
         <div className='col-6 text-center' >
-          <Button color="success" onClick={()=>this.showToggle()} style={{border: '1px solid'}}
+          <Button color="success" onClick={() => this.showToggle()} style={{ border: '1px solid' }}
           ><b>Create Project</b></Button>
           <div className="modal-create">
-          <Modal
-            isOpen={this.state.modal}
-            toggle={this.showToggle}
-            className={this.props.className}
-          >
-            <ModalHeader toggle={this.showToggle}>
-              Create project
+            <Modal
+              isOpen={this.state.modal}
+              toggle={this.showToggle}
+              className={this.props.className}
+            >
+              <ModalHeader toggle={this.showToggle}>
+                Create project
             </ModalHeader>
-            <ModalBody>
-            <Input type="text" onChange={this.handleNameProject} value={this.state.nameProject} name="project" id="project" placeholder="with name project" />
-            </ModalBody>
-            <ModalFooter>
-              <Button type="submit" color="primary" onClick={this.createProject}>
-                Add
+              <ModalBody>
+                <Input type="text" onChange={this.handleNameProject} value={this.state.nameProject} name="project" id="project" placeholder="with name project" />
+              </ModalBody>
+              <ModalFooter>
+                <Button type="submit" color="primary" onClick={this.createProject}>
+                  Add
               </Button>{" "}
-              <Button color="secondary" onClick={this.showToggle}>
-                Cancel
+                <Button color="secondary" onClick={this.showToggle}>
+                  Cancel
               </Button>
-            </ModalFooter>
-          </Modal>
+              </ModalFooter>
+            </Modal>
           </div>
+
         </div>
       </div>
     );
@@ -104,7 +116,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     SearchEmail: email => dispatch(actionsAdmin.SearchAction(email)),
-    createProjectAct : name => dispatch(actionsProject.createProjectAct(name))
+    createProjectAct: name => dispatch(actionsProject.createProjectAct(name))
   };
 };
 export default connect(

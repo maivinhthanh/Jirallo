@@ -3,6 +3,7 @@ import InfoUser from '../Components/InfoUser/InfoUser'
 import jwtDecode from 'jwt-decode'
 import Cookies from 'js-cookie'
 import { Route, Redirect } from 'react-router'
+import ParentUser from '../Components/InfoUser/ParentUser'
 
 class InfoUserPage extends Component {
     
@@ -14,7 +15,7 @@ class InfoUserPage extends Component {
         isAuth = true
     }
     return(
-      <PrivateRoute path="/infouser/:id" isAuth={isAuth} component={InfoUser}/>
+      <PrivateRoute path="/infouser/:id" isAuth={isAuth} component={ParentUser}/>
     )
     
     

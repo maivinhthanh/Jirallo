@@ -8,7 +8,8 @@ class Calendar extends Component {
     super(props);
     this.state = {
         openSchedule: false,
-        dates: null
+        // dates: this.props.clearData ? '' : this.props.admin[0].birthdate
+        dates: this.props.admin[0].birthdate
     };
   }
   toggleSchedule = () =>{
@@ -23,13 +24,12 @@ class Calendar extends Component {
     this.props.setdate(data)
   }
   render() {
-
     return (
         <div >
             <div className="input">
                 <div className="input-group mb-3">
                     
-                    <input type="text" className="form-control" value={this.state.dates} disabled/>
+                    <input type="text" className="form-control" value={!this.props.clearData ? this.state.dates : ''} disabled/>
                     <div className="input-group-prepend" onClick={()=>this.toggleSchedule()}>
                         <i className="fas fa-calendar input-group-text"></i>
                     </div>

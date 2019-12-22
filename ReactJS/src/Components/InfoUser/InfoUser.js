@@ -8,23 +8,26 @@ import MenuUser from '../MenuUser/Menu'
 import Activities from './Activities'
 import * as actionsAdmin from "../../Store/actions/admin";
 import * as action from "../../Store/actions/auth";
+import swal from 'sweetalert';
 
 class InfoUser extends Component {
   constructor(props) {
     super(props);  
     this.state = {
-      name: '',
-      avatar: '',
-      gender: '',
-      birthday: ''
+      name: this.props.admin[0].name,
+      avatar: this.props.admin[0].avatar,
+      gender: this.props.admin[0].gender,
+      birthday: this.props.admin[0].birthdate,
+      flag : false,
+      clearData: false
     };     
     this.activeId = ''
   }
   
-  componentWillMount(){
-    const { match: { params: { id } } } = this.props
-    this.props.FindUserAction(id)
-  }
+  // componentWillMount(){
+  //   const { match: { params: { id } } } = this.props
+  //   this.props.FindUserAction(id)
+  // }
   setAvatar = (data) => {
     this.setState({
       avatar: data
@@ -47,6 +50,21 @@ class InfoUser extends Component {
       birthday: data
     });
   }
+  componentWillUpdate(nextProps, preProps){
+    // console.log(nextProps, preProps)
+    // !_.isEmpty(nextProps.admin[0]) && this.renderUser(nextProps.admin[0])
+    if(this.state.flag) !_.isEqual(nextProps.admin[0], preProps) && swal('Success')
+
+  }
+  // renderUser = (user) => {
+  //   console.log(user)
+  //   this.setState({
+  //     name: user.name,
+  //     birthday: user.birthdate,
+  //     gender: user.gender,
+  //     avatar: user.avatar
+  //   })
+  // }
   handleSave = () => {
     let data = new FormData()
     data.append('avatar',this.state.avatar)
@@ -54,14 +72,15 @@ class InfoUser extends Component {
     data.append('name',this.state.name)
     data.append('birthdate',this.state.birthday)
     this.props.EditUserAction(this.activeId, data);
-    
+    this.setState({flag: true})
   }
   delete = () =>{
     this.setState({
       name: '',
       avatar: '',
       gender: '',
-      birthday: ''
+      birthday: '',
+      clearData: true
     });
   }
   render() {
@@ -69,6 +88,7 @@ class InfoUser extends Component {
       _.map(admin, (item) => {
         this.activeId = item._id
       })
+      const {clearData} = this.state
       return (
         <div >
             <MenuUser isUserPage={true}/>
@@ -102,7 +122,8 @@ class InfoUser extends Component {
                                         <p>Gender</p>
                                       </div>
                                       <div className="col-8">
-                                        <select className="form-control" onChange={this.handleGender} value={this.state.gender}>
+                                        <select className="form-control" onChange={this.handleGender} value={!clearData ? this.state.gender: ''}>
+                                          <option value = '' className={!clearData ? 'hidden' : ''}></option>
                                           <option value="male">Male</option>
                                           <option value="female">Female</option>
                                         </select>
@@ -115,8 +136,7 @@ class InfoUser extends Component {
                                         <p>Birthdate</p>
                                       </div>
                                       <div className="col-8">
-                                        <Calendar setdate={this.setdate}/>
-                                        
+                                        <Calendar setdate={this.setdate} admin={admin} clearData={clearData}/>
                                       </div>
                                     </div>
                                     <div>
@@ -158,18 +178,20 @@ class InfoUser extends Component {
     
   }
 }
-const mapStateToProps = state => {
-  return {
-    admin: state.admin,
-  };
-};
-const mapDispatchToProps = dispatch => {
-    return {
-        FindUserAction: email => dispatch(actionsAdmin.FindUserAction(email)),
-        EditUserAction: (id, user) => dispatch(action.EditUserAction(id, user))
-    };
-};
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(InfoUser)
+export default InfoUser
+// const mapStateToProps = state => {
+//   return {
+//     admin: state.admin,
+//     auth: state.auth
+//   };
+// };
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         FindUserAction: email => dispatch(actionsAdmin.FindUserAction(email)),
+//         EditUserAction: (id, user) => dispatch(action.EditUserAction(id, user))
+//     };
+// };
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(InfoUser)

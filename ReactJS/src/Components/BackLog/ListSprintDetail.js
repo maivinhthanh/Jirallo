@@ -71,7 +71,7 @@ export default class ListSprintDetail extends Component {
                   <button
                     type="button"
                     className="btn btn-primary dropdown-toggle"
-                    style={{background:'transparent', border:'transparent'}}
+                    style={{height:'30px', border:'transparent'}}
                     data-toggle="dropdown"
                   >
                   </button>
