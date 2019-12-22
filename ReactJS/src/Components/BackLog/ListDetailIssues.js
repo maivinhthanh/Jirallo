@@ -17,6 +17,9 @@ import Process from '../Board/Process'
 import Issue from '../Board/Issues';
 import WrapperDrop from "./WrapperDrop";
 import * as actionProject from '../../Store/actions/project'
+import ListIssues from "./ListIssues";
+import CreateSprint from "../Sprint/modalCreate";
+import {DataBeforeDrag} from '../../until/context'
 class ListDetailIssues extends Component {
   constructor(props) {
     super(props);
@@ -32,6 +35,7 @@ class ListDetailIssues extends Component {
     this.idIssue = "";
     // this.arrayList = [];
     this.dataTranfer = false;
+    this.dataBefore = []
   }
   AddFlagIssueAct = item => {
     const { issues } = this.props;
@@ -59,9 +63,16 @@ class ListDetailIssues extends Component {
     this.idIssue = idIssue;
   };
   componentWillMount() {
-    this.props.showListIssue(this.props.params);
+    // this.props.showListIssue(this.props.params);
     this.props.showListSprint(this.props.params);
     this.props.showListIssueInBackLog(this.props.params);
+  }
+  componentDidUpdate(preProps, props) {
+    if(preProps.issues !== this.props.issues){
+      console.log(preProps.issues)
+      console.log(this.props.issues)
+    }
+  
   }
   dataAssignee = (data) => {
     this.props.findUserLikeId(data.assignee)
@@ -77,13 +88,19 @@ class ListDetailIssues extends Component {
       status: true
     })
   }
-  LoadData = (idSprint) => {
-    this.props.showListIssue(idSprint)
+  LoadData = (idProject) => {
+    this.props.showListIssue(idProject)
   }
+  // reload = () => {
+  //   this.props.showListIssue(this.props.params)
+  //   this.issueDrag = this.props.issues
+  //   console.log(this.issueDrag)
+  // }
+
   render() {
-    const { issues, sprint, user, admin, params, listuser } = this.props;
+    const { issues, sprint, user, admin, params, listuser, issueOnSprint } = this.props;
     const { modal, status, loadData } = this.state;
-    console.log(this.issues)
+    console.log(this.props.issues)
     return (
       <div className="row">
        <div className={`${modal ? "col-md-9" : "col-md-12"}`}>
@@ -101,6 +118,8 @@ class ListDetailIssues extends Component {
                     admin={admin}
                     modal={modal}
                     issues={issues}
+                    issueOnSprint={issueOnSprint}
+                    ViewListIssueInSprint={this.props.ViewListIssueInSprint}
                     handleDeleteSprint={this.props.handleDeleteSprint}
                     completeSprintAct={this.props.completeSprintAct}
                     updateNameAct={this.props.updateNameAct}
@@ -109,6 +128,9 @@ class ListDetailIssues extends Component {
                   {/* {this.renderListSprint(sprint)} */}
                 </ul>
               </div>
+               <div className='col-md-12'>
+            <CreateSprint params={params} />
+          </div>
             </div>
             <div className="col-md-12">
               <div className="item-issue">
@@ -139,6 +161,12 @@ class ListDetailIssues extends Component {
               </div>
             </div>
           </div>
+          <div className='col-md-12'>
+            <ListIssues params={params} />
+          </div>
+          {/* <div className='col-md-12'>
+            <CreateSprint params={params} />
+          </div> */}
         </div>
         <div className={`${modal ? "col-md-3" : "hidden"}`}>
           {_.map(_.compact(issues), (item, key) => {
@@ -177,7 +205,8 @@ const mapStateToProps = state => {
     sprint: state.sprint,
     user: state.user,
     admin: state.admin,
-    listuser: state.listuser
+    listuser: state.listuser,
+    issueOnSprint: state.issueOnSprint
   };
 };
 const mapDispatchToProps = dispatch => {

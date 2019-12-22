@@ -39,15 +39,15 @@ class BacklogPage extends Component {
                   </div>
                   <div className="col-10 defineIssue">
                     <div className="row">
-                      <div className="col-12">
+                      {/* <div className="col-12">
                         <CreateSprint params={id} />
-                      </div>
+                      </div> */}
                       <div className="col-12">
                         <ListDetailIssues params={id} />
                       </div>
-                      <div className="col-12">
+                      {/* <div className="col-12">
                         <ListIssues params={id} />
-                      </div>
+                      </div> */}
                     </div>
                     </div>
                   </div>

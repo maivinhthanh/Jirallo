@@ -48,9 +48,10 @@ export default class ListSprintDetail extends Component {
     this.props.updateNameAct(data, id)
   }
   render() {
-    const { sprint, user, admin, issues, modal } = this.props;
+    const { sprint, user, admin, issues, modal, params, issueOnSprint } = this.props;
     const {isDisabled, isLoading, isClearable, isRtl, isSearchable} = this.props
     const x = _.filter(sprint,(item) => item.hidden == false)
+    console.log(this.props.sprint)
     return (
       <div>
         {_.map(_.filter(sprint,(item) => item.hidden == false), (data, key) => {
@@ -93,6 +94,8 @@ export default class ListSprintDetail extends Component {
               <div className='optionbtn'>
               {/* <div className={`optionbtn ${!modal ? "" : "custom"}`}> */}
                 <IssueOnSprint
+                  issueOnSprint={issueOnSprint}
+                  params={params}
                   user={user}
                   admin={admin}
                   filterSprint={data}
@@ -100,6 +103,9 @@ export default class ListSprintDetail extends Component {
                   ViewListIssueInSprint={this.props.ViewListIssueInSprint}
                 />
               </div>
+              {/* <div className="create">
+              <createSprint params={params}/>
+              </div> */}
             </div>
           );
         })}

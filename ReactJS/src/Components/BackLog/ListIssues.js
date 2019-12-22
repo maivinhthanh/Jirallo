@@ -56,7 +56,7 @@ class ListIssues extends Component {
   render() {
     return (
       <div>
-        <div className="issues-task" style={{position:'absolute', bottom:'-60px'}}>
+        <div className="issues-task" style={{position:'absolute', bottom:'-60px', left:'43px'}}>
           <Button
             data-toggle="collapse"
             data-target="#demo3"

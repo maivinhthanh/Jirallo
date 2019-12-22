@@ -21,6 +21,7 @@ const initialState = {
 export const createIssue =(state, action) => {
   let cloneState = [...state]
   cloneState.push(action.data.newissues)
+  console.log(cloneState)
   return cloneState
   // return updateObject(state, action.data.newissues)
 }

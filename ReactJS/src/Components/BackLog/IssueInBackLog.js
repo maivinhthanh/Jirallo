@@ -40,6 +40,8 @@ class IssueInBackLog extends Component {
         _.map(issues, (data) => {
             listissues.push(data._id)
         })
+        console.log(issues)
+        console.log(listissues)
        this.props.AddAndSortIssueInBacklog(listissues,params)
        this.props.LoadData(params)
         // this.props.addIssueOnSprint(id, issue)
@@ -53,7 +55,8 @@ class IssueInBackLog extends Component {
     return (
         <div className="col-md-12" >
             {/* <WrapperDrop white process={'todo'} handleChange={(id, issue) => this.changeIssue(id, issue)}> */}
-            {_.map(_.filter(_.compact(this.props.issues), (item, index) => item.hidden == false), (item, index) => {
+            {/* {_.map(_.filter(_.compact(this.props.issues), (item, index) => item.hidden == false), (item, index) => { */}
+            {_.map(_.filter(_.compact(this.props.issues)), (item, index) => {
                 return (
                     <IssuesLog
                     handleAddIssue={(id, issue) => this.addIssue(id, issue)}

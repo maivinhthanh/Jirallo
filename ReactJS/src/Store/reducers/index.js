@@ -13,7 +13,7 @@ import memberReducer from './member'
 import listuserReducer from './listuser'
 import errorReducer from './error'
 import activitiesReducer from './activities'
-
+import IssueOnSprintReducer from './inssueOnSprint'
 export default combineReducers({
     auth: authReducer,
     admin: adminReducer,
@@ -27,6 +27,7 @@ export default combineReducers({
     listissues: listissuesReducer,
     listuser: listuserReducer,
     activities: activitiesReducer,
-    error: errorReducer
+    error: errorReducer,
+    issueOnSprint: IssueOnSprintReducer
 });
 
