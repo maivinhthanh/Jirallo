@@ -13,7 +13,7 @@ import * as actionsAdmin from "../../Store/actions/admin";
 import * as actionsProject from "../../Store/actions/project";
 import { Toast, ToastBody, ToastHeader } from 'reactstrap';
 // import swal from "sweetalert";
-var swal = require("sweetalert2")
+import swal from "sweetalert2"
 
 class HeaderBoard extends Component {
   constructor(props) {

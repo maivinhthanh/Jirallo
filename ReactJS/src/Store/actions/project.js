@@ -118,6 +118,19 @@ export const viewListIssuesInProject = (id, user) => {
     })
   }
 }
+export const getIssuesInSprintActiveACT = (id, user) => {
+  return dispatch => {
+    return CallApi(`project/getIssuesInSprintActive/${id}`,
+    'POST',
+    {user:user},
+    'token'
+    ).then(respone => {
+      dispatch(viewListIssuesInProjectSuccess(respone.data.idissues))
+    }).catch(err => {
+     dispatch(projectError(err))
+    })
+  }
+}
 export const EditProject = (id, project) => {
   return dispatch => {
     return CallApi(`project/editInfoProject/${id}`,

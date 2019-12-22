@@ -35,6 +35,8 @@ class MenuUser extends Component {
         })
     }
     logout = () =>{
+        Cookies.remove('token')
+        Cookies.remove('refreshtoken')
         this.props.logout()
         this.setState({
             

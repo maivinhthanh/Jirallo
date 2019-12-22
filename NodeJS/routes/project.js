@@ -56,4 +56,7 @@ router.get('/getListUserInProject/:idproject',isAuth,
 router.get('/hasAuth/:idproject',isAuth,
     projectController.hasAuth,
 )
+router.post('/getIssuesInSprintActive/:idproject',isAuth,
+    projectController.getIssuesInSprintActive,
+)
 module.exports = router

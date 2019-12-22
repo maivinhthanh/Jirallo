@@ -57,7 +57,7 @@ class App extends Component {
             <PrivateRoute path="/viewAll" isAuth={isAuth} component={ListProjectPage} />
             <PrivateRoute path="/adminPage" isAuth={isAuth} component={MainPage} />
             <PrivateRoute path="/issues/:idproject/:idissues" isAuth={isAuth} component={IssuesPage} />
-            <PrivateRoute path="*" isAuth={isAuth} component={NotPage} />
+            {/* <PrivateRoute path="/*" isAuth={isAuth} component={NotPage} /> */}
         </div>
       </DndProvider>
     );
