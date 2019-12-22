@@ -40,8 +40,7 @@ class IssueInBackLog extends Component {
         _.map(issues, (data) => {
             listissues.push(data._id)
         })
-        console.log(issues)
-        console.log(listissues)
+
        this.props.AddAndSortIssueInBacklog(listissues,params)
        this.props.LoadData(params)
         // this.props.addIssueOnSprint(id, issue)
@@ -50,8 +49,7 @@ class IssueInBackLog extends Component {
         this.props.AddIssueIntoSprint(idIssue, id)
     }
     render(){
-    console.log(this.props.issues)
-    console.log(this.props)
+
     return (
         <div className="col-md-12" >
             {/* <WrapperDrop white process={'todo'} handleChange={(id, issue) => this.changeIssue(id, issue)}> */}

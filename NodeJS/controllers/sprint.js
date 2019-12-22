@@ -88,13 +88,26 @@ exports.editSprint = async (req, res, next) => {
 exports.viewListSprint = async (req, res, next) => {
     try{
         const idproject = req.params.idproject
+        const iduser = req.body.iduser
 
-        const project = await Project.findById(idproject).populate({
-            path: 'idsprint',
-            match:{
-                hidden: false
-            }
-        })
+        let project
+        if(iduser !== null){
+            project = await Project.findById(idproject).populate({
+                path: 'idsprint',
+                match:{
+                    hidden: false,
+                    assignee: iduser
+                }
+            })
+        }
+        else{
+            project = await Project.findById(idproject).populate({
+                path: 'idsprint',
+                match:{
+                    hidden: false
+                }
+            })
+        }
 
         res.status(201).json({ statusCode: 200 ,listsprint: project.idsprint})
     }

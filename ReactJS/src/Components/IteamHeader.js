@@ -1,20 +1,32 @@
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import { BrowserRouter as Router } from "react-router-dom";
+
+import CallApi from "../until/apiCaller";
+import PrivateRoute from '../PrivateRoute'
+import ConfigProjectPage from '../Page/ConfigProjectPage'
 
 export default class IteamHeader extends Component {
   constructor(props){
     super(props)
     this.state = {
-      status : true
+      status : true,
+      auth: true
     }
   }
-
+  async componentWillMount(){
+    let data = await CallApi(`project/hasAuth/${this.props.params}`,'GET',
+      {},
+      'token'
+    )
+    let auth = data.data.hasAuth
+    this.setState({
+      auth: auth
+    })
+  }
   render() {
-    let user = JSON.parse(localStorage.getItem('user'))
     const idproject = this.props.params
-    if(user === null){
-      user = {image : null}
-    }
+
     return (
       <div>
         <ul className="nav_links list-unstyled">
@@ -30,12 +42,17 @@ export default class IteamHeader extends Component {
                   <p>ActiveSprint</p>
               </Link>
             </li>
-            <li>
-              <Link to={{ pathname: `/config/${idproject}` }}>
-                  <span className="fas fa-cog"></span>
-                  <p>Config</p>
-              </Link>
-            </li>
+            {
+              this.state.auth ? (
+                <li>
+                  <Link to={{ pathname: `/config/${idproject}` }}>
+                      <span className="fas fa-cog"></span>
+                      <p>Config</p>
+                  </Link>
+                </li>
+              ):null
+            }
+            
             <li>
               <a href="#blog">
                 <span className="fa fa-chart-line" />
@@ -43,6 +60,9 @@ export default class IteamHeader extends Component {
               </a>
             </li>
           </ul>
+          <Router >
+            <PrivateRoute path="/config/:id?" isAuth={this.state.auth} component={ConfigProjectPage} />
+          </Router>
       </div>
     )
   }

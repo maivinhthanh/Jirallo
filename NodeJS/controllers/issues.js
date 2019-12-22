@@ -189,11 +189,23 @@ exports.viewListIssues = async (req, res, next) => {
 exports.viewListIssuesInBackLog = async (req, res, next) => {
     try{
         const idproject = req.params.idproject
+        const iduser = req.body.iduser
 
-        const issues = await Issues.find({
-            $or: [ { "idsprint":{$exists:false} }, { "idsprint": [] } ] ,
-            idproject: idproject
-        })
+        let issues
+
+        if(iduser !== null){
+            issues = await Issues.find({
+                $or: [ { "idsprint":{$exists:false} }, { "idsprint": [] } ] ,
+                idproject: idproject,
+                assignee: iduser
+            })
+        }
+        else{
+            issues = await Issues.find({
+                $or: [ { "idsprint":{$exists:false} }, { "idsprint": [] } ] ,
+                idproject: idproject
+            })
+        }
 
         res.status(201).json({ statusCode: 200 ,listissues: issues})
     }

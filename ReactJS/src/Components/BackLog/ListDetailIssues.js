@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import * as action from "../../Store/actions/issues";
 import { connect } from "react-redux";
 import _ from "lodash";
 import DescriptTask from "../Task/DescriptTask";
@@ -9,17 +8,9 @@ import * as actionSprint from "../../Store/actions/sprint";
 import * as actionAdmin from "../../Store/actions/admin";
 import IssueInBackLog from '../BackLog/IssueInBackLog';
 
-// import * as actionUser from '../../Store/actions/user';
-// import swal from "sweetalert";
-import IssueOnSprint from "./IssueOnSprint";
 import ListSprintDetail from "./ListSprintDetail";
-import Process from '../Board/Process'
-import Issue from '../Board/Issues';
-import WrapperDrop from "./WrapperDrop";
 import * as actionProject from '../../Store/actions/project'
 import ListIssues from "./ListIssues";
-import CreateSprint from "../Sprint/modalCreate";
-import {DataBeforeDrag} from '../../until/context'
 class ListDetailIssues extends Component {
   constructor(props) {
     super(props);
@@ -63,14 +54,12 @@ class ListDetailIssues extends Component {
     this.idIssue = idIssue;
   };
   componentWillMount() {
-    // this.props.showListIssue(this.props.params);
     this.props.showListSprint(this.props.params);
     this.props.showListIssueInBackLog(this.props.params);
   }
   componentDidUpdate(preProps, props) {
     if(preProps.issues !== this.props.issues){
-      console.log(preProps.issues)
-      console.log(this.props.issues)
+
     }
   
   }
@@ -97,14 +86,12 @@ class ListDetailIssues extends Component {
   //   console.log(this.issueDrag)
   // }
   loadDataIssue = (idProject) => {
-    console.log('sads',idProject)
     this.props.showListIssueInBackLog(idProject)
   } 
 
   render() {
     const { issues, sprint, user, admin, params, listuser, issueOnSprint } = this.props;
     const { modal, status, loadData } = this.state;
-    console.log(this.props.issues)
     return (
       <div className="row">
        <div className={`${modal ? "col-md-9" : "col-md-12"}`}>
@@ -135,7 +122,6 @@ class ListDetailIssues extends Component {
                 </ul>
               </div>
                <div className='col-md-12'>
-            <CreateSprint params={params} />
           </div>
             </div>
             <div className="col-md-12">
@@ -170,9 +156,7 @@ class ListDetailIssues extends Component {
           <div className='col-md-12'>
             <ListIssues params={params} />
           </div>
-          {/* <div className='col-md-12'>
-            <CreateSprint params={params} />
-          </div> */}
+          
         </div>
         <div className={`${modal ? "col-md-3" : "hidden"}`}>
           {_.map(_.compact(issues), (item, key) => {
@@ -235,7 +219,6 @@ const mapDispatchToProps = dispatch => {
     beginSprint: (idSprint, idProject) => dispatch(actionSprint.beginSprint(idSprint, idProject)),
     AddIssueIntoSprint: (idSprint, idIssue) => dispatch(actionSprint.AddIssueIntoSprint(idSprint, idIssue)),
     getListUserInProject: (id) => dispatch(actionProject.getListUserInProject(id)),
-    showListIssueInBackLog: id => dispatch(actionIssue.showListIssueInBackLog(id)),
     AddAndSortIssueInBacklog : (listIssue, idProject) => dispatch(actionIssue.AddAndSortIssueInBacklog(listIssue,idProject))
   };
 };
