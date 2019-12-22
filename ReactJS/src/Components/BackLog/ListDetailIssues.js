@@ -216,11 +216,9 @@ const mapDispatchToProps = dispatch => {
     showListSprint: id => dispatch(actionSprint.showListSprintAct(id)),
     findUserLikeEmail: email => dispatch(actionAdmin.SearchAction(email)),
     assignTaskIssueAct: (idIssue, idUser) =>
-      dispatch(actionIssue.assignTaskIssueAct(idIssue, idUser)),
-    // AddIssueIntoSprint: (idIssue, idSprint) =>
-    //   dispatch(actionIssue.AddIssueIntoSprint(idIssue, idSprint)),
+    dispatch(actionIssue.assignTaskIssueAct(idIssue, idUser)),
     ViewListIssueInSprint: id =>
-      dispatch(actionSprint.ViewListIssueInSprint(id)),
+    dispatch(actionSprint.ViewListIssueInSprint(id)),
     removeIssue: id => dispatch(actionIssue.removeIssue(id)),
     changeProcessIssue: (idIssue, process) => dispatch(actionIssue.changeProcessIssue(idIssue, process)),
     handleDeleteSprint: (id) => dispatch(actionSprint.deleteSprint(id)),
@@ -233,7 +231,6 @@ const mapDispatchToProps = dispatch => {
     getListUserInProject: (id) => dispatch(actionProject.getListUserInProject(id)),
     showListIssueInBackLog: id => dispatch(actionIssue.showListIssueInBackLog(id)),
     AddAndSortIssueInBacklog : (listIssue, idProject) => dispatch(actionIssue.AddAndSortIssueInBacklog(listIssue,idProject))
-    // findUserLikeIDAct: (idUser) => dispatch(actionUser.findUserLikeIDAct(idUser))
   };
 };
 export default connect(

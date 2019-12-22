@@ -10,7 +10,16 @@ import ListDetailIssues from "../Components/BackLog/ListDetailIssues";
 import IteamHeader from '../Components/IteamHeader'
 import MenuUser from '../Components/MenuUser/Menu'
 class BacklogPage extends Component {
-
+  ChangeUser = (id, status) =>{
+    console.log(id)
+    if(status){
+      // this.props.viewListIssuesInProject(this.props.params, null)
+    }
+    else{
+      // this.props.viewListIssuesInProject(this.props.params, id)
+    }
+    
+  }
   render() {
     const { match: { params: { id } } } = this.props
     return (
@@ -29,7 +38,7 @@ class BacklogPage extends Component {
                 <div className='col-12'>
                   <div className="filter">
                     <p>Quick Filters: </p>
-                    <ListUser params={id} />
+                    <ListUser params={id} ChangeUser={this.ChangeUser}/>
                   </div>
                 </div>
                 <div className='col-12'>
