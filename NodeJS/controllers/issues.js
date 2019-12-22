@@ -318,7 +318,37 @@ exports.getInfoIssues = async (req, res, next) => {
             process: process
         }
 
-        const issues = await Issues.findById(idissues)
+        const issues = await Issues.findById(idissues).populate({
+            path: 'idsprint',
+            match:{
+                hidden: false,
+            },
+            select:['idsprint','name']
+        }).populate({
+            path: 'idepic',
+            match:{
+                hidden: false,
+            },
+            select:['idepic','name']
+        }).populate({
+            path: 'idproject',
+            match:{
+                hidden: false,
+            },
+            select:['idproject','name']
+        }).populate({
+            path: 'repoter',
+            match:{
+                hidden: false,
+            },
+            select:['idproject','name', 'avatar', 'image']
+        }).populate({
+            path: 'assignee',
+            match:{
+                hidden: false,
+            },
+            select:['idproject','name', 'avatar', 'image']
+        })
 
         res.status(201).json({ statusCode: 200 ,issues:issues})
 

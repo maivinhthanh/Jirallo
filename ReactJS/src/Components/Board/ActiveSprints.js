@@ -1,15 +1,20 @@
 import React, { Component, Fragment } from 'react'
-import Process from './Process'
-import Issues from './Issues'
-import * as actions from '../../Store/actions/issues'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+
+import * as action from '../../Store/actions/project'
+import * as actions from '../../Store/actions/issues'
+import Issues from './Issues'
+import Process from './Process'
 
 class ActiveSprint extends Component {
     constructor(props) {
         super(props);        
         this.cloneO = this.props.listissues
         this.changeProcessIssue = this.props.changeProcessIssue
+    }
+    componentWillMount() {
+        this.props.getInfoProject(this.props.params)
     }
     componentWillUpdate(nextProps, nextState, snapshot) {
 
@@ -19,43 +24,44 @@ class ActiveSprint extends Component {
       }
     
     shouldComponentUpdate(nextProps, nextState){
-        return this.props.listissues != nextProps.listissues;
+        return this.props.listissues != nextProps.listissues ||
+        this.props.project != nextProps.project
     }
     
     render(){
-        console.log(this.cloneO)
-        const heightProcess = this.cloneO.lenght * 100
+        let process = []
+        if (this.props.project[0] !== undefined){
+            process = this.props.project[0].process
+        }
+        else{
+            process = []
+        }
+        const numberColumn = 12 / Number.parseInt(process.length)
+        const heightProcess = this.cloneO.length * 100 + 200 
         return (
-        
             <div className="row " style={{ width: '100%',height: '400px'}}>
-                <div className="col-6" style={{ width: '100%',height: heightProcess}} >
-                    <Process white process={'todo'} handleChange={(id, process) => this.props.changeProcessIssue(id, process)}>
-                        {
-                             _.map(this.cloneO, (item, index)=>{
-                                if(item.process === 'todo'){
-                                    return (
-                                        <Issues name={item} key={index}/>
-                                    )
+                {
+                    _.map(process, (ip, idp) =>{
+                        return(
+                            <div className={`col-${numberColumn}`} style={{ width: '100%',height: heightProcess + 'px'}} key={idp}>
+                                <Process white process={ip} handleChange={(id, process) => this.props.changeProcessIssue(id, process)}>
+                                    {
+                                        _.map(this.cloneO, (item, index)=>{
+                                            if(item.process === ip){
+                                                return (
+                                                    <Issues name={item} key={index}/>
+                                                )
+                                            }
+                                            
+                                        })
                                 }
-                                
-                            })
-                       }
-                    </Process>
-                </div>
-                <div className="col-6" style={{ width: '100%',height: heightProcess}} >
-                    <Process white process={'done'} handleChange={(id, process) => this.props.changeProcessIssue(id, process)}>
-                        {
-                             _.map(this.cloneO, (item, index)=>{
-                                if(item.process === 'done'){
-                                    return (
-                                        <Issues name={item} key={index}/>
-                                    )
-                                }
-                                
-                            })
-                        }
-                    </Process>
-                </div>
+                                </Process>
+                            </div>
+                        )
+                    })
+                }
+            
+
             </div>    
         )
     }
@@ -64,11 +70,13 @@ class ActiveSprint extends Component {
 const mapStateToProps = state => {
     return {
         listissues: state.listissues,
+        project: state.project
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        changeProcessIssue: (id, process) => dispatch(actions.changeProcessIssue(id, process))
+        changeProcessIssue: (id, process) => dispatch(actions.changeProcessIssue(id, process)),
+        getInfoProject: (id) => dispatch(action.getInfoProject(id)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ActiveSprint)

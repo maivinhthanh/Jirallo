@@ -64,6 +64,12 @@ export const AddAndSortSuccess = (data) => {
     data
   }
 }
+export const viewInfoIssues = (data) => {
+  return {
+    type: actionTypes.viewInfoIssues,
+    data
+  }
+}
 
 export const AddAndSortIssueInBacklog = (listIssue, idProject) => {
   return dispatch => {
@@ -97,6 +103,7 @@ export const updateNameIssue = (name, id) => {
       })
     }
 }
+
 export const changeProcessIssue = (idissues, processes) => {
   return dispatch => {
     return CallApi(`issues/changeProcessIssues/${idissues}`,
@@ -209,6 +216,19 @@ export const createIssuesAct =(id, name, type) => {
     'token'
     ).then (respone => {
       dispatch(createIssue(respone.data))
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+}
+export const viewInfoIssuesAct =(id) => {
+  return dispatch => {
+    return CallApi(`issues/getInfoIssues/${id}`,
+    'GET',
+    {},
+    'token'
+    ).then (respone => {
+      dispatch(viewInfoIssues(respone.data.issues))
     }).catch(err => {
       console.log(err)
     })

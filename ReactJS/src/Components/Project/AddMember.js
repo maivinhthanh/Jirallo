@@ -15,8 +15,14 @@ class AddMember extends Component {
 
     }
   }
+  componentWillMount(){
+    
+    this.props.getListUserInProject(this.props.params)
+
+  }
   shouldComponentUpdate(nextProps, nextState){
-    return nextProps.user !== this.props.user
+    return nextProps.user !== this.props.user ||
+          this.props.listuser != nextProps.listuser
   }
   handleChangeEmail = (e) =>{
     if(e.target.value.length > 4 ){
@@ -38,7 +44,7 @@ class AddMember extends Component {
     this.props.AddMemberIntoProject(params, user)
   }
   render() {
-    const { params, user } = this.props
+    const { params, user, listuser } = this.props
     return (
       <div className="row">
           
@@ -67,10 +73,10 @@ class AddMember extends Component {
                           <td>{item.name}</td>
                           <td>{item.email}</td>
                           <td>
-                            <button className="btn btn-primary" onClick={()=>this.addMember(item.id, 'manager')}>
+                            <button className="btn btn-primary" onClick={()=>this.addMember(item._id, 'manager')}>
                               Manager
                             </button>
-                            <button className="btn btn-primary" onClick={()=>this.addMember(item.id, 'developer')}>
+                            <button className="btn btn-primary" onClick={()=>this.addMember(item._id, 'developer')}>
                               Developer
                             </button>
                           </td>
@@ -81,9 +87,29 @@ class AddMember extends Component {
                   })
                 }
                 
-                
               </tbody>
             </Table>
+            <div className="row">
+              {_.map(listuser, (user, index) => {
+                  return(
+                    <div className="user-listuser" style={{margin: '30px',border: '2px solid', borderRadius: '5px'}}> 
+                      {
+                        !user.id? 
+                        (
+                          <img className="avatar-image" src={ Config.API_URL + "/" + user.id.image} height={40} width={40}/>
+                        )
+                        :
+                        (
+                          <img className="avatar-image" src={Config.API_LOCAL + '/' + 'images/user-1.png' } height={40} width={40}/>
+                        )
+                      }
+                      
+                      <p>{user.id.name}</p>
+                    </div>
+                  )
+                })
+              }
+            </div>
           </div>
       </div>
     )
@@ -92,12 +118,14 @@ class AddMember extends Component {
 const mapStateToProps = state => {
   return {
     user: state.user,
+    listuser: state.listuser
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
     findUserLikeEmail: (email) => dispatch(actionuser.findUserLikeEmailAct(email)),
     AddMemberIntoProject : (idproject, user) => dispatch(actionproject.AddMemberAct(idproject,user)),
+    getListUserInProject: (id) => dispatch(actionproject.getListUserInProject(id)),
   }
 }
 export default connect(

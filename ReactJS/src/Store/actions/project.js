@@ -52,7 +52,18 @@ export const getListUserInProjectSuccess = (data) => {
     data
   }
 }
-
+export const AddProcess = (data) => {
+  return {
+    type: actionTypes.addProcess,
+    data
+  }
+}
+export const ChangeActive = (index) => {
+  return {
+    type: actionTypes.ChangeActive,
+    index
+  }
+}
 export const editEditNameProject = (name, id) => {
   return dispatch => {
     return CallApi(`project/editInfoProject/${id}`,
@@ -94,11 +105,11 @@ export const getListUserInProject = (id) => {
     })
   }
 }
-export const viewListIssuesInProject = (id) => {
+export const viewListIssuesInProject = (id, user) => {
   return dispatch => {
     return CallApi(`project/viewListIssuesInProject/${id}`,
-    'GET',
-    {},
+    'POST',
+    {user:user},
     'token'
     ).then(respone => {
       dispatch(viewListIssuesInProjectSuccess(respone.data.project))
@@ -154,7 +165,21 @@ export const AddMemberAct =(idproject,user) => {
     })
   }
 }
-
+export const AddProcessAct =(idproject, process) => {
+  return dispatch => {
+    return CallApi(`project/AddProcess/${idproject}`,
+    'PUT',
+    {
+      process: process
+    },
+    'token'
+    ).then(respone => {
+      dispatch(AddProcess(respone.data.project))
+    }).catch(err => {
+      dispatch(projectError(err))
+    })
+  }
+}
 export const getListProjectAct = () =>{
   return dispatch => {
     return CallApi('project/ViewListProject',

@@ -1,7 +1,7 @@
 import * as actionTypes from '../constants/issues';
 import { updateObject } from '../utility';
 import _ from 'lodash';
-import { ListIssueInBackLog } from '../actions/issues';
+
 const initialState = {
     comment: [],
     name: '',
@@ -12,7 +12,7 @@ const initialState = {
     process:'',
     datecreate:'',
     repoter:'',
-    // idgroup:'',
+    assignee:'',
     error: false,
     hidden: false,
     type:'',
@@ -89,6 +89,12 @@ export const showListIssueInBackLog = (state, action) => {
 export const addAndSortSuccess = (state, action) => {
   return state
 }
+export const viewInfoIssues = (state, action) => {
+  console.log(updateObject(state, action.data))
+  // let cloneState = _.clone(action.data)
+  return action.data
+}
+
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.createIssue: return createIssue( state, action );
@@ -101,7 +107,7 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.assignTaskIssue : return assignTaskIssue(state, action);
         case actionTypes.showListIssueInBackLog : return showListIssueInBackLog(state, action);
         case actionTypes.addAndSortSuccess : return addAndSortSuccess(state, action)
-
+        case actionTypes.viewInfoIssues : return viewInfoIssues(state, action)
         default: return state;
     }
 };
