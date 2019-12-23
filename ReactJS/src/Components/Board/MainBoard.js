@@ -8,15 +8,14 @@ import * as action from '../../Store/actions/project'
 
 class MainBoard extends Component {
   componentWillMount() {
-    this.props.viewListIssuesInProject(this.props.params, null)
+    this.props.getIssuesInSprintActiveACT(this.props.params, null)
   }
   ChangeUser = (id, status) =>{
-    console.log(id)
     if(status){
-      this.props.viewListIssuesInProject(this.props.params, null)
+      this.props.getIssuesInSprintActiveACT(this.props.params, null)
     }
     else{
-      this.props.viewListIssuesInProject(this.props.params, id)
+      this.props.getIssuesInSprintActiveACT(this.props.params, id)
     }
     
   }
@@ -47,7 +46,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-      viewListIssuesInProject: (id, user) => dispatch(action.viewListIssuesInProject(id, user)),
+    getIssuesInSprintActiveACT: (id, user) => dispatch(action.getIssuesInSprintActiveACT(id, user)),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MainBoard)

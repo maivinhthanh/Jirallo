@@ -2,6 +2,7 @@ const { validationResult } = require("express-validator/check")
 const {ObjectId} = require('mongodb')
 
 const Project = require('../models/project')
+const Sprint = require('../models/sprint')
 const User = require('../models/user')
 const Activities = require('../models/activities')
 
@@ -218,7 +219,6 @@ exports.viewListIssuesInProject = async (req, res, next) => {
         let project
 
         if(user !== null){
-            console.log("1",user)
             project = await Project.findById(idproject).populate({
                 path: 'idissues',
                 match:{
@@ -229,7 +229,6 @@ exports.viewListIssuesInProject = async (req, res, next) => {
             })
         }
         else{
-            console.log("2",user)
             project = await Project.findById(idproject).populate({
                 path: 'idissues',
                 match:{
@@ -297,4 +296,42 @@ exports.hasAuth = async (req, res, next) => {
 
     res.status(201).json({ statusCode: 200, hasAuth: flag })
 
+}
+exports.getIssuesInSprintActive = async (req, res, next) => {
+    try{
+        const idproject = req.params.idproject
+
+        const user = req.body.user
+        let sprint
+
+        const project = await Project.findById(idproject)
+        const idsprintactive = project.activesprint
+        
+        if(user !== null){
+            sprint = await Sprint.findById(idsprintactive).populate({
+                path: 'idissues',
+                match:{
+                    hidden: false,
+                    assignee : ObjectId(user)
+                },
+                select:['idissues','name', 'assignee', 'process', 'type', 'priority', 'tag']
+            })
+        }
+        else{
+            sprint = await Sprint.findById(idsprintactive).populate({
+                path: 'idissues',
+                match:{
+                    hidden: false,
+                },
+                select:['idissues','name', 'assignee', 'process', 'type', 'priority', 'tag']
+            })
+        }
+        
+
+        res.status(201).json({ statusCode: 200 ,idissues: sprint.idissues})
+    }
+    catch(err) {
+        
+        next(err)
+    }
 }
