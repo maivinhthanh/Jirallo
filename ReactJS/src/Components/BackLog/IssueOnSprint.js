@@ -67,7 +67,7 @@ export default class IssueOnSprint extends Component {
   }
 
   render() {
-    const { issues, filterSprint, user, admin } = this.props;
+    const { issues, filterSprint, user, admin, params } = this.props;
     const { modal, status } = this.state;
     console.log(this.activeIssue)
     return (
@@ -75,6 +75,7 @@ export default class IssueOnSprint extends Component {
         <div className="item-issue">
           {this.renderSprint()}
           <Sprint activeIssue={this.activeIssue}
+          params={params}
             modal={modal}
              issues={issues}
              ViewListIssueInSprint={this.props.ViewListIssueInSprint}

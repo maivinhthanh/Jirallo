@@ -35,11 +35,11 @@ class sprint extends Component {
         })
         console.log(activeIssue)
     }
-    IssueToSprint(itemDrag, itemDrop){
+    async IssueToSprint(itemDrag, itemDrop){
         console.log(itemDrag, itemDrop)
         let listIssueId = []
         // Keo, tha
-        const {activeIssue, issues} = this.props
+        const {activeIssue, issues, params} = this.props
         let vtx, vty;
         _.filter(activeIssue, (data, key) => {
             if(data._id === itemDrag.item._id){
@@ -60,9 +60,9 @@ class sprint extends Component {
         })
         // console.log(listIssueId)
         // console.log(itemDrag.filterSprint._id)
-        this.props.DragIssueToSprint(listIssueId, itemDrag.filterSprint._id, itemDrop.issue._id)
-        this.props.ViewListIssueInSprint(itemDrag.filterSprint._id)
-        this.props.loadDataIssue('5d8d84a297c3b62d33e0caeb')
+        await this.props.DragIssueToSprint(listIssueId, itemDrag.filterSprint._id, itemDrop.issue._id)
+        await this.props.ViewListIssueInSprint(itemDrag.filterSprint._id)
+        this.props.loadDataIssue(params)
     }
     render() {
         const {filterSprint, modal, activeIssue, issues} = this.props

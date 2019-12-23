@@ -28,7 +28,7 @@ class ListUser extends Component {
   showModal = () =>{
     if(this.props.params !== null && this.props.params !== 'null'){
       return (
-          <User listuser = {this.props.listuser} ChangeActive = {this.ChangeActive}/>
+          <User params={this.props.params} listuser = {this.props.listuser} ChangeActive = {this.ChangeActive}/>
         )
     }
     else{

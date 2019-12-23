@@ -18,7 +18,8 @@ class ListDetailIssues extends Component {
       modal: false,
       status: false,
       loadData: false,
-      highlightItems: []
+      highlightItems: [],
+      conditionLoadIssue: true
     };
     this.idActive = "";
     this.itemACtive = [];
@@ -54,13 +55,15 @@ class ListDetailIssues extends Component {
     this.idIssue = idIssue;
   };
   componentWillMount() {
+    console.log(this.state.conditionLoadIssue)
     this.props.showListSprint(this.props.params);
     this.props.showListIssueInBackLog(this.props.params);
+    // this.props.showListIssue(this.props.params)
   }
   componentDidUpdate(preProps, props) {
-    if(preProps.issues !== this.props.issues){
-
-    }
+    // if(preProps.issues !== this.props.issues){
+    // }
+   // console.log(preProps, props)
   
   }
   dataAssignee = (data) => {
@@ -77,8 +80,11 @@ class ListDetailIssues extends Component {
       status: true
     })
   }
-  LoadData = (idProject) => {
+  LoadData = (idProject, flag) => {
     this.props.showListIssue(idProject)
+    this.setState({
+      conditionLoadIssue: false 
+    })
   }
   // reload = () => {
   //   this.props.showListIssue(this.props.params)

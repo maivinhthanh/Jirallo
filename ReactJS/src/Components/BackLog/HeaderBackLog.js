@@ -50,7 +50,7 @@ class HeaderBackLog extends Component {
   }
   createSprint = (event)=>{
     event.preventDefault();
-    this.props.createSprintAct(this.state.nameSprint)
+    this.props.createSprintAct(this.state.nameSprint, this.props.params)
   }
   render() {
     const {active, keyseach} = this.state

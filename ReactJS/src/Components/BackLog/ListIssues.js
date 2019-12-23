@@ -1,14 +1,17 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   Button,
   Input,
   Modal,
   ModalBody,
   ModalHeader,
-  ModalFooter
+  ModalFooter,
+  Form
 } from "reactstrap";
 import { connect } from "react-redux";
 import * as actions from "../../Store/actions/issues";
+var swal = require("sweetalert2")
+
 class ListIssues extends Component {
   constructor(props) {
     super(props);
@@ -52,8 +55,21 @@ class ListIssues extends Component {
     e.preventDefault();
     const {nameIssues, typeIssues} = this.state
     this.props.createIssuesAct(this.props.params, nameIssues, typeIssues);
+    swal.fire({
+      position: 'center-center',
+      icon: 'success',
+      title: 'Create issue success',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    this.showToggleIssues()
+    this.setState({
+      nameIssues: '',
+      typeIssues: ''
+    })
   }
   render() {
+    const {modalIssues} = this.state
     return (
       <div>
         <div className="issues-task" style={{position:'absolute', bottom:'-60px', left:'43px'}}>
@@ -77,6 +93,7 @@ class ListIssues extends Component {
                 Create Issues
               </ModalHeader>
               <ModalBody>
+                <Form >
                 <label name="name">Name Issue</label>
                 <Input
                   type="text"
@@ -98,6 +115,7 @@ class ListIssues extends Component {
                   <option value="bug">Bug</option>
                   <option value="task">Task</option>
                 </Input>
+                </Form>
               </ModalBody>
               <ModalFooter>
                 <Button

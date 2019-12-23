@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   Nav,
   NavItem,
@@ -6,6 +6,7 @@ import {
 } from "reactstrap";
 import * as Config from '../../Config';
 import _ from "lodash";
+// import { createSprint } from '../../';
 class User extends Component {
   constructor(props){
     super(props)
@@ -25,9 +26,10 @@ class User extends Component {
   }
 
   render() {
-    const { listuser } = this.props;
+    const { listuser, params } = this.props;
     return (
-      <div className="user-list">
+      <Fragment>
+      <div className="col-md-9 user-list">
         <Nav tabs>
           {_.map(listuser, (user, index) => {
             console.log(user)
@@ -54,6 +56,10 @@ class User extends Component {
           })}
         </Nav>
       </div>
+      <div className='col-md-3'>
+        {/* <createSprint params={params}/> */}
+      </div>
+      </Fragment>
     );
   }
 }

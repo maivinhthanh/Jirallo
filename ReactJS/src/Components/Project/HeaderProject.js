@@ -60,6 +60,7 @@ class HeaderBoard extends Component {
       showConfirmButton: false,
       timer: 1500
     })
+    this.showToggle()
   }
   render() {
     const { active, keyseach, show } = this.state

@@ -6,12 +6,10 @@ import WrapperDrop from '../BackLog/WrapperDrop'
 import Process from '../Board/Process';
 
 class IssueInBackLog extends Component {
-    // const [{ isDragging }, drag] = useDrag({
-    //     item: { type: 'issue', id: props.name },
-    //     collect: monitor => ({
-    //         isDragging: !!monitor.isDragging(),
-    //     }),
-    // })
+    constructor(props){
+        super(props)
+        this.flag = true
+    }
     parentCallBack = (data, active) => {
         this.props.parentCallBack(data, active)
     }
@@ -40,9 +38,9 @@ class IssueInBackLog extends Component {
         _.map(issues, (data) => {
             listissues.push(data._id)
         })
-
+        this.flag = false
        this.props.AddAndSortIssueInBacklog(listissues,params)
-       this.props.LoadData(params)
+       this.props.LoadData(params,this.flag)
         // this.props.addIssueOnSprint(id, issue)
     }
     AddIssueIntoSprint = (idIssue, id) => {
