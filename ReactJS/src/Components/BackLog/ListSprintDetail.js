@@ -47,14 +47,14 @@ export default class ListSprintDetail extends Component {
   updateName = (data, id) =>{
     this.props.updateNameAct(data, id)
   }
+
   render() {
     const { sprint, user, admin, issues, modal, params, issueOnSprint } = this.props;
     const {isDisabled, isLoading, isClearable, isRtl, isSearchable} = this.props
     const x = _.filter(sprint,(item) => item.hidden == false)
-    console.log(this.props.sprint)
     return (
       <div>
-        {_.map(_.filter(sprint,(item) => item.hidden == false), (data, key) => {
+        {!_.isEqual(sprint._id, '') && _.map(sprint, (data, key) => {
           return (
             <div
             className='sprint'
@@ -110,7 +110,8 @@ export default class ListSprintDetail extends Component {
               </div> */}
             </div>
           );
-        })}
+        })
+        }
       </div>
     );
   }

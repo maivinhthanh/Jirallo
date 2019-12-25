@@ -2,26 +2,37 @@ import * as actionTypes from '../constants/sprint';
 import { updateObject } from '../utility';
 import _ from 'lodash';
 const initialState = [{
-    comment: [],
-    name: '',
-    email: '',
-    password: '',
-    image:'',
-    priority:'',
-    process:'',
-    datecreate:'',
-    repoter:'',
-    // idgroup:'',
-    error: false,
-    hidden: false,
-    type:'',
-    idissues:'',
-    _id: ''
+    idsprint: '',
+    listissues: [
+        {
+            comment: [],
+            name: '',
+            email: '',
+            password: '',
+            image:'',
+            priority:'',
+            process:'',
+            datecreate:'',
+            repoter:'',
+            // idgroup:'',
+            error: false,
+            hidden: false,
+            type:'',
+            idissues:'',
+            _id: ''
+        }
+    ]
+    
 }];
 export const ViewListIssue = (state, action) => {
     console.log(state, action)
     let cloneState = _.cloneDeep(state)
-    cloneState = _.cloneDeep(action.data.listissues)
+    cloneState = [...cloneState,{
+        id: action.id,
+        listissues: action.data.listissues
+    }]
+    console.log(cloneState)
+    // cloneState = _.cloneDeep(action.data.listissues)
     return cloneState
 }
 

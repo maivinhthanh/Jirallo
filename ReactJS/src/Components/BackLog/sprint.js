@@ -41,25 +41,21 @@ class sprint extends Component {
         // Keo, tha
         const {activeIssue, issues, params} = this.props
         let vtx, vty;
-        _.filter(activeIssue, (data, key) => {
+        _.filter(activeIssue.listissues, (data, key) => {
             if(data._id === itemDrag.item._id){
                 vtx = key
             }
         })
-        for(let i = activeIssue.length; i>= vtx ; i--){
-            activeIssue[i] = activeIssue[i-1]
+        for(let i = activeIssue.listissues.length; i>= vtx ; i--){
+            activeIssue.listissues[i] = activeIssue.listissues[i-1]
         }
-        activeIssue[vtx] = itemDrop.issue;
-        // activeIssue.length ++ ;
-            
-        // FindIssueInSprint 
-        console.log(activeIssue)
+        activeIssue.listissues[vtx] = itemDrop.issue;
+        
         // Filter id trong activeIssue push vao mang
-        _.map(activeIssue, (issue, key) =>{
+        _.map(activeIssue.listissues, (issue, key) =>{
             listIssueId.push(issue._id)
         })
-        // console.log(listIssueId)
-        console.log(itemDrag.filterSprint._id)
+        
         await this.props.DragIssueToSprint(listIssueId, itemDrag.filterSprint._id, itemDrop.issue._id)
         await this.props.ViewListIssueInSprint(itemDrag.filterSprint._id)
         this.props.loadDataIssue(params)
@@ -70,7 +66,7 @@ class sprint extends Component {
         return (
             <div className='sprint-detail-drag'>
                 {/* <WrapperDrop white filterSprint={filterSprint} handleChange={(id, issue) => this.props.addIssueOnSprint(id, issue)} > */}
-                    {_.map(activeIssue, (data, index) => {
+                    {_.map(activeIssue.listissues, (data, index) => {
                         return (
                             <IssueAdd  white filterSprint={filterSprint} handleAddIssueIntoSprint={(id, issue) => this.IssueToSprint(id, issue)} handleAdd={(id, issue) => this.addIssueOnSprint(id, issue)}  modal={modal} item={data} key={index} />
                         );
