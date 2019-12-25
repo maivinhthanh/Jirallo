@@ -40,7 +40,9 @@ export default function IssueAdd(props) {
             isOver: !!monitor.isOver(),
         }),
     })
+    console.log(props.item)
     return (
+       
         <div style={{
             position: 'relative',
             width: '100%',

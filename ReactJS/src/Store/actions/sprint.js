@@ -175,6 +175,7 @@ export const createSprintAct = (data, id) => {
     },
    'token'
     ).then(respone => {
+      console.log(respone.data)
       dispatch(createSprint(respone.data))
     }).catch(err => {
       console.log(err)

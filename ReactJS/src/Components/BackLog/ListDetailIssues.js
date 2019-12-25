@@ -55,10 +55,9 @@ class ListDetailIssues extends Component {
     this.idIssue = idIssue;
   };
   componentWillMount() {
-    console.log(this.state.conditionLoadIssue)
     this.props.showListSprint(this.props.params);
     this.props.showListIssueInBackLog(this.props.params);
-    // this.props.showListIssue(this.props.params)
+   // this.props.showListIssue(this.props.params)
   }
   componentDidUpdate(preProps, props) {
     // if(preProps.issues !== this.props.issues){
@@ -82,9 +81,9 @@ class ListDetailIssues extends Component {
   }
   LoadData = (idProject, flag) => {
     this.props.showListIssue(idProject)
-    this.setState({
-      conditionLoadIssue: false 
-    })
+    // this.setState({
+    //   conditionLoadIssue: false 
+    // })
   }
   // reload = () => {
   //   this.props.showListIssue(this.props.params)

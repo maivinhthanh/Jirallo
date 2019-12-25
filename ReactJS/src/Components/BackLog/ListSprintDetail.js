@@ -95,6 +95,7 @@ export default class ListSprintDetail extends Component {
               {/* <div className={`optionbtn ${!modal ? "" : "custom"}`}> */}
                 <IssueOnSprint
                   issueOnSprint={issueOnSprint}
+                  sprint={sprint}
                   params={params}
                   user={user}
                   admin={admin}

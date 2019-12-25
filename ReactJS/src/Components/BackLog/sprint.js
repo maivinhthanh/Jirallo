@@ -59,14 +59,14 @@ class sprint extends Component {
             listIssueId.push(issue._id)
         })
         // console.log(listIssueId)
-        // console.log(itemDrag.filterSprint._id)
+        console.log(itemDrag.filterSprint._id)
         await this.props.DragIssueToSprint(listIssueId, itemDrag.filterSprint._id, itemDrop.issue._id)
         await this.props.ViewListIssueInSprint(itemDrag.filterSprint._id)
         this.props.loadDataIssue(params)
     }
     render() {
         const {filterSprint, modal, activeIssue, issues} = this.props
-        console.log(issues)
+        console.log(activeIssue)
         return (
             <div className='sprint-detail-drag'>
                 {/* <WrapperDrop white filterSprint={filterSprint} handleChange={(id, issue) => this.props.addIssueOnSprint(id, issue)} > */}
@@ -86,10 +86,8 @@ const mapDispatchToProps = dispatch => {
         addIssueOnSprint: (id, issue) => dispatch(action.AddIssueIntoSprint(id, issue)),
         DragIssueToSprint:(listIssueId, idSprint, newIssue) => dispatch(action.DragIssueToSprint(listIssueId, idSprint, newIssue)),
         showListIssueInBackLog: id => dispatch(actionIssue.showListIssueInBackLog(id)),
-
+       // ViewListIssueInSprint: id => dispatch(action.ViewListIssueInSprint(id))
         // ViewListIssueInSprint: (idSprint) => dispatch(action.ViewListIssueInSprint(idSprint))
-
-
     }
 
 }
