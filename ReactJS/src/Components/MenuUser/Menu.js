@@ -53,7 +53,6 @@ class MenuUser extends Component {
         // imageElem.src = tCtx.canvas.toDataURL();
     }
     render() {
-        let user = JSON.parse(localStorage.getItem('user'))
         let jwt = jwtDecode(Cookies.get('token'))
         return (
             <div>
@@ -61,12 +60,11 @@ class MenuUser extends Component {
                     <button className="cn-button" onClick={() => this.addClass()} 
                         style={this.props.isUserPage?{top : '0%'}:{}}>
                         {
-                            !user.image?
                                 <div>
                                     <canvas ref={this.canvas} ></canvas>
-                                </div>:
-                            <img className="avatar-image" src={user.image !== null? 
-                                Config.API_URL  + "/" + user.image : user.avatar} height={96} width={96}/>
+                                </div>
+                            // <img className="avatar-image" src={user.image !== null? 
+                            //     Config.API_URL  + "/" + user.image : user.avatar} height={96} width={96}/>
                         }
                     
                     </button>

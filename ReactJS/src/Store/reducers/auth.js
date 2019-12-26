@@ -29,7 +29,7 @@ const login = ( state, action ) => {
     CallApi('auth/getMyInfo', 'GET',{},'token')
     .then( response => {
         localStorage.setItem('user', JSON.stringify(response.data.result));
-        
+        console.log(response.data.result)
      } )
      .catch(error => {
         

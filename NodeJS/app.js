@@ -2,6 +2,7 @@ const path = require('path')
 
 const express = require('express')
 const bodyParser = require('body-parser')
+// const serveStatic = require('serve-static');
 
 const authRoutes = require('./routes/auth')
 const projectRoutes = require('./routes/project')
@@ -16,6 +17,11 @@ app.use(bodyParser.urlencoded({extended: true})) // x-www-form-urlencoded <form>
 app.use(bodyParser.json()) // application/json
 
 app.use('/images', express.static(path.join(__dirname, 'images')))
+
+// app.use(serveStatic(__dirname + "/build"));
+// app.get(/.*/, function (req, res) {
+// 	res.sendFile(path.join(__dirname, '/build/index.html'))
+// })
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')

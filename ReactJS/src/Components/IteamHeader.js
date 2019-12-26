@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 
 import CallApi from "../until/apiCaller";
 import PrivateRoute from '../PrivateRoute'
@@ -60,9 +60,9 @@ export default class IteamHeader extends Component {
               </a>
             </li>
           </ul>
-          <Router >
+          {/* <Router >
             <PrivateRoute path="/config/:id?" isAuth={this.state.auth} component={ConfigProjectPage} />
-          </Router>
+          </Router> */}
       </div>
     )
   }
