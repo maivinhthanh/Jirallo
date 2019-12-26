@@ -38,13 +38,16 @@ class IssueInBackLog extends Component {
         _.map(issues, (data) => {
             listissues.push(data._id)
         })
-        this.flag = false
        this.props.AddAndSortIssueInBacklog(listissues,params)
-       this.props.LoadData(params,this.flag)
+       this.props.LoadData(params)
         // this.props.addIssueOnSprint(id, issue)
     }
-    AddIssueIntoSprint = (idIssue, id) => {
-        this.props.AddIssueIntoSprint(idIssue, id)
+    AddIssueIntoSprint = async(idIssue, id) => {
+        const {params} = this.props
+        await this.props.AddIssueIntoSprint(idIssue, id)
+        await this.props.ViewListIssueInSprint(id)
+        this.props.loadDataIssue(params)
+        // this.props.load(params)
     }
     render(){
 

@@ -4,7 +4,7 @@ import * as actions from '../../../Store/actions/auth';
 import { Redirect } from 'react-router-dom';
 import Login from '../../../Components/Auth/Login/Login'
 import { Toast, ToastBody, ToastHeader } from 'reactstrap';
-import swal from "sweetalert";
+import swal from "sweetalert2";
 import _ from 'lodash'
 class LoginContainer extends Component {
   constructor(props){

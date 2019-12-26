@@ -21,7 +21,6 @@ export default function IssueAdd(props) {
             isDragging: !!monitor.isDragging(),
         }),
     })
-
     let item = props.item[1]
     const fill = props.white ? 'white' : 'white'
     const [{ isOver }, drop] = useDrop({
@@ -40,7 +39,9 @@ export default function IssueAdd(props) {
             isOver: !!monitor.isOver(),
         }),
     })
+    console.log(props.item)
     return (
+       
         <div style={{
             position: 'relative',
             width: '100%',

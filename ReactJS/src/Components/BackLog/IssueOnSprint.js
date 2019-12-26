@@ -16,7 +16,6 @@ import UpdateIssue from "../Modal/UpdateIssue";
 import ChildSprint from "./ChildSprint";
 import Sprint from "./sprint";
 import { DataBeforeDrag } from "../../until/context";
-import sprint from "./sprint";
 export default class IssueOnSprint extends Component {
   constructor(props) {
     super(props);
@@ -41,57 +40,38 @@ export default class IssueOnSprint extends Component {
       modal: true
     });
   }
-  getIssueOnSprint = (id) => {
-    this.props.ViewListIssueInSprint(id)
-  }
-  componentDidMount(){
-    const {filterSprint} = this.props
-    this.props.ViewListIssueInSprint(filterSprint._id)
+  componentDidMount() {
+    const { filterSprint } = this.props
+    !_.isEmpty(filterSprint)&&
+      this.props.ViewListIssueInSprint(filterSprint._id)
   }
 
-  renderSprint = () => {
+  renderSprint = (id) => {
     const { issues, filterSprint, user, admin, issueOnSprint } = this.props;
-    // Default de khi khong co issue trong sprint thi load mac dinh issue nay
-    this.activeIssue = [{
-      datecreate: "2019-12-17T03:02:18.805Z",
-      name: "default",
-      id: '00',
-      idsprint: [],
-      idproject: ""
-    }];
-    _.map(issueOnSprint, (item, key) => {
-      if(item._id !== '') {
-        this.activeIssue = _.clone(issueOnSprint)
+    let listIssue = []
+    _.map(issueOnSprint,(data, key) => {
+      if(data.id === filterSprint._id){
+          this.activeIssue = _.clone(data)
       }
     })
   }
 
   render() {
-    const { issues, filterSprint, user, admin, params } = this.props;
+    const { issues, filterSprint, user, admin, params, issueOnSprint } = this.props;
     const { modal, status } = this.state;
-    console.log(this.activeIssue)
     return (
       <div>
         <div className="item-issue">
-          {this.renderSprint()}
+          {this.renderSprint(filterSprint._id)}
           <Sprint activeIssue={this.activeIssue}
-          params={params}
+            params={params}
             modal={modal}
-             issues={issues}
-             ViewListIssueInSprint={this.props.ViewListIssueInSprint}
-             loadDataIssue={this.props.loadDataIssue}
-             filterSprint={filterSprint}/>
-          {/* <div ref={drop} style={{ position: 'relative', width: '100%', height: '100%', }} >
-            <div style={{
-              backgroundColor: fill, width: '100%',
-              height: '100%',}} >
-              <div className='border' style={{ padding: '10px' }}>
-                <span>Sprint default</span>
-              </div>
-            </div>
-          </div> */}
+            issues={issues}
+            ViewListIssueInSprint={this.props.ViewListIssueInSprint}
+            loadDataIssue={this.props.loadDataIssue}
+            filterSprint={filterSprint} />
           <span>
-           
+
           </span>
         </div>
         {status == true && (
@@ -101,27 +81,6 @@ export default class IssueOnSprint extends Component {
             data={this.itemActive}
           />
         )}
-        {/* <div className="content-right">
-          <div className={`${modal ? "" : "hidden"}`}>
-            {_.map(_.compact(issues), (item, key) => {
-              if (item._id === this.idActive) {
-                return (
-                  <DescriptTask
-                    key={key}
-                    data={item}
-                    user={user}
-                    admin={admin}
-                    assignTaskIssueAct={this.props.assignTaskIssueAct}
-                    findUserLikeEmail={this.props.findUserLikeEmail}
-                    AddFlagIssueAct={this.AddFlagIssueAct}
-                    RemoveFlag={this.RemoveFlag}
-                    // removeIssue={this.props.removeIssue}
-                  />
-                );
-              }
-            })}
-          </div>
-        </div> */}
       </div>
     );
   }

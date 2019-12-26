@@ -21,13 +21,12 @@ class Pagination extends React.Component {
  
         // get new pager object for specified page
         pager = this.getPager(items.length, page);
- 
         // get new page of items from items array
         var pageOfItems = items.slice(pager.startIndex, pager.endIndex + 1);
  
         // update state
         this.setState({ pager: pager });
- 
+        
         // call change page function in parent component
         this.props.onChangePage(pager.currentPage);
     }
@@ -84,7 +83,7 @@ class Pagination extends React.Component {
  
     render() {
         var pager = this.state.pager;
- 
+        console.log(pager.pages, pager.currentPage)
         return (
             <nav aria-label="Page navigation example">
                 <ul className="pagination">

@@ -40,10 +40,10 @@ export const DragSuccess = (data) => {
     data
   }
 }
-export const ViewListIssue = (data) => {
+export const ViewListIssue = (data, id) => {
   return {
     type: actionTypes.ViewListIssue,
-    data
+    data, id
   }
 }
 export const DragIssueToSprint = (listIssueId, idSprint, newissue) => {
@@ -122,7 +122,6 @@ export const deleteSprint = (id) => {
   }
 }
 export const ViewListIssueInSprint = (id) => {
-  console.log(id)
   return dispatch => {
     return CallApi(`sprint/viewListIssuesInSprint/${id}`,
     'GET',
@@ -130,7 +129,7 @@ export const ViewListIssueInSprint = (id) => {
     'token'
     ).then(respone => {
       console.log(respone)
-      dispatch(ViewListIssue(respone.data))
+      dispatch(ViewListIssue(respone.data, id))
     }).catch(err => {
       dispatch(errorSprint(err))
     })
@@ -145,7 +144,6 @@ export const AddIssueIntoSprint = (idSprint, idIssue) => {
     },
     'token'
     ).then(respone => {
-      console.log(respone.data)
       dispatch(AddSuccess(respone.data))
     }).catch(err => {
       dispatch(errorSprint(err))
@@ -175,6 +173,7 @@ export const createSprintAct = (data, id) => {
     },
    'token'
     ).then(respone => {
+      console.log(respone.data)
       dispatch(createSprint(respone.data))
     }).catch(err => {
       console.log(err)

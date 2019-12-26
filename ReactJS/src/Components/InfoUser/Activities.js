@@ -36,7 +36,7 @@ class Activities extends Component {
             this.exampleItems = _.range(1, this.props.activities.totalpages * 5 + 1).map(i => { return { id: i, name: 'Item ' + i }; });
         }
         const {activities} = this.props
-        console.log(activities)
+        console.log(this.exampleItems)
         return (
             <div className="container">
                 {

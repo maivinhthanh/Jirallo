@@ -25,7 +25,6 @@ class ListDetailIssues extends Component {
     this.itemACtive = [];
     this.itemFlag = "";
     this.idIssue = "";
-    // this.arrayList = [];
     this.dataTranfer = false;
     this.dataBefore = []
   }
@@ -55,16 +54,9 @@ class ListDetailIssues extends Component {
     this.idIssue = idIssue;
   };
   componentWillMount() {
-    console.log(this.state.conditionLoadIssue)
     this.props.showListSprint(this.props.params);
     this.props.showListIssueInBackLog(this.props.params);
-    // this.props.showListIssue(this.props.params)
-  }
-  componentDidUpdate(preProps, props) {
-    // if(preProps.issues !== this.props.issues){
-    // }
-   // console.log(preProps, props)
-  
+   // this.props.showListIssue(this.props.params)
   }
   dataAssignee = (data) => {
     this.props.findUserLikeId(data.assignee)
@@ -82,9 +74,9 @@ class ListDetailIssues extends Component {
   }
   LoadData = (idProject, flag) => {
     this.props.showListIssue(idProject)
-    this.setState({
-      conditionLoadIssue: false 
-    })
+    // this.setState({
+    //   conditionLoadIssue: false 
+    // })
   }
   // reload = () => {
   //   this.props.showListIssue(this.props.params)
@@ -124,7 +116,6 @@ class ListDetailIssues extends Component {
                     loadDataIssue={this.loadDataIssue}
                     
                   />
-                  {/* {this.renderListSprint(sprint)} */}
                 </ul>
               </div>
                <div className='col-md-12'>
@@ -133,9 +124,6 @@ class ListDetailIssues extends Component {
             <div className="col-md-12">
               <div className="item-issue">
                 <p style={{ textAlign: "left", marginLeft: "72px" }}>BackLog <span style={{ marginLeft: '10px', color: '#7A869A' }}>{issues.length} issues</span></p>
-
-                {/* <span>{issues.datecreate}</span> */}
-                {/* <Process white process={'todo'} handleChange={(id, process) => this.props.changeProcessIssue(id, process)}></Process> */}
                 <IssueInBackLog
                   params={params}
                   modal={modal}
@@ -146,9 +134,10 @@ class ListDetailIssues extends Component {
                   showUpdateIssue={this.showUpdateIssue}
                   AddAndSortIssueInBacklog={this.props.AddAndSortIssueInBacklog}
                   LoadData = {this.LoadData}
+                  loadDataIssue={this.loadDataIssue}
+                  ViewListIssueInSprint={this.props.ViewListIssueInSprint}
                   // addIssueOnSprint={this.props.addIssueOnSprint}
                   sprint={sprint} />
-                {/* <Process/> */}
                 {status == true && (
                   <UpdateIssue
                     EditIssuesAct={this.props.EditIssuesAct}
@@ -162,7 +151,6 @@ class ListDetailIssues extends Component {
           <div className='col-md-12'>
             <ListIssues params={params} />
           </div>
-          
         </div>
         <div className={`${modal ? "col-md-3" : "hidden"}`}>
           {_.map(_.compact(issues), (item, key) => {

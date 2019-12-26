@@ -32,7 +32,7 @@ const login = ( state, action ) => {
         console.log(response.data.result)
      } )
      .catch(error => {
-        
+        console.log(error)
      } );
     return updateObject( state, {id : action.id} );
 };
