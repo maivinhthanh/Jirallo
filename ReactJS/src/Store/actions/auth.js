@@ -159,3 +159,33 @@ export const refreshToken = () =>{
         })
     }
 }
+export const sendEmail = (email) =>{
+    return dispatch =>{
+        return CallApi(`auth/sendMail`,'POST',
+        {email: email},
+        'token'
+        ).then(response =>{
+            dispatch()
+        })
+        .catch(err =>{
+           console.log(err)
+        })
+    }
+}
+export const changePass = (email, code, password) =>{
+    return dispatch =>{
+        return CallApi(`auth/changePass`,'POST',
+        {
+            email: email,
+            password: password,
+            code: code
+        },
+        'token'
+        ).then(response =>{
+            dispatch()
+        })
+        .catch(err =>{
+           console.log(err)
+        })
+    }
+}

@@ -2,6 +2,7 @@ const { validationResult } = require("express-validator/check")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const {ObjectId} = require('mongodb')
+var nodemailer =  require('nodemailer')
 
 const User = require('../models/user')
 const Activities = require('../models/activities')
@@ -384,7 +385,6 @@ exports.loginbygoogle = async (req, res, next) => {
         const image = req.body.image
         const email = req.body.email
         const name = req.body.name
-        console.log("1")
         let user = await User.findOne({idgoogle: idgoogle})
         if(!user){
             user = new User({
@@ -393,31 +393,24 @@ exports.loginbygoogle = async (req, res, next) => {
                 avatar: image,
                 email: email
             })
-            console.log("2")
             const newuser = await user.save()
-            console.log("3")
             const userFakeData = {
                 email: newuser.email,
                 userId: newuser._id.toString(),
             }
-            console.log("4")
             const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife)
             const refreshToken = await jwtHelper.generateToken(userFakeData, refreshTokenSecret, refreshTokenLife)
-            console.log("5")
             const tokendata = new Token({
                 refreshtoken: refreshToken
             })
-            console.log("6")
             await tokendata.save()
     
-            console.log("7")
             const action = new Activities({
                 action: 'loginbygoogle',
                 iduser: newuser._id
             })
     
             await action.save()
-            console.log("8")
             res.status(200).json({token: accessToken, refreshToken: refreshtoken, userId: newuser._id.toString()})
         }
         else{
@@ -425,14 +418,12 @@ exports.loginbygoogle = async (req, res, next) => {
                 email: email,
                 userId: user._id.toString()
             }
-            console.log("9")
             const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife)
             const refreshToken = await jwtHelper.generateToken(userFakeData, refreshTokenSecret, refreshTokenLife)
             
             const tokendata = new Token({
                 refreshtoken: refreshToken
             })
-            console.log("10")
             await tokendata.save()
 
             const action = new Activities({
@@ -441,9 +432,97 @@ exports.loginbygoogle = async (req, res, next) => {
             })
     
             await action.save()
-            console.log("11")
             res.status(200).json({token: accessToken, refreshToken: refreshToken, userId: user._id.toString()})
         }
+
+        
+    }
+    catch (error) {
+        
+        next(error)
+    }
+}
+exports.sendMail = async (req, res, next) => {
+    try{
+        const email = req.body.email
+        let user = await User.findOne({email: email})
+        console.log(user)
+        let code
+        if(!user.password){
+            if(!user.idfacebook){
+                code = user.idgoogle.substring(1, 6)
+            }
+            else{
+                code = user.idfacebook.substring(1, 6)
+            }
+            
+        }
+        else{
+            code = user.password.substring(10, 6)
+        }
+        console.log(process.env.EMAIL)
+        var transporter =  nodemailer.createTransport({ // config mail server
+            service: 'Gmail',
+            auth: {
+                user: process.env.EMAIL ,
+                pass: process.env.PASSWORD
+            }
+        });
+        var mainOptions = { // thiết lập đối tượng, nội dung gửi mail
+            from: 'JIRALLO',
+            to: email,
+            subject: 'Quên Password',
+            text: 'Cám ơn bạn đã vào web chúng tôi. Mã code của bạn là:' + code,
+            html: '<p>Quên Password</b><ul><li>Code:' + code 
+        }
+        transporter.sendMail(mainOptions, function(err, info){
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('Message sent: ' +  info.response);
+            }
+        });
+        res.status(200).json({ statusCode: "ok" });
+    }
+    catch (error) {
+        
+        next(error)
+    }
+}
+exports.changePass = async (req, res, next) => {
+    try{
+        const password = req.body.password
+        const email = req.body.email
+        let user = await User.findOne({email: email})
+        let code
+        if(!user.password){
+            if(!user.idfacebook){
+                code = user.idgoogle.substring(1, 6)
+            }
+            else{
+                code = user.idfacebook.substring(1, 6)
+            }
+            
+        }
+        else{
+            code = user.password.substring(10, 6)
+        }
+        if(code === req.body.code){
+            const hashedPw = await bcrypt.hash(password, 12)
+            const data = {
+                email: email,
+                password: hashedPw,
+                name: name,
+                gender: gender,
+                image: image
+            }
+            await User.findByIdAndUpdate(user._id, data)
+            res.status(200).json({ statusCode: "ok", message:"Đã đổi mật khẩu" });
+        }
+        else{
+            res.status(200).json({ statusCode: "err", message:"Mã code không đúng" });
+        }
+        
 
         
     }

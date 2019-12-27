@@ -109,12 +109,9 @@ class Login extends Component {
               </div>
 
               <div className="text-center p-t-12">
-                <span className="txt1">
-                  Forgot
-                </span>
-                <a className="txt2" href="#">
-                  Username / Password?
-                </a>
+                
+                <Link to="/fogotpassword">Forgot Password</Link>
+                
               </div>
 
               <div className="text-center p-t-136">

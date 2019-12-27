@@ -15,6 +15,8 @@ import rootReducer from './Store/reducers'
 
 import Register from './Containers/Auth/Register/RegisterContainer'
 import Login from './Containers/Auth/Login/LoginContainer'
+import ForgotPass from './Components/Auth/ForgotPass'
+
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -42,6 +44,7 @@ const app = (
                 <App />
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
+                <Route path="/fogotpassword" component={ForgotPass} />
             </Router>
         </BrowserRouter>
     </Provider>

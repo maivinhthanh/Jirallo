@@ -109,4 +109,16 @@ router.get('/getMyInfo',upload.single('avatar'),isAuth,
     ], 
     authController.getMyInfo,
 )
+router.post('/sendMail',upload.single('avatar'),
+    [
+       
+    ], 
+    authController.sendMail,
+)
+router.post('/changePass',upload.single('avatar'),
+    [
+       
+    ], 
+    authController.changePass,
+)
 module.exports = router
