@@ -16,6 +16,7 @@ import rootReducer from './Store/reducers'
 import Register from './Containers/Auth/Register/RegisterContainer'
 import Login from './Containers/Auth/Login/LoginContainer'
 import ForgotPass from './Components/Auth/ForgotPass'
+import ChangePassword from './Components/Auth/ChangePassword'
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -45,6 +46,7 @@ const app = (
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 <Route path="/fogotpassword" component={ForgotPass} />
+                <Route path="/forgotpassword/:token" component={ChangePassword} />
             </Router>
         </BrowserRouter>
     </Provider>

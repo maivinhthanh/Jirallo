@@ -172,13 +172,12 @@ export const sendEmail = (email) =>{
         })
     }
 }
-export const changePass = (email, code, password) =>{
+export const changePass = (token, password) =>{
     return dispatch =>{
         return CallApi(`auth/changePass`,'POST',
         {
-            email: email,
-            password: password,
-            code: code
+            token: token,
+            password: password
         },
         'token'
         ).then(response =>{

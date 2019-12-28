@@ -1,6 +1,5 @@
 const { validationResult } = require("express-validator/check")
 const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
 const {ObjectId} = require('mongodb')
 var nodemailer =  require('nodemailer')
 
@@ -13,6 +12,9 @@ const accessTokenLife = process.env.TOKEN_LIFE || '365d'
 const accessTokenSecret = process.env.ACCESS_TOKEN || "s0me-secr3t-goes-here"
 const refreshTokenLife = process.env.REFRESH_TOKEN_LIFE || "365d"
 const refreshTokenSecret = process.env.REFRESH_TOKEN || "some-s3cret-refre2h-token"
+const passwordTokenSecret = process.env.PASSWORD_TOKEN || "some-s3cret-pa$$word-token"
+const passwordTokenLife = process.env.PASSWORD_TOKEN_LIFE || "600000"
+const URL_FRONTEND = process.env.URL_FRONTEND || "http://localhost:3000/"
 
 exports.signup = async (req, res, next) => {
     try{
@@ -446,34 +448,24 @@ exports.sendMail = async (req, res, next) => {
     try{
         const email = req.body.email
         let user = await User.findOne({email: email})
-        console.log(user)
-        let code
-        if(!user.password){
-            if(!user.idfacebook){
-                code = user.idgoogle.substring(1, 6)
-            }
-            else{
-                code = user.idfacebook.substring(1, 6)
-            }
-            
+        const userFakeData = {
+            email: email,
+            userId: user._id.toString()
         }
-        else{
-            code = user.password.substring(10, 6)
-        }
-        console.log(process.env.EMAIL)
+        const refreshToken = await jwtHelper.generateToken(userFakeData, passwordTokenSecret, passwordTokenLife)
+
         var transporter =  nodemailer.createTransport({ // config mail server
             service: 'Gmail',
             auth: {
                 user: process.env.EMAIL ,
                 pass: process.env.PASSWORD
-            }
+            },
         });
         var mainOptions = { // thiết lập đối tượng, nội dung gửi mail
-            from: 'JIRALLO',
+            from: 'JIRALLO' + process.env.EMAIL,
             to: email,
-            subject: 'Quên Password',
-            text: 'Cám ơn bạn đã vào web chúng tôi. Mã code của bạn là:' + code,
-            html: '<p>Quên Password</b><ul><li>Code:' + code 
+            subject: 'JIRALLO',
+            text: URL_FRONTEND + 'forgotpassword/' + refreshToken,
         }
         transporter.sendMail(mainOptions, function(err, info){
             if (err) {
@@ -492,36 +484,18 @@ exports.sendMail = async (req, res, next) => {
 exports.changePass = async (req, res, next) => {
     try{
         const password = req.body.password
-        const email = req.body.email
-        let user = await User.findOne({email: email})
-        let code
-        if(!user.password){
-            if(!user.idfacebook){
-                code = user.idgoogle.substring(1, 6)
-            }
-            else{
-                code = user.idfacebook.substring(1, 6)
-            }
-            
+        const token = req.body.token
+
+        const decoded = await jwtHelper.verifyToken(token, passwordTokenSecret)
+
+        let user = await User.findById( decoded.data.userId)
+        
+        const hashedPw = await bcrypt.hash(password, 12)
+        const data = {
+            password: hashedPw
         }
-        else{
-            code = user.password.substring(10, 6)
-        }
-        if(code === req.body.code){
-            const hashedPw = await bcrypt.hash(password, 12)
-            const data = {
-                email: email,
-                password: hashedPw,
-                name: name,
-                gender: gender,
-                image: image
-            }
-            await User.findByIdAndUpdate(user._id, data)
-            res.status(200).json({ statusCode: "ok", message:"Đã đổi mật khẩu" });
-        }
-        else{
-            res.status(200).json({ statusCode: "err", message:"Mã code không đúng" });
-        }
+        await User.findByIdAndUpdate(user._id, data)
+        res.status(200).json({ statusCode: "ok", message:"Đã đổi mật khẩu" });
         
 
         
