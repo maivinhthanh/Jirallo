@@ -12,7 +12,8 @@ import HeaderProject from './HeaderProject'
 class ConfigProject extends Component {
 
   render() {
-    const { params } = this.props
+    const { params, auth } = this.props
+    
     return (
         <div className="row">
             <div className="col-12">
@@ -22,37 +23,43 @@ class ConfigProject extends Component {
             <div className="col-1" >
                 <IteamHeader params={params}/>
             </div>
-            <div className="col-11 container" >
-                <ul className="nav nav-tabs">
-                    <li className="nav-item">
-                        <Link className="nav-link" to={{ pathname: `/config/${params}/edit` }}>
-                            <p>Edit Project</p>
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to={{ pathname: `/config/${params}/addmember` }}>
-                            <p>Add Member</p>
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to={{ pathname: `/config/${params}/addprocess` }}>
-                            <p>Add Process</p>
-                        </Link>
-                    </li>
-                   
-                </ul>
-                <Switch>
-                        <Route exact path={`/config/${params}/edit`} >
-                            <EditProject params={params} />
-                        </Route>
-                        <Route path={`/config/${params}/addmember`} >
-                            <AddMember params={params} />
-                        </Route>
-                        <Route path={`/config/${params}/addprocess`} >
-                            <AddProcess params={params} />
-                        </Route>
-                </Switch>
-            </div>
+            {
+                auth?(
+                    <div className="col-11 container" >
+                        <ul className="nav nav-tabs">
+                            <li className="nav-item">
+                                <Link className="nav-link" to={{ pathname: `/config/${params}/edit` }}>
+                                    <p>Edit Project</p>
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to={{ pathname: `/config/${params}/addmember` }}>
+                                    <p>Add Member</p>
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to={{ pathname: `/config/${params}/addprocess` }}>
+                                    <p>Add Process</p>
+                                </Link>
+                            </li>
+                        
+                        </ul>
+                        <Switch>
+                                <Route exact path={`/config/${params}/edit`} >
+                                    <EditProject params={params} />
+                                </Route>
+                                <Route path={`/config/${params}/addmember`} >
+                                    <AddMember params={params} />
+                                </Route>
+                                <Route path={`/config/${params}/addprocess`} >
+                                    <AddProcess params={params} />
+                                </Route>
+                        </Switch>
+                    </div>
+                ):
+                (<div></div>)
+            }
+            
         </div>
     )
   }

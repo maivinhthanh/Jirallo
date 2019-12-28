@@ -25,13 +25,36 @@ const initialState = [{
     
 }];
 export const ViewListIssue = (state, action) => {
-    console.log(state, action)
     let cloneState = _.cloneDeep(state)
-    cloneState = [...cloneState,{
-        id: action.id,
-        listissues: action.data.listissues
-    }]
-    console.log(cloneState)
+    if(action.data.listissues.length === 0){
+        cloneState = [...cloneState,{
+            id: action.id,
+            listissues: [{
+                comment: [],
+                name: '',
+                email: '',
+                password: '',
+                image:'',
+                priority:'',
+                process:'',
+                datecreate:'',
+                repoter:'',
+                // idgroup:'',
+                error: false,
+                hidden: false,
+                type:'',
+                idissues:'',
+                _id: ''
+            }]
+        }]
+    }
+    else{
+        cloneState = [...cloneState,{
+            id: action.id,
+            listissues: action.data.listissues
+        }]
+    }
+    
     // cloneState = _.cloneDeep(action.data.listissues)
     return cloneState
 }

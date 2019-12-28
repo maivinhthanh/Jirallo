@@ -256,9 +256,11 @@ exports.addAndSortIssuesInSprint = async (req, res, next) => {
         const listissues = req.body.listissues
         const newissues = req.body.newissues
 
+        const list = listissues.filter(item => item !== '')
+
         const sprint = await Sprint.findByIdAndUpdate(idsprint,
             {
-                idissues : listissues
+                idissues : list
             } ,{new: true})
         
         await Issuses.findByIdAndUpdate(newissues, {

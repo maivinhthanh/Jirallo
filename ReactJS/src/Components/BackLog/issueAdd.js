@@ -39,7 +39,6 @@ export default function IssueAdd(props) {
             isOver: !!monitor.isOver(),
         }),
     })
-    console.log(props.item)
     return (
        
         <div style={{
@@ -58,8 +57,7 @@ export default function IssueAdd(props) {
                             opacity: isDragging ? 1 : 1,
                             fontSize: 20,
                             cursor: 'move',
-                            border: '1px solid #ccaa',
-                            // margin: '12px',
+                            border: '1px solid #ccaa', height: '40px',
                             padding: '5px'}}
                         className={`${!props.modal ? "" : "col-md-12"}`}>
                         {props.item.name}

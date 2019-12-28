@@ -33,10 +33,8 @@ class sprint extends Component {
                 }
             }
         })
-        console.log(activeIssue)
     }
     async IssueToSprint(itemDrag, itemDrop){
-        console.log(itemDrag, itemDrop)
         let listIssueId = []
         // Keo, tha
         const {activeIssue, issues, params} = this.props
@@ -62,7 +60,6 @@ class sprint extends Component {
     }
     render() {
         const {filterSprint, modal, activeIssue, issues} = this.props
-        console.log(activeIssue)
         return (
             <div className='sprint-detail-drag'>
                 {/* <WrapperDrop white filterSprint={filterSprint} handleChange={(id, issue) => this.props.addIssueOnSprint(id, issue)} > */}
@@ -82,8 +79,7 @@ const mapDispatchToProps = dispatch => {
         addIssueOnSprint: (id, issue) => dispatch(action.AddIssueIntoSprint(id, issue)),
         DragIssueToSprint:(listIssueId, idSprint, newIssue) => dispatch(action.DragIssueToSprint(listIssueId, idSprint, newIssue)),
         showListIssueInBackLog: id => dispatch(actionIssue.showListIssueInBackLog(id)),
-       // ViewListIssueInSprint: id => dispatch(action.ViewListIssueInSprint(id))
-        // ViewListIssueInSprint: (idSprint) => dispatch(action.ViewListIssueInSprint(idSprint))
+       
     }
 
 }

@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import {
-  Button,
-  UncontrolledCollapse,
-  Card,
-  CardBody,
   UncontrolledDropdown,
-  DropdownItem,
   DropdownMenu,
   DropdownToggle
 } from "reactstrap";

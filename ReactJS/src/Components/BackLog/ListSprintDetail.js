@@ -29,49 +29,49 @@ export default class ListSprintDetail extends Component {
   //     isSearchable:true
   //   }
   // }
-  deleteSprint(id){
-    const {sprint} = this.props
+  deleteSprint(id) {
+    const { sprint } = this.props
     _.map(sprint, (item, index) => {
-        if(item._id === id){
-          sprint.splice(index, 1)
-         }
+      if (item._id === id) {
+        sprint.splice(index, 1)
+      }
     })
     this.props.handleDeleteSprint(id)
   }
-  completeSprint(id){
+  completeSprint(id) {
     this.props.completeSprintAct(id)
   }
-  beginSprint(idSprint, idProject){
+  beginSprint(idSprint, idProject) {
     this.props.beginSprint(idSprint, idProject)
   }
-  updateName = (data, id) =>{
+  updateName = (data, id) => {
     this.props.updateNameAct(data, id)
   }
 
   render() {
     const { sprint, user, admin, issues, modal, params, issueOnSprint } = this.props;
-    const {isDisabled, isLoading, isClearable, isRtl, isSearchable} = this.props
-    const x = _.filter(sprint,(item) => item.hidden == false)
+    const { isDisabled, isLoading, isClearable, isRtl, isSearchable } = this.props
+    const x = _.filter(sprint, (item) => item.hidden == false)
     return (
       <div>
         {!_.isEqual(sprint._id, '') && _.map(sprint, (data, key) => {
           return (
             <div
-            className='sprint'
+              className='sprint'
               // className={`container sprint ${!modal ? "" : "layoutSprint"}`}
               key={key}
             >
               <li style={{ marginLeft: "-27px" }}>
-              <i className="fas fa-ellipsis-h setting-addsprint" style={{color: 'black', marginRight:'10px'}}></i>
-              <InputField nameInput={'sprint'} sprint={sprint} newdata={(item,name) => this.updateName(item, data._id)}>{data.name}</InputField>
-              <span style={{marginLeft: '10px', color: '#7A869A'}}>{data.idissues.length} issues</span>
-             <span style={{position:'absolute', top:'27px', left:'103px', color: '#7A869A'}}>{data.datecreate}</span>
+                <i className="fas fa-ellipsis-h setting-addsprint" style={{ color: 'black', marginRight: '10px' }}></i>
+                <InputField nameInput={'sprint'} sprint={sprint} newdata={(item, name) => this.updateName(item, data._id)}>{data.name}</InputField>
+                {/* <span style={{ marginLeft: '10px', color: '#7A869A' }}>{data.idissues.length} issues</span> */}
+                <span style={{ position: 'absolute', top: '27px', left: '103px', color: '#7A869A' }}>{data.datecreate}</span>
                 {/* <InputField sprint={(data,name) => this.updateName(data, this.props.sprint.name)}>{data.name}</InputField> */}
-                <div className="dropdown" style={{top:'-26px', left:'161px'}}>
+                <div className="dropdown" style={{ top: '-26px', left: '161px' }}>
                   <button
                     type="button"
                     className="btn btn-primary dropdown-toggle"
-                    style={{height:'30px', border:'transparent'}}
+                    style={{ height: '30px', border: 'transparent' }}
                     data-toggle="dropdown"
                   >
                   </button>
@@ -79,20 +79,20 @@ export default class ListSprintDetail extends Component {
                     <span className="dropdown-item">
                       Edit
                     </span>
-                    <span className="dropdown-item" onClick={()=>this.deleteSprint(data._id)}>
+                    <span className="dropdown-item" onClick={() => this.deleteSprint(data._id)}>
                       Delete
                     </span>
-                    <span className="dropdown-item" onClick={()=>this.beginSprint(data._id, this.props.params)}>
+                    <span className="dropdown-item" onClick={() => this.beginSprint(data._id, this.props.params)}>
                       Begin
                     </span>
-                    <span className="dropdown-item" onClick={()=>this.completeSprint(data._id)}>
+                    <span className="dropdown-item" onClick={() => this.completeSprint(data._id)}>
                       Complete
                     </span>
                   </div>
                 </div>
               </li>
               <div className='optionbtn'>
-              {/* <div className={`optionbtn ${!modal ? "" : "custom"}`}> */}
+                {/* <div className={`optionbtn ${!modal ? "" : "custom"}`}> */}
                 <IssueOnSprint
                   issueOnSprint={issueOnSprint}
                   sprint={sprint}
