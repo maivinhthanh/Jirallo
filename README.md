@@ -1,12 +1,10 @@
 # Jirallo
-Application are using for track process step in project 
-You can manage your project and how to work with team, devide work fairly.
-Exchange infomation with your team real time and have knowlege of rule work, and keep track my process
-
-Before you continue, you must be install :
-You have to installed latest of version of Node js
-You have a basic understanding of React js
-You are using Linux, or Windown machine, MAC OS is not currently supprted
-
-After download source code
-You should turn on terminal "npm install" in folder NodeJS, and ReactJS so as install neccessary library for project
+Hướng dẫn cài đặt
+- Tải bộ source code về 
+- Vào thư mục NODEJS
+    + vào cmd của thư mục đó gõ npm install
+    + Trên thư mục có file env.env copy 1 bản đổi tên thành .env
+    + vào cmd của thư mục gõ npm start
+- Vào thư mục REACTJS
+    + vào cmd của thư mục đó gõ npm install
+    +  vào cmd của thư mục gõ npm start
