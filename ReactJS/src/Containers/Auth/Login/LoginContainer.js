@@ -21,11 +21,11 @@ class LoginContainer extends Component {
         redirect: true
       })
     }
-    if(nextProps.errorLogin.type === 'errorToken' && _.isEmpty(nextProps.user) ) {
-    return (
-      swal(`${nextProps.errorLogin.message}`)
-    )
-    }
+    // if(nextProps.errorLogin.type === 'errorToken' && _.isEmpty(nextProps.user) ) {
+    // return (
+    //   swal(`${nextProps.errorLogin.message}`)
+    // )
+    // }
   }
   haveRedirect(){
     if(this.state.redirect === true){

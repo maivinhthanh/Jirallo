@@ -94,11 +94,11 @@ export const updateNameAct = (name, id) => {
     })
   }
 }
-export const completeSprintAct =(id) => {
+export const completeSprintAct = (idSprint, idProject) => {
   return dispatch => {
-    return CallApi(`sprint/completeSprint/${id}`,
+    return CallApi(`sprint/completeSprint/${idProject}`,
     'PUT',
-    {},
+    {idSprint:idSprint},
     'token'
     ).then(respone => {
       console.log(respone)
@@ -107,11 +107,11 @@ export const completeSprintAct =(id) => {
     })
   }
 }
-export const deleteSprint = (id) => {
+export const deleteSprint = (idSprint, idProject) => {
   return dispatch => {
-    return CallApi(`sprint/deleteSprint/${id}`,
+    return CallApi(`sprint/deleteSprint/${idProject}`,
     'PUT',
-    {},
+    {idSprint:idSprint},
     'token'
     ).then(respone => {
       console.log(respone)
