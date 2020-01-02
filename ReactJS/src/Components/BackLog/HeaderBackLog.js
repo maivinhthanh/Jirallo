@@ -8,6 +8,7 @@ import { InputGroup, InputGroupAddon, InputGroupText, Input,
         Modal,ModalBody,ModalHeader,ModalFooter, Button
 }
 from "reactstrap"
+import swal from 'sweetalert2';
 
 class HeaderBackLog extends Component {
   constructor(props) {
@@ -52,6 +53,14 @@ class HeaderBackLog extends Component {
     event.preventDefault();
     console.log(this.props.params)
     this.props.createSprintAct(this.state.nameSprint, this.props.params)
+    this.showToggle()
+    swal.fire({
+      position: 'center-top',
+      icon: 'success',
+      title: 'create sprint success',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
   render() {
     const {active, keyseach} = this.state

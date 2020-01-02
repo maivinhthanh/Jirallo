@@ -779,3 +779,22 @@ p.movetxt {
   padding: 10px;
   border-bottom: 1px solid #caa;
 }
+/* IssuesLog */
+.bug {
+  width: 15px;
+  height: 15px;
+  background: red;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin-top: 4px;
+  float: left;
+}
+.task {
+  width: 15px;
+  height: 15px;
+  background: green;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin-top: 4px;
+  float: left;
+}

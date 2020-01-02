@@ -60,7 +60,10 @@ export default function IssueAdd(props) {
                             border: '1px solid #ccaa', height: '40px',
                             padding: '5px'}}
                         className={`${!props.modal ? "" : "col-md-12"}`}>
+                            <span>
+                        <span className={`${props.item.type === 'task' ? 'bug' : 'task'}`}></span>
                         {props.item.name}
+                        </span>
                         {/* <div
                             className={`issues ${!props.modal ? "" : "custom"}`}
                             style={{ float: "left", marginLeft: "75px", marginBottom: '15px' }}

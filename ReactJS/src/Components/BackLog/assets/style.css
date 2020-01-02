@@ -90,3 +90,12 @@ button.dropdown-toggle.btn.btn-secondary {
   position: absolute;
   left: 870px;
 }
+.nameIssue {
+  text-align: left;
+}
+.issues {
+  cursor: move;
+  margin-left: 70px;
+  border: 1px solid rgba(204, 204, 170, 0.667);
+  padding: 5px
+}

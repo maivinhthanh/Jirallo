@@ -34,8 +34,8 @@ class ListDetailIssues extends Component {
       if (data._id === item) {
         this.itemFlag = item;
         document
-          .getElementsByClassName("nameIssue")
-        [key].setAttribute("style", "color: red");
+          .getElementsByClassName("issues")
+        [key].setAttribute("style", "background: bisque");
       }
     });
   };
@@ -45,8 +45,8 @@ class ListDetailIssues extends Component {
       if (data._id === item) {
         this.itemFlag = item;
         document
-          .getElementsByClassName("nameIssue")
-        [key].setAttribute("style", "color: black");
+          .getElementsByClassName("issues")
+        [key].setAttribute("style", "background: transparent");
       }
     });
   };
@@ -149,7 +149,7 @@ class ListDetailIssues extends Component {
             </div>
           </div>
           <div className='col-md-12'>
-            <ListIssues params={params} />
+            <ListIssues params={params} issues={issues} />
           </div>
         </div>
         <div className={`${modal ? "col-md-3" : "hidden"}`}>

@@ -46,6 +46,7 @@ function IssuesLog(props) {
         props.parentCallBack(props.modal, idActive);
     }
     return (
+       
         <div
             style={{
                 position: 'relative',
@@ -62,21 +63,19 @@ function IssuesLog(props) {
                     <div ref={drag}
                         style={{
                             opacity: isDragging ? 1 : 1,
-                            cursor: 'move',
-                            marginLeft: '70px',
-                            border: '1px solid rgba(204, 204, 170, 0.667)',
-                            padding: '5px'
                         }}
                         // className={`row issues ${props.modal ? "" : "col-md-12"}` 
                         className="row issues"
                     >
                             <div className="col-md-11">
-                                <div className="nameIssue" style={{textAlign: 'left'}}>
+                                <div className="nameIssue">
+                               
                                     <span onClick={() => showContent(props.item._id)}>
-                                        {props.item.name}
+                                        <span className={`${props.item.type === 'bug' ? 'bug' : 'task'}`}></span>
+                                    {props.item.name}
                                     </span>
                                 </div>
-                            </div>
+                            </div>  
                             <div className="col-md-1" style={{display:'flex'}}>
                                 <i
                                     data-toggle="modal"

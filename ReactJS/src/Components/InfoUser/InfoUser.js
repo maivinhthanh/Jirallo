@@ -8,7 +8,9 @@ import MenuUser from '../MenuUser/Menu'
 import Activities from './Activities'
 import * as actionsAdmin from "../../Store/actions/admin";
 import * as action from "../../Store/actions/auth";
-import swal from 'sweetalert';
+import { Route, Redirect } from 'react-router'
+import swal from 'sweetalert2';
+import { Link } from "react-router-dom"
 
 class InfoUser extends Component {
   constructor(props) {
@@ -53,7 +55,14 @@ class InfoUser extends Component {
   componentWillUpdate(nextProps, preProps){
     // console.log(nextProps, preProps)
     // !_.isEmpty(nextProps.admin[0]) && this.renderUser(nextProps.admin[0])
-    if(this.state.flag) !_.isEqual(nextProps.admin[0], preProps) && swal('Success')
+    if(this.state.flag) !_.isEqual(nextProps.admin[0], preProps) && 
+    swal.fire({
+      position: 'center-top',
+      icon: 'success',
+      title: 'Update user success',
+      showConfirmButton: false,
+      timer: 1500
+    })
 
   }
   // renderUser = (user) => {
@@ -74,21 +83,22 @@ class InfoUser extends Component {
     this.props.EditUserAction(this.activeId, data);
     this.setState({flag: true})
   }
-  delete = () =>{
-    this.setState({
-      name: '',
-      avatar: '',
-      gender: '',
-      birthday: '',
-      clearData: true
-    });
-  }
+  // delete = () =>{
+  //   this.setState({
+  //     name: '',
+  //     avatar: '',
+  //     gender: '',
+  //     birthday: '',
+  //     clearData: true
+  //   });
+  // }
   render() {
       const {admin} = this.props
       _.map(admin, (item) => {
         this.activeId = item._id
       })
       const {clearData} = this.state
+      console.log(this.state.birthday)
       return (
         <div >
             <MenuUser isUserPage={true}/>
@@ -144,13 +154,13 @@ class InfoUser extends Component {
                                     </div>
                                     <div className="row">
                                       <div className="col-6 text-center">
-                                        <button onClick={()=>this.handleSave()} className="btn btn-success">
+                                        <button disabled={this.state.clearData} onClick={()=>this.handleSave()} className="btn btn-success">
                                           Save
                                         </button>
                                       </div>
                                       <div className="col-6 text-center">
-                                        <button onClick={this.delete} className="btn btn-danger">
-                                          Cancel
+                                        <button className="btn btn-danger">
+                                          <Link style={{color: 'white'}} to="/user">Cancel</Link>
                                         </button>
                                       </div>
                                     </div>

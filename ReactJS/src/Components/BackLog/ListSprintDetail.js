@@ -4,6 +4,13 @@ import _ from "lodash";
 import InputField from './../InputEdit/inputField'
 import WrapperDrop from "./WrapperDrop";
 import Process from "../Board/Process";
+import swal from 'sweetalert2';
+import { Input, Modal, ModalBody, ModalHeader, ModalFooter, Button } from "reactstrap"
+import { connect } from "react-redux";
+import * as action from "../../Store/actions/sprint";
+import Calendar from "../BackLog/Calendar";
+
+
 // import Select from 'react-select';
 // export const colourOptions = [
 //   { value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true },
@@ -18,25 +25,34 @@ import Process from "../Board/Process";
 //   { value: 'silver', label: 'Silver', color: '#666666' },
 // ];
 
-export default class ListSprintDetail extends Component {
-  // constructor(props){
-  //   super(props)
-  //   this.state = {
-  //     isDisabled: true,
-  //     isLoading: false,
-  //     isClearable: false,
-  //     isRtl: false,
-  //     isSearchable:true
-  //   }
-  // }
+class ListSprintDetail extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      modal: false,
+      flag: true,
+      nameSprint: '',
+      timeBegin: '',
+      deadline: ''
+
+    }
+    this.idActive = ''
+  }
   deleteSprint(id) {
     const { sprint } = this.props
     _.map(sprint, (item, index) => {
-      if (item._id === id) {
+      if (item._id == id) {
         sprint.splice(index, 1)
       }
     })
     this.props.handleDeleteSprint(id)
+    swal.fire({
+      position: 'center-top',
+      icon: 'success',
+      title: 'Delete sprint success',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
   completeSprint(id) {
     this.props.completeSprintAct(id)
@@ -47,11 +63,42 @@ export default class ListSprintDetail extends Component {
   updateName = (data, id) => {
     this.props.updateNameAct(data, id)
   }
+  showToggle = (id) => {
+    this.setState(preState => ({
+      modal: !preState.modal
+    }))
+    this.idActive = id
+  }
+  handleNameSprint = (e) => {
+    e.preventDefault()
+    this.setState({
+      nameSprint: e.target.value
+    })
+  }
+  settimebegin = (data) => {
+    this.setState({
+      timeBegin : data
+    })
+  }
+  setdealine = (data) => {
+    this.setState({
+      deadline : data
+    })
+  }
+  editSprint = (id) => {
+    const { sprint } = this.props
+    let data = new FormData()
+    data.append('name', this.state.nameSprint)
+    data.append('timebegin', this.state.timeBegin)
+    data.append('deadline', this.state.deadline)
+    this.props.EditSprint(data, this.idActive)
+    this.props.showListSprint(this.props.params)
+    this.showToggle()
+  }
 
   render() {
     const { sprint, user, admin, issues, modal, params, issueOnSprint } = this.props;
-    const { isDisabled, isLoading, isClearable, isRtl, isSearchable } = this.props
-    const x = _.filter(sprint, (item) => item.hidden == false)
+    // const x = _.filter(sprint, (item) => item.hidden == false)
     return (
       <div>
         {!_.isEqual(sprint._id, '') && _.map(sprint, (data, key) => {
@@ -76,7 +123,7 @@ export default class ListSprintDetail extends Component {
                   >
                   </button>
                   <div className="dropdown-menu">
-                    <span className="dropdown-item">
+                    <span className="dropdown-item" onClick={() => this.showToggle(data._id)}>
                       Edit
                     </span>
                     <span className="dropdown-item" onClick={() => this.deleteSprint(data._id)}>
@@ -91,6 +138,34 @@ export default class ListSprintDetail extends Component {
                   </div>
                 </div>
               </li>
+              <div className="modal-create">
+                <Modal
+                  isOpen={this.state.modal}
+                  toggle={this.showToggle}
+                  className={this.props.className}
+                >
+                  <ModalHeader toggle={this.showToggle}>
+                    Edit sprint
+                  </ModalHeader>
+                  <ModalBody>
+                    <label>Name Sprint</label>
+                    <Input type="text" onChange={this.handleNameSprint} value={this.state.nameSprint} name="sprint" id="sprint" placeholder="with name sprint" />
+                    <label>Time begin </label>
+                    <Calendar flag='time' settimebegin={this.settimebegin}/>
+                    <label>Dealine</label>
+                    <Calendar flag = 'dealine' setdealine = {this.setdealine}/>
+                    {/* <Input type="text" onChange={this.handleDealine} value={this.state.deadline} name="deadline" id="deadline" placeholder="with deadline sprint" /> */}
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button type="submit" color="primary" onClick={() => this.editSprint(data._id)}>
+                      Edit
+                  </Button>{" "}
+                    <Button color="secondary" onClick={this.showToggle}>
+                      Cancel
+                  </Button>
+                  </ModalFooter>
+                </Modal>
+              </div>
               <div className='optionbtn'>
                 {/* <div className={`optionbtn ${!modal ? "" : "custom"}`}> */}
                 <IssueOnSprint
@@ -116,4 +191,16 @@ export default class ListSprintDetail extends Component {
     );
   }
 }
+const mapDispatchToProps = dispatch => {
+  return {
+    EditSprint: (data, id) => dispatch(action.EditSprint(data, id)),
+    showListSprint:(id) => dispatch(action.showListSprintAct(id))
+  }
+}
+const mapStateToProps = state => {
+  return {
+    sprint: state.sprint
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ListSprintDetail)
 

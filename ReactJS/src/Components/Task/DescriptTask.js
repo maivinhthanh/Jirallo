@@ -134,7 +134,6 @@ export default class DescriptTask extends Component {
                       <DropdownItem onClick={() => this.remove(data._id)}>
                         Remove
                       </DropdownItem>
-                      <DropdownItem>Clone</DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>
                 </div>

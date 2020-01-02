@@ -10,6 +10,7 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import * as actions from "../../Store/actions/issues";
+import _ from 'lodash'
 var swal = require("sweetalert2")
 
 class ListIssues extends Component {
@@ -17,7 +18,7 @@ class ListIssues extends Component {
     super(props);
     this.state = {
       nameIssues: "",
-      typeIssues:"",
+      typeIssues: "bug",
       modalIssues: false,
       activeTab: "1"
     };
@@ -45,7 +46,7 @@ class ListIssues extends Component {
       nameIssues: e.target.value
     });
   }
-  handleTypeIssues(e){
+  handleTypeIssues(e) {
     e.preventDefault();
     this.setState({
       typeIssues: e.target.value
@@ -53,26 +54,35 @@ class ListIssues extends Component {
   }
   createIssues(e) {
     e.preventDefault();
-    const {nameIssues, typeIssues} = this.state
-    this.props.createIssuesAct(this.props.params, nameIssues, typeIssues);
-    swal.fire({
-      position: 'center-center',
-      icon: 'success',
-      title: 'Create issue success',
-      showConfirmButton: false,
-      timer: 1500
-    })
-    this.showToggleIssues()
-    this.setState({
-      nameIssues: '',
-      typeIssues: ''
-    })
+    const { nameIssues, typeIssues } = this.state
+    let filter = _.filter(this.props.issues, (item, index) => item.name === nameIssues)
+    if (filter.length !== 0) {
+      swal.fire({
+        title: 'Do not enter the same name',
+      })
+    }
+    else {
+      this.props.createIssuesAct(this.props.params, nameIssues, typeIssues);
+      swal.fire({
+        position: 'center-center',
+        icon: 'success',
+        title: 'Create issue success',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      this.showToggleIssues()
+      this.setState({
+        nameIssues: '',
+      })
+    }
   }
   render() {
-    const {modalIssues} = this.state
+    const { modalIssues, typeIssues } = this.state
+    console.log(typeIssues)
+    console.log(this.props.issues)
     return (
       <div>
-        <div className="issues-task" style={{position:'absolute', bottom:'-60px', left:'43px'}}>
+        <div className="issues-task" style={{ position: 'absolute', color: 'white', bottom: '-60px', left: '43px', backgroundColor: '#6A8DCD' }}>
           <Button
             data-toggle="collapse"
             data-target="#demo3"
@@ -94,27 +104,27 @@ class ListIssues extends Component {
               </ModalHeader>
               <ModalBody>
                 <Form >
-                <label name="name">Name Issue</label>
-                <Input
-                  type="text"
-                  onChange={this.handleNameIssues}
-                  value={this.state.nameIssues}
-                  style={{ marginBottom: "10px" }}
-                  name="issue"
-                  id="issue"
-                  placeholder="with name issue"
-                />
-                <label name="tyoe">Type</label>
-                <Input
-                  type="select"
-                  name="selectMulti"
-                  id="exampleSelectMulti"
-                  value={this.state.typeIssues}
-                  onChange={this.handleTypeIssues}
-                >
-                  <option value="bug">Bug</option>
-                  <option value="task">Task</option>
-                </Input>
+                  <label name="name">Name Issue</label>
+                  <Input
+                    type="text"
+                    onChange={this.handleNameIssues}
+                    value={this.state.nameIssues}
+                    style={{ marginBottom: "10px" }}
+                    name="issue"
+                    id="issue"
+                    placeholder="with name issue"
+                  />
+                  <label name="tyoe">Type</label>
+                  <Input
+                    type="select"
+                    name="selectMulti"
+                    id="exampleSelectMulti"
+                    value={this.state.typeIssues}
+                    onChange={this.handleTypeIssues}
+                  >
+                    <option value="bug">Bug</option>
+                    <option value="task">Task</option>
+                  </Input>
                 </Form>
               </ModalBody>
               <ModalFooter>
@@ -139,7 +149,7 @@ class ListIssues extends Component {
 const mapStateToProps = state => {
   return {
     project: state.project,
-    issues : state.issue
+    issues: state.issue
   };
 };
 const mapDispatchToProps = dispatch => {
