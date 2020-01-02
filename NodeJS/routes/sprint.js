@@ -38,7 +38,7 @@ router.put('/completeSprint/:idproject',upload.single('avatar'),isAuth,
     [], 
     sprintController.completeSprint,
 )
-router.put('/deleteSprint/:idsprint',upload.single('avatar'),isAuth, 
+router.put('/deleteSprint/:idproject',upload.single('avatar'),isAuth, 
     [], 
     sprintController.deleteSprint,
 )

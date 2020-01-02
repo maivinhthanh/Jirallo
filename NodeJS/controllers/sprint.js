@@ -209,7 +209,8 @@ exports.completeSprint = async (req, res, next) => {
 }
 exports.deleteSprint = async (req, res, next) => {
     try{
-        const idsprint = req.params.idsprint
+        const idproject = req.params.idproject
+        const idsprint = req.body.idsprint
 
         const newsprint = {
             hidden: true,
@@ -217,6 +218,10 @@ exports.deleteSprint = async (req, res, next) => {
         } 
         await Sprint.findByIdAndUpdate(idsprint, newsprint)
 
+        await Project.findByIdAndUpdate(idproject, {
+            activesprint: null
+        })
+        
         const action = new Activities({
             action: 'deleteSprint',
             content: 'sprint/deleteSprint/' + idsprint,

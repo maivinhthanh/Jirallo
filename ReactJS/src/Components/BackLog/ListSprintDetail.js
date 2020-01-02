@@ -126,13 +126,13 @@ class ListSprintDetail extends Component {
                     <span className="dropdown-item" onClick={() => this.showToggle(data._id)}>
                       Edit
                     </span>
-                    <span className="dropdown-item" onClick={() => this.deleteSprint(data._id)}>
+                    <span className="dropdown-item" onClick={() => this.deleteSprint(data._id, this.props.params)}>
                       Delete
                     </span>
                     <span className="dropdown-item" onClick={() => this.beginSprint(data._id, this.props.params)}>
                       Begin
                     </span>
-                    <span className="dropdown-item" onClick={() => this.completeSprint(data._id)}>
+                    <span className="dropdown-item" onClick={() => this.completeSprint(data._id,  this.props.params)}>
                       Complete
                     </span>
                   </div>
