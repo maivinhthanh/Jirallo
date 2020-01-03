@@ -197,13 +197,15 @@ exports.viewListIssuesInBackLog = async (req, res, next) => {
             issues = await Issues.find({
                 $or: [ { "idsprint":{$exists:false} }, { "idsprint": [] } ] ,
                 idproject: idproject,
-                assignee: iduser
+                assignee: iduser,
+                hidden: false
             })
         }
         else{
             issues = await Issues.find({
                 $or: [ { "idsprint":{$exists:false} }, { "idsprint": [] } ] ,
-                idproject: idproject
+                idproject: idproject,
+                hidden: false
             })
         }
 
