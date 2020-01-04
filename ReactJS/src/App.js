@@ -47,7 +47,7 @@ class App extends Component {
         <div className="App">
           {/* <MenuUser/> */}
             <PrivateRoute path="/" isAuth={isAuth} exact component={HomePage} />
-            <PrivateRoute path="/user" isAuth={isAuth} component={UserPage} />
+            <PrivateRoute path="/user" isAuth={isAuth} component={HomePage} />
             <PrivateRoute path="/backlog/:id?" isAuth={isAuth} component={BacklogPage} />
             <PrivateRoute path="/Profile/:id?" isAuth={isAuth} component={ProfileProject} />
             <PrivateRoute path="/active/:id?" isAuth={isAuth} component={BoardPage} />

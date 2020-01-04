@@ -30,7 +30,7 @@ export default function Issues({ name }) {
                   <div className="col-4">
                     {
                       name.type === 'task'  
-                        ?<i className="fas fa-circle"></i>
+                        ?<i className="fas fa-tasks"></i>
                         :<i className="fas fa-bug"></i>
                     }
                   </div>

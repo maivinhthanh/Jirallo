@@ -65,7 +65,7 @@ exports.editSprint = async (req, res, next) => {
             deadline: deadline,
             dateedit: Date.now(),
         } 
-        const sprint = await Sprint.findByIdAndUpdate(idsprint, newsprint)
+        const sprint = await Sprint.findByIdAndUpdate(idsprint, newsprint, { new: true })
 
         const action = new Activities({
             action: 'editSprint',
