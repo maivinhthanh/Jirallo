@@ -40,29 +40,34 @@ export default function IssueAdd(props) {
         }),
     })
     return (
-       
+
         <div style={{
             position: 'relative',
             width: '100%',
             height: '100%',
-            padding: '7px 0px', }}>
-           
+            padding: '7px 0px',
+        }}>
+
             <div ref={drop} style={{ position: 'relative', width: '100%', height: '100%', }} >
                 <div style={{
                     backgroundColor: fill, width: '100%',
-                    height: '100%', }} >
+                    height: '100%',
+                }} >
                     <div
                         ref={drag}
                         style={{
                             opacity: isDragging ? 1 : 1,
-                            fontSize: 20,
+                            fontSize: '1rem',
                             cursor: 'move',
                             border: '1px solid #ccaa', height: '40px',
-                            padding: '5px'}}
+                            padding: '5px'
+                        }}
                         className={`${!props.modal ? "" : "col-md-12"}`}>
-                            <span>
-                        <span className={`${props.item.type === 'task' ? 'bug' : 'task'}`}></span>
-                        {props.item.name}
+                        <span>
+                            <span className="mr-2">
+                                {props.item.type === 'bug' ? <i class="fas fa-bug" style={{ color: 'red' }}></i> : <i class="fas fa-tasks" style={{ color: 'green' }}></i>}
+                            </span>
+                            {props.item.name}
                         </span>
                         {/* <div
                             className={`issues ${!props.modal ? "" : "custom"}`}

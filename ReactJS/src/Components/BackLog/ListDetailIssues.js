@@ -19,14 +19,15 @@ class ListDetailIssues extends Component {
       status: false,
       loadData: false,
       highlightItems: [],
-      conditionLoadIssue: true
+      conditionLoadIssue: true,
+      sprintActive: []
     };
     this.idActive = "";
     this.itemACtive = [];
     this.itemFlag = "";
     this.idIssue = "";
     this.dataTranfer = false;
-    this.dataBefore = []
+    this.dataBefore = [];
   }
   AddFlagIssueAct = item => {
     const { issues } = this.props;
@@ -53,11 +54,19 @@ class ListDetailIssues extends Component {
   getIdIssue = idIssue => {
     this.idIssue = idIssue;
   };
-  componentWillMount() {
-    this.props.showListSprint(this.props.params);
+  async componentWillMount() {
+    await this.props.showListSprint(this.props.params);
     this.props.showListIssueInBackLog(this.props.params);
    // this.props.showListIssue(this.props.params)
   }
+  // componentDidUpdate(preProps, preState){
+  // //  !_.isEqual(preProps.sprint, this.props.sprint) && 
+  // if(this.props.sprint._id !== ''){
+  //   if (preProps.sprint !== this.props.sprint) {
+  //     this.props.s
+  // }
+  // }
+  // }
   dataAssignee = (data) => {
     this.props.findUserLikeId(data.assignee)
   }
@@ -89,7 +98,7 @@ class ListDetailIssues extends Component {
 
   render() {
     const { issues, sprint, user, admin, params, listuser, issueOnSprint } = this.props;
-    const { modal, status, loadData } = this.state;
+    const { modal, status, loadData, sprintActive } = this.state;
     return (
       <div className="row">
        <div className={`${modal ? "col-md-9" : "col-md-12"}`}>

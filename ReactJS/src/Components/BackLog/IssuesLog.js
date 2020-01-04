@@ -71,7 +71,10 @@ function IssuesLog(props) {
                                 <div className="nameIssue">
                                
                                     <span onClick={() => showContent(props.item._id)}>
-                                        <span className={`${props.item.type === 'bug' ? 'bug' : 'task'}`}></span>
+                                        {/* <span className={`${props.item.type === 'bug' ? 'bug' : 'task'}`}></span> */}
+                                        <span className="mr-2">
+                                        {props.item.type === 'bug' ? <i class="fas fa-bug" style={{color: 'red'}}></i> : <i class="fas fa-tasks"style={{color: 'green'}}></i>}
+                                        </span>
                                     {props.item.name}
                                     </span>
                                 </div>

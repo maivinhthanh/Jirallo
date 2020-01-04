@@ -64,10 +64,22 @@ class ListSprintDetail extends Component {
     this.props.updateNameAct(data, id)
   }
   showToggle = (id) => {
+    const {sprint} = this.props
     this.setState(preState => ({
       modal: !preState.modal
     }))
     this.idActive = id
+    _.map(sprint, (item, index) => {
+      console.log(item)
+      if (item._id === id) {
+        console.log(item)
+        this.setState({
+          nameSprint: item.name,
+          beginSprint: item.begin,
+          deadline: item.deadline
+        })
+      }
+    })
   }
   handleNameSprint = (e) => {
     e.preventDefault()
@@ -99,6 +111,8 @@ class ListSprintDetail extends Component {
   render() {
     const { sprint, user, admin, issues, modal, params, issueOnSprint } = this.props;
     // const x = _.filter(sprint, (item) => item.hidden == false)
+    console.log(this.props.sprint)
+    
     return (
       <div>
         {!_.isEqual(sprint._id, '') && _.map(sprint, (data, key) => {
