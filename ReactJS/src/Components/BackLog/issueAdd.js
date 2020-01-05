@@ -22,6 +22,7 @@ export default function IssueAdd(props) {
         }),
     })
     let item = props.item[1]
+    let modal = true
     const fill = props.white ? 'white' : 'white'
     const [{ isOver }, drop] = useDrop({
         accept: 'issue',
@@ -39,6 +40,10 @@ export default function IssueAdd(props) {
             isOver: !!monitor.isOver(),
         }),
     })
+    const showInfomation = (id) => {
+        modal = true
+        props.showInfomationIssue(id, modal)
+    }
     return (
 
         <div style={{
@@ -63,7 +68,7 @@ export default function IssueAdd(props) {
                             padding: '5px'
                         }}
                         className={`${!props.modal ? "" : "col-md-12"}`}>
-                        <span>
+                        <span onClick={()=> showInfomation(props.item._id)}>
                             <span className="mr-2">
                                 {props.item.type === 'bug' ? <i class="fas fa-bug" style={{ color: 'red' }}></i> : <i class="fas fa-tasks" style={{ color: 'green' }}></i>}
                             </span>

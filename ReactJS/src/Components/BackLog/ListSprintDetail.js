@@ -78,7 +78,6 @@ class ListSprintDetail extends Component {
     }))
     this.idActive = id
     _.map(sprint, (item, index) => {
-      console.log(item)
       if (item._id === id) {
         this.setState({
           nameSprint: item.name,
@@ -119,7 +118,6 @@ class ListSprintDetail extends Component {
     const { sprint, user, admin, issues, modal, params, issueOnSprint } = this.props;
     // const x = _.filter(sprint, (item) => item.hidden == false)
     const {timeBegin,deadline} = this.state
-    console.log(timeBegin, deadline)
     return (
       <div>
         {!_.isEqual(sprint._id, '') && _.map(sprint, (data, key) => {
