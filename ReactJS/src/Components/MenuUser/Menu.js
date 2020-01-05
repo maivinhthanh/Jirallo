@@ -24,7 +24,7 @@ class MenuUser extends Component {
         }
         else{
             if(!user.image){
-                this.convertImage(user.name)
+                this.convertImage(user.name.charAt(0))
             }
         }
         
@@ -46,9 +46,9 @@ class MenuUser extends Component {
     convertImage = (data) =>{
         let tCtx = this.canvas.current.getContext('2d')
         // let imageElem = this.image.current
-        tCtx.canvas.width = 150;
+        tCtx.canvas.width = 50;
         tCtx.font = "40px serif";
-        tCtx.strokeText(data, 5, 80);
+        tCtx.strokeText(data, 13, 80);
         
         // imageElem.src = tCtx.canvas.toDataURL();
     }
