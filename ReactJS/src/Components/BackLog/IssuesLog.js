@@ -8,10 +8,11 @@ import {
 import _ from 'lodash'
 import { useDrag } from 'react-dnd'
 import { useDrop } from 'react-dnd'
+import UpdateIssue from '../Modal/UpdateIssue'
 function IssuesLog(props) {
     let idIssue = "";
     let itemACtive = [];
-    let idActive = ''
+    let openModal = true
     const [{ isDragging }, drag] = useDrag({
         item: { type: 'issueIn', issue: props.item },
         collect: monitor => ({
@@ -39,14 +40,13 @@ function IssuesLog(props) {
     };
     const RedirectToUpdate = item => {
         itemACtive = item;
-        props.showUpdateIssue()
+        props.showUpdateIssue(itemACtive)
     };
     const showContent = (id) => {
-        idActive = id;
-        props.parentCallBack(props.modal, idActive);
+        props.parentCallBack(props.modal, id);
     }
+    console.log(openModal)
     return (
-       
         <div
             style={{
                 position: 'relative',
@@ -122,6 +122,7 @@ function IssuesLog(props) {
                     />
                 )}
             </div>
+            
         </div>
     );
 }

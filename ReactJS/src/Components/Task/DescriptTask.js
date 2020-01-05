@@ -106,6 +106,9 @@ export default class DescriptTask extends Component {
   updateNameIssue =(data, name) => {
     this.props.updateNameIssue(data, name)
   }
+  closeDescript = () => {
+    this.props.closeDescript()
+  }
   render() {
     const { data } = this.props;
     const { user, admin, listuser } = this.props;
@@ -113,6 +116,10 @@ export default class DescriptTask extends Component {
     return (
       <div className="descriptWork">
         <div className="list-item-right dropdown">
+        <div style={{textAlign:'right'}}>
+        <i class="fas fa-times" onClick={this.closeDescript}></i>
+        </div>
+
           <div>
             <h4 style={{ textAlign: "initial" }}>
               WORKJIRA /
@@ -124,7 +131,7 @@ export default class DescriptTask extends Component {
                     <DropdownToggle className="custom-issue" caret>
                       <i className="icon fas fa-ellipsis-h"></i>
                     </DropdownToggle>
-                    <DropdownMenu>
+                    <DropdownMenu style={{transform: 'translate3d(-97px, -2px, 0px)'}}>
                       <DropdownItem onClick={() => this.AddFlag(data._id)}>
                         Add Flag
                       </DropdownItem>

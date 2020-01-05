@@ -8,11 +8,18 @@ import AddMember from './AddMember'
 import AddProcess from './AddProcess'
 import EditProject from './EditProject'
 import HeaderProject from './HeaderProject'
+import * as action from '../../Store/actions/project'
+import _ from 'lodash'
 
 class ConfigProject extends Component {
-
+    constructor(props){
+        super(props)
+    }
+    componentWillMount() {
+        this.props.getInfoProject(this.props.params)
+    }
   render() {
-    const { params, auth } = this.props
+    const { params, auth, project } = this.props
     
     return (
         <div className="row">
@@ -46,7 +53,12 @@ class ConfigProject extends Component {
                         </ul>
                         <Switch>
                                 <Route exact path={`/config/${params}/edit`} >
-                                    <EditProject params={params} />
+                                    {
+                                    !_.isEqual(project.id, '') &&
+                                    _.map(project, (item,index) => {
+                                       return <EditProject params={params} projectAct={item} />
+                                    })
+                                    }
                                 </Route>
                                 <Route path={`/config/${params}/addmember`} >
                                     <AddMember params={params} />
@@ -67,10 +79,16 @@ class ConfigProject extends Component {
 const mapStateToProps = state => {
   return {
     error: state.error,
+    project: state.project
   };
 };
+const mapDispatchToProps = dispatch => {
+    return {
+        getInfoProject: (id) => dispatch(action.getInfoProject(id)),
+    }
+}
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(ConfigProject)

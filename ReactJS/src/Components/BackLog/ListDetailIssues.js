@@ -22,7 +22,7 @@ class ListDetailIssues extends Component {
       conditionLoadIssue: true,
       sprintActive: []
     };
-    this.idActive = "";
+    this.idActive = ''
     this.itemACtive = [];
     this.itemFlag = "";
     this.idIssue = "";
@@ -56,29 +56,27 @@ class ListDetailIssues extends Component {
   };
   async componentWillMount() {
     await this.props.showListSprint(this.props.params);
-    this.props.showListIssueInBackLog(this.props.params);
+    await this.props.showListIssueInBackLog(this.props.params);
    // this.props.showListIssue(this.props.params)
   }
-  // componentDidUpdate(preProps, preState){
-  // //  !_.isEqual(preProps.sprint, this.props.sprint) && 
-  // if(this.props.sprint._id !== ''){
-  //   if (preProps.sprint !== this.props.sprint) {
-  //     this.props.s
-  // }
-  // }
-  // }
   dataAssignee = (data) => {
     this.props.findUserLikeId(data.assignee)
   }
   callbackFunction = (data, id) => {
     this.setState({
-      modal: !data
+      modal: true
     })
     this.idActive = id
   }
-  showUpdateIssue = () => {
+  showUpdateIssue = (itemEdit) => {
     this.setState({
       status: true
+    })
+    this.itemACtive = itemEdit
+  }
+  closeModal= () => {
+    this.setState({
+      status: false
     })
   }
   LoadData = (idProject, flag) => {
@@ -95,6 +93,11 @@ class ListDetailIssues extends Component {
   loadDataIssue = (idProject) => {
     this.props.showListIssueInBackLog(idProject)
   } 
+  closeDescript =() => {
+    this.setState({
+      modal: false
+    })
+  }
 
   render() {
     const { issues, sprint, user, admin, params, listuser, issueOnSprint } = this.props;
@@ -102,6 +105,7 @@ class ListDetailIssues extends Component {
     return (
       <div className="row">
        <div className={`${modal ? "col-md-9" : "col-md-12"}`}>
+       {/* <div className='col-md-9'> */}
           <div className="row">
             <div className="col-md-12">
               <div
@@ -152,6 +156,7 @@ class ListDetailIssues extends Component {
                     EditIssuesAct={this.props.EditIssuesAct}
                     params={this.itemACtive._id}
                     data={this.itemACtive}
+                    closeModal = {this.closeModal}
                   />
                 )}
               </div>
@@ -162,6 +167,7 @@ class ListDetailIssues extends Component {
           </div>
         </div>
         <div className={`${modal ? "col-md-3" : "hidden"}`}>
+        {/* <div className='col-md-3'> */}
           {_.map(_.compact(issues), (item, key) => {
             if (item._id === this.idActive) {
               return (
@@ -183,6 +189,7 @@ class ListDetailIssues extends Component {
                   dataAssignee={this.dataAssignee}
                   updateNameIssue={this.props.updateNameIssue}
                   getListUserInProject={this.props.getListUserInProject}
+                  closeDescript = {this.closeDescript}
                 />
               );
             }

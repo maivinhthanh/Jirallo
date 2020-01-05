@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css';
 
-class Calendar extends Component {
+class CalendarDeadline extends Component {
     constructor(props) {
         super(props);
         this.state = {
           openSchedule: false,
           status: false,
-          dates : this.props.timeBegin 
+          dates : this.props.deadline
         };
       }
       toggleSchedule = () => {
@@ -16,21 +16,17 @@ class Calendar extends Component {
           openSchedule: !this.state.openSchedule,
         })
       }
-      setdate = async(data) => {
+      setdate = async (data) => {
         const {flag} = this.props
         await this.setState({
           dates: data
         })
-        this.props.settimebegin(this.state.dates)
-        // await this.setState({
-        //   dates: data
-        // })
-        // if (flag === 'time') {
-        //     this.props.settimebegin(this.state.dates)
-        // }
-        // else {
-        //     this.props.setdealine(this.state.dates)
-        // }
+        if (flag === 'time') {
+            this.props.settimebegin(this.state.dates)
+        }
+        else {
+            this.props.setdealine(this.state.dates)
+        }
         this.toggleSchedule()
       }
     render() {
@@ -67,4 +63,4 @@ class Calendar extends Component {
     }
 }
 
-export default Calendar;
+export default CalendarDeadline;

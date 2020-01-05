@@ -9,6 +9,7 @@ import { Input, Modal, ModalBody, ModalHeader, ModalFooter, Button } from "react
 import { connect } from "react-redux";
 import * as action from "../../Store/actions/sprint";
 import Calendar from "../BackLog/Calendar";
+import CalendarDeadline from "../BackLog/CalendarDeadline";
 
 
 // import Select from 'react-select';
@@ -63,6 +64,13 @@ class ListSprintDetail extends Component {
   updateName = (data, id) => {
     this.props.updateNameAct(data, id)
   }
+  formatDay =(timestamp) => {
+    var date = new Date(timestamp);
+    var month = date.getMonth()+1;
+    var year = date.getFullYear();
+    var day = date.getDate();
+    return year+'-'+month+'-'+day;
+}
   showToggle = (id) => {
     const {sprint} = this.props
     this.setState(preState => ({
@@ -72,12 +80,11 @@ class ListSprintDetail extends Component {
     _.map(sprint, (item, index) => {
       console.log(item)
       if (item._id === id) {
-        console.log(item)
         this.setState({
           nameSprint: item.name,
-          beginSprint: item.begin,
-          deadline: item.deadline
-        })
+          timeBegin:  item.hasOwnProperty('timebegin') ? item.timebegin.slice(0,10) : 'not value',
+          deadline: item.hasOwnProperty('deadline') ? item.deadline.slice(0,10) : 'not value'
+        })  
       }
     })
   }
@@ -89,12 +96,12 @@ class ListSprintDetail extends Component {
   }
   settimebegin = (data) => {
     this.setState({
-      timeBegin : data
+      timeBegin : this.formatDay(data)
     })
   }
   setdealine = (data) => {
     this.setState({
-      deadline : data
+      deadline : this.formatDay(data)
     })
   }
   editSprint = (id) => {
@@ -111,8 +118,8 @@ class ListSprintDetail extends Component {
   render() {
     const { sprint, user, admin, issues, modal, params, issueOnSprint } = this.props;
     // const x = _.filter(sprint, (item) => item.hidden == false)
-    console.log(this.props.sprint)
-    
+    const {timeBegin,deadline} = this.state
+    console.log(timeBegin, deadline)
     return (
       <div>
         {!_.isEqual(sprint._id, '') && _.map(sprint, (data, key) => {
@@ -123,20 +130,8 @@ class ListSprintDetail extends Component {
               key={key}
             >
               <li style={{ marginLeft: "-27px" }}>
-                <i className="fas fa-ellipsis-h setting-addsprint" style={{ color: 'black', marginRight: '10px' }}></i>
-                <InputField nameInput={'sprint'} sprint={sprint} newdata={(item, name) => this.updateName(item, data._id)}>{data.name}</InputField>
-                {/* <span style={{ marginLeft: '10px', color: '#7A869A' }}>{data.idissues.length} issues</span> */}
-                <span style={{ position: 'absolute', top: '27px', left: '103px', color: '#7A869A' }}>{data.datecreate}</span>
-                {/* <InputField sprint={(data,name) => this.updateName(data, this.props.sprint.name)}>{data.name}</InputField> */}
-                <div className="dropdown" style={{ top: '-26px', left: '161px' }}>
-                  <button
-                    type="button"
-                    className="btn btn-primary dropdown-toggle"
-                    style={{ height: '30px', border: 'transparent' }}
-                    data-toggle="dropdown"
-                  >
-                  </button>
-                  <div className="dropdown-menu">
+                <i className="fas fa-ellipsis-h setting-addsprint" data-toggle="dropdown" style={{ color: 'black', marginRight: '10px' }}></i>
+                <div className="dropdown-menu">
                     <span className="dropdown-item" onClick={() => this.showToggle(data._id)}>
                       Edit
                     </span>
@@ -149,7 +144,24 @@ class ListSprintDetail extends Component {
                     <span className="dropdown-item" onClick={() => this.completeSprint(data._id,  this.props.params)}>
                       Complete
                     </span>
-                  </div>
+                  </div>  
+                <InputField nameInput={'sprint'} sprint={sprint} newdata={(item, name) => this.updateName(item, data._id)}>{data.name}</InputField>
+                {/* <span style={{ marginLeft: '10px', color: '#7A869A' }}>{data.idissues.length} issues</span> */}
+                <span style={{ position: 'absolute', top: '27px', left: '45px', color: '#7A869A' }}>
+                  {
+                    data.hasOwnProperty('datecreate') ? data.datecreate.slice(0,10) : ''
+                  }
+                  </span>
+                <div className="dropdown" style={{ top: '-26px', left: '161px' }}>
+                {/* <i class="fas fa-angle-double-down icon-toggle" data-toggle="dropdown"></i> */}
+                  {/* <button
+                    type="button"
+                    className="btn btn-primary dropdown-toggle"
+                    style={{ height: '30px', border: 'transparent' }}
+                    data-toggle="dropdown"
+                  >
+                  </button> */}
+                
                 </div>
               </li>
               <div className="modal-create">
@@ -165,9 +177,9 @@ class ListSprintDetail extends Component {
                     <label>Name Sprint</label>
                     <Input type="text" onChange={this.handleNameSprint} value={this.state.nameSprint} name="sprint" id="sprint" placeholder="with name sprint" />
                     <label>Time begin </label>
-                    <Calendar flag='time' settimebegin={this.settimebegin}/>
+                    <Calendar flag='time' timeBegin={timeBegin} settimebegin={this.settimebegin}/>
                     <label>Dealine</label>
-                    <Calendar flag = 'dealine' setdealine = {this.setdealine}/>
+                    <CalendarDeadline flag = 'dealine' deadline={deadline} setdealine = {this.setdealine}/>
                     {/* <Input type="text" onChange={this.handleDealine} value={this.state.deadline} name="deadline" id="deadline" placeholder="with deadline sprint" /> */}
                   </ModalBody>
                   <ModalFooter>

@@ -65,9 +65,11 @@ class IssueInBackLog extends Component {
                     sprint={this.props.sprint}
                     parentCallBack={this.parentCallBack}
                     AddIssueIntoSprint={this.AddIssueIntoSprint}
+                    showUpdateIssue={this.props.showUpdateIssue}
                     />
                 )
             })}
+          
             {/* </WrapperDrop> */}
         </div>
 

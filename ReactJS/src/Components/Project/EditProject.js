@@ -12,18 +12,14 @@ class EditProject extends Component {
             valueEmail: '',
             status: false,
             selected: 'developer',
-            name: '',
-            datecreate: '',
-            dateedit: '',
-            description: '',
-            image: ''
+            name: this.props.projectAct.name,
+            datecreate: this.props.projectAct.datecreate,
+            dateedit: this.props.projectAct.hasOwnProperty('dateedit') ? this.props.projectAct.dateedit.slice(0,10) : 'Not value',
+            description: this.props.projectAct.description || 'Not value',
+            image: this.props.projectAct.image 
         }
         this.handleChangename = this.handleChangename.bind(this)
     }
-    componentWillMount() {
-        this.props.getInfoProject(this.props.params)
-    }
-    
     // shouldComponentUpdate(nextProps, nextState) {
     //     // return this.props.project != nextProps.project
     //     console.log(nextProps, nextState)
@@ -62,7 +58,6 @@ class EditProject extends Component {
     }
     render() {
         const { params, project } = this.props
-        
         return (
             <div>
                 <form>
@@ -119,7 +114,6 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        getInfoProject: (id) => dispatch(action.getInfoProject(id)),
         EditProject: (id, project) => dispatch(action.EditProject(id, project))
     }
 }

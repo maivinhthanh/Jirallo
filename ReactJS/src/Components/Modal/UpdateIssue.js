@@ -68,6 +68,9 @@ class UpdateIssue extends Component {
       priority: e.target.value
     });
   }
+  // componentDidUpdate(nextProps){
+  //   !_.isEqual(nextProps.data, this.props.data) && console.log('asds')
+  // }
   handleSave(e) {
     e.preventDefault();
     let data = new FormData()
@@ -108,7 +111,7 @@ class UpdateIssue extends Component {
             <div className="modal-dialog">
               <div className="modal-content">
                 {/* Modal Header */}
-                <div className="modal-header">
+                <div className="modal-header" >
                   <h4 className="modal-title">Update Issues</h4>
                   <button type="button" className="close" data-dismiss="modal">
                     ×
@@ -203,11 +206,12 @@ class UpdateIssue extends Component {
                         />
                       </FormGroup>
                       <div className="modal-footer">
-                        <button type="submit" className="btn btn-success">
+                        <button id='save' type="submit" className="btn btn-success">
                           Save
                         </button>
                         <button
                           type="submit"
+                          id='btn-close-modal'
                           className="btn btn-danger"
                           data-dismiss="modal"
                         >
