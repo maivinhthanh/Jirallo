@@ -38,12 +38,9 @@ class MenuLog extends Component {
     };
     this.toggle = this.toggle.bind(this);
     this.showToggle = this.showToggle.bind(this);
-    // this.handleIdProject = this.handleIdProject.bind(this);
-    // this.handleNameEpic = this.handleNameEpic.bind(this);
     this.createEpic = this.createEpic.bind(this);
     this.showToggleEpic = this.showToggleEpic.bind(this);
-    // this.showListIssueOfEpic = this.showListIssueOfEpic.bind(this);
-    this.handleNameEpicEdit = this.handleNameEpicEdit.bind(this);
+    this.handleNameEpic = this.handleNameEpic.bind(this);
     this.activeItem = null;
   }
   createEpic(e) {
@@ -86,14 +83,13 @@ class MenuLog extends Component {
   //   this.props.EditepicAct(this.state.nameEpic, this.activeItem);
   //   this.showToggleEpic();
   // }
-  handleNameEpicEdit(e) {
+  handleNameEpic(e) {
     e.preventDefault();
     this.setState({
       nameEpic: e.target.value
     });
   }
   updateNameEpic = (name, id) => {
-    // console.log(name, id)
     this.props.updateNameEpic(name,id)
   }
   render() {
@@ -182,7 +178,7 @@ class MenuLog extends Component {
                 >
                   Toggle
                 </Button>
-                <UncontrolledCollapse toggler="#toggler1" style={{width:'100%'}}>
+                {/* <UncontrolledCollapse toggler="#toggler1" style={{width:'100%'}}>
                   <Card>
                     <CardBody>
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -191,7 +187,7 @@ class MenuLog extends Component {
                       hic, iste sed dignissimos esse fuga! Minus, alias.
                     </CardBody>
                   </Card>
-                </UncontrolledCollapse>
+                </UncontrolledCollapse> */}
               </React.Fragment>
               {/* <div> */}
                 {/* <Button

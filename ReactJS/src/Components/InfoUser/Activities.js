@@ -20,12 +20,10 @@ class Activities extends Component {
         this.props.getAllActivities(1)
     }
     shouldComponentUpdate(nextProp, nextState){
-        console.log(nextProp.activities.activities,this.props.activities.activities )
         return nextProp.activities.activities !== this.props.activities.activities
     }
     onChangePage = (pageOfItems) => {
         this.setState({ pageOfItems: pageOfItems });
-        console.log(pageOfItems)
         this.props.getAllActivities(pageOfItems)
     }
     render() {
@@ -36,7 +34,6 @@ class Activities extends Component {
             this.exampleItems = _.range(1, this.props.activities.totalpages * 5 + 1).map(i => { return { id: i, name: 'Item ' + i }; });
         }
         const {activities} = this.props
-        console.log(this.exampleItems)
         return (
             <div className="container">
                 {

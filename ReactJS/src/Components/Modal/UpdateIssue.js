@@ -16,7 +16,7 @@ class UpdateIssue extends Component {
       descript: this.props.data.descript,
       tag: this.props.data.tag,
     };
-    this.handleAvatar = this.handleAvatar.bind(this);
+    // this.handleAvatar = this.handleAvatar.bind(this);
     this.handlePriority = this.handlePriority.bind(this);
     this.handleName = this.handleName.bind(this);
     this.handleType = this.handleType.bind(this);
@@ -38,12 +38,12 @@ class UpdateIssue extends Component {
       process: e.target.value
     })
   }
-  handleAvatar(e) {
-    e.preventDefault();
-    this.setState({
-      avatar: e.target.files[0]
-    });
-  }
+  // handleAvatar(e) {
+  //   e.preventDefault();
+  //   this.setState({
+  //     avatar: e.target.files[0]
+  //   });
+  // }
   handleType(e) {
     e.preventDefault();
     this.setState({
@@ -74,7 +74,7 @@ class UpdateIssue extends Component {
   handleSave(e) {
     e.preventDefault();
     let data = new FormData()
-    data.append('image',this.state.avatar)
+    // data.append('image',this.state.avatar)
     data.append('name',this.state.name)
     data.append('type',this.state.type)
     data.append('priority',this.state.priority)
@@ -193,18 +193,15 @@ class UpdateIssue extends Component {
                           placeholder="descript placeholder"
                         />
                       </FormGroup>
-                      <FormGroup>
+                      {/* <FormGroup>
                         <Label for="text">Avatar</Label>
                         <Input
                           type="file"
                           name="text"
                           id="avatar"
                           onChange={this.handleAvatar}
-                          // value={this.state.avatar}
-                          // required
-                          // placeholder="avatar placeholder"
                         />
-                      </FormGroup>
+                      </FormGroup> */}
                       <div className="modal-footer">
                         <button id='save' type="submit" className="btn btn-success">
                           Save

@@ -45,7 +45,7 @@ class IssueInBackLog extends Component {
     AddIssueIntoSprint = async(idIssue, id) => {
         const {params} = this.props
         await this.props.AddIssueIntoSprint(idIssue, id)
-        await this.props.ViewListIssueInSprint(id)
+        await this.props.ViewListIssueInSprint(idIssue)
         this.props.loadDataIssue(params)
         // this.props.load(params)
     }

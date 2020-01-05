@@ -82,7 +82,7 @@ class ListIssues extends Component {
     console.log(this.props.issues)
     return (
       <div>
-        <div className="issues-task" style={{ position: 'absolute', color: 'white', bottom: '-60px', left: '43px', backgroundColor: '#6A8DCD' }}>
+        <div className="issues-task" style={{ position: 'absolute', color: 'white', bottom: '-60px', left: '43px', border: '1px solid black'}}>
           <Button
             data-toggle="collapse"
             data-target="#demo3"

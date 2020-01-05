@@ -39,23 +39,12 @@ export default class IteamHeader extends Component {
                   <p>ActiveSprint</p>
               </Link>
             </li>
-            {
-              this.state.auth ? (
                 <li>
                   <Link to={{ pathname: `/config/${idproject}` }}>
                       <span className="fas fa-cog"></span>
                       <p>Config</p>
                   </Link>
                 </li>
-              ):null
-            }
-            
-            <li>
-              <a href="#blog">
-                <span className="fa fa-chart-line" />
-                <p>Chart</p>
-              </a>
-            </li>
           </ul>
       </div>
     )

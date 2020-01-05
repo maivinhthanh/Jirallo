@@ -83,7 +83,6 @@ class Pagination extends React.Component {
  
     render() {
         var pager = this.state.pager;
-        console.log(pager.pages, pager.currentPage)
         return (
             <nav aria-label="Page navigation example">
                 <ul className="pagination">

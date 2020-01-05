@@ -804,3 +804,7 @@ p.movetxt {
   transform: rotate(90deg);
   transition-duration: 1s;
 }
+.issues-task:hover{
+  background: rgb(106, 141, 205);
+  transition: 1s;
+}

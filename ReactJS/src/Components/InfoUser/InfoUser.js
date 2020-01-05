@@ -52,19 +52,18 @@ class InfoUser extends Component {
       birthday: data
     });
   }
-  componentWillUpdate(nextProps, preProps){
-    // console.log(nextProps, preProps)
-    // !_.isEmpty(nextProps.admin[0]) && this.renderUser(nextProps.admin[0])
-    if(this.state.flag) !_.isEqual(nextProps.admin[0], preProps) && 
-    swal.fire({
-      position: 'center-top',
-      icon: 'success',
-      title: 'Update user success',
-      showConfirmButton: false,
-      timer: 1500
-    })
-
-  }
+  // componentWillUpdate(nextProps, preProps){
+  //   // console.log(nextProps, preProps)
+  //   // !_.isEmpty(nextProps.admin[0]) && this.renderUser(nextProps.admin[0])
+  //   if(this.state.flag) !_.isEqual(nextProps.admin[0], preProps) && 
+  //   swal.fire({
+  //     position: 'center-top',
+  //     icon: 'success',
+  //     title: 'Update user success',
+  //     showConfirmButton: false,
+  //     timer: 1500
+  //   })
+  // }
   // renderUser = (user) => {
   //   console.log(user)
   //   this.setState({
@@ -82,6 +81,13 @@ class InfoUser extends Component {
     data.append('birthdate',this.state.birthday)
     this.props.EditUserAction(this.activeId, data);
     this.setState({flag: true})
+      swal.fire({
+      position: 'center-top',
+      icon: 'success',
+      title: 'Update user success',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
   // delete = () =>{
   //   this.setState({
