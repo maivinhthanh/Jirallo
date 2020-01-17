@@ -8,16 +8,14 @@ const Activities = require('../models/activities')
 
 exports.createProject = async (req, res, next) => {
     try{
-        const errors = validationResult(req)
-        if (!errors.isEmpty()) {
-            res.status(400).json({
-                message: 'Error',
-            });
-            throw error
-        }
 
         const name = req.body.name
         const iduser = req.userId
+        
+        if(!name){
+            res.status(203).json({ message: 'Not found Name' })
+            return
+        }
 
         const project = new Project({
             name: name,
@@ -45,7 +43,7 @@ exports.createProject = async (req, res, next) => {
 
         await action.save()
 
-        res.status(201).json({ statusCode: 200 ,newproject})
+        res.status(201).json({ newproject})
     }
     catch (error) {
         
@@ -55,13 +53,6 @@ exports.createProject = async (req, res, next) => {
 
 exports.editInfoProject = async (req, res, next) => {
     try{
-        const errors = validationResult(req)
-        if (!errors.isEmpty()) {
-            res.status(404).json({
-                message: 'Error',
-            });
-            throw error
-        }
 
         const idproject = req.params.idproject
         const name = req.body.name
@@ -94,7 +85,7 @@ exports.editInfoProject = async (req, res, next) => {
 
         await action.save()
 
-        res.status(201).json({ statusCode: 200 ,oldproject})
+        res.status(200).json({ oldproject})
     }
     catch(err) {
         
@@ -104,19 +95,12 @@ exports.editInfoProject = async (req, res, next) => {
 
 exports.viewInfoProject = async (req, res, next) => {
     try{
-        const errors = validationResult(req)
-        if (!errors.isEmpty()) {
-            res.status(404).json({
-                message: 'Error',
-            });
-            throw error
-        }
         
         const idproject = req.params.idproject
 
         const project = await Project.findById(idproject)
 
-        res.status(201).json({ statusCode: 200 ,project})
+        res.status(200).json({ project})
     }
     catch(err) {
         
@@ -156,7 +140,7 @@ exports.AddMember = async (req, res, next) => {
 
         await action.save()
 
-        res.status(201).json({ statusCode: 200 ,project})
+        res.status(201).json({ project})
     }
     catch(err) {
         next(err)
@@ -182,7 +166,7 @@ exports.AddProcess = async (req, res, next) => {
 
         await action.save()
 
-        res.status(201).json({ statusCode: 200 ,project: project})
+        res.status(200).json({ project: project})
     }
     catch(err) {
         next(err)
@@ -194,7 +178,7 @@ exports.ViewListProject = async (req, res, next) => {
         const iduser = req.userId
         const user = await User.findById(iduser).populate('idproject')
 
-        res.status(201).json({ statusCode: 200 ,listproject: user.idproject})
+        res.status(200).json({ listproject: user.idproject})
     }
     catch(err) {
         next(err)
@@ -206,7 +190,7 @@ exports.FindProjectByID = async (req, res, next) => {
 
         const project = await Project.findById(idproject)
 
-        res.status(201).json({ statusCode: 200 ,project: project})
+        res.status(200).json({ project: project})
     }
     catch(err) {
         next(err)
@@ -239,7 +223,7 @@ exports.viewListIssuesInProject = async (req, res, next) => {
         }
         
 
-        res.status(201).json({ statusCode: 200 ,project: project.idissues})
+        res.status(200).json({ project: project.idissues})
     }
     catch(err) {
         next(err)
@@ -256,7 +240,7 @@ exports.getListUserInProject = async (req, res, next) => {
             },
         })
 
-        res.status(201).json({ statusCode: 200 ,listuser: project.idmembers})
+        res.status(200).json({ listuser: project.idmembers})
     }
     catch(err) {
         next(err)
@@ -272,7 +256,7 @@ exports.addAndSortIssuesInBackLog = async (req, res, next) => {
                 idissues : listissues
             } ,{new: true})
 
-        res.status(201).json({ statusCode: 200, listissues: project.idissues })
+        res.status(200).json({  listissues: project.idissues })
     }
     catch(err) {
         
@@ -294,7 +278,7 @@ exports.hasAuth = async (req, res, next) => {
         
     })
 
-    res.status(201).json({ statusCode: 200, hasAuth: flag })
+    res.status(200).json({  hasAuth: flag })
 
 }
 exports.getIssuesInSprintActive = async (req, res, next) => {
@@ -328,7 +312,7 @@ exports.getIssuesInSprintActive = async (req, res, next) => {
         }
         
 
-        res.status(201).json({ statusCode: 200 ,idissues: sprint.idissues})
+        res.status(200).json({ idissues: sprint.idissues})
     }
     catch(err) {
         

@@ -18,21 +18,25 @@ const URL_FRONTEND = process.env.URL_FRONTEND || "http://localhost:3000/"
 
 exports.signup = async (req, res, next) => {
     try{
-        const errors = validationResult(req)
-        if (!errors.isEmpty()) {
-            const error = new Error("Validation failed.")
-            error.statusCode = 404
-            error.data = errors.array()
-            res.status(404).json(error)
-            throw error
-        }
 
         const email = req.body.email
-        const name = req.body.name
+        const firstname = req.body.firstname
+        const lastname = req.body.lastname
         const password = req.body.password
         const gender = req.body.gender
         const image = null
-
+        if(!email){
+            res.status(203).json({ message: 'Not found Email' })
+            return
+        }
+        if(!password){
+            res.status(203).json({ message: 'Not found password' })
+            return
+        }
+        if(!firstname){
+            res.status(203).json({ message: 'Not found name' })
+            return
+        }
         if (req.file !== undefined) {
             image = req.file.path
         }
@@ -42,19 +46,18 @@ exports.signup = async (req, res, next) => {
         const user = new User({
             email: email,
             password: hashedPw,
-            name: name,
+            firstname: firstname,
+            lastname: lastname,
+            name: firstname + ' ' + lastname,
             gender: gender,
             image: image
         })
 
         const newuser = await user.save()
-        res.status(201).json({ statusCode: 200, userId: newuser._id })
+        res.status(201).json({  userId: newuser._id })
     }
     catch (error) {
-        if (!error.statusCode) {
-            error.statusCode = 500
-        }
-        res.status(500).json(error)
+        
         next(error)
     }
 }
@@ -62,29 +65,31 @@ exports.signup = async (req, res, next) => {
 exports.login = async (req, res, next) => {
     try{
         
-        const errors = validationResult(req)
-        if (!errors.isEmpty()) {
-            res.status(401).json({
-                message: 'Validation failed..',
-            });
-            throw error
-        }
         const email = req.body.email
         const password = req.body.password
 
+        if(!email){
+            res.status(203).json({ message: 'Not found Email' })
+            return
+        }
+        if(!password){
+            res.status(203).json({ message: 'Not found password' })
+            return
+        }
+
         let loadedUser = await User.findOne({ email: email })
         if (!loadedUser) {
-            res.status(401).json({
+            res.status(203).json({
                 message: 'Not found user',
             });
-            return next()
+            return
         }
         const isEqual = await bcrypt.compare(password, loadedUser.password)
         if (!isEqual) {
-            res.status(401).json({
+            res.status(203).json({
                 message: 'Wrong password!',
             });
-            return 
+            return
         }
         
         const userFakeData = {
@@ -109,7 +114,7 @@ exports.login = async (req, res, next) => {
         await action.save()
 
         res.status(200).json({ token: accessToken, refreshToken: refreshToken, userId: loadedUser._id.toString() })
-        // return next();
+        // return;
     }
     catch (error) {
         
@@ -119,9 +124,8 @@ exports.login = async (req, res, next) => {
 exports.refreshToken = async (req, res, next) => {
     try {
         const refreshTokenFromClient = req.body.refreshToken;
-        console.log(refreshTokenFromClient)
         const checktoken = await Token.findOne({refreshtoken: refreshTokenFromClient})
-        console.log(checktoken)
+
         if (checktoken) {
         
             const decoded = await jwtHelper.verifyToken(refreshTokenFromClient, refreshTokenSecret);
@@ -129,14 +133,15 @@ exports.refreshToken = async (req, res, next) => {
             const userFakeData = decoded.data;
             const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife);
             return res.status(200).json({accessToken});
-        } else {
-        return res.status(403).send({
-            message: 'No token provided.',
-        });
+        } 
+        else {
+            return res.status(203).json({
+                message: 'No token provided.',
+            });
         }
     }
     catch (error) {
-        res.status(403).json({
+        res.status(401).json({
             message: 'Invalid refresh token.',
         });
     }
@@ -162,12 +167,12 @@ exports.logout = async (req, res, next) => {
 
         return res.status(200).json({accessToken});
       } catch (error) {
-        res.status(403).json({
+        res.status(203).json({
           message: 'Invalid refresh token.',
         });
       }
     } else {
-      return res.status(403).send({
+      return res.status(401).send({
         message: 'No token provided.',
       });
     }
@@ -175,22 +180,15 @@ exports.logout = async (req, res, next) => {
   
 exports.findUser = async (req, res, next) => {
     try{
-        const errors = validationResult(req)
-        if (!errors.isEmpty()) {
-            res.status(404).json({
-                message: 'Validation failed',
-            });
-            throw error
-        }
-
+        
         const email = req.body.email
 
         const user = await User.findOne({ email: email })
         if (!user) {
-            res.status(404).json({
+            res.status(203).json({
                 message: 'Not Found user',
             });
-            throw error
+            return
         }
 
         res.status(200).json({ user: user })
@@ -202,14 +200,7 @@ exports.findUser = async (req, res, next) => {
 }
 exports.editProfile = async (req, res, next) => {
     try{
-        const errors = validationResult(req)
-        if (!errors.isEmpty()) {
-            res.status(404).json({
-                message: 'Error',
-            });
-            throw error
-        }
-
+        
         const iduser = req.params.iduser
         let image = null
         if (req.file !== undefined) {
@@ -241,7 +232,7 @@ exports.editProfile = async (req, res, next) => {
 
         await action.save()
 
-        res.status(200).json({statusCode: 200,result: user})
+        res.status(200).json({result: user})
     }
     catch (error) {
         res.status(500).json({
@@ -252,22 +243,14 @@ exports.editProfile = async (req, res, next) => {
 }
 exports.findUserLikeEmail = async (req, res, next) => {
     try{
-        const errors = validationResult(req)
-        if (!errors.isEmpty()) {
-            res.status(404).json({
-                message: 'Validation failed',
-            });
-            throw error
-        }
+        
         const email = req.body.email
         const listuser = await User.find({ email: { $regex: email } })
         if (!listuser) {
-            const error = new Error("Không tìm thầy user")
-            error.statusCode = 404
-            res.status(404).json(error)
-            throw error
+            res.status(203).json({message: 'Not found user'})
+            return
         }
-        res.status(200).json({statusCode: 200,result: listuser})
+        res.status(200).json({result: listuser})
     }
     catch (error) {
         
@@ -280,7 +263,7 @@ exports.FindUserID = async (req, res, next) => {
 
         const user = await User.findById(iduser)
 
-        res.status(200).json({statusCode: 200,result: user})
+        res.status(200).json({result: user})
     }
     catch (error) {
         
@@ -292,7 +275,7 @@ exports.getMyInfo = async (req, res, next) => {
         const iduser = req.userId
         const user = await User.findById(iduser).select('email _id name image avatar')
 
-        res.status(200).json({statusCode: 200,result: user})
+        res.status(200).json({result: user})
     }
     catch (error) {
         
@@ -303,7 +286,7 @@ exports.getListUser = async (req, res, next) => {
     try{
         const user = await User.find({})
 
-        res.status(200).json({statusCode: 200,result: user})
+        res.status(200).json({result: user})
     }
     catch (error) {
         

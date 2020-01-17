@@ -8,14 +8,6 @@ const Activities = require('../models/activities')
 
 exports.createIssues = async (req, res, next) => {
     try{
-        const errors = validationResult(req)
-        if (!errors.isEmpty()) {
-            const error = new Error("Validation failed.")
-            error.statusCode = 404
-            error.data = errors.array()
-            res.status(404).json(error)
-            throw error
-        }
 
         const name = req.body.name
         const type = req.body.type ? req.body.type : 'task'
@@ -25,6 +17,11 @@ exports.createIssues = async (req, res, next) => {
         const idproject = req.body.idproject
         const iduser = req.userId
 
+        if(!name){
+            res.status(203).json({ message: 'Not found Name' })
+            return
+        }
+        
         const issues = new Issues({
             name: name,
             type: type,
@@ -53,7 +50,7 @@ exports.createIssues = async (req, res, next) => {
 
         await action.save()
 
-        res.status(201).json({ statusCode: 200 ,newissues})
+        res.status(201).json({ newissues})
     }
     catch (error) {
         
@@ -64,14 +61,6 @@ exports.createIssues = async (req, res, next) => {
 
 exports.createIssuesInSprint = async (req, res, next) => {
     try{
-        const errors = validationResult(req)
-        if (!errors.isEmpty()) {
-            const error = new Error("Validation failed.")
-            error.statusCode = 404
-            error.data = errors.array()
-            res.status(404).json(error)
-            throw error
-        }
 
         const name = req.body.name
         const type = req.body.type ? req.body.type : 'task'
@@ -117,7 +106,7 @@ exports.createIssuesInSprint = async (req, res, next) => {
 
         await action.save()
 
-        res.status(201).json({ statusCode: 200 ,newissues})
+        res.status(201).json({ newissues})
     }
     catch (error) {
         
@@ -164,7 +153,7 @@ exports.editIssues = async (req, res, next) => {
 
         newissues = {...newissues, id: idissues}
 
-        res.status(201).json({ statusCode: 200 ,newissues})
+        res.status(201).json({ newissues})
     }
     catch(err) {
         
@@ -178,7 +167,7 @@ exports.viewListIssues = async (req, res, next) => {
 
         const project = await Project.findById(idproject).populate('idissues')
 
-        res.status(201).json({ statusCode: 200 ,listissues: project.idissues})
+        res.status(201).json({ listissues: project.idissues})
     }
     catch(err) {
         
@@ -209,7 +198,7 @@ exports.viewListIssuesInBackLog = async (req, res, next) => {
             })
         }
 
-        res.status(201).json({ statusCode: 200 ,listissues: issues})
+        res.status(201).json({ listissues: issues})
     }
     catch(err) {
         
@@ -248,7 +237,7 @@ exports.assignforUser = async (req, res, next) => {
 
         await action.save()
 
-        res.status(201).json({ statusCode: 200 ,data:dataupdate})
+        res.status(201).json({ data:dataupdate})
 
     }
     catch(err) {
@@ -284,7 +273,7 @@ exports.addIssueIntoSprint = async (req, res, next) => {
 
         await action.save()
 
-        res.status(201).json({ statusCode: 200, listissues: sprint.idissues })
+        res.status(201).json({  listissues: sprint.idissues })
 
     }
     catch(err) {
@@ -315,7 +304,7 @@ exports.changeProcessIssues = async (req, res, next) => {
       
         await action.save()
 
-        res.status(201).json({ statusCode: 200 ,issues:issues})
+        res.status(201).json({ issues:issues})
 
     }
     catch(err) {
@@ -364,7 +353,7 @@ exports.getInfoIssues = async (req, res, next) => {
             select:['idproject','name', 'avatar', 'image']
         })
 
-        res.status(201).json({ statusCode: 200 ,issues:issues})
+        res.status(201).json({ issues:issues})
 
     }
     catch(err) {

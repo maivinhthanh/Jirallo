@@ -10,7 +10,7 @@ const isAuth = require('../middleware/AuthMiddleware')
 const upload = require('./uploadfile')
 
 router.get('/getAllActivities/:page',upload.single('avatar'),isAuth,
-    [], 
+    
     activitiesController.getAllActivities,
 )
 module.exports = router

@@ -26,9 +26,16 @@ const userSchema = new Schema({
     oldpassword: {
         type: String
     },
+    firstname: {
+        type: String,
+        required: true
+    },
     name: {
         type: String,
         required: true
+    },
+    lastname: {
+        type: String,
     },
     avatar:{
         type: String,

@@ -7,16 +7,14 @@ const Activities = require('../models/activities')
 
 exports.createEpic = async (req, res, next) => {
     try{
-        const errors = validationResult(req)
-        if (!errors.isEmpty()) {
-            res.status(400).json({
-                message: 'Error',
-            });
-            throw error
-        }
-
+        
         const name = req.body.name
         const idproject = req.body.idproject
+        
+        if(!name){
+            res.status(203).json({ message: 'Not found Name' })
+            return
+        }
 
         const epic = new Epic({
             name: name,
@@ -39,7 +37,7 @@ exports.createEpic = async (req, res, next) => {
 
         await action.save()
 
-        res.status(201).json({ statusCode: 200 ,newepic})
+        res.status(201).json({ newepic})
     }
     catch (error) {
         
@@ -70,7 +68,7 @@ exports.editEpic = async (req, res, next) => {
 
         await action.save()
 
-        res.status(201).json({ statusCode: 200 ,epic})
+        res.status(201).json({ epic})
     }
     catch(err) {
         
@@ -89,7 +87,7 @@ exports.viewListEpic = async (req, res, next) => {
             }
         })
 
-        res.status(201).json({ statusCode: 200 ,listepic: project.idepic})
+        res.status(201).json({ listepic: project.idepic})
     }
     catch(err) {
         
@@ -108,7 +106,7 @@ exports.viewListIssuesInEpic = async (req, res, next) => {
             }
         })
 
-        res.status(201).json({ statusCode: 200 ,listissues: epic.idissues})
+        res.status(201).json({ listissues: epic.idissues})
     }
     catch(err) {
         

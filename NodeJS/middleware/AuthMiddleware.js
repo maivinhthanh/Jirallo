@@ -12,12 +12,12 @@ module.exports = async (req, res, next) => {
       req.userId = decoded.data.userId
       next();
     } catch (error) {
-      return res.status(401).json({
+      return res.status(203).json({
         message: 'Unauthorized.',
       });
     }
   } else {
-    return res.status(403).send({
+    return res.status(203).send({
       message: 'No token provided.',
     });
   }

@@ -10,17 +10,11 @@ const isAuth = require('../middleware/AuthMiddleware')
 const upload = require('./uploadfile')
 
 router.post('/createEpic',upload.single('avatar'),isAuth,
-    [
-        body('name')
-        .trim()
-        .not()
-        .isEmpty(),
-        body('idproject')
-    ], 
+   
     epicController.createEpic,
 )
 router.put('/editEpic/:idepic',upload.single('avatar'),isAuth, 
-    [], 
+    
     epicController.editEpic,
 )
 router.get('/viewListEpic/:idproject',isAuth,

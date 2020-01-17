@@ -11,21 +11,15 @@ const isManager = require('../middleware/is-Manager')
 const upload = require('./uploadfile')
 
 router.post('/createSprint',upload.single('avatar'),isAuth,
-    [
-        body('name')
-        .trim()
-        .not()
-        .isEmpty(),
-        body('idproject')
-    ], 
+    
     sprintController.createSprint,
 )
 router.put('/editSprint/:idsprint',upload.single('avatar'),isAuth, 
-    [], 
+    
     sprintController.editSprint,
 )
 router.put('/beginsprint/:idproject',upload.single('avatar'),isAuth, isManager,
-    [], 
+    
     sprintController.beginsprint,
 )
 router.post('/viewListSprint/:idproject',isAuth,
@@ -35,15 +29,15 @@ router.get('/viewListIssuesInSprint/:idsprint',isAuth,
     sprintController.viewListIssuesInSprint,
 )
 router.put('/completeSprint/:idproject',upload.single('avatar'),isAuth, 
-    [], 
+    
     sprintController.completeSprint,
 )
 router.put('/deleteSprint/:idproject',upload.single('avatar'),isAuth, 
-    [], 
+    
     sprintController.deleteSprint,
 )
 router.put('/addAndSortIssuesInSprint/:idsprint',upload.single('avatar'),isAuth, 
-    [], 
+    
     sprintController.addAndSortIssuesInSprint,
 )
 module.exports = router

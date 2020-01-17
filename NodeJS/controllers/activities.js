@@ -11,14 +11,11 @@ exports.getAllActivities = async (req, res, next) => {
         .skip((perPage * page) - perPage)
         .limit(perPage)
         
-        res.status(201).json({ statusCode: 200, activities: activities, 
+        res.status(200).json({  activities: activities, 
             current: !page ? '1': page, totalpages: Math.ceil(count / perPage)})
     }
     catch (error) {
-        if (!error.statusCode) {
-            error.statusCode = 500
-        }
-        res.status(500).json(error)
+        
         next(error)
     }
 }

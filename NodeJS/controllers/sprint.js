@@ -8,18 +8,15 @@ const Activities = require('../models/activities')
 
 exports.createSprint = async (req, res, next) => {
     try{
-        const errors = validationResult(req)
-        if (!errors.isEmpty()) {
-            const error = new Error("Validation failed.")
-            error.statusCode = 404
-            error.data = errors.array()
-            res.status(404).json(error)
-            throw error
-        }
 
         const name = req.body.name
         const idproject = req.body.idproject
 
+        if(!name){
+            res.status(203).json({ message: 'Not found Name' })
+            return
+        }
+        
         const sprint = new Sprint({
             name: name,
         })
@@ -41,13 +38,10 @@ exports.createSprint = async (req, res, next) => {
 
         await action.save()
 
-        res.status(201).json({ statusCode: 200 ,newsprint})
+        res.status(201).json({ newsprint})
     }
     catch (error) {
-        if (!error.statusCode) {
-            error.statusCode = 500
-        }
-        res.status(500).json(error)
+        
         next(error)
     }
     
@@ -77,7 +71,7 @@ exports.editSprint = async (req, res, next) => {
 
         await action.save()
 
-        res.status(201).json({ statusCode: 200 ,newsprint})
+        res.status(201).json({ newsprint})
     }
     catch(err) {
         
@@ -109,7 +103,7 @@ exports.viewListSprint = async (req, res, next) => {
             })
         }
 
-        res.status(201).json({ statusCode: 200 ,listsprint: project.idsprint})
+        res.status(201).json({ listsprint: project.idsprint})
     }
     catch(err) {
         
@@ -135,12 +129,12 @@ exports.beginsprint = async (req, res, next) => {
                 activesprint: idsprint
             })
 
-            res.status(201).json({ statusCode: 200 ,newsprint})
+            res.status(201).json({ newsprint})
         }
         else{
-            res.status(201).json({ statusCode: 400 ,data: {
-                msg: "Sprint haven't complete"
-            }})
+            res.status(203).json({ 
+                message: "Sprint haven't complete"
+            })
         }
 
         const action = new Activities({
@@ -200,7 +194,7 @@ exports.completeSprint = async (req, res, next) => {
 
         await action.save()
 
-        res.status(201).json({ statusCode: 200 ,newsprint})
+        res.status(200).json({ newsprint})
     }
     catch(err) {
         
@@ -230,7 +224,7 @@ exports.deleteSprint = async (req, res, next) => {
 
         await action.save()
 
-        res.status(201).json({ statusCode: 200 })
+        res.status(200).json({ statusCode: 200 })
     }
     catch(err) {
         
@@ -248,7 +242,7 @@ exports.viewListIssuesInSprint = async (req, res, next) => {
             }
         })
 
-        res.status(201).json({ statusCode: 200, listissues: sprint.idissues })
+        res.status(200).json({  listissues: sprint.idissues })
     }
     catch(err) {
         
@@ -271,7 +265,7 @@ exports.addAndSortIssuesInSprint = async (req, res, next) => {
         await Issuses.findByIdAndUpdate(newissues, {
             $push: { idsprint : idsprint }
         })
-        res.status(201).json({ statusCode: 200, listissues: sprint.idissues })
+        res.status(200).json({  listissues: sprint.idissues })
     }
     catch(err) {
         

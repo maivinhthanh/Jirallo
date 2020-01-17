@@ -11,16 +11,11 @@ const isManager = require('../middleware/is-Manager')
 const upload = require('./uploadfile')
 
 router.post('/createProject',upload.single('avatar'),isAuth,
-    [
-        body('name')
-        .trim()
-        .not()
-        .isEmpty()
-    ], 
+    
     projectController.createProject,
 )
 router.put('/editInfoProject/:idproject',upload.single('avatar'),isAuth,  isManager,
-    [], 
+    
     projectController.editInfoProject,
 )
 router.get('/viewInfoProject/:idproject',isAuth,
@@ -30,15 +25,15 @@ router.get('/ViewListProject/',isAuth,
     projectController.ViewListProject,
 )
 router.put('/AddMember/:idproject',upload.single('avatar'),isAuth, isManager,
-    [], 
+    
     projectController.AddMember,
 )
 router.put('/AddProcess/:idproject',upload.single('avatar'),isAuth, isManager,
-    [], 
+    
     projectController.AddProcess,
 )
 router.put('/addAndSortIssuesInBackLog/:idproject',upload.single('avatar'),isAuth,
-    [], 
+    
     projectController.addAndSortIssuesInBackLog,
 )
 router.get('/viewListProject',isAuth,
