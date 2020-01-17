@@ -31,8 +31,12 @@ export const RegisterAction = (email,password, firstname, lastname, gender) =>{
                     dispatch(Notification.hideNotification())
                 }, 5000)
             }
-        }).catch(error => {
+        })
+        .catch(error =>{
             dispatch(Notification.ErrorAPI(error));
-        });
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
     }
 }

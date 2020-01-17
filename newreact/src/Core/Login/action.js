@@ -16,7 +16,8 @@ export const loginAction = (email, password) => {
         return CallApi('auth/login', 'POST',{
                 email: email,
                 password: password
-            }).then( response => {
+            })
+            .then( response => {
                 if(response.status === 200){
                     dispatch(login(response.data));
                 }
@@ -27,9 +28,12 @@ export const loginAction = (email, password) => {
                     }, 5000)
                 }
             })
-            .catch(error => {
+            .catch(error =>{
                 dispatch(Notification.ErrorAPI(error));
-            });
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            })
     };
 };
 export const loginByFacebookAction = (data) => {
@@ -40,12 +44,24 @@ export const loginByFacebookAction = (data) => {
             // image: data.picture.data.url,
             email: data.email,
             name: data.name
-          }).then( response => {
-            dispatch(login(response));
-         } )
-         .catch(error => {
-             console.log(error);
-         } );
+        })
+        .then( response => {
+            if(response.status === 200){
+                dispatch(login(response.data));
+            }
+            else {
+                dispatch(Notification.Error(response.data));
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+         .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
     };
 };
 export const loginByGoogleAction = (data) => {
@@ -55,11 +71,23 @@ export const loginByGoogleAction = (data) => {
             image: data.imageUrl,
             email: data.email,
             name: data.name
-          }).then( response => {
-            dispatch(login(response));
-         } )
-         .catch(error => {
-             console.log(error);
-         } );
+        })
+        .then( response => {
+            if(response.status === 200){
+                dispatch(login(response.data));
+            }
+            else {
+                dispatch(Notification.Error(response.data));
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
     };
 };

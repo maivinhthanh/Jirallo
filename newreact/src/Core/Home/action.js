@@ -20,8 +20,11 @@ export const logout = () =>{
             Cookies.remove('refreshtoken');
             dispatch(LogOut(response.data))
         })
-        .catch(err =>{
-           console.log(err)
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
         })
     }
 }
