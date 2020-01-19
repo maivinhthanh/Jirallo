@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
-import ListProject from './ListProject/ListProject'
+// import ListProject from './ListProject/ListProject'
 import MenuUser from '../Core/Home/Menu'
+import Header from './Header/HeaderContainer'
 
 class ListProjectPage extends Component {
   
@@ -10,7 +11,8 @@ class ListProjectPage extends Component {
       return (
         <div >
           <MenuUser/>
-          <ListProject />
+          <Header />
+          {/* <ListProject /> */}
         </div>
       )
     

@@ -15,7 +15,7 @@ import HomePage from '../Home/HomePage'
 // import InfoUserPage from './Page/InfoUserPage';
 // import ProfileProject from './Page/ProfileProject'
 import HTML5Backend from 'react-dnd-html5-backend'
-// import ListProjectPage from './Page/ListProjectPage'
+import ListProject from '../../ListProject/Page'
 // import IssuesPage from './Page/IssuesPage'
 // import ConfigProjectPage from './Page/ConfigProjectPage'
 import PrivateRoute from '../../PrivateRoute'
@@ -44,6 +44,7 @@ class App extends Component {
           refreshtoken : jwtDecode(Cookies.get('refreshtoken'))
         }
         isAuth = 1000 * token.refreshtoken.exp > (new Date()).getTime()
+        console.log(isAuth )
       }
     }
     return (
@@ -58,7 +59,7 @@ class App extends Component {
             {/* <PrivateRoute path='/group' isAuth={isAuth} component={Group} /> */}
             {/* <PrivateRoute path="/admin" isAuth={isAuth} component={AdminPage} /> */}
             {/* <PrivateRoute path="/infouser/:id" isAuth={isAuth} component={InfoUserPage} /> */}
-            {/* <PrivateRoute path="/viewAll" isAuth={isAuth} component={ListProjectPage} /> */}
+            <PrivateRoute path="/viewAll" isAuth={isAuth} component={ListProject} />
             {/* <PrivateRoute path="/adminPage" isAuth={isAuth} component={MainPage} /> */}
             {/* <PrivateRoute path="/issues/:idproject/:idissues" isAuth={isAuth} component={IssuesPage} /> */}
             {/* <PrivateRoute path="/config/:id?" isAuth={isAuth} component={ConfigProjectPage} /> */}

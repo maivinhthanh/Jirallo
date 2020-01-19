@@ -25,7 +25,6 @@ const initialState = {
 };
 
 const login = ( state, action ) => {
-    console.log("ko biết có vào đây ko?")
     const token = action.token
     const refreshtoken = action.refreshtoken
     Cookies.set('token', token, { expires: 365 });
