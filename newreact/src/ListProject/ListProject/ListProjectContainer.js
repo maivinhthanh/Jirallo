@@ -6,12 +6,14 @@ import ListProjectUI from './ListProjectUI'
 import * as action from './action'
 
 class ListProjectContainer extends Component {
-  
+  componentWillMount(){
+    this.props.ViewListProject()
+  }
   render() {
 
       return (
         <div >
-          <ListProjectUI />
+          <ListProjectUI listproject={this.props.listproject}  />
         </div>
       )
     
@@ -21,12 +23,14 @@ class ListProjectContainer extends Component {
 const mapStateToProps = (state) => {
     return {
       note: state.note,
-      auth: state.auth
+      auth: state.auth,
+      listproject: state.listproject
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
+      ViewListProject: () => dispatch( action.ViewListProject() ),
     }
 }
 

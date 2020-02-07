@@ -58,6 +58,12 @@ const userSchema = new Schema({
             ref: 'Project'
         }
     ],
+    idgroup:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Group',
+        }
+    ],
     hidden:{ type: Boolean, default: false },
     datecreate: { type: Date, default: Date.now },
     dateedit: { type: Date }

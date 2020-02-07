@@ -12,7 +12,7 @@ import HomePage from '../Home/HomePage'
 // import AdminPage from './Page/AdminPage';
 // import Group from './Components/Group/Group';
 // import BacklogPage from './Page/BacklogPage';
-// import InfoUserPage from './Page/InfoUserPage';
+import InfoUser from '../../InfoUser/Page';
 // import ProfileProject from './Page/ProfileProject'
 import HTML5Backend from 'react-dnd-html5-backend'
 import ListProject from '../../ListProject/Page'
@@ -58,7 +58,7 @@ class App extends Component {
             {/* <PrivateRoute path="/active/:id?" isAuth={isAuth} component={BoardPage} /> */}
             {/* <PrivateRoute path='/group' isAuth={isAuth} component={Group} /> */}
             {/* <PrivateRoute path="/admin" isAuth={isAuth} component={AdminPage} /> */}
-            {/* <PrivateRoute path="/infouser/:id" isAuth={isAuth} component={InfoUserPage} /> */}
+            <PrivateRoute path="/infouser/:id" isAuth={isAuth} component={InfoUser} />
             <PrivateRoute path="/viewAll" isAuth={isAuth} component={ListProject} />
             {/* <PrivateRoute path="/adminPage" isAuth={isAuth} component={MainPage} /> */}
             {/* <PrivateRoute path="/issues/:idproject/:idissues" isAuth={isAuth} component={IssuesPage} /> */}

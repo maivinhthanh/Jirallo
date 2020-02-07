@@ -177,7 +177,7 @@ exports.ViewListProject = async (req, res, next) => {
 
         const iduser = req.userId
         const user = await User.findById(iduser).populate('idproject')
-
+        
         res.status(200).json({ listproject: user.idproject})
     }
     catch(err) {
