@@ -12,12 +12,12 @@ import MenuUser from '../Core/Home/Menu'
 import * as action from './action'
 
 class InfoUserContainer extends Component {
-  show = (isAuth)=>{
+  show = (isAuth, id)=>{
     if(!isAuth){
       return(
         <Grid>
             <Paper style={{height: '60px'}} />
-            <InfoUserUI/>
+            <InfoUserUI iduser={id}/>
         </Grid>
         
       )
@@ -26,7 +26,7 @@ class InfoUserContainer extends Component {
       return (
         <Grid>
             <Paper style={{height: '60px'}} />
-            <InfoMeUI/>
+            <InfoMeUI iduser={id}/>
         </Grid>
       )
     }
@@ -46,7 +46,7 @@ class InfoUserContainer extends Component {
           <MenuUser/>
           
           {
-            this.show(isAuth)
+            this.show(isAuth, params.id)
           }
         </div>
       )

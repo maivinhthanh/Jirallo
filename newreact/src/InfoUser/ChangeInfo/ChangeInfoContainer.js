@@ -6,12 +6,15 @@ import UI from './ChangeInfoUI'
 import * as action from './action'
 
 class ChangeInfoContainer extends Component {
-  
+  componentWillMount(){
+    const { iduser } = this.props
+    this.props.GetInfoUser(iduser)
+  }
   render() {
 
       return (
         <div >
-          <UI infouser={this.props.infouser}/>
+          <UI iduser={this.props.iduser} infouser={this.props.infouser} ChangeInfoUser={this.props.ChangeInfoUser}/>
         </div>
       )
     
@@ -28,6 +31,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
+      GetInfoUser: id => dispatch(action.GetInfoUser(id)),
+      ChangeInfoUser: (id, data) => dispatch(action.ChangeInfoUser(id, data)),
     }
 }
 

@@ -208,7 +208,9 @@ exports.editProfile = async (req, res, next) => {
         }
 
         const dataUpdate = {
-            name: req.body.name,
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            name: req.body.firstname + ' ' + req.body.lastname,
             image: image,
             birthdate: req.body.birthdate,
             gender: req.body.gender,
