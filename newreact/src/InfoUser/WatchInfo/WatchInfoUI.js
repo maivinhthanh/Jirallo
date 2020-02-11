@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import DatePicker from '../../Components/DatePicker'
 
-class ChangeInfoUI extends Component {
+class WatchInfoUI extends Component {
   constructor(props) {
     super(props);  
     this.state = {
@@ -30,31 +30,7 @@ class ChangeInfoUI extends Component {
       });
     }
   }
-  handleChange = (event)=>{
-    console.log(event.target.name)
-    // event.preventDefault();
-    this.setState({
-      [event.target.name] : event.target.value
-    })
-  }
-  changedate = (date)=>{
-    console.log(date._d)
-    this.setState({
-      birthdate : date._d
-    })
-  }
-  ChangeInfoUser = () =>{
-    const data = {
-            gender : this.state.gender,
-            avatar: this.state.avatar,
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            birthdate: Date.parse(this.state.birthdate.toString())
-    }
-    console.log(this.state.birthdate)
-    console.log(data)
-    this.props.ChangeInfoUser(this.props.iduser,data)
-  }
+  
   render() {
       const { iduser } = this.props
 
@@ -65,21 +41,21 @@ class ChangeInfoUI extends Component {
               <p>First Name</p>
             </Grid>
             <Grid justify="center" item xs={12} sm={8}>
-              <TextField name="firstname" fullWidth value={this.state.firstname} onChange={this.handleChange}/>
+              <TextField disabled name="firstname" fullWidth value={this.state.firstname} />
             </Grid>
             <Grid item xs={12} sm={8}>
               <p>Last Name</p>
             </Grid>
             <Grid justify="center" item xs={12} sm={8}>
-              <TextField name="lastname" fullWidth value={this.state.lastname} onChange={this.handleChange}/>
+              <TextField disabled name="lastname" fullWidth value={this.state.lastname} />
             </Grid>
             <Grid item xs={12} sm={8}>
               <p>Gender</p>
             </Grid>
             <Grid justify="center" item xs={12} sm={8}>
-              <Select fullWidth
+              <Select disabled fullWidth
                 value={this.state.gender}
-                onChange={this.handleChange}
+                
               >
                 <MenuItem value={'male'}>Male</MenuItem>
                 <MenuItem value={'female'}>Female</MenuItem>
@@ -92,14 +68,7 @@ class ChangeInfoUI extends Component {
               <DatePicker label={""} date={this.state.birthdate} changedate={this.changedate}/>
             </Grid>
             <Grid justify="center" item xs={6} sm={6}>
-            <Button variant="outlined" color="primary" onClick={this.ChangeInfoUser}>
-              Save
-            </Button>
-            </Grid>
-            <Grid justify="center" item xs={6} sm={6}>
-            <Button variant="outlined" color="secondary">
-              Cancel
-            </Button>
+            
             </Grid>
           </Grid>
         </div>
@@ -108,4 +77,4 @@ class ChangeInfoUI extends Component {
   }
 }
 
-export default ChangeInfoUI
+export default WatchInfoUI

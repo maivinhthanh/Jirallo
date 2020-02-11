@@ -8,6 +8,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
+import WatchInfo from './WatchInfo/WatchInfoContainer'
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -44,7 +46,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function FullWidthTabs() {
+export default function FullWidthTabs(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -79,7 +81,7 @@ export default function FullWidthTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          Item One
+          <WatchInfo iduser={props.iduser}/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           Item Two

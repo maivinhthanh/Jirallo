@@ -9,15 +9,17 @@ import Cookies from 'js-cookie'
 import InfoUserUI from './infoUserUI'
 import InfoMeUI from './infoMeUI'
 import MenuUser from '../Core/Home/Menu'
-import * as action from './action'
+import Toast from '../Components/Toast'
 
 class InfoUserContainer extends Component {
   show = (isAuth, id)=>{
     if(!isAuth){
+      
       return(
         <Grid>
             <Paper style={{height: '60px'}} />
             <InfoUserUI iduser={id}/>
+            
         </Grid>
         
       )
@@ -33,6 +35,7 @@ class InfoUserContainer extends Component {
   }
   render() {
     const { match: { params } } = this.props
+    const { note } = this.props
     let isAuth = false
     if (Cookies.get('token') ){
         let token = jwtDecode(Cookies.get('token'))
@@ -44,7 +47,7 @@ class InfoUserContainer extends Component {
       return (
         <div >
           <MenuUser/>
-          
+          <Toast open={note.show} message={note.message} type={note.type} />
           {
             this.show(isAuth, params.id)
           }
