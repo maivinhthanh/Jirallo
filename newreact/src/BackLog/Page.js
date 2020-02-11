@@ -1,18 +1,23 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import Grid from '@material-ui/core/Grid';
 
 import UI from './UI'
+import MenuProject from '../Core/Home/Menu/MenuProject'
 import * as action from './action'
 
-class MenuProjectContainer extends Component {
+class ActiveSprintPage extends Component {
   
   render() {
 
       return (
-        <div >
-          <UI />
-        </div>
+        <Grid container >
+          
+              <MenuProject />
+              <UI/>
+            
+        </Grid>
       )
     
   }
@@ -30,4 +35,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MenuProjectContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(ActiveSprintPage)
