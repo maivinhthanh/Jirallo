@@ -8,7 +8,7 @@ import Cookies from 'js-cookie'
 
 import InfoUserUI from './infoUserUI'
 import InfoMeUI from './infoMeUI'
-import MenuUser from '../Core/Home/Menu'
+import MenuUser from '../Core/Home/Menu/Menu'
 import Toast from '../Components/Toast'
 
 class InfoUserContainer extends Component {

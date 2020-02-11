@@ -7,7 +7,7 @@ import UI from './UI'
 import MenuProject from '../MenuProject/MenuProjectContainer'
 import * as action from './action'
 
-class  extends Component {
+class ActiveSprintPage extends Component {
   
   render() {
 
@@ -35,4 +35,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Container)
+export default connect(mapStateToProps, mapDispatchToProps)(ActiveSprintPage)

@@ -5,7 +5,7 @@ import _ from 'lodash'
 import UI from './UI'
 import * as action from './action'
 
-class  extends Component {
+class MenuProjectContainer extends Component {
   
   render() {
 
@@ -30,4 +30,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Container)
+export default connect(mapStateToProps, mapDispatchToProps)(MenuProjectContainer)

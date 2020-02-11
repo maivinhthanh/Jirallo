@@ -8,7 +8,7 @@ import { DndProvider } from 'react-dnd'
 // import UserPage from './Page/UserPage';
 import HomePage from '../Home/HomePage'
 // import MainPage from './Page/MainPage'
-// import BoardPage from './Page/BoardPage'
+import ActiveSprint from '../../ActiveSprint/Page'
 // import AdminPage from './Page/AdminPage';
 // import Group from './Components/Group/Group';
 // import BacklogPage from './Page/BacklogPage';
@@ -55,7 +55,7 @@ class App extends Component {
             <PrivateRoute path="/user" isAuth={isAuth} component={HomePage} />
             {/* <PrivateRoute path="/backlog/:id?" isAuth={isAuth} component={BacklogPage} /> */}
             {/* <PrivateRoute path="/Profile/:id?" isAuth={isAuth} component={ProfileProject} /> */}
-            {/* <PrivateRoute path="/active/:id?" isAuth={isAuth} component={BoardPage} /> */}
+            <PrivateRoute path="/active/:id?" isAuth={isAuth} component={ActiveSprint} />
             {/* <PrivateRoute path='/group' isAuth={isAuth} component={Group} /> */}
             {/* <PrivateRoute path="/admin" isAuth={isAuth} component={AdminPage} /> */}
             <PrivateRoute path="/infouser/:id" isAuth={isAuth} component={InfoUser} />

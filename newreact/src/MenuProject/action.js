@@ -1,5 +1,5 @@
-import CallApi from '../../until/apiCaller';
-import * as Notification from '../../until/Notification';
+import CallApi from '../until/apiCaller';
+import * as Notification from '../until/Notification';
 
 export const forwarddata = (data) =>{
     return {

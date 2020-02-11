@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import BannerLeft from './Home';
-import MenuUser from './Menu'
+import MenuUser from './Menu/Menu'
 
 class HomePage extends Component {
 
