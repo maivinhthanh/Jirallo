@@ -13,7 +13,7 @@ const updatestate = (state, action) =>{
    return updateObject( state, {id : action.id, error:false},);
 }
 
-const reducer = ( state = initialState, action ) => {
+const listUserReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'ACTION': return updatestate( state, action ); 
         
@@ -21,4 +21,4 @@ const reducer = ( state = initialState, action ) => {
     }
 };
 
-export default reducer;
+export default listUserReducer;

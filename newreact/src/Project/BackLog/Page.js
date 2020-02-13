@@ -4,7 +4,7 @@ import _ from 'lodash'
 import Grid from '@material-ui/core/Grid';
 
 import UI from './UI'
-import MenuProject from '../Core/Home/Menu/MenuProject'
+import MenuProject from '../../Core/Home/Menu/MenuProject'
 import * as action from './action'
 
 class ActiveSprintPage extends Component {

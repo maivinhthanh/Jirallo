@@ -8,7 +8,7 @@ import { DndProvider } from 'react-dnd'
 // import UserPage from './Page/UserPage';
 import HomePage from '../Home/HomePage'
 // import MainPage from './Page/MainPage'
-import ActiveSprint from '../../ActiveSprint/Page'
+import ActiveSprint from '../../Project/ActiveSprint/Page'
 // import AdminPage from './Page/AdminPage';
 // import Group from './Components/Group/Group';
 // import BacklogPage from './Page/BacklogPage';
