@@ -121,7 +121,7 @@ class MenuUser extends Component {
                 <Draggable  {...dragHandlers}>
                     <div > 
                         <MenuUI jwt={jwt}/>
-                        <MenuProjectUI />
+                        <MenuProjectUI idproject={this.props.idproject}/>
                     </div>
                     
                 </Draggable>

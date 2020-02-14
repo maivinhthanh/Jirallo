@@ -14,7 +14,7 @@ class ActiveSprintPage extends Component {
       return (
         <Grid container >
           
-              <MenuProject />
+              <MenuProject idproject={params.id}/>
               <UI/>
             
         </Grid>

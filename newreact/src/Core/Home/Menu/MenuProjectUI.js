@@ -3,14 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import Avatar from '@material-ui/core/Avatar';
 import Icon from '@material-ui/core/Icon';
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
   list: {
@@ -24,7 +21,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function TemporaryDrawer() {
+export default function TemporaryDrawer({idproject}) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -49,22 +46,28 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        <ListItem button >
-          <Icon className="fas fa-stream" />
-          <ListItemText primary={'Backlog'} />
-        </ListItem>
+        <Link to={`/backlog/${idproject}`}>
+          <ListItem button >
+            <Icon className="fas fa-stream" />
+            <ListItemText primary={'Backlog'} />
+          </ListItem>
+        </Link>
       </List>
       <List>
-        <ListItem button >
-          <Icon className="fas fa-columns" />
-          <ListItemText primary={'Active Sprint'} />
-        </ListItem>
+        <Link to={`/active/${idproject}`}>
+          <ListItem button >
+            <Icon className="fas fa-columns" />
+            <ListItemText primary={'Active Sprint'} />
+          </ListItem>
+        </Link>
       </List>
       <List>
-        <ListItem button >
-          <Icon className="fas fa-cog" />
-          <ListItemText primary={'Config'} />
-        </ListItem>
+        <Link to={`/config/${idproject}`}>
+          <ListItem button >
+            <Icon className="fas fa-cog" />
+            <ListItemText primary={'Config'} />
+          </ListItem>
+        </Link>
       </List>
      
     </div>

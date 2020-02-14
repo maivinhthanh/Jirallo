@@ -2,6 +2,8 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
+import BacklogContainer from './Backlog/BacklogContainer'
+
 const useStyles = makeStyles(theme => ({
     root: {
       '& > *': {
@@ -11,13 +13,13 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function UI() {
+export default function UI({idproject}) {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
+        <div>
             <Grid container spacing={0}>
-                
+              <BacklogContainer idproject={idproject} />
             </Grid>
         </div>
     )

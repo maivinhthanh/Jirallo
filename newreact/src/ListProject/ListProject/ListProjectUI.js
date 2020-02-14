@@ -44,7 +44,7 @@ export default function ListProjectUI(listproject, gotoProject) {
         {
           _.map(listproject.listproject, (item, index)=>{
             return (
-              <Grid item cols={3} spacing={3} justify="center" alignItems="center">
+              <Grid item cols={3} key={index}>
                 <Card className={classes.card}>
                   <CardHeader
                     

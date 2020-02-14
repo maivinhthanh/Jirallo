@@ -11,7 +11,7 @@ import HomePage from '../Home/HomePage'
 import ActiveSprint from '../../Project/ActiveSprint/Page'
 // import AdminPage from './Page/AdminPage';
 // import Group from './Components/Group/Group';
-// import BacklogPage from './Page/BacklogPage';
+import Backlog from '../../Project/BackLog/Page';
 import InfoUser from '../../InfoUser/Page';
 // import ProfileProject from './Page/ProfileProject'
 import HTML5Backend from 'react-dnd-html5-backend'
@@ -53,7 +53,7 @@ class App extends Component {
           {/* <MenuUser/> */}
             <PrivateRoute path="/" isAuth={isAuth} exact component={HomePage} />
             <PrivateRoute path="/user" isAuth={isAuth} component={HomePage} />
-            {/* <PrivateRoute path="/backlog/:id?" isAuth={isAuth} component={BacklogPage} /> */}
+            <PrivateRoute path="/backlog/:id?" isAuth={isAuth} component={Backlog} />
             {/* <PrivateRoute path="/Profile/:id?" isAuth={isAuth} component={ProfileProject} /> */}
             <PrivateRoute path="/active/:id?" isAuth={isAuth} component={ActiveSprint} />
             {/* <PrivateRoute path='/group' isAuth={isAuth} component={Group} /> */}
