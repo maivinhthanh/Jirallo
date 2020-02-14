@@ -1,22 +1,24 @@
-import { getissuesinsprintactive } from "./ActiveSprint/ActiveSprint/action";
+import _ from 'lodash'
 
-const updateObject = (oldObject, updatedProperties) => {
-    return {
-        ...oldObject,
-        ...updatedProperties
-    };
+const updateArray = (oldObject, updatedProperties) => {
+    return [...oldObject, ...updatedProperties]
 };
 
 const initialState = []
 
 const getIssuesInSprintActive = (state, action) =>{
-   return updateObject( state, action.data);
+   return updateArray(state,action.data )
 }
-
+const changeProcessIssueInListIssues = (state, action) =>{
+    const index = _.findIndex(state, (item,index)=>item._id === action.data._id)
+    let clone = _.clone(state)
+    clone[index] = action.data
+    return clone
+}
 const listIssuesReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'GET_ISSUES_IN_SPRINT_ACTIVE': return getIssuesInSprintActive( state, action ); 
-        
+        case 'CHANGE_PROCESS_ISSUE': return changeProcessIssueInListIssues( state, action ); 
         default: return state;
     }
 };

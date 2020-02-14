@@ -45,7 +45,37 @@ export const GetIssuesInSprintActive = (id, user) =>{
         ).then (response =>{
             
             if(response.status === 200){
-                dispatch(getinfoproject(response.data.idissues));
+                dispatch(getissuesinsprintactive(response.data.idissues));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
+export const changeprocessissue = (data) =>{
+    return {
+        type:'CHANGE_PROCESS_ISSUE',
+        data: data
+    }
+}
+export const ChangeProcessIssue = (idissues, processes) =>{
+    return dispatch =>{
+        return CallApi(`issues/changeProcessIssues/${idissues}`,'PUT',
+        {process: processes},
+        ).then (response =>{
+            if(response.status === 201){
+                dispatch(changeprocessissue(response.data.issues));
                 
             }
             else {

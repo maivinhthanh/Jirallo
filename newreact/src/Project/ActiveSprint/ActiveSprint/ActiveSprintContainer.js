@@ -11,9 +11,9 @@ class ActiveSprintContainer extends Component {
     this.props.GetIssuesInSprintActive(this.props.idproject, null)
   }
   render() {
-      const { idproject, project, listIssues } = this.props
+      const { idproject, project, listissues, ChangeProcessIssue } = this.props
       return (
-          <UI idproject={idproject} project={project} listIssues={listIssues}/>
+          <UI idproject={idproject} project={project} listissues={listissues} ChangeProcessIssue={ChangeProcessIssue}/>
       )
     
   }
@@ -23,14 +23,15 @@ const mapStateToProps = (state) => {
     return {
       note: state.note,
       project: state.project,
-      listIssues : state.listIssues
+      listissues : state.listissues
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
       GetInfoProject: (id) => dispatch(action.GetInfoProject(id)),
-      GetIssuesInSprintActive: (id, user) => dispatch(action.GetIssuesInSprintActive(id, user))
+      GetIssuesInSprintActive: (id, user) => dispatch(action.GetIssuesInSprintActive(id, user)),
+      ChangeProcessIssue: (id, process) => dispatch(action.ChangeProcessIssue(id, process)),
     }
 }
 

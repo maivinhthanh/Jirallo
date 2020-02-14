@@ -4,6 +4,8 @@ import { useDrag } from 'react-dnd'
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
+import Grid from '@material-ui/core/Grid';
+import Icon from '@material-ui/core/Icon';
 
 export default function Issues({ info }) {
   const [{isDragging}, drag] = useDrag({
@@ -12,7 +14,9 @@ export default function Issues({ info }) {
 			isDragging: !!monitor.isDragging(),
 		}),
   })
+  
   return (
+    
       <div ref={drag}
         style={{
           opacity: isDragging ? 1 : 1,
@@ -24,33 +28,33 @@ export default function Issues({ info }) {
           borderRadius: '12px'
         }}>
           <Card>
-              <CardHeader>{info.name}</CardHeader>
+              <CardHeader title={info.name}></CardHeader>
               <CardContent>
-                <div className="row">
-                  <div className="col-4">
+                <Grid container>
+                  <Grid item xs={4}>
                     {
                       info.type === 'task'  
-                        ?<i className="fas fa-tasks"></i>
-                        :<i className="fas fa-bug"></i>
+                        ?<Icon className="fas fa-tasks" color="primary"></Icon>
+                        :<Icon className="fas fa-bug" color="secondary"></Icon>
                     }
-                  </div>
-                  <div className="col-4">
+                  </Grid>
+                  <Grid item xs={4}>
                   {
                       info.priority == 'highest'  
-                        ?<i className="fas fa-arrow-up" style={{color: 'red'}}></i>: 
+                        ?<Icon className="fas fa-arrow-up" color="secondary"></Icon>: 
                       info.priority == 'high'
-                        ?<i className="fas fa-up" style={{color: 'black'}}></i>:
+                        ?<Icon className="fas fa-up" color="primary"></Icon>:
                       info.priority == 'medium'
-                        ?<i className="fas fa-minus" style={{color: 'black'}}></i>:
+                        ?<Icon className="fas fa-minus" color="primary"></Icon>:
                       info.priority == 'low'
-                        ?<i className="fas fa-arrow-down" style={{color: 'black'}}></i>:
-                        <i className="fas fa-arrow-down" style={{color: 'red'}}></i>
+                        ?<Icon className="fas fa-arrow-down" color="primary"></Icon>:
+                        <Icon className="fas fa-arrow-down" color="secondary"></Icon>
                     }
-                  </div>
-                  <div className="col-4">
-                    <i className="fas fa-tag">{info.tag}</i>
-                  </div>
-                </div>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Icon className="fas fa-tag">{info.tag}</Icon>
+                  </Grid>
+                </Grid>
               </CardContent>
           </Card>
       </div>

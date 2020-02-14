@@ -9,14 +9,13 @@ const initialState = {
     
 };
 
-const updatestate = (state, action) =>{
-   return updateObject( state, {id : action.id, error:false},);
+const changeProcessIssue = (state, action) =>{
+    return updateArray(state,action.data )
 }
 
 const issuesReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case 'ACTION': return updatestate( state, action ); 
-        
+        case 'CHANGE_PROCESS_ISSUE': return changeProcessIssue( state, action ); 
         default: return state;
     }
 };

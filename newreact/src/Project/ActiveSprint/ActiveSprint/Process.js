@@ -8,6 +8,7 @@ export default function Process({ black, process, children, handleChange }) {
   const [{ isOver }, drop] = useDrop({
     accept: 'issues',
     drop: (item) => {
+      console.log(item)
       handleChange(item.id._id, process)
     },
     collect: monitor => ({

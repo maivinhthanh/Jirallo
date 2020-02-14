@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function UI({idproject, project, listIssues}) {
+export default function UI({idproject, project, listissues, ChangeProcessIssue}) {
     const classes = useStyles();
     const numberColumn = 12 / Number.parseInt(project.process.length)
     if(numberColumn < 3){
@@ -32,9 +32,9 @@ export default function UI({idproject, project, listIssues}) {
                 _.map(project.process, (ip, idp) =>{
                   return(
                       <Grid item className={classes.process} xs={numberColumn} key={idp}>
-                        <Process white process={ip} >
+                        <Process white process={ip} handleChange={(id, process) => ChangeProcessIssue(id, process)} >
                             {
-                                _.map(listIssues, (item, index)=>{
+                                _.map(listissues, (item, index)=>{
                                     if(item.process === ip){
                                         return (
                                             <Issues info={item} key={index}/>
