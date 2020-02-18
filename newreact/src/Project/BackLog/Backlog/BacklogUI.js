@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function UI({listsprint}) {
+export default function UI({idproject, listsprint}) {
     const classes = useStyles();
 
     return (
@@ -24,7 +24,7 @@ export default function UI({listsprint}) {
                 _.map(listsprint, (data, index) => {
                     return (
                         <Grid item xs={12} key={index}>
-                          <Sprint white sprint={data}  />
+                          <Sprint idproject={idproject} white  sprint={data}  />
                         </Grid>
                     );
                 })

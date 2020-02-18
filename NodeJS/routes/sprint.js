@@ -25,7 +25,7 @@ router.put('/beginsprint/:idproject',upload.single('avatar'),isAuth, isManager,
 router.post('/viewListSprint/:idproject',isAuth,
     sprintController.viewListSprint,
 )
-router.get('/viewListIssuesInSprint/:idsprint',isAuth,
+router.post('/viewListIssuesInSprint/:idproject',isAuth,
     sprintController.viewListIssuesInSprint,
 )
 router.put('/completeSprint/:idproject',upload.single('avatar'),isAuth, 

@@ -30,7 +30,8 @@ exports.createIssues = async (req, res, next) => {
             tag: tag,
             repoter: iduser,
             watch: [iduser],
-            idproject: idproject
+            idproject: idproject,
+            idsprint: null
         })
 
         const newissues = await issues.save()
@@ -79,7 +80,7 @@ exports.createIssuesInSprint = async (req, res, next) => {
             tag: tag,
             repoter: iduser,
             watch: [iduser],
-            idsprint:[idsprint],
+            idsprint:idsprint,
             idproject: idproject
         })
 
@@ -184,7 +185,7 @@ exports.viewListIssuesInBackLog = async (req, res, next) => {
 
         if(iduser !== null){
             issues = await Issues.find({
-                $or: [ { "idsprint":{$exists:false} }, { "idsprint": [] } ] ,
+                $or: [ { "idsprint":{$exists:false} }, { "idsprint": null } ] ,
                 idproject: idproject,
                 assignee: iduser,
                 hidden: false
@@ -192,7 +193,7 @@ exports.viewListIssuesInBackLog = async (req, res, next) => {
         }
         else{
             issues = await Issues.find({
-                $or: [ { "idsprint":{$exists:false} }, { "idsprint": [] } ] ,
+                $or: [ { "idsprint":{$exists:false} }, { "idsprint": null } ] ,
                 idproject: idproject,
                 hidden: false
             })
@@ -259,7 +260,7 @@ exports.addIssueIntoSprint = async (req, res, next) => {
        
         await Issues.findByIdAndUpdate(idissues, 
             {
-                $push: {idsprint: (idsprint)}
+                idsprint: idsprint
             }, { new: true }
         )
         const sprint = await Sprint.findById(idsprint).populate('idissues')

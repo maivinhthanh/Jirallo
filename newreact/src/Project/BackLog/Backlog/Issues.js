@@ -5,20 +5,17 @@ import _ from 'lodash'
 import IssuesUI from './IssuesUI'
 import * as action from './action'
 
-class BacklogContainer extends Component {
+class IssuesContainer extends Component {
   componentWillMount() {
-    this.props.ViewListIssueInSprint(this.props.idsprint)
+    this.props.ViewListIssueInSprint(this.props.idproject, this.props.idsprint, null)
   }
   IssueToSprint  = async (itemDrag, itemDrop) =>{
-    console.log(this.props.listissues)
-    console.log(itemDrag, itemDrop)
-    const { listissues } = this.props
+    const { idproject, listissues } = this.props
     let vtx, vty;
     let listIssueId = []
 
     const haveInList = listissues.findIndex(i => i._id === itemDrop.issue._id)
 
-    console.log(haveInList)
     if(haveInList !== -1)
     {
 
@@ -44,7 +41,6 @@ class BacklogContainer extends Component {
       }
 
       listissues[vtx] = itemDrop.issue;
-      console.log(vtx, listissues)
 
     }
 
@@ -52,11 +48,10 @@ class BacklogContainer extends Component {
       listIssueId.push(issue._id)
     })
 
-    await this.props.AddAndSortIssuesInSprint(itemDrag.item.idsprint[0], itemDrop.issue._id, listIssueId)
+    await this.props.AddAndSortIssuesInSprint(idproject, itemDrag.item.idsprint, itemDrop.issue._id, listIssueId)
     
   }
   render() {
-      console.log(this.props.listissues)
       const { listissues } = this.props
       return (
         <div >
@@ -68,7 +63,6 @@ class BacklogContainer extends Component {
                 )
               })
                   
-                
               : <div></div>
           }
         </div>
@@ -84,10 +78,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-      ViewListIssueInSprint: (id) => dispatch(action.ViewListIssueInSprint(id)),
+      ViewListIssueInSprint: (idproject, idsprint, iduser) => 
+        dispatch(action.ViewListIssueInSprint(idproject, idsprint, iduser)),
       AddAndSortIssuesInSprint: (idsprint, idissues, listissues) => 
         dispatch(action.AddAndSortIssuesInSprint(idsprint, idissues, listissues)),
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BacklogContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(IssuesContainer)

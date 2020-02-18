@@ -73,14 +73,17 @@ export const viewlistissuesinsprint = (idsprint, data) =>{
     }
 }
 
-export const ViewListIssueInSprint = (id) => {
+export const ViewListIssueInSprint = (idproject, idsprint = null, iduser = null) => {
     return dispatch => {
-        return CallApi(`sprint/viewListIssuesInSprint/${id}`,
-        'GET',
-        {}
+        return CallApi(`sprint/viewListIssuesInSprint/${idproject}`,
+        'POST',
+        {
+            idsprint: idsprint,
+            iduser: iduser
+        }
         ).then (response =>{
             if(response.status === 200){
-                dispatch(viewlistissuesinsprint(id,response.data.listissues));
+                dispatch(viewlistissuesinsprint(idsprint,response.data.listissues));                
                 
             }
             else {
