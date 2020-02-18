@@ -23,8 +23,8 @@ export default function UI({listsprint}) {
               {
                 _.map(listsprint, (data, index) => {
                     return (
-                        <Grid item xs={12}>
-                          <Sprint white sprint={data} key={index} />
+                        <Grid item xs={12} key={index}>
+                          <Sprint white sprint={data}  />
                         </Grid>
                     );
                 })

@@ -28,7 +28,6 @@ class Sprint extends Component {
 const mapStateToProps = (state) => {
     return {
       
-      listsprint: state.listsprint,
     }
 }
 

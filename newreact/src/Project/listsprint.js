@@ -10,7 +10,7 @@ const updateObject = (oldObject, updatedProperties) => {
     };
 };
 const initialState = [{
-    idsprint: null,
+    _id: null,
     idissues: [],
     hidden: false,
     name: 'Backlog',
@@ -22,7 +22,10 @@ const showListSprint = (state, action) =>{
    return updateArray( state, action.data);
 }
 const viewListIssue = (state, action) =>{
-    // console.log(action.data)
+    let cloneState = _.cloneDeep(state)
+    const index = cloneState.findIndex(i=>i._id === action.idsprint)
+    cloneState[index].listissues = action.data
+    return cloneState
 }
 const showListIssueInBackLog = (state, action) =>{
     let cloneState = _.cloneDeep(state)

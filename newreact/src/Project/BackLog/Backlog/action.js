@@ -65,9 +65,10 @@ export const ShowListSprint = (id,iduser = null) => {
         })
     }
 }
-export const viewlistissuesinsprint = (data) =>{
+export const viewlistissuesinsprint = (idsprint, data) =>{
     return {
         type:'VIEW_LIST_ISSUES_IN_SPRINT',
+        idsprint: idsprint,
         data: data
     }
 }
@@ -78,9 +79,8 @@ export const ViewListIssueInSprint = (id) => {
         'GET',
         {}
         ).then (response =>{
-            if(response.status === 201){
-                console.log(response)
-                dispatch(viewlistissuesinsprint(response.data.listsprint));
+            if(response.status === 200){
+                dispatch(viewlistissuesinsprint(id,response.data.listissues));
                 
             }
             else {

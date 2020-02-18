@@ -12,7 +12,7 @@ class BacklogContainer extends Component {
   }
   render() {
       // console.log(this.props.issueinbacklog)
-      console.log(this.props.listsprint)
+      // console.log(this.props.listsprint)
       const { idproject, listsprint } = this.props
       return (
         <div >

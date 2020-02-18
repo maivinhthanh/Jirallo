@@ -7,16 +7,25 @@ import * as action from './action'
 
 class BacklogContainer extends Component {
   componentWillMount() {
-    this.props.ShowListSprint(this.props.idproject, null)
-    this.props.ShowListIssueInBackLog(this.props.idproject, null)
+    this.props.ViewListIssueInSprint(this.props.idsprint)
+    // this.props.ShowListIssueInBackLog(this.props.idproject, null)
   }
   render() {
-      // console.log(this.props.issueinbacklog)
       console.log(this.props.listissues)
       const { listissues } = this.props
       return (
         <div >
-          <IssuesUI item={listissues}/>
+          {
+            listissues
+              ? _.map(listissues, (item, index) =>{
+                return(
+                  <IssuesUI item={item} key={index}/> 
+                )
+              })
+                  
+                
+              : <div></div>
+          }
         </div>
       )
     
@@ -25,16 +34,12 @@ class BacklogContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-      note: state.note,
-      // issueinbacklog: state.issueinbacklog,
-      listsprint: state.listsprint,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-      ShowListIssueInBackLog: (id, iduser) => dispatch(action.ShowListIssueInBackLog(id, iduser)),
-      ShowListSprint: (id, iduser) => dispatch(action.ShowListSprint(id, iduser)),
+      ViewListIssueInSprint: (id) => dispatch(action.ViewListIssueInSprint(id)),
     }
 }
 
