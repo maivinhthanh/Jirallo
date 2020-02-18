@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux'
 
-import authReducer from './Core/auth';
-import noteReducer from './Core/note';
-import listprojectReducer from './ListProject/listproject'
-import infouserReducer from './InfoUser/infouser'
-import projectReducer from './Project/project'
-import listIssuesReducer from './Project/listissues'
+import authReducer from './Reducer/auth';
+import noteReducer from './Reducer/note';
+import listprojectReducer from './Reducer/listproject'
+import infouserReducer from './Reducer/infouser'
+import projectReducer from './Reducer/project'
+import listIssuesReducer from './Reducer/listissues'
 // import issueinbacklogReducer from './Project/issueinbacklog'
-import listsprintReducer from './Project/listsprint'
+import listsprintReducer from './Reducer/listsprint'
 
 export default combineReducers({
     auth: authReducer,
