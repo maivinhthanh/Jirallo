@@ -54,13 +54,11 @@ const issuesSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Epic',
     },
-    idsprint:[
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Sprint',
-            required: true
-        }
-    ],
+    idsprint:{
+        type: Schema.Types.ObjectId,
+        ref: 'Sprint',
+    }
+    ,
     idproject:{
         type: Schema.Types.ObjectId,
         ref: 'Project',

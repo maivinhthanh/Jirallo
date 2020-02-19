@@ -73,8 +73,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function PrimarySearchAppBar({sprint}) {
-  console.log(sprint)
+export default function PrimarySearchAppBar({idproject, sprint}) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -126,7 +125,7 @@ export default function PrimarySearchAppBar({sprint}) {
         </Toolbar>
       </AppBar>
       <Grid>
-        <Issues idsprint={sprint._id} listissues={sprint.listissues}/> 
+        <Issues idproject={idproject} idsprint={sprint._id} listissues={sprint.listissues}/> 
           
       </Grid>
     </Container>

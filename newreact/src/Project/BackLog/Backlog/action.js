@@ -105,14 +105,17 @@ export const viewlistissuesinsprint = (idsprint, data) =>{
     }
 }
 
-export const ViewListIssueInSprint = (id) => {
+export const ViewListIssueInSprint = (idproject, idsprint = null, iduser = null) => {
     return dispatch => {
-        return CallApi(`sprint/viewListIssuesInSprint/${id}`,
-        'GET',
-        {}
+        return CallApi(`sprint/viewListIssuesInSprint/${idproject}`,
+        'POST',
+        {
+            idsprint: idsprint,
+            iduser: iduser
+        }
         ).then (response =>{
             if(response.status === 200){
-                dispatch(viewlistissuesinsprint(id,response.data.listissues));
+                dispatch(viewlistissuesinsprint(idsprint,response.data.listissues));                
                 
             }
             else {
@@ -130,3 +133,40 @@ export const ViewListIssueInSprint = (id) => {
         })
     }
 }
+
+export const addandsortissuesinsprint = (idsprint, data) =>{
+    return {
+        type:'ADD_AND_SORT_ISSUES_IN_SPRINT',
+        idsprint: idsprint,
+        data: data
+    }
+}
+export const AddAndSortIssuesInSprint = (idSprint, newissue, listIssueId ) => {
+    return dispatch => {
+        return CallApi(`sprint/addAndSortIssuesInSprint/${idSprint}`,
+        'PUT',
+        {
+            listissues: listIssueId,
+            newissues: newissue
+        }
+        ).then (response =>{
+            if(response.status === 200){
+                let data = {newData: response.data.listissues, idSprint: idSprint}
+                dispatch(addandsortissuesinsprint(data));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+  }

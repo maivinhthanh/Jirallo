@@ -10,7 +10,6 @@ import AddSprint from './addSprint'
 class BacklogContainer extends Component {
   componentWillMount() {
     this.props.ShowListSprint(this.props.idproject, null)
-    this.props.ShowListIssueInBackLog(this.props.idproject, null)
   }
   render() {
       const { idproject, listsprint } = this.props
@@ -40,7 +39,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-      ShowListIssueInBackLog: (id, iduser) => dispatch(action.ShowListIssueInBackLog(id, iduser)),
       ShowListSprint: (id, iduser) => dispatch(action.ShowListSprint(id, iduser)),
     }
 }

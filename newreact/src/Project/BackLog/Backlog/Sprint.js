@@ -11,13 +11,11 @@ class Sprint extends Component {
 
   }
   render() {
-      // console.log(this.props.issueinbacklog)
-      console.log(this.props.sprint)
-      const { sprint } = this.props
+      const { sprint, idproject } = this.props
       return (
         <div >
           <Grid container spacing={1} >
-              <SprintUI sprint={sprint}/>
+              <SprintUI idproject={idproject} sprint={sprint}/>
           </Grid>
         </div>
       )

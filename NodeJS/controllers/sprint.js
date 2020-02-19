@@ -233,16 +233,55 @@ exports.deleteSprint = async (req, res, next) => {
 }
 exports.viewListIssuesInSprint = async (req, res, next) => {
     try{
-        const idsprint = req.params.idsprint
+        const idproject = req.params.idproject
+        const idsprint = req.body.idsprint
+        const iduser = req.body.iduser
 
-        const sprint = await Sprint.findById(idsprint).populate({
-            path: 'idissues',
-            match:{
-                hidden: false
+        if (idsprint === null || idsprint === undefined)
+        {
+            let issues
+            if(iduser !== null){
+                issues = await Issuses.find({
+                    $or: [ { "idsprint":{$exists:false} }, { "idsprint": null } ] ,
+                    idproject: idproject,
+                    assignee: iduser,
+                    hidden: false
+                })
             }
-        })
+            else{
+                issues = await Issuses.find({
+                    $or: [ { "idsprint":{$exists:false} }, { "idsprint": null } ] ,
+                    idproject: idproject,
+                    hidden: false
+                })
+            }
+            res.status(200).json({ listissues: issues})
+        }
+        else{
+            let sprint
+            if(iduser !== null){
+                sprint = await Sprint.findById(idsprint).populate({
+                    path: 'idissues',
+                    match:{
+                        hidden: false,
+                        assignee: iduser,
+                    }
+                })
+            }
+            else{
+                sprint = await Sprint.findById(idsprint).populate({
+                    path: 'idissues',
+                    match:{
+                        hidden: false
+                    }
+                })
+            }
+            
+    
+            res.status(200).json({  listissues: sprint.idissues })
+        }
 
-        res.status(200).json({  listissues: sprint.idissues })
+        
     }
     catch(err) {
         
@@ -263,7 +302,7 @@ exports.addAndSortIssuesInSprint = async (req, res, next) => {
             } ,{new: true})
         
         await Issuses.findByIdAndUpdate(newissues, {
-            $push: { idsprint : idsprint }
+            idsprint : idsprint 
         })
         res.status(200).json({  listissues: sprint.idissues })
     }

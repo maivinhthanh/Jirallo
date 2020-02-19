@@ -10,12 +10,12 @@ export default function IssueAdd(props) {
             isDragging: !!monitor.isDragging(),
         }),
     })
-    console.log(props)
+    // console.log(props)
     let item = props.item
     let modal = true
     const fill = props.white ? 'white' : 'white'
     const [{ isOver }, drop] = useDrop({
-        accept: 'issue',
+        accept: 'issuea',
         drop: (item) => {
             props.handleAdd(props, item)
         },
