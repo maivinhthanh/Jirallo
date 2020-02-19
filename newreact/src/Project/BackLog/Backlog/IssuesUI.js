@@ -77,7 +77,5 @@ export default function IssueAdd(props) {
             </div>
         </div>
 
-
-
     );
 }

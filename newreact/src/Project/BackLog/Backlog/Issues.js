@@ -30,40 +30,62 @@ class IssuesContainer extends Component {
 
     }
     else{
-      _.filter(listissues, (data, index) => {
-        if (data._id === itemDrag.item._id) {
-            vtx = index
-        }
-      })
+      console.log(listissues, itemDrag.item._id)
+      if(!listissues){
 
-      for (let i = listissues.length; i >= vtx; i--) {
-        listissues[i] = listissues[i - 1]
       }
-
-      listissues[vtx] = itemDrop.issue;
+      else if(listissues.length === 0){
+        listissues[0] = itemDrop.issue
+      }
+      else{
+        _.filter(listissues, (data, index) => {
+          if (data._id === itemDrag.item._id) {
+              vtx = index
+          }
+        })
+  
+        for (let i = listissues.length; i >= vtx; i--) {
+          listissues[i] = listissues[i - 1]
+        }
+  
+        listissues[vtx] = itemDrop.issue
+      }
 
     }
 
     _.map(listissues, (issue, key) => {
       listIssueId.push(issue._id)
     })
-    console.log(itemDrop.issue.idsprint, itemDrag.item.idsprint, itemDrop.issue._id, listIssueId)
-    // await this.props.AddAndSortIssuesInSprint( itemDrop.issue.idsprint, itemDrag.item.idsprint, itemDrop.issue._id, listIssueId)
-    
+    await this.props.AddAndSortIssuesInSprint( itemDrop.issue.idsprint, itemDrag.item.idsprint, itemDrop.issue._id, listIssueId)
+    await this.props.ShowListSprint (this.props.idproject, null)
   }
   render() {
-      const { listissues } = this.props
+      const { listissues, idsprint } = this.props
+      let listissuesEmpty
+      if(listissues){
+        listissuesEmpty = listissues.length !== 0
+      }
+      else{
+        listissuesEmpty = false
+      }
+      
+      const fakeissue = {
+        _id: '',
+        name: null,
+        type: 'task',
+        idsprint: idsprint
+      }
       return (
         <div >
           {
-            listissues
+            listissuesEmpty
               ? _.map(listissues, (item, index) =>{
                 return(
                   <IssuesUI item={item} key={index} handleAddIssueIntoSprint={(id, issue) => this.IssueToSprint(id, issue)}/> 
                 )
               })
                   
-              : <div></div>
+              :  <IssuesUI item={fakeissue} handleAddIssueIntoSprint={(id, issue) => this.IssueToSprint(id, issue)}/> 
           }
         </div>
       )
@@ -82,6 +104,7 @@ const mapDispatchToProps = dispatch => {
         dispatch(action.ViewListIssueInSprint(idproject, idsprint, iduser)),
       AddAndSortIssuesInSprint: (idSprintGive, idSprintTake, idIssues, listIssue) => 
         dispatch(action.AddAndSortIssuesInSprint(idSprintGive, idSprintTake, idIssues, listIssue)),
+      ShowListSprint: (idproject, iduser) => dispatch(action.ShowListSprint(idproject, iduser)),
     }
 }
 

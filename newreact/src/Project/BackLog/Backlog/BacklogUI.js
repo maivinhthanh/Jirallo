@@ -14,27 +14,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-<<<<<<< HEAD
-export default function UI({ listsprint }) {
-  const classes = useStyles();
-
-  return (
-    <div >
-      <Grid item xs={12} container>
-        {
-          _.map(listsprint, (data, index) => {
-            return (
-              <Grid item xs={12} key={index}>
-                <Sprint white sprint={data} />
-              </Grid>
-            );
-          })
-        }
-      </Grid>
-    </div>
-  )
-
-=======
 export default function UI({idproject, listsprint}) {
     const classes = useStyles();
 
@@ -53,6 +32,5 @@ export default function UI({idproject, listsprint}) {
             </Grid>
         </div>
     )
->>>>>>> ee665c10891fab21413c10a558d60ec9d0a1b795
 
 }

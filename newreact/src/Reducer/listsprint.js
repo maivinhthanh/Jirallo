@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import { addNameSprint } from './BackLog/Backlog/action';
 
 const updateArray = (oldObject, updatedProperties) => {
     return [...oldObject, ...updatedProperties]
