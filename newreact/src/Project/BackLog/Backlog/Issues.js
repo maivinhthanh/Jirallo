@@ -25,7 +25,7 @@ class IssuesContainer extends Component {
         }
       })
       let reserve = listissues[haveInList]
-      listissues[haveInList] = itemDrop.issue
+      listissues[haveInList] = itemDrag.item
       listissues[vtx] = reserve
 
     }
@@ -47,8 +47,8 @@ class IssuesContainer extends Component {
     _.map(listissues, (issue, key) => {
       listIssueId.push(issue._id)
     })
-
-    await this.props.AddAndSortIssuesInSprint(idproject, itemDrag.item.idsprint, itemDrop.issue._id, listIssueId)
+    console.log(itemDrop.issue.idsprint, itemDrag.item.idsprint, itemDrop.issue._id, listIssueId)
+    // await this.props.AddAndSortIssuesInSprint( itemDrop.issue.idsprint, itemDrag.item.idsprint, itemDrop.issue._id, listIssueId)
     
   }
   render() {
@@ -80,8 +80,8 @@ const mapDispatchToProps = dispatch => {
     return {
       ViewListIssueInSprint: (idproject, idsprint, iduser) => 
         dispatch(action.ViewListIssueInSprint(idproject, idsprint, iduser)),
-      AddAndSortIssuesInSprint: (idsprint, idissues, listissues) => 
-        dispatch(action.AddAndSortIssuesInSprint(idsprint, idissues, listissues)),
+      AddAndSortIssuesInSprint: (idSprintGive, idSprintTake, idIssues, listIssue) => 
+        dispatch(action.AddAndSortIssuesInSprint(idSprintGive, idSprintTake, idIssues, listIssue)),
     }
 }
 

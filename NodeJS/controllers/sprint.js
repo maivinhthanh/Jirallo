@@ -290,21 +290,64 @@ exports.viewListIssuesInSprint = async (req, res, next) => {
 }
 exports.addAndSortIssuesInSprint = async (req, res, next) => {
     try{
-        const idsprint = req.params.idsprint
+        const idsprintgive = req.body.idsprintgive
+        const idsprinttake = req.body.idsprinttake
         const listissues = req.body.listissues
-        const newissues = req.body.newissues
+        const idissues = req.params.idissues
 
         const list = listissues.filter(item => item !== '')
 
-        const sprint = await Sprint.findByIdAndUpdate(idsprint,
-            {
-                idissues : list
-            } ,{new: true})
-        
-        await Issuses.findByIdAndUpdate(newissues, {
-            idsprint : idsprint 
-        })
-        res.status(200).json({  listissues: sprint.idissues })
+        console.log(idsprintgive, idsprinttake, idissues)
+
+        if(idsprintgive === null || idsprintgive === 'null'){
+            await Sprint.findByIdAndUpdate(idsprinttake,
+                {
+                    idissues: list  
+                } ,{new: true}
+            )
+        }
+        else if(idsprinttake === null || idsprinttake === 'null'){
+            await Sprint.findByIdAndUpdate(idsprintgive,
+                {
+                    $pull: { idissues: idissues } 
+                } ,{new: true}
+            )
+        }
+        else if((idsprinttake === null || idsprinttake === 'null') && (idsprintgive === null || idsprintgive === 'null')){
+
+        }
+        else{
+            await Sprint.findByIdAndUpdate(idsprintgive,
+                {
+                    $pull: { idissues: idissues } 
+                } ,{new: true}
+            )
+            await Sprint.findByIdAndUpdate(idsprinttake,
+                {
+                    idissues: list  
+                } ,{new: true}
+            )
+        }
+
+        res.status(200)
+
+        // const list = listissues.filter(item => item !== '')
+        // if(idsprint === null || idsprint === 'null'){
+        //     res.status(200).json({  listissues: [] })
+        // }
+        // else{
+        //     const sprint = await Sprint.findByIdAndUpdate(idsprinttake,
+        //         {
+        //             idissues : list
+        //         } ,{new: true}
+        //     )
+            
+        //     await Issuses.findByIdAndUpdate(idissues, {
+        //         idsprint : idsprinttake 
+        //     })
+        //     res.status(200).json({  listissues: sprint.idissues })
+        // }
+
     }
     catch(err) {
         

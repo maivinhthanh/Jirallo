@@ -102,24 +102,26 @@ export const ViewListIssueInSprint = (idproject, idsprint = null, iduser = null)
     }
 }
 
-export const addandsortissuesinsprint = (idsprint, data) =>{
+export const addandsortissuesinsprint = (data) =>{
     return {
         type:'ADD_AND_SORT_ISSUES_IN_SPRINT',
-        idsprint: idsprint,
-        data: data
+        idsprintgive: data.idSprintGive,
+        idsprinttake: data.idSprintTake,
+        data: data.newData
     }
 }
-export const AddAndSortIssuesInSprint = (idSprint, newissue, listIssueId ) => {
+export const AddAndSortIssuesInSprint = (idSprintGive, idSprintTake, idIssues, listissues ) => {
     return dispatch => {
-        return CallApi(`sprint/addAndSortIssuesInSprint/${idSprint}`,
+        return CallApi(`sprint/addAndSortIssuesInSprint/${idIssues}`,
         'PUT',
         {
-            listissues: listIssueId,
-            newissues: newissue
+            idsprintgive: idSprintGive,
+            idsprinttake: idSprintTake,
+            listissues: listissues
         }
         ).then (response =>{
             if(response.status === 200){
-                let data = {newData: response.data.listissues, idSprint: idSprint}
+                let data = {idSprintGive: idSprintGive, idSprintTake: idSprintTake}
                 dispatch(addandsortissuesinsprint(data));
                 
             }
