@@ -7,7 +7,39 @@ export const showlistissueinbacklog = (data) =>{
         data: data
     }
 }
+export const addNameSprint = (data) => {
+    return {
+        type: 'ADD_NAME_SPRINT',
+        data: data
+    }
+}
 
+export const handleSaveName = (name,id) => {
+    return dispatch => {
+        return CallApi('sprint/createSprint','POST',{
+            name: name,
+            idproject: id
+        }).then(response => {
+            console.log('200',response.data)
+            if(response.status === 201){
+                dispatch(addNameSprint(response.data.newsprint));
+            }
+            else {
+                console.log('loi roi')
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        }).catch(err => {
+            console.log(err)
+            dispatch(Notification.Error(err))
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
 export const ShowListIssueInBackLog = (id, iduser = null) =>{
     return dispatch =>{
         return CallApi(`issues/viewListIssuesInBackLog/${id}`,'POST',{

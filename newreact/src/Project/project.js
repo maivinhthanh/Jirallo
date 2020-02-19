@@ -26,7 +26,7 @@ const updatestate = (state, action) =>{
 
 const projectReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case 'GET_INFO_PROJECT': return updatestate( state, action ); 
+        case 'GET_INFO_PROJECT': return updatestate( state, action );
         
         default: return state;
     }

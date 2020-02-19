@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { addNameSprint } from './BackLog/Backlog/action';
 
 const updateArray = (oldObject, updatedProperties) => {
     return [...oldObject, ...updatedProperties]
@@ -32,11 +33,19 @@ const showListIssueInBackLog = (state, action) =>{
     cloneState[0].listissues = action.data
     return cloneState
 }
+const createNameSprint = (state, action) => {
+    let cloneState = _.cloneDeep(state)
+    console.log(action.data)
+    cloneState.push(action.data)
+    console.log('test',cloneState)
+    return cloneState
+}
 const listsprint = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'SHOW_LIST_SPRINT': return showListSprint( state, action ); 
         case 'VIEW_LIST_ISSUES_IN_SPRINT': return viewListIssue(state, action);
         case 'SHOW_LIST_ISSUES_IN_BACKLOG': return showListIssueInBackLog( state, action ); 
+        case 'ADD_NAME_SPRINT' : return createNameSprint(state, action);
         default: return state;
     }
 };
