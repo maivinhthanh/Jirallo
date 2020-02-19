@@ -5,9 +5,9 @@ import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Grid from '@material-ui/core/Grid';
-
+import SpringModal from '../SpringModal'
 const useStyles = makeStyles(theme => ({
-    main:{
+    main: {
         backgroundColor: '#6A8DCD',
         height: '60px'
     },
@@ -21,10 +21,10 @@ const useStyles = makeStyles(theme => ({
         marginLeft: theme.spacing(1),
         flex: 1,
     },
-        iconButton: {
+    iconButton: {
         padding: 10,
     },
-        divider: {
+    divider: {
         height: 28,
         margin: 4,
     },
@@ -33,13 +33,23 @@ const useStyles = makeStyles(theme => ({
 export default function HeaderUI() {
 
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+  
 
     return (
         <div className={classes.main} >
             <Grid container spacing={0}>
                 <Grid item xs={6}>
                     <Paper component="form" className={classes.root}>
-                        
+
                         <InputBase
                             className={classes.input}
                             placeholder="Search Project"
@@ -50,8 +60,11 @@ export default function HeaderUI() {
                         </IconButton>
                     </Paper>
                 </Grid>
+                <Grid item xs={6} >
+                    <SpringModal/>
+                </Grid>
             </Grid>
         </div>
     )
-  
+
 }

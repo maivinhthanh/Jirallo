@@ -77,6 +77,11 @@ export default function PrimarySearchAppBar({idproject, sprint}) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [idsprint, setSprint] = React.useState('')
+
+  const AddIssueOnSprint = (id) => {
+    console.log(id)
+  }
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -108,7 +113,7 @@ export default function PrimarySearchAppBar({idproject, sprint}) {
           <div className={classes.sectionDesktop}>
             <Icon className="fas fa-play" />
             <Icon className="fas fa-pencil-alt" />
-            <Icon className="fas fa-plus" />
+            <Icon className="fas fa-plus" onClick={ () => AddIssueOnSprint(sprint._id)} />
           </div>
           <div className={classes.sectionMobile}>
             <Icon
