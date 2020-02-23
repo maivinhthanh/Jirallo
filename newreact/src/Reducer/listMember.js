@@ -5,17 +5,18 @@ const updateObject = (oldObject, updatedProperties) => {
     };
 };
 
-const initialState = {
-    
-};
+const initialState = []
 
-const updatestate = (state, action) =>{
-   return updateObject( state, {id : action.id, error:false},);
+const getListUserInProject = (state, action) =>{
+    action.data.map((item, index) =>{
+        state = [...state, item.id]
+    })
+   return state
 }
 
 const listUserReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case 'ACTION': return updatestate( state, action ); 
+        case 'GET_LIST_USER_IN_PROJECT': return getListUserInProject( state, action ); 
         
         default: return state;
     }
