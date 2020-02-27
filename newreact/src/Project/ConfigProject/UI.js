@@ -83,13 +83,13 @@ export default function FullWidthTabs(props) {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <EditProject project= {props.project} />
+          <EditProject idproject= {props.idproject} />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <AddProcess project= {props.project} />
+          <AddProcess idproject= {props.idproject} />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <AddMember project= {props.project} />
+          <AddMember idproject= {props.idproject} />
         </TabPanel>
       </SwipeableViews>
     </div>

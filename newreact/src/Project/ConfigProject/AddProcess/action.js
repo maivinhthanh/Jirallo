@@ -1,21 +1,21 @@
 import CallApi from '../../../until/apiCaller';
 import * as Notification from '../../../until/Notification';
 
-export const forwarddata = (data) =>{
+export const addprocess = (data) =>{
     return {
-        type:'ACTION',
+        type:'ADD_PROCESS',
         data: data
     }
 }
 
-export const Action = (data) =>{
+export const AddProcess = (idproject, process) =>{
     return dispatch =>{
-        return CallApi('url','POST',{
-            data:data
+        return CallApi(`project/AddProcess/${idproject}`,'PUT',{
+            process: process
         }).then (response =>{
-            
-            if(response.status === 201){
-                dispatch(forwarddata(response.data));
+            if(response.status === 200){
+                
+                dispatch(addprocess(response.data.project));
                 dispatch(Notification.CreateSuccess({message: 'Tạo thành công'}))
                 setTimeout(() => {
                     dispatch(Notification.hideNotification())

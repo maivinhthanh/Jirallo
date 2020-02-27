@@ -14,9 +14,8 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function AddProcess({project}) {
+export default function AddProcess({project, idproject}) {
     const classes = useStyles();
-    console.log(project)
     const process = project.process
     return (
         <div className={classes.root}>
@@ -24,8 +23,8 @@ export default function AddProcess({project}) {
                 {
                   _.map(process, (item, index)=>{
                     return(
-                      <Grid item xs={12}>
-                        <Process name={item} key={index} />
+                      <Grid item xs={12} key={index}>
+                        <Process idproject={idproject} name={item} listprocess={process} />
                       </Grid>
                     )
                   })

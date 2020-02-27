@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function UI({idproject, project, listissues, ChangeProcessIssue}) {
     const classes = useStyles();
-    const numberColumn = 12 / Number.parseInt(project.process.length)
+    let numberColumn = 12 / Number.parseInt(project.process.length)
     if(numberColumn < 3){
       numberColumn = 3
     }

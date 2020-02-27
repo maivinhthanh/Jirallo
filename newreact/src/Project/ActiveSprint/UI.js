@@ -17,11 +17,11 @@ export default function UI({idproject}) {
     const classes = useStyles();
 
     return (
-        <Grid className={classes.root}>
-            <Grid container spacing={0}>
+        <div >
+            <div container spacing={0}>
                 <ActiveSprintContainer idproject={idproject}/>
-            </Grid>
-        </Grid>
+            </div>
+        </div>
     )
 
   
