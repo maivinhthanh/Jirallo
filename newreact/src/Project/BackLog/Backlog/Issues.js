@@ -6,8 +6,22 @@ import IssuesUI from './IssuesUI'
 import * as action from './action'
 
 class IssuesContainer extends Component {
+  constructor(props){
+    super(props);
+    this.state ={
+      selectuser: null,
+    }
+  }
   componentWillMount() {
     this.props.ViewListIssueInSprint(this.props.idproject, this.props.idsprint, null)
+  }
+  // shouldComponentUpdate(nextProps, nextState){
+  //   return this.props.selectuser != nextProps.selectuser 
+  // }
+  componentWillUpdate(nextProps, nextState, snapshot) {
+    if (nextProps.selectuser != this.props.selectuser) {
+      this.props.ViewListIssueInSprint(this.props.idproject, this.props.idsprint, nextProps.selectuser)        
+    }
   }
   IssueToSprint  = async (itemDrag, itemDrop) =>{
     const { idproject, listissues } = this.props
@@ -30,7 +44,6 @@ class IssuesContainer extends Component {
 
     }
     else{
-      console.log(listissues, itemDrag.item._id)
       if(!listissues){
 
       }
@@ -59,6 +72,7 @@ class IssuesContainer extends Component {
     await this.props.AddAndSortIssuesInSprint( itemDrop.issue.idsprint, itemDrag.item.idsprint, itemDrop.issue._id, listIssueId)
     await this.props.ShowListSprint (this.props.idproject, null)
   }
+  
   render() {
       const { listissues, idsprint } = this.props
       let listissuesEmpty

@@ -171,4 +171,4 @@ export const AddAndSortIssuesInSprint = (idSprintGive, idSprintTake, idIssues, l
             }, 5000)
         })
     }
-  }
+}

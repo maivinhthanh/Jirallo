@@ -28,13 +28,14 @@ export default function ImageAvatars({listMember,selectUser}) {
     <div className={classes.root}>
       {
         _.map(listMember, (item,index) =>{
+          console.log(item._id)
           return(
             <div key={index}>
               {
                 item.image
-                ? <Avatar alt={item.name} src={'/image/'+item.image} onClick={selectUser(item._id)}
+                ? <Avatar alt={item.name} src={'/image/'+item.image} onClick={()=>selectUser(item._id)}
                     className={classes.large}  />
-                : <Avatar alt={item.name} onClick={selectUser(item._id)}
+                : <Avatar alt={item.name} onClick={()=>selectUser(item._id)}
                     className={classes.large} >{item.name.charAt(0)}</Avatar>
               }
             </div>

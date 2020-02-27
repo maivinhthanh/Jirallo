@@ -5,18 +5,22 @@ import Grid from '@material-ui/core/Grid';
 
 import UI from './UI'
 import MenuProject from '../../Core/Home/Menu/MenuProject'
+import Toast from '../../Components/Toast'
 import * as action from './action'
-
-class ActiveSprintPage extends Component {
-  
+class ConfigPage extends Component {
+  componentWillMount(){
+    this.props.ViewInfoProject(this.props.match.params.id)
+  }
   render() {
-
+      const { match: { params } } = this.props
+      const { note } = this.props
       return (
-        <Grid container >
+        <Grid  >
           
               <MenuProject idproject={params.id}/>
-              <UI/>
-            
+              <UI idproject={params.id}/>
+              <Toast open={note.show} message={note.message} type={note.type} />
+
         </Grid>
       )
     
@@ -32,7 +36,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
+      ViewInfoProject: (id) => dispatch(action.ViewInfoProject(id))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActiveSprintPage)
+export default connect(mapStateToProps, mapDispatchToProps)(ConfigPage)

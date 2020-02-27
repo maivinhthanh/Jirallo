@@ -11,7 +11,7 @@ class MemberContainer extends Component {
     this.props.GetListUserInProject(this.props.idproject)
   }
   selectUser = (id) =>{
-    console.log(id)
+    this.props.selectUser(id)
   }
   render() {
       const { listMember } = this.props

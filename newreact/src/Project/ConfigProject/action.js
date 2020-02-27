@@ -1,25 +1,20 @@
-import CallApi from '../../../until/apiCaller';
-import * as Notification from '../../../until/Notification';
+import CallApi from '../../until/apiCaller';
+import * as Notification from '../../until/Notification';
 
-export const forwarddata = (data) =>{
+export const viewinfoproject = (data) =>{
     return {
-        type:'ACTION',
+        type:'GET_INFO_PROJECT',
         data: data
     }
 }
 
-export const Action = (data) =>{
+export const ViewInfoProject = (id) =>{
     return dispatch =>{
-        return CallApi('url','POST',{
-            data:data
+        return CallApi(`project/viewInfoProject/${id}`,'GET',{
         }).then (response =>{
-            
-            if(response.status === 201){
-                dispatch(forwarddata(response.data));
-                dispatch(Notification.CreateSuccess({message: 'Tạo thành công'}))
-                setTimeout(() => {
-                    dispatch(Notification.hideNotification())
-                }, 5000)
+            if(response.status === 200){
+                dispatch(viewinfoproject(response.data.project));
+                
             }
             else {
                 dispatch(Notification.Error(response.data))
