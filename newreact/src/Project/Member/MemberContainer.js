@@ -10,8 +10,18 @@ class MemberContainer extends Component {
   componentWillMount() {
     this.props.GetListUserInProject(this.props.idproject)
   }
-  selectUser = (id) =>{
-    this.props.selectUser(id)
+  // shouldComponentUpdate(nextProps, nextState){
+  //     return this.props.listMember != nextProps.listMember 
+  //   }
+  selectUser = (id, index, status) =>{
+    if(status === true){
+      this.props.selectUser(null)
+    }
+    else{
+      this.props.selectUser(id)
+    }
+    
+    this.props.ChangeActive(index, status)
   }
   render() {
       const { listMember } = this.props
@@ -19,7 +29,7 @@ class MemberContainer extends Component {
       return (
         <Grid container >
           
-              <UI listMember={listMember} selectUser={(id)=>this.selectUser(id)} />
+              <UI listMember={listMember} selectUser={(id, index, status)=>this.selectUser(id, index, status)} />
             
         </Grid>
       )
@@ -35,7 +45,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-      GetListUserInProject: (idproject) => dispatch(action.GetListUserInProject(idproject))
+      GetListUserInProject: (idproject) => dispatch(action.GetListUserInProject(idproject)),
+      ChangeActive: (index, status) => dispatch(action.changeactive(index, status))
     }
 }
 
