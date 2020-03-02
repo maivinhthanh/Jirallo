@@ -42,5 +42,9 @@ router.put('/deleteIssues/:idissues',upload.single('image'),isAuth,
     
     issuesController.deleteIssues,
 )
+router.post('/filterListIssues/:idproject',isAuth, 
+    
+    issuesController.filterListIssues,
+)
 
 module.exports = router

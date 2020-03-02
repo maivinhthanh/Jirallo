@@ -8,6 +8,7 @@ import projectReducer from './Reducer/project'
 import listIssuesReducer from './Reducer/listissues'
 import listMemberReducer from './Reducer/listMember'
 import listsprintReducer from './Reducer/listsprint'
+import issuesReducer from './Reducer/issues'
 
 export default combineReducers({
     auth: authReducer,
@@ -17,6 +18,7 @@ export default combineReducers({
     project: projectReducer,
     listissues: listIssuesReducer,
     listsprint: listsprintReducer,
-    listMember: listMemberReducer
+    listMember: listMemberReducer,
+    issues: issuesReducer
 });
 

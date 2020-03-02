@@ -15,10 +15,16 @@ const changeProcessIssueInListIssues = (state, action) =>{
     clone[index] = action.data
     return clone
 }
+const filterIssues = (state, action) =>{
+
+    return action.data
+}
 const listIssuesReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'GET_ISSUES_IN_SPRINT_ACTIVE': return getIssuesInSprintActive( state, action ); 
         case 'CHANGE_PROCESS_ISSUE': return changeProcessIssueInListIssues( state, action ); 
+        case 'FILTER_ISSUES': return filterIssues( state, action ); 
+
         default: return state;
     }
 };

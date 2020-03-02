@@ -9,7 +9,6 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-
 import _ from 'lodash'
 
 const useStyles = makeStyles(theme => ({
@@ -23,19 +22,28 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function NestedList({project}) {
+export default function NestedList({project, getSelect}) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-  const [state, setState] = React.useState({
-    
-  });
-    
+  const [openProcess, setOpenprocess] = React.useState(false);
+  const [openSprint, setOpensprint] = React.useState(false);
+  const [process, setProcess] = React.useState({});
+  const [sprint, setSprint] = React.useState({});
+
   const handleChange = name => event => {
-    setState({ ...state, [name]: event.target.checked });
+    setProcess({ ...process, [name]: event.target.checked });
+    let data = _.cloneDeep(process)
     
+    data[name] = event.target.checked
+
+    getSelect(data)
   };
-  const handleClick = () => {
-    setOpen(!open);
+  const handleClick = (name) => {
+    if(name === 'process'){
+      setOpenprocess(!openProcess)
+    }
+    else{
+      setOpensprint(!openSprint)
+    }
   };
 
   return (
@@ -49,11 +57,11 @@ export default function NestedList({project}) {
       }
       className={classes.root}
     >
-      <ListItem button onClick={handleClick}>
+      <ListItem button onClick={(name)=>handleClick('process')}>
         <ListItemText primary="Process" />
-        {open ? <ExpandLess /> : <ExpandMore />}
+        {openProcess ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit>
+      <Collapse in={openProcess} timeout="auto" unmountOnExit>
         {
           _.map(project.process, (item, index)=>{
             return(
@@ -61,7 +69,31 @@ export default function NestedList({project}) {
                 <ListItem button className={classes.nested}>
                 <FormControlLabel
                   control={
-                    <Checkbox checked={state[item]} onChange={handleChange(item)} value={item} />
+                    <Checkbox checked={process[item]} onChange={handleChange(item)} value={item} />
+                  }
+                  label={item}
+                />
+                </ListItem>
+              </List>
+            )
+            
+          })
+        }
+        
+      </Collapse>
+      <ListItem button onClick={(name)=>handleClick('sprint')}>
+        <ListItemText primary="Process" />
+        {openSprint ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={openSprint} timeout="auto" unmountOnExit>
+        {
+          _.map(project.process, (item, index)=>{
+            return(
+              <List component="div" disablePadding key={index}>
+                <ListItem button className={classes.nested}>
+                <FormControlLabel
+                  control={
+                    <Checkbox checked={process[item]} onChange={handleChange(item)} value={item} />
                   }
                   label={item}
                 />
