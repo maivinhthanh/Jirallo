@@ -6,7 +6,33 @@ const updateObject = (oldObject, updatedProperties) => {
 };
 
 const initialState = {
-    
+    _id: null,
+    name: null,
+    repoter: {
+        image: null,
+        name: null,
+        _id: null
+    },
+    assignee: {
+        image: null,
+        name: null,
+        _id: null
+    },
+    process: 'todo',
+    type: 'task',
+    priority: 'medium',
+    descript: '',
+    image: [],
+    comment: [{
+        author: {
+            image: null,
+            name: null,
+            _id: null
+        },
+        content: null,
+        image:[]
+    }],
+    watch: []
 };
 
 const changeProcessIssue = (state, action) =>{

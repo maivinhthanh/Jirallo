@@ -31,8 +31,6 @@ class ChangeInfoUI extends Component {
     }
   }
   handleChange = (event)=>{
-    console.log(event.target.name)
-    // event.preventDefault();
     this.setState({
       [event.target.name] : event.target.value
     })

@@ -2,6 +2,7 @@ const express = require('express')
 const { body } = require('express-validator/check')
 
 const issuesController = require('../controllers/issues')
+const commentController = require('../controllers/comment')
 
 const router = express()
 
@@ -45,6 +46,10 @@ router.put('/deleteIssues/:idissues',upload.single('image'),isAuth,
 router.post('/filterListIssues/:idproject',isAuth, 
     
     issuesController.filterListIssues,
+)
+
+router.post('/createComment/:idissues',upload.single('image'),isAuth,
+    commentController.createComment,
 )
 
 module.exports = router

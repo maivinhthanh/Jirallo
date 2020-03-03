@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SelectedListItem({listissues, selectIssues}) {
   const classes = useStyles();
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(null);
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
