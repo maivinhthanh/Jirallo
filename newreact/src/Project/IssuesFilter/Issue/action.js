@@ -41,20 +41,18 @@ export const addcomment = (data) =>{
 }
 
 export const AddComment = (idissues, data) =>{
-    console.log(data)
     return dispatch =>{
         return CallApi(`issues/createComment/${idissues}`,'POST',{
             content: data.content,
             assignee: data.assignee
         }).then (response =>{
-            console.log(response)
             if(response.status === 201){
                 
                 dispatch(addcomment(response.data));
                 
             }
             else {
-                dispatch(Notification.Error(response.data))
+                dispatch(Notification.Error(response.data.newcomment))
                 setTimeout(() => {
                     dispatch(Notification.hideNotification())
                 }, 5000)

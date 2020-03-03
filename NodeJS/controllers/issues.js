@@ -349,6 +349,13 @@ exports.getInfoIssues = async (req, res, next) => {
             },
             select:['idproject','name', 'avatar', 'image']
         })
+        .populate({
+            path: 'comment',
+            match:{
+                hidden: false,
+            },
+            select:['author','assignee', 'content', 'image']
+        })
 
         res.status(200).json({ issues:issues})
 

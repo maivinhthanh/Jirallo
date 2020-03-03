@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import Avatar from '@material-ui/core/Avatar';
+import _ from 'lodash'
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -11,26 +12,30 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function InputWithIcon() {
+export default function ListCommentUI({listcomment}) {
   const classes = useStyles();
-
   return (
     <div>
       
       <div className={classes.margin}>
-        <Grid container spacing={1} alignItems="flex-end">
-          <Grid item xs={1}>
-            <AccountCircle />
-          </Grid>
-          <Grid item xs={11}>
-            <TextField fullWidth size="normal" id="input-with-icon-grid" label="Add comment" />
-          </Grid>
-        </Grid>
-        <Grid container spacing={1} alignItems="flex-end" justify="flex-end" >
-          <Button variant="contained" color="primary">
-            Submit
-          </Button>
-        </Grid>
+        {
+          listcomment.length !== 0 ?
+          _.map(listcomment, (item, index)=>{
+            return(
+              <Grid container spacing={1} alignItems="flex-end" key={index}>
+                <Grid item xs={2}>
+                  <Avatar alt="Avatar" src={item.author.image} />
+                  <p>{item.author.name}</p>
+                </Grid>
+                <Grid item xs={10}>
+                  <p>{item.content}</p>
+                </Grid>
+              </Grid>
+            )
+          })
+          :<div></div>
+        }
+        
         
       </div>
     </div>

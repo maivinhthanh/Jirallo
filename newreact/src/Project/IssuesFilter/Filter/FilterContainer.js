@@ -22,8 +22,11 @@ class FilterContainer extends Component {
     this.props.FilterIssues(this.props.idproject, arr)
   }
 
-  selectIssues = (issue) =>{
-    this.props.SelectIssues(issue)
+   selectIssues = async (issue) =>{
+    await this.props.GetComment(issue)
+    await this.props.SelectIssues(issue)
+    
+
   }
   
   render() {
@@ -59,6 +62,7 @@ const mapDispatchToProps = dispatch => {
     return {
       FilterIssues: (id, process) => dispatch( action.FilterIssues(id, process) ),
       SelectIssues:(issue) => dispatch( action.SelectIssues(issue) ),
+      GetComment:(idissue) => dispatch( action.GetComment(idissue) ),
     }
 }
 

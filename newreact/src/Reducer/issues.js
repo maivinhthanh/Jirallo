@@ -39,13 +39,21 @@ const changeProcessIssue = (state, action) =>{
     return updateObject(state,action.data )
 }
 const selectIssuesInFilter = (state, action) =>{
-    return updateObject(state,action.data )
+    let issue = updateObject(state,action.data )
+    issue.comment = state.comment
+    console.log(issue)
+    return issue
+}
+const getComment = (state, action) =>{
+    state.comment = action.data
+    return state
 }
 const issuesReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'CHANGE_PROCESS_ISSUE': return changeProcessIssue( state, action ); 
         case 'SELECT_ISSUES_IN_FILTER': return selectIssuesInFilter( state, action ); 
-        
+        case 'GET_COMMENT': return getComment( state, action ); 
+
         default: return state;
     }
 };

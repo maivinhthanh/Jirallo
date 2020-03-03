@@ -5,7 +5,6 @@ const Activities = require('../models/activities')
 
 exports.createComment = async (req, res, next) => {
     try{
-        console.log("!")
         const idissues = req.params.idissues
         const content = req.body.content
         const assignee = req.body.assignee
@@ -16,7 +15,6 @@ exports.createComment = async (req, res, next) => {
         }
         
         const iduser = req.userId
-        console.log(idissues, content, assignee)
         if(!content){
             res.status(203).json({ message: 'Not found Content' })
             return
@@ -27,6 +25,7 @@ exports.createComment = async (req, res, next) => {
             assignee: assignee,
             content: content,
             image: image,
+            idissue:idissues,
             dateedit: Date.now(),
         })
 
@@ -48,6 +47,33 @@ exports.createComment = async (req, res, next) => {
         await action.save()
 
         res.status(201).json({ newcomment})
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.getListComment = async (req, res, next) => {
+    try{
+        const idissue = req.params.idissue
+        
+        const listcomment = await Comment.find({idissue: idissue})
+        .populate({
+            path: 'author',
+            match:{
+                hidden: false,
+            },
+            select:['name', 'avatar', 'image']
+        }).populate({
+            path: 'assignee',
+            match:{
+                hidden: false,
+            },
+            select:['name', 'avatar', 'image']
+        })
+
+        res.status(200).json({ listcomment })
     }
     catch (error) {
         

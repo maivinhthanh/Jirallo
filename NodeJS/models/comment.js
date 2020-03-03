@@ -14,6 +14,10 @@ const commentSchema = new Schema({
         type: String,
         required: true
     },
+    idissue: {
+        type: Schema.Types.ObjectId,
+        ref: 'Issues',
+    },
     image:[
         {
             type: String

@@ -64,3 +64,35 @@ export const FilterIssues = (idproject, process) =>{
         })
     }
 }
+export const getcomment = (data) =>{
+    return {
+        type:'GET_COMMENT',
+        data: data
+    }
+}
+
+export const GetComment = (idissues, data) =>{
+    return dispatch =>{
+        return CallApi(`issues/getListComment/${idissues}`,'GET',{
+           
+        }).then (response =>{
+            if(response.status === 200){
+                
+                dispatch(getcomment(response.data.listcomment));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data.newcomment))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}

@@ -4,6 +4,7 @@ import _ from 'lodash'
 import { Grid } from '@material-ui/core'
 
 import AddCommentUI from './AddCommentUI'
+import ListCommentUI from './ListCommentUI'
 import * as action from './action'
 
 class CommentContainer extends Component {
@@ -11,17 +12,15 @@ class CommentContainer extends Component {
     
   }
   changeContent = (data) =>{
-    // let com = {
-    //   content: data
-    // }
     this.props.AddComment(this.props.idissue, data)
   }
   render() {
+    const { issues } = this.props
       return (
         <div >
           <Grid container>
             <Grid item xs={12}>
-
+              <ListCommentUI listcomment={issues.comment} />
             </Grid>
             <Grid item xs={12}>
               <AddCommentUI changeContent={this.changeContent}/>
@@ -35,6 +34,7 @@ class CommentContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
+      issues: state.issues
     }
 }
 

@@ -30,7 +30,7 @@ export default function AddCommentUI({changeContent}) {
             <AccountCircle />
           </Grid>
           <Grid item xs={11}>
-            <TextField fullWidth size="normal"
+            <TextField fullWidth size="medium"
               onChange={handleChange('content')} id="input-with-icon-grid" label="Add comment" />
           </Grid>
         </Grid>

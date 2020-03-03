@@ -7,13 +7,13 @@ import IssueUI from './IssueUI'
 import * as action from './action'
 
 class IssueContainer extends Component {
+  
   componentWillUpdate(nextProps, nextState, snapshot) {
     
   }
 
   render() {
       const {  issues } = this.props
-      console.log(issues)
       return (
         <div >
           <IssueUI issue={issues}/>

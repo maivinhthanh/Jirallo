@@ -30,7 +30,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function IssueUI({issue}) {
   const classes = useStyles();
-  console.log(issue)
   return (
     <div className={classes.root}>
       <AppBar position="static">
