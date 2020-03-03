@@ -2,12 +2,10 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/Inbox';
 import Icon from '@material-ui/core/Icon';
 import _ from 'lodash'
-
+import { Link } from "react-router-dom";
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -16,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SelectedListItem({listissues, selectIssues}) {
+export default function SelectedListItem({idproject, listissues, selectIssues}) {
   const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = React.useState(null);
 
@@ -32,19 +30,21 @@ export default function SelectedListItem({listissues, selectIssues}) {
           listissues.length != 0 ?
           _.map(listissues, (item, index) =>{
             return (
-              <ListItem 
-                button key={index}
-                selected={selectedIndex === index}
-                onClick={event => handleListItemClick(event, index)}
-              > 
-                  {
-                    item.type === 'bug' 
-                    ? <Icon className="fa fa-bug" color="secondary" /> 
-                    : <Icon className="fa fa-tasks" color="primary" />
-                  }
-                  
-                <ListItemText primary={item.name} />
-              </ListItem>
+              <Link to={`/issues/${idproject}/${item._id}`} key={index}>
+                <ListItem 
+                  button 
+                  selected={selectedIndex === index}
+                  onClick={event => handleListItemClick(event, index)}
+                > 
+                    {
+                      item.type === 'bug' 
+                      ? <Icon className="fa fa-bug" color="secondary" /> 
+                      : <Icon className="fa fa-tasks" color="primary" />
+                    }
+                    
+                  <ListItemText primary={item.name} />
+                </ListItem>
+              </Link>
             )
           })
           :<ListItem

@@ -74,7 +74,7 @@ class IssuesContainer extends Component {
   }
   
   render() {
-      const { listissues, idsprint } = this.props
+      const { listissues, idsprint, idproject } = this.props
       let listissuesEmpty
       if(listissues){
         listissuesEmpty = listissues.length !== 0
@@ -95,7 +95,7 @@ class IssuesContainer extends Component {
             listissuesEmpty
               ? _.map(listissues, (item, index) =>{
                 return(
-                  <IssuesUI item={item} key={index} handleAddIssueIntoSprint={(id, issue) => this.IssueToSprint(id, issue)}/> 
+                  <IssuesUI idproject={idproject} item={item} key={index} handleAddIssueIntoSprint={(id, issue) => this.IssueToSprint(id, issue)}/> 
                 )
               })
                   

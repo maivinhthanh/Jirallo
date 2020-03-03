@@ -70,7 +70,7 @@ export default function TemporaryDrawer({idproject}) {
         </Link>
       </List>
       <List>
-        <Link to={`/issues/${idproject}`}>
+        <Link to={`/issues/${idproject}/null`}>
           <ListItem button >
             <Icon className="fas fa-tasks" />
             <ListItemText primary={'Issues'} />

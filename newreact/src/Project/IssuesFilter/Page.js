@@ -7,10 +7,19 @@ import UI from './UI'
 import MenuProject from '../../Core/Home/Menu/MenuProject'
 import Toast from '../../Components/Toast'
 import * as action from './action'
+import * as actionFilter from './Filter/action'
 
 class IssuesFilterPage extends Component {
-  componentWillMount(){
-    this.props.ViewInfoProject(this.props.match.params.id)
+  async componentWillMount(){
+    this.props.ViewInfoProject(this.props.match.params.idproject)
+    if(this.props.match.params.idissues === 'null')
+    {
+
+    }
+    else if(this.props.match.params.idissues){
+      await this.props.GetComment(this.props.match.params.idissues)
+      await this.props.SelectIssues(this.props.match.params.idissues)
+    }
   }
   render() {
       const { match: { params } } = this.props
@@ -18,8 +27,8 @@ class IssuesFilterPage extends Component {
       return (
         <Grid  >
           
-              <MenuProject idproject={params.id}/>
-              <UI idproject={params.id}/>
+              <MenuProject idproject={params.idproject}/>
+              <UI idproject={params.idproject}/>
               <Toast open={note.show} message={note.message} type={note.type} />
 
         </Grid>
@@ -37,7 +46,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-      ViewInfoProject: (id) => dispatch(action.ViewInfoProject(id))
+      ViewInfoProject: (id) => dispatch( action.ViewInfoProject(id)),
+      SelectIssues:(issue) => dispatch( actionFilter.SelectIssues(issue) ),
+      GetComment:(idissue) => dispatch( actionFilter.GetComment(idissue) ),
     }
 }
 

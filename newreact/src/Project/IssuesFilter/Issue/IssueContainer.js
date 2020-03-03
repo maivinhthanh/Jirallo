@@ -13,7 +13,7 @@ class IssueContainer extends Component {
   }
 
   render() {
-      const {  issues } = this.props
+      const { issues } = this.props
       return (
         <div >
           <IssueUI issue={issues}/>

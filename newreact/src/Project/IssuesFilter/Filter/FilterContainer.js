@@ -25,7 +25,6 @@ class FilterContainer extends Component {
    selectIssues = async (issue) =>{
     await this.props.GetComment(issue)
     await this.props.SelectIssues(issue)
-    
 
   }
   

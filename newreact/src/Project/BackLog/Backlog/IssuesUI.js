@@ -2,6 +2,7 @@ import React from 'react';
 import _ from 'lodash'
 import { useDrag } from 'react-dnd'
 import { useDrop } from 'react-dnd'
+import { Link } from "react-router-dom";
 
 export default function IssueAdd(props) {
     const [{ isDragging }, drag] = useDrag({
@@ -56,16 +57,23 @@ export default function IssueAdd(props) {
                             cursor: 'move',
                             border: '1px solid #ccaa', height: '40px',
                             padding: '5px'
-                        }}
-                        className="col-md-12">
-                        <span onClick={()=> showInfomation(props.item._id)}>
-                            <span className="mr-2">
-                                {props.item.type === 'bug' ? <i className="fas fa-bug" style={{ color: 'red' }}></i> : <i className="fas fa-tasks" style={{ color: 'green' }}></i>}
-                            </span>
-                            {props.item.name}
-                        </span>
-                        
+                        }} className="row" >
+                            <div className="col-md-11">
+                                <span onClick={()=> showInfomation(props.item._id)}>
+                                    <span className="mr-2">
+                                        {props.item.type === 'bug' ? <i className="fas fa-bug" style={{ color: 'red' }}></i> : <i className="fas fa-tasks" style={{ color: 'green' }}></i>}
+                                    </span>
+                                    {props.item.name}
+                                    
+                                </span>
+                            </div>
+                            <div className="col-md-1" style={{display:'flex'}}>
+                                <Link to={`/issues/${props.idproject}/${item._id}`} >
+                                    <i className="fas fa-info-circle" ></i> 
+                                </Link>
+                            </div>
                     </div>
+                    
                 </div>
                 {isOver && (
                     <div style={{

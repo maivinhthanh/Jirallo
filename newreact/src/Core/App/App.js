@@ -61,7 +61,7 @@ class App extends Component {
             <PrivateRoute path="/infouser/:id" isAuth={isAuth} component={InfoUser} />
             <PrivateRoute path="/viewAll" isAuth={isAuth} component={ListProject} />
             {/* <PrivateRoute path="/adminPage" isAuth={isAuth} component={MainPage} /> */}
-            <PrivateRoute path="/issues/:id" isAuth={isAuth} component={IssuesFilter} />
+            <PrivateRoute path="/issues/:idproject/:idissues" isAuth={isAuth} component={IssuesFilter} />
             <PrivateRoute path="/config/:id?" isAuth={isAuth} component={ConfigProject} />
             {/* <PrivateRoute path="/*" isAuth={isAuth} component={NotPage} /> */}
         </div>
