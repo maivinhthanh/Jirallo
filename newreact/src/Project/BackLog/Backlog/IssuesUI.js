@@ -4,6 +4,8 @@ import { useDrag } from 'react-dnd'
 import { useDrop } from 'react-dnd'
 import { Link } from "react-router-dom";
 
+import IssueInfoModal from './IssueInfoModal'
+
 export default function IssueAdd(props) {
     const [{ isDragging }, drag] = useDrag({
         item: { type: 'issue', issue: props.item },
@@ -58,7 +60,7 @@ export default function IssueAdd(props) {
                             border: '1px solid #ccaa', height: '40px',
                             padding: '5px'
                         }} className="row" >
-                            <div className="col-md-11">
+                            <div className="col-md-10">
                                 <span onClick={()=> showInfomation(props.item._id)}>
                                     <span className="mr-2">
                                         {props.item.type === 'bug' ? <i className="fas fa-bug" style={{ color: 'red' }}></i> : <i className="fas fa-tasks" style={{ color: 'green' }}></i>}
@@ -69,8 +71,13 @@ export default function IssueAdd(props) {
                             </div>
                             <div className="col-md-1" style={{display:'flex'}}>
                                 <Link to={`/issues/${props.idproject}/${item._id}`} >
-                                    <i className="fas fa-info-circle" ></i> 
+                                    <i className="fas fa-arrow-right"></i>
                                 </Link>
+                            </div>
+                            <div className="col-md-1" style={{display:'flex'}}>
+                                <span >
+                                    <IssueInfoModal idissue={props.item._id} />
+                                </span>
                             </div>
                     </div>
                     

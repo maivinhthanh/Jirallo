@@ -77,6 +77,14 @@ export default function TemporaryDrawer({idproject}) {
           </ListItem>
         </Link>
       </List>
+      <List>
+        <Link to={`/report/${idproject}`}>
+          <ListItem button >
+            <Icon className="fas fa-book" />
+            <ListItemText primary={'Report'} />
+          </ListItem>
+        </Link>
+      </List>
     </div>
   );
 

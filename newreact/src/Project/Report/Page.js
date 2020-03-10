@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-
 import UI from './UI'
 import MenuProject from '../../Core/Home/Menu/MenuProject'
 import Toast from '../../Components/Toast'
 
-class BackLogPage extends Component {
+class ReportPage extends Component {
   
   render() {
       const { match: { params } } = this.props
@@ -35,4 +34,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BackLogPage)
+export default connect(mapStateToProps, mapDispatchToProps)(ReportPage)

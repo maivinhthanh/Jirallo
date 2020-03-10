@@ -58,6 +58,10 @@ const projectSchema = new Schema({
             ref: 'Group',
         }
     ],
+    idreport: {
+        type: Schema.Types.ObjectId,
+        ref: 'Report',
+    },
     activesprint: {
         type: Schema.Types.ObjectId,
         ref: 'Sprint',
