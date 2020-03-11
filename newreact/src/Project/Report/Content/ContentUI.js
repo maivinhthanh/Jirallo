@@ -38,7 +38,7 @@ const useTreeItemStyles = makeStyles(theme => ({
     },
   },
   expanded: {},
-  selected: {},
+  // selected: {},
   label: {
     fontWeight: 'inherit',
     color: 'inherit',
@@ -57,7 +57,7 @@ const useTreeItemStyles = makeStyles(theme => ({
 
 function StyledTreeItem(props) {
   const classes = useTreeItemStyles();
-  const { labelText, labelInfo, color, bgColor, ...other } = props;
+  const { labelText, labelInfo, color, bgColor, nodeId, ...other } = props;
   
   return (
     <TreeItem 
@@ -79,16 +79,18 @@ function StyledTreeItem(props) {
         root: classes.root,
         content: classes.content,
         expanded: classes.expanded,
-        selected: classes.selected,
+        // selected: classes.selected,
         group: classes.group,
         label: classes.label,
       }}
+      nodeId={nodeId}
       {...other}
     />
   );
 }
 
 StyledTreeItem.propTypes = {
+  nodeId: PropTypes.string,
   bgColor: PropTypes.string,
   color: PropTypes.string,
   labelInfo: PropTypes.string,
@@ -103,70 +105,72 @@ const useStyles = makeStyles({
   },
 });
 
-export default function GmailTreeView() {
+export default function ContentUI({selectContent}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState([]);
   const [selected, setSelected] = React.useState([]);
 
   const handleToggle = (event, nodeIds) => {
     setExpanded(nodeIds);
-  };
-  const handleSelect = (event, nodeIds) => {
-    setSelected(nodeIds);
-    console.log(nodeIds)
+    
   };
 
+  const handleSelect = (event, nodeIds) => {
+    setSelected(nodeIds);
+    selectContent(nodeIds)
+  };
   return (
     <TreeView
       className={classes.root}
-      defaultExpanded={['1']}
+      // defaultExpanded={['1']}
       defaultCollapseIcon={<ArrowDropDownIcon />}
       defaultExpandIcon={<ArrowRightIcon />}
-      defaultEndIcon={<div style={{ width: 24 }} />}
+      defaultEndIcon={<div style={{ width: 20 }} />}
       expanded={expanded}
       selected={selected}
-      onNodeSelect={handleSelect}
       onNodeToggle={handleToggle}
+      onNodeSelect={handleSelect}
     >
-      <StyledTreeItem nodeId="1" labelText="Cover"  />
-      <StyledTreeItem nodeId="2" labelText="Survey" />
-      <StyledTreeItem nodeId="3" labelText="Criteria" >
+      
+      <StyledTreeItem nodeId="Cover" labelText="Cover"  />
+      <StyledTreeItem nodeId="Survey" labelText="Survey" />
+      <StyledTreeItem nodeId="Criteria" labelText="Criteria" >
         <StyledTreeItem
-          nodeId="6"
+          nodeId="Advantages"
           labelText="Advantages"
           color="#1a73e8"
           bgColor="#e8f0fe"
         />
         <StyledTreeItem
-          nodeId="7"
+          nodeId="Defect"
           labelText="Defect"
           color="#e3742f"
           bgColor="#fcefe3"
         />
       </StyledTreeItem>
-      <StyledTreeItem nodeId="4" labelText="Usecase" >
+      <StyledTreeItem nodeId="Usecase" labelText="Usecase" >
         <StyledTreeItem
-          nodeId="8"
+          nodeId="General"
           labelText="General"
           color="#1a73e8"
           bgColor="#e8f0fe"
         />
         <StyledTreeItem
-          nodeId="9"
+          nodeId="Actor"
           labelText="Actor"
           color="#e3742f"
           bgColor="#fcefe3"
         />
       </StyledTreeItem>
-      <StyledTreeItem nodeId="5" labelText="Database" >
+      <StyledTreeItem nodeId="Database" labelText="Database" >
         <StyledTreeItem
-          nodeId="10"
+          nodeId="Database-Usecase"
           labelText="Usecase"
           color="#1a73e8"
           bgColor="#e8f0fe"
         />
         <StyledTreeItem
-          nodeId="11"
+          nodeId="Table"
           labelText="Table"
           color="#e3742f"
           bgColor="#fcefe3"

@@ -2,16 +2,18 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import UI from './UI'
+import ContentUI from './ContentUI'
 import * as action from './action'
 
 class ContentContainer extends Component {
   
-  
+    selectContent = (data) =>{
+        this.props.selectContent(data)
+    }
     render() {
         return (
             <div >
-                <UI />
+                <ContentUI selectContent={this.selectContent}/>
             </div>
         )
         
