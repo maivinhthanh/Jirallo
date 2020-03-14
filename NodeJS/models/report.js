@@ -32,6 +32,20 @@ const reportSchema = new Schema({
         type: String,
         default: ""
     },
+    introduce:{
+        urgency: {
+            type: String,
+            default: ""
+        },
+        target: {
+            type: String,
+            default: ""
+        },
+        structure: {
+            type: String,
+            default: ""
+        }
+    },
     survey:[
         {
             type: String,
