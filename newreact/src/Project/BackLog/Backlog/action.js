@@ -13,6 +13,62 @@ export const addNameSprint = (data) => {
         data: data
     }
 }
+export const beginSprint = (data) => {
+    //Send data to server not write reducer
+    return {
+        type: 'BEGIN_SPRINT',
+        data
+    }
+}
+export const updateName = (data) => {
+    return {
+        type: 'UPDATE_NAME',
+        data
+    }
+}
+export const createIssue = (name, type, idproject) => {
+    return dispatch => {
+        return CallApi(`issues/createIssues`, 'POST', {
+            name,
+            type,
+            idproject
+        }).then(respone => {
+            console.log(respone)
+        })
+    }
+}
+export const updateNameSprint = (id, name) => {
+    return dispatch => {
+        return CallApi(`sprint/editSprint/${id}`,'PUT',{
+            name
+        }).then(respone => {
+            let data = respone.data.newsprint
+            data.id = id
+            dispatch(updateName(data))
+        }).catch(err => {
+            dispatch(Notification.Error(err))
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
+export const beginStatusSprint = (idsprint, idproject) => {
+    return dispatch => {
+        return CallApi(`sprint/beginsprint/${idproject}`,'PUT',{
+            idsprint
+        }).then(response => {
+            if(response.status === 201) {
+                dispatch(beginSprint(response.data.newsprint))
+            }
+        }).catch(err => {
+            dispatch(Notification.Error(err))
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
 
 export const handleSaveName = (name,id) => {
     return dispatch => {
@@ -25,14 +81,12 @@ export const handleSaveName = (name,id) => {
                 dispatch(addNameSprint(response.data.newsprint));
             }
             else {
-                console.log('loi roi')
                 dispatch(Notification.Error(response.data))
                 setTimeout(() => {
                     dispatch(Notification.hideNotification())
                 }, 5000)
             }
         }).catch(err => {
-            console.log(err)
             dispatch(Notification.Error(err))
             setTimeout(() => {
                 dispatch(Notification.hideNotification())
@@ -73,6 +127,7 @@ export const showlistsprint = (data) =>{
 }
 
 export const ShowListSprint = (id,iduser = null) => {
+    console.log(id)
     return dispatch => {
         return CallApi(`sprint/viewListSprint/${id}`,
         'POST',
@@ -80,7 +135,6 @@ export const ShowListSprint = (id,iduser = null) => {
         ).then (response =>{
             if(response.status === 201){
                 dispatch(showlistsprint(response.data.listsprint));
-                
             }
             else {
                 dispatch(Notification.Error(response.data))
@@ -106,6 +160,7 @@ export const viewlistissuesinsprint = (idsprint, data) =>{
 }
 
 export const ViewListIssueInSprint = (idproject, idsprint = null, iduser = null) => {
+    console.log(idproject)
     return dispatch => {
         return CallApi(`sprint/viewListIssuesInSprint/${idproject}`,
         'POST',
@@ -119,6 +174,7 @@ export const ViewListIssueInSprint = (idproject, idsprint = null, iduser = null)
                 
             }
             else {
+                alert('1')
                 dispatch(Notification.Error(response.data))
                 setTimeout(() => {
                     dispatch(Notification.hideNotification())
@@ -126,6 +182,7 @@ export const ViewListIssueInSprint = (idproject, idsprint = null, iduser = null)
             }
         })
         .catch(error =>{
+            alert('2')
             dispatch(Notification.ErrorAPI(error));
             setTimeout(() => {
                 dispatch(Notification.hideNotification())

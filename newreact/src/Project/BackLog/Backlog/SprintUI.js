@@ -10,6 +10,17 @@ import Icon from '@material-ui/core/Icon';
 import SearchIcon from '@material-ui/icons/Search';
 
 import Issues from './Issues'
+import * as actions from './action'
+import { connect } from 'react-redux'
+import InputField from '../Backlog/inputField'
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import Select from '@material-ui/core/Select';
+import NativeSelect from '@material-ui/core/NativeSelect';
+
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -71,31 +82,64 @@ const useStyles = makeStyles(theme => ({
       display: 'none',
     },
   },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
 }));
 
-export default function PrimarySearchAppBar({idproject, sprint}) {
+function PrimarySearchAppBar(props) {
+  const [open, setOpen] = React.useState(false);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [idsprint, setSprint] = React.useState('')
+  const [nameIssue, setName] = React.useState('');
+  const [optionChoose, setOption] = React.useState('')
 
-  const AddIssueOnSprint = (id) => {
-    console.log(id)
+  const beginSprint = (id) => {
+    props.beginStatusSprint(id, props.idproject)
   }
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
-  
+  const updateNameSprint = (name, id) => {
+    props.updateNameSprint(id, name)
+  }
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleChange = (e) => {
+    setName(e.target.value)
+  }
+  const handleChangeSelect = (e) => {
+    setOption(e.target.value)
+  }
+  const SaveIssue = () => {
+    props.createIssue(nameIssue, optionChoose, props.idproject)
+  }
   return (
     <Container className={classes.grow}>
       <AppBar position="static">
         <Toolbar >
-          
+
           <Typography className={classes.title} variant="h6" noWrap>
-            {sprint.name}
+            <InputField nameInput={'issue'} sprint={props.sprint} size="30px" arrow="10px" margin="10px"
+              changeName={(data, name) => updateNameSprint(data, props.sprint._id)}>{props.sprint.name}</InputField>
           </Typography>
-          
+
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -111,13 +155,13 @@ export default function PrimarySearchAppBar({idproject, sprint}) {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <Icon className="fas fa-play" />
+            <Icon className="fas fa-play" onClick={() => beginSprint(props.sprint._id)} />
             <Icon className="fas fa-pencil-alt" />
-            <Icon className="fas fa-plus" onClick={ () => AddIssueOnSprint(sprint._id)} />
+            <Icon className="fas fa-plus" onClick={handleOpen} />
           </div>
           <div className={classes.sectionMobile}>
             <Icon
-              className="fas fa-ellipsis-v" 
+              className="fas fa-ellipsis-v"
             >
               <MoreIcon />
             </Icon>
@@ -125,9 +169,68 @@ export default function PrimarySearchAppBar({idproject, sprint}) {
         </Toolbar>
       </AppBar>
       <Grid>
-        <Issues idproject={idproject} idsprint={sprint._id} listissues={sprint.listissues}/> 
-          
+        <Issues idproject={props.idproject} idsprint={props.sprint._id} listissues={props.sprint.listissues} />
+
       </Grid>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paper}>
+            <form className={classes.root} noValidate autoComplete="off">
+              <TextField style={{marginBottom:'20px'}} id="standard-basic" label="name issue"
+               value={nameIssue}
+               onChange={handleChange}
+              />
+              <br/>
+              <Select
+                native
+                value={optionChoose}
+                onChange={handleChangeSelect}
+                style={{marginBottom:'20px'}}
+                inputProps={{
+                  name: 'age',
+                  id: 'age-native-simple',
+                }}
+              >
+                <option value="" />
+                <option value='bug'>Bug</option>
+                <option value='task'>Task</option>
+              </Select>
+                <br/>
+              <Button style={{ marginLeft:'80px' }} variant="contained"
+              onClick={SaveIssue}
+               color="primary">
+                Save
+              </Button>
+            </form>
+          </div>
+        </Fade>
+      </Modal>
     </Container>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    listsprint: state.listsprint
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    beginStatusSprint: (idsprint, idproject) => dispatch(actions.beginStatusSprint(idsprint, idproject)),
+    updateNameSprint: (id, name) => dispatch(actions.updateNameSprint(id, name)),
+    createIssue : (nameIssue, optionChoose, idproject) => dispatch(actions.createIssue(nameIssue, optionChoose, idproject))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PrimarySearchAppBar)
