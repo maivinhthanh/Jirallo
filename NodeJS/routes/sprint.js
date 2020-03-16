@@ -36,7 +36,7 @@ router.put('/deleteSprint/:idproject',upload.single('avatar'),isAuth,
     
     sprintController.deleteSprint,
 )
-router.put('/addAndSortIssuesInSprint/:idsprint',upload.single('avatar'),isAuth, 
+router.put('/addAndSortIssuesInSprint/:idissues',upload.single('avatar'),isAuth, 
     
     sprintController.addAndSortIssuesInSprint,
 )

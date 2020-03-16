@@ -10,11 +10,11 @@ export default class Sprint extends Component {
 
   }
   render() {
-      const { sprint, idproject } = this.props
+      const { sprint, idproject, selectuser } = this.props
       return (
         <div >
           <Grid container spacing={1} >
-              <SprintUI idproject={idproject} sprint={sprint} />
+              <SprintUI idproject={idproject} sprint={sprint} selectuser={selectuser}/>
           </Grid>
         </div>
       )

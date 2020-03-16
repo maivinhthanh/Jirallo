@@ -23,11 +23,13 @@ const initialState = {
 const updatestate = (state, action) =>{
    return updateObject( state, action.data);
 }
-
+const addProcess = (state, action) =>{
+    return updateObject( state, action.data);
+}
 const projectReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'GET_INFO_PROJECT': return updatestate( state, action );
-        
+        case 'ADD_PROCESS': return addProcess( state, action );
         default: return state;
     }
 };

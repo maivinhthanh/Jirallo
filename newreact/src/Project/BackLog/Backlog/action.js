@@ -26,6 +26,24 @@ export const updateName = (data) => {
         data
     }
 }
+export const getInfoIssue = (data) => {
+    return {
+        type: 'GET_INFO_ISSUE',
+        data
+    }
+}
+export const showInfomationIssue = (id) => {
+    return dispatch => {
+        return CallApi(`issues/getInfoIssues/${id}`,'GET').then(respone => {
+            dispatch(getInfoIssue(respone.data))
+        }).catch(err => {
+            dispatch(Notification.Error(err))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+        })
+    }
+}
 export const createIssue = (name, type, idproject) => {
     return dispatch => {
         return CallApi(`issues/createIssues`, 'POST', {
@@ -191,24 +209,26 @@ export const ViewListIssueInSprint = (idproject, idsprint = null, iduser = null)
     }
 }
 
-export const addandsortissuesinsprint = (idsprint, data) =>{
+export const addandsortissuesinsprint = (data) =>{
     return {
         type:'ADD_AND_SORT_ISSUES_IN_SPRINT',
-        idsprint: idsprint,
-        data: data
+        idsprintgive: data.idSprintGive,
+        idsprinttake: data.idSprintTake,
+        data: data.newData
     }
 }
-export const AddAndSortIssuesInSprint = (idSprint, newissue, listIssueId ) => {
+export const AddAndSortIssuesInSprint = (idSprintGive, idSprintTake, idIssues, listissues ) => {
     return dispatch => {
-        return CallApi(`sprint/addAndSortIssuesInSprint/${idSprint}`,
+        return CallApi(`sprint/addAndSortIssuesInSprint/${idIssues}`,
         'PUT',
         {
-            listissues: listIssueId,
-            newissues: newissue
+            idsprintgive: idSprintGive,
+            idsprinttake: idSprintTake,
+            listissues: listissues
         }
         ).then (response =>{
             if(response.status === 200){
-                let data = {newData: response.data.listissues, idSprint: idSprint}
+                let data = {idSprintGive: idSprintGive, idSprintTake: idSprintTake}
                 dispatch(addandsortissuesinsprint(data));
                 
             }
@@ -226,4 +246,34 @@ export const AddAndSortIssuesInSprint = (idSprint, newissue, listIssueId ) => {
             }, 5000)
         })
     }
-  }
+}
+export const selectIssues = (issue) =>{
+    return {
+        type:'SELECT_ISSUES_IN_FILTER',
+        data: issue
+    }
+}
+export const SelectIssues = (idissues, ) =>{
+    return dispatch =>{
+        return CallApi(`issues/getInfoIssues/${idissues}`,'GET',{
+        }).then (response =>{
+            if(response.status === 200){
+                
+                dispatch(selectIssues(response.data.issues));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}

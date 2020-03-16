@@ -318,10 +318,6 @@ exports.getInfoIssues = async (req, res, next) => {
     try{
         const idissues = req.params.idissues
 
-        const dataupdate = {
-            process: process
-        }
-
         const issues = await Issues.findById(idissues).populate({
             path: 'idsprint',
             match:{
@@ -353,8 +349,15 @@ exports.getInfoIssues = async (req, res, next) => {
             },
             select:['idproject','name', 'avatar', 'image']
         })
+        .populate({
+            path: 'comment',
+            match:{
+                hidden: false,
+            },
+            select:['author','assignee', 'content', 'image']
+        })
 
-        res.status(201).json({ issues:issues})
+        res.status(200).json({ issues:issues})
 
     }
     catch(err) {
@@ -383,6 +386,33 @@ exports.deleteIssues = async (req, res, next) => {
 
         res.status(201).json({ statusCode: 200 })
 
+    }
+    catch(err) {
+        
+        next(err)
+    }
+    
+}
+exports.filterListIssues = async (req, res, next) => {
+    try{
+        const idproject = req.params.idproject
+        const process = req.body.process
+        if(process === null){
+            const issues = await Issues.find({
+                idproject: idproject
+            })
+    
+            res.status(200).json({ listissues: issues})
+        }
+        else{
+            const issues = await Issues.find({
+                idproject: idproject,
+                process: process
+            })
+    
+            res.status(200).json({ listissues: issues})
+        }
+        
     }
     catch(err) {
         

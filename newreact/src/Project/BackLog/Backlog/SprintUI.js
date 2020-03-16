@@ -95,7 +95,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function PrimarySearchAppBar(props) {
+function PrimarySearchAppBar({idproject, sprint, selectuser, props}) {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -104,7 +104,7 @@ function PrimarySearchAppBar(props) {
   const [optionChoose, setOption] = React.useState('')
 
   const beginSprint = (id) => {
-    props.beginStatusSprint(id, props.idproject)
+    props.beginStatusSprint(id, idproject)
   }
 
   const handleMobileMenuClose = () => {
@@ -128,7 +128,7 @@ function PrimarySearchAppBar(props) {
     setOption(e.target.value)
   }
   const SaveIssue = () => {
-    props.createIssue(nameIssue, optionChoose, props.idproject)
+    props.createIssue(nameIssue, optionChoose, idproject)
   }
   return (
     <Container className={classes.grow}>
@@ -136,8 +136,8 @@ function PrimarySearchAppBar(props) {
         <Toolbar >
 
           <Typography className={classes.title} variant="h6" noWrap>
-            <InputField nameInput={'issue'} sprint={props.sprint} size="30px" arrow="10px" margin="10px"
-              changeName={(data, name) => updateNameSprint(data, props.sprint._id)}>{props.sprint.name}</InputField>
+            <InputField nameInput={'issue'} sprint={sprint} size="30px" arrow="10px" margin="10px"
+              changeName={(data, name) => updateNameSprint(data, sprint._id)}>{sprint.name}</InputField>
           </Typography>
 
           <div className={classes.search}>
@@ -155,7 +155,7 @@ function PrimarySearchAppBar(props) {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <Icon className="fas fa-play" onClick={() => beginSprint(props.sprint._id)} />
+            <Icon className="fas fa-play" onClick={() => beginSprint(sprint._id)} />
             <Icon className="fas fa-pencil-alt" />
             <Icon className="fas fa-plus" onClick={handleOpen} />
           </div>
@@ -169,8 +169,7 @@ function PrimarySearchAppBar(props) {
         </Toolbar>
       </AppBar>
       <Grid>
-        <Issues idproject={props.idproject} idsprint={props.sprint._id} listissues={props.sprint.listissues} />
-
+        <Issues idproject={idproject} idsprint={sprint._id} listissues={sprint.listissues} selectuser={selectuser} />
       </Grid>
       <Modal
         aria-labelledby="transition-modal-title"

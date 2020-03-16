@@ -13,7 +13,9 @@ class ActiveSprintContainer extends Component {
   render() {
       const { idproject, project, listissues, ChangeProcessIssue } = this.props
       return (
+        <div>
           <UI idproject={idproject} project={project} listissues={listissues} ChangeProcessIssue={ChangeProcessIssue}/>
+          </div>
       )
     
   }

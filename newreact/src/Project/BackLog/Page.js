@@ -7,7 +7,7 @@ import UI from './UI'
 import MenuProject from '../../Core/Home/Menu/MenuProject'
 import Toast from '../../Components/Toast'
 
-class ActiveSprintPage extends Component {
+class BackLogPage extends Component {
   
   render() {
       const { match: { params } } = this.props
@@ -35,4 +35,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActiveSprintPage)
+export default connect(mapStateToProps, mapDispatchToProps)(BackLogPage)

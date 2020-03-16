@@ -13,11 +13,11 @@ import ActiveSprint from '../../Project/ActiveSprint/Page'
 // import Group from './Components/Group/Group';
 import Backlog from '../../Project/BackLog/Page';
 import InfoUser from '../../InfoUser/Page';
-// import ProfileProject from './Page/ProfileProject'
+import Report from '../../Project/Report/Page'
 import HTML5Backend from 'react-dnd-html5-backend'
 import ListProject from '../../ListProject/Page'
-// import IssuesPage from './Page/IssuesPage'
-// import ConfigProjectPage from './Page/ConfigProjectPage'
+import IssuesFilter from '../../Project/IssuesFilter/Page'
+import ConfigProject from '../../Project/ConfigProject/Page'
 import PrivateRoute from '../../PrivateRoute'
 
 import * as actions from './action';
@@ -54,15 +54,15 @@ class App extends Component {
             <PrivateRoute path="/" isAuth={isAuth} exact component={HomePage} />
             <PrivateRoute path="/user" isAuth={isAuth} component={HomePage} />
             <PrivateRoute path="/backlog/:id?" isAuth={isAuth} component={Backlog} />
-            {/* <PrivateRoute path="/Profile/:id?" isAuth={isAuth} component={ProfileProject} /> */}
+            <PrivateRoute path="/report/:id?" isAuth={isAuth} component={Report} />
             <PrivateRoute path="/active/:id?" isAuth={isAuth} component={ActiveSprint} />
             {/* <PrivateRoute path='/group' isAuth={isAuth} component={Group} /> */}
             {/* <PrivateRoute path="/admin" isAuth={isAuth} component={AdminPage} /> */}
             <PrivateRoute path="/infouser/:id" isAuth={isAuth} component={InfoUser} />
             <PrivateRoute path="/viewAll" isAuth={isAuth} component={ListProject} />
             {/* <PrivateRoute path="/adminPage" isAuth={isAuth} component={MainPage} /> */}
-            {/* <PrivateRoute path="/issues/:idproject/:idissues" isAuth={isAuth} component={IssuesPage} /> */}
-            {/* <PrivateRoute path="/config/:id?" isAuth={isAuth} component={ConfigProjectPage} /> */}
+            <PrivateRoute path="/issues/:idproject/:idissues" isAuth={isAuth} component={IssuesFilter} />
+            <PrivateRoute path="/config/:id?" isAuth={isAuth} component={ConfigProject} />
             {/* <PrivateRoute path="/*" isAuth={isAuth} component={NotPage} /> */}
         </div>
       </DndProvider>

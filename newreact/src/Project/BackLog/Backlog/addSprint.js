@@ -45,6 +45,8 @@ function SimpleModal(props) {
   const saveSprint = () => {
     const idproject = props.idproject
     props.handleSaveName(namesprint,idproject)
+    setOpen(false);
+
   }
 
   const handleOpen = () => {
@@ -56,7 +58,7 @@ function SimpleModal(props) {
   };
 
   return (
-    <div>
+    <div style={{marginTop:'30px', marginBottom:'20px'}}>
       <button className='btn' style={{background: '#3f51b5', color: 'white'}} type="button" onClick={handleOpen}>
         Add Sprint
       </button>

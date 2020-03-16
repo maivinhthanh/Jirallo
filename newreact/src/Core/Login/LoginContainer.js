@@ -26,7 +26,7 @@ class LoginContainer extends Component {
   haveRedirect(){
     
     if(this.props.user.hasAuth){
-      return <Redirect to="/user" />
+      return <Redirect to="/" />
     }
 
   }

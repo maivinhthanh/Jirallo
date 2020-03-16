@@ -13,12 +13,12 @@ class ActiveSprintPage extends Component {
       const { match: { params } } = this.props
       const { note } = this.props
       return (
-        <Grid container >
+        <div >
           
               <MenuProject idproject={params.id}/>
               <UI idproject={params.id}/>
               <Toast open={note.show} message={note.message} type={note.type} />
-        </Grid>
+        </div>
       )
     
   }

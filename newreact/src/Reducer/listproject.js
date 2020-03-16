@@ -1,6 +1,6 @@
 const initialState = []
 const listproject = (state, action) =>{
-   return [...state, ...action.data ]
+   return [ ...action.data ]
 }
 const updateList = (state, action) => {
     let cloneState = [...state]
