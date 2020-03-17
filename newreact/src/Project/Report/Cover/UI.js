@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
+import DivAction from '../../../Components/InputEdit/DivActionUI'
+
 const useStyles = makeStyles({
   A4: {
     height: 842,
@@ -62,6 +64,7 @@ export default function ControlledTreeView() {
           <div className="cover-image">
             <img src="images/logo-spkt.jpg" alt="logo-spkt" />
           </div>
+          <DivAction size={18} marginBottom={3} margin={3} />
           <div className="row">
             <div className="col-6 text-right">
               <h6 className={classes.coverStudent}>MAI VĨNH THÀNH</h6>

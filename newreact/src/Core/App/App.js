@@ -33,8 +33,7 @@ class App extends Component {
   render(){
     let isAuth = false
     let token
-
-    // console.log(Cookies.get('token')!= 'undefined')
+    
     // console.log(Cookies.get('token')!= undefined )
     // console.log(Cookies.get('token')!= undefined && Cookies.get('token')!= 'undefined')
     if (!(!Cookies.get('token') && !Cookies.get('refreshtoken')) ){
