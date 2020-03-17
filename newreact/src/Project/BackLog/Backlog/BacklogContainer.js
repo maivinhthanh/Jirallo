@@ -26,6 +26,8 @@ class BacklogContainer extends Component {
   }
   componentWillUpdate(nextProps, nextState, snapshot) {
     if (nextState.selectuser != this.state.selectuser) {
+      this.ShowListIssueInBackLog(this.propsops.idproject, null)
+      //this.props.ShowListSprint(this.props.idproject, null)
       // this.props.ViewListIssueInSprint(this.props.idproject, this.props.idsprint, this.props.selectuser)        
     }
   }
@@ -64,6 +66,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
     return {
       ShowListSprint: (id, iduser) => dispatch(action.ShowListSprint(id, iduser)),
+      ShowListIssueInBackLog: (id, iduser) => dispatch(action.ShowListIssueInBackLog(id, iduser))
     }
 }
 

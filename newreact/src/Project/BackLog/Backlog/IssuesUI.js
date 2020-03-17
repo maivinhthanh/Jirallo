@@ -135,10 +135,6 @@ function IssueAdd(props) {
                     timeout: 500,
                 }}
             >
-               {/* <TextField id="standard-basic" label="process"/>
-                        <TextField id="standard-basic" label="repoter"/>
-                        <TextField id="standard-basic" label="comment"/>
-                        <TextField id="standard-basic" label="assignee"/> */}
                 <Fade in={open}>
                     <div className={classes.paper}>
                         <form className={classes.root} noValidate autoComplete="off">

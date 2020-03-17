@@ -46,6 +46,17 @@ const updateName = (state, action) => {
     })
     return cloneState
 }
+const createIssueBacklog = (state, action) => {
+    let cloneState = _.clone(state)
+    _.map(cloneState, (item) => {
+        if (item._id === null) {
+            item.listissues.push(action.data.newissues)
+        }
+    })
+    console.log(cloneState)
+    return cloneState
+
+}
 const listsprint = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'SHOW_LIST_SPRINT': return showListSprint( state, action ); 
@@ -53,6 +64,8 @@ const listsprint = ( state = initialState, action ) => {
         case 'SHOW_LIST_ISSUES_IN_BACKLOG': return showListIssueInBackLog( state, action ); 
         case 'ADD_NAME_SPRINT' : return createNameSprint(state, action);
         case 'UPDATE_NAME' : return updateName(state, action);
+        case 'CREATE_ISSUE_BACKLOG': return createIssueBacklog(state,action);
+
         default: return state;
     }
 };

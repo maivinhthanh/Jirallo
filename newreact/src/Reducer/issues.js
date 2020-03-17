@@ -42,7 +42,6 @@ const changeProcessIssue = (state, action) =>{
 const selectIssuesInFilter = (state, action) =>{
     let issue = updateObject(state,action.data )
     issue.comment = state.comment
-    console.log(issue)
     return issue
 }
 const getComment = (state, action) =>{
@@ -50,17 +49,16 @@ const getComment = (state, action) =>{
     return state
 }
 const getInfoIssue = (state, action) => {
-    console.log(state, action)
     let cloneState = _.clone(action.data.issues)
     return cloneState
 }
+
 const issuesReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'CHANGE_PROCESS_ISSUE': return changeProcessIssue( state, action ); 
         case 'SELECT_ISSUES_IN_FILTER': return selectIssuesInFilter( state, action ); 
         case 'GET_COMMENT': return getComment( state, action ); 
         case 'GET_INFO_ISSUE': return getInfoIssue(state, action);
-
         default: return state;
     }
 };

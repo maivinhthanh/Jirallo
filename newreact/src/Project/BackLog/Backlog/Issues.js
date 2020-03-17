@@ -75,6 +75,7 @@ class IssuesContainer extends Component {
   
   render() {
       const { listissues, idsprint, idproject } = this.props
+      console.log(listissues)
       let listissuesEmpty
       if(listissues){
         listissuesEmpty = listissues.length !== 0

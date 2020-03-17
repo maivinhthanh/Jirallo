@@ -95,7 +95,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function PrimarySearchAppBar({idproject, sprint, selectuser, props}) {
+function PrimarySearchAppBar({idproject, sprint, selectuser}, props) {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -128,7 +128,12 @@ function PrimarySearchAppBar({idproject, sprint, selectuser, props}) {
     setOption(e.target.value)
   }
   const SaveIssue = () => {
-    props.createIssue(nameIssue, optionChoose, idproject)
+    let issue = {
+      name: nameIssue,
+      type: optionChoose
+    }
+    console.log(issue, idproject, props)
+    // props.createIssue(issue, idproject)
   }
   return (
     <Container className={classes.grow}>
@@ -228,7 +233,8 @@ const mapDispatchToProps = dispatch => {
   return {
     beginStatusSprint: (idsprint, idproject) => dispatch(actions.beginStatusSprint(idsprint, idproject)),
     updateNameSprint: (id, name) => dispatch(actions.updateNameSprint(id, name)),
-    createIssue : (nameIssue, optionChoose, idproject) => dispatch(actions.createIssue(nameIssue, optionChoose, idproject))
+    createIssue : (issue, idproject) => dispatch(actions.createIssue(issue, idproject))
+    // createIssue : (nameIssue, optionChoose, idproject) => dispatch(actions.createIssue(nameIssue, optionChoose, idproject))
   }
 }
 

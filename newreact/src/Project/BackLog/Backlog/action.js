@@ -32,6 +32,12 @@ export const getInfoIssue = (data) => {
         data
     }
 }
+export const createIssueBacklog = (data) => {
+    return {
+        type: 'CREATE_ISSUE_BACKLOG',
+        data
+    }
+}
 export const showInfomationIssue = (id) => {
     return dispatch => {
         return CallApi(`issues/getInfoIssues/${id}`,'GET').then(respone => {
@@ -44,17 +50,36 @@ export const showInfomationIssue = (id) => {
         })
     }
 }
-export const createIssue = (name, type, idproject) => {
+export const createIssue = (issue, idproject) => {
     return dispatch => {
-        return CallApi(`issues/createIssues`, 'POST', {
-            name,
-            type,
+        return CallApi(`issues/createIssues`, 'POST',{
+            name: issue.name,
+            priority: issue.priority,
+            process: issue.process,
+            tag: issue.tag,
+            type: issue.type,
             idproject
         }).then(respone => {
-            console.log(respone)
+            dispatch(createIssueBacklog(respone.data))
+        }).catch(err => {
+            dispatch(Notification.Error(err))
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
         })
     }
 }
+// export const createIssue = (name, type, idproject) => {
+//     return dispatch => {
+//         return CallApi(`issues/createIssues`, 'POST', {
+//             name,
+//             type,
+//             idproject
+//         }).then(respone => {
+//             console.log(respone)
+//         })
+//     }
+// }
 export const updateNameSprint = (id, name) => {
     return dispatch => {
         return CallApi(`sprint/editSprint/${id}`,'PUT',{

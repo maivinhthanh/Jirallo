@@ -19,12 +19,18 @@ const filterIssues = (state, action) =>{
 
     return action.data
 }
+const createIssueBacklog = (state, action) => {
+    let cloneState = _.clone(state)
+    cloneState = action.data.newissues
+    return cloneState
+}
 const listIssuesReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'GET_ISSUES_IN_SPRINT_ACTIVE': return getIssuesInSprintActive( state, action ); 
         case 'CHANGE_PROCESS_ISSUE': return changeProcessIssueInListIssues( state, action ); 
         case 'FILTER_ISSUES': return filterIssues( state, action ); 
-
+        case 'CREATE_ISSUE_BACKLOG': return createIssueBacklog(state,action);
+        
         default: return state;
     }
 };

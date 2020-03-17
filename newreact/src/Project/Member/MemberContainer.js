@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import UI from './MemberUI'
 import * as action from './action'
 import AddSprint from '../BackLog/Backlog/addSprint';
+import Modalcreate from '../BackLog/Backlog/createIssue';
 
 class MemberContainer extends Component {
   componentWillMount() {
@@ -31,6 +32,7 @@ class MemberContainer extends Component {
         <Grid container >
               <UI listMember={listMember} selectUser={(id, index, status)=>this.selectUser(id, index, status)} />
               <AddSprint idproject={this.props.idproject}/>
+              <Modalcreate idproject={this.props.idproject}/>
         </Grid>
       )
     
