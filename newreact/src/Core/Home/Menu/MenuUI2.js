@@ -11,9 +11,10 @@ import Avatar from '@material-ui/core/Avatar';
 import jwtDecode from 'jwt-decode'
 import Cookies from 'js-cookie'
 let userId = null
-console.log(Cookies.get('token'))
-if (!Cookies.get('token')){
-  userId = jwtDecode(Cookies.get('token')).data.userId
+if (!(!Cookies.get('token') && !Cookies.get('refreshtoken')) ){
+  if(Cookies.get('token')!= undefined && Cookies.get('token')!= 'undefined'){
+    userId = jwtDecode(Cookies.get('refreshtoken')).data.userId
+  }
 }
 const useStyles = makeStyles(theme => ({
   root: {

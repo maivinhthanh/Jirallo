@@ -27,6 +27,8 @@ const initialState = {
 const login = ( state, action ) => {
     const token = action.token
     const refreshtoken = action.refreshtoken
+    Cookies.remove('token')
+    Cookies.remove('refreshtoken')
     Cookies.set('token', token, { expires: 1 });
     Cookies.set('refreshtoken', refreshtoken, { expires: 365 });
     CallApi('auth/getMyInfo', 'GET',{},'token')

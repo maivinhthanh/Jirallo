@@ -23,6 +23,7 @@ import PrivateRoute from '../../PrivateRoute'
 import * as actions from './action';
 
 class App extends Component {
+  
   shouldComponentUpdate(nextProps, nextState){
     return nextProps.user.code !== this.props.user.code
   }

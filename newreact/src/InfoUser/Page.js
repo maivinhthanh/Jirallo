@@ -37,8 +37,8 @@ class InfoUserContainer extends Component {
     const { match: { params } } = this.props
     const { note } = this.props
     let isAuth = false
-    if (Cookies.get('token') ){
-        let token = jwtDecode(Cookies.get('token'))
+    if (Cookies.get('refreshtoken') ){
+        let token = jwtDecode(Cookies.get('refreshtoken'))
         if(token.data.userId == params.id){
           isAuth = true
         }
