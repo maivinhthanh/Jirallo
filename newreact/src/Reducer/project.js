@@ -11,6 +11,7 @@ const initialState = {
     idgroup: [],
     idsprint: [],
     idissues: [],
+    idreport:null,
     process: [],
     _id: '',
     idmembers: [],

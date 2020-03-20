@@ -4,6 +4,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Icon from '@material-ui/core/Icon';
 import _ from 'lodash'
 
+import DivInput from './DivInput'
+
 const useStyles = makeStyles(theme => ({
     root: {
       '& > *': {
@@ -23,10 +25,13 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         border: '1px solid black',
         borderRadius: '5px'
+    },
+    action:{
+      float: "right"
     }
 }));
 
-const initialState = {isEdit: false}
+const initialState = {isEdit: true}
 
 const todoReducer = (state, action) => {
   
@@ -39,8 +44,13 @@ const todoReducer = (state, action) => {
       return state
   }
 }
-
-export default function UI({}) {
+const defaultPropValue = {
+  size: 18,
+  marginBottom: 5,
+  arrow: 5,
+  margin: 2
+};
+export default function UI( props = defaultPropValue ) {
     const classes = useStyles();
 
     const [state, dispatch] = React.useReducer(todoReducer, initialState)
@@ -60,14 +70,15 @@ export default function UI({}) {
         return (
           <div onMouseEnter={handleHover} onMouseLeave={handleHover} 
             className={isHover ? classes.divParentHover : classes.divParent}>
-            <div>
-              abc
+            <div style={{fontSize : props.size, marginBottom : props.arrow,
+              display:'inline', margin: props.margin}}>
+              {props.children}
             </div>
             {
               !isHover ? 
-              <div ></div>
+              <div className={classes.action}></div>
               :
-              <div >
+              <div className={classes.action}>
                 <Avatar variant="rounded" onClick={editText} className={classes.small}>
                   <Icon className="fas fa-edit" color="secondary"></Icon>
                 </Avatar>
@@ -81,13 +92,13 @@ export default function UI({}) {
           <div onMouseEnter={handleHover} onMouseLeave={handleHover}
           className={isHover ? classes.divParentHover : classes.divParent}>
             <div>
-              def
+              <DivInput {...props}></DivInput>
             </div>
             {
               !isHover ? 
-              <div ></div>
+              <div className={classes.action}></div>
               :
-              <div >
+              <div className={classes.action}>
                 <Avatar variant="rounded" onClick={saveText} className={classes.small}>
                   <Icon className="fas fa-check" color="primary"></Icon>
                 </Avatar>

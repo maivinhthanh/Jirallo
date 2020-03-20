@@ -9,9 +9,11 @@ class ContentContainer extends Component {
   
   
     render() {
+        const { report } = this.props
+        console.log(report)
         return (
             <div >
-                <UI />
+                <UI info={report}/>
             </div>
         )
         
@@ -20,6 +22,7 @@ class ContentContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        report: state.report
     }
 }
 
