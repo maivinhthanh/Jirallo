@@ -67,11 +67,12 @@ const updatestate = (state, action) =>{
    return updateObject( state, action.data);
 }
 
-const projectReducer = ( state = initialState, action ) => {
+const reportReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'GET_REPORT_IN_PROJECT': return updatestate( state, action );
+        case 'EDIT_COVER': return updatestate( state, action );
         default: return state;
     }
 };
 
-export default projectReducer;
+export default reportReducer;

@@ -45,7 +45,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function ControlledTreeView({info}) {
+export default function ControlledTreeView(props) {
   const classes = useStyles();
   
   return (
@@ -66,7 +66,7 @@ export default function ControlledTreeView({info}) {
           </div>
           
           {
-            _.map(info.author, (item, index)=>{
+            _.map(props.info.author, (item, index)=>{
               return (
                 <div className="row">
                   <div className="col-6 text-right">
@@ -85,7 +85,7 @@ export default function ControlledTreeView({info}) {
             Đề tài
           </div>
           <div className={classes.coverName}>
-            <DivAction size={30} marginBottom={3} margin={3} >{info.name}</DivAction>
+            <DivAction size={30} marginBottom={3} margin={3} changeText={props.EditName} >{props.info.name}</DivAction>
           </div>
           <div className={classes.coverTitle}>
             TIỂU LUẬN CHUYÊN NGÀNH CÔNG NGHỆ PHẦN MỀM
@@ -94,10 +94,10 @@ export default function ControlledTreeView({info}) {
             GIÁO VIÊN HƯỚNG DẪN:
           </div>
           <div className={classes.coverTitle}>
-            <DivAction size={25} marginBottom={3} margin={3} >{info.teacher}</DivAction>
+            <DivAction size={25} marginBottom={3} margin={3} changeText={props.EditTeacher}  >{props.info.teacher}</DivAction>
           </div>
           <div className={classes.coverFooter}>
-            KHÓA <DivAction size={25} marginBottom={3} margin={3} >{info.year}</DivAction>
+            KHÓA <DivAction size={25} marginBottom={3} margin={3} changeText={props.EditYear}  >{props.info.year}</DivAction>
           </div>
         </div>
       </div>

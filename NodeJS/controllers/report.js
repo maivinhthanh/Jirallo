@@ -71,3 +71,35 @@ exports.getReportInProject = async (req, res, next) => {
     }
     
 }
+exports.editCover = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+
+        const name = req.body.name
+        const author = req.body.author
+        const teacher = req.body.teacher
+        const year = req.body.year
+        const preface = req.body.preface
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+
+        const report = await Report.findByIdAndUpdate(idreport,{
+            name: name,
+            author: author,
+            teacher: teacher,
+            year: year,
+            preface: preface
+        },{ new: true })
+
+        res.status(200).json( {report} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
