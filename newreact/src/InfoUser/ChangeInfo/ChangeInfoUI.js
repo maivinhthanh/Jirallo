@@ -57,7 +57,7 @@ class ChangeInfoUI extends Component {
       const { iduser } = this.props
 
       return (
-        <div >
+       <div > 
           <Grid container direction="row" spacing={3} justify="center" alignItems="center">
             <Grid item xs={12} sm={8}>
               <p>First Name</p>

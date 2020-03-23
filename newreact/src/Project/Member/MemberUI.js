@@ -28,7 +28,6 @@ export default function ImageAvatars({listMember,selectUser}) {
     <div className={classes.root}>
       {
         _.map(listMember, (item,index) =>{
-          console.log(item)
           return(
             <div key={index} onClick={()=>selectUser(item._id, index, item.active)} style={item.active?{backgroundColor:'#6A8DCD'}:{}}>
               {
