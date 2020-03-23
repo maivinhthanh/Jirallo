@@ -10,7 +10,7 @@ const epicRoutes = require('./routes/epic')
 const sprintRoutes = require('./routes/sprint')
 const issuesRoutes = require('./routes/issues')
 const activitiesRoutes = require('./routes/activities')
-
+const reportRoutes = require('./routes/report')
 
 const app = express() 
 
@@ -40,7 +40,7 @@ app.use('/epic', epicRoutes)
 app.use('/sprint', sprintRoutes)
 app.use('/issues', issuesRoutes)
 app.use('/activities', activitiesRoutes)
-
+app.use('/report', reportRoutes)
 
 app.use((err, req, res, next) => {
     res.status(500).json({

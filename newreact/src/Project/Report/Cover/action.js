@@ -1,19 +1,19 @@
 import CallApi from '../../../until/apiCaller';
 import * as Notification from '../../../until/Notification';
 
-export const selectIssues = (issue) =>{
+export const editcover = (report) =>{
     return {
-        type:'SELECT_ISSUES_IN_FILTER',
-        data: issue
+        type:'EDIT_COVER',
+        data: report
     }
 }
-export const SelectIssues = (idissues, ) =>{
+export const EditCover = (idreport, data ) =>{
     return dispatch =>{
-        return CallApi(`issues/getInfoIssues/${idissues}`,'GET',{
-        }).then (response =>{
+        return CallApi(`report/editCover/${idreport}`,'POST',data)
+        .then (response =>{
             if(response.status === 200){
                 
-                dispatch(selectIssues(response.data.issues));
+                dispatch(editcover(response.data.report));
                 
             }
             else {

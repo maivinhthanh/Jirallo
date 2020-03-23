@@ -13,5 +13,12 @@ router.post('/createReport/:idproject',upload.single('avatar'),isAuth,
    
     reportController.createReport,
 )
-
+router.get('/getReportInProject/:idproject',upload.single('avatar'),isAuth,
+   
+    reportController.getReportInProject,
+)
+router.post('/editCover/:idreport',upload.single('avatar'),isAuth,
+   
+    reportController.editCover,
+)
 module.exports = router

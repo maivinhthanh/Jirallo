@@ -7,11 +7,7 @@ import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import EditIcon from '@material-ui/icons/Edit';
 import { Link } from 'react-router-dom'
 import Icon from '@material-ui/core/Icon';
-import Avatar from '@material-ui/core/Avatar';
-import jwtDecode from 'jwt-decode'
-import Cookies from 'js-cookie'
 
-let jwt = jwtDecode(Cookies.get('token'))
 const useStyles = makeStyles(theme => ({
   root: {
     height: 0,

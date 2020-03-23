@@ -23,6 +23,7 @@ import PrivateRoute from '../../PrivateRoute'
 import * as actions from './action';
 
 class App extends Component {
+  
   shouldComponentUpdate(nextProps, nextState){
     return nextProps.user.code !== this.props.user.code
   }
@@ -33,8 +34,7 @@ class App extends Component {
   render(){
     let isAuth = false
     let token
-
-    // console.log(Cookies.get('token')!= 'undefined')
+    
     // console.log(Cookies.get('token')!= undefined )
     // console.log(Cookies.get('token')!= undefined && Cookies.get('token')!= 'undefined')
     if (!(!Cookies.get('token') && !Cookies.get('refreshtoken')) ){

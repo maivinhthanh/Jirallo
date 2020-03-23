@@ -36,3 +36,23 @@ export const Action = (data) =>{
         })
     }
 }
+
+
+export const EditProject = (id, project) => {
+    return dispatch => {
+      return CallApi(`project/editInfoProject/${id}`,
+      'PUT',
+      {
+        name: project.get('name'),
+        dateedit: project.get('dateedit'),
+        description: project.get('description'),
+        image: project.get('avatar').name
+      },
+      'token'
+      ).then(respone => {
+        console.log(respone)
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+  }

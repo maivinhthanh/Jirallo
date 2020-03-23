@@ -1,5 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import _ from 'lodash'
+import DivAction from '../../../Components/InputEdit/DivActionUI'
 
 const useStyles = makeStyles({
   A4: {
@@ -43,7 +45,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function ControlledTreeView() {
+export default function ControlledTreeView(props) {
   const classes = useStyles();
   
   return (
@@ -62,27 +64,28 @@ export default function ControlledTreeView() {
           <div className="cover-image">
             <img src="images/logo-spkt.jpg" alt="logo-spkt" />
           </div>
-          <div className="row">
-            <div className="col-6 text-right">
-              <h6 className={classes.coverStudent}>MAI VĨNH THÀNH</h6>
-            </div>
-            <div className="col-6 text-left">
-              <h6 className={classes.coverStudent}>16110460</h6>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-6 text-right">
-              <h6 className={classes.coverStudent}>HUỲNH THỊ TUYẾT NHI</h6>
-            </div>
-            <div className="col-6 text-left">
-              <h6 className={classes.coverStudent}>16110409</h6>
-            </div>
-          </div>
+          
+          {
+            _.map(props.info.author, (item, index)=>{
+              return (
+                <div className="row">
+                  <div className="col-6 text-right">
+                    <DivAction size={25} marginBottom={3} margin={3} >{item.name}</DivAction>
+                  </div>
+                  <div className="col-6 text-left">
+                    <DivAction size={25} marginBottom={3} margin={3} >{item.code}</DivAction>
+                  </div>
+                </div>
+              )
+            })
+          }
+
+          
           <div className={classes.coverSubTitle}>
             Đề tài
           </div>
           <div className={classes.coverName}>
-            XÂY DỰNG ỨNG DỤNG WEB QUẢN LÝ PHẦN MỀM
+            <DivAction size={30} marginBottom={3} margin={3} changeText={props.EditName} >{props.info.name}</DivAction>
           </div>
           <div className={classes.coverTitle}>
             TIỂU LUẬN CHUYÊN NGÀNH CÔNG NGHỆ PHẦN MỀM
@@ -91,10 +94,10 @@ export default function ControlledTreeView() {
             GIÁO VIÊN HƯỚNG DẪN:
           </div>
           <div className={classes.coverTitle}>
-            ThS. NGUYỄN MINH ĐẠO
+            <DivAction size={25} marginBottom={3} margin={3} changeText={props.EditTeacher}  >{props.info.teacher}</DivAction>
           </div>
           <div className={classes.coverFooter}>
-            KHÓA 2016 - 2020
+            KHÓA <DivAction size={25} marginBottom={3} margin={3} changeText={props.EditYear}  >{props.info.year}</DivAction>
           </div>
         </div>
       </div>

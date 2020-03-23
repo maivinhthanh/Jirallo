@@ -24,7 +24,8 @@ exports.createReport = async (req, res, next) => {
             name: name,
             author: author,
             teacher: teacher,
-            year: year
+            year: year,
+            idproject: idproject
         })
 
         const newreport = await report.save()
@@ -43,6 +44,58 @@ exports.createReport = async (req, res, next) => {
         await action.save()
 
         res.status(201).json({ newreport })
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.getReportInProject = async (req, res, next) => {
+    try{
+
+        const idproject = req.params.idproject
+        
+        if(!idproject){
+            res.status(203).json({ message: 'Not found project' })
+            return
+        }
+
+        const report = await Report.findOne({idproject: idproject})
+
+        res.status(200).json( {report} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.editCover = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+
+        const name = req.body.name
+        const author = req.body.author
+        const teacher = req.body.teacher
+        const year = req.body.year
+        const preface = req.body.preface
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+
+        const report = await Report.findByIdAndUpdate(idreport,{
+            name: name,
+            author: author,
+            teacher: teacher,
+            year: year,
+            preface: preface
+        },{ new: true })
+
+        res.status(200).json( {report} )
     }
     catch (error) {
         

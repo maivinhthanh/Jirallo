@@ -27,7 +27,6 @@ class MemberContainer extends Component {
   }
   render() {
       const { listMember } = this.props
-      console.log(this.props.listMember)
       return (
         <Grid container >
               <UI listMember={listMember} selectUser={(id, index, status)=>this.selectUser(id, index, status)} />

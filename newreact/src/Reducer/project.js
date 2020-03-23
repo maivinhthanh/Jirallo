@@ -1,3 +1,4 @@
+
 const updateObject = (oldObject, updatedProperties) => {
     return {
         ...oldObject,
@@ -11,6 +12,7 @@ const initialState = {
     idgroup: [],
     idsprint: [],
     idissues: [],
+    idreport:null,
     process: [],
     _id: '',
     idmembers: [],
@@ -26,10 +28,15 @@ const updatestate = (state, action) =>{
 const addProcess = (state, action) =>{
     return updateObject( state, action.data);
 }
+const addMemberAct = (state, action) => {
+    return updateObject( state, action.data);
+}
+
 const projectReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'GET_INFO_PROJECT': return updatestate( state, action );
         case 'ADD_PROCESS': return addProcess( state, action );
+        case 'ADD_MEMBER_SUCCESS' : return addMemberAct(state, action);
         default: return state;
     }
 };

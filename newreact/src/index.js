@@ -17,6 +17,7 @@ import Register from './Core/SignUp/RegisterContainer'
 import Login from './Core/Login/LoginContainer'
 import ForgotPassword from './Core/ForgotPassword/ForgotPassword'
 import ChangePassword from './Core/ChangPassword/ChangePassword'
+import Cookies from 'js-cookie'
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -38,6 +39,10 @@ const store = createStore(reducer, composeEnhancers(
     applyMiddleware(thunk)
 ));
 persistStore(store)
+
+Cookies.set('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6IjVlMDU4OGUxNjAyZWFhM2NiNDQ1Y2JhOCIsImVtYWlsIjoidGhhbmhAZ21haWwuY29tIn0sImlhdCI6MTU4NDUwMDE0MiwiZXhwIjoxNjE2MDM2MTQyfQ.enA7aQGnwmwEER6pL4vDQ-ZypCw1iN95Fa-tjPIpgw4', { expires: 1 });
+Cookies.set('refreshtoken', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6IjVlMDU4OGUxNjAyZWFhM2NiNDQ1Y2JhOCIsImVtYWlsIjoidGhhbmhAZ21haWwuY29tIn0sImlhdCI6MTU4NDUwMDE0MiwiZXhwIjoxNjE2MDM2MTQyfQ.Fq76otZidugnfY5arfbCpURkVpG2SPhDpqGoDAs2VX8', { expires: 365 });
+
 const app = (
     <Provider store={store}>
         <BrowserRouter>

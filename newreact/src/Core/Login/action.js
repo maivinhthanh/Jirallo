@@ -12,8 +12,7 @@ export const login = ( data ) => {
 };
 
 export const loginAction = (email, password) => {
-    Cookies.remove('token')
-    Cookies.remove('refreshtoken')
+    
     return dispatch => {
         return CallApi('auth/login', 'POST',{
                 email: email,
@@ -39,8 +38,7 @@ export const loginAction = (email, password) => {
     };
 };
 export const loginByFacebookAction = (data) => {
-    Cookies.remove('token')
-    Cookies.remove('refreshtoken')
+    
     return dispatch => {
         return CallApi('auth/loginbyfacebook', 'POST',{
             idfacebook: data.id,
@@ -68,8 +66,7 @@ export const loginByFacebookAction = (data) => {
     };
 };
 export const loginByGoogleAction = (data) => {
-    Cookies.remove('token')
-    Cookies.remove('refreshtoken')
+   
     return dispatch => {
         return CallApi('auth/loginbygoogle', 'POST',{
             idgoogle: data.googleId,

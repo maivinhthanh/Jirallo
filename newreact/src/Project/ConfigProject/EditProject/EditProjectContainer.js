@@ -9,9 +9,12 @@ class EditProjectContainer extends Component {
   
   render() {
       const { project } = this.props
+      console.log(project)
       return (
         <div >
-          <UI project={ project }/>
+          {
+            !_.isEmpty(project) && <UI project={ project }/>
+          }
         </div>
       )
     

@@ -15,7 +15,6 @@ export const getlistuserinproject = (data) =>{
         data: data
     }
 }
-
 export const GetListUserInProject = (id) => {
     return dispatch => {
         return CallApi(`project/getListUserInProject/${id}`,

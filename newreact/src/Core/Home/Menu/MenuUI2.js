@@ -10,8 +10,12 @@ import Icon from '@material-ui/core/Icon';
 import Avatar from '@material-ui/core/Avatar';
 import jwtDecode from 'jwt-decode'
 import Cookies from 'js-cookie'
-
-let jwt = jwtDecode(Cookies.get('token'))
+let userId = null
+if (!(!Cookies.get('token') && !Cookies.get('refreshtoken')) ){
+  if(Cookies.get('token')!= undefined && Cookies.get('token')!= 'undefined'){
+    userId = jwtDecode(Cookies.get('refreshtoken')).data.userId
+  }
+}
 const useStyles = makeStyles(theme => ({
   root: {
     height: 0,
@@ -31,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 const actions = [
   { icon: <Link to="/"><Avatar alt="Remy Sharp" src="/logo-menu.jpg" /></Link>, name: 'Home' },
   { icon: <Link to="/viewAll"><Icon className="fas fa-folder" /></Link>, name: 'All Project' },
-  { icon: <Link to={`/infouser/${jwt.data.userId}`}><Icon className="fas fa-user" /></Link>, name: 'Profile' },
+  { icon: <Link to={`/infouser/${userId}`}><Icon className="fas fa-user" /></Link>, name: 'Profile' },
   { icon: <Link to="/login" onClick={()=>this.logout()}><Icon className="fas fa-sign-out-alt" /></Link>, name: 'Log Out' }
 ];
 
