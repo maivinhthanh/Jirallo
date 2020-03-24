@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import DivAction from '../../../Components/InputEdit/DivActionUI'
 
 const useStyles = makeStyles({
   A4: {
@@ -28,7 +29,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function ControlledTreeView() {
+export default function ControlledTreeView(props) {
   const classes = useStyles();
   
   return (
@@ -38,25 +39,15 @@ export default function ControlledTreeView() {
           LỜI CÁM ƠN
         </div>  
         <div className={classes.coverContent}>
-            Trong quá trình nghiên cứu đề tài, các giảng viên đã luôn hỗ trợ, hướng dẫn sinh
-          viên. Với tất cả sự kính trọng, nhóm thực hiện đề tài xin được bày tỏ lòng biết ơn đến quý
-          thầy cô đã luôn theo dõi và hướng dẫn trong suốt thời gian thực hiện đề tài.
-          Đầu tiên, nhóm 1 xin gửi lời cảm ơn sâu sắc nhất đến Ban giám hiệu trường Đại học
-          Sư phạm Kỹ Thuật Thành phố Hồ Chí Minh đã tạo điều kiện, môi trường học tập chất
-          lượng, hiệu quả cho nhóm có thể phát huy một cách tốt nhất nghiên cứu.
-          Đồng thời, nhóm xin gửi lời cảm ơn đến Ban Chủ nhiệm khoa Công nghệ Thông tin
-          và các thầy cô khoa Công nghệ Thông tin - trường Đại học Sư phạm Kỹ thuật thành phố
-          Hồ Chí Minh đã tạo môi trường học tập và làm việc chuyên nghiệp, nhiệt tình giảng dạy
-          nhóm thực hiện đề tài nói riêng và sinh viên trong khoa Công nghệ Thông tin nói chung
-          trong quá trình học tập và làm việc tại trường.
-          Đặc biệt, xin gửi lời cảm ơn chân thành nhất đến thầy Nguyễn Minh Đạo – giáo
-          viên hướng dẫn Tiểu luận chuyên ngành – Khoa công nghệ thông tin – Đại học Sư phạm
-          Kỹ thuật Tp. Hồ Chí Minh, đã hướng dẫn, quan tâm, góp ý và luôn đồng đồng hành cùng
-          nhóm trong những giai đoạn khó khăn nhất của đề tài
-          Với những kinh nghiệm thực tiễn còn thiếu sót và kinh nghiệm chuyên môn còn non
-          yếu, bài báo cáo vẫn có những thiếu sót và hạn chế nhất định. Kính mong nhận được những
-          phản hỏi, đóng góp ý kiến và chỉ bảo thêm của quý thầy cô để nhóm có thể đạt được những
-          kiến thức hữu ích nhất, nâng cao ý thức để phục vụ cho kỹ năng sau này.
+          {
+            props.info.preface === ""
+            ?
+            <DivAction size={20} marginBottom={2} margin={2} changeText={props.EditPreface}  >......................
+            .....................</DivAction>
+            :
+            <DivAction size={20} marginBottom={2} margin={2} changeText={props.EditPreface}  >{props.info.preface}</DivAction>
+          }
+          
         </div> 
         <div className={classes.coverFooter}>
           Xin chân thành cảm ơn!

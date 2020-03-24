@@ -10,15 +10,15 @@ const isAuth = require('../middleware/AuthMiddleware')
 const upload = require('./uploadfile')
 
 router.post('/createReport/:idproject',upload.single('avatar'),isAuth,
-   
     reportController.createReport,
 )
 router.get('/getReportInProject/:idproject',upload.single('avatar'),isAuth,
-   
     reportController.getReportInProject,
 )
 router.post('/editCover/:idreport',upload.single('avatar'),isAuth,
-   
     reportController.editCover,
+)
+router.post('/editIntroduce/:idreport',upload.single('avatar'),isAuth,
+    reportController.editIntroduce,
 )
 module.exports = router

@@ -103,3 +103,33 @@ exports.editCover = async (req, res, next) => {
     }
     
 }
+exports.editIntroduce = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+
+        const urgency = req.body.urgency
+        const target = req.body.target
+        const structure = req.body.structure
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+
+        const report = await Report.findByIdAndUpdate(idreport,{
+            introduce:{
+                urgency: urgency,
+                target: target,
+                structure: structure
+            } 
+        },{ new: true })
+
+        res.status(200).json( {report} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}

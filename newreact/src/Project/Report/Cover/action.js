@@ -7,6 +7,7 @@ export const editcover = (report) =>{
         data: report
     }
 }
+
 export const EditCover = (idreport, data ) =>{
     return dispatch =>{
         return CallApi(`report/editCover/${idreport}`,'POST',data)

@@ -134,6 +134,26 @@ export default function ContentUI({selectContent}) {
       
       <StyledTreeItem nodeId="Cover" labelText="Cover"  />
       <StyledTreeItem nodeId="Survey" labelText="Survey" />
+      <StyledTreeItem nodeId="Introduce" labelText="Introduce" >
+        <StyledTreeItem
+          nodeId="Urgency"
+          labelText="Urgency"
+          color="#1a73e8"
+          bgColor="#e8f0fe"
+        />
+        <StyledTreeItem
+          nodeId="Target"
+          labelText="Target"
+          color="#e3742f"
+          bgColor="#fcefe3"
+        />
+        <StyledTreeItem
+          nodeId="Structure"
+          labelText="Structure"
+          color="#1a73e8"
+          bgColor="#e8f0fe"
+        />
+      </StyledTreeItem>
       <StyledTreeItem nodeId="Criteria" labelText="Criteria" >
         <StyledTreeItem
           nodeId="Advantages"

@@ -3,15 +3,26 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import UI from './UI'
-import * as action from './action'
+import * as action from '../Cover/action'
 
 class PrefaceContainer extends Component {
-  
+    EditPreface = (preface) =>{
+        const data = {
+            name: this.props.report.name,
+            author: this.props.report.author,
+            teacher: this.props.report.teacher,
+            year: this.props.report.year,
+            preface: preface
+        }
+        this.props.EditCover(this.props.report._id, data)
+    }
   
     render() {
+        const { report } = this.props
         return (
             <div >
-                <UI />
+                <UI info={report} 
+                EditPreface={this.EditPreface}/>
             </div>
         )
         
@@ -20,11 +31,13 @@ class PrefaceContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        report: state.report
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
+        EditCover: (id, data) => dispatch(action.EditCover(id, data)),
     }
 }
 

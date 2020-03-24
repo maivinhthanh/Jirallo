@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Content from './Content/ContentContainer'
 import Cover from './Cover/ContentContainer'
 import Preface from './Preface/PrefaceContainer'
+import Introduce from './Introduce/IntroduceContainer'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -30,10 +31,14 @@ export default function UI({idproject}) {
       else if(data === 'Survey'){
         window.scrollTo(0, survey.current.offsetTop)
       }
+      else if(data === 'Introduce'){
+        window.scrollTo(0, introduce.current.offsetTop)
+      }
     };
 
     const cover = useRef(null)
     const survey = useRef(null)
+    const introduce = useRef(null)
 
     return (
         <div>
@@ -51,7 +56,9 @@ export default function UI({idproject}) {
                 <div ref={survey}>
                   <Preface />     
                 </div>
-                             
+                <div ref={introduce}>
+                  <Introduce />     
+                </div>       
               </div>
             </div>
         </div>
