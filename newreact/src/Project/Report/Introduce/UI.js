@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import _ from 'lodash'
 import DivAction from '../../../Components/ListInputEdit/DivActionUI'
@@ -34,14 +34,19 @@ const useStyles = makeStyles({
 
 export default function ControlledTreeView(props) {
   const classes = useStyles();
-  
+
+  console.log(props.introduceRef)
+  const urgency = useRef(null)
+  const target = useRef(null)
+  const structure = useRef(null)
+
   return (
     <div className="Cover">
       <div className={classes.A4} >
           <div className={classes.coverTitle}>
             GIỚI THIỆU ĐỀ TÀI
           </div>  
-          <div className={classes.coverSubTitle}>
+          <div className={classes.coverSubTitle} ref={props.urgencyRef}>
             1. TÍNH CẤP THIẾT CỦA ĐỀ TÀI
           </div>
           <div className={classes.coverContent}>
@@ -58,7 +63,7 @@ export default function ControlledTreeView(props) {
           }
           
           </div> 
-          <div className={classes.coverSubTitle}>
+          <div className={classes.coverSubTitle} ref={props.targetRef}>
             2. MỤC TIÊU CỦA ĐỀ TÀI
           </div>
           <div className={classes.coverContent}>
@@ -75,7 +80,7 @@ export default function ControlledTreeView(props) {
           }
           
           </div> 
-          <div className={classes.coverSubTitle}>
+          <div className={classes.coverSubTitle} ref={props.structureRef}>
             3. KẾT CẤU CỦA ĐỀ TÀI
           </div>
           <div className={classes.coverContent}>

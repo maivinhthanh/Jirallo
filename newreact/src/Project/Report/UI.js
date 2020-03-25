@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react'
+import React, {useRef} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 
 import Content from './Content/ContentContainer'
@@ -19,20 +19,25 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function UI({idproject}) {
+export default React.forwardRef( function UI({idproject}) {
     const classes = useStyles();
     
     // const [selected, setSelected] = React.useState(null);
     const handleSelect = (data) => {
-      console.log(data)
       if(data === 'Cover'){
         window.scrollTo(0, cover.current.offsetTop)
       }
       else if(data === 'Survey'){
         window.scrollTo(0, survey.current.offsetTop)
       }
-      else if(data === 'Introduce'){
-        window.scrollTo(0, introduce.current.offsetTop)
+      else if(data === 'Urgency'){
+        window.scrollTo(0, introduce.current.urgencyRef.offsetTop)
+      }
+      else if(data === 'Target'){
+        window.scrollTo(0, introduce.current.targetRef.offsetTop)
+      }
+      else if(data === 'Structure'){
+        window.scrollTo(0, introduce.current.structureRef.offsetTop)
       }
     };
 
@@ -56,8 +61,8 @@ export default function UI({idproject}) {
                 <div ref={survey}>
                   <Preface />     
                 </div>
-                <div ref={introduce}>
-                  <Introduce />     
+                <div >
+                  <Introduce forwardedRef={introduce} />     
                 </div>       
               </div>
             </div>
@@ -65,4 +70,4 @@ export default function UI({idproject}) {
     )
 
   
-}
+})

@@ -5,7 +5,13 @@ import _ from 'lodash'
 import UI from './UI'
 import * as action from './action'
 
-class ContentContainer extends Component {
+class IntroduceContainer extends Component {
+    constructor(props) {
+        super(props)
+        this.urgencyRef = React.createRef();
+        this.targetRef = React.createRef();
+        this.structureRef = React.createRef();
+    }
     EditUrgency = (content, key) =>{
         let urgency = this.props.report.introduce.urgency
         urgency[key] = content
@@ -44,10 +50,12 @@ class ContentContainer extends Component {
     }
     render() {
         const { report } = this.props
-        console.log(report)
         return (
             <div >
                 <UI info={report} 
+                    urgencyRef={el => this.urgencyRef = el}
+                    targetRef={el => this.targetRef = el}
+                    structureRef={el => this.structureRef = el}
                     EditUrgency={this.EditUrgency}
                     EditTarget={this.EditTarget}
                     EditStructure={this.EditStructure}
@@ -71,4 +79,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContentContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(IntroduceContainer)
