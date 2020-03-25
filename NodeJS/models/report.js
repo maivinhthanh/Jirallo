@@ -58,7 +58,21 @@ const reportSchema = new Schema({
                 type: String,
                 default: ""
             },
-            content:[{
+            image:[{
+                name:{
+                    type: String,
+                    default: ""
+                },
+                address:{
+                    type: String,
+                    default: ""
+                }
+            }],
+            advantages:[{
+                type: String,
+                default: ""
+            }],
+            defect:[{
                 type: String,
                 default: ""
             }]

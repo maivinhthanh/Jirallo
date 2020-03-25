@@ -7,15 +7,16 @@ export const editintroduce = (report) =>{
         data: report
     }
 }
-export const AddParagraph = (name) =>{
+export const AddParagraph = (name, key) =>{
     return {
-        type:'ADD_PARAGRAPH_INTRODUCE',
-        data: name
+        type:'ADD_PARAGRAPH_SERVEY',
+        data: name,
+        key: key
     }
 }
-export const EditIntroduce = (idreport, data ) =>{
+export const EditSurvey = (idreport, data ) =>{
     return dispatch =>{
-        return CallApi(`report/editIntroduce/${idreport}`,'POST',data)
+        return CallApi(`report/editSurvey/${idreport}`,'POST',{survey:data})
         .then (response =>{
             if(response.status === 200){
                 

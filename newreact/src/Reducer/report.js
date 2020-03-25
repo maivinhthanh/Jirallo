@@ -21,7 +21,15 @@ const initialState = {
         target:[],
         structure: []
     },
-    survey:[],
+    survey:[{
+        name: '',
+        image: [{
+            name:'',
+            address:''
+        }],
+        advantages:[],
+        defect:[]
+    }],
     criteria:{
         advantages:'',
         defect:''
@@ -68,7 +76,7 @@ const updatestate = (state, action) =>{
    return updateObject( state, action.data);
 }
 
-const add = (state, action) =>{
+const addIntroduce = (state, action) =>{
     const newState = _.cloneDeep(state)
     if(action.data === 'Urgency'){
         newState.introduce.urgency = [...newState.introduce.urgency, '............']
@@ -81,12 +89,23 @@ const add = (state, action) =>{
     }
     return newState
 }
+const addSurvey = (state, action) =>{
+    const newState = _.cloneDeep(state)
+    if(action.data === 'Advantages'){
+        newState.survey[action.key].advantages = [...newState.survey[action.key].advantages, '............']
+    }
+    else{
+        newState.survey[action.key].defect = [...newState.survey[action.key].defect, '............']
+    }
+    return newState
+}
  
 const reportReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'GET_REPORT_IN_PROJECT': return updatestate( state, action );
         case 'EDIT_COVER': return updatestate( state, action );
-        case 'ADD_PARAGRAPH': return add( state, action );
+        case 'ADD_PARAGRAPH_INTRODUCE': return addIntroduce( state, action );
+        case 'ADD_PARAGRAPH_SERVEY': return addSurvey( state, action );
         default: return state;
     }
 };

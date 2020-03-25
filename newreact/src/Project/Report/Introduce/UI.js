@@ -36,9 +36,6 @@ export default function ControlledTreeView(props) {
   const classes = useStyles();
 
   console.log(props.introduceRef)
-  const urgency = useRef(null)
-  const target = useRef(null)
-  const structure = useRef(null)
 
   return (
     <div className="Cover">

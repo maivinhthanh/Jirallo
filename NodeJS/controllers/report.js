@@ -25,7 +25,16 @@ exports.createReport = async (req, res, next) => {
             author: author,
             teacher: teacher,
             year: year,
-            idproject: idproject
+            idproject: idproject,
+            survey:[{
+                name: '',
+                image: [{
+                    name:'',
+                    address:''
+                }],
+                advantages:[],
+                defect:[]
+            }]
         })
 
         const newreport = await report.save()
@@ -123,6 +132,30 @@ exports.editIntroduce = async (req, res, next) => {
                 target: target,
                 structure: structure
             } 
+        },{ new: true })
+
+        res.status(200).json( {report} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.editSurvey = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+
+        const survey = req.body.survey
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+
+        const report = await Report.findByIdAndUpdate(idreport,{
+            survey: survey
         },{ new: true })
 
         res.status(200).json( {report} )

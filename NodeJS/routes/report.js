@@ -21,4 +21,7 @@ router.post('/editCover/:idreport',upload.single('avatar'),isAuth,
 router.post('/editIntroduce/:idreport',upload.single('avatar'),isAuth,
     reportController.editIntroduce,
 )
+router.post('/editSurvey/:idreport',upload.single('avatar'),isAuth,
+    reportController.editSurvey,
+)
 module.exports = router

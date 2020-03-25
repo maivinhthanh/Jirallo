@@ -5,6 +5,7 @@ import Content from './Content/ContentContainer'
 import Cover from './Cover/ContentContainer'
 import Preface from './Preface/PrefaceContainer'
 import Introduce from './Introduce/IntroduceContainer'
+import Survey from './Survey/SurveyContainer'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -63,7 +64,10 @@ export default React.forwardRef( function UI({idproject}) {
                 </div>
                 <div >
                   <Introduce forwardedRef={introduce} />     
-                </div>       
+                </div>  
+                <div>
+                  <Survey />
+                </div>     
               </div>
             </div>
         </div>
