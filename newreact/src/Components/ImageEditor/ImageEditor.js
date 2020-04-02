@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import _ from 'lodash'
 
 import './AddImage.css';
-import AddImage from './AddImage'
+// import AddImage from './AddImage'
 import { Icon } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -39,7 +39,7 @@ const todoReducer = (state, action) => {
       return state
   }
 }
-export default function ImageEditor(  ) {
+export default function ImageEditor(props ) {
     const classes = useStyles();
 
     const [state, dispatch] = React.useReducer(todoReducer, initialState)
@@ -49,6 +49,9 @@ export default function ImageEditor(  ) {
     const handleName = (event) => {
         event.preventDefault();
         setName( event.target.value )
+    }
+    const saveImage = ()=>{
+        props.saveImage(avatar, name)
     }
     const deleteImage = ()=>{
         setFile([])
@@ -90,7 +93,7 @@ export default function ImageEditor(  ) {
         }
         dispatch({type: 'SAVE'})
         // console.log(this.state.avatar)
-        // this.props.setAvatar(this.state.avatar)
+        // props.saveImage(avatar, name)
 
     }
     if(!state.isEdit){
@@ -121,6 +124,9 @@ export default function ImageEditor(  ) {
                 </div>
                 <div className="col-12">
                     <input className="form-control" onChange={handleName} />
+                </div>
+                <div className="col-12">
+                    <button className="btn btn-primary" onClick={saveImage}><Icon className="fa fa-check"></Icon></button>
                 </div>
             </div>
         )

@@ -38,6 +38,7 @@ export default function ControlledTreeView(props) {
   const classes = useStyles();
 
   const [indexChange, setIndexChange] = React.useState(null);
+  const [image, setImage] = React.useState([]);
 
   const IndexChangeAction = (index) =>{
     setIndexChange(index)
@@ -48,6 +49,10 @@ export default function ControlledTreeView(props) {
   }
   const EditDefect = (data, paragraph) =>{
     props.EditDefect(data, paragraph, indexChange)
+  }
+  const saveImage = (image, name)=>{
+    const idsurvey = props.info.survey[indexChange]._id
+    props.saveImage(image, name, idsurvey)
   }
   
   return (
@@ -69,7 +74,18 @@ export default function ControlledTreeView(props) {
                   <div>
                     <p>Một số hình ảnh</p>
                     {
-                      <ImageEditor />
+                      _.map(item.image, (image, index)=>{
+                        return(
+                          <div>
+                            <img src={`http://localhost:8088/${image.address}`} width="500" height="350" />
+                            <p>{image.name}</p>
+                          </div>
+                          
+                        )
+                      })
+                    }
+                    {
+                      <ImageEditor saveImage={saveImage}/>
                     }
                   </div>
                   <div>

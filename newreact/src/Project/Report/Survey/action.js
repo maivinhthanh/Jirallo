@@ -38,3 +38,27 @@ export const EditSurvey = (idreport, data ) =>{
         })
     }
 }
+export const PushImageSurvey = (idreport, data ) =>{
+    return dispatch =>{
+        return CallApi(`report/pushImageSurvey/${idreport}`,'POST', data)
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.report));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}

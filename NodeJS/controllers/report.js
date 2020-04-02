@@ -166,3 +166,41 @@ exports.editSurvey = async (req, res, next) => {
     }
     
 }
+exports.pushImageSurvey = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+
+        let image = null
+        if (req.file !== undefined) {
+            image = req.file.path
+        }
+        const name = req.body.name
+        const idsurvey = req.body.idsurvey
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        console.log("1",name, idsurvey)
+        const report = await Report.update({
+            _id: idreport,
+            "survey._id": idsurvey
+        },{
+            $push:{
+                "survey.$.image": {
+                    name: name,
+                    address: image
+                }
+            }
+            
+        },{ new: true })
+
+        res.status(200).json( {report} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
