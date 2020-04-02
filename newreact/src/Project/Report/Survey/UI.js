@@ -4,6 +4,7 @@ import _ from 'lodash'
 import ListDivAction from '../../../Components/ListInputEdit/DivActionUI'
 import DivAction from '../../../Components/InputEdit/DivActionUI'
 import ImageEditor from '../../../Components/ImageEditor/ImageEditor'
+import { Icon } from '@material-ui/core';
 
 const useStyles = makeStyles({
   A4: {
@@ -54,7 +55,9 @@ export default function ControlledTreeView(props) {
     const idsurvey = props.info.survey[indexChange]._id
     props.saveImage(image, name, idsurvey)
   }
-  
+  const AddSurvey = ()=>{
+    props.AddSurvey()
+  }
   return (
     <div className="Cover">
       <div className={classes.A4} >
@@ -115,6 +118,9 @@ export default function ControlledTreeView(props) {
                       addParagraph={()=>props.AddParagraph('Defect', index)}
                       content={item.defect}/>
                     }
+                    <div>
+                      <button className="btn btn-primary" onClick={AddSurvey}><Icon className="fa fa-plus"></Icon></button>
+                    </div>
                   </div>
                 </div>
               )

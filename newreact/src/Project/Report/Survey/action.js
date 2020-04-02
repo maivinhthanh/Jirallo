@@ -14,6 +14,32 @@ export const AddParagraph = (name, key) =>{
         key: key
     }
 }
+
+export const AddSurvey = (idreport ) =>{
+    return dispatch =>{
+        return CallApi(`report/addSurvey/${idreport}`,'POST',)
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.report));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
+
 export const EditSurvey = (idreport, data ) =>{
     return dispatch =>{
         return CallApi(`report/editSurvey/${idreport}`,'POST',{survey:data})
@@ -44,7 +70,7 @@ export const PushImageSurvey = (idreport, data ) =>{
         .then (response =>{
             if(response.status === 200){
                 
-                dispatch(editintroduce(response.data.report));
+                dispatch(editintroduce(response.data.newreport));
                 
             }
             else {

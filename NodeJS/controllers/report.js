@@ -28,10 +28,7 @@ exports.createReport = async (req, res, next) => {
             idproject: idproject,
             survey:[{
                 name: '',
-                image: [{
-                    name:'',
-                    address:''
-                }],
+                image: [],
                 advantages:[],
                 defect:[]
             }]
@@ -182,7 +179,6 @@ exports.pushImageSurvey = async (req, res, next) => {
             res.status(203).json({ message: 'Not found report' })
             return
         }
-        console.log("1",name, idsurvey)
         const report = await Report.update({
             _id: idreport,
             "survey._id": idsurvey
@@ -195,7 +191,35 @@ exports.pushImageSurvey = async (req, res, next) => {
             }
             
         },{ new: true })
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.addSurvey = async (req, res, next) => {
+    try{
 
+        const idreport = req.params.idreport
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        const report = await Report.findByIdAndUpdate(idreport,{
+            $push:{
+                "survey": {
+                    name: '',
+                    image: [],
+                    advantages:[],
+                    defect:[]
+                }
+            }
+            
+        },{ new: true })
         res.status(200).json( {report} )
     }
     catch (error) {
