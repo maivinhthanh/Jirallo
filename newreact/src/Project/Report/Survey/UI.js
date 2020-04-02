@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import _ from 'lodash'
 import ListDivAction from '../../../Components/ListInputEdit/DivActionUI'
 import DivAction from '../../../Components/InputEdit/DivActionUI'
+import ImageEditor from '../../../Components/ImageEditor/ImageEditor'
 
 const useStyles = makeStyles({
   A4: {
@@ -67,7 +68,9 @@ export default function ControlledTreeView(props) {
                   </div>
                   <div>
                     <p>Một số hình ảnh</p>
-
+                    {
+                      <ImageEditor />
+                    }
                   </div>
                   <div>
                     <p>Ưu điểm</p>
