@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import _ from 'lodash'
 import ListDivAction from '../../../Components/ListInputEdit/DivActionUI'
 import DivAction from '../../../Components/InputEdit/DivActionUI'
-import ImageEditor from '../../../Components/ImageEditor/ImageEditor'
+import ImageUpload from '../../../Components/ImageEditor/ImageUpload'
 import { Icon } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -88,7 +88,7 @@ export default function ControlledTreeView(props) {
                       })
                     }
                     {
-                      <ImageEditor saveImage={saveImage}/>
+                      <ImageUpload saveImage={saveImage}/>
                     }
                   </div>
                   <div>
