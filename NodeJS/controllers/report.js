@@ -28,10 +28,7 @@ exports.createReport = async (req, res, next) => {
             idproject: idproject,
             survey:[{
                 name: '',
-                image: [{
-                    name:'',
-                    address:''
-                }],
+                image: [],
                 advantages:[],
                 defect:[]
             }]
@@ -158,6 +155,71 @@ exports.editSurvey = async (req, res, next) => {
             survey: survey
         },{ new: true })
 
+        res.status(200).json( {report} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.pushImageSurvey = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+
+        let image = null
+        if (req.file !== undefined) {
+            image = req.file.path
+        }
+        const name = req.body.name
+        const idsurvey = req.body.idsurvey
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        const report = await Report.update({
+            _id: idreport,
+            "survey._id": idsurvey
+        },{
+            $push:{
+                "survey.$.image": {
+                    name: name,
+                    address: image
+                }
+            }
+            
+        },{ new: true })
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.addSurvey = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        const report = await Report.findByIdAndUpdate(idreport,{
+            $push:{
+                "survey": {
+                    name: '',
+                    image: [],
+                    advantages:[],
+                    defect:[]
+                }
+            }
+            
+        },{ new: true })
         res.status(200).json( {report} )
     }
     catch (error) {

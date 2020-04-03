@@ -24,4 +24,10 @@ router.post('/editIntroduce/:idreport',upload.single('avatar'),isAuth,
 router.post('/editSurvey/:idreport',upload.single('avatar'),isAuth,
     reportController.editSurvey,
 )
+router.post('/pushImageSurvey/:idreport',upload.single('avatar'),isAuth,
+    reportController.pushImageSurvey,
+)
+router.post('/addSurvey/:idreport',upload.single('avatar'),isAuth,
+    reportController.addSurvey,
+)
 module.exports = router

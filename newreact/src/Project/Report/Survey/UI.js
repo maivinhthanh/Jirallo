@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import _ from 'lodash'
 import ListDivAction from '../../../Components/ListInputEdit/DivActionUI'
 import DivAction from '../../../Components/InputEdit/DivActionUI'
+import ImageUpload from '../../../Components/ImageEditor/ImageUpload'
+import { Icon } from '@material-ui/core';
 
 const useStyles = makeStyles({
   A4: {
@@ -37,6 +39,7 @@ export default function ControlledTreeView(props) {
   const classes = useStyles();
 
   const [indexChange, setIndexChange] = React.useState(null);
+  const [image, setImage] = React.useState([]);
 
   const IndexChangeAction = (index) =>{
     setIndexChange(index)
@@ -48,7 +51,13 @@ export default function ControlledTreeView(props) {
   const EditDefect = (data, paragraph) =>{
     props.EditDefect(data, paragraph, indexChange)
   }
-  
+  const saveImage = (image, name)=>{
+    const idsurvey = props.info.survey[indexChange]._id
+    props.saveImage(image, name, idsurvey)
+  }
+  const AddSurvey = ()=>{
+    props.AddSurvey()
+  }
   return (
     <div className="Cover">
       <div className={classes.A4} >
@@ -67,7 +76,20 @@ export default function ControlledTreeView(props) {
                   </div>
                   <div>
                     <p>Một số hình ảnh</p>
-
+                    {
+                      _.map(item.image, (image, index)=>{
+                        return(
+                          <div>
+                            <img src={`http://localhost:8088/${image.address}`} width="500" height="350" />
+                            <p>{image.name}</p>
+                          </div>
+                          
+                        )
+                      })
+                    }
+                    {
+                      <ImageUpload saveImage={saveImage}/>
+                    }
                   </div>
                   <div>
                     <p>Ưu điểm</p>
@@ -96,6 +118,9 @@ export default function ControlledTreeView(props) {
                       addParagraph={()=>props.AddParagraph('Defect', index)}
                       content={item.defect}/>
                     }
+                    <div>
+                      <button className="btn btn-primary" onClick={AddSurvey}><Icon className="fa fa-plus"></Icon></button>
+                    </div>
                   </div>
                 </div>
               )
