@@ -4,6 +4,7 @@ import _ from 'lodash'
 import ListDivAction from '../../../Components/ListInputEdit/DivActionUI'
 import DivAction from '../../../Components/InputEdit/DivActionUI'
 import ImageUpload from '../../../Components/ImageEditor/ImageUpload'
+import ImageEditor from '../../../Components/ImageEditor/ImageEditor'
 import { Icon } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -77,12 +78,9 @@ export default function ControlledTreeView(props) {
                   <div>
                     <p>Một số hình ảnh</p>
                     {
-                      _.map(item.image, (image, index)=>{
+                      _.map(item.image, (image, ind)=>{
                         return(
-                          <div>
-                            <img src={`http://localhost:8088/${image.address}`} width="500" height="350" />
-                            <p>{image.name}</p>
-                          </div>
+                          <ImageEditor image={image} key={ind} />
                           
                         )
                       })

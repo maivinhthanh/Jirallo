@@ -200,6 +200,92 @@ exports.pushImageSurvey = async (req, res, next) => {
     }
     
 }
+exports.deleteImageSurvey = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const name = req.body.name
+        const idsurvey = req.body.idsurvey
+        const idimage = req.body.idimage
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+
+        const report = await Report.update({
+            _id: idreport,
+            "survey._id": idsurvey
+        },{
+            $pull:{
+                "survey.$.image._id": idimage
+            }
+            
+        },{ new: true })
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+
+exports.updateImageSurvey = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const name = req.body.name
+        const idsurvey = req.body.idsurvey
+        const idimage = req.body.idimage
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+
+        let image = null
+        if (req.file !== undefined) {
+            image = req.file.path
+            const report = await Report.update({
+                _id: idreport,
+                "survey._id": idsurvey,
+                "survey.image._id": idimage
+            },{
+                $set:{
+                    "survey.$.image.$.name": name
+                },
+                $set:{
+                    "survey.$.image.$.address": image
+                }
+                
+            },{ new: true })
+            const newreport = await Report.findById(idreport)
+            res.status(200).json( {newreport} )
+        }
+        else{
+            const report = await Report.update({
+                _id: idreport,
+                "survey._id": idsurvey,
+                "survey.image._id": idimage
+            },{
+                $set:{
+                    "survey.$.image.$.name": name
+                }
+                
+            },{ new: true })
+            const newreport = await Report.findById(idreport)
+            res.status(200).json( {newreport} )
+        }
+        
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+
 exports.addSurvey = async (req, res, next) => {
     try{
 
