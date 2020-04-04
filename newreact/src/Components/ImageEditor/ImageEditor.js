@@ -79,14 +79,15 @@ export default function ImageEditor(props ) {
     }
     const saveText = ()=>{
         dispatch({type: 'SAVE'})
+        props.saveImage(avatar, name, props.image._id)
     }
     const handleName = (event) => {
         event.preventDefault();
         setName( event.target.value )
     }
-    const saveImage = ()=>{
-        props.saveImage(avatar, name)
-    }
+    // const saveImage = ()=>{
+    //     props.saveImage(avatar, name)
+    // }
     const deleteImage = ()=>{
         setFile([])
         setAvatar(null)

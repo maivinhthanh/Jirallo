@@ -248,32 +248,44 @@ exports.updateImageSurvey = async (req, res, next) => {
         if (req.file !== undefined) {
             image = req.file.path
             const report = await Report.update({
-                _id: idreport,
-                "survey._id": idsurvey,
-                "survey.image._id": idimage
+                '_id' : ObjectId(idreport)
+               
             },{
                 $set:{
-                    "survey.$.image.$.name": name
+                    "survey.$[i].image.$[j].name": name,
+                    "survey.$[i].image.$[j].address": image
                 },
-                $set:{
-                    "survey.$.image.$.address": image
-                }
                 
-            },{ new: true })
+            },{
+                arrayFilters: [
+                {
+                    'i._id' : ObjectId(idsurvey)
+                },
+                {
+                    'j._id': ObjectId(idimage)
+                }
+            ]})
             const newreport = await Report.findById(idreport)
             res.status(200).json( {newreport} )
         }
         else{
             const report = await Report.update({
-                _id: idreport,
-                "survey._id": idsurvey,
-                "survey.image._id": idimage
+                '_id' : ObjectId(idreport)
             },{
                 $set:{
-                    "survey.$.image.$.name": name
+                    "survey.$[i].image.$[j].name": name
                 }
                 
-            },{ new: true })
+            },{
+                arrayFilters: [
+                {
+                    'i._id' : ObjectId(idsurvey)
+                },
+                {
+                    'j._id': ObjectId(idimage)
+                }
+            ]}
+            )
             const newreport = await Report.findById(idreport)
             res.status(200).json( {newreport} )
         }

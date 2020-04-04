@@ -36,6 +36,17 @@ class IntroduceContainer extends Component {
         console.log(data)
         this.props.PushImageSurvey(this.props.report._id,data)
     }
+    UpdateImage = (image, name, idsurvey, idimage) =>{
+        let data = new FormData()
+        if(image){
+            data.append('avatar',image)
+        }
+        data.append('name',name)
+        data.append('idsurvey',idsurvey)
+        data.append('idimage',idimage)
+        console.log(data)
+        this.props.UpdateImageSurvey(this.props.report._id,data)
+    }
     AddSurvey = ()=>{
         this.props.AddSurvey()
     }
@@ -48,7 +59,8 @@ class IntroduceContainer extends Component {
                    EditDefect={this.EditDefect}
                    AddParagraph={this.AddParagraph}
                    saveImage={this.PushImageSurvey}
-                   AddSurvey={this.AddSurvey} />
+                   AddSurvey={this.AddSurvey}
+                   updateImage={this.UpdateImage} />
             </div>
         )
         
@@ -66,7 +78,8 @@ const mapDispatchToProps = dispatch => {
         EditSurvey: (id, data) => dispatch(action.EditSurvey(id, data)),
         AddParagraph: (name, key) => dispatch(action.AddParagraph(name, key)),
         PushImageSurvey: (id, data) =>dispatch(action.PushImageSurvey(id, data)),
-        AddSurvey: () => dispatch(action.AddSurvey())
+        AddSurvey: () => dispatch(action.AddSurvey()),
+        UpdateImageSurvey: (id, data) =>dispatch(action.UpdateImageSurvey(id, data)),
     }
 }
 
