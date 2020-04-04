@@ -85,10 +85,10 @@ export default function ImageEditor(props ) {
         event.preventDefault();
         setName( event.target.value )
     }
-    // const saveImage = ()=>{
-    //     props.saveImage(avatar, name)
-    // }
     const deleteImage = ()=>{
+        props.deleteImage(props.image._id)
+    }
+    const removeImage = ()=>{
         setFile([])
         setAvatar(null)
         dispatch({type: 'EDIT'})
@@ -169,7 +169,7 @@ export default function ImageEditor(props ) {
                         <Avatar variant="rounded" onClick={saveText} className={classes.small}>
                             <Icon className="fas fa-check" color="primary"></Icon>
                         </Avatar>
-                        <Avatar variant="rounded" onClick={saveText} className={classes.small}>
+                        <Avatar variant="rounded" onClick={deleteImage} className={classes.small}>
                             <Icon className="fas fa-times" color="secondary"></Icon>
                         </Avatar>
                         <Avatar variant="rounded" onClick={changeImage} className={classes.small}>
@@ -197,7 +197,7 @@ export default function ImageEditor(props ) {
                         <Avatar variant="rounded" onClick={saveText} className={classes.small}>
                             <Icon className="fas fa-check" color="primary"></Icon>
                         </Avatar>
-                        <Avatar variant="rounded" onClick={saveText} className={classes.small}>
+                        <Avatar variant="rounded" onClick={deleteImage} className={classes.small}>
                             <Icon className="fas fa-times" color="secondary"></Icon>
                         </Avatar>
                     </div>
@@ -224,10 +224,10 @@ export default function ImageEditor(props ) {
                         <Avatar variant="rounded" onClick={saveText} className={classes.small}>
                             <Icon className="fas fa-check" color="primary"></Icon>
                         </Avatar>
-                        <Avatar variant="rounded" onClick={saveText} className={classes.small}>
+                        <Avatar variant="rounded" onClick={deleteImage} className={classes.small}>
                             <Icon className="fas fa-times" color="secondary"></Icon>
                         </Avatar>
-                        <Avatar variant="rounded" onClick={deleteImage} className={classes.small}>
+                        <Avatar variant="rounded" onClick={removeImage} className={classes.small}>
                             <Icon className="fas fa-image" color="secondary"></Icon>
                         </Avatar>
                     </div>

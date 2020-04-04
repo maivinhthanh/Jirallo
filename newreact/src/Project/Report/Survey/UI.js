@@ -60,6 +60,10 @@ export default function ControlledTreeView(props) {
     const idsurvey = props.info.survey[indexChange]._id
     props.updateImage(image, name, idsurvey, idimage)
   }
+  const deleteImage = (idimage) =>{
+    const idsurvey = props.info.survey[indexChange]._id
+    props.deleteImage(idsurvey, idimage)
+  }
   const AddSurvey = ()=>{
     props.AddSurvey()
   }
@@ -84,7 +88,8 @@ export default function ControlledTreeView(props) {
                     {
                       _.map(item.image, (image, ind)=>{
                         return(
-                          <ImageEditor image={image} key={ind} saveImage={updateImage}/>
+                          <ImageEditor image={image} key={ind} saveImage={updateImage}
+                          deleteImage={deleteImage}/>
                           
                         )
                       })

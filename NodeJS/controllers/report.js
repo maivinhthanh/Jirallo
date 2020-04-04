@@ -204,7 +204,6 @@ exports.deleteImageSurvey = async (req, res, next) => {
     try{
 
         const idreport = req.params.idreport
-        const name = req.body.name
         const idsurvey = req.body.idsurvey
         const idimage = req.body.idimage
 
@@ -214,14 +213,18 @@ exports.deleteImageSurvey = async (req, res, next) => {
         }
 
         const report = await Report.update({
-            _id: idreport,
-            "survey._id": idsurvey
+            _id: ObjectId(idreport)
         },{
             $pull:{
-                "survey.$.image._id": idimage
+                "survey.$[i].image": {"_id":ObjectId(idimage)}
             }
             
-        },{ new: true })
+        },{
+            arrayFilters: [
+            {
+                'i._id' : ObjectId(idsurvey)
+            }
+        ]})
         const newreport = await Report.findById(idreport)
         res.status(200).json( {newreport} )
     }

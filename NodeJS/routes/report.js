@@ -33,5 +33,7 @@ router.post('/addSurvey/:idreport',upload.single('avatar'),isAuth,
 router.put('/updateImageSurvey/:idreport',upload.single('avatar'),isAuth,
     reportController.updateImageSurvey,
 )
-
+router.put('/deleteImageSurvey/:idreport',upload.single('avatar'),isAuth,
+    reportController.deleteImageSurvey,
+)
 module.exports = router

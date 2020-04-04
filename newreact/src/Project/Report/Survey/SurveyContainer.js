@@ -33,7 +33,6 @@ class IntroduceContainer extends Component {
         data.append('avatar',image)
         data.append('name',name)
         data.append('idsurvey',idsurvey)
-        console.log(data)
         this.props.PushImageSurvey(this.props.report._id,data)
     }
     UpdateImage = (image, name, idsurvey, idimage) =>{
@@ -44,11 +43,17 @@ class IntroduceContainer extends Component {
         data.append('name',name)
         data.append('idsurvey',idsurvey)
         data.append('idimage',idimage)
-        console.log(data)
         this.props.UpdateImageSurvey(this.props.report._id,data)
     }
     AddSurvey = ()=>{
         this.props.AddSurvey()
+    }
+    DeleteImage = (idsurvey, idimage) =>{
+        const data = {
+            idsurvey: idsurvey,
+            idimage:idimage
+        }
+        this.props.DeleteImageSurvey(this.props.report._id, data)
     }
     render() {
         const { report } = this.props
@@ -60,7 +65,8 @@ class IntroduceContainer extends Component {
                    AddParagraph={this.AddParagraph}
                    saveImage={this.PushImageSurvey}
                    AddSurvey={this.AddSurvey}
-                   updateImage={this.UpdateImage} />
+                   updateImage={this.UpdateImage}
+                   deleteImage={this.DeleteImage} />
             </div>
         )
         
@@ -80,6 +86,7 @@ const mapDispatchToProps = dispatch => {
         PushImageSurvey: (id, data) =>dispatch(action.PushImageSurvey(id, data)),
         AddSurvey: () => dispatch(action.AddSurvey()),
         UpdateImageSurvey: (id, data) =>dispatch(action.UpdateImageSurvey(id, data)),
+        DeleteImageSurvey:(id, data)=>dispatch(action.DeleteImageSurvey(id, data)),
     }
 }
 
