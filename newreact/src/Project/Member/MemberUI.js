@@ -35,7 +35,8 @@ export default function ImageAvatars({listMember,selectUser}) {
                 ? <Avatar alt={item.name} src={'/image/'+item.image} 
                     className={classes.large}  />
                 : <Avatar alt={item.name} 
-                    className={classes.large} >{item.name.charAt(0)}</Avatar>
+                    // className={classes.large} >{item.name.charAt(0)}</Avatar>
+                    className={classes.large} >{item.name}</Avatar>
               }
               <p>{item.name}</p>
             </div>

@@ -10,12 +10,12 @@ import UploadImage from './UploadImage'
 
 import DatePicker from '../../../../src/Components/DatePicker'
 import * as action from './action'
+import './project.css'
 import _ from 'lodash'
 
 class EditProjectUI extends Component {
   constructor(props) {
     super(props)
-    console.log(this.props)
     this.state = {
       nameproject: _.get(this.props.project, 'name') || '',
       image: _.get(this.props.project, 'image') || '',
@@ -68,7 +68,19 @@ class EditProjectUI extends Component {
             <p>Name project</p>
           </Grid>
           <Grid justify="center" item xs={12} sm={8}>
-            <TextField name="nameproject" fullWidth value={this.state.nameproject} onChange={this.handleChangeName} />
+            <TextField name="nameproject" placeholder='name project' fullWidth value={this.state.nameproject} onChange={this.handleChangeName} />
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <p>Description</p>
+          </Grid>
+          <Grid justify="center" item xs={12} sm={8}>
+            <TextField name="description" placeholder='description' fullWidth value={this.state.description} onChange={this.handleChangeDescript} />
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <p>Date Create</p>
+          </Grid>
+          <Grid justify="center" item xs={12} sm={8}>
+            <DatePicker label={""} date={this.state.datecreate} changedate={this.handleChangeDateCreate} />
           </Grid>
           <Grid item xs={12} sm={8}>
             <p>Image project</p>
@@ -77,18 +89,6 @@ class EditProjectUI extends Component {
             <div>
               <UploadImage setAvatar={this.setAvatar} />
             </div>
-          </Grid>
-          <Grid item xs={12} sm={8}>
-            <p>description</p>
-          </Grid>
-          <Grid justify="center" item xs={12} sm={8}>
-            <TextField name="description" fullWidth value={this.state.description} onChange={this.handleChangeDescript} />
-          </Grid>
-          <Grid item xs={12} sm={8}>
-            <p>Date Create</p>
-          </Grid>
-          <Grid justify="center" item xs={12} sm={8}>
-            <DatePicker label={""} date={this.state.datecreate} changedate={this.handleChangeDateCreate} />
           </Grid>
           <Grid justify="center" item xs={6} sm={6}>
             <Button variant="outlined" color="primary" onClick={this.editProject}>
