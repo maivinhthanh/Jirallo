@@ -133,7 +133,7 @@ export default function ContentUI({selectContent}) {
     >
       
       <StyledTreeItem nodeId="Cover" labelText="Cover"  />
-      <StyledTreeItem nodeId="Survey" labelText="Survey" />
+      <StyledTreeItem nodeId="Preface" labelText="Preface" />
       <StyledTreeItem nodeId="Introduce" labelText="Introduce" >
         <StyledTreeItem
           nodeId="Urgency"
@@ -154,6 +154,7 @@ export default function ContentUI({selectContent}) {
           bgColor="#e8f0fe"
         />
       </StyledTreeItem>
+      <StyledTreeItem nodeId="Survey" labelText="Survey" />
       <StyledTreeItem nodeId="Criteria" labelText="Criteria" >
         <StyledTreeItem
           nodeId="Advantages"

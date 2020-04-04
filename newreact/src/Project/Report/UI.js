@@ -31,6 +31,9 @@ export default React.forwardRef( function UI({idproject}) {
       else if(data === 'Survey'){
         window.scrollTo(0, survey.current.offsetTop)
       }
+      else if(data === 'Preface'){
+        window.scrollTo(0, preface.current.offsetTop)
+      }
       else if(data === 'Urgency'){
         window.scrollTo(0, introduce.current.urgencyRef.offsetTop)
       }
@@ -44,6 +47,7 @@ export default React.forwardRef( function UI({idproject}) {
 
     const cover = useRef(null)
     const survey = useRef(null)
+    const preface = useRef(null)
     const introduce = useRef(null)
 
     return (
@@ -59,14 +63,14 @@ export default React.forwardRef( function UI({idproject}) {
                 <div ref={cover}>
                   <Cover />
                 </div>
-                <div ref={survey}>
+                <div ref={preface}>
                   <Preface />     
                 </div>
                 <div >
                   <Introduce forwardedRef={introduce} />     
                 </div>  
                 <div>
-                  <Survey />
+                  <Survey ref={survey}/>
                 </div>     
               </div>
             </div>
