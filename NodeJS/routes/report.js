@@ -36,4 +36,7 @@ router.put('/updateImageSurvey/:idreport',upload.single('avatar'),isAuth,
 router.put('/deleteImageSurvey/:idreport',upload.single('avatar'),isAuth,
     reportController.deleteImageSurvey,
 )
+router.post('/addUsecase/:idreport',upload.single('avatar'),isAuth,
+    reportController.addUsecase,
+)
 module.exports = router

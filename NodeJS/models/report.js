@@ -78,54 +78,64 @@ const reportSchema = new Schema({
             }]
         }
     ],
-    criteria:{
-        advantages: {
-            type: String,
-            default: ""
-        },
-        defect: {
-            type: String,
-            default: ""
-        }
-    },
     usecase:{
-        general:[{
-            image:{
-                type: String,
-                default: ""
-            },
+        diagram:[{
+            image:[{
+                name:{
+                    type: String,
+                    default: ""
+                },
+                address:{
+                    type: String,
+                    default: ""
+                }
+            }],
             title:{
                 type: String,
                 default: ""
             },
         }],
-        actor:[{
-                name:{
+        descript:[{
+                title:{
                     type: String,
                     default: ""
                 },
-                major: [
+                descript: [
                     {
-                        name:{
+                        title:{
                             type: String,
                             default: ""
                         },
-                        type:{
+                        descript:[{
+                            type: String,
+                            default: ""
+                        }],
+                        actor:{
                             type: String,
                             default: ""
                         },
-                        regulations:{
+                        precondition:{
+                            type: String,
+                            default: ""
+                        },
+                        step:[{
+                            type: String,
+                            default: ""
+                        }],
+                        nametable:{
                             type: String,
                             default: ""
                         },
                         image:{
-                            type: String,
-                            default: ""
-                        },
-                        key:{
-                            type: String,
-                            default: ""
-                        },
+                            name:{
+                                type: String,
+                                default: ""
+                            },
+                            address:{
+                                type: String,
+                                default: ""
+                            }
+                        }
                     }
                 ]
             }
@@ -133,69 +143,60 @@ const reportSchema = new Schema({
         ]
 
     },
+    descriptionWebsite: [{
+        type: String,
+        default: ""
+    }],
     database:{
-        usecase:[{
+        image:[{
             name:{
                 type: String,
                 default: ""
             },
-            table:{
-                type: String,
-                default: ""
-            },
-            actor:{
-                type: String,
-                default: ""
-            },
-            stream: {
-                D1: {
-                    type: String,
-                    default: ""
-                },
-                D2: {
-                    type: String,
-                    default: ""
-                },
-                D3: {
-                    type: String,
-                    default: ""
-                },
-                D4: {
-                    type: String,
-                    default: ""
-                },
-                D5: {
-                    type: String,
-                    default: ""
-                },
-                D6: {
-                    type: String,
-                    default: ""
-                },
-            },
-            algorithm: {
+            address:{
                 type: String,
                 default: ""
             }
-        }],
-        table: [{
-            name:  {
+        }]
+    },
+    UI:[
+        {
+            title:{
                 type: String,
                 default: ""
             },
-            row: [{
-                name:  {
+            image:[{
+                name:{
                     type: String,
                     default: ""
                 },
-                type:  {
+                address:{
                     type: String,
                     default: ""
                 }
-            }]
-        }]
-    },
-   
+            }],
+            descript:[{
+                type: String,
+                default: ""
+            }],
+            listobject:[
+                {
+                    type:{
+                        type: String,
+                        default: ""
+                    },
+                    descript:{
+                        type: String,
+                        default: ""
+                    }
+                }
+            ],
+            nametable:{
+                type: String,
+                default: ""
+            }
+        }
+    ],
     hidden:{ type: Boolean, default: false },
     datecreate: { type: Date, default: Date.now },
     dateedit: { type: Date }

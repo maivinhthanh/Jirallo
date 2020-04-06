@@ -329,3 +329,51 @@ exports.addSurvey = async (req, res, next) => {
     }
     
 }
+exports.addUsecase = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const type = req.body.type
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        if(type === 'diagram'){
+            const report = await Report.findByIdAndUpdate(idreport,{
+                $push:{
+                    "usecase.diagram": {
+                        image: [],
+                        title: ""
+                    }
+                }
+                
+            },{ new: true })
+            res.status(200).json( {report} )
+        }
+        else{
+            const report = await Report.findByIdAndUpdate(idreport,{
+                $push:{
+                    "usecase.descript": {
+                        title: "",
+                        descript:[],
+                        actor: "",
+                        precondition: "",
+                        step: "",
+                        nametable: "",
+                        image: "",
+                        
+                    }
+                }
+                
+            },{ new: true })
+            res.status(200).json( {report} )
+        }
+        
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}

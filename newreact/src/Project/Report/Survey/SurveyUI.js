@@ -74,14 +74,14 @@ export default function ControlledTreeView(props) {
             CHƯƠNG 1: KHẢO SÁT HIỆN TRẠNG
           </div>  
           <div className={classes.coverSubTitle} >
-            2.1. KHẢO SÁT MỘT SỐ TRANG WEB
+            1.1. KHẢO SÁT MỘT SỐ TRANG WEB
           </div>
           {
             _.map(props.info.survey, (item, index)=>{
               return (
                 <div onMouseEnter={()=>IndexChangeAction(index)}>
                   <div className={classes.coverSubTitle} >
-                    <DivAction size={20} marginBottom={3} margin={3} >2.1.{index + 1} {item.name}</DivAction>
+                    <DivAction size={20} marginBottom={3} margin={3} >1.1.{index + 1} {item.name}</DivAction>
                   </div>
                   <div>
                     <p>Một số hình ảnh</p>

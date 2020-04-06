@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import UI from './UI'
+import UI from './CoverUI'
 import * as action from './action'
 
 class ContentContainer extends Component {

@@ -15,6 +15,7 @@ class ReportPage extends Component {
   render() {
       const { match: { params } } = this.props
       const { note, project } = this.props
+      console.log(project.idreport)
       if(project.idreport === null){
         return (
           <div >

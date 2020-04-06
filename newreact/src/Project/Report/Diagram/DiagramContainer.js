@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import UI from './SurveyUI'
+import UI from './DiagramUI'
 import * as action from './action'
 
-class IntroduceContainer extends Component {
+class UsecaseContainer extends Component {
     constructor(props) {
         super(props)
         
@@ -27,7 +27,7 @@ class IntroduceContainer extends Component {
         console.log(data, key)
         this.props.AddParagraph(data, key)
     }
-    PushImageSurvey = (image, name, idsurvey)=>{
+    PushImageUsecase = (image, name, idsurvey)=>{
         
         let data = new FormData()
         data.append('avatar',image)
@@ -35,18 +35,8 @@ class IntroduceContainer extends Component {
         data.append('idsurvey',idsurvey)
         this.props.PushImageSurvey(this.props.report._id,data)
     }
-    UpdateImage = (image, name, idsurvey, idimage) =>{
-        let data = new FormData()
-        if(image){
-            data.append('avatar',image)
-        }
-        data.append('name',name)
-        data.append('idsurvey',idsurvey)
-        data.append('idimage',idimage)
-        this.props.UpdateImageSurvey(this.props.report._id,data)
-    }
-    AddSurvey = ()=>{
-        this.props.AddSurvey(this.props.report._id)
+    AddDiagram = ()=>{
+        this.props.AddUsecase(this.props.report._id, "diagram")
     }
     DeleteImage = (idsurvey, idimage) =>{
         const data = {
@@ -60,13 +50,7 @@ class IntroduceContainer extends Component {
         return (
             <div >
                 <UI info={report} 
-                   EditAdvantages={this.EditAdvantages}
-                   EditDefect={this.EditDefect}
-                   AddParagraph={this.AddParagraph}
-                   saveImage={this.PushImageSurvey}
-                   AddSurvey={this.AddSurvey}
-                   updateImage={this.UpdateImage}
-                   deleteImage={this.DeleteImage} />
+                    AddDiagram={this.AddDiagram}/>
             </div>
         )
         
@@ -81,13 +65,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        EditSurvey: (id, data) => dispatch(action.EditSurvey(id, data)),
-        AddParagraph: (name, key) => dispatch(action.AddParagraph(name, key)),
-        PushImageSurvey: (id, data) =>dispatch(action.PushImageSurvey(id, data)),
-        AddSurvey: (id) => dispatch(action.AddSurvey(id)),
-        UpdateImageSurvey: (id, data) =>dispatch(action.UpdateImageSurvey(id, data)),
-        DeleteImageSurvey:(id, data)=>dispatch(action.DeleteImageSurvey(id, data)),
+        AddUsecase: (id, type) => dispatch(action.AddUsecase(id, type)),
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IntroduceContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(UsecaseContainer)

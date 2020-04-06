@@ -6,6 +6,7 @@ import Cover from './Cover/ContentContainer'
 import Preface from './Preface/PrefaceContainer'
 import Introduce from './Introduce/IntroduceContainer'
 import Survey from './Survey/SurveyContainer'
+import Diagram from './Diagram/DiagramContainer'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -43,12 +44,16 @@ export default React.forwardRef( function UI({idproject}) {
       else if(data === 'Structure'){
         window.scrollTo(0, introduce.current.structureRef.offsetTop)
       }
+      else if(data === 'Diagram'){
+        window.scrollTo(0, diagram.current.offsetTop)
+      }
     };
 
     const cover = useRef(null)
     const survey = useRef(null)
     const preface = useRef(null)
     const introduce = useRef(null)
+    const diagram = useRef(null)
 
     return (
         <div>
@@ -69,9 +74,12 @@ export default React.forwardRef( function UI({idproject}) {
                 <div >
                   <Introduce forwardedRef={introduce} />     
                 </div>  
-                <div>
-                  <Survey ref={survey}/>
-                </div>     
+                <div ref={survey}>
+                  <Survey />
+                </div>    
+                <div ref={diagram}>
+                  <Diagram  />
+                </div> 
               </div>
             </div>
         </div>

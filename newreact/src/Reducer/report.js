@@ -27,46 +27,25 @@ const initialState = {
         advantages:[],
         defect:[]
     }],
-    criteria:{
-        advantages:'',
-        defect:''
-    },
     usecase:{
-        general:[{
-            image:'',
+        diagram:[{
+            image:[],
             title:''
         }],
-        actor: [{
-            name: '',
-            major:[{
-                name:'',
-                type:'',
-                regulations:'',
-                image:'',
-                key:'',
+        descript: [{
+            title: '',
+            descript:[{
+                title:'',
+                descript:[],
+                actor:'',
+                precondition:'',
+                step:'',
+                nametable: '',
+                image:[],
+                
             }]
         }]
     },
-    database:{
-        usecase:[{
-            name:'',
-            table:'',
-            actor:'',
-            stream:{
-                D1:'',
-                D2:'',
-                D3:'',
-                D4:'',
-                D5:'',
-                D6:'',
-            },
-            algorithm:'',
-        }],
-        table:[{
-            name:'',
-            type:'',
-        }]
-    }
 };
 
 const updatestate = (state, action) =>{
