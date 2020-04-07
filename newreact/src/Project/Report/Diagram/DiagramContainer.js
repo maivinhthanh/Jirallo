@@ -45,12 +45,21 @@ class UsecaseContainer extends Component {
         }
         this.props.DeleteImageSurvey(this.props.report._id, data)
     }
+    updateTitle = (name, idusecase) =>{
+        const data = {
+            type: 'diagram',
+            name: name,
+            idusecase: idusecase
+        }
+        this.props.UpdateTitleUsecase(this.props.report._id, data)
+    }
     render() {
         const { report } = this.props
         return (
             <div >
                 <UI info={report} 
-                    AddDiagram={this.AddDiagram}/>
+                    AddDiagram={this.AddDiagram}
+                    updateTitle={this.updateTitle}/>
             </div>
         )
         
@@ -66,6 +75,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
     return {
         AddUsecase: (id, type) => dispatch(action.AddUsecase(id, type)),
+        UpdateTitleUsecase: (id, data) => dispatch(action.UpdateTitleUsecase(id, data)),
+
     }
 }
 

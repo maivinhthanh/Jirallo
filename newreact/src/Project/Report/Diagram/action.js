@@ -41,3 +41,27 @@ export const AddUsecase = (idreport, type ) =>{
         })
     }
 }
+export const UpdateTitleUsecase = (idreport, data ) =>{
+    return dispatch =>{
+        return CallApi(`report/updateTitleUsecase/${idreport}`,'PUT', data)
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}

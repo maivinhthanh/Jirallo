@@ -40,12 +40,10 @@ export default function ControlledTreeView(props) {
   const classes = useStyles();
 
   const [indexChange, setIndexChange] = React.useState(null);
-  const [image, setImage] = React.useState([]);
 
   const IndexChangeAction = (index) =>{
     setIndexChange(index)
   }
-
   const EditAdvantages = (data, paragraph) =>{
     props.EditAdvantages(data, paragraph, indexChange)
   }

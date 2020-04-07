@@ -2,6 +2,7 @@ const express = require('express')
 const { body } = require('express-validator/check')
 
 const reportController = require('../controllers/report')
+const usecaseController = require('../controllers/usecase')
 
 const router = express()
 
@@ -37,6 +38,9 @@ router.put('/deleteImageSurvey/:idreport',upload.single('avatar'),isAuth,
     reportController.deleteImageSurvey,
 )
 router.post('/addUsecase/:idreport',upload.single('avatar'),isAuth,
-    reportController.addUsecase,
+    usecaseController.addUsecase,
+)
+router.put('/updateTitleUsecase/:idreport',upload.single('avatar'),isAuth,
+    usecaseController.updateTitleUsecase,
 )
 module.exports = router

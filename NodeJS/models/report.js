@@ -126,7 +126,7 @@ const reportSchema = new Schema({
                             type: String,
                             default: ""
                         },
-                        image:{
+                        image:[{
                             name:{
                                 type: String,
                                 default: ""
@@ -135,7 +135,7 @@ const reportSchema = new Schema({
                                 type: String,
                                 default: ""
                             }
-                        }
+                        }]
                     }
                 ]
             }
