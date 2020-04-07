@@ -37,10 +37,25 @@ router.put('/updateImageSurvey/:idreport',upload.single('avatar'),isAuth,
 router.put('/deleteImageSurvey/:idreport',upload.single('avatar'),isAuth,
     reportController.deleteImageSurvey,
 )
+router.put('/updateTitleSurvey/:idreport',upload.single('avatar'),isAuth,
+    reportController.updateTitleSurvey,
+)
 router.post('/addUsecase/:idreport',upload.single('avatar'),isAuth,
     usecaseController.addUsecase,
 )
 router.put('/updateTitleUsecase/:idreport',upload.single('avatar'),isAuth,
     usecaseController.updateTitleUsecase,
+)
+router.put('/updateImageDiagram/:idreport',upload.single('avatar'),isAuth,
+    usecaseController.updateImageDiagram,
+)
+router.put('/updateImageDescript/:idreport',upload.single('avatar'),isAuth,
+    usecaseController.updateImageDescript,
+)
+router.put('/deleteImageUsecase/:idreport',upload.single('avatar'),isAuth,
+    usecaseController.deleteImageUsecase,
+)
+router.post('/pushImageUsecase/:idreport',upload.single('avatar'),isAuth,
+    usecaseController.pushImageUsecase,
 )
 module.exports = router

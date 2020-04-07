@@ -111,7 +111,7 @@ exports.updateTitleUsecase = async (req, res, next) => {
     }
     
 }
-exports.deleteImageDiagram = async (req, res, next) => {
+exports.deleteImageUsecase = async (req, res, next) => {
     try{
 
         const idreport = req.params.idreport

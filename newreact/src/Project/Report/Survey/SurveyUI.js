@@ -65,6 +65,11 @@ export default function ControlledTreeView(props) {
   const AddSurvey = ()=>{
     props.AddSurvey()
   }
+  const updateTitle = (name) =>{
+    const idsurvey = props.info.survey[indexChange]._id
+    const nameslice = name.slice(6, name.length)
+    props.updateTitle(nameslice, idsurvey)
+  }
   return (
     <div className="Cover">
       <div className={classes.A4} >
@@ -79,7 +84,7 @@ export default function ControlledTreeView(props) {
               return (
                 <div onMouseEnter={()=>IndexChangeAction(index)}>
                   <div className={classes.coverSubTitle} >
-                    <DivAction size={20} marginBottom={3} margin={3} >1.1.{index + 1} {item.name}</DivAction>
+                    <DivAction size={20} marginBottom={3} margin={3} changeText={updateTitle}>1.1.{index + 1}. {item.name}</DivAction>
                   </div>
                   <div>
                     <p>Một số hình ảnh</p>

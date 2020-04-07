@@ -55,6 +55,13 @@ class IntroduceContainer extends Component {
         }
         this.props.DeleteImageSurvey(this.props.report._id, data)
     }
+    updateTitle = (name, idsurvey) =>{
+        const data = {
+            name: name,
+            idsurvey: idsurvey
+        }
+        this.props.UpdateTitleSurvey(this.props.report._id, data)
+    }
     render() {
         const { report } = this.props
         return (
@@ -66,7 +73,8 @@ class IntroduceContainer extends Component {
                    saveImage={this.PushImageSurvey}
                    AddSurvey={this.AddSurvey}
                    updateImage={this.UpdateImage}
-                   deleteImage={this.DeleteImage} />
+                   deleteImage={this.DeleteImage}
+                   updateTitle={this.updateTitle} />
             </div>
         )
         
@@ -87,6 +95,7 @@ const mapDispatchToProps = dispatch => {
         AddSurvey: (id) => dispatch(action.AddSurvey(id)),
         UpdateImageSurvey: (id, data) =>dispatch(action.UpdateImageSurvey(id, data)),
         DeleteImageSurvey:(id, data)=>dispatch(action.DeleteImageSurvey(id, data)),
+        UpdateTitleSurvey: (id, data)=>dispatch(action.UpdateTitleSurvey(id, data))
     }
 }
 

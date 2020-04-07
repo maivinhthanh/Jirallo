@@ -77,6 +77,43 @@ exports.getReportInProject = async (req, res, next) => {
     }
     
 }
+exports.updateAuthor = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const name = req.body.name
+        const idsurvey = req.body.idsurvey
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        await Report.update(
+            {
+                '_id' : ObjectId(idreport)
+            },{
+                $set:{
+                    "survey.$[i].name": name
+                }
+                
+            },{
+                arrayFilters: [
+                {
+                    'i._id' : ObjectId(idsurvey)
+                }
+            ]}
+        )
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )    
+        
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+
 exports.editCover = async (req, res, next) => {
     try{
 
@@ -139,6 +176,43 @@ exports.editIntroduce = async (req, res, next) => {
     }
     
 }
+exports.updateTitleSurvey = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const name = req.body.name
+        const idsurvey = req.body.idsurvey
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        await Report.update(
+            {
+                '_id' : ObjectId(idreport)
+            },{
+                $set:{
+                    "survey.$[i].name": name
+                }
+                
+            },{
+                arrayFilters: [
+                {
+                    'i._id' : ObjectId(idsurvey)
+                }
+            ]}
+        )
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )    
+        
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+
 exports.editSurvey = async (req, res, next) => {
     try{
 
