@@ -34,16 +34,16 @@ const initialState = {
         }],
         descript: [{
             title: '',
-            descript:[{
-                title:'',
-                descript:[],
-                actor:'',
-                precondition:'',
-                step:'',
-                nametable: '',
-                image:[],
-                
-            }]
+            name: '',
+            key: '',
+            briefdescript: [],
+            actor: '',
+            precondition:'',
+            postcondition: '',
+            basicflows: [],
+            exception: [],
+            nametable: '',
+            image:[],
         }]
     },
 };

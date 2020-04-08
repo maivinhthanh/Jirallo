@@ -95,51 +95,73 @@ const reportSchema = new Schema({
                 default: ""
             },
         }],
-        descript:[{
+        descript:[
+            {
                 title:{
                     type: String,
                     default: ""
                 },
-                descript: [
-                    {
-                        title:{
-                            type: String,
-                            default: ""
-                        },
-                        descript:[{
-                            type: String,
-                            default: ""
-                        }],
-                        actor:{
-                            type: String,
-                            default: ""
-                        },
-                        precondition:{
-                            type: String,
-                            default: ""
-                        },
-                        step:[{
-                            type: String,
-                            default: ""
-                        }],
-                        nametable:{
-                            type: String,
-                            default: ""
-                        },
-                        image:[{
-                            name:{
-                                type: String,
-                                default: ""
-                            },
-                            address:{
-                                type: String,
-                                default: ""
-                            }
-                        }]
+                name:{
+                    type: String,
+                    default: ""
+                },
+                key:{
+                    type: String,
+                    default: ""
+                },
+                briefdescript:[{
+                    type: String,
+                    default: ""
+                }],
+                actor:{
+                    type: String,
+                    default: ""
+                },
+                precondition:{
+                    type: String,
+                    default: ""
+                },
+                postcondition:{
+                    type: String,
+                    default: ""
+                },
+                basicflows:[{
+                    user:{
+                        type: String,
+                        default: ""
+                    },
+                    system:[{
+                        type: String,
+                        default: ""
+                    }]
+                    
+                }],
+                exception:[{
+                    description:{
+                        type: String,
+                        default: ""
+                    },
+                    system:[{
+                        type: String,
+                        default: ""
+                    }]
+                    
+                }],
+                nametable:{
+                    type: String,
+                    default: ""
+                },
+                image:[{
+                    name:{
+                        type: String,
+                        default: ""
+                    },
+                    address:{
+                        type: String,
+                        default: ""
                     }
-                ]
+                }]
             }
-            
         ]
 
     },

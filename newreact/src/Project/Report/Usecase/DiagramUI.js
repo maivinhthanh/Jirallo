@@ -85,7 +85,7 @@ export default function ControlledTreeView(props) {
                       _.map(item.image, (image, ind)=>{
                         return(
                           <ImageEditor image={image} key={ind} saveImage={updateImage}
-                          deleteImage={deleteImage}/>
+                            deleteImage={deleteImage}/>
                           
                         )
                       })

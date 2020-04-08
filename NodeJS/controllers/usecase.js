@@ -31,14 +31,17 @@ exports.addUsecase = async (req, res, next) => {
             const report = await Report.findByIdAndUpdate(idreport,{
                 $push:{
                     "usecase.descript": {
-                        title: "",
-                        descript:[],
-                        actor: "",
-                        precondition: "",
-                        step: "",
-                        nametable: "",
-                        image: "",
-                        
+                        title: '',
+                        name: '',
+                        key: '',
+                        briefdescript: [],
+                        actor: '',
+                        precondition:'',
+                        postcondition: '',
+                        basicflows: [],
+                        exception: [],
+                        nametable: '',
+                        image:[] 
                     }
                 }
                 

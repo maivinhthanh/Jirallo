@@ -6,7 +6,8 @@ import Cover from './Cover/ContentContainer'
 import Preface from './Preface/PrefaceContainer'
 import Introduce from './Introduce/IntroduceContainer'
 import Survey from './Survey/SurveyContainer'
-import Diagram from './Diagram/DiagramContainer'
+import Diagram from './Usecase/DiagramContainer'
+import Usecase from './Usecase/UsecaseContainer'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -47,6 +48,9 @@ export default React.forwardRef( function UI({idproject}) {
       else if(data === 'Diagram'){
         window.scrollTo(0, diagram.current.offsetTop)
       }
+      else if(data === 'Usecase'){
+        window.scrollTo(0, usecase.current.offsetTop)
+      }
     };
 
     const cover = useRef(null)
@@ -54,6 +58,7 @@ export default React.forwardRef( function UI({idproject}) {
     const preface = useRef(null)
     const introduce = useRef(null)
     const diagram = useRef(null)
+    const usecase = useRef(null)
 
     return (
         <div>
@@ -79,6 +84,9 @@ export default React.forwardRef( function UI({idproject}) {
                 </div>    
                 <div ref={diagram}>
                   <Diagram  />
+                </div>
+                <div ref={usecase}>
+                  <Usecase />
                 </div> 
               </div>
             </div>
