@@ -12,7 +12,6 @@ class UsecaseContainer extends Component {
     }
     
     AddParagraph = (data, key) => { 
-        console.log(data, key)
         this.props.AddParagraph(data, key)
     }
     PushImageUsecase = (image, name, idusecase)=>{
@@ -62,6 +61,32 @@ class UsecaseContainer extends Component {
         data.append('idusecase',idusecase)
         this.props.PushImageUsecase(this.props.report._id,data)
     }
+    updateUsecase = (name, text, index)=>{
+        let descript = {}
+        descript.key = this.props.report.usecase.descript[index].key
+        descript.name = this.props.report.usecase.descript[index].name
+        descript.briefdescript = this.props.report.usecase.descript[index].briefdescript
+        descript.actor = this.props.report.usecase.descript[index].actor
+        descript.precondition = this.props.report.usecase.descript[index].precondition
+        descript.postcondition = this.props.report.usecase.descript[index].postcondition
+        descript.idusecase = this.props.report.usecase.descript[index]._id
+
+        descript[name] = text
+        this.props.UpdateUsecase(this.props.report._id, descript)
+    }
+    EditBrief = (content, paragragh, key)=>{
+        let descript = {}
+        descript.key = this.props.report.usecase.descript[key].key
+        descript.name = this.props.report.usecase.descript[key].name
+        descript.briefdescript = this.props.report.usecase.descript[key].briefdescript
+        descript.actor = this.props.report.usecase.descript[key].actor
+        descript.precondition = this.props.report.usecase.descript[key].precondition
+        descript.postcondition = this.props.report.usecase.descript[key].postcondition
+        descript.idusecase = this.props.report.usecase.descript[key]._id
+
+        descript.briefdescript[paragragh] = content
+        this.props.UpdateUsecase(this.props.report._id, descript)
+    }
     render() {
         const { report } = this.props
         return (
@@ -69,9 +94,12 @@ class UsecaseContainer extends Component {
                 <UI info={report} 
                     AddUsecase={this.AddUsecase}
                     updateTitle={this.updateTitle}
+                    updateUsecase={this.updateUsecase}
+                    addParagraph={this.AddParagraph}
                     deleteImage={this.DeleteImage}
                     updateImage={this.UpdateImage}
-                    saveImage={this.PushImage}/>
+                    saveImage={this.PushImage}
+                    EditBrief={this.EditBrief}/>
             </div>
         )
         
@@ -91,6 +119,8 @@ const mapDispatchToProps = dispatch => {
         PushImageUsecase: (id, data) => dispatch(action.PushImageUsecase(id, data)),
         DeleteImageUsecase: (id, data) => dispatch(action.DeleteImageUsecase(id, data)),
         UpdateImageDiagram: (id, data) => dispatch(action.UpdateImageDiagram(id, data)),
+        UpdateUsecase: (id, data) => dispatch(action.UpdateUsecase(id, data)),
+        AddParagraph: (data, key) => dispatch(action.AddParagraph(data, key)),
     }
 }
 

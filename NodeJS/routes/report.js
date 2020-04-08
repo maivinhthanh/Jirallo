@@ -58,4 +58,7 @@ router.put('/deleteImageUsecase/:idreport',upload.single('avatar'),isAuth,
 router.post('/pushImageUsecase/:idreport',upload.single('avatar'),isAuth,
     usecaseController.pushImageUsecase,
 )
+router.put('/updateUsecase/:idreport',upload.single('avatar'),isAuth,
+    usecaseController.updateUsecase,
+)
 module.exports = router

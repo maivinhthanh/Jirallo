@@ -87,7 +87,13 @@ const addSurvey = (state, action) =>{
     return newState
 
 }
- 
+const addParagraghBrief = (state, action) =>{
+    const newState = _.cloneDeep(state)
+    newState.usecase.descript[action.key].briefdescript = 
+    [...newState.usecase.descript[action.key].briefdescript, '............']
+    return newState
+
+}
 const reportReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'GET_REPORT_IN_PROJECT': return updatestate( state, action );
@@ -95,7 +101,7 @@ const reportReducer = ( state = initialState, action ) => {
         case 'ADD_PARAGRAPH_INTRODUCE': return addIntroduce( state, action );
         case 'ADD_PARAGRAPH_SERVEY': return addParagraghSurvey( state, action );
         case 'ADD_SERVEY': return addSurvey( state, action );
-
+        case 'ADD_PARAGRAPH_BRIEF': return addParagraghBrief( state, action)
         default: return state;
     }
 };

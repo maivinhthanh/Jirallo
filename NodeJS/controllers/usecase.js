@@ -355,3 +355,51 @@ exports.pushImageUsecase = async (req, res, next) => {
     }
     
 }
+exports.updateUsecase = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const key = req.body.key
+        const name = req.body.name
+        const briefdescript = req.body.briefdescript
+        const actor = req.body.actor
+        const precondition = req.body.precondition
+        const postcondition = req.body.postcondition
+        
+        const idusecase = req.body.idusecase
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+
+        await Report.update({
+            _id: idreport,
+        },{
+            $set:{
+                'usecase.descript.$[i].key' :key,
+                'usecase.descript.$[i].name' :name,
+                'usecase.descript.$[i].briefdescript' :briefdescript,
+                'usecase.descript.$[i].actor' :actor,
+                'usecase.descript.$[i].precondition' :precondition,
+                'usecase.descript.$[i].postcondition' :postcondition,
+            }
+            
+        },{
+            arrayFilters: [
+            {
+                'i._id' : ObjectId(idusecase)
+            }
+            
+        ]})
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    
+        
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}

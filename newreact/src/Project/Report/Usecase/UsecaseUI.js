@@ -63,6 +63,12 @@ export default function ControlledTreeView(props) {
     const nameslice = name.slice(6, name.length)
     props.updateTitle(nameslice, iduscase)
   }
+  const EditBrief = (data, paragraph)=>{
+    props.EditBrief(data, paragraph, indexChange)
+  }
+  const updateUsecase = (text, name ) =>{
+    props.updateUsecase(name, text, indexChange)
+  }
   return (
     <div className="Cover">
       <div className={classes.A4} >
@@ -79,27 +85,39 @@ export default function ControlledTreeView(props) {
                   <table className="table-usecase table table-hover">
                     <tr>
                       <td width="30%">UsecaseID</td>
-                      <td>fsdfas{item.key}</td>
+                      <td><DivAction size={18} marginBottom={3} margin={3} changeText={(text,name)=>updateUsecase(text, 'key')} >{item.key}</DivAction></td>
                     </tr>
                     <tr>
                       <td>Tên usecase</td>
-                      <td>{item.name}</td>
+                      <td><DivAction size={18} marginBottom={3} margin={3} changeText={(text, name)=>updateUsecase(text, 'name')} >{item.name}</DivAction>{item.name}</td>
                     </tr>
                     <tr>
                       <td>Tóm tắt mô tả</td>
-                      <td>{item.briefdescript}</td>
+                      <td>
+                        {
+                          item.briefdescript.length === 0
+                          ?
+                          <ListDivAction size={18} marginBottom={2} margin={2} changeText={EditBrief}  
+                            addParagraph={()=>props.addParagraph('Brief', index)}
+                            content={['................']}  />
+                          :
+                          <ListDivAction size={18} marginBottom={2} margin={2} changeText={EditBrief}
+                            addParagraph={()=>props.addParagraph('Brief', index)}
+                            content={item.briefdescript}/>
+                        }
+                      </td>
                     </tr>
                     <tr>
                       <td>Tác nhân</td>
-                      <td>{item.actor}</td>
+                      <td><DivAction size={18} marginBottom={3} margin={3} changeText={(text, name)=>updateUsecase(text, 'actor')} >{item.actor}</DivAction>{item.actor}</td>
                     </tr>
                     <tr>
                       <td>Tiền điều kiện</td>
-                      <td>{item.precondition}</td>
+                      <td><DivAction size={18} marginBottom={3} margin={3} changeText={(text, name)=>updateUsecase(text, 'precondition')} >{item.precondition}</DivAction></td>
                     </tr>
                     <tr>
                       <td>Hậu điều kiện</td>
-                      <td>{item.postcondition}</td>
+                      <td><DivAction size={18} marginBottom={3} margin={3} changeText={(text, name)=>updateUsecase(text, 'postcondition')} >{item.postcondition}</DivAction></td>
                     </tr>
                     <tr>
                       <td colSpan="2">Luồng</td>

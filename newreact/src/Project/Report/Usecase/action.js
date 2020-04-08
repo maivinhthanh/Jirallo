@@ -9,7 +9,7 @@ export const editintroduce = (report) =>{
 }
 export const AddParagraph = (name, key) =>{
     return {
-        type:'ADD_PARAGRAPH_SERVEY',
+        type:'ADD_PARAGRAPH_BRIEF',
         data: name,
         key: key
     }
@@ -41,6 +41,31 @@ export const AddUsecase = (idreport, type ) =>{
         })
     }
 }
+export const UpdateUsecase = (idreport, data ) =>{
+    return dispatch =>{
+        return CallApi(`report/updateUsecase/${idreport}`,'PUT', data)
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
+
 export const UpdateTitleUsecase = (idreport, data ) =>{
     return dispatch =>{
         return CallApi(`report/updateTitleUsecase/${idreport}`,'PUT', data)
