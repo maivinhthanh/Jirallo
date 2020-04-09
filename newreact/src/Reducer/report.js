@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import { AddFlow } from '../Project/Report/Usecase/action';
 const updateObject = (oldObject, updatedProperties) => {
     return {
         ...oldObject,
@@ -94,6 +95,21 @@ const addParagraghBrief = (state, action) =>{
     return newState
 
 }
+const addflow = (state, action)=>{
+    const newState = _.cloneDeep(state)
+    newState.usecase.descript[action.index].basicflows = 
+    [...newState.usecase.descript[action.index].basicflows, {
+        user: "",
+        system: []
+    }]
+    return newState
+}
+const addParagraghSystem = (state, action)=>{
+    const newState = _.cloneDeep(state)
+    newState.usecase.descript[action.indexUsecase].basicflows[action.indexFlow].system = 
+    [...newState.usecase.descript[action.indexUsecase].basicflows[action.indexFlow].system,"........."]
+    return newState
+}
 const reportReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'GET_REPORT_IN_PROJECT': return updatestate( state, action );
@@ -101,7 +117,9 @@ const reportReducer = ( state = initialState, action ) => {
         case 'ADD_PARAGRAPH_INTRODUCE': return addIntroduce( state, action );
         case 'ADD_PARAGRAPH_SERVEY': return addParagraghSurvey( state, action );
         case 'ADD_SERVEY': return addSurvey( state, action );
-        case 'ADD_PARAGRAPH_BRIEF': return addParagraghBrief( state, action)
+        case 'ADD_PARAGRAPH_BRIEF': return addParagraghBrief( state, action);
+        case 'ADD_FLOW': return addflow(state, action );
+        case 'ADD_PARAGRAPH_SYSTEM': return addParagraghSystem( state, action);
         default: return state;
     }
 };

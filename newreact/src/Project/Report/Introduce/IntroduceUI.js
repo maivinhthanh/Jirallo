@@ -35,8 +35,6 @@ const useStyles = makeStyles({
 export default function ControlledTreeView(props) {
   const classes = useStyles();
 
-  console.log(props.introduceRef)
-
   return (
     <div className="Cover">
       <div className={classes.A4} >

@@ -5,7 +5,7 @@ import ListDivAction from '../../../Components/ListInputEdit/DivActionUI'
 import DivAction from '../../../Components/InputEdit/DivActionUI'
 import ImageUpload from '../../../Components/ImageEditor/ImageUpload'
 import ImageEditor from '../../../Components/ImageEditor/ImageEditor'
-import { Icon } from '@material-ui/core';
+import { Icon, Button } from '@material-ui/core';
 import './usecase.css'
 
 const useStyles = makeStyles({
@@ -46,28 +46,37 @@ export default function ControlledTreeView(props) {
     setIndexChange(index)
   }
   const saveImage = (image, name)=>{
-    const iddiagram = props.info.usecase.descript[indexChange]._id
-    props.saveImage(image, name, iddiagram)
+    const idusecase = props.info.usecase.descript[indexChange]._id
+    props.saveImage(image, name, idusecase)
   }
   const updateImage = (image, name, idimage)=>{
-    const iddiagram = props.info.usecase.descript[indexChange]._id
-    props.updateImage(image, name, iddiagram, idimage)
+    const idusecase = props.info.usecase.descript[indexChange]._id
+    props.updateImage(image, name, idusecase, idimage)
   }
   const deleteImage = (idimage) =>{
-    const iddiagram = props.info.usecase.descript[indexChange]._id
-    props.deleteImage(iddiagram, idimage)
+    const idusecase = props.info.usecase.descript[indexChange]._id
+    props.deleteImage(idusecase, idimage)
   }
   
   const updateTitle = (name) =>{
-    const iduscase = props.info.usecase.descript[indexChange]._id
+    const idusecase = props.info.usecase.descript[indexChange]._id
     const nameslice = name.slice(6, name.length)
-    props.updateTitle(nameslice, iduscase)
+    props.updateTitle(nameslice, idusecase)
   }
   const EditBrief = (data, paragraph)=>{
     props.EditBrief(data, paragraph, indexChange)
   }
   const updateUsecase = (text, name ) =>{
     props.updateUsecase(name, text, indexChange)
+  }
+  const addFlow = ()=>{
+    props.addFlow(indexChange)
+  }
+  const updateFlowUser = (text, indexFlow) =>{
+    props.updateFlowUser(text, indexChange, indexFlow)
+  }
+  const EditSystem = (data, paragraph, indexFlow) =>{
+    props.EditSystem(data, paragraph, indexChange, indexFlow)
   }
   return (
     <div className="Cover">
@@ -78,7 +87,7 @@ export default function ControlledTreeView(props) {
           {
             _.map(props.info.usecase.descript, (item, index)=>{
               return(
-                <div onMouseEnter={()=>IndexChangeAction(index)}>
+                <div onMouseEnter={()=>IndexChangeAction(index)} key={index}>
                   <div className={classes.coverSubTitle} >
                     <DivAction size={20} marginBottom={3} margin={3} changeText={updateTitle} >2.2.{index + 1}. {item.title}</DivAction>
                   </div>
@@ -122,7 +131,66 @@ export default function ControlledTreeView(props) {
                     <tr>
                       <td colSpan="2">Luồng</td>
                     </tr>
+                    <tr>
+                      <td colSpan="2">
+                        <table className="table-usecase table table-hover">
+                          <tr>
+                            <th width="50%">Người dùng</th>
+                            <th>Hệ thống</th>
+                          </tr>
+                          {
+                            _.map(item.basicflows, (flow, indexFlow)=>{
+                              return (
+                                <tr key={indexFlow}>
+                                  <td>
+                                    <DivAction size={18} marginBottom={3} margin={3} 
+                                      changeText={(text, index)=>updateFlowUser(text, indexFlow)} >
+                                      {flow.user}
+                                    </DivAction>
+                                  </td>
+                                  <td>
+                                    {
+                                      flow.system.length === 0
+                                      ?
+                                      <ListDivAction size={20} marginBottom={2} margin={2} 
+                                        changeText={(text, paragraph, index)=>EditSystem(text, paragraph, indexFlow)}  
+                                        addParagraph={()=>props.AddParagraphSystem(index, indexFlow)}
+                                        content={['................']}  />
+                                      :
+                                      <ListDivAction size={20} marginBottom={2} margin={2} 
+                                        changeText={(text, paragraph, index)=>EditSystem(text, paragraph, indexFlow)}
+                                        addParagraph={()=>props.AddParagraphSystem(index, indexFlow)}
+                                        content={flow.system}/>
+                                    }
+                                  </td>
+                                </tr>
+                              )
+                            })
+                          }
+                          <tr>
+                            <td>
+                              <Button variant="contained" color="primary" onClick={addFlow}>
+                                Thêm luồng
+                              </Button>
+                            </td>
+                            <td></td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
                   </table>
+                  {
+                      _.map(item.image, (image, ind)=>{
+                        return(
+                          <ImageEditor image={image} key={ind} saveImage={updateImage}
+                            deleteImage={deleteImage}/>
+                          
+                        )
+                      })
+                    }
+                    {
+                      <ImageUpload saveImage={saveImage}/>
+                    }
                 </div>
               )
             })

@@ -82,7 +82,7 @@ export default function ControlledTreeView(props) {
           {
             _.map(props.info.survey, (item, index)=>{
               return (
-                <div onMouseEnter={()=>IndexChangeAction(index)}>
+                <div onMouseEnter={()=>IndexChangeAction(index)} key={index}>
                   <div className={classes.coverSubTitle} >
                     <DivAction size={20} marginBottom={3} margin={3} changeText={updateTitle}>1.1.{index + 1}. {item.name}</DivAction>
                   </div>

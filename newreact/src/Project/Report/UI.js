@@ -2,7 +2,7 @@ import React, {useRef} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 
 import Content from './Content/ContentContainer'
-import Cover from './Cover/ContentContainer'
+import Cover from './Cover/CoverContainer'
 import Preface from './Preface/PrefaceContainer'
 import Introduce from './Introduce/IntroduceContainer'
 import Survey from './Survey/SurveyContainer'

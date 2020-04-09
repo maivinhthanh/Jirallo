@@ -61,4 +61,7 @@ router.post('/pushImageUsecase/:idreport',upload.single('avatar'),isAuth,
 router.put('/updateUsecase/:idreport',upload.single('avatar'),isAuth,
     usecaseController.updateUsecase,
 )
+router.put('/updateBasicFlows/:idreport',upload.single('avatar'),isAuth,
+    usecaseController.updateBasicFlows,
+)
 module.exports = router

@@ -14,6 +14,9 @@ class UsecaseContainer extends Component {
     AddParagraph = (data, key) => { 
         this.props.AddParagraph(data, key)
     }
+    AddParagraphSystem = (indexUsecase, indexFlow)=>{
+        this.props.AddParagraphSystem(indexUsecase, indexFlow)
+    }
     PushImageUsecase = (image, name, idusecase)=>{
         
         let data = new FormData()
@@ -42,15 +45,15 @@ class UsecaseContainer extends Component {
         }
         this.props.UpdateTitleUsecase(this.props.report._id, data)
     }
-    UpdateImage = (image, name, iddiagram, idimage) =>{
+    UpdateImage = (image, name, idusecase, idimage) =>{
         let data = new FormData()
         if(image){
             data.append('avatar',image)
         }
         data.append('name',name)
-        data.append('iddiagram',iddiagram)
+        data.append('idusecase',idusecase)
         data.append('idimage',idimage)
-        this.props.UpdateImageDiagram(this.props.report._id,data)
+        this.props.UpdateImageUsecase(this.props.report._id,data)
     }
     PushImage = (image, name, idusecase)=>{
         
@@ -87,6 +90,21 @@ class UsecaseContainer extends Component {
         descript.briefdescript[paragragh] = content
         this.props.UpdateUsecase(this.props.report._id, descript)
     }
+    addFlow = (index) =>{
+        this.props.AddFlow(index)
+    }
+    updateFlowUser = (text, indexUsecase, indexFlow) =>{
+        let basicflows = this.props.report.usecase.descript[indexUsecase].basicflows
+        basicflows[indexFlow].user = text
+        const idusecase = this.props.report.usecase.descript[indexUsecase]._id
+        this.props.UpdateBasicFlows(this.props.report._id,basicflows, idusecase)
+    }
+    EditSystem = async (content, paragragh, indexUsecase, indexFlow) =>{
+        let basicflows = this.props.report.usecase.descript[indexUsecase].basicflows
+        basicflows[indexFlow].system[paragragh] = content
+        const idusecase = this.props.report.usecase.descript[indexUsecase]._id
+        this.props.UpdateBasicFlows(this.props.report._id,basicflows, idusecase)
+    }
     render() {
         const { report } = this.props
         return (
@@ -96,10 +114,14 @@ class UsecaseContainer extends Component {
                     updateTitle={this.updateTitle}
                     updateUsecase={this.updateUsecase}
                     addParagraph={this.AddParagraph}
+                    AddParagraphSystem={this.AddParagraphSystem}
                     deleteImage={this.DeleteImage}
                     updateImage={this.UpdateImage}
                     saveImage={this.PushImage}
-                    EditBrief={this.EditBrief}/>
+                    EditBrief={this.EditBrief}
+                    addFlow={this.addFlow}
+                    updateFlowUser={this.updateFlowUser}
+                    EditSystem={this.EditSystem}/>
             </div>
         )
         
@@ -118,9 +140,12 @@ const mapDispatchToProps = dispatch => {
         UpdateTitleUsecase: (id, data) => dispatch(action.UpdateTitleUsecase(id, data)),
         PushImageUsecase: (id, data) => dispatch(action.PushImageUsecase(id, data)),
         DeleteImageUsecase: (id, data) => dispatch(action.DeleteImageUsecase(id, data)),
-        UpdateImageDiagram: (id, data) => dispatch(action.UpdateImageDiagram(id, data)),
+        UpdateImageUsecase: (id, data) => dispatch(action.UpdateImageUsecase(id, data)),
         UpdateUsecase: (id, data) => dispatch(action.UpdateUsecase(id, data)),
         AddParagraph: (data, key) => dispatch(action.AddParagraph(data, key)),
+        AddParagraphSystem: (indexUsecase, indexFlow) => dispatch(action.AddParagraphSystem(indexUsecase, indexFlow)),
+        AddFlow: (index) =>dispatch(action.AddFlow(index)),
+        UpdateBasicFlows: (id, basicflows, idusecase) => dispatch(action.UpdateBasicFlows(id, basicflows, idusecase))
     }
 }
 

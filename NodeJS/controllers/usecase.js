@@ -239,7 +239,8 @@ exports.updateImageDescript = async (req, res, next) => {
 
         const idreport = req.params.idreport
         const name = req.body.name
-        const iddescript = req.body.iddescript
+        const idusecase = req.body.idusecase
+        const idimage = req.body.idimage
         if(!idreport){
             res.status(203).json({ message: 'Not found report' })
             return
@@ -260,7 +261,7 @@ exports.updateImageDescript = async (req, res, next) => {
             },{
                 arrayFilters: [
                 {
-                    'i._id' : ObjectId(iddescript)
+                    'i._id' : ObjectId(idusecase)
                 },
                 {
                     'j._id': ObjectId(idimage)
@@ -280,7 +281,7 @@ exports.updateImageDescript = async (req, res, next) => {
             },{
                 arrayFilters: [
                 {
-                    'i._id' : ObjectId(iddescript)
+                    'i._id' : ObjectId(idusecase)
                 },
                 {
                     'j._id': ObjectId(idimage)
@@ -383,6 +384,44 @@ exports.updateUsecase = async (req, res, next) => {
                 'usecase.descript.$[i].actor' :actor,
                 'usecase.descript.$[i].precondition' :precondition,
                 'usecase.descript.$[i].postcondition' :postcondition,
+            }
+            
+        },{
+            arrayFilters: [
+            {
+                'i._id' : ObjectId(idusecase)
+            }
+            
+        ]})
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    
+        
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.updateBasicFlows = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport        
+        const basicflows = req.body.basicflows
+        
+        const idusecase = req.body.idusecase
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+
+        await Report.update({
+            _id: idreport,
+        },{
+            $set:{
+                'usecase.descript.$[i].basicflows' :basicflows
             }
             
         },{

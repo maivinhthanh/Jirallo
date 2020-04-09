@@ -14,6 +14,19 @@ export const AddParagraph = (name, key) =>{
         key: key
     }
 }
+export const AddFlow = (index)=>{
+    return {
+        type:'ADD_FLOW',
+        index: index
+    }
+}
+export const AddParagraphSystem = (indexUsecase, indexFlow)=>{
+    return {
+        type:'ADD_PARAGRAPH_SYSTEM',
+        indexUsecase:indexUsecase,
+        indexFlow:indexFlow
+    }
+}
 
 export const AddUsecase = (idreport, type ) =>{
     return dispatch =>{
@@ -114,6 +127,31 @@ export const UpdateImageDiagram = (idreport, data ) =>{
         })
     }
 }
+export const UpdateImageUsecase = (idreport, data ) =>{
+    return dispatch =>{
+        return CallApi(`report/updateImageDescript/${idreport}`,'PUT', data)
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
+
 export const DeleteImageUsecase = (idreport, data ) =>{
     return dispatch =>{
         return CallApi(`report/deleteImageUsecase/${idreport}`,'PUT', data)
@@ -141,6 +179,33 @@ export const DeleteImageUsecase = (idreport, data ) =>{
 export const PushImageUsecase = (idreport, data ) =>{
     return dispatch =>{
         return CallApi(`report/pushImageUsecase/${idreport}`,'POST', data)
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
+export const UpdateBasicFlows = (idreport, basicflows, idusecase ) =>{
+    return dispatch =>{
+        return CallApi(`report/updateBasicFlows/${idreport}`,'PUT', {
+            basicflows:basicflows,
+            idusecase: idusecase
+        })
         .then (response =>{
             if(response.status === 200){
                 

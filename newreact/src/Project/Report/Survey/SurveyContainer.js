@@ -13,18 +13,15 @@ class IntroduceContainer extends Component {
     EditAdvantages = async (content, paragragh, key) =>{
         let data = this.props.report.survey
         data[key].advantages[paragragh] = content
-        console.log(data)
         await this.props.EditSurvey(this.props.report._id, data)
     }
     EditDefect = async (content, paragragh, key) =>{
         let data = this.props.report.survey
         data[key].defect[paragragh] = content
-        console.log(data)
         await this.props.EditSurvey(this.props.report._id, data)
     }
     
     AddParagraph = (data, key) => { 
-        console.log(data, key)
         this.props.AddParagraph(data, key)
     }
     PushImageSurvey = (image, name, idsurvey)=>{

@@ -38,7 +38,6 @@ class ContentContainer extends Component {
     }
     render() {
         const { report } = this.props
-        console.log(report)
         return (
             <div >
                 <UI info={report} 
