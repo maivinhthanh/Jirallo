@@ -14,8 +14,11 @@ class UsecaseContainer extends Component {
     AddParagraph = (data, key) => { 
         this.props.AddParagraph(data, key)
     }
-    AddParagraphSystem = (indexUsecase, indexFlow)=>{
-        this.props.AddParagraphSystem(indexUsecase, indexFlow)
+    AddParagraphFlow = (indexUsecase, indexFlow)=>{
+        this.props.AddParagraphFlow(indexUsecase, indexFlow)
+    }
+    AddParagraphException = (indexUsecase, indexFlow)=>{
+        this.props.AddParagraphException(indexUsecase, indexFlow)
     }
     PushImageUsecase = (image, name, idusecase)=>{
         
@@ -93,17 +96,32 @@ class UsecaseContainer extends Component {
     addFlow = (index) =>{
         this.props.AddFlow(index)
     }
+    addException = (index) =>{
+        this.props.AddException(index)
+    }
     updateFlowUser = (text, indexUsecase, indexFlow) =>{
         let basicflows = this.props.report.usecase.descript[indexUsecase].basicflows
         basicflows[indexFlow].user = text
         const idusecase = this.props.report.usecase.descript[indexUsecase]._id
         this.props.UpdateBasicFlows(this.props.report._id,basicflows, idusecase)
     }
+    updateExceptionDescript = (text, indexUsecase, indexException) =>{
+        let exception = this.props.report.usecase.descript[indexUsecase].exception
+        exception[indexException].description = text
+        const idusecase = this.props.report.usecase.descript[indexUsecase]._id
+        this.props.UpdateException(this.props.report._id,exception, idusecase)
+    }
     EditSystem = async (content, paragragh, indexUsecase, indexFlow) =>{
         let basicflows = this.props.report.usecase.descript[indexUsecase].basicflows
         basicflows[indexFlow].system[paragragh] = content
         const idusecase = this.props.report.usecase.descript[indexUsecase]._id
-        this.props.UpdateBasicFlows(this.props.report._id,basicflows, idusecase)
+        await this.props.UpdateBasicFlows(this.props.report._id,basicflows, idusecase)
+    }
+    EditException = async (content, paragragh, indexUsecase, indexException) =>{
+        let exception = this.props.report.usecase.descript[indexUsecase].exception
+        exception[indexException].system[paragragh] = content
+        const idusecase = this.props.report.usecase.descript[indexUsecase]._id
+        await this.props.UpdateException(this.props.report._id,exception, idusecase)
     }
     render() {
         const { report } = this.props
@@ -114,14 +132,18 @@ class UsecaseContainer extends Component {
                     updateTitle={this.updateTitle}
                     updateUsecase={this.updateUsecase}
                     addParagraph={this.AddParagraph}
-                    AddParagraphSystem={this.AddParagraphSystem}
+                    AddParagraphSystem={this.AddParagraphFlow}
                     deleteImage={this.DeleteImage}
                     updateImage={this.UpdateImage}
                     saveImage={this.PushImage}
                     EditBrief={this.EditBrief}
                     addFlow={this.addFlow}
+                    addException={this.addException}
                     updateFlowUser={this.updateFlowUser}
-                    EditSystem={this.EditSystem}/>
+                    EditSystem={this.EditSystem}
+                    AddParagraphException={this.AddParagraphException}
+                    EditException={this.EditException}
+                    updateExceptionDescript={this.updateExceptionDescript}/>
             </div>
         )
         
@@ -143,9 +165,12 @@ const mapDispatchToProps = dispatch => {
         UpdateImageUsecase: (id, data) => dispatch(action.UpdateImageUsecase(id, data)),
         UpdateUsecase: (id, data) => dispatch(action.UpdateUsecase(id, data)),
         AddParagraph: (data, key) => dispatch(action.AddParagraph(data, key)),
-        AddParagraphSystem: (indexUsecase, indexFlow) => dispatch(action.AddParagraphSystem(indexUsecase, indexFlow)),
+        AddParagraphFlow: (indexUsecase, indexFlow) => dispatch(action.AddParagraphFlow(indexUsecase, indexFlow)),
         AddFlow: (index) =>dispatch(action.AddFlow(index)),
-        UpdateBasicFlows: (id, basicflows, idusecase) => dispatch(action.UpdateBasicFlows(id, basicflows, idusecase))
+        UpdateBasicFlows: (id, basicflows, idusecase) => dispatch(action.UpdateBasicFlows(id, basicflows, idusecase)),
+        AddException: (index) =>dispatch(action.AddException(index)),
+        AddParagraphException:(indexUsecase, indexFlow) => dispatch(action.AddParagraphException(indexUsecase, indexFlow)),
+        UpdateException:(id, exception, idusecase) => dispatch(action.UpdateException(id, exception, idusecase)),
     }
 }
 

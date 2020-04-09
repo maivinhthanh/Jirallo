@@ -72,11 +72,20 @@ export default function ControlledTreeView(props) {
   const addFlow = ()=>{
     props.addFlow(indexChange)
   }
+  const addException = ()=>{
+    props.addException(indexChange)
+  }
   const updateFlowUser = (text, indexFlow) =>{
     props.updateFlowUser(text, indexChange, indexFlow)
   }
+  const updateExceptionDescript = (text, indexException) =>{
+    props.updateExceptionDescript(text, indexChange, indexException)
+  }
   const EditSystem = (data, paragraph, indexFlow) =>{
     props.EditSystem(data, paragraph, indexChange, indexFlow)
+  }
+  const EditException = (data, paragraph, indexException) =>{
+    props.EditException(data, paragraph, indexChange, indexException)
   }
   return (
     <div className="Cover">
@@ -171,6 +180,56 @@ export default function ControlledTreeView(props) {
                             <td>
                               <Button variant="contained" color="primary" onClick={addFlow}>
                                 Thêm luồng
+                              </Button>
+                            </td>
+                            <td></td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colSpan="2">Điều kiện ngoại lệ</td>
+                    </tr>
+                    <tr>
+                      <td colSpan="2">
+                        <table className="table-usecase table table-hover">
+                          <tr>
+                            <th width="50%">Mô tả</th>
+                            <th>Hệ thống</th>
+                          </tr>
+                          {
+                            _.map(item.exception, (exception, indexException)=>{
+                              return (
+                                <tr key={indexException}>
+                                  <td>
+                                    <DivAction size={18} marginBottom={3} margin={3} 
+                                      changeText={(text, index)=>updateExceptionDescript(text, indexException)} >
+                                      {exception.description}
+                                    </DivAction>
+                                  </td>
+                                  <td>
+                                    {
+                                      exception.system.length === 0
+                                      ?
+                                      <ListDivAction size={20} marginBottom={2} margin={2} 
+                                        changeText={(text, paragraph, index)=>EditException(text, paragraph, indexException)}  
+                                        addParagraph={()=>props.AddParagraphException(index, indexException)}
+                                        content={['................']}  />
+                                      :
+                                      <ListDivAction size={20} marginBottom={2} margin={2} 
+                                        changeText={(text, paragraph, index)=>EditException(text, paragraph, indexException)}
+                                        addParagraph={()=>props.AddParagraphException(index, indexException)}
+                                        content={exception.system}/>
+                                    }
+                                  </td>
+                                </tr>
+                              )
+                            })
+                          }
+                          <tr>
+                            <td>
+                              <Button variant="contained" color="primary" onClick={addException}>
+                                Thêm ngoại lệ
                               </Button>
                             </td>
                             <td></td>

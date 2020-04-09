@@ -1,5 +1,4 @@
 import _ from 'lodash'
-import { AddFlow } from '../Project/Report/Usecase/action';
 const updateObject = (oldObject, updatedProperties) => {
     return {
         ...oldObject,
@@ -104,10 +103,25 @@ const addflow = (state, action)=>{
     }]
     return newState
 }
-const addParagraghSystem = (state, action)=>{
+const addException = (state, action)=>{
+    const newState = _.cloneDeep(state)
+    newState.usecase.descript[action.index].exception = 
+    [...newState.usecase.descript[action.index].exception, {
+        description: "",
+        system: []
+    }]
+    return newState
+}
+const addParagraghFlow = (state, action)=>{
     const newState = _.cloneDeep(state)
     newState.usecase.descript[action.indexUsecase].basicflows[action.indexFlow].system = 
     [...newState.usecase.descript[action.indexUsecase].basicflows[action.indexFlow].system,"........."]
+    return newState
+}
+const addParagraghException = (state, action)=>{
+    const newState = _.cloneDeep(state)
+    newState.usecase.descript[action.indexUsecase].exception[action.indexFlow].system = 
+    [...newState.usecase.descript[action.indexUsecase].exception[action.indexFlow].system,"........."]
     return newState
 }
 const reportReducer = ( state = initialState, action ) => {
@@ -119,7 +133,9 @@ const reportReducer = ( state = initialState, action ) => {
         case 'ADD_SERVEY': return addSurvey( state, action );
         case 'ADD_PARAGRAPH_BRIEF': return addParagraghBrief( state, action);
         case 'ADD_FLOW': return addflow(state, action );
-        case 'ADD_PARAGRAPH_SYSTEM': return addParagraghSystem( state, action);
+        case 'ADD_PARAGRAPH_FLOW': return addParagraghFlow( state, action);
+        case 'ADD_EXCEPTION': return addException( state, action);
+        case 'ADD_PARAGRAPH_EXCEPTION': return addParagraghException( state, action);
         default: return state;
     }
 };

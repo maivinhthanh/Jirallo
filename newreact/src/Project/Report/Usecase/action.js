@@ -20,14 +20,26 @@ export const AddFlow = (index)=>{
         index: index
     }
 }
-export const AddParagraphSystem = (indexUsecase, indexFlow)=>{
+export const AddException = (index)=>{
     return {
-        type:'ADD_PARAGRAPH_SYSTEM',
+        type:'ADD_EXCEPTION',
+        index: index
+    }
+}
+export const AddParagraphFlow = (indexUsecase, indexFlow)=>{
+    return {
+        type:'ADD_PARAGRAPH_FLOW',
         indexUsecase:indexUsecase,
         indexFlow:indexFlow
     }
 }
-
+export const AddParagraphException = (indexUsecase, indexFlow)=>{
+    return {
+        type:'ADD_PARAGRAPH_EXCEPTION',
+        indexUsecase:indexUsecase,
+        indexFlow:indexFlow
+    }
+}
 export const AddUsecase = (idreport, type ) =>{
     return dispatch =>{
         return CallApi(`report/addUsecase/${idreport}`,'POST', {
@@ -204,6 +216,33 @@ export const UpdateBasicFlows = (idreport, basicflows, idusecase ) =>{
     return dispatch =>{
         return CallApi(`report/updateBasicFlows/${idreport}`,'PUT', {
             basicflows:basicflows,
+            idusecase: idusecase
+        })
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
+export const UpdateException = (idreport, exception, idusecase ) =>{
+    return dispatch =>{
+        return CallApi(`report/updateException/${idreport}`,'PUT', {
+            exception:exception,
             idusecase: idusecase
         })
         .then (response =>{

@@ -442,3 +442,41 @@ exports.updateBasicFlows = async (req, res, next) => {
     }
     
 }
+exports.updateException = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport        
+        const exception = req.body.exception
+        
+        const idusecase = req.body.idusecase
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+
+        await Report.update({
+            _id: idreport,
+        },{
+            $set:{
+                'usecase.descript.$[i].exception' :exception
+            }
+            
+        },{
+            arrayFilters: [
+            {
+                'i._id' : ObjectId(idusecase)
+            }
+            
+        ]})
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    
+        
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
