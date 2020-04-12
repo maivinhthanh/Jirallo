@@ -49,7 +49,17 @@ const initialState = {
     descriptionWebsite: [],
     database:{
         image:[]
-    }
+    },
+    ui:[{
+        group:"",
+        content:[{
+            title: "",
+            image: [],
+            descript: "",
+            listobject:[],
+            nametable:""
+        }]
+    }]
 };
 
 const updatestate = (state, action) =>{
@@ -134,6 +144,15 @@ const addParagraghDescript = (state, action)=>{
     [...newState.descriptionWebsite,"........."]
     return newState
 }
+const addObject = (state, action)=>{
+    const newState = _.cloneDeep(state)
+    newState.ui[action.idgroup].content[action.idui].listobject = 
+    [...newState.ui[action.idgroup].content[action.idui].listobject,{
+        type: '',
+        descript: ''
+    }]
+    return newState
+}
 const reportReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'GET_REPORT_IN_PROJECT': return updatestate( state, action );
@@ -146,7 +165,9 @@ const reportReducer = ( state = initialState, action ) => {
         case 'ADD_PARAGRAPH_FLOW': return addParagraghFlow( state, action);
         case 'ADD_EXCEPTION': return addException( state, action);
         case 'ADD_PARAGRAPH_EXCEPTION': return addParagraghException( state, action);
-        case 'ADD_PARAGRAPH_DESCRIPT_WEBSITE': return addParagraghDescript(state, action)
+        case 'ADD_PARAGRAPH_DESCRIPT_WEBSITE': return addParagraghDescript(state, action);
+        case 'ADD_OBJECT': return addObject(state, action);
+
         default: return state;
     }
 };

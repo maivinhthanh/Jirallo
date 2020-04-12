@@ -171,7 +171,7 @@ export default function ContentUI({selectContent, report}) {
       <StyledTreeItem nodeId="Usecase" labelText="Usecase" />
       <StyledTreeItem nodeId="DescriptWebsite" labelText="Descript Website" />
       <StyledTreeItem nodeId="Database" labelText="Database" >
-        <StyledTreeItem
+        {/* <StyledTreeItem
           nodeId="Database-Usecase"
           labelText="Usecase"
           color="#1a73e8"
@@ -182,9 +182,9 @@ export default function ContentUI({selectContent, report}) {
           labelText="Table"
           color="#e3742f"
           bgColor="#fcefe3"
-        />
+        /> */}
       </StyledTreeItem>
-      
+      <StyledTreeItem nodeId="Interface" labelText="Interface" />
     </TreeView>
   );
 }

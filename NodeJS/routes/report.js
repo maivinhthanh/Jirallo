@@ -80,5 +80,28 @@ router.put('/deleteImageDatabase/:idreport',upload.single('avatar'),isAuth,
 router.put('/updateImageDatabase/:idreport',upload.single('avatar'),isAuth,
     designController.updateImageDatabase,
 )
-
+router.post('/addGroup/:idreport',upload.single('avatar'),isAuth,
+    designController.addGroup,
+)
+router.put('/updateNameGroup/:idreport',upload.single('avatar'),isAuth,
+    designController.updateNameGroup,
+)
+router.put('/addInterface/:idreport',upload.single('avatar'),isAuth,
+    designController.addInterface,
+)
+router.post('/pushImageInterface/:idreport',upload.single('avatar'),isAuth,
+    designController.pushImageInterface,
+)
+router.put('/deleteImageInterface/:idreport',upload.single('avatar'),isAuth,
+    designController.deleteImageInterface,
+)
+router.put('/updateImageInterface/:idreport',upload.single('avatar'),isAuth,
+    designController.updateImageInterface,
+)
+router.put('/updateInterface/:idreport',upload.single('avatar'),isAuth,
+    designController.updateInterface,
+)
+router.put('/updateObject/:idreport',upload.single('avatar'),isAuth,
+    designController.updateObject,
+)
 module.exports = router

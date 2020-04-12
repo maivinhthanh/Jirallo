@@ -181,43 +181,52 @@ const reportSchema = new Schema({
             }
         }]
     },
-    UI:[
+    ui:[
         {
-            title:{
+            group:{
                 type: String,
                 default: ""
             },
-            image:[{
-                name:{
-                    type: String,
-                    default: ""
-                },
-                address:{
-                    type: String,
-                    default: ""
-                }
-            }],
-            descript:[{
-                type: String,
-                default: ""
-            }],
-            listobject:[
+            content:[
                 {
-                    type:{
+                    title:{
                         type: String,
                         default: ""
                     },
+                    image:[{
+                        name:{
+                            type: String,
+                            default: ""
+                        },
+                        address:{
+                            type: String,
+                            default: ""
+                        }
+                    }],
                     descript:{
+                        type: String,
+                        default: ""
+                    },
+                    listobject:[
+                        {
+                            type:{
+                                type: String,
+                                default: ""
+                            },
+                            descript:{
+                                type: String,
+                                default: ""
+                            }
+                        }
+                    ],
+                    nametable:{
                         type: String,
                         default: ""
                     }
                 }
-            ],
-            nametable:{
-                type: String,
-                default: ""
-            }
+            ]
         }
+        
     ],
     hidden:{ type: Boolean, default: false },
     datecreate: { type: Date, default: Date.now },
