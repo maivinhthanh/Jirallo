@@ -403,3 +403,27 @@ exports.addSurvey = async (req, res, next) => {
     }
     
 }
+exports.updateSetting = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const setting = req.body.setting
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        const report = await Report.findByIdAndUpdate(idreport,{
+            $set:{
+                "setting": setting
+            }
+            
+        },{ new: true })
+        res.status(200).json( {report} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}

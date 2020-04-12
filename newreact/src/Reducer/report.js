@@ -59,7 +59,12 @@ const initialState = {
             listobject:[],
             nametable:""
         }]
-    }]
+    }],
+    setting:{
+        language: [],
+        technology:[],
+        structure: []
+    }
 };
 
 const updatestate = (state, action) =>{
@@ -153,6 +158,13 @@ const addObject = (state, action)=>{
     }]
     return newState
 }
+const addSetting = (state, action)=>{
+    const newState = _.cloneDeep(state)
+    newState.setting[action.name] = 
+    [...newState.setting[action.name],".........."]
+    console.log(newState)
+    return newState
+}
 const reportReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'GET_REPORT_IN_PROJECT': return updatestate( state, action );
@@ -167,6 +179,7 @@ const reportReducer = ( state = initialState, action ) => {
         case 'ADD_PARAGRAPH_EXCEPTION': return addParagraghException( state, action);
         case 'ADD_PARAGRAPH_DESCRIPT_WEBSITE': return addParagraghDescript(state, action);
         case 'ADD_OBJECT': return addObject(state, action);
+        case 'ADD_PARAGRAPH_SETTING': return addSetting(state, action);
 
         default: return state;
     }

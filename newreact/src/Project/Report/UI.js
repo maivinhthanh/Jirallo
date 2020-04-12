@@ -11,6 +11,7 @@ import Usecase from './Usecase/UsecaseContainer'
 import DescriptionWebsite from './Design/DescriptionContainer'
 import Database from './Design/DatabaseContainer'
 import Interface from './Design/InterfaceContainer'
+import Setting from './Setting/SettingContainer'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -63,6 +64,9 @@ export default React.forwardRef( function UI({idproject}) {
       else if(data === 'Interface'){
         window.scrollTo(0, interfaces.current.offsetTop)
       }
+      else if(data === 'Setting'){
+        window.scrollTo(0, setting.current.offsetTop)
+      }
     };
 
     const cover = useRef(null)
@@ -74,6 +78,7 @@ export default React.forwardRef( function UI({idproject}) {
     const descript = useRef(null)
     const database = useRef(null)
     const interfaces = useRef(null)
+    const setting = useRef(null)
 
     return (
         <div>
@@ -112,6 +117,10 @@ export default React.forwardRef( function UI({idproject}) {
                 <div ref={interfaces}>
                   <Interface />
                 </div>
+                <div ref={setting}>
+                  <Setting />
+                </div>
+                
               </div>
             </div>
         </div>

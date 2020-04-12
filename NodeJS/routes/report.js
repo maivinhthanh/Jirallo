@@ -104,4 +104,7 @@ router.put('/updateInterface/:idreport',upload.single('avatar'),isAuth,
 router.put('/updateObject/:idreport',upload.single('avatar'),isAuth,
     designController.updateObject,
 )
+router.put('/updateSetting/:idreport',upload.single('avatar'),isAuth,
+    reportController.updateSetting,
+)
 module.exports = router

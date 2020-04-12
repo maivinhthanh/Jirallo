@@ -185,6 +185,7 @@ export default function ContentUI({selectContent, report}) {
         /> */}
       </StyledTreeItem>
       <StyledTreeItem nodeId="Interface" labelText="Interface" />
+      <StyledTreeItem nodeId="Setting" labelText="Setting" />
     </TreeView>
   );
 }

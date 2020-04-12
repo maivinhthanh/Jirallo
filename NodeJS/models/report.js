@@ -228,6 +228,44 @@ const reportSchema = new Schema({
         }
         
     ],
+    setting: {
+        language:[{
+            type: String,
+            default: ""
+        }],
+        technology:[{
+            type: String,
+            default: ""
+        }],
+        structure:[{
+            type: String,
+            default: ""
+        }],
+    },
+    testing: [{
+        title: {
+            type: String,
+            default: ""
+        },
+        content: [{
+            name:{
+                type: String,
+                default: ""
+            },
+            description:{
+                type: String,
+                default: ""
+            },
+            expect:{
+                type: String,
+                default: ""
+            },
+            result:{
+                type: String,
+                default: ""
+            }
+        }]
+    }],
     hidden:{ type: Boolean, default: false },
     datecreate: { type: Date, default: Date.now },
     dateedit: { type: Date }
