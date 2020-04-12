@@ -46,6 +46,10 @@ const initialState = {
             image:[],
         }]
     },
+    descriptionWebsite: [],
+    database:{
+        image:[]
+    }
 };
 
 const updatestate = (state, action) =>{
@@ -124,6 +128,12 @@ const addParagraghException = (state, action)=>{
     [...newState.usecase.descript[action.indexUsecase].exception[action.indexFlow].system,"........."]
     return newState
 }
+const addParagraghDescript = (state, action)=>{
+    const newState = _.cloneDeep(state)
+    newState.descriptionWebsite = 
+    [...newState.descriptionWebsite,"........."]
+    return newState
+}
 const reportReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'GET_REPORT_IN_PROJECT': return updatestate( state, action );
@@ -136,6 +146,7 @@ const reportReducer = ( state = initialState, action ) => {
         case 'ADD_PARAGRAPH_FLOW': return addParagraghFlow( state, action);
         case 'ADD_EXCEPTION': return addException( state, action);
         case 'ADD_PARAGRAPH_EXCEPTION': return addParagraghException( state, action);
+        case 'ADD_PARAGRAPH_DESCRIPT_WEBSITE': return addParagraghDescript(state, action)
         default: return state;
     }
 };

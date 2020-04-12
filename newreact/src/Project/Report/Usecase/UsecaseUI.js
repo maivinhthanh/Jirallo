@@ -10,7 +10,7 @@ import './usecase.css'
 
 const useStyles = makeStyles({
   A4: {
-    height: 842,
+    // height: 842,
     paddingLeft: 113,
     paddingRight: 75,
     paddingBottom: 75,
@@ -37,7 +37,7 @@ const useStyles = makeStyles({
 
 });
 
-export default function ControlledTreeView(props) {
+export default function UsecaseUI(props) {
   const classes = useStyles();
 
   const [indexChange, setIndexChange] = React.useState(null);

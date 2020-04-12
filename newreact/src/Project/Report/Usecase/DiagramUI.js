@@ -8,7 +8,7 @@ import { Icon } from '@material-ui/core';
 
 const useStyles = makeStyles({
   A4: {
-    height: 842,
+    // height: 842,
     paddingLeft: 113,
     paddingRight: 75,
     paddingBottom: 75,
@@ -35,7 +35,7 @@ const useStyles = makeStyles({
 
 });
 
-export default function ControlledTreeView(props) {
+export default function DiagramUI(props) {
   const classes = useStyles();
 
   const [indexChange, setIndexChange] = React.useState(null);

@@ -8,6 +8,8 @@ import Introduce from './Introduce/IntroduceContainer'
 import Survey from './Survey/SurveyContainer'
 import Diagram from './Usecase/DiagramContainer'
 import Usecase from './Usecase/UsecaseContainer'
+import DescriptionWebsite from './Design/DescriptionContainer'
+import Database from './Design/DatabaseContainer'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -51,6 +53,12 @@ export default React.forwardRef( function UI({idproject}) {
       else if(data === 'Usecase'){
         window.scrollTo(0, usecase.current.offsetTop)
       }
+      else if(data === 'DescriptWebsite'){
+        window.scrollTo(0, descript.current.offsetTop)
+      }
+      else if(data === 'Database'){
+        window.scrollTo(0, database.current.offsetTop)
+      }
     };
 
     const cover = useRef(null)
@@ -59,6 +67,8 @@ export default React.forwardRef( function UI({idproject}) {
     const introduce = useRef(null)
     const diagram = useRef(null)
     const usecase = useRef(null)
+    const descript = useRef(null)
+    const database = useRef(null)
 
     return (
         <div>
@@ -88,6 +98,12 @@ export default React.forwardRef( function UI({idproject}) {
                 <div ref={usecase}>
                   <Usecase />
                 </div> 
+                <div ref={descript}>
+                  <DescriptionWebsite />
+                </div>
+                <div ref={database}>
+                  <Database />
+                </div>
               </div>
             </div>
         </div>

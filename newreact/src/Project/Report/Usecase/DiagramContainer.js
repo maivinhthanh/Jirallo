@@ -5,7 +5,7 @@ import _ from 'lodash'
 import UI from './DiagramUI'
 import * as action from './action'
 
-class UsecaseContainer extends Component {
+class DiagramContainer extends Component {
     constructor(props) {
         super(props)
         
@@ -94,4 +94,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsecaseContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(DiagramContainer)

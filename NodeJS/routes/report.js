@@ -3,6 +3,7 @@ const { body } = require('express-validator/check')
 
 const reportController = require('../controllers/report')
 const usecaseController = require('../controllers/usecase')
+const designController = require('../controllers/design')
 
 const router = express()
 
@@ -67,4 +68,17 @@ router.put('/updateBasicFlows/:idreport',upload.single('avatar'),isAuth,
 router.put('/updateException/:idreport',upload.single('avatar'),isAuth,
     usecaseController.updateException,
 )
+router.put('/updateDescriptWebsite/:idreport',upload.single('avatar'),isAuth,
+    designController.updateDescriptWebsite,
+)
+router.post('/pushImageDatabase/:idreport',upload.single('avatar'),isAuth,
+    designController.pushImageDatabase,
+)
+router.put('/deleteImageDatabase/:idreport',upload.single('avatar'),isAuth,
+    designController.deleteImageDatabase,
+)
+router.put('/updateImageDatabase/:idreport',upload.single('avatar'),isAuth,
+    designController.updateImageDatabase,
+)
+
 module.exports = router

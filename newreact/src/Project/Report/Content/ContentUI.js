@@ -6,6 +6,7 @@ import TreeItem from '@material-ui/lab/TreeItem';
 import Typography from '@material-ui/core/Typography';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import _ from 'lodash'
 
 const useTreeItemStyles = makeStyles(theme => ({
   root: {
@@ -105,7 +106,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ContentUI({selectContent}) {
+export default function ContentUI({selectContent, report}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState([]);
   const [selected, setSelected] = React.useState([]);
@@ -154,9 +155,21 @@ export default function ContentUI({selectContent}) {
           bgColor="#e8f0fe"
         />
       </StyledTreeItem>
-      <StyledTreeItem nodeId="Survey" labelText="Survey" />
+      <StyledTreeItem nodeId="Survey" labelText="Survey" >
+        {
+          _.map(report.survey, (item, index)=>{
+            return (
+              <StyledTreeItem
+                nodeId={item._id} labelText={item.name}>
+
+              </StyledTreeItem>
+            )
+          })
+        }
+      </StyledTreeItem>
       <StyledTreeItem nodeId="Diagram" labelText="Diagram" />
       <StyledTreeItem nodeId="Usecase" labelText="Usecase" />
+      <StyledTreeItem nodeId="DescriptWebsite" labelText="Descript Website" />
       <StyledTreeItem nodeId="Database" labelText="Database" >
         <StyledTreeItem
           nodeId="Database-Usecase"
@@ -171,6 +184,7 @@ export default function ContentUI({selectContent}) {
           bgColor="#fcefe3"
         />
       </StyledTreeItem>
+      
     </TreeView>
   );
 }

@@ -1,15 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import UI from './SurveyUI'
 import * as action from './action'
 
-class IntroduceContainer extends Component {
+class SurveyContainer extends Component {
     constructor(props) {
         super(props)
         
     }
+    
     EditAdvantages = async (content, paragragh, key) =>{
         let data = this.props.report.survey
         data[key].advantages[paragragh] = content
@@ -61,9 +62,11 @@ class IntroduceContainer extends Component {
     }
     render() {
         const { report } = this.props
+        // console.log(this.listRef)
+        let { props, ref } = React.forwardRef((props, ref) => ({ props, ref }))
         return (
             <div >
-                <UI info={report} 
+                <UI info={report} ref={ref}
                    EditAdvantages={this.EditAdvantages}
                    EditDefect={this.EditDefect}
                    AddParagraph={this.AddParagraph}
@@ -96,4 +99,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IntroduceContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(SurveyContainer)

@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function ControlledTreeView(props) {
+export default function PrefaceUI(props) {
   const classes = useStyles();
   
   return (

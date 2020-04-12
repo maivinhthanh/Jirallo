@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 
 });
 
-export default function ControlledTreeView(props) {
+export default function IntroduceUI(props) {
   const classes = useStyles();
 
   return (
