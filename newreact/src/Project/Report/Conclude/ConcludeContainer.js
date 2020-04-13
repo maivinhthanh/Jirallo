@@ -8,9 +8,10 @@ import * as action from './action'
 class ConcludeContainer extends Component {
     constructor(props) {
         super(props)
-        this.urgencyRef = React.createRef();
-        this.targetRef = React.createRef();
-        this.structureRef = React.createRef();
+        this.resultRef = React.createRef();
+        this.advantagesRef = React.createRef();
+        this.defectRef = React.createRef();
+        this.developmentRef = React.createRef();
     }
     EditDefect = (content, key) =>{
         let defect = this.props.report.conclude.defect

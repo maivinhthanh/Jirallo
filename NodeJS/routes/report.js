@@ -122,4 +122,22 @@ router.put('/editConclude/:idreport',upload.single('avatar'),isAuth,
 router.put('/editReference/:idreport',upload.single('avatar'),isAuth,
     reportController.editReference,
 )
+router.post('/addTheory/:idreport',upload.single('avatar'),isAuth,
+    reportController.addTheory,
+)
+router.put('/updateTitleTheory/:idreport',upload.single('avatar'),isAuth,
+    reportController.updateTitleTheory,
+)
+router.put('/updateContentTheory/:idreport',upload.single('avatar'),isAuth,
+    reportController.updateContentTheory,
+)
+router.post('/pushImageTheory/:idreport',upload.single('avatar'),isAuth,
+    reportController.pushImageTheory,
+)
+router.put('/deleteImageTheory/:idreport',upload.single('avatar'),isAuth,
+    reportController.deleteImageTheory,
+)
+router.put('/updateImageTheory/:idreport',upload.single('avatar'),isAuth,
+    reportController.updateImageTheory,
+)
 module.exports = router

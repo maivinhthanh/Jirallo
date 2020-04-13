@@ -155,6 +155,7 @@ export default function ContentUI({selectContent, report}) {
           bgColor="#e8f0fe"
         />
       </StyledTreeItem>
+      <StyledTreeItem nodeId="Theory" labelText="Theory" />
       <StyledTreeItem nodeId="Survey" labelText="Survey" >
         {
           _.map(report.survey, (item, index)=>{
@@ -171,18 +172,7 @@ export default function ContentUI({selectContent, report}) {
       <StyledTreeItem nodeId="Usecase" labelText="Usecase" />
       <StyledTreeItem nodeId="DescriptWebsite" labelText="Descript Website" />
       <StyledTreeItem nodeId="Database" labelText="Database" >
-        {/* <StyledTreeItem
-          nodeId="Database-Usecase"
-          labelText="Usecase"
-          color="#1a73e8"
-          bgColor="#e8f0fe"
-        />
-        <StyledTreeItem
-          nodeId="Table"
-          labelText="Table"
-          color="#e3742f"
-          bgColor="#fcefe3"
-        /> */}
+        
       </StyledTreeItem>
       <StyledTreeItem nodeId="Interface" labelText="Interface" />
       <StyledTreeItem nodeId="Setting" labelText="Setting" />

@@ -5,6 +5,7 @@ import Content from './Content/ContentContainer'
 import Cover from './Cover/CoverContainer'
 import Preface from './Preface/PrefaceContainer'
 import Introduce from './Introduce/IntroduceContainer'
+import Theory from './Theory/TheoryContainer'
 import Survey from './Survey/SurveyContainer'
 import Diagram from './Usecase/DiagramContainer'
 import Usecase from './Usecase/UsecaseContainer'
@@ -73,8 +74,23 @@ export default React.forwardRef( function UI({idproject}) {
       else if(data === 'Testing'){
         window.scrollTo(0, testing.current.offsetTop)
       }
-      else if(data === 'Reference'){
+      else if(data === 'References'){
         window.scrollTo(0, reference.current.offsetTop)
+      }
+      else if(data === 'Result'){
+        window.scrollTo(0, conclude.current.resultRef.offsetTop)
+      }
+      else if(data === 'Advantages'){
+        window.scrollTo(0, conclude.current.advantagesRef.offsetTop)
+      }
+      else if(data === 'Defect'){
+        window.scrollTo(0, conclude.current.defectRef.offsetTop)
+      }
+      else if(data === 'Development'){
+        window.scrollTo(0, conclude.current.developmentRef.offsetTop)
+      }
+      else if(data === 'Theory'){
+        window.scrollTo(0, theory.current.offsetTop)
       }
 
     };
@@ -83,6 +99,7 @@ export default React.forwardRef( function UI({idproject}) {
     const survey = useRef(null)
     const preface = useRef(null)
     const introduce = useRef(null)
+    const theory = useRef(null)
     const diagram = useRef(null)
     const usecase = useRef(null)
     const descript = useRef(null)
@@ -111,6 +128,9 @@ export default React.forwardRef( function UI({idproject}) {
                 </div>
                 <div >
                   <Introduce forwardedRef={introduce} />     
+                </div>  
+                <div ref={theory}>
+                  <Theory />     
                 </div>  
                 <div ref={survey}>
                   <Survey />

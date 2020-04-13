@@ -432,7 +432,6 @@ exports.updateContentTesting = async (req, res, next) => {
 
         const idreport = req.params.idreport
         const idtesting = req.body.idtesting
-        const idContent = req.body.idContent
         const content = req.body.content
 
         if(!idreport){
@@ -581,6 +580,248 @@ exports.editReference = async (req, res, next) => {
         },{ new: true })
 
         res.status(200).json( {report} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.addTheory = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+    
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        await Report.update(
+            {
+                '_id' : ObjectId(idreport)
+            },
+            {
+                $push:{
+                    "theory": {
+                        title: "",
+                        content:[],
+                        image:[]
+                    }
+                }
+                
+            }
+        )
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.updateContentTheory = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const idtheory = req.body.idtheory
+        const content = req.body.content
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        await Report.update(
+            {
+                '_id' : ObjectId(idreport)
+            },
+            {
+                $set:{
+                    "theory.$[i].content": content
+                }
+                
+            },{
+                arrayFilters: [
+                {
+                    'i._id' : ObjectId(idtheory)
+                }
+            ]}
+        )
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.updateTitleTheory = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const idtheory = req.body.idtheory
+        const title = req.body.title
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        await Report.update(
+            {
+                '_id' : ObjectId(idreport)
+            },
+            {
+                $set:{
+                    "theory.$[i].title": title
+                }
+                
+            },{
+                arrayFilters: [
+                {
+                    'i._id' : ObjectId(idtheory)
+                }
+            ]}
+        )
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.pushImageTheory = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+
+        let image = null
+        if (req.file !== undefined) {
+            image = req.file.path
+        }
+        const name = req.body.name
+        const idtheory = req.body.idtheory
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        const report = await Report.update({
+            _id: idreport,
+            "theory._id": idtheory
+        },{
+            $push:{
+                "theory.$.image": {
+                    name: name,
+                    address: image
+                }
+            }
+            
+        },{ new: true })
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.deleteImageTheory = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const idtheory = req.body.idtheory
+        const idimage = req.body.idimage
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+
+        const report = await Report.update({
+            _id: ObjectId(idreport)
+        },{
+            $pull:{
+                "theory.$[i].image": {"_id":ObjectId(idimage)}
+            }
+            
+        },{
+            arrayFilters: [
+            {
+                'i._id' : ObjectId(idtheory)
+            }
+        ]})
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+
+exports.updateImageTheory = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const name = req.body.name
+        const idtheory = req.body.idtheory
+        const idimage = req.body.idimage
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+
+        let image = null
+        if (req.file !== undefined) {
+            image = req.file.path
+            await Report.update({
+                '_id' : ObjectId(idreport)
+               
+            },{
+                $set:{
+                    "theory.$[i].image.$[j].name": name,
+                    "theory.$[i].image.$[j].address": image
+                },
+                
+            },{
+                arrayFilters: [
+                {
+                    'i._id' : ObjectId(idtheory)
+                },
+                {
+                    'j._id': ObjectId(idimage)
+                }
+            ]})
+            const newreport = await Report.findById(idreport)
+            res.status(200).json( {newreport} )
+        }
+        else{
+            await Report.update({
+                '_id' : ObjectId(idreport)
+            },{
+                $set:{
+                    "theory.$[i].image.$[j].name": name
+                }
+                
+            },{
+                arrayFilters: [
+                {
+                    'i._id' : ObjectId(idtheory)
+                },
+                {
+                    'j._id': ObjectId(idimage)
+                }
+            ]}
+            )
+            const newreport = await Report.findById(idreport)
+            res.status(200).json( {newreport} )
+        }
+        
     }
     catch (error) {
         
