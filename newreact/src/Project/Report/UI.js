@@ -12,6 +12,9 @@ import DescriptionWebsite from './Design/DescriptionContainer'
 import Database from './Design/DatabaseContainer'
 import Interface from './Design/InterfaceContainer'
 import Setting from './Setting/SettingContainer'
+import Testing from './Testing/TestingContainer'
+import Conclude from './Conclude/ConcludeContainer'
+import Reference from './Conclude/ReferenceContainer'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -67,6 +70,13 @@ export default React.forwardRef( function UI({idproject}) {
       else if(data === 'Setting'){
         window.scrollTo(0, setting.current.offsetTop)
       }
+      else if(data === 'Testing'){
+        window.scrollTo(0, testing.current.offsetTop)
+      }
+      else if(data === 'Reference'){
+        window.scrollTo(0, reference.current.offsetTop)
+      }
+
     };
 
     const cover = useRef(null)
@@ -79,6 +89,9 @@ export default React.forwardRef( function UI({idproject}) {
     const database = useRef(null)
     const interfaces = useRef(null)
     const setting = useRef(null)
+    const testing = useRef(null)
+    const conclude = useRef(null)
+    const reference = useRef(null)
 
     return (
         <div>
@@ -120,7 +133,15 @@ export default React.forwardRef( function UI({idproject}) {
                 <div ref={setting}>
                   <Setting />
                 </div>
-                
+                <div ref={testing}>
+                  <Testing />
+                </div>
+                <div >
+                  <Conclude forwardedRef={conclude} />     
+                </div>  
+                <div ref={reference}>
+                  <Reference />
+                </div>
               </div>
             </div>
         </div>

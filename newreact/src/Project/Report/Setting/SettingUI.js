@@ -34,7 +34,6 @@ const useStyles = makeStyles({
 
 export default function SettingUI(props) {
   const classes = useStyles();
-  console.log(props.info)
   return (
     <div className="Cover">
       <div className={classes.A4} > 

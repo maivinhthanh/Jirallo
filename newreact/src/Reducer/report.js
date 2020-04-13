@@ -21,6 +21,12 @@ const initialState = {
         target:[],
         structure: []
     },
+    theory:[{
+        title: '',
+        content:[],
+        image: [],
+
+    }],
     survey:[{
         name: '',
         image: [],
@@ -64,7 +70,14 @@ const initialState = {
         language: [],
         technology:[],
         structure: []
-    }
+    },
+    conclude:{
+        result: [],
+        advantages: [],
+        defect: [],
+        development: []
+    },
+    references: []
 };
 
 const updatestate = (state, action) =>{
@@ -165,6 +178,46 @@ const addSetting = (state, action)=>{
     console.log(newState)
     return newState
 }
+const addTesting = (state, action)=>{
+    const newState = _.cloneDeep(state)
+    newState.testing[action.index].content = 
+    [...newState.testing[action.index].content,{
+        name:'',
+        description: '',
+        expect: '',
+        result: ''
+    }]
+    console.log(newState)
+    return newState
+}
+const addConclude = (state, action) =>{
+    const newState = _.cloneDeep(state)
+    if(action.data === 'result'){
+        newState.conclude.result = [...newState.conclude.result, '............']
+    }
+    else if(action.data === 'advantages'){
+        newState.conclude.advantages = [...newState.conclude.advantages, '............']
+    }
+    else if(action.data === 'defect'){
+        newState.conclude.defect = [...newState.conclude.defect, '............']
+    }
+    else{
+        newState.conclude.development = [...newState.conclude.development, '............']
+    }
+    return newState
+}
+const addTheory = (state, action) =>{
+    const newState = _.cloneDeep(state)
+    newState.theory[action.index].content = [...newState.theory[action.index].content, '............']
+    
+    return newState
+}
+const addReference = (state, action) =>{
+    const newState = _.cloneDeep(state)
+    newState.references = [...newState.references, '............']
+    
+    return newState
+}
 const reportReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'GET_REPORT_IN_PROJECT': return updatestate( state, action );
@@ -180,7 +233,10 @@ const reportReducer = ( state = initialState, action ) => {
         case 'ADD_PARAGRAPH_DESCRIPT_WEBSITE': return addParagraghDescript(state, action);
         case 'ADD_OBJECT': return addObject(state, action);
         case 'ADD_PARAGRAPH_SETTING': return addSetting(state, action);
-
+        case 'ADD_PARAGRAPH_TESTING': return addTesting(state, action);
+        case 'ADD_PARAGRAPH_CONCLUDE': return addConclude(state, action);
+        case 'ADD_PARAGRAPH_REFERENCE': return addReference(state, action);
+        case 'ADD_PARAGRAPH_THEORY': return addTheory(state, action);
         default: return state;
     }
 };

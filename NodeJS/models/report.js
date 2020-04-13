@@ -52,6 +52,26 @@ const reportSchema = new Schema({
             }
         ]
     },
+    theory:[{
+        title:{
+            type: String,
+            default: ""
+        },
+        content:[{
+                type: String,
+                default: ""
+        }],
+        image:[{
+            name:{
+                type: String,
+                default: ""
+            },
+            address:{
+                type: String,
+                default: ""
+            }
+        }],
+    }],
     survey:[
         {
             name:{
@@ -266,6 +286,38 @@ const reportSchema = new Schema({
             }
         }]
     }],
+    conclude:{
+        result: [
+            {
+                type: Array,
+                default: ""
+            }
+        ],
+        advantages: [
+            {
+                type: String,
+                default: ""
+            }
+        ],
+        defect: [
+            {
+                type: String,
+                default: ""
+            }
+        ],
+        development: [
+            {
+                type: String,
+                default: ""
+            }
+        ]
+    },
+    references: [
+        {
+            type: String,
+            default: ""
+        }
+    ],
     hidden:{ type: Boolean, default: false },
     datecreate: { type: Date, default: Date.now },
     dateedit: { type: Date }

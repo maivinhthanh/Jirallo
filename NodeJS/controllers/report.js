@@ -427,3 +427,164 @@ exports.updateSetting = async (req, res, next) => {
     }
     
 }
+exports.updateContentTesting = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const idtesting = req.body.idtesting
+        const idContent = req.body.idContent
+        const content = req.body.content
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        await Report.update(
+            {
+                '_id' : ObjectId(idreport)
+            },
+            {
+                $set:{
+                    "testing.$[i].content": content
+                }
+                
+            },{
+                arrayFilters: [
+                {
+                    'i._id' : ObjectId(idtesting)
+                }
+            ]}
+        )
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.addTesting = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+    
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        await Report.update(
+            {
+                '_id' : ObjectId(idreport)
+            },
+            {
+                $push:{
+                    "testing": {
+                        title: "",
+                        content:[]
+                    }
+                }
+                
+            }
+        )
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.updateTitleTesting = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const idtesting = req.body.idtesting
+        const title = req.body.title
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        await Report.update(
+            {
+                '_id' : ObjectId(idreport)
+            },
+            {
+                $set:{
+                    "testing.$[i].title": title
+                }
+                
+            },{
+                arrayFilters: [
+                {
+                    'i._id' : ObjectId(idtesting)
+                }
+            ]}
+        )
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.editConclude = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+
+        const result = req.body.result
+        const advantages = req.body.advantages
+        const defect = req.body.defect
+        const development = req.body.development
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+
+        const report = await Report.findByIdAndUpdate(idreport,{
+            conclude:{
+                result: result,
+                advantages: advantages,
+                defect: defect,
+                development: development
+            } 
+        },{ new: true })
+
+        res.status(200).json( {report} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.editReference = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+
+        const references = req.body.references
+
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+
+        const report = await Report.findByIdAndUpdate(idreport,{
+            references: references
+        },{ new: true })
+
+        res.status(200).json( {report} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}

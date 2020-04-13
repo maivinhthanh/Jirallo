@@ -186,6 +186,34 @@ export default function ContentUI({selectContent, report}) {
       </StyledTreeItem>
       <StyledTreeItem nodeId="Interface" labelText="Interface" />
       <StyledTreeItem nodeId="Setting" labelText="Setting" />
+      <StyledTreeItem nodeId="Testing" labelText="Testing" />
+      <StyledTreeItem nodeId="Conclude" labelText="Conclude" >
+        <StyledTreeItem
+          nodeId="Result"
+          labelText="Result"
+          color="#1a73e8"
+          bgColor="#e8f0fe"
+        />
+        <StyledTreeItem
+          nodeId="Advantages"
+          labelText="Advantages"
+          color="#e3742f"
+          bgColor="#fcefe3"
+        />
+        <StyledTreeItem
+          nodeId="Defect"
+          labelText="Defect"
+          color="#e3742f"
+          bgColor="#fcefe3"
+        />
+        <StyledTreeItem
+          nodeId="Development"
+          labelText="Development"
+          color="#e3742f"
+          bgColor="#fcefe3"
+        />
+      </StyledTreeItem>
+      <StyledTreeItem nodeId="References" labelText="References" />
     </TreeView>
   );
 }

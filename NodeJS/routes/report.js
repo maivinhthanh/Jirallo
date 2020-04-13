@@ -107,4 +107,19 @@ router.put('/updateObject/:idreport',upload.single('avatar'),isAuth,
 router.put('/updateSetting/:idreport',upload.single('avatar'),isAuth,
     reportController.updateSetting,
 )
+router.put('/updateContentTesting/:idreport',upload.single('avatar'),isAuth,
+    reportController.updateContentTesting,
+)
+router.post('/addTesting/:idreport',upload.single('avatar'),isAuth,
+    reportController.addTesting,
+)
+router.put('/updateTitleTesting/:idreport',upload.single('avatar'),isAuth,
+    reportController.updateTitleTesting,
+)
+router.put('/editConclude/:idreport',upload.single('avatar'),isAuth,
+    reportController.editConclude,
+)
+router.put('/editReference/:idreport',upload.single('avatar'),isAuth,
+    reportController.editReference,
+)
 module.exports = router

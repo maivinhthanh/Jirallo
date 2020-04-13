@@ -2,8 +2,6 @@ const { validationResult } = require("express-validator/check")
 const {ObjectId} = require('mongodb')
 
 const Report = require('../models/report')
-const Project = require('../models/project')
-const Activities = require('../models/activities')
 
 exports.addUsecase = async (req, res, next) => {
     try{

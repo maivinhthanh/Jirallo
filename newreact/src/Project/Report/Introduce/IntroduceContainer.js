@@ -5,7 +5,7 @@ import _ from 'lodash'
 import UI from './IntroduceUI'
 import * as action from './action'
 
-class IntroduceContainer extends Component {
+class ConcludeContainer extends Component {
     constructor(props) {
         super(props)
         this.urgencyRef = React.createRef();
@@ -79,4 +79,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IntroduceContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(ConcludeContainer)
