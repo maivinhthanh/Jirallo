@@ -19,10 +19,11 @@ class AddMemberUI extends Component {
     this.props.getListUserInProject(project._id)
 
   }
-  shouldComponentUpdate(nextProps, nextState){
-    return nextProps.user !== this.props.user ||
-          this.props.listuser != nextProps.listuser
-  }
+  
+  // shouldComponentUpdate(nextProps, nextState){
+  //   return nextProps.user !== this.props.user ||
+  //         this.props.listuser != nextProps.listuser
+  // }
   handleChangeEmail = (e) =>{
     if(e.target.value.length > 4 ){
       this.setState({
@@ -44,14 +45,16 @@ class AddMemberUI extends Component {
   }
   render() {
     const { params, auth, listMember, user, listuser } = this.props
+    console.log(listMember)
     return (
       <div className="row">
           <div className="col-12">
             <input className="form-control" value={this.email} onChange={this.handleChangeEmail}
+            placeholder='search'
             ></input>
-            <Table>
+            <Table style={{marginTop:'30px'}}>
               <thead>
-                <tr>
+                <tr style={{ background:'aliceblue'}}>
                   <th>#</th>
                   <th>Avatar</th>
                   <th>Name</th>
@@ -70,10 +73,10 @@ class AddMemberUI extends Component {
                           <td>{item.id.name}</td>
                           <td>{item.id.email}</td>
                           <td>
-                            <button className="btn btn-primary" onClick={()=>this.addMember(item._id, 'manager')}>
+                            <button style={{ fontFamily: 'fantasy'}} className="btn btn-primary" onClick={()=>this.addMember(item._id, 'manager')}>
                               Manager
                             </button>
-                            <button style={{ marginLeft: '20px'}} className="btn btn-primary" onClick={()=>this.addMember(item._id, 'developer')}>
+                            <button style={{ marginLeft: '20px', fontFamily: 'fantasy'}} className="btn btn-primary" onClick={()=>this.addMember(item._id, 'developer')}>
                               Developer
                             </button>
                           </td>

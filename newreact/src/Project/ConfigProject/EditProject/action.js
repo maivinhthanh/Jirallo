@@ -37,7 +37,6 @@ export const Action = (data) =>{
     }
 }
 
-
 export const EditProject = (id, project) => {
     return dispatch => {
       return CallApi(`project/editInfoProject/${id}`,

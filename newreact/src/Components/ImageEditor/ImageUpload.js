@@ -113,15 +113,20 @@ export default function ImageEditor(props ) {
     else{
         return(
             <div className="row">
-                <div className="col-12">
+                <div className="col-12 hovereffect">
                     {allFiles.map((file, i) => {
                         return <img key={i} src={file.base64} className="img-fluid" width="500" height="350" />
                     })}
                     <img src="" />
+                    <div className='overlay'>
+                    {/* <h2>Hover effect 4</h2> */}
+                    <a class="info" onClick={deleteImage}>Remove</a>
+                    {/* <button className="btn btn-danger" onClick={deleteImage}><Icon className="fa fa-minus"></Icon></button> */}
+                    </div>
                 </div>
-                <div className="col-12">
+                {/* <div className="col-12">
                     <button className="btn btn-danger" onClick={deleteImage}><Icon className="fa fa-minus"></Icon></button>
-                </div>
+                </div> */}
                 <div className="col-12">
                     <input className="form-control" onChange={handleName} />
                 </div>
