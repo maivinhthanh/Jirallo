@@ -59,6 +59,9 @@ class TheoryContainer extends Component {
         }
         this.props.UpdateTitleTheory(this.props.report._id, data)
     }
+    deleteTheory = (idtheory) =>{
+        this.props.DeleteTheory(this.props.report._id, idtheory)
+    }
     render() {
         const { report } = this.props
         return (
@@ -70,7 +73,8 @@ class TheoryContainer extends Component {
                    AddTheory={this.AddTheory}
                    updateImage={this.UpdateImage}
                    deleteImage={this.DeleteImage}
-                   updateTitle={this.updateTitle} />
+                   updateTitle={this.updateTitle} 
+                   deleteTheory={this.deleteTheory}/>
             </div>
         )
         
@@ -91,7 +95,8 @@ const mapDispatchToProps = dispatch => {
         AddTheory: (id) => dispatch(action.AddTheory(id)),
         UpdateImageTheory: (id, data) =>dispatch(action.UpdateImageTheory(id, data)),
         DeleteImageTheory:(id, data)=>dispatch(action.DeleteImageTheory(id, data)),
-        UpdateTitleTheory: (id, data)=>dispatch(action.UpdateTitleTheory(id, data))
+        UpdateTitleTheory: (id, data)=>dispatch(action.UpdateTitleTheory(id, data)),
+        DeleteTheory: (id, idtheory)=>dispatch(action.DeleteTheory(id, idtheory)),
     }
 }
 

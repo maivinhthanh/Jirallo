@@ -478,3 +478,63 @@ exports.updateException = async (req, res, next) => {
     }
     
 }
+exports.deleteDiagram = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const iddiagram = req.body.iddiagram
+    
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        await Report.update(
+            {
+                '_id' : ObjectId(idreport)
+            },
+            {
+                $pull:{
+                    "usecase.diagram": {"_id":ObjectId(iddiagram)}
+                }
+                
+            }
+        )
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.deleteUsecase = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const idusecase = req.body.idusecase
+    
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        await Report.update(
+            {
+                '_id' : ObjectId(idreport)
+            },
+            {
+                $pull:{
+                    "usecase.descript": {"_id":ObjectId(idusecase)}
+                }
+                
+            }
+        )
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}

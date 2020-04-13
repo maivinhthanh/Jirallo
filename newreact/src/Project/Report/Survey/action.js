@@ -160,3 +160,27 @@ export const DeleteImageSurvey = (idreport, data ) =>{
         })
     }
 }
+export const DeleteSurvey = (idreport, idsurvey ) =>{
+    return dispatch =>{
+        return CallApi(`report/deleteSurvey/${idreport}`,'PUT', {idsurvey})
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}

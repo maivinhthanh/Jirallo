@@ -140,4 +140,16 @@ router.put('/deleteImageTheory/:idreport',upload.single('avatar'),isAuth,
 router.put('/updateImageTheory/:idreport',upload.single('avatar'),isAuth,
     reportController.updateImageTheory,
 )
+router.put('/deleteTheory/:idreport',upload.single('avatar'),isAuth,
+    reportController.deleteTheory,
+)
+router.put('/deleteSurvey/:idreport',upload.single('avatar'),isAuth,
+    reportController.deleteSurvey,
+)
+router.put('/deleteDiagram/:idreport',upload.single('avatar'),isAuth,
+    usecaseController.deleteDiagram,
+)
+router.put('/deleteUsecase/:idreport',upload.single('avatar'),isAuth,
+    usecaseController.deleteUsecase,
+)
 module.exports = router

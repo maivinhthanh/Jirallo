@@ -91,14 +91,17 @@ export default function UsecaseUI(props) {
     <div className="Cover">
       <div className={classes.A4} >
           <div className={classes.coverSubTitle} >
-            2.2. CHI TIẾT USECASE
+            3.2. CHI TIẾT USECASE
           </div>
           {
             _.map(props.info.usecase.descript, (item, index)=>{
               return(
                 <div onMouseEnter={()=>IndexChangeAction(index)} key={index}>
+                  <Button variant="contained" color="secondary" onClick={(id)=>props.deleteUsecase(item._id)}>
+                    Xóa 3.2.{index + 1}.
+                  </Button>
                   <div className={classes.coverSubTitle} >
-                    <DivAction size={20} marginBottom={3} margin={3} changeText={updateTitle} >2.2.{index + 1}. {item.title}</DivAction>
+                    <DivAction size={20} marginBottom={3} margin={3} changeText={updateTitle} >3.2.{index + 1}. {item.title}</DivAction>
                   </div>
                   <table className="table-usecase table table-hover">
                     <tr>

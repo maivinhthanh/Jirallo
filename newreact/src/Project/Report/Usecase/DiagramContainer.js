@@ -62,6 +62,9 @@ class DiagramContainer extends Component {
         data.append('idusecase',idusecase)
         this.props.PushImageUsecase(this.props.report._id,data)
     }
+    DeleteDiagram = (iddiagram) =>{
+        this.props.DeleteDiagram(this.props.report._id,iddiagram)
+    }
     render() {
         const { report } = this.props
         return (
@@ -71,7 +74,8 @@ class DiagramContainer extends Component {
                     updateTitle={this.updateTitle}
                     deleteImage={this.DeleteImage}
                     updateImage={this.UpdateImage}
-                    saveImage={this.PushImage}/>
+                    saveImage={this.PushImage}
+                    deleteDiagram={this.DeleteDiagram}/>
             </div>
         )
         
@@ -91,6 +95,7 @@ const mapDispatchToProps = dispatch => {
         PushImageUsecase: (id, data) => dispatch(action.PushImageUsecase(id, data)),
         DeleteImageUsecase: (id, data) => dispatch(action.DeleteImageUsecase(id, data)),
         UpdateImageDiagram: (id, data) => dispatch(action.UpdateImageDiagram(id, data)),
+        DeleteDiagram: (id,iddiagram) => dispatch(action.DeleteDiagram(id, iddiagram)),
     }
 }
 

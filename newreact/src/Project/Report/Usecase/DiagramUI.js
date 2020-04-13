@@ -4,7 +4,7 @@ import _ from 'lodash'
 import DivAction from '../../../Components/InputEdit/DivActionUI'
 import ImageUpload from '../../../Components/ImageEditor/ImageUpload'
 import ImageEditor from '../../../Components/ImageEditor/ImageEditor'
-import { Icon } from '@material-ui/core';
+import { Icon, Button } from '@material-ui/core';
 
 const useStyles = makeStyles({
   A4: {
@@ -67,18 +67,23 @@ export default function DiagramUI(props) {
     <div className="Cover">
       <div className={classes.A4} >
           <div className={classes.coverTitle}>
-            CHƯƠNG 2: MÔ HÌNH HÓA YÊU CẦU
+            CHƯƠNG 3: MÔ HÌNH HÓA YÊU CẦU
           </div>  
           <div className={classes.coverSubTitle} >
-            2.1. LƯỢC ĐỒ DIAGRAM
+            3.1. LƯỢC ĐỒ DIAGRAM
           </div>
           
           {
               _.map(props.info.usecase.diagram, (item, index)=>{
                 return (
                   <div onMouseEnter={()=>IndexChangeAction(index)} key={index}>
+                    <div>
+                      <Button variant="contained" color="secondary" onClick={(id)=>props.deleteDiagram(item._id)}>
+                        Xóa 3.1.{index + 1}.
+                      </Button>
+                    </div>
                     <div className={classes.coverSubTitle} >
-                      <DivAction size={20} marginBottom={3} margin={3} changeText={updateTitle} >2.1.{index + 1}. {item.title}</DivAction>
+                      <DivAction size={20} marginBottom={3} margin={3} changeText={updateTitle} >3.1.{index + 1}. {item.title}</DivAction>
                     </div>
                     {
                       _.map(item.image, (image, ind)=>{

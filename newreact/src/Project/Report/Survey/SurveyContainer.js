@@ -60,6 +60,9 @@ class SurveyContainer extends Component {
         }
         this.props.UpdateTitleSurvey(this.props.report._id, data)
     }
+    deleteSurvey = (idsurvey)=>{
+        this.props.DeleteSurvey(this.props.report._id, idsurvey)
+    }
     render() {
         const { report } = this.props
         // console.log(this.listRef)
@@ -74,7 +77,8 @@ class SurveyContainer extends Component {
                    AddSurvey={this.AddSurvey}
                    updateImage={this.UpdateImage}
                    deleteImage={this.DeleteImage}
-                   updateTitle={this.updateTitle} />
+                   updateTitle={this.updateTitle}
+                   deleteSurvey={this.deleteSurvey} />
             </div>
         )
         
@@ -95,7 +99,8 @@ const mapDispatchToProps = dispatch => {
         AddSurvey: (id) => dispatch(action.AddSurvey(id)),
         UpdateImageSurvey: (id, data) =>dispatch(action.UpdateImageSurvey(id, data)),
         DeleteImageSurvey:(id, data)=>dispatch(action.DeleteImageSurvey(id, data)),
-        UpdateTitleSurvey: (id, data)=>dispatch(action.UpdateTitleSurvey(id, data))
+        UpdateTitleSurvey: (id, data)=>dispatch(action.UpdateTitleSurvey(id, data)),
+        DeleteSurvey: (id, idsurvey)=>dispatch(action.DeleteSurvey(id, idsurvey)),
     }
 }
 

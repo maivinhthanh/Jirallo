@@ -159,3 +159,27 @@ export const DeleteImageTheory = (idreport, data ) =>{
         })
     }
 }
+export const DeleteTheory = (idreport, idtheory ) =>{
+    return dispatch =>{
+        return CallApi(`report/deleteTheory/${idreport}`,'PUT', {idtheory})
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}

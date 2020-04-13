@@ -5,7 +5,7 @@ import ListDivAction from '../../../Components/ListInputEdit/DivActionUI'
 import DivAction from '../../../Components/InputEdit/DivActionUI'
 import ImageUpload from '../../../Components/ImageEditor/ImageUpload'
 import ImageEditor from '../../../Components/ImageEditor/ImageEditor'
-import { Icon } from '@material-ui/core';
+import {Button, Icon } from '@material-ui/core';
 
 const useStyles = makeStyles({
   A4: {
@@ -78,6 +78,11 @@ export default function TheoryUI(props) {
             _.map(props.info.theory, (item, index)=>{
               return (
                 <div onMouseEnter={()=>IndexChangeAction(index)} key={index}>
+                  <div>
+                    <Button variant="contained" color="secondary" onClick={(id)=>props.deleteTheory(item._id)}>
+                      Xóa 1.{index + 1}.
+                    </Button>
+                  </div>
                   <div className={classes.coverSubTitle} >
                     <DivAction size={20} marginBottom={3} margin={3} changeText={updateTitle}>1.{index + 1}. {item.title}</DivAction>
                   </div>

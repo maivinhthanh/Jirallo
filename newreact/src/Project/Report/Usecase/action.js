@@ -266,3 +266,55 @@ export const UpdateException = (idreport, exception, idusecase ) =>{
         })
     }
 }
+export const DeleteDiagram = (idreport, iddiagram ) =>{
+    return dispatch =>{
+        return CallApi(`report/deleteDiagram/${idreport}`,'PUT', {
+            iddiagram
+        })
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
+export const DeleteUsecase = (idreport, idusecase ) =>{
+    return dispatch =>{
+        return CallApi(`report/deleteUsecase/${idreport}`,'PUT', {
+            idusecase
+        })
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}

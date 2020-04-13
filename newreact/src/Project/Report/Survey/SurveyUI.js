@@ -5,7 +5,7 @@ import ListDivAction from '../../../Components/ListInputEdit/DivActionUI'
 import DivAction from '../../../Components/InputEdit/DivActionUI'
 import ImageUpload from '../../../Components/ImageEditor/ImageUpload'
 import ImageEditor from '../../../Components/ImageEditor/ImageEditor'
-import { Icon } from '@material-ui/core';
+import { Button, Icon } from '@material-ui/core';
 
 const useStyles = makeStyles({
   A4: {
@@ -74,17 +74,22 @@ export default function SurveyUI(props) {
     <div className="Cover">
       <div className={classes.A4} >
           <div className={classes.coverTitle}>
-            CHƯƠNG 1: KHẢO SÁT HIỆN TRẠNG
+            CHƯƠNG 2: KHẢO SÁT HIỆN TRẠNG
           </div>  
           <div className={classes.coverSubTitle} >
-            1.1. KHẢO SÁT MỘT SỐ TRANG WEB
+            2.1. KHẢO SÁT MỘT SỐ TRANG WEB
           </div>
           {
             _.map(props.info.survey, (item, index)=>{
               return (
                 <div onMouseEnter={()=>IndexChangeAction(index)} key={index}>
+                  <div>
+                    <Button variant="contained" color="secondary" onClick={(id)=>props.deleteSurvey(item._id)}>
+                      Xóa 2.1.{index + 1}.
+                    </Button>
+                  </div>
                   <div className={classes.coverSubTitle} >
-                    <DivAction size={20} marginBottom={3} margin={3} changeText={updateTitle}>1.1.{index + 1}. {item.name}</DivAction>
+                    <DivAction size={20} marginBottom={3} margin={3} changeText={updateTitle}>2.1.{index + 1}. {item.name}</DivAction>
                   </div>
                   <div>
                     <p>Một số hình ảnh</p>

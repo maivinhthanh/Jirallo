@@ -829,3 +829,63 @@ exports.updateImageTheory = async (req, res, next) => {
     }
     
 }
+exports.deleteTheory = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const idtheory = req.body.idtheory
+    
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        await Report.update(
+            {
+                '_id' : ObjectId(idreport)
+            },
+            {
+                $pull:{
+                    "theory": {"_id":ObjectId(idtheory)}
+                }
+                
+            }
+        )
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.deleteSurvey = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const idsurvey = req.body.idsurvey
+    
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        await Report.update(
+            {
+                '_id' : ObjectId(idreport)
+            },
+            {
+                $pull:{
+                    "survey": {"_id":ObjectId(idsurvey)}
+                }
+                
+            }
+        )
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
