@@ -496,3 +496,71 @@ exports.updateObject = async (req, res, next) => {
     }
     
 }
+exports.deleteGroupInterface = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const idgroup = req.body.idgroup
+    
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        await Report.update(
+            {
+                '_id' : ObjectId(idreport)
+            },
+            {
+                $pull:{
+                    "ui": {"_id":ObjectId(idgroup)}
+                }
+                
+            }
+        )
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.deleteInterface = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const idgroup = req.body.idgroup
+        const idui = req.body.idui
+    
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        await Report.update(
+            {
+                '_id' : ObjectId(idreport)
+            },
+            {
+                $pull:{
+                    "ui.$[i].content": {"_id":ObjectId(idui)}
+                }
+                
+            },
+            {
+                arrayFilters: [
+                    {
+                        'i._id': ObjectId(idgroup)
+                    }
+                    
+            ]}
+        )
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}

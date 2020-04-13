@@ -39,10 +39,10 @@ export default function DescriptionUI(props) {
     <div className="Cover">
       <div className={classes.A4} >
           <div className={classes.coverTitle}>
-            CHƯƠNG 3: THIẾT KẾ WEBSITE
+            CHƯƠNG 4: THIẾT KẾ WEBSITE
           </div>  
           <div className={classes.coverSubTitle} >
-            3.1. ĐẶC TẢ WEBSITE
+            4.1. ĐẶC TẢ WEBSITE
           </div>
           <div className={classes.coverContent}>
           {

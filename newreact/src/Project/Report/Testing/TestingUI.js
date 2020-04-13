@@ -56,14 +56,19 @@ export default function TestingUI(props) {
     <div className="Cover">
         <div className={classes.A4} >  
             <div className={classes.coverSubTitle} >
-                4.2. KIỂM THỬ
+                5.2. KIỂM THỬ
             </div>
             {
                 _.map(props.info.testing, (item, index)=>{
                     return(
                         <div onMouseEnter={()=>IndexChangeAction(index)} key={index}>
+                            <div>
+                                <Button variant="contained" color="secondary" onClick={(id)=>props.deleteTesting(item._id)}>
+                                    Xóa 5.2.{index + 1}.
+                                </Button>
+                            </div>
                             <div className={classes.coverSubTitle} >
-                                <DivAction size={20} marginBottom={3} margin={3} changeText={updateTitle}>4.2.{index + 1}. {item.title}</DivAction>
+                                <DivAction size={20} marginBottom={3} margin={3} changeText={updateTitle}>5.2.{index + 1}. {item.title}</DivAction>
                             </div>
                             <table className="table-usecase table table-hover">
                                 <tr>

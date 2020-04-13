@@ -51,7 +51,7 @@ export default function DatabaseUI(props) {
     <div className="Cover">
       <div className={classes.A4} > 
           <div className={classes.coverSubTitle} >
-            3.2. CƠ SỞ DỮ LIỆU
+            4.2. CƠ SỞ DỮ LIỆU
           </div>
             {
                 _.map(props.info.database.image, (image, ind)=>{

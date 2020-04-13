@@ -307,3 +307,51 @@ export const UpdateObject = (idreport, data ) =>{
         })
     }
 }
+export const DeleteGroupInterface = (idreport, idgroup ) =>{
+    return dispatch =>{
+        return CallApi(`report/deleteGroupInterface/${idreport}`,'PUT',{idgroup})
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
+export const DeleteInterface = (idreport, idgroup, idui ) =>{
+    return dispatch =>{
+        return CallApi(`report/deleteInterface/${idreport}`,'PUT',{idgroup, idui})
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}

@@ -98,21 +98,29 @@ export default function InterfaceUI(props) {
     <div className="Cover">
       <div className={classes.A4} >
           <div className={classes.coverSubTitle} >
-            3.3. THIẾT KẾ GIAO DIỆN
+            4.3. THIẾT KẾ GIAO DIỆN
           </div>
           {
             _.map(props.info.ui, (group, indexGroup)=>{
               return(
                 <div onMouseEnter={()=>IndexChangeGroupAction(indexGroup)} key={indexGroup}>
+                  <div>
+                    <Button variant="contained" color="secondary" onClick={(id)=>props.deleteGroupInterface(group._id)}>
+                      Xóa 4.3.{group + 1}.
+                    </Button>
+                  </div>
                   <div className={classes.coverSubTitle} >
-                    <DivAction size={20} marginBottom={3} margin={3} changeText={updateNameGroup} >3.3.{indexGroup + 1}. {group.group}</DivAction>
+                    <DivAction size={20} marginBottom={3} margin={3} changeText={updateNameGroup} >4.3.{indexGroup + 1}. {group.group}</DivAction>
                   </div>
                   {
                     _.map(group.content, (ui, indexUI)=>{
                       return (
                         <div onMouseEnter={()=>IndexChangeUIAction(indexUI)} key={indexUI}>
+                          <Button variant="contained" color="secondary" onClick={(id)=>props.deleteInterface(group._id, ui._id)}>
+                            Xóa 4.3.{indexGroup + 1}.{indexUI + 1}.
+                          </Button>
                           <div className={classes.coverSubTitle} >
-                            <DivAction size={20} marginBottom={3} margin={3} changeText={updateTitle} >3.3.{indexGroup + 1}.{indexUI + 1}. {ui.title}</DivAction>
+                            <DivAction size={20} marginBottom={3} margin={3} changeText={updateTitle} >4.3.{indexGroup + 1}.{indexUI + 1}. {ui.title}</DivAction>
                           </div>
                           {
                             _.map(ui.image, (image, ind)=>{

@@ -91,6 +91,12 @@ class InterfaceContainer extends Component {
         }
         this.props.UpdateNameGroup(this.props.report._id, data)
     }
+    DeleteGroupInterface = (idgroup)=>{
+        this.props.DeleteGroupInterface(this.props.report._id, idgroup)
+    }
+    DeleteInterface = (idgroup, idui)=>{
+        this.props.DeleteInterface(this.props.report._id, idgroup, idui)
+    }
     render() {
         const { report } = this.props
         return (
@@ -105,7 +111,9 @@ class InterfaceContainer extends Component {
                     saveImage={this.PushImage}
                     addObject={this.addObject}
                     updateObject={this.updateObject}
-                    updateNameGroup={this.updateNameGroup}/>
+                    updateNameGroup={this.updateNameGroup}
+                    deleteGroupInterface={this.DeleteGroupInterface}
+                    deleteInterface={this.DeleteInterface}/>
             </div>
         )
         
@@ -129,6 +137,8 @@ const mapDispatchToProps = dispatch => {
         UpdateInterface: (id, data) => dispatch(action.UpdateInterface(id, data)),
         AddObject: (idgroup, idui) => dispatch(action.AddObject(idgroup, idui)),
         UpdateObject: (id, data) => dispatch(action.UpdateObject(id, data)),
+        DeleteGroupInterface: (id ,idgroup) => dispatch(action.DeleteGroupInterface(id ,idgroup)),
+        DeleteInterface: (id ,idgroup,idui) => dispatch(action.DeleteInterface(id ,idgroup,idui))
     }
 }
 

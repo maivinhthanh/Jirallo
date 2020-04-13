@@ -152,4 +152,13 @@ router.put('/deleteDiagram/:idreport',upload.single('avatar'),isAuth,
 router.put('/deleteUsecase/:idreport',upload.single('avatar'),isAuth,
     usecaseController.deleteUsecase,
 )
+router.put('/deleteGroupInterface/:idreport',upload.single('avatar'),isAuth,
+    designController.deleteGroupInterface,
+)
+router.put('/deleteInterface/:idreport',upload.single('avatar'),isAuth,
+    designController.deleteInterface,
+)
+router.put('/deleteTesting/:idreport',upload.single('avatar'),isAuth,
+    reportController.deleteTesting,
+)
 module.exports = router

@@ -34,6 +34,9 @@ class TestingContainer extends Component {
         }
         this.props.UpdateTitleTesting(this.props.report._id, data)
     }
+    DeleteTesting = (idtesting)=>{
+        this.props.DeleteTesting(this.props.report._id, idtesting)
+    }
     render() {
         const { report } = this.props
         return (
@@ -42,7 +45,8 @@ class TestingContainer extends Component {
                     AddGroup={this.AddGroup}
                     addTesting={this.AddTesting}
                     updateObject = {this.updateObject}
-                    updateTitle={this.updateTitle}/>
+                    updateTitle={this.updateTitle}
+                    deleteTesting={this.DeleteTesting}/>
             </div>
         )
         
@@ -61,6 +65,7 @@ const mapDispatchToProps = dispatch => {
         AddTesting: (index) => dispatch(action.AddTesting(index)),
         UpdateContentTesting: (id, data) => dispatch(action.UpdateContentTesting(id, data)),
         UpdateTitleTesting: (id, data) => dispatch(action.UpdateTitleTesting(id, data)),
+        DeleteTesting: (id, idtesting) => dispatch(action.DeleteTesting(id, idtesting)),
     }
 }
 

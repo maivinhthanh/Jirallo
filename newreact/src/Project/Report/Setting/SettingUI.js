@@ -38,13 +38,13 @@ export default function SettingUI(props) {
     <div className="Cover">
       <div className={classes.A4} > 
       <div className={classes.coverTitle}>
-            CHƯƠNG 4: CÀI ĐẶT VÀ KIỂM THỬ
+            CHƯƠNG 5: CÀI ĐẶT VÀ KIỂM THỬ
           </div>  
           <div className={classes.coverSubTitle} >
-            4.1. CÀI ĐẶT
+            5.1. CÀI ĐẶT
           </div>
           <div className={classes.coverSubTitle} >
-            4.1.1. Ngôn ngữ cài đặt
+            5.1.1. Ngôn ngữ cài đặt
           </div>
           {
             props.info.setting.language.length === 0
@@ -58,7 +58,7 @@ export default function SettingUI(props) {
              content={props.info.setting.language}/>
           }
           <div className={classes.coverSubTitle} >
-            4.1.2. Công nghệ sử dụng
+            5.1.2. Công nghệ sử dụng
           </div>  
           {
             props.info.setting.technology.length === 0
@@ -72,7 +72,7 @@ export default function SettingUI(props) {
              content={props.info.setting.technology}/>
           } 
           <div className={classes.coverSubTitle} >
-          4.1.3. Cấu trúc
+          5.1.3. Cấu trúc
         </div>  
         {
             props.info.setting.structure.length === 0
