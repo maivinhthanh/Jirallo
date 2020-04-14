@@ -110,7 +110,7 @@ export default function UsecaseUI(props) {
                     </tr>
                     <tr>
                       <td>Tên usecase</td>
-                      <td><DivAction size={18} marginBottom={3} margin={3} changeText={(text, name)=>updateUsecase(text, 'name')} >{item.name}</DivAction>{item.name}</td>
+                      <td><DivAction size={18} marginBottom={3} margin={3} changeText={(text, name)=>updateUsecase(text, 'name')} >{item.name}</DivAction></td>
                     </tr>
                     <tr>
                       <td>Tóm tắt mô tả</td>
