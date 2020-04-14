@@ -32,10 +32,8 @@ const useStyles = makeStyles({
 
 });
 
-export default function ControlledTreeView(props) {
+export default function IntroduceUI(props) {
   const classes = useStyles();
-
-  console.log(props.introduceRef)
 
   return (
     <div className="Cover">

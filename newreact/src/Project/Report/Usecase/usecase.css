@@ -1,0 +1,32 @@
+.table-usecase {
+    background: #fff !important;
+    border: 1px inset #ccc;
+    box-shadow: 2px 5px 2px #f1f1f1;
+}
+
+.table-usecase thead tr > th {
+    background: #f3f3f3;
+    color: #333;
+    font-weight: bold;
+}
+
+.table-usecase tbody tr:hover > td {
+    background: #FAF7BA
+}
+.table-hover tbody tr:hover > td {
+    background: whitesmoke
+}
+  
+.table-hover tbody tr:hover > th {
+    background: whitesmoke
+}
+  
+.table-hover tr:hover > th,
+.table-hover tr:hover > td {
+    background: whitesmoke
+}
+  
+.table tr:hover > td {
+    background: whitesmoke;
+    cursor: pointer;
+}

@@ -13,7 +13,7 @@ class ContentContainer extends Component {
     render() {
         return (
             <div >
-                <ContentUI selectContent={this.selectContent}/>
+                <ContentUI selectContent={this.selectContent} report={this.props.report}/>
             </div>
         )
         
@@ -22,6 +22,7 @@ class ContentContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        report: state.report
     }
 }
 

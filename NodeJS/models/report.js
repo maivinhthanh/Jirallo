@@ -52,6 +52,26 @@ const reportSchema = new Schema({
             }
         ]
     },
+    theory:[{
+        title:{
+            type: String,
+            default: ""
+        },
+        content:[{
+                type: String,
+                default: ""
+        }],
+        image:[{
+            name:{
+                type: String,
+                default: ""
+            },
+            address:{
+                type: String,
+                default: ""
+            }
+        }],
+    }],
     survey:[
         {
             name:{
@@ -78,124 +98,226 @@ const reportSchema = new Schema({
             }]
         }
     ],
-    criteria:{
-        advantages: {
-            type: String,
-            default: ""
-        },
-        defect: {
-            type: String,
-            default: ""
-        }
-    },
     usecase:{
-        general:[{
-            image:{
-                type: String,
-                default: ""
-            },
+        diagram:[{
+            image:[{
+                name:{
+                    type: String,
+                    default: ""
+                },
+                address:{
+                    type: String,
+                    default: ""
+                }
+            }],
             title:{
                 type: String,
                 default: ""
             },
         }],
-        actor:[{
+        descript:[
+            {
+                title:{
+                    type: String,
+                    default: ""
+                },
                 name:{
                     type: String,
                     default: ""
                 },
-                major: [
-                    {
-                        name:{
-                            type: String,
-                            default: ""
-                        },
-                        type:{
-                            type: String,
-                            default: ""
-                        },
-                        regulations:{
-                            type: String,
-                            default: ""
-                        },
-                        image:{
-                            type: String,
-                            default: ""
-                        },
-                        key:{
-                            type: String,
-                            default: ""
-                        },
+                key:{
+                    type: String,
+                    default: ""
+                },
+                briefdescript:[{
+                    type: String,
+                    default: ""
+                }],
+                actor:{
+                    type: String,
+                    default: ""
+                },
+                precondition:{
+                    type: String,
+                    default: ""
+                },
+                postcondition:{
+                    type: String,
+                    default: ""
+                },
+                basicflows:[{
+                    user:{
+                        type: String,
+                        default: ""
+                    },
+                    system:[{
+                        type: String,
+                        default: ""
+                    }]
+                    
+                }],
+                exception:[{
+                    description:{
+                        type: String,
+                        default: ""
+                    },
+                    system:[{
+                        type: String,
+                        default: ""
+                    }]
+                    
+                }],
+                nametable:{
+                    type: String,
+                    default: ""
+                },
+                image:[{
+                    name:{
+                        type: String,
+                        default: ""
+                    },
+                    address:{
+                        type: String,
+                        default: ""
                     }
-                ]
+                }]
             }
-            
         ]
 
     },
+    descriptionWebsite: [{
+        type: String,
+        default: ""
+    }],
     database:{
-        usecase:[{
+        image:[{
             name:{
                 type: String,
                 default: ""
             },
-            table:{
-                type: String,
-                default: ""
-            },
-            actor:{
-                type: String,
-                default: ""
-            },
-            stream: {
-                D1: {
-                    type: String,
-                    default: ""
-                },
-                D2: {
-                    type: String,
-                    default: ""
-                },
-                D3: {
-                    type: String,
-                    default: ""
-                },
-                D4: {
-                    type: String,
-                    default: ""
-                },
-                D5: {
-                    type: String,
-                    default: ""
-                },
-                D6: {
-                    type: String,
-                    default: ""
-                },
-            },
-            algorithm: {
+            address:{
                 type: String,
                 default: ""
             }
-        }],
-        table: [{
-            name:  {
+        }]
+    },
+    ui:[
+        {
+            group:{
                 type: String,
                 default: ""
             },
-            row: [{
-                name:  {
-                    type: String,
-                    default: ""
-                },
-                type:  {
-                    type: String,
-                    default: ""
+            content:[
+                {
+                    title:{
+                        type: String,
+                        default: ""
+                    },
+                    image:[{
+                        name:{
+                            type: String,
+                            default: ""
+                        },
+                        address:{
+                            type: String,
+                            default: ""
+                        }
+                    }],
+                    descript:{
+                        type: String,
+                        default: ""
+                    },
+                    listobject:[
+                        {
+                            type:{
+                                type: String,
+                                default: ""
+                            },
+                            descript:{
+                                type: String,
+                                default: ""
+                            }
+                        }
+                    ],
+                    nametable:{
+                        type: String,
+                        default: ""
+                    }
                 }
-            }]
-        }]
+            ]
+        }
+        
+    ],
+    setting: {
+        language:[{
+            type: String,
+            default: ""
+        }],
+        technology:[{
+            type: String,
+            default: ""
+        }],
+        structure:[{
+            type: String,
+            default: ""
+        }],
     },
-   
+    testing: [{
+        title: {
+            type: String,
+            default: ""
+        },
+        content: [{
+            name:{
+                type: String,
+                default: ""
+            },
+            description:{
+                type: String,
+                default: ""
+            },
+            expect:{
+                type: String,
+                default: ""
+            },
+            result:{
+                type: String,
+                default: ""
+            }
+        }]
+    }],
+    conclude:{
+        result: [
+            {
+                type: Array,
+                default: ""
+            }
+        ],
+        advantages: [
+            {
+                type: String,
+                default: ""
+            }
+        ],
+        defect: [
+            {
+                type: String,
+                default: ""
+            }
+        ],
+        development: [
+            {
+                type: String,
+                default: ""
+            }
+        ]
+    },
+    references: [
+        {
+            type: String,
+            default: ""
+        }
+    ],
     hidden:{ type: Boolean, default: false },
     datecreate: { type: Date, default: Date.now },
     dateedit: { type: Date }

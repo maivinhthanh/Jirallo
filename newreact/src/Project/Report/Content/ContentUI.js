@@ -6,6 +6,7 @@ import TreeItem from '@material-ui/lab/TreeItem';
 import Typography from '@material-ui/core/Typography';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import _ from 'lodash'
 
 const useTreeItemStyles = makeStyles(theme => ({
   root: {
@@ -105,7 +106,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ContentUI({selectContent}) {
+export default function ContentUI({selectContent, report}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState([]);
   const [selected, setSelected] = React.useState([]);
@@ -133,7 +134,7 @@ export default function ContentUI({selectContent}) {
     >
       
       <StyledTreeItem nodeId="Cover" labelText="Cover"  />
-      <StyledTreeItem nodeId="Survey" labelText="Survey" />
+      <StyledTreeItem nodeId="Preface" labelText="Preface" />
       <StyledTreeItem nodeId="Introduce" labelText="Introduce" >
         <StyledTreeItem
           nodeId="Urgency"
@@ -154,12 +155,40 @@ export default function ContentUI({selectContent}) {
           bgColor="#e8f0fe"
         />
       </StyledTreeItem>
-      <StyledTreeItem nodeId="Criteria" labelText="Criteria" >
+      <StyledTreeItem nodeId="Theory" labelText="Theory" />
+      <StyledTreeItem nodeId="Survey" labelText="Survey" >
+        {
+          _.map(report.survey, (item, index)=>{
+            return (
+              <StyledTreeItem
+                nodeId={item._id} labelText={item.name}>
+
+              </StyledTreeItem>
+            )
+          })
+        }
+      </StyledTreeItem>
+      <StyledTreeItem nodeId="Diagram" labelText="Diagram" />
+      <StyledTreeItem nodeId="Usecase" labelText="Usecase" />
+      <StyledTreeItem nodeId="DescriptWebsite" labelText="Descript Website" />
+      <StyledTreeItem nodeId="Database" labelText="Database" >
+        
+      </StyledTreeItem>
+      <StyledTreeItem nodeId="Interface" labelText="Interface" />
+      <StyledTreeItem nodeId="Setting" labelText="Setting" />
+      <StyledTreeItem nodeId="Testing" labelText="Testing" />
+      <StyledTreeItem nodeId="Conclude" labelText="Conclude" >
+        <StyledTreeItem
+          nodeId="Result"
+          labelText="Result"
+          color="#1a73e8"
+          bgColor="#e8f0fe"
+        />
         <StyledTreeItem
           nodeId="Advantages"
           labelText="Advantages"
-          color="#1a73e8"
-          bgColor="#e8f0fe"
+          color="#e3742f"
+          bgColor="#fcefe3"
         />
         <StyledTreeItem
           nodeId="Defect"
@@ -167,35 +196,14 @@ export default function ContentUI({selectContent}) {
           color="#e3742f"
           bgColor="#fcefe3"
         />
-      </StyledTreeItem>
-      <StyledTreeItem nodeId="Usecase" labelText="Usecase" >
         <StyledTreeItem
-          nodeId="General"
-          labelText="General"
-          color="#1a73e8"
-          bgColor="#e8f0fe"
-        />
-        <StyledTreeItem
-          nodeId="Actor"
-          labelText="Actor"
+          nodeId="Development"
+          labelText="Development"
           color="#e3742f"
           bgColor="#fcefe3"
         />
       </StyledTreeItem>
-      <StyledTreeItem nodeId="Database" labelText="Database" >
-        <StyledTreeItem
-          nodeId="Database-Usecase"
-          labelText="Usecase"
-          color="#1a73e8"
-          bgColor="#e8f0fe"
-        />
-        <StyledTreeItem
-          nodeId="Table"
-          labelText="Table"
-          color="#e3742f"
-          bgColor="#fcefe3"
-        />
-      </StyledTreeItem>
+      <StyledTreeItem nodeId="References" labelText="References" />
     </TreeView>
   );
 }

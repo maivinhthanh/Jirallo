@@ -7,21 +7,20 @@ export const editintroduce = (report) =>{
         data: report
     }
 }
-export const AddParagraph = (name, key) =>{
+export const AddParagraph = (index) =>{
     return {
-        type:'ADD_PARAGRAPH_SERVEY',
-        data: name,
-        key: key
+        type:'ADD_PARAGRAPH_THEORY',
+        index: index
     }
 }
 
-export const AddSurvey = (idreport ) =>{
+export const AddTheory = (idreport ) =>{
     return dispatch =>{
-        return CallApi(`report/addSurvey/${idreport}`,'POST',)
+        return CallApi(`report/addTheory/${idreport}`,'POST',{})
         .then (response =>{
             if(response.status === 200){
                 
-                dispatch(editintroduce(response.data.report));
+                dispatch(editintroduce(response.data.newreport));
                 
             }
             else {
@@ -39,9 +38,33 @@ export const AddSurvey = (idreport ) =>{
         })
     }
 }
-export const UpdateTitleSurvey = (idreport, data ) =>{
+export const UpdateTitleTheory = (idreport, data ) =>{
     return dispatch =>{
-        return CallApi(`report/updateTitleSurvey/${idreport}`,'PUT',data)
+        return CallApi(`report/updateTitleTheory/${idreport}`,'PUT',data)
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
+export const UpdateContentTheory = (idreport, data ) =>{
+    return dispatch =>{
+        return CallApi(`report/updateContentTheory/${idreport}`,'PUT',data)
         .then (response =>{
             if(response.status === 200){
                 
@@ -64,33 +87,9 @@ export const UpdateTitleSurvey = (idreport, data ) =>{
     }
 }
 
-export const EditSurvey = (idreport, data ) =>{
+export const PushImageTheory = (idreport, data ) =>{
     return dispatch =>{
-        return CallApi(`report/editSurvey/${idreport}`,'POST',{survey:data})
-        .then (response =>{
-            if(response.status === 200){
-                
-                dispatch(editintroduce(response.data.report));
-                
-            }
-            else {
-                dispatch(Notification.Error(response.data))
-                setTimeout(() => {
-                    dispatch(Notification.hideNotification())
-                }, 5000)
-            }
-        })
-        .catch(error =>{
-            dispatch(Notification.ErrorAPI(error));
-            setTimeout(() => {
-                dispatch(Notification.hideNotification())
-            }, 5000)
-        })
-    }
-}
-export const PushImageSurvey = (idreport, data ) =>{
-    return dispatch =>{
-        return CallApi(`report/pushImageSurvey/${idreport}`,'POST', data)
+        return CallApi(`report/pushImageTheory/${idreport}`,'POST', data)
         .then (response =>{
             if(response.status === 200){
                 
@@ -112,9 +111,9 @@ export const PushImageSurvey = (idreport, data ) =>{
         })
     }
 }
-export const UpdateImageSurvey = (idreport, data ) =>{
+export const UpdateImageTheory = (idreport, data ) =>{
     return dispatch =>{
-        return CallApi(`report/updateImageSurvey/${idreport}`,'PUT', data)
+        return CallApi(`report/updateImageTheory/${idreport}`,'PUT', data)
         .then (response =>{
             if(response.status === 200){
                 
@@ -136,9 +135,9 @@ export const UpdateImageSurvey = (idreport, data ) =>{
         })
     }
 }
-export const DeleteImageSurvey = (idreport, data ) =>{
+export const DeleteImageTheory = (idreport, data ) =>{
     return dispatch =>{
-        return CallApi(`report/deleteImageSurvey/${idreport}`,'PUT', data)
+        return CallApi(`report/deleteImageTheory/${idreport}`,'PUT', data)
         .then (response =>{
             if(response.status === 200){
                 
@@ -160,9 +159,9 @@ export const DeleteImageSurvey = (idreport, data ) =>{
         })
     }
 }
-export const DeleteSurvey = (idreport, idsurvey ) =>{
+export const DeleteTheory = (idreport, idtheory ) =>{
     return dispatch =>{
-        return CallApi(`report/deleteSurvey/${idreport}`,'PUT', {idsurvey})
+        return CallApi(`report/deleteTheory/${idreport}`,'PUT', {idtheory})
         .then (response =>{
             if(response.status === 200){
                 
