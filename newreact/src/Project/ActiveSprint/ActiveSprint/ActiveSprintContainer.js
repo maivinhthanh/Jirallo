@@ -8,7 +8,7 @@ import * as action from './action'
 class ActiveSprintContainer extends Component {
   componentWillMount() {
     this.props.GetInfoProject(this.props.idproject)
-    this.props.GetIssuesInSprintActive(this.props.idproject, null)
+    this.props.GetIssuesInSprintActive(this.props.idproject, '')
   }
   render() {
       const { idproject, project, listissues, ChangeProcessIssue } = this.props

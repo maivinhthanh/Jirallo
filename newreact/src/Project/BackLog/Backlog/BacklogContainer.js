@@ -27,7 +27,7 @@ class BacklogContainer extends Component {
   componentWillUpdate(nextProps, nextState, snapshot) {
     if (nextState.selectuser != this.state.selectuser) {
       this.ShowListIssueInBackLog(this.propsops.idproject, null)
-      //this.props.ShowListSprint(this.props.idproject, null)
+      this.props.ShowListSprint(this.props.idproject, null)
       // this.props.ViewListIssueInSprint(this.props.idproject, this.props.idsprint, this.props.selectuser)        
     }
   }
@@ -36,6 +36,7 @@ class BacklogContainer extends Component {
   // }
   render() {
       const { idproject, listsprint } = this.props
+     
       return (
         <div >
           <Grid container >
@@ -45,7 +46,7 @@ class BacklogContainer extends Component {
             <Grid item xs={12} >
               <Member idproject={idproject} selectUser={this.selectUser}/>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} style={{marginTop: '20px'}}>
               <UI idproject={idproject} listsprint={listsprint} selectuser={this.state.selectuser}/>
             </Grid>
           </Grid>

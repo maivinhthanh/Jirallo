@@ -70,14 +70,13 @@ function Modalcreate(props) {
         }
         props.createIssue(issue, props.idproject)
         props.ShowListIssueInBackLog(props.idproject, null)
+        handleClose()
 
     }
 
     return (
         <div style={{ margin: '30px 30px 20px auto'}}>
-            <button type="button" onClick={handleOpen}>
-                create issues
-      </button>
+              <button class="btn btn-custom btn-outline-danger btn-lg btn-block" onClick={handleOpen}> Create Issue</button>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
