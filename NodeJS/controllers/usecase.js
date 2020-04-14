@@ -538,3 +538,77 @@ exports.deleteUsecase = async (req, res, next) => {
     }
     
 }
+exports.deleteFlow = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const idusecase = req.body.idusecase
+        const idflow = req.body.idflow
+    
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        await Report.update(
+            {
+                '_id' : ObjectId(idreport)
+            },
+            {
+                $pull:{
+                    'usecase.descript.$[i].basicflows': {"_id":ObjectId(idflow)}
+                }
+                
+            },{
+                arrayFilters: [
+                {
+                    'i._id' : ObjectId(idusecase)
+                }
+                
+            ]}
+        )
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}
+exports.deleteException = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const idusecase = req.body.idusecase
+        const idexception = req.body.idexception
+    
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        await Report.update(
+            {
+                '_id' : ObjectId(idreport)
+            },
+            {
+                $pull:{
+                    'usecase.descript.$[i].exception': {"_id":ObjectId(idexception)}
+                }
+                
+            },{
+                arrayFilters: [
+                {
+                    'i._id' : ObjectId(idusecase)
+                }
+                
+            ]}
+        )
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}

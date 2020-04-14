@@ -161,4 +161,16 @@ router.put('/deleteInterface/:idreport',upload.single('avatar'),isAuth,
 router.put('/deleteTesting/:idreport',upload.single('avatar'),isAuth,
     reportController.deleteTesting,
 )
+router.put('/deleteFlow/:idreport',upload.single('avatar'),isAuth,
+    usecaseController.deleteFlow,
+)
+router.put('/deleteException/:idreport',upload.single('avatar'),isAuth,
+    usecaseController.deleteException,
+)
+router.put('/deleteInterfaceObject/:idreport',upload.single('avatar'),isAuth,
+    designController.deleteInterfaceObject,
+)
+router.put('/deleteObjectTesting/:idreport',upload.single('avatar'),isAuth,
+    reportController.deleteObjectTesting,
+)
 module.exports = router

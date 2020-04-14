@@ -37,6 +37,9 @@ class TestingContainer extends Component {
     DeleteTesting = (idtesting)=>{
         this.props.DeleteTesting(this.props.report._id, idtesting)
     }
+    DeleteObject = (idtesting, idobj)=>{
+        this.props.DeleteObjectTesting(this.props.report._id, idtesting, idobj)
+    }
     render() {
         const { report } = this.props
         return (
@@ -46,7 +49,8 @@ class TestingContainer extends Component {
                     addTesting={this.AddTesting}
                     updateObject = {this.updateObject}
                     updateTitle={this.updateTitle}
-                    deleteTesting={this.DeleteTesting}/>
+                    deleteTesting={this.DeleteTesting}
+                    deleteObject={this.DeleteObject}/>
             </div>
         )
         
@@ -66,6 +70,7 @@ const mapDispatchToProps = dispatch => {
         UpdateContentTesting: (id, data) => dispatch(action.UpdateContentTesting(id, data)),
         UpdateTitleTesting: (id, data) => dispatch(action.UpdateTitleTesting(id, data)),
         DeleteTesting: (id, idtesting) => dispatch(action.DeleteTesting(id, idtesting)),
+        DeleteObjectTesting: (id, idtesting, idobj) => dispatch(action.DeleteObjectTesting(id, idtesting, idobj)),
     }
 }
 

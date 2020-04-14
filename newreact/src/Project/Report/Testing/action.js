@@ -110,3 +110,27 @@ export const DeleteTesting = (idreport,idtesting ) =>{
         })
     }
 }
+export const DeleteObjectTesting = (idreport,idtesting, idobject) =>{
+    return dispatch =>{
+        return CallApi(`report/deleteObjectTesting/${idreport}`,'PUT',{idtesting, idobject})
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}

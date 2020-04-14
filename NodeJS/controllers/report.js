@@ -919,3 +919,40 @@ exports.deleteTesting = async (req, res, next) => {
     }
     
 }
+exports.deleteObjectTesting = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const idtesting = req.body.idtesting
+        const idobject = req.body.idobject
+    
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        await Report.update(
+            {
+                '_id' : ObjectId(idreport)
+            },
+            {
+                $pull:{
+                    "testing.$[i].content": {"_id":ObjectId(idobject)}
+                }
+                
+            },{
+                arrayFilters: [
+                {
+                    'i._id' : ObjectId(idtesting)
+                },
+                
+            ]}
+        )
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}

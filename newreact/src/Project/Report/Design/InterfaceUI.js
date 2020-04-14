@@ -106,7 +106,7 @@ export default function InterfaceUI(props) {
                 <div onMouseEnter={()=>IndexChangeGroupAction(indexGroup)} key={indexGroup}>
                   <div>
                     <Button variant="contained" color="secondary" onClick={(id)=>props.deleteGroupInterface(group._id)}>
-                      Xóa 4.3.{group + 1}.
+                      Xóa 4.3.{indexGroup + 1}.
                     </Button>
                   </div>
                   <div className={classes.coverSubTitle} >
@@ -141,6 +141,7 @@ export default function InterfaceUI(props) {
                                       <th width="5%">STT</th>
                                       <th width="15%">Loại đối tượng</th>
                                       <th>Mô tả</th>
+                                      <th width="5%"></th>
                                     </tr>
                                     {
                                       _.map(ui.listobject, (obj, indexObj)=>{
@@ -158,6 +159,11 @@ export default function InterfaceUI(props) {
                                                 changeText={(text, name, index)=>updateObject(text,'descript', indexObj)} >
                                                 {obj.descript}
                                               </DivAction>
+                                            </td>
+                                            <td>
+                                              <Button variant="contained" color="secondary" onClick={(idgroup, idui, idobj)=>props.deleteObject(group._id, ui._id, obj._id)}>
+                                                <Icon className="fa fa-times"></Icon>
+                                              </Button>
                                             </td>
                                           </tr>
                                         )

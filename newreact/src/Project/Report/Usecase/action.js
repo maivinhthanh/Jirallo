@@ -318,3 +318,56 @@ export const DeleteUsecase = (idreport, idusecase ) =>{
         })
     }
 }
+export const DeleteException = (idreport, idusecase, idexception) =>{
+    return dispatch =>{
+        return CallApi(`report/deleteException/${idreport}`,'PUT', {
+            idusecase, 
+            idexception
+        })
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
+export const DeleteFlow = (idreport, idusecase, idflow ) =>{
+    return dispatch =>{
+        return CallApi(`report/deleteFlow/${idreport}`,'PUT', {
+            idusecase, idflow
+        })
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}

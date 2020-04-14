@@ -355,3 +355,27 @@ export const DeleteInterface = (idreport, idgroup, idui ) =>{
         })
     }
 }
+export const DeleteInterfaceObject = (idreport, idgroup, idui, idobject ) =>{
+    return dispatch =>{
+        return CallApi(`report/deleteInterfaceObject/${idreport}`,'PUT',{idgroup, idui, idobject})
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}

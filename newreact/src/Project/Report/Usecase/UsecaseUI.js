@@ -149,6 +149,7 @@ export default function UsecaseUI(props) {
                           <tr>
                             <th width="50%">Người dùng</th>
                             <th>Hệ thống</th>
+                            <th width="5%"></th>
                           </tr>
                           {
                             _.map(item.basicflows, (flow, indexFlow)=>{
@@ -175,6 +176,11 @@ export default function UsecaseUI(props) {
                                         content={flow.system}/>
                                     }
                                   </td>
+                                  <td>
+                                    <Button variant="contained" color="secondary" onClick={(id, idflow)=>props.deleteFlow(item._id, flow._id)}>
+                                      <Icon className="fa fa-times"></Icon>
+                                    </Button>
+                                  </td>
                                 </tr>
                               )
                             })
@@ -199,6 +205,7 @@ export default function UsecaseUI(props) {
                           <tr>
                             <th width="50%">Mô tả</th>
                             <th>Hệ thống</th>
+                            <th width="5%"></th>
                           </tr>
                           {
                             _.map(item.exception, (exception, indexException)=>{
@@ -224,6 +231,11 @@ export default function UsecaseUI(props) {
                                         addParagraph={()=>props.AddParagraphException(index, indexException)}
                                         content={exception.system}/>
                                     }
+                                  </td>
+                                  <td>
+                                    <Button variant="contained" color="secondary" onClick={(id, idexception)=>props.deleteException(item._id, exception._id)}>
+                                      <Icon className="fa fa-times"></Icon>
+                                    </Button>
                                   </td>
                                 </tr>
                               )

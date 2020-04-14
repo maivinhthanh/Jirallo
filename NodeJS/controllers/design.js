@@ -564,3 +564,45 @@ exports.deleteInterface = async (req, res, next) => {
     }
     
 }
+exports.deleteInterfaceObject = async (req, res, next) => {
+    try{
+
+        const idreport = req.params.idreport
+        const idgroup = req.body.idgroup
+        const idui = req.body.idui
+        const idobject = req.body.idobject
+    
+        if(!idreport){
+            res.status(203).json({ message: 'Not found report' })
+            return
+        }
+        await Report.update(
+            {
+                '_id' : ObjectId(idreport)
+            },
+            {
+                $pull:{
+                    "ui.$[i].content.$[j].listobject": {"_id":ObjectId(idobject)}
+                }
+                
+            },
+            {
+                arrayFilters: [
+                    {
+                        'i._id': ObjectId(idgroup)
+                    },
+                    {
+                        'j._id': ObjectId(idui)
+                    }
+                    
+            ]}
+        )
+        const newreport = await Report.findById(idreport)
+        res.status(200).json( {newreport} )
+    }
+    catch (error) {
+        
+        next(error)
+    }
+    
+}

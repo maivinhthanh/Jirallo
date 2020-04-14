@@ -77,6 +77,7 @@ export default function TestingUI(props) {
                                     <th>Mô tả</th>
                                     <th>Kết quả mong muốn</th>
                                     <th width="10%">Kết quả thực tế</th>
+                                    <th width="5%"></th>
                                 </tr>
                                 {
                                     _.map(item.content, (test, indexObj)=>{
@@ -106,6 +107,11 @@ export default function TestingUI(props) {
                                                         changeText={(text, name, index)=>updateObject(text,'result', indexObj)} >
                                                             {test.result}
                                                     </DivAction>
+                                                </td>
+                                                <td>
+                                                    <Button variant="contained" color="secondary" onClick={(idtest, idobj)=>props.deleteObject(item._id, test._id)}>
+                                                        <Icon className="fa fa-times"></Icon>
+                                                    </Button>
                                                 </td>
                                                 
                                             </tr>

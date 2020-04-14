@@ -126,6 +126,12 @@ class UsecaseContainer extends Component {
     DeleteUsecase = (idusecase) =>{
         this.props.DeleteUsecase(this.props.report._id, idusecase)
     }
+    DeleteFlow = (idusecase, idflow) =>{
+        this.props.DeleteFlow(this.props.report._id, idusecase, idflow)
+    }
+    DeleteException = (idusecase, idexception) =>{
+        this.props.DeleteException(this.props.report._id, idusecase, idexception)
+    }
     render() {
         const { report } = this.props
         return (
@@ -147,7 +153,9 @@ class UsecaseContainer extends Component {
                     AddParagraphException={this.AddParagraphException}
                     EditException={this.EditException}
                     updateExceptionDescript={this.updateExceptionDescript}
-                    deleteUsecase={this.DeleteUsecase}/>
+                    deleteUsecase={this.DeleteUsecase}
+                    deleteFlow={this.DeleteFlow}
+                    deleteException={this.DeleteException}/>
             </div>
         )
         
@@ -176,6 +184,8 @@ const mapDispatchToProps = dispatch => {
         AddParagraphException:(indexUsecase, indexFlow) => dispatch(action.AddParagraphException(indexUsecase, indexFlow)),
         UpdateException:(id, exception, idusecase) => dispatch(action.UpdateException(id, exception, idusecase)),
         DeleteUsecase:(id, idusecase) => dispatch(action.DeleteUsecase(id, idusecase)),
+        DeleteException:(id, idusecase, idexception) => dispatch(action.DeleteException(id, idusecase, idexception)),
+        DeleteFlow:(id, idusecase, idflow) => dispatch(action.DeleteFlow(id, idusecase, idflow)),
     }
 }
 
