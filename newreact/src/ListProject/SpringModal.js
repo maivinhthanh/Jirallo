@@ -23,6 +23,8 @@ const useStyles = makeStyles(theme => ({
   btn: {
     padding: '10px',
     marginTop: '7px',
+    border: '1px solid',
+    borderRadius: '100px' 
   }
 }));
 
@@ -50,6 +52,7 @@ function TransitionsModal(props) {
   return (
     <div>
       <button type="button" className={classes.btn} onClick={handleOpen}>
+      <i class="fas fa-plus" style={{marginRight: '10px'}}></i>
         create project
       </button>
       <Modal

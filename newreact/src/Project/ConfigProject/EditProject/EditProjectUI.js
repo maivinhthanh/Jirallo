@@ -53,6 +53,7 @@ class EditProjectUI extends Component {
     });
   }
   editProject = () => {
+    console.log(this.state.image)
     let data = new FormData()
     data.append('avatar', this.state.image)
     data.append('dateedit', this.state.datecreate)
@@ -112,7 +113,9 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    EditProject: (id, project) => dispatch(action.EditProject(id, project))
+    EditProject: (id, project) => dispatch(action.EditProject(id, project)),
+    ViewInfoProject: (id) => dispatch(action.ViewInfoProject(id)),
+
   }
 }
 export default connect(
