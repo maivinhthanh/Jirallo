@@ -7,8 +7,11 @@ import UI from './MemberUI'
 import * as action from './action'
 import AddSprint from '../BackLog/Backlog/addSprint';
 import Modalcreate from '../BackLog/Backlog/createIssue';
+import '../Member/style.css'
+
 
 class MemberContainer extends Component {
+
   componentWillMount() {
     this.props.GetListUserInProject(this.props.idproject)
   }
@@ -27,11 +30,15 @@ class MemberContainer extends Component {
   }
   render() {
       const { listMember } = this.props
+
       return (
         <Grid container >
               <UI listMember={listMember} selectUser={(id, index, status)=>this.selectUser(id, index, status)} />
+              <div class='group-function'>
               <AddSprint idproject={this.props.idproject}/>
               <Modalcreate idproject={this.props.idproject}/>
+              </div>
+              
         </Grid>
       )
     

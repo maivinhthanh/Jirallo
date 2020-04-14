@@ -7,7 +7,8 @@ import * as action from '../action'
 class EditProjectContainer extends Component {
 
   componentWillMount() {
-    this.props.ViewInfoProject(this.props.params)
+    const { project } = this.props
+    this.props.ViewInfoProject(project._id)
   }
   render() {
     const { project } = this.props

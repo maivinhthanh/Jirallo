@@ -15,6 +15,10 @@ import _ from 'lodash'
 const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: 345,
+    width: 285,
+    height: 300,
+    marginTop: 22,
+    border: '1px solid cornflowerblue'
   },
   media: {
     height: 0,
@@ -37,8 +41,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function ListProjectUI(listproject, gotoProject) {
   const classes = useStyles();
-  
-  console.log(listproject.listproject)
+  console.log(listproject)
   return (
     <Grid container direction="row" spacing={3} justify="center" alignItems="center">
         {
@@ -56,7 +59,7 @@ export default function ListProjectUI(listproject, gotoProject) {
                       </Link>
                     }
                     title={item.name}
-                    subheader={item.datecreate}
+                    subheader= { item.datecreate.slice(0,10)}
                   />
                   <CardMedia
                     className={classes.media}
