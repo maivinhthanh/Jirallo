@@ -47,6 +47,7 @@ class App extends Component {
         isAuth = 1000 * token.refreshtoken.exp > (new Date()).getTime()
       }
     }
+    console.log(isAuth)
     return (
       <DndProvider backend={HTML5Backend}>
         <div className="App">

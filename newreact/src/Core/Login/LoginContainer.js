@@ -16,7 +16,7 @@ class LoginContainer extends Component {
     }
   }
   componentWillUpdate(nextProps){
-    if(nextProps.user !== this.props.user){
+    if(nextProps.user.hasAuth !== this.props.user.hasAuth){
       this.setState({
         redirect: true
       })
@@ -25,7 +25,7 @@ class LoginContainer extends Component {
   }
   haveRedirect(){
     
-    if(this.props.user.hasAuth){
+    if(this.state.redirect === true){
       return <Redirect to="/" />
     }
 
