@@ -33,14 +33,16 @@ const useStyles = makeStyles({
 
 export default function IntroduceUI(props) {
   const classes = useStyles();
-
+  const urgencyRef = useRef(null)
+  const targetRef = useRef(null)
+  const structureRef = useRef(null)
   return (
     <div className="Cover">
       <div className={classes.A4} >
           <div className={classes.coverTitle}>
             GIỚI THIỆU ĐỀ TÀI
           </div>  
-          <div className={classes.coverSubTitle} ref={props.urgencyRef}>
+          <div className={classes.coverSubTitle} ref={urgencyRef}>
             1. TÍNH CẤP THIẾT CỦA ĐỀ TÀI
           </div>
           <div className={classes.coverContent}>
@@ -53,7 +55,7 @@ export default function IntroduceUI(props) {
           }
           
           </div> 
-          <div className={classes.coverSubTitle} ref={props.targetRef}>
+          <div className={classes.coverSubTitle} ref={targetRef}>
             2. MỤC TIÊU CỦA ĐỀ TÀI
           </div>
           <div className={classes.coverContent}>
@@ -66,7 +68,7 @@ export default function IntroduceUI(props) {
           }
           
           </div> 
-          <div className={classes.coverSubTitle} ref={props.structureRef}>
+          <div className={classes.coverSubTitle} ref={structureRef}>
             3. KẾT CẤU CỦA ĐỀ TÀI
           </div>
           <div className={classes.coverContent}>

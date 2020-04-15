@@ -33,6 +33,13 @@ const useStyles = makeStyles({
 
 export default function UsecaseUI(props) {
   const classes = useStyles();
+  const arrLength = props.info.usecase.descript.length;
+  const elRefs = React.useRef([]);
+
+  if (elRefs.current.length !== arrLength) {
+    // add or remove refs
+    elRefs.current = Array(arrLength).fill().map((_, i) => elRefs.current[i] || React.createRef());
+  }
 
   return (
     <div className="Cover">

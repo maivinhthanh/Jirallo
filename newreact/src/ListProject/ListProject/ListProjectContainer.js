@@ -9,11 +9,12 @@ class ListProjectContainer extends Component {
   componentWillMount(){
     this.props.ViewListProject()
   }
+
   render() {
 
       return (
         <div >
-          <ListProjectUI listproject={this.props.listproject}  />
+          <ListProjectUI listproject={this.props.listproject} />
         </div>
       )
     

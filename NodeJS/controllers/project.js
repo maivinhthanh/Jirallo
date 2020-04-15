@@ -267,11 +267,49 @@ exports.hasAuth = async (req, res, next) => {
     const userId = req.userId
     const idproject = req.params.idproject
     let flag = false
+    let position = ''
 
     await Project.findById(idproject).then(e=>{
         e.idmembers.map((item, index)=>{
 
-            if(item.id.toString() === userId && item.position === "Manager"){
+            if(item.id.toString() === userId){
+                flag = true
+                position = item.position
+            }
+        })
+        
+    })
+
+    res.status(200).json({ hasAuth: flag, position })
+
+}
+exports.isManager = async (req, res, next) => {
+    const userId = req.userId
+    const idproject = req.params.idproject
+    let flag = false
+
+    await Project.findById(idproject).then(e=>{
+        e.idmembers.map((item, index)=>{
+
+            if(item.id.toString() === userId && item.position === "manager"){
+                flag = true
+            }
+        })
+        
+    })
+
+    res.status(200).json({  hasAuth: flag })
+
+}
+exports.isTeacher = async (req, res, next) => {
+    const userId = req.userId
+    const idproject = req.params.idproject
+    let flag = false
+
+    await Project.findById(idproject).then(e=>{
+        e.idmembers.map((item, index)=>{
+
+            if(item.id.toString() === userId && item.position === "teacher"){
                 flag = true
             }
         })

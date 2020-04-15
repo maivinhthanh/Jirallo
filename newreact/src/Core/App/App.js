@@ -45,7 +45,6 @@ class App extends Component {
           refreshtoken : jwtDecode(Cookies.get('refreshtoken'))
         }
         isAuth = 1000 * token.refreshtoken.exp > (new Date()).getTime()
-        console.log(isAuth )
       }
     }
     return (

@@ -79,6 +79,9 @@ class AddMemberUI extends Component {
                             <button style={{ marginLeft: '20px', fontFamily: 'fantasy'}} className="btn btn-primary" onClick={()=>this.addMember(item._id, 'developer')}>
                               Developer
                             </button>
+                            <button style={{ marginLeft: '20px', fontFamily: 'fantasy'}} className="btn btn-primary" onClick={()=>this.addMember(item._id, 'teacger')}>
+                              Teacher
+                            </button>
                           </td>
                         </tr>
                       )

@@ -32,7 +32,6 @@ const useStyles = makeStyles(theme => ({
 
 export default React.forwardRef( function UI({idproject, report}) {
     const classes = useStyles();
-    console.log(report)
     // const [selected, setSelected] = React.useState(null);
     const handleSelect = (data) => {
       if(data === 'Cover'){

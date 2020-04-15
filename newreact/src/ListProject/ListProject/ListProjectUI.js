@@ -39,13 +39,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ListProjectUI(listproject, gotoProject) {
+export default function ListProjectUI(props) {
   const classes = useStyles();
-  console.log(listproject)
+
   return (
     <Grid container direction="row" spacing={3} justify="center" alignItems="center">
         {
-          _.map(listproject.listproject, (item, index)=>{
+          _.map(props.listproject, (item, index)=>{
             return (
               <Grid item cols={3} key={index}>
                 <Card className={classes.card}>

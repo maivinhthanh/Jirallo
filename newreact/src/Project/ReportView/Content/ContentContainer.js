@@ -10,7 +10,6 @@ class ContentContainer extends Component {
         this.props.selectContent(data)
     }
     render() {
-        console.log(this.props.report)
         return (
             <div >
                 <ContentUI selectContent={this.selectContent} report={this.props.report}/>
