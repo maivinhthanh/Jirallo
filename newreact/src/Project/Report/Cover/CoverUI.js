@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   },
   coverFooter:{
     fontSize: 20,
-    marginTop: 300,
+    // marginTop: 300,
     fontWeight: 'bold'
   },
   coverSubTitle:{

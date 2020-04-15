@@ -19,15 +19,14 @@ const initialState = [{
 }];
 
 const showListSprint = (state, action) =>{
-    console.log(state, action.data)
     let cloneState = _.cloneDeep(state)
-    return updateArray( cloneState, action.data);
+    return updateArray( [cloneState[0]], action.data);
 }
 const viewListIssue = (state, action) =>{
     let cloneState = _.cloneDeep(state)
     const index = cloneState.findIndex(i=>i._id === action.idsprint)
     cloneState[index].listissues = action.data
-    console.log(cloneState)
+    // console.log(cloneState)
     return cloneState
 }
 const showListIssueInBackLog = (state, action) =>{

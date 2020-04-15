@@ -7,7 +7,7 @@ const updatestate = (state, action) =>{
     
     const newdata = {
         hasAuth: action.hasAuth,
-        position: action.position
+        position: action.position.toLowerCase()
     }
    return newdata
 }

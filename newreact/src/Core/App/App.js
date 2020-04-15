@@ -14,7 +14,6 @@ import ActiveSprint from '../../Project/ActiveSprint/Page'
 import Backlog from '../../Project/BackLog/Page';
 import InfoUser from '../../InfoUser/Page';
 import Report from '../../Project/Report/Page'
-import ReportView from '../../Project/ReportView/Page'
 import HTML5Backend from 'react-dnd-html5-backend'
 import ListProject from '../../ListProject/Page'
 import IssuesFilter from '../../Project/IssuesFilter/Page'
@@ -57,7 +56,6 @@ class App extends Component {
             <PrivateRoute path="/backlog/:id?" isAuth={isAuth} component={Backlog} />
             <PrivateRoute path="/report/:id?" isAuth={isAuth} component={Report} />
             <PrivateRoute path="/active/:id?" isAuth={isAuth} component={ActiveSprint} />
-            <PrivateRoute path='/reportview/:id?' isAuth={isAuth} component={ReportView} />
             {/* <PrivateRoute path="/admin" isAuth={isAuth} component={AdminPage} /> */}
             <PrivateRoute path="/infouser/:id" isAuth={isAuth} component={InfoUser} />
             <PrivateRoute path="/viewAll" isAuth={isAuth} component={ListProject} />
