@@ -3,15 +3,11 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import { Container, Grid } from '@material-ui/core';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Icon from '@material-ui/core/Icon';
-import SearchIcon from '@material-ui/icons/Search';
 
 import Issues from './Issues'
-import * as actions from './action'
-import { connect } from 'react-redux'
 import InputField from '../Backlog/inputField'
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -19,12 +15,12 @@ import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
-
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 const useStyles = makeStyles(theme => ({
   grow: {
     flexGrow: 2,
+    offset: theme.mixins.toolbar,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -95,28 +91,22 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function PrimarySearchAppBar({idproject, sprint, selectuser}, props) {
+export default function PrimarySearchAppBar(props) {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [nameIssue, setName] = React.useState('');
-  const [optionChoose, setOption] = React.useState('')
+  const [optionType, setType] = React.useState('')
+  const [optionPriority, setPriority] = React.useState('')
 
   const beginSprint = (id) => {
-    props.beginStatusSprint(id, idproject)
+    props.beginStatusSprint(id)
   }
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
   const updateNameSprint = (name, id) => {
     props.updateNameSprint(id, name)
   }
   const handleOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -124,45 +114,46 @@ function PrimarySearchAppBar({idproject, sprint, selectuser}, props) {
   const handleChange = (e) => {
     setName(e.target.value)
   }
-  const handleChangeSelect = (e) => {
-    setOption(e.target.value)
+  const handleChangeType = (e) => {
+    setType(e.target.value)
+  }
+  const handleChangePriority = (e) => {
+    setPriority(e.target.value)
   }
   const SaveIssue = () => {
     let issue = {
       name: nameIssue,
-      type: optionChoose
+      type: optionType,
+      priority: optionPriority,
+      idsprint: props.sprint._id
     }
-    console.log(issue, idproject, props)
-    // props.createIssue(issue, idproject)
+    props.createIssue(issue)
   }
   return (
     <Container className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" color="transparent">
         <Toolbar >
 
           <Typography className={classes.title} variant="h6" noWrap>
-            <InputField nameInput={'issue'} sprint={sprint} size="30px" arrow="10px" margin="10px"
-              changeName={(data, name) => updateNameSprint(data, sprint._id)}>{sprint.name}</InputField>
+            <InputField nameInput={'issue'} sprint={props.sprint} size="30px" arrow="10px" margin="10px"
+              changeName={(data, name) => updateNameSprint(data, props.sprint._id)}>{props.sprint.name}</InputField>
           </Typography>
 
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <Icon className="fas fa-play" onClick={() => beginSprint(sprint._id)} />
-            <Icon className="fas fa-pencil-alt" />
-            <Icon className="fas fa-plus" onClick={handleOpen} />
+          {
+              props.sprint._id
+              ?<ButtonGroup variant="text" color="primary" aria-label="text primary button group">
+                <Button onClick={() => beginSprint(props.sprint._id)}>Begin Sprint</Button>
+                <Button>Edit Sprint</Button>
+                <Button onClick={handleOpen}>Create Sprint</Button>
+              </ButtonGroup>
+              :<ButtonGroup variant="text" color="primary" aria-label="text primary button group">
+              <Button onClick={handleOpen}>Create Sprint</Button>
+            </ButtonGroup>
+              
+            }
+
           </div>
           <div className={classes.sectionMobile}>
             <Icon
@@ -174,7 +165,7 @@ function PrimarySearchAppBar({idproject, sprint, selectuser}, props) {
         </Toolbar>
       </AppBar>
       <Grid>
-        <Issues idproject={idproject} idsprint={sprint._id} listissues={sprint.listissues} selectuser={selectuser} />
+        <Issues idproject={props.idproject} idsprint={props.sprint._id} listissues={props.sprint.listissues} selectuser={props.selectuser} />
       </Grid>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -198,8 +189,8 @@ function PrimarySearchAppBar({idproject, sprint, selectuser}, props) {
               <br/>
               <Select
                 native
-                value={optionChoose}
-                onChange={handleChangeSelect}
+                value={optionType}
+                onChange={handleChangeType}
                 style={{marginBottom:'20px'}}
                 inputProps={{
                   name: 'age',
@@ -210,7 +201,25 @@ function PrimarySearchAppBar({idproject, sprint, selectuser}, props) {
                 <option value='bug'>Bug</option>
                 <option value='task'>Task</option>
               </Select>
-                <br/>
+              <br/>
+              <Select
+                native
+                value={optionPriority}
+                onChange={handleChangePriority}
+                style={{marginBottom:'20px'}}
+                inputProps={{
+                  name: 'age',
+                  id: 'age-native-simple',
+                }}
+              >
+                <option value="" />
+                <option value='highest'>Highest</option>
+                <option value='high'>High</option>
+                <option value='medium'>Medium</option>
+                <option value='low'>Low</option>
+                <option value='lowest'>Lowest</option>
+              </Select>
+              <br />
               <Button style={{ marginLeft:'80px' }} variant="contained"
               onClick={SaveIssue}
                color="primary">
@@ -223,19 +232,3 @@ function PrimarySearchAppBar({idproject, sprint, selectuser}, props) {
     </Container>
   );
 }
-
-const mapStateToProps = (state) => {
-  return {
-    listsprint: state.listsprint
-  }
-}
-const mapDispatchToProps = dispatch => {
-  return {
-    beginStatusSprint: (idsprint, idproject) => dispatch(actions.beginStatusSprint(idsprint, idproject)),
-    updateNameSprint: (id, name) => dispatch(actions.updateNameSprint(id, name)),
-    createIssue : (issue, idproject) => dispatch(actions.createIssue(issue, idproject))
-    // createIssue : (nameIssue, optionChoose, idproject) => dispatch(actions.createIssue(nameIssue, optionChoose, idproject))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PrimarySearchAppBar)

@@ -69,12 +69,17 @@ class IssuesContainer extends Component {
     _.map(listissues, (issue, key) => {
       listIssueId.push(issue._id)
     })
+    console.log(itemDrop.issue.idsprint, itemDrag.item.idsprint, itemDrop.issue._id, listIssueId)
     await this.props.AddAndSortIssuesInSprint( itemDrop.issue.idsprint, itemDrag.item.idsprint, itemDrop.issue._id, listIssueId)
-    await this.props.ShowListSprint (this.props.idproject, null)
+    // await this.props.ShowListSprint (this.props.idproject, null)
+    await this.props.ViewListIssueInSprint(this.props.idproject, this.props.idsprint, null)
   }
-  
+  RemoveIssueIntoSprint = (item) =>{
+    this.props.ViewListIssueInSprint(this.props.idproject, this.props.idsprint, null)
+  }
   render() {
       const { listissues, idsprint, idproject } = this.props
+      // console.log(listissues, idsprint, idproject)
       let listissuesEmpty
       if(listissues){
         listissuesEmpty = listissues.length !== 0
@@ -82,7 +87,7 @@ class IssuesContainer extends Component {
       else{
         listissuesEmpty = false
       }
-      
+      // console.log(listissuesEmpty)
       const fakeissue = {
         _id: '',
         name: null,
@@ -95,11 +100,14 @@ class IssuesContainer extends Component {
             listissuesEmpty
               ? _.map(listissues, (item, index) =>{
                 return(
-                  <IssuesUI idproject={idproject} item={item} key={index} handleAddIssueIntoSprint={(id, issue) => this.IssueToSprint(id, issue)}/> 
+                  <IssuesUI idproject={idproject} item={item} key={index} handleAddIssueIntoSprint={(id, issue) => this.IssueToSprint(id, issue)}
+                    handleRemoveIssueIntoSprint={this.RemoveIssueIntoSprint}
+                  /> 
                 )
               })
                   
-              :  <IssuesUI item={fakeissue} handleAddIssueIntoSprint={(id, issue) => this.IssueToSprint(id, issue)}/> 
+              :  <IssuesUI item={fakeissue} handleAddIssueIntoSprint={(id, issue) => this.IssueToSprint(id, issue)}
+                handleRemoveIssueIntoSprint={this.RemoveIssueIntoSprint}/> 
           }
         </div>
       )

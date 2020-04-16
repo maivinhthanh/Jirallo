@@ -20,6 +20,7 @@ const initialState = [{
 
 const showListSprint = (state, action) =>{
     let cloneState = _.cloneDeep(state)
+    console.log(updateArray( [cloneState[0]], action.data))
     return updateArray( [cloneState[0]], action.data);
 }
 const viewListIssue = (state, action) =>{
