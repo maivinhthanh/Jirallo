@@ -7,7 +7,7 @@ const updateArray = (oldObject, updatedProperties) => {
 const initialState = []
 
 const getIssuesInSprintActive = (state, action) =>{
-   return updateArray(state,action.data )
+   return updateArray([],action.data )
 }
 const changeProcessIssueInListIssues = (state, action) =>{
     const index = _.findIndex(state, (item,index)=>item._id === action.data._id)

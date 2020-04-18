@@ -12,7 +12,9 @@ class BackLogPage extends Component {
   componentWillMount(){
     this.props.HasAuth(this.props.match.params.id)
   }
-  
+  shouldComponentUpdate(nextProps){
+    return nextProps.authProject.hasAuth != this.props.authProject.hasAuth
+  }
   render() {
       const { match: { params } } = this.props
       const { note, authProject } = this.props
@@ -28,11 +30,7 @@ class BackLogPage extends Component {
       }
       else{
         return(
-          <Redirect
-            to={{
-              pathname: "/viewAll"
-            }}
-          />
+          <p>project không tồn tại</p>
         )
       }
       

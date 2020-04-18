@@ -23,6 +23,9 @@ class IssuesFilterPage extends Component {
       await this.props.SelectIssues(this.props.match.params.idissues)
     }
   }
+  shouldComponentUpdate(nextProps){
+    return nextProps.authProject.hasAuth != this.props.authProject.hasAuth
+  }
   render() {
       const { match: { params } } = this.props
       const { note, authProject } = this.props
@@ -39,11 +42,7 @@ class IssuesFilterPage extends Component {
       }
       else{
         return(
-          <Redirect
-            to={{
-              pathname: "/viewAll"
-            }}
-          />
+          <p>project không tồn tại</p>
         )
       }
   }

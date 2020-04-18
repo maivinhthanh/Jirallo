@@ -4,17 +4,43 @@ import _ from 'lodash'
 
 import UI from './UI'
 import * as action from './action'
+import Member from '../../Member/MemberContainer'
+import { Grid } from '@material-ui/core'
 
 class ActiveSprintContainer extends Component {
+  constructor(props){
+    super(props);
+    this.state ={
+      selectuser: null,
+    }
+  }
   componentWillMount() {
     this.props.GetInfoProject(this.props.idproject)
     this.props.GetIssuesInSprintActive(this.props.idproject, null)
+  }
+  selectUser = (id) =>{
+    console.log(id)
+    this.setState({
+      selectuser : id
+    })
+  }
+  componentWillUpdate(nextProps, nextState, snapshot) {
+    console.log(this.state.selectuser)
+    if (nextState.selectuser != this.state.selectuser) {
+      this.props.GetIssuesInSprintActive(this.props.idproject, this.state.selectuser)
+    }
   }
   render() {
       const { idproject, project, listissues, ChangeProcessIssue } = this.props
       return (
         <div>
-          <UI idproject={idproject} project={project} listissues={listissues} ChangeProcessIssue={ChangeProcessIssue}/>
+          <Grid item xs={12} >
+            <Member idproject={idproject} selectUser={this.selectUser}/>
+          </Grid>
+          <Grid item xs={12} style={{marginTop: '20px'}}>
+            <UI idproject={idproject} project={project} listissues={listissues} ChangeProcessIssue={ChangeProcessIssue}/>
+          </Grid>
+          
           </div>
       )
     
