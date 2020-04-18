@@ -15,7 +15,7 @@ class EditProjectContainer extends Component {
     return (
       <div >
         {
-          !_.isEmpty(project._id) && <UI project={project} />
+          !_.isEmpty(project._id) && <UI id={project._id} project={project} />
         }
       </div>
     )

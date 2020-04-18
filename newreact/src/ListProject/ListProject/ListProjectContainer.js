@@ -7,7 +7,7 @@ import * as action from './action'
 
 class ListProjectContainer extends Component {
   componentWillMount(){
-    this.props.ViewListProject()
+     this.props.ViewListProject()
   }
   render() {
 
