@@ -51,9 +51,11 @@ function TransitionsModal(props) {
 
   return (
     <div>
-      <button type="button" className={classes.btn} onClick={handleOpen}>
-      <i class="fas fa-plus" style={{marginRight: '10px'}}></i>
-        create project
+      <button type="button" onClick={handleOpen}>
+      <i class="fas icon_add fa-plus-circle"></i>
+      <div className='text_add'>
+      Add project
+      </div>
       </button>
       <Modal
         aria-labelledby="transition-modal-title"

@@ -85,9 +85,6 @@ export default function HeaderUI(props) {
                         </IconButton>
                     </Paper>
                 </Grid>
-                <Grid item xs={6}style={{textAlign: 'right', paddingRight: '20px'}} >
-                    <SpringModal/>
-                </Grid>
             </Grid>
         </div>
     )
