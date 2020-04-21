@@ -24,7 +24,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function ImageAvatars({listMember,selectUser}) {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       {

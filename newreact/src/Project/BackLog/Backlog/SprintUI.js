@@ -93,6 +93,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function PrimarySearchAppBar(props) {
   const [open, setOpen] = React.useState(false);
+  const [openedit, setOpenEdit] = React.useState(false);
   const classes = useStyles();
   const [nameIssue, setName] = React.useState('');
   const [optionType, setType] = React.useState('')
@@ -107,10 +108,15 @@ export default function PrimarySearchAppBar(props) {
   const handleOpen = () => {
     setOpen(true);
   };
+  const handleOpenEdit = () => {
+    setOpenEdit(true);
+  };
   const handleClose = () => {
     setOpen(false);
   };
-
+  const handleCloseEdit = () => {
+    setOpenEdit(false);
+  };
   const handleChange = (e) => {
     setName(e.target.value)
   }

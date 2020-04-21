@@ -29,15 +29,15 @@ const getListUserInProject = (state, action) =>{
     //     let newdata = updateObject(item.id, {active: false})
     //     cloneState = cloneState.push(newdata)
     // })
+    console.log(cloneState)
     cloneState = _.clone(action.data)
-    
+    console.log(cloneState)
    return cloneState
 }
 
 const FindUserAction = (state, action) => {
     let listAuth = _.clone(state)
     listAuth = _.clone(action.data)
-    console.log(listAuth)
     return listAuth
 }
 const listUserReducer = ( state = initialState, action ) => {

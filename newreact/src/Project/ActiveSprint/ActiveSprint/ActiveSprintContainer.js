@@ -19,13 +19,11 @@ class ActiveSprintContainer extends Component {
     this.props.GetIssuesInSprintActive(this.props.idproject, null)
   }
   selectUser = (id) =>{
-    console.log(id)
     this.setState({
       selectuser : id
     })
   }
   componentWillUpdate(nextProps, nextState, snapshot) {
-    console.log(this.state.selectuser)
     if (nextState.selectuser != this.state.selectuser) {
       this.props.GetIssuesInSprintActive(this.props.idproject, this.state.selectuser)
     }
