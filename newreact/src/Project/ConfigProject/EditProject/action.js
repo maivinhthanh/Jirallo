@@ -13,6 +13,12 @@ export const viewinfoproject = (data) =>{
         data: data
     }
 }
+export const listproject = (data) =>{
+    return {
+        type:'GETALLLISTPROJECT',
+        data: data
+    }
+}
 
 export const Action = (data) =>{
     return dispatch =>{
@@ -42,6 +48,32 @@ export const Action = (data) =>{
         })
     }
 }
+
+export const ViewListProject = (data) =>{
+    return dispatch =>{
+        return CallApi('project/ViewListProject','GET',{
+        }).then (response =>{
+            
+            if(response.status === 200){
+                dispatch(listproject(response.data.listproject));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
+
 
 export const EditProject = (id, project) => {
     return dispatch => {
