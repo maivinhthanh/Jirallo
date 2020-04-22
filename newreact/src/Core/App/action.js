@@ -9,7 +9,16 @@ export const refreshToken = () =>{
         {refreshToken: refreshToken},
         'token'
         ).then(response =>{
-            Cookies.set('token', response.data.accessToken, { expires: 1 });
+            if(response.status === 200){
+                Cookies.set('token', response.data.accessToken, { expires: 1 });
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+            
         })
         .catch(err =>{
            console.log(err)

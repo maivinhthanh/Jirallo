@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import _ from 'lodash'
-import DivAction from '../../../Components/InputEdit/DivActionUI'
 
 const useStyles = makeStyles({
   A4: {
@@ -47,7 +46,6 @@ const useStyles = makeStyles({
 
 export default function ControlledTreeView(props) {
   const classes = useStyles();
-  
   return (
     <div className="Cover">
       <div className={classes.A4} >
@@ -70,10 +68,10 @@ export default function ControlledTreeView(props) {
               return (
                 <div className="row">
                   <div className="col-6 text-right">
-                    <DivAction size={25} marginBottom={3} margin={3} >{item.name}</DivAction>
+                    <div>{item.name}</div>
                   </div>
                   <div className="col-6 text-left">
-                    <DivAction size={25} marginBottom={3} margin={3} >{item.code}</DivAction>
+                    <div>{item.code}</div>
                   </div>
                 </div>
               )
@@ -85,7 +83,7 @@ export default function ControlledTreeView(props) {
             Đề tài
           </div>
           <div className={classes.coverName}>
-            <DivAction size={30} marginBottom={3} margin={3} changeText={props.EditName} >{props.info.name}</DivAction>
+            <div>{props.info.name}</div>
           </div>
           <div className={classes.coverTitle}>
             TIỂU LUẬN CHUYÊN NGÀNH CÔNG NGHỆ PHẦN MỀM
@@ -94,10 +92,10 @@ export default function ControlledTreeView(props) {
             GIÁO VIÊN HƯỚNG DẪN:
           </div>
           <div className={classes.coverTitle}>
-            <DivAction size={25} marginBottom={3} margin={3} changeText={props.EditTeacher}  >{props.info.teacher}</DivAction>
+          <div>{props.info.teacher}</div>
           </div>
           <div className={classes.coverFooter}>
-            KHÓA <DivAction size={25} marginBottom={3} margin={3} changeText={props.EditYear}  >{props.info.year}</DivAction>
+            KHÓA <div>{props.info.year}</div>
           </div>
         </div>
       </div>

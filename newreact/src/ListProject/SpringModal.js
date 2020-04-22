@@ -23,6 +23,8 @@ const useStyles = makeStyles(theme => ({
   btn: {
     padding: '10px',
     marginTop: '7px',
+    border: '1px solid',
+    borderRadius: '100px' 
   }
 }));
 
@@ -49,8 +51,11 @@ function TransitionsModal(props) {
 
   return (
     <div>
-      <button type="button" className={classes.btn} onClick={handleOpen}>
-        create project
+      <button type="button" onClick={handleOpen}>
+      <i class="fas icon_add fa-plus-circle"></i>
+      <div className='text_add'>
+      Add project
+      </div>
       </button>
       <Modal
         aria-labelledby="transition-modal-title"

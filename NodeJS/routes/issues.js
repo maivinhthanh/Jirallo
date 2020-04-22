@@ -14,6 +14,10 @@ router.post('/createIssues',upload.single('image'),isAuth,
     
     issuesController.createIssues,
 )
+router.post('/createIssuesInSprint',upload.single('image'),isAuth,
+    
+    issuesController.createIssuesInSprint,
+)
 router.put('/editIssues/:idissues',upload.single('image'),isAuth, 
     
     issuesController.editIssues,

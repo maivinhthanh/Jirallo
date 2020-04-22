@@ -32,11 +32,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const logout =()=>{
+  Cookies.remove('token')
+  Cookies.remove('refreshtoken')
+}
+
 const actions = [
   { icon: <Link to="/"><Avatar alt="Remy Sharp" src="/logo-menu.jpg" /></Link>, name: 'Home' },
   { icon: <Link to="/viewAll"><Icon className="fas fa-folder" /></Link>, name: 'All Project' },
   { icon: <Link to={`/infouser/${userId}`}><Icon className="fas fa-user" /></Link>, name: 'Profile' },
-  { icon: <Link to="/login" onClick={()=>this.logout()}><Icon className="fas fa-sign-out-alt" /></Link>, name: 'Log Out' }
+  { icon: <Link to="/login" onClick={()=>logout()}><Icon className="fas fa-sign-out-alt" /></Link>, name: 'Log Out' }
 ];
 
 export default function OpenIconSpeedDial() {

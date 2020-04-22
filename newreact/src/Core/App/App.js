@@ -44,9 +44,9 @@ class App extends Component {
           refreshtoken : jwtDecode(Cookies.get('refreshtoken'))
         }
         isAuth = 1000 * token.refreshtoken.exp > (new Date()).getTime()
-        console.log(isAuth )
       }
     }
+    console.log(isAuth)
     return (
       <DndProvider backend={HTML5Backend}>
         <div className="App">
@@ -56,7 +56,6 @@ class App extends Component {
             <PrivateRoute path="/backlog/:id?" isAuth={isAuth} component={Backlog} />
             <PrivateRoute path="/report/:id?" isAuth={isAuth} component={Report} />
             <PrivateRoute path="/active/:id?" isAuth={isAuth} component={ActiveSprint} />
-            {/* <PrivateRoute path='/group' isAuth={isAuth} component={Group} /> */}
             {/* <PrivateRoute path="/admin" isAuth={isAuth} component={AdminPage} /> */}
             <PrivateRoute path="/infouser/:id" isAuth={isAuth} component={InfoUser} />
             <PrivateRoute path="/viewAll" isAuth={isAuth} component={ListProject} />

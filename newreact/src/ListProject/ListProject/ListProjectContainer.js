@@ -7,13 +7,14 @@ import * as action from './action'
 
 class ListProjectContainer extends Component {
   componentWillMount(){
-    this.props.ViewListProject()
+     this.props.ViewListProject()
   }
+
   render() {
 
       return (
         <div >
-          <ListProjectUI listproject={this.props.listproject}  />
+          <ListProjectUI listproject={this.props.listproject} />
         </div>
       )
     

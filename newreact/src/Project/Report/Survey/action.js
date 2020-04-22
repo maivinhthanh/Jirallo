@@ -39,6 +39,30 @@ export const AddSurvey = (idreport ) =>{
         })
     }
 }
+export const UpdateTitleSurvey = (idreport, data ) =>{
+    return dispatch =>{
+        return CallApi(`report/updateTitleSurvey/${idreport}`,'PUT',data)
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
 
 export const EditSurvey = (idreport, data ) =>{
     return dispatch =>{
@@ -67,6 +91,78 @@ export const EditSurvey = (idreport, data ) =>{
 export const PushImageSurvey = (idreport, data ) =>{
     return dispatch =>{
         return CallApi(`report/pushImageSurvey/${idreport}`,'POST', data)
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
+export const UpdateImageSurvey = (idreport, data ) =>{
+    return dispatch =>{
+        return CallApi(`report/updateImageSurvey/${idreport}`,'PUT', data)
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
+export const DeleteImageSurvey = (idreport, data ) =>{
+    return dispatch =>{
+        return CallApi(`report/deleteImageSurvey/${idreport}`,'PUT', data)
+        .then (response =>{
+            if(response.status === 200){
+                
+                dispatch(editintroduce(response.data.newreport));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
+export const DeleteSurvey = (idreport, idsurvey ) =>{
+    return dispatch =>{
+        return CallApi(`report/deleteSurvey/${idreport}`,'PUT', {idsurvey})
         .then (response =>{
             if(response.status === 200){
                 

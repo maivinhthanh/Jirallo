@@ -5,6 +5,7 @@ import _ from 'lodash'
 
 import * as action from './action';
 import * as Config from '../../../Config';
+import ModalAddMember from './ModalAddMember';
 
 class AddMemberUI extends Component {
   constructor(props) {
@@ -64,7 +65,7 @@ class AddMemberUI extends Component {
               </thead>
               <tbody>
                 {
-                  _.map(auth, (item, index)=>{
+                   _.map(auth, (item, index)=>{
                       return(
                         <tr>
                           <th scope="row">{index + 1}</th>
@@ -78,6 +79,9 @@ class AddMemberUI extends Component {
                             </button>
                             <button style={{ marginLeft: '20px', fontFamily: 'fantasy'}} className="btn btn-primary" onClick={()=>this.addMember(item._id, 'developer')}>
                               Developer
+                            </button>
+                            <button style={{ marginLeft: '20px', fontFamily: 'fantasy'}} className="btn btn-primary" onClick={()=>this.addMember(item._id, 'teacger')}>
+                              Teacher
                             </button>
                           </td>
                         </tr>

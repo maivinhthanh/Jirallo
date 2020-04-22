@@ -6,6 +6,7 @@ import _ from 'lodash'
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    marginLeft: '35px',
     '& > *': {
       marginLeft: theme.spacing(6),
       marginRight: theme.spacing(6),
@@ -23,22 +24,21 @@ const useStyles = makeStyles(theme => ({
 
 export default function ImageAvatars({listMember,selectUser}) {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       {
         _.map(listMember, (item,index) =>{
           return(
-            <div key={index} onClick={()=>selectUser(item._id, index, item.active)} style={item.active?{backgroundColor:'#6A8DCD'}:{}}>
+            <div key={index} onClick={()=>selectUser(item._id, index, item.active)} style={item.active?{backgroundColor:'#6A8DCD'}:{}, { marginTop: '10px'}}>
               {
-                item.image
-                ? <Avatar alt={item.name} src={'/image/'+item.image} 
+                _.get(item, ['id', 'image'])
+                ? <Avatar alt={ _.get(item, ['id', 'name'])} src={'/image/'+_.get(item, ['id', 'image'])} 
                     className={classes.large}  />
-                : <Avatar alt={item.name} 
+                : <Avatar alt={ _.get(item, ['id', 'name'])} 
                     // className={classes.large} >{item.name.charAt(0)}</Avatar>
-                    className={classes.large} >{item.name}</Avatar>
+                    className={classes.large} ></Avatar>
               }
-              <p>{item.name}</p>
+              <p>{ _.get(item, ['id', 'name'])}</p>
             </div>
             
             

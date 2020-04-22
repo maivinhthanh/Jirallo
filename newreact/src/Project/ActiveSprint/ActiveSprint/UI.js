@@ -52,7 +52,7 @@ export default function UI({idproject, project, listissues, ChangeProcessIssue})
     const classes = useStyles();
     let numberColumn = project.process.length
     let divineColumn = 12 / Number.parseInt(numberColumn)
-
+console.log(listissues)
     const [state, dispatch] = React.useReducer(todoReducer, initialState)
 
     if(numberColumn < 4){

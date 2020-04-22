@@ -42,19 +42,15 @@ function IssueAdd(props) {
         collect: monitor => ({
             isDragging: !!monitor.isDragging(),
         }),
+        end: (item, monitor) =>{
+            props.handleRemoveIssueIntoSprint(props.item)
+        }
     })
     // console.log(props)
     let item = props.item
     let modal = true
     const fill = props.white ? 'white' : 'white'
     const [{ isOver }, drop] = useDrop({
-        accept: 'issuea',
-        drop: (item) => {
-            props.handleAdd(props, item)
-        },
-        collect: monitor => ({
-            isOver: !!monitor.isOver(),
-        }),
         accept: 'issue',
         drop: (item) => {
             props.handleAddIssueIntoSprint(props, item)

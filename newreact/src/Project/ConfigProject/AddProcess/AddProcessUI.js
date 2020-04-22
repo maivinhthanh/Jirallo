@@ -8,8 +8,9 @@ import Process from './Process'
 const useStyles = makeStyles(theme => ({
     root: {
       '& > *': {
-        margin: theme.spacing(1),
-        width: 200,
+        margin: '0 auto',
+        width: '50%'
+        
       },
     },
 }));

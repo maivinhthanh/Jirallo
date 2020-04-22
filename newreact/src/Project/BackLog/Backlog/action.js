@@ -51,35 +51,48 @@ export const showInfomationIssue = (id) => {
     }
 }
 export const createIssue = (issue, idproject) => {
-    return dispatch => {
-        return CallApi(`issues/createIssues`, 'POST',{
-            name: issue.name,
-            priority: issue.priority,
-            process: issue.process,
-            tag: issue.tag,
-            type: issue.type,
-            idproject
-        }).then(respone => {
-            dispatch(createIssueBacklog(respone.data))
-        }).catch(err => {
-            dispatch(Notification.Error(err))
-            setTimeout(() => {
-                dispatch(Notification.hideNotification())
-            }, 5000)
-        })
+    console.log(issue)
+    if(issue.idsprint === null){
+        return dispatch => {
+            return CallApi(`issues/createIssues`, 'POST',{
+                name: issue.name,
+                priority: issue.priority,
+                process: issue.process,
+                tag: issue.tag,
+                type: issue.type,
+                idproject
+            }).then(respone => {
+                dispatch(createIssueBacklog(respone.data))
+            }).catch(err => {
+                dispatch(Notification.Error(err))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            })
+        }
+    }
+    else{
+        return dispatch => {
+            return CallApi(`issues/createIssuesInSprint`, 'POST',{
+                name: issue.name,
+                priority: issue.priority,
+                process: issue.process,
+                tag: issue.tag,
+                type: issue.type,
+                idsprint: issue.idsprint,
+                idproject
+            }).then(respone => {
+                dispatch(createIssueBacklog(respone.data))
+            }).catch(err => {
+                dispatch(Notification.Error(err))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            })
+        }
     }
 }
-// export const createIssue = (name, type, idproject) => {
-//     return dispatch => {
-//         return CallApi(`issues/createIssues`, 'POST', {
-//             name,
-//             type,
-//             idproject
-//         }).then(respone => {
-//             console.log(respone)
-//         })
-//     }
-// }
+
 export const updateNameSprint = (id, name) => {
     return dispatch => {
         return CallApi(`sprint/editSprint/${id}`,'PUT',{
@@ -170,7 +183,6 @@ export const showlistsprint = (data) =>{
 }
 
 export const ShowListSprint = (id,iduser = null) => {
-    console.log(id)
     return dispatch => {
         return CallApi(`sprint/viewListSprint/${id}`,
         'POST',
@@ -203,7 +215,6 @@ export const viewlistissuesinsprint = (idsprint, data) =>{
 }
 
 export const ViewListIssueInSprint = (idproject, idsprint = null, iduser = null) => {
-    console.log(idproject)
     return dispatch => {
         return CallApi(`sprint/viewListIssuesInSprint/${idproject}`,
         'POST',

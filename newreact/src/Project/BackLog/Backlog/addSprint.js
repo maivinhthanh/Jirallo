@@ -59,9 +59,7 @@ function SimpleModal(props) {
 
   return (
     <div style={{marginTop:'30px', marginBottom:'20px'}}>
-      <button className='btn' style={{background: '#3f51b5', color: 'white'}} type="button" onClick={handleOpen}>
-        Add Sprint
-      </button>
+      <button class="btn btn-custom btn-outline-warning btn-lg btn-block" onClick={handleOpen}> Add Sprint</button>
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"

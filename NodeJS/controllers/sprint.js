@@ -298,6 +298,7 @@ exports.addAndSortIssuesInSprint = async (req, res, next) => {
         const list = listissues.filter(item => item !== '')
 
         if(idsprintgive === null || idsprintgive === 'null'){
+            console.log(list)
             await Sprint.findByIdAndUpdate(idsprinttake,
                 {
                     idissues: list  
@@ -310,7 +311,7 @@ exports.addAndSortIssuesInSprint = async (req, res, next) => {
         else if(idsprinttake === null || idsprinttake === 'null'){
             await Sprint.findByIdAndUpdate(idsprintgive,
                 {
-                    $pull: { idissues: idissues } 
+                    $pull: { idissues: ObjectId(idissues) } 
                 } ,{new: true}
             )
             await Issuses.findByIdAndUpdate(idissues, {
@@ -323,7 +324,7 @@ exports.addAndSortIssuesInSprint = async (req, res, next) => {
         else{
             await Sprint.findByIdAndUpdate(idsprintgive,
                 {
-                    $pull: { idissues: idissues } 
+                    $pull: { idissues: ObjectId(idissues) } 
                 } ,{new: true}
             )
             await Sprint.findByIdAndUpdate(idsprinttake,
