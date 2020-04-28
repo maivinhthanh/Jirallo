@@ -15,6 +15,9 @@ class ActiveSprintPage extends Component {
   shouldComponentUpdate(nextProps){
     return nextProps.authProject.hasAuth != this.props.authProject.hasAuth
   }
+  componentDidMount(){
+    document.title = "Active Sprint"
+  }
   render() {
       const { match: { params } } = this.props
       const { note, authProject } = this.props

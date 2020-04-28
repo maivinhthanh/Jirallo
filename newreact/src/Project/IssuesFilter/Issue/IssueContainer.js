@@ -12,11 +12,16 @@ class IssueContainer extends Component {
     
   }
 
+  EditDescriptIssues = (data) =>{
+    this.props.EditDescriptIssues(this.props.issues._id, data)
+  }
+
   render() {
       const { issues } = this.props
       return (
         <div >
-          <IssueUI issue={issues}/>
+          <IssueUI issue={issues}
+          EditDescriptIssues={this.EditDescriptIssues}/> 
           
         </div>
       )
@@ -32,7 +37,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-      
+      EditDescriptIssues: (id, data) => dispatch(action.EditDescriptIssues(id, data))
     }
 }
 

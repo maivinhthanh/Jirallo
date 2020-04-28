@@ -161,6 +161,34 @@ exports.editIssues = async (req, res, next) => {
         next(err)
     }
 }
+exports.editDescriptIssues = async (req, res, next) => {
+    try{
+        const idissue = req.params.idissue
+        const descript = req.body.descript
+
+        let newissues = {
+            descript: descript,
+            dateedit: Date.now(),
+        }
+        const issues = await Issues.findByIdAndUpdate(idissue, newissues, { new: true })
+
+        const action = new Activities({
+            action: 'editDescriptIssues',
+            content: 'issues/editDescriptIssues/' + idissue,
+            iduser: req.userId,
+            olddata: issues,
+            newdata: newissues
+        })
+
+        await action.save()
+
+        res.status(201).json({ newissues})
+    }
+    catch(err) {
+        
+        next(err)
+    }
+}
 
 exports.viewListIssues = async (req, res, next) => {
     try{

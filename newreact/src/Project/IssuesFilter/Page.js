@@ -26,6 +26,9 @@ class IssuesFilterPage extends Component {
   shouldComponentUpdate(nextProps){
     return nextProps.authProject.hasAuth != this.props.authProject.hasAuth
   }
+  componentDidMount(){
+    document.title = "Issues Filter"
+  }
   render() {
       const { match: { params } } = this.props
       const { note, authProject } = this.props

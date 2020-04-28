@@ -58,4 +58,7 @@ router.post('/createComment/:idissues',upload.single('image'),isAuth,
 router.get('/getListComment/:idissue', isAuth,
     commentController.getListComment,
 )
+router.put('/editDescriptIssues/:idissue', isAuth,
+    issuesController.editDescriptIssues,
+)
 module.exports = router

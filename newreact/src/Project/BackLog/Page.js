@@ -15,9 +15,13 @@ class BackLogPage extends Component {
   shouldComponentUpdate(nextProps){
     return nextProps.authProject.hasAuth != this.props.authProject.hasAuth
   }
+  componentDidMount(){
+    document.title = "Back Log"
+  }
   render() {
       const { match: { params } } = this.props
-      const { note, authProject } = this.props
+      const { note, authProject,project } = this.props
+      console.log(project)
       if(authProject.hasAuth === true){
         return (
           <div >
@@ -41,7 +45,8 @@ class BackLogPage extends Component {
 const mapStateToProps = (state) => {
     return {
       note: state.note,
-      authProject: state.authProject
+      authProject: state.authProject,
+      project: state.project
     }
 }
 
