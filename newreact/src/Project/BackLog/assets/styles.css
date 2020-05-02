@@ -22,3 +22,12 @@
     border-radius: 50px;
     padding: 5px;
 }
+.wrapper-header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    text-align: left;
+}
+.list-btn {
+    justify-content: space-between
+}

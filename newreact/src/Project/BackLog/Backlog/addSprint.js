@@ -1,11 +1,29 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
-import * as actions from './action'
-import { connect } from 'react-redux'
+import React, { Fragment } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import * as actions from "./action";
+import { connect } from "react-redux";
+import { createMuiTheme, withStyles } from "@material-ui/core/styles";
+import { green, purple } from "@material-ui/core/colors";
+import { ThemeProvider } from "@material-ui/styles";
 
+const ColorButton = withStyles(theme => ({
+  root: {
+    color: theme.palette.getContrastText(purple[500]),
+    backgroundColor: purple[500],
+    "&:hover": {
+      backgroundColor: purple[700]
+    }
+  }
+}))(Button);
+
+const theme = createMuiTheme({
+  palette: {
+    primary: green
+  }
+});
 function rand() {
   return Math.round(Math.random() * 20) - 10;
 }
@@ -17,19 +35,22 @@ function getModalStyle() {
   return {
     top: `${top}%`,
     left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
+    transform: `translate(-${top}%, -${left}%)`
   };
 }
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    position: 'absolute',
+    position: "absolute",
     width: 400,
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(2, 4, 3)
   },
+  margin: {
+    margin: theme.spacing(1)
+  }
 }));
 
 function SimpleModal(props) {
@@ -37,17 +58,16 @@ function SimpleModal(props) {
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
-  const [namesprint, setName] = React.useState('')
+  const [namesprint, setName] = React.useState("");
 
-  const handleChange = (e) => {
-      setName(e.target.value)
-  }
+  const handleChange = e => {
+    setName(e.target.value);
+  };
   const saveSprint = () => {
-    const idproject = props.idproject
-    props.handleSaveName(namesprint,idproject)
-    handleClose()
-
-  }
+    const idproject = props.idproject;
+    props.handleSaveName(namesprint, idproject);
+    handleClose();
+  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -58,8 +78,16 @@ function SimpleModal(props) {
   };
 
   return (
-    <div style={{marginTop:'30px', marginBottom:'20px'}}>
-      <button class="btn btn-custom btn-outline-warning btn-lg btn-block" onClick={handleOpen}> Add Sprint</button>
+    <Fragment style={{ marginTop: "30px", marginBottom: "20px" }}>
+      <ColorButton
+        variant="contained"
+        color="primary"
+        className={useStyles.margin}
+        onClick={handleOpen}
+      >
+        <i class="fas fa-plus"></i> Add sprint
+      </ColorButton>
+      {/* <button class="btn btn-custom btn-outline-warning btn-lg btn-block" onClick={handleOpen}> Add Sprint</button> */}
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
@@ -69,27 +97,33 @@ function SimpleModal(props) {
         <div style={modalStyle} className={classes.paper}>
           <h2 id="simple-modal-title">Create sprint</h2>
           <form className={classes.root} noValidate autoComplete="off">
-              <TextField id="standard-basic" label="name sprint" value={namesprint} onChange={handleChange}/>
-              <Button variant="contained" color="primary" onClick={saveSprint} >
-                Save
-              </Button>
-            </form>
+            <TextField
+              id="standard-basic"
+              label="name sprint"
+              value={namesprint}
+              onChange={handleChange}
+            />
+            <Button variant="contained" color="primary" onClick={saveSprint}>
+              Save
+            </Button>
+          </form>
         </div>
       </Modal>
-    </div>
+    </Fragment>
   );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     note: state.note,
-    user : state.auth,
-    listsprint: state.listsprint,
-  }
-}
+    user: state.auth,
+    listsprint: state.listsprint
+  };
+};
 const mapDispatchToProps = dispatch => {
   return {
-    handleSaveName: (name, idproject) => dispatch( actions.handleSaveName(name, idproject) ),
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps) (SimpleModal)
+    handleSaveName: (name, idproject) =>
+      dispatch(actions.handleSaveName(name, idproject))
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SimpleModal);

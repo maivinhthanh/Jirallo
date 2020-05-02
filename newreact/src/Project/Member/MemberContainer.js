@@ -34,10 +34,7 @@ class MemberContainer extends Component {
       return (
         <Grid container >
               <UI listMember={listMember} selectUser={(id, index, status)=>this.selectUser(id, index, status)} />
-              <div class='group-function'>
-              <AddSprint idproject={this.props.idproject}/>
-              {/* <Modalcreate idproject={this.props.idproject}/> */}
-              </div>
+            
               
         </Grid>
       )
