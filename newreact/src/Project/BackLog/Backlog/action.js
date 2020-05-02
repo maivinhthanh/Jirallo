@@ -38,6 +38,26 @@ export const createIssueBacklog = (data) => {
         data
     }
 }
+export const deleteSprintSuccess = data => {
+    return {
+      type: 'DELETE_SPRINT',
+      data
+    }
+  }
+export const deleteSprint = (idSprint, idProject) => {
+    return dispatch => {
+      return CallApi(`sprint/deleteSprint/${idProject}`,
+      'PUT',
+      {idSprint:idSprint},
+      'token'
+      ).then(respone => {
+        console.log(respone)
+        // dispatch(deleteSprintSuccess(respone.data))
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+  }
 export const showInfomationIssue = (id) => {
     return dispatch => {
         return CallApi(`issues/getInfoIssues/${id}`,'GET').then(respone => {

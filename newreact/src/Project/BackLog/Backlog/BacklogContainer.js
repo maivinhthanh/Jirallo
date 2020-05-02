@@ -7,6 +7,7 @@ import * as action from './action'
 import { Grid } from '@material-ui/core'
 import AddSprint from './addSprint'
 import Member from '../../Member/MemberContainer'
+// import HeaderUser from './HeaderUser'
 
 class BacklogContainer extends Component {
   constructor(props){
@@ -38,11 +39,10 @@ class BacklogContainer extends Component {
       const { idproject, listsprint } = this.props
      
       return (
-        <div >
           <Grid container >
-            {/* <Grid item xs={12} >
-              <AddSprint idproject={idproject}/>
-            </Grid> */}
+            <Grid item xs={12} >
+              {/* <HeaderUser/> */}
+            </Grid>
             <Grid item xs={12} >
               <Member idproject={idproject} selectUser={this.selectUser}/>
             </Grid>
@@ -50,7 +50,6 @@ class BacklogContainer extends Component {
               <UI idproject={idproject} listsprint={listsprint} selectuser={this.state.selectuser}/>
             </Grid>
           </Grid>
-        </div>
       )
     
   }

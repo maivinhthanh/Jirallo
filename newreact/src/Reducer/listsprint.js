@@ -60,6 +60,11 @@ const createIssueBacklog = (state, action) => {
     return cloneState
 
 }
+const deleteSprint = (state, action) => {
+    let cloneState = _.cloneDeep(state)
+     console.log(cloneState)
+    return cloneState
+}
 const listsprint = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'SHOW_LIST_SPRINT': return showListSprint( state, action ); 
@@ -68,6 +73,7 @@ const listsprint = ( state = initialState, action ) => {
         case 'ADD_NAME_SPRINT' : return createNameSprint(state, action);
         case 'UPDATE_NAME' : return updateName(state, action);
         case 'CREATE_ISSUE_BACKLOG': return createIssueBacklog(state,action);
+        case 'DELETE_SPRINT': return deleteSprint(state, action)
 
         default: return state;
     }

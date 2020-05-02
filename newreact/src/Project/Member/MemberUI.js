@@ -30,13 +30,21 @@ export default function ImageAvatars({listMember,selectUser}) {
         _.map(listMember, (item,index) =>{
           return(
             <div key={index} onClick={()=>selectUser(item._id, index, item.active)} style={item.active?{backgroundColor:'#6A8DCD'}:{}, { marginTop: '10px'}}>
-              {
+              {/* {
                 _.get(item, ['id', 'image'])
                 ? <Avatar alt={ _.get(item, ['id', 'name'])} src={'/image/'+_.get(item, ['id', 'image'])} 
                     className={classes.large}  />
                 : <Avatar alt={ _.get(item, ['id', 'name'])} 
                     // className={classes.large} >{item.name.charAt(0)}</Avatar>
                     className={classes.large} ></Avatar>
+              } */}
+               {
+                _.get(item, ['id', 'image'])
+                ? <Avatar alt={ _.get(item, ['id', 'name'])} src={'/image/'+_.get(item, ['id', 'image'])} 
+                    className={classes.large}  />
+                : <Avatar alt={ _.get(item, ['id', 'name'])} src="images/logo-login.jpg" />
+                    // className={classes.large} >{item.name.charAt(0)}</Avatar>
+                    // className={classes.large} ></Avatar>
               }
               <p>{ _.get(item, ['id', 'name'])}</p>
             </div>

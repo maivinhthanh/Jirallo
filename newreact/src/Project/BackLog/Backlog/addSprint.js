@@ -45,7 +45,7 @@ function SimpleModal(props) {
   const saveSprint = () => {
     const idproject = props.idproject
     props.handleSaveName(namesprint,idproject)
-    setOpen(false);
+    handleClose()
 
   }
 

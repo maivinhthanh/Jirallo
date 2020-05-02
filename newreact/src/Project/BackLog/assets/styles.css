@@ -1,0 +1,24 @@
+.user-profile {
+    display: flex;
+    float: right;
+    margin-right: 30px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.icon-search {
+    margin-top:10px;
+    margin-right: 10px;
+}
+.wrapper {
+    border-bottom: 1px solid #eff0f6;
+    margin-bottom: 20px;
+}
+.avatar-user {
+    display: flex;
+    margin-left:10px;
+}
+.input-text {
+    border: 1px solid;
+    border-radius: 50px;
+    padding: 5px;
+}

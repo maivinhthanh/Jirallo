@@ -17,11 +17,9 @@ export default function UI({idproject}) {
     const classes = useStyles();
 
     return (
-        <div>
             <Grid container spacing={0}>
               <BacklogContainer idproject={idproject} />
             </Grid>
-        </div>
     )
 
   
