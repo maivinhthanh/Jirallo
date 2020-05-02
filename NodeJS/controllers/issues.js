@@ -425,9 +425,27 @@ exports.filterListIssues = async (req, res, next) => {
     try{
         const idproject = req.params.idproject
         const process = req.body.process
-        if(process === null){
+        const sprint = req.body.sprint
+        console.log(sprint)
+        if(process === null && sprint === null){
             const issues = await Issues.find({
                 idproject: idproject
+            })
+    
+            res.status(200).json({ listissues: issues})
+        }
+        else if(process === null){
+            const issues = await Issues.find({
+                idproject: idproject,
+                idsprint: sprint
+            })
+    
+            res.status(200).json({ listissues: issues})
+        }
+        else if (sprint === null){
+            const issues = await Issues.find({
+                idproject: idproject,
+                process: process
             })
     
             res.status(200).json({ listissues: issues})
@@ -435,7 +453,8 @@ exports.filterListIssues = async (req, res, next) => {
         else{
             const issues = await Issues.find({
                 idproject: idproject,
-                process: process
+                process: process,
+                idsprint: sprint
             })
     
             res.status(200).json({ listissues: issues})

@@ -59,3 +59,34 @@ export const HasAuth = (idproject) => {
         })
     }
 }
+export const showlistsprint = (data) =>{
+    return {
+        type:'SHOW_LIST_SPRINT',
+        data: data
+    }
+}
+
+export const ShowListSprint = (id,iduser = null) => {
+    return dispatch => {
+        return CallApi(`sprint/viewListSprint/${id}`,
+        'POST',
+        {iduser:iduser}
+        ).then (response =>{
+            if(response.status === 201){
+                dispatch(showlistsprint(response.data.listsprint));
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}

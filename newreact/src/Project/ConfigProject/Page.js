@@ -36,7 +36,13 @@ class ConfigPage extends Component {
       }
       else{
         return(
-          <p>project không tồn tại</p>
+          <Grid  >
+            
+                <MenuProject idproject={params.idproject}/>
+                <p>Project không tồn tại</p>
+                <Toast open={note.show} message={note.message} type={note.type} />
+
+          </Grid>
         )
       }
   }

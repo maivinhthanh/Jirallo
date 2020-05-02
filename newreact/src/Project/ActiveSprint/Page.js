@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import { Redirect } from 'react-router-dom'
+import Grid from '@material-ui/core/Grid';
 
 import UI from './UI'
 import MenuProject from '../../Core/Home/Menu/MenuProject'
@@ -33,7 +34,13 @@ class ActiveSprintPage extends Component {
       }
       else{
         return(
-          <p>project không tồn tại</p>
+          <Grid  >
+            
+                <MenuProject idproject={params.idproject}/>
+                <p>Project không tồn tại</p>
+                <Toast open={note.show} message={note.message} type={note.type} />
+
+          </Grid>
         )
       }
     

@@ -39,10 +39,11 @@ export const filterissues = (data) =>{
     }
 }
 
-export const FilterIssues = (idproject, process) =>{
+export const FilterIssues = (idproject, process, sprint) =>{
     return dispatch =>{
         return CallApi(`issues/filterListIssues/${idproject}`,'POST',{
-            process: process
+            process: process,
+            sprint: sprint
         }).then (response =>{
             if(response.status === 200){
                 
