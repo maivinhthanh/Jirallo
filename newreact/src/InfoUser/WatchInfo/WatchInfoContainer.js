@@ -10,6 +10,12 @@ class WatchInfoContainer extends Component {
     const { iduser } = this.props
     this.props.GetInfoUser(iduser)
   }
+  componentDidMount(){
+    if(this.props.infouser.name){
+      document.title = this.props.infouser.name
+
+    }
+  }
   render() {
 
       return (

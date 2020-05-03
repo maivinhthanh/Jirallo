@@ -33,6 +33,7 @@ export const FilterIssues = (idproject, process) =>{
         })
     }
 }
+
 export const addcomment = (data) =>{
     return {
         type:'ADD_COMMENT',
@@ -49,6 +50,37 @@ export const AddComment = (idissues, data) =>{
             if(response.status === 201){
                 
                 dispatch(addcomment(response.data));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data.newcomment))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
+export const editdescriptissues = (data) =>{
+    return {
+        type:'CHANGE_PROCESS_ISSUE',
+        data: data
+    }
+}
+export const EditDescriptIssues = (idissues, data) =>{
+    return dispatch =>{
+        return CallApi(`issues/editDescriptIssues/${idissues}`,'PUT',{
+            descript: data,
+        }).then (response =>{
+            if(response.status === 201){
+                
+                dispatch(editdescriptissues(response.data));
                 
             }
             else {

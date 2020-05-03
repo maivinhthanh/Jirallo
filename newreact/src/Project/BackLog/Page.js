@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import { Redirect } from 'react-router-dom'
+import Grid from '@material-ui/core/Grid';
 
 import UI from './UI'
 import MenuProject from '../../Core/Home/Menu/MenuProject'
@@ -17,9 +17,13 @@ class BackLogPage extends Component {
   shouldComponentUpdate(nextProps){
     return nextProps.authProject.hasAuth != this.props.authProject.hasAuth
   }
+  componentDidMount(){
+    document.title = "Back Log"
+  }
   render() {
       const { match: { params } } = this.props
-      const { note, authProject } = this.props
+      const { note, authProject,project } = this.props
+      console.log(project)
       if(authProject.hasAuth === true){
         return (
           <Grid container spacing={0}>
@@ -37,7 +41,13 @@ class BackLogPage extends Component {
       }
       else{
         return(
-          <p>project không tồn tại</p>
+          <Grid  >
+            
+                <MenuProject idproject={params.idproject}/>
+                <p>Project không tồn tại</p>
+                <Toast open={note.show} message={note.message} type={note.type} />
+
+          </Grid>
         )
       }
       
@@ -48,7 +58,8 @@ class BackLogPage extends Component {
 const mapStateToProps = (state) => {
     return {
       note: state.note,
-      authProject: state.authProject
+      authProject: state.authProject,
+      project: state.project
     }
 }
 

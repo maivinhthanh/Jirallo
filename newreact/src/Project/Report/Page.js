@@ -14,7 +14,9 @@ class ReportPage extends Component {
     this.props.ViewInfoProject(this.props.match.params.id)
     this.props.GetReportInProject(this.props.match.params.id)
   }
-  
+  componentDidMount(){
+    document.title = "Report"
+  }
   render() {
       const { match: { params } } = this.props
       const { note, project, authProject, report} = this.props

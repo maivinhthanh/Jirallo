@@ -17,6 +17,9 @@ class ConfigPage extends Component {
   shouldComponentUpdate(nextProps){
     return nextProps.authProject.hasAuth != this.props.authProject.hasAuth
   }
+  componentDidMount(){
+    document.title = "Setting"
+  }
   render() {
       const { match: { params } } = this.props
       const { note, authProject } = this.props
@@ -33,7 +36,13 @@ class ConfigPage extends Component {
       }
       else{
         return(
-          <p>project không tồn tại</p>
+          <Grid  >
+            
+                <MenuProject idproject={params.idproject}/>
+                <p>Project không tồn tại</p>
+                <Toast open={note.show} message={note.message} type={note.type} />
+
+          </Grid>
         )
       }
   }

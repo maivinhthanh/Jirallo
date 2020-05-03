@@ -10,32 +10,40 @@ import * as action from './action'
 class FilterContainer extends Component {
   componentWillMount(){
     this.props.FilterIssues(this.props.idproject, null)
+
   }
 
-  getSelect = (data) =>{
-    let arr = []
-    _.forEach(data, (value, key)=>{
+  getSelect = (process, sprint) =>{
+    let arrprocess = []
+    let arrsprint = []
+    _.forEach(process, (value, key)=>{
       if(value === true){
-        arr = [...arr, key]
+        arrprocess = [...arrprocess, key]
       }
     })
-    this.props.FilterIssues(this.props.idproject, arr)
+    _.forEach(sprint, (value, key)=>{
+      if(value === true){
+        arrsprint = [...arrsprint, key]
+      }
+    })
+    this.props.FilterIssues(this.props.idproject, arrprocess, arrsprint)
   }
 
-   selectIssues = async (issue) =>{
+  selectIssues = async (issue) =>{
     await this.props.GetComment(issue)
     await this.props.SelectIssues(issue)
 
   }
   
   render() {
-      const { idproject, project, listissues } = this.props
+      const { idproject, project, listissues, listsprint } = this.props
       return (
         <div >
           <Grid container >
             
             <Grid item xs={6}>
-              <Filter idproject={ idproject } project={project} getSelect={this.getSelect}/>
+              <Filter idproject={ idproject } project={project} 
+              listsprint={listsprint} getSelect={this.getSelect}/>
             </Grid>
 
             <Grid item xs={6}>
@@ -53,13 +61,14 @@ class FilterContainer extends Component {
 const mapStateToProps = (state) => {
     return {
       project: state.project,
-      listissues: state.listissues
+      listissues: state.listissues,
+      listsprint: state.listsprint
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-      FilterIssues: (id, process) => dispatch( action.FilterIssues(id, process) ),
+      FilterIssues: (id, process, sprint) => dispatch( action.FilterIssues(id, process, sprint) ),
       SelectIssues:(issue) => dispatch( action.SelectIssues(issue) ),
       GetComment:(idissue) => dispatch( action.GetComment(idissue) ),
     }

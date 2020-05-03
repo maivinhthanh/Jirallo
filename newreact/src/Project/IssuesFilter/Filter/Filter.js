@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function NestedList({project, getSelect}) {
+export default function NestedList({project, getSelect, listsprint}) {
   const classes = useStyles();
   const [openProcess, setOpenprocess] = React.useState(false);
   const [openSprint, setOpensprint] = React.useState(false);
@@ -34,8 +34,17 @@ export default function NestedList({project, getSelect}) {
     let data = _.cloneDeep(process)
     
     data[name] = event.target.checked
-
-    getSelect(data)
+    getSelect(data, sprint)
+  };
+  const handleChangeSprint = name => event => {
+    if(name !== null){
+      setSprint({ ...sprint, [name]: event.target.checked });
+      let data = _.cloneDeep(sprint)
+      
+      data[name] = event.target.checked
+      getSelect(process, data)
+    }
+    
   };
   const handleClick = (name) => {
     if(name === 'process'){
@@ -82,20 +91,20 @@ export default function NestedList({project, getSelect}) {
         
       </Collapse>
       <ListItem button onClick={(name)=>handleClick('sprint')}>
-        <ListItemText primary="Process" />
+        <ListItemText primary="Sprint" />
         {openSprint ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={openSprint} timeout="auto" unmountOnExit>
         {
-          _.map(project.process, (item, index)=>{
+          _.map(listsprint, (item, index)=>{
             return(
               <List component="div" disablePadding key={index}>
                 <ListItem button className={classes.nested}>
                 <FormControlLabel
                   control={
-                    <Checkbox checked={process[item]} onChange={handleChange(item)} value={item} />
+                    <Checkbox checked={sprint[item._id]} onChange={handleChangeSprint(item._id)} value={item._id} />
                   }
-                  label={item}
+                  label={item.name}
                 />
                 </ListItem>
               </List>

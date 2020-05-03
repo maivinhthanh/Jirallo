@@ -12,8 +12,9 @@ import * as actionFilter from './Filter/action'
 
 class IssuesFilterPage extends Component {
   async componentWillMount(){
-    this.props.HasAuth(this.props.match.params.id)
+    this.props.HasAuth(this.props.match.params.idproject)
     this.props.ViewInfoProject(this.props.match.params.idproject)
+    this.props.ShowListSprint(this.props.match.params.idproject)
     if(this.props.match.params.idissues === 'null')
     {
 
@@ -25,6 +26,9 @@ class IssuesFilterPage extends Component {
   }
   shouldComponentUpdate(nextProps){
     return nextProps.authProject.hasAuth != this.props.authProject.hasAuth
+  }
+  componentDidMount(){
+    document.title = "Issues Filter"
   }
   render() {
       const { match: { params } } = this.props
@@ -42,7 +46,13 @@ class IssuesFilterPage extends Component {
       }
       else{
         return(
-          <p>project không tồn tại</p>
+          <Grid  >
+            
+                <MenuProject idproject={params.idproject}/>
+                <p>Project không tồn tại</p>
+                <Toast open={note.show} message={note.message} type={note.type} />
+
+          </Grid>
         )
       }
   }
@@ -61,6 +71,7 @@ const mapDispatchToProps = dispatch => {
       ViewInfoProject: (id) => dispatch( action.ViewInfoProject(id)),
       SelectIssues:(issue) => dispatch( actionFilter.SelectIssues(issue) ),
       GetComment:(idissue) => dispatch( actionFilter.GetComment(idissue) ),
+      ShowListSprint:(idproject) => dispatch( action.ShowListSprint(idproject) ),
     }
 }
 

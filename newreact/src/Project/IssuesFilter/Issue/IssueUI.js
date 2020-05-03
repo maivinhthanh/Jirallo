@@ -4,8 +4,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import { Paper } from '@material-ui/core';
+import { Paper, Button } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import Comment from './CommentContainer'
 
@@ -28,8 +30,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function IssueUI({issue}) {
+export default function IssueUI({issue, EditDescriptIssues}) {
   const classes = useStyles();
+  const [descript, setDescript] = React.useState(false);
+  console.log(issue)
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -52,8 +56,29 @@ export default function IssueUI({issue}) {
                 <Grid container>
                   <Grid item xs={12}>
                     <Paper className={classes.descript}>
-                      <p>{issue.descript}</p>
+                          <CKEditor
+                            editor={ ClassicEditor }
+                            data={issue.descript}
+                            onInit={ editor => {
+                                // You can store the "editor" and use when it is needed.
+                                // console.log( 'Editor is ready to use!', editor );
+                            } }
+                            onChange={ ( event, editor ) => {
+                                const data = editor.getData();
+                                setDescript(data)
+                            } }
+                            onBlur={ ( event, editor ) => {
+                              EditDescriptIssues(descript)
+                            } }
+                            onFocus={ ( event, editor ) => {
+                                // console.log( 'Focus.', editor );
+                            } }
+                          />
+                      
                     </Paper>
+                    {/* <Button variant="contained" color="primary" >
+                        Save
+                      </Button> */}
                   </Grid>
                 </Grid>
                 
