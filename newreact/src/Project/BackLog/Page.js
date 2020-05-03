@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import Grid from '@material-ui/core/Grid';
 
 import UI from './UI'
 import MenuProject from '../../Core/Home/Menu/MenuProject'
@@ -23,7 +22,7 @@ class BackLogPage extends Component {
   render() {
       const { match: { params } } = this.props
       const { note, authProject,project } = this.props
-      console.log(project)
+      console.log(params)
       if(authProject.hasAuth === true){
         return (
           <Grid container spacing={0}>
@@ -43,7 +42,7 @@ class BackLogPage extends Component {
         return(
           <Grid  >
             
-                <MenuProject idproject={params.idproject}/>
+                <MenuProject idproject={params.id}/>
                 <p>Project không tồn tại</p>
                 <Toast open={note.show} message={note.message} type={note.type} />
 

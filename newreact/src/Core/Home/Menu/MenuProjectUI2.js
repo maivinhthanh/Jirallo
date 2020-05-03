@@ -28,7 +28,7 @@ export default function OpenIconSpeedDial({idproject}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [hidden, setHidden] = React.useState(false);
-
+  console.log(idproject)
   const actions = [
     { icon: <Link to={`/backlog/${idproject}`}><Icon className="fas fa-stream" /></Link>, name: 'Backlog' },
     { icon: <Link to={`/active/${idproject}`}><Icon className="fas fa-columns" /></Link>, name: 'Active Sprint' },

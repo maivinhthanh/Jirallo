@@ -11,9 +11,9 @@ class MenuUser extends Component {
         super(props);
         
     }
-
+    
     render() {
-
+        console.log(this.props.idproject)
         return (
             <div className="Main-Menu">
                 <MenuUI />
