@@ -44,8 +44,9 @@ class EditProjectUI extends Component {
     this.setState({ nameproject: e.target.value })
   }
   handleChangeDateCreate(e) {
+    debugger
     this.setState({
-      datecreate: e.target.value
+      datecreate: e
     })
   }
   handleChangeDescript(e) {

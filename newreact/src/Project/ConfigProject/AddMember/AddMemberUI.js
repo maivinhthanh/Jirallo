@@ -69,10 +69,10 @@ class AddMemberUI extends Component {
                       return(
                         <tr>
                           <th scope="row">{index + 1}</th>
-                          <td><img className="img-thumbnail" height="20" width="20" src={item.id.image !== null? 
-                                  Config.API_URL  + "/" + item.id.image : item.id.avatar}></img></td>
-                          <td>{item.id.name}</td>
-                          <td>{item.id.email}</td>
+                          <td><img className="img-thumbnail" height="20" width="20" src={_.get(item, ['id','image']) !== null? 
+                                  Config.API_URL  + "/" + _.get(item, ['id','image']) : 'https://picsum.photos/200/300'}></img></td>
+                         <td>{_.get(item, ['id', 'name'], 'default')}</td>
+                          <td>{_.get(item, ['id', 'email'], 'default')}</td>
                           <td>
                             <button style={{ fontFamily: 'fantasy'}} className="btn btn-primary" onClick={()=>this.addMember(item._id, 'manager')}>
                               Manager
