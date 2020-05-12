@@ -44,6 +44,7 @@ class BacklogContainer extends Component {
   }
   componentWillMount() {
     this.props.ShowListSprint(this.props.idproject, null);
+    this.props.ShowInfoProject(this.props.idproject);
   }
 
   selectUser = id => {
@@ -72,7 +73,7 @@ class BacklogContainer extends Component {
   //   return this.props.selectuser != nextProps.selectuser
   // }
   render() {
-    const { idproject, listsprint } = this.props;
+    const { idproject, listsprint, project } = this.props;
     const { status, open } = this.state
     return (
       <Grid container>
@@ -82,14 +83,14 @@ class BacklogContainer extends Component {
               <h2>
                 Welcome to project
               </h2><br/>
-              <span>Project 01</span>
+              <span>{project.name}</span>
             </div>
             <div className="item-second">
               <h2>
                 Active time 
               </h2>
               <br/>
-              <span>date time</span>
+              <span>{project.datecreate}</span>
             </div>
             <div className="item-third">
               <h2> Status </h2>
@@ -153,7 +154,8 @@ const mapStateToProps = state => {
   return {
     note: state.note,
     // issueinbacklog: state.issueinbacklog,
-    listsprint: state.listsprint
+    listsprint: state.listsprint,
+    project: state.project
   };
 };
 
@@ -161,7 +163,9 @@ const mapDispatchToProps = dispatch => {
   return {
     ShowListSprint: (id, iduser) => dispatch(action.ShowListSprint(id, iduser)),
     ShowListIssueInBackLog: (id, iduser) =>
-      dispatch(action.ShowListIssueInBackLog(id, iduser))
+      dispatch(action.ShowListIssueInBackLog(id, iduser)),
+    ShowInfoProject: (id) => dispatch(action.ViewInfoProject(id))
+
   };
 };
 
