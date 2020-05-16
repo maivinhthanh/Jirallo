@@ -7,6 +7,7 @@ import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField'
 import * as actions from './action'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -62,13 +63,12 @@ function ModalAddMember(props) {
   
     const saveAddMember = async() => {
         await props.findUserLikeEmail(email)
-        console.log(props.auth[0]._id)
-        // let user = {
-        //     _id: props.auth[0]._id,
-        //     position: position
-        // }
-        // await props.AddMemberToProject(props.idProject, user)
-        // handleClose()
+        let user = {
+            _id: _.get(props.listMember, ['0', '_id']),
+            position: position
+        }
+        await props.AddMemberToProject(props.idProject, user)
+        handleClose()
     }
   
     const handleOpen = () => {
@@ -78,6 +78,7 @@ function ModalAddMember(props) {
     const handleClose = () => {
       setOpen(false);
     };
+    
     return (
       <div>
         <span onClick={handleOpen}><i className="fa fa-plus"> Add</i></span>
@@ -112,9 +113,7 @@ function ModalAddMember(props) {
 
   const mapStateToProps = (state) => {
       return {
-          auth : state.auth,
           listMember : state.listMember,
-          infouser: state.infouser
       }
   }
   const mapDispatchToProps = dispatch => {
@@ -125,3 +124,5 @@ function ModalAddMember(props) {
     }
   }
   export default connect(mapStateToProps, mapDispatchToProps) (ModalAddMember)
+
+

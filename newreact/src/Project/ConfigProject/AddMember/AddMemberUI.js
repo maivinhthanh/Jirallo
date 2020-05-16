@@ -6,6 +6,7 @@ import _ from 'lodash'
 import * as action from './action';
 import * as Config from '../../../Config';
 import ModalAddMember from './ModalAddMember';
+import Toast from '../../../Components/Toast'
 
 class AddMemberUI extends Component {
   constructor(props) {
@@ -45,8 +46,7 @@ class AddMemberUI extends Component {
     this.props.AddMemberIntoProject(params, user)
   }
   render() {
-    const { params, auth, listMember, user, listuser } = this.props
-    console.log(listMember)
+    const { params, auth, listMember, user, listuser, note } = this.props
     return (
       <div className="row">
           <div className="col-12">
@@ -114,6 +114,7 @@ class AddMemberUI extends Component {
               }
             </div>
           </div>
+          <Toast open={note.show} message={note.message} type={note.type} />
       </div>
     );
   }
@@ -121,7 +122,8 @@ class AddMemberUI extends Component {
 const mapStateToProps = state => {
   return {
     auth: state.auth,
-    listMember: state.listMember
+    listMember: state.listMember,
+    note: state.note
   }
 }
 const mapDispatchToProps = dispatch => {

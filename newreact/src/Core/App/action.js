@@ -1,7 +1,6 @@
 import Cookies from 'js-cookie'
 
 import CallApi from '../../until/apiCaller';
-
 export const refreshToken = () =>{
     const refreshToken = Cookies.get('refreshtoken')
     return dispatch =>{
@@ -10,7 +9,7 @@ export const refreshToken = () =>{
         'token'
         ).then(response =>{
             if(response.status === 200){
-                Cookies.set('token', response.data.accessToken, { expires: 1 });
+                // Cookies.set('token', response.data.accessToken, { expires: 1 });
             }
             else {
                 dispatch(Notification.Error(response.data))

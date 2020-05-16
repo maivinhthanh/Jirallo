@@ -17,6 +17,7 @@ import UI from '../../../src/Project/Member/MemberUI'
 import SpringModal from '../SpringModal';
 import Avatar from '@material-ui/core/Avatar';
 import ModalAddMember from '../../Project/ConfigProject/AddMember/ModalAddMember';
+import Toast from '../../Components/Toast'
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -146,6 +147,7 @@ export default function ListProjectUI(props) {
                 </CardContent>
 
               </Card>
+              <Toast open={props.note.show} message={props.note.message} type={props.note.type} />
             </Grid>
           )
         })
