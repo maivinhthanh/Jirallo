@@ -89,7 +89,11 @@ export default function ListProjectUI(props) {
                       <div className='row'>
                       <div className='col-md-6'><span>Change user</span></div>
                     <div className='col-md-6' style={{ textAlign: 'right'}}>
-                      <ModalAddMember idProject={item._id}/>
+                      <ModalAddMember 
+                      AddMemberToProject={props.AddMemberToProject}
+                      findUserLikeEmail={props.findUserLikeEmail}
+                      auth={props.auth}
+                      idProject={item._id} />
                     </div>
                       </div>
                     </div>
