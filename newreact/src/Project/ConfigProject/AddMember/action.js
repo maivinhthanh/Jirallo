@@ -53,10 +53,21 @@ export const findUserLikeEmail = data => {
         position: user.position
       },
       'token'
-      ).then(respone => {
-        dispatch(addMemberSuccess(respone.data))
+      ).then(response => {
+        console.log(response)
+        if (response.status === 200){
+          dispatch(addMemberSuccess(response.data))
+        } else {
+          dispatch(Notification.Error(response.data));
+          setTimeout(() => {
+            dispatch(Notification.hideNotification())
+        }, 5000)
+        }
       }).catch(err => {
-        dispatch(projectError(err))
+        dispatch(Notification.Error(err));
+        setTimeout(() => {
+          dispatch(Notification.hideNotification())
+      }, 5000)
       })
     }
   }
@@ -69,7 +80,7 @@ export const findUserLikeEmailAct = (email) => {
       ).then(respone => {
         dispatch(findUserLikeEmail(respone.data.result))
       }).catch(err => {
-        console.log(err)
+        dispatch(projectError(err))
       })
     }
   }

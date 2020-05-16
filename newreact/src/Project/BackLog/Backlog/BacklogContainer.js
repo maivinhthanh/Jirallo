@@ -132,7 +132,7 @@ class BacklogContainer extends Component {
           </div>
         </Grid>
         <Grid item xs={6}>
-        <OpenIconSpeedDial/>
+        <OpenIconSpeedDial idproject={idproject}/>
         </Grid>
           <Grid item xs={6}>
           <Member idproject={idproject} selectUser={this.selectUser} />

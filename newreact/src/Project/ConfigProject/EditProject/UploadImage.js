@@ -46,6 +46,7 @@ class Calendar extends Component {
                 avatar: files[0],
                 validate: true
             })
+            this.props.setAvatar(files[0])
         }
         else {
             this.setState({
@@ -54,7 +55,7 @@ class Calendar extends Component {
             })
         }
         console.log(this.state.avatar)
-        this.props.setAvatar(this.state.avatar)
+        // this.props.setAvatar(this.state.avatar)
 
     }
     // shouldComponentUpdate(nextProps, nextState) {

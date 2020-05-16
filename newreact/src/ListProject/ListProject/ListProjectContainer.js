@@ -14,7 +14,7 @@ class ListProjectContainer extends Component {
 
       return (
         <div >
-          <ListProjectUI listproject={this.props.listproject} />
+          <ListProjectUI note={this.props.note} listproject={this.props.listproject} />
         </div>
       )
     
@@ -25,7 +25,7 @@ const mapStateToProps = (state) => {
     return {
       note: state.note,
       auth: state.auth,
-      listproject: state.listproject
+      listproject: state.listproject,
     }
 }
 

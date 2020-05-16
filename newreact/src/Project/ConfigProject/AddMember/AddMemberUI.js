@@ -6,6 +6,7 @@ import _ from 'lodash'
 import * as action from './action';
 import * as Config from '../../../Config';
 import ModalAddMember from './ModalAddMember';
+import Toast from '../../../Components/Toast'
 
 class AddMemberUI extends Component {
   constructor(props) {
@@ -45,8 +46,7 @@ class AddMemberUI extends Component {
     this.props.AddMemberIntoProject(params, user)
   }
   render() {
-    const { params, auth, listMember, user, listuser } = this.props
-    console.log(listMember)
+    const { params, auth, listMember, user, listuser, note } = this.props
     return (
       <div className="row">
           <div className="col-12">
@@ -69,10 +69,10 @@ class AddMemberUI extends Component {
                       return(
                         <tr>
                           <th scope="row">{index + 1}</th>
-                          <td><img className="img-thumbnail" height="20" width="20" src={item.id.image !== null? 
-                                  Config.API_URL  + "/" + item.id.image : item.id.avatar}></img></td>
-                          <td>{item.id.name}</td>
-                          <td>{item.id.email}</td>
+                          <td><img className="img-thumbnail" height="20" width="20" src={_.get(item, ['id','image']) !== null? 
+                                  Config.API_URL  + "/" + _.get(item, ['id','image']) : 'https://picsum.photos/200/300'}></img></td>
+                         <td>{_.get(item, ['id', 'name'], 'default')}</td>
+                          <td>{_.get(item, ['id', 'email'], 'default')}</td>
                           <td>
                             <button style={{ fontFamily: 'fantasy'}} className="btn btn-primary" onClick={()=>this.addMember(item._id, 'manager')}>
                               Manager
@@ -114,6 +114,7 @@ class AddMemberUI extends Component {
               }
             </div>
           </div>
+          <Toast open={note.show} message={note.message} type={note.type} />
       </div>
     );
   }
@@ -121,7 +122,8 @@ class AddMemberUI extends Component {
 const mapStateToProps = state => {
   return {
     auth: state.auth,
-    listMember: state.listMember
+    listMember: state.listMember,
+    note: state.note
   }
 }
 const mapDispatchToProps = dispatch => {

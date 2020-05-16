@@ -34,12 +34,13 @@ const login = ( state, action ) => {
     Cookies.set('refreshtoken', refreshtoken, { expires: 365 });
     CallApi('auth/getMyInfo', 'GET',{},'token')
     .then( response => {
+        console.log(response)
         localStorage.setItem('user', JSON.stringify(response.data.result));
      } )
      .catch(error => {
         console.log(error)
      } );
-    return updateObject( state, {hasAuth : true} );
+    return updateObject( state, {hasAuth : false} );
 };
 
 const register = (state, action) =>{
@@ -72,7 +73,7 @@ const reducer = ( state = initialState, action ) => {
         case 'Register' : return register(state,action);
         case 'EditUserSuccess' : return EditUserSuccess(state, action);
         case 'LogOut' : return LogOut(state,action)
-        case 'FIND_USER_LIKE_EMAIL': return FindUserAction(state, action)
+        // case 'FIND_USER_LIKE_EMAIL': return FindUserAction(state, action)
         case 'GET_LIST_USER_IN_PROJECT' : return getListUserInProject(state,action)
 
         default: return state;
