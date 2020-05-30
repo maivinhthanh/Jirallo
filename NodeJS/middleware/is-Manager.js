@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
     Project.findById(idproject).then(e=>{
             e.idmembers.map((item, index)=>{
                 
-                if(item.id.toString() === userId && item.position === "manager"){
+                if(item.id.toString() === userId && item.position.toLowerCase() === "manager"){
                     flag = true
                 }
             })
