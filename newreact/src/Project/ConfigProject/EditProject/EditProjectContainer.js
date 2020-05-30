@@ -4,6 +4,8 @@ import _ from 'lodash'
 
 import UI from './EditProjectUI'
 import * as action from '../action'
+import Toast from '../../../Components/Toast'
+
 class EditProjectContainer extends Component {
 
   componentWillMount() {
@@ -11,12 +13,13 @@ class EditProjectContainer extends Component {
     this.props.ViewInfoProject(project._id)
   }
   render() {
-    const { project } = this.props
+    const { project, note } = this.props
     return (
       <div >
         {
           !_.isEmpty(project._id) && <UI id={project._id} project={project} />
         }
+        <Toast open={note.show} message={note.message} type={note.type}/>
       </div>
     )
 
@@ -25,7 +28,8 @@ class EditProjectContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    project: state.project
+    project: state.project,
+    note: state.note
   }
 }
 
