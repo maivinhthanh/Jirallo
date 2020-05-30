@@ -6,19 +6,32 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import DatePicker from '../../Components/DatePicker'
+import _ from 'lodash'
 
 class ChangeInfoUI extends Component {
   constructor(props) {
     super(props);  
     this.state = {
-      firstname: this.props.infouser.firstname,
-      lastname: this.props.infouser.lastname,
-      gender: this.props.infouser.gender,
-      birthdate: this.props.infouser.birthdate,
+      firstname: '' || 'notvalue',
+      lastname: '',
+      gender: '',
+      birthdate: '',
       flag : false,
       clearData: false
     };     
     this.activeId = ''
+  }
+  componentDidUpdate(prevProps) {
+    if (!_.isEqual(prevProps.infouser, this.props.infouser)) {
+      const { infouser } = this.props
+      this.setState({
+        firstname: infouser.firstname,
+        lastname: infouser.lastname,
+        gender: infouser.gender,
+        birthdate: infouser.birthdate,
+      }) 
+    }
+
   }
   componentWillReceiveProps(nextProps) {
     if(this.props != nextProps) {

@@ -7,6 +7,12 @@ export const forwarddata = (data) =>{
         data: data
     }
 }
+export const editSuccess = (data) => {
+    return {
+        type: 'EDIT_SUCCESS',
+        data: data
+    }
+}
 export const viewinfoproject = (data) =>{
     return {
         type:'GET_INFO_PROJECT',
@@ -87,9 +93,23 @@ export const EditProject = (id, project) => {
       },
       'token'
       ).then(respone => {
-        console.log(respone)
+        if (respone.status === 200) {
+            dispatch(editSuccess(respone.data))
+            // dispatch(Notification.CreateSuccess(message))
+            // setTimeout(() => {
+            //     dispatch(Notification.hideNotification)
+            // }, 3000)
+        } else {
+            dispatch(Notification.Error(respone.data))
+            setTimeout(() => {
+                dispatch(Notification.hideNotification)
+            }, 5000)
+        }
       }).catch(err => {
-        console.log(err)
+          dispatch(Notification.ErrorAPI(err))
+          setTimeout(() => {
+              dispatch(Notification.hideNotification)
+          }, 5000)
       })
     }
   }
