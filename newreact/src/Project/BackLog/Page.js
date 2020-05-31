@@ -8,6 +8,7 @@ import Toast from '../../Components/Toast'
 import * as action from './action'
 import MenuHeader from '../../Core/Home/Menu/MenuHeader'
 import Grid from '@material-ui/core/Grid';
+import CallAPI from '../../until/apiCaller'
 
 class BackLogPage extends Component {
   componentWillMount(){
@@ -17,31 +18,29 @@ class BackLogPage extends Component {
     return nextProps.authProject.hasAuth != this.props.authProject.hasAuth
   }
   componentDidMount(){
+    const { match: { params } } = this.props
     document.title = "Back Log"
+    this.props.getInfoProject(params.id)
   }
   render() {
       const { match: { params } } = this.props
       const { note, authProject,project } = this.props
-      console.log(params)
       if(authProject.hasAuth === true){
         return (
-          <Grid container spacing={0}>
           <div className='row'>
             <div className='col-md-1 item-left' style={{ background: 'blue'}}>
             <MenuHeader/>
             </div>
             <div className='col-md-11 item-right'>
-            <UI idproject={params.id}/>
+            <UI idproject={params.id} project={project} />
                 <Toast open={note.show} message={note.message} type={note.type} />
             </div>
            </div>
-           </Grid>
         )
       }
       else{
         return(
           <Grid  >
-            
                 <MenuProject idproject={params.id}/>
                 <p>Project không tồn tại</p>
                 <Toast open={note.show} message={note.message} type={note.type} />
@@ -64,7 +63,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-      HasAuth: (id) =>dispatch(action.HasAuth(id))
+      HasAuth: (id) =>dispatch(action.HasAuth(id)),
+      getInfoProject: (id) => dispatch(action.GetInfoProject(id))
     }
 }
 

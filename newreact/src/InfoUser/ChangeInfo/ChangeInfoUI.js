@@ -12,7 +12,7 @@ class ChangeInfoUI extends Component {
   constructor(props) {
     super(props);  
     this.state = {
-      firstname: '' || 'notvalue',
+      firstname: '',
       lastname: '',
       gender: '',
       birthdate: '',
@@ -49,7 +49,6 @@ class ChangeInfoUI extends Component {
     })
   }
   changedate = (date)=>{
-    console.log(date._d)
     this.setState({
       birthdate : date._d
     })
@@ -62,8 +61,6 @@ class ChangeInfoUI extends Component {
             lastname: this.state.lastname,
             birthdate: Date.parse(this.state.birthdate.toString())
     }
-    console.log(this.state.birthdate)
-    console.log(data)
     this.props.ChangeInfoUser(this.props.iduser,data)
   }
   render() {

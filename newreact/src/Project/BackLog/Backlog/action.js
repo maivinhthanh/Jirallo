@@ -235,6 +235,7 @@ export const viewlistissuesinsprint = (idsprint, data) =>{
 }
 
 export const ViewListIssueInSprint = (idproject, idsprint = null, iduser = null) => {
+    console.log(idproject)
     return dispatch => {
         return CallApi(`sprint/viewListIssuesInSprint/${idproject}`,
         'POST',
@@ -256,7 +257,7 @@ export const ViewListIssueInSprint = (idproject, idsprint = null, iduser = null)
             }
         })
         .catch(error =>{
-            alert('2')
+            // alert('2')
             dispatch(Notification.ErrorAPI(error));
             setTimeout(() => {
                 dispatch(Notification.hideNotification())

@@ -21,6 +21,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import OpenIconSpeedDial1 from "../../../Core/Home/Menu/MenuUI2";
 import OpenIconSpeedDial from "../../../Core/Home/Menu/MenuProjectUI2";
+import { projectError } from "../../ConfigProject/AddMember/action";
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -38,7 +39,7 @@ class BacklogContainer extends Component {
     super(props);
     this.state = {
       selectuser: null,
-      status: 'Done',
+      status: '',
       open: false,
     };
   }
@@ -72,7 +73,7 @@ class BacklogContainer extends Component {
   //   return this.props.selectuser != nextProps.selectuser
   // }
   render() {
-    const { idproject, listsprint } = this.props;
+    const { idproject, listsprint, project } = this.props;
     const { status, open } = this.state
     return (
       <Grid container>
@@ -82,14 +83,14 @@ class BacklogContainer extends Component {
               <h2>
                 Welcome to project
               </h2><br/>
-              <span>Project 01</span>
+              <span>{project.name}</span>
             </div>
             <div className="item-second">
               <h2>
                 Active time 
               </h2>
               <br/>
-              <span>date time</span>
+              <span>{project.datecreate}</span>
             </div>
             <div className="item-third">
               <h2> Status </h2>
@@ -105,12 +106,21 @@ class BacklogContainer extends Component {
                   id: "demo-controlled-open-select"
                 }}
               >
-                <MenuItem value="Done">
+              {
+                _.map(project.process, (item) => {
+                 return (
+                  <MenuItem value={item}>
+                  <em>{item}</em>
+                </MenuItem>
+                 )
+                })
+              }
+                {/* <MenuItem value="Done">
                   <em>Done</em>
                 </MenuItem>
                 <MenuItem value={'In process'}>In process</MenuItem>
                 <MenuItem value={'Done'}>Done</MenuItem>
-                <MenuItem value={'Process'}>Process</MenuItem>
+                <MenuItem value={'Process'}>Process</MenuItem> */}
               </Select>
             </div>
             <div className="item-four">
