@@ -260,7 +260,7 @@ export default function PrimarySearchAppBar(props) {
                       onClick={() => setIdActive(props.sprint._id)}
                     />
                     <StyledBreadcrumb
-                      label="Create Sprint"
+                      label="Create Issue"
                       deleteIcon={<ExpandMoreIcon />}
                       onClick={handleOpen}
                       onDelete={handleClick5}
@@ -286,12 +286,12 @@ export default function PrimarySearchAppBar(props) {
                   label="Create Issue"
                   onClick={createIssue}
                 /> */}
-                <StyledBreadcrumb
+                {/* <StyledBreadcrumb
                   label="Create Sprint"
                   deleteIcon={<ExpandMoreIcon />}
                   onClick={handleOpen}
                   onDelete={handleClick5}
-                />
+                /> */}
               </Fragment>
             )}
           </div>
