@@ -52,7 +52,7 @@ const updateName = (state, action) => {
 const createIssueBacklog = (state, action) => {
     let cloneState = _.clone(state)
     _.map(cloneState, (item) => {
-        if (item._id === null) {
+        if (item._id !== null) {
             item.listissues.push(action.data.newissues)
         }
     })

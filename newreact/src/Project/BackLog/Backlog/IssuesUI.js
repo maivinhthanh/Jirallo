@@ -13,6 +13,8 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import { Grid } from '@material-ui/core'
+
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -80,7 +82,7 @@ function IssueAdd(props) {
                     backgroundColor: fill, width: '100%',
                     height: '100%',
                 }} >
-                    <div
+                    <Grid container
                         ref={drag}
                         style={{
                             opacity: isDragging ? 1 : 1,
@@ -88,8 +90,8 @@ function IssueAdd(props) {
                             cursor: 'move',
                             border: '1px solid #ccaa', height: '40px',
                             padding: '5px'
-                        }} className="row" >
-                        <div className="col-md-10">
+                        }}>
+                        <Grid item xs={10}>
                             <span onClick={() => showInfomation(props.item._id)}>
                                 <span className="mr-2">
                                     {props.item.type === 'bug' ? <i className="fas fa-bug" style={{ color: 'red' }}></i> : <i className="fas fa-tasks" style={{ color: 'green' }}></i>}
@@ -97,18 +99,18 @@ function IssueAdd(props) {
                                 {props.item.name}
 
                             </span>
-                        </div>
-                        <div className="col-md-1" style={{ display: 'flex' }}>
+                        </Grid>
+                        <Grid item xs={1} style={{ display: 'flex' }}>
                             <Link to={`/issues/${props.idproject}/${item._id}`} >
                                 <i className="fas fa-arrow-right"></i>
                             </Link>
-                        </div>
-                        <div className="col-md-1" style={{ display: 'flex' }}>
+                        </Grid>
+                        <Grid item xs={1} style={{ display: 'flex' }}>
                             <span >
                                 <IssueInfoModal idissue={props.item._id} />
                             </span>
-                        </div>
-                    </div>
+                        </Grid>
+                    </Grid>
 
                 </div>
                 {isOver && (

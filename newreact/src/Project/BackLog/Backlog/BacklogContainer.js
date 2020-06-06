@@ -17,10 +17,9 @@ import {
 import { ThemeProvider } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
 import { green } from "@material-ui/core/colors";
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import OpenIconSpeedDial1 from "../../../Core/Home/Menu/MenuUI2";
 import OpenIconSpeedDial from "../../../Core/Home/Menu/MenuProjectUI2";
+import { projectError } from "../../ConfigProject/AddMember/action";
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -38,7 +37,7 @@ class BacklogContainer extends Component {
     super(props);
     this.state = {
       selectuser: null,
-      status: 'Done',
+      status: '',
       open: false,
     };
   }
@@ -65,14 +64,14 @@ class BacklogContainer extends Component {
     if (nextState.selectuser != this.state.selectuser) {
       this.props.ShowListIssueInBackLog(this.props.idproject, null);
       this.props.ShowListSprint(this.props.idproject, null);
-      // this.props.ViewListIssueInSprint(this.props.idproject, this.props.idsprint, this.props.selectuser)
+      this.props.ViewListIssueInSprint(this.props.idproject, this.props.idsprint, this.props.selectuser)
     }
   }
   // shouldComponentUpdate(nextProps, nextState){
   //   return this.props.selectuser != nextProps.selectuser
   // }
   render() {
-    const { idproject, listsprint } = this.props;
+    const { idproject, listsprint, project } = this.props;
     const { status, open } = this.state
     return (
       <Grid container>
@@ -82,19 +81,20 @@ class BacklogContainer extends Component {
               <h2>
                 Welcome to project
               </h2><br/>
-              <span>Project 01</span>
+              <span>{project.name}</span>
             </div>
             <div className="item-second">
               <h2>
                 Active time 
               </h2>
               <br/>
-              <span>date time</span>
+              <span>{project.datecreate}</span>
             </div>
             <div className="item-third">
-              <h2> Status </h2>
+              <h2> Description </h2>
               <br />
-              <Select
+              <span>{project.description}</span>
+              {/* <Select
                 open={open}
                 onClose={this.handleClose}
                 onOpen={this.handleOpen}
@@ -105,13 +105,16 @@ class BacklogContainer extends Component {
                   id: "demo-controlled-open-select"
                 }}
               >
-                <MenuItem value="Done">
-                  <em>Done</em>
+              {
+                _.map(project.process, (item) => {
+                 return (
+                  <MenuItem value={item}>
+                  <em>{item}</em>
                 </MenuItem>
-                <MenuItem value={'In process'}>In process</MenuItem>
-                <MenuItem value={'Done'}>Done</MenuItem>
-                <MenuItem value={'Process'}>Process</MenuItem>
-              </Select>
+                 )
+                })
+              }
+              </Select> */}
             </div>
             <div className="item-four">
               <div className="list-btn">
@@ -153,7 +156,8 @@ const mapStateToProps = state => {
   return {
     note: state.note,
     // issueinbacklog: state.issueinbacklog,
-    listsprint: state.listsprint
+    listsprint: state.listsprint,
+    project: state.project
   };
 };
 
@@ -161,7 +165,8 @@ const mapDispatchToProps = dispatch => {
   return {
     ShowListSprint: (id, iduser) => dispatch(action.ShowListSprint(id, iduser)),
     ShowListIssueInBackLog: (id, iduser) =>
-      dispatch(action.ShowListIssueInBackLog(id, iduser))
+      dispatch(action.ShowListIssueInBackLog(id, iduser)),
+      ViewListIssueInSprint: (idproject, idsprint,selectuser) => dispatch(action.ViewListIssueInSprint(idproject, idsprint,selectuser))
   };
 };
 

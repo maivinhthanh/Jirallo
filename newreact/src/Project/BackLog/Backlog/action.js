@@ -70,9 +70,8 @@ export const showInfomationIssue = (id) => {
         })
     }
 }
-export const createIssue = (issue, idproject) => {
-    console.log(issue)
-    if(issue.idsprint === null){
+export const createIssue = (issue, idproject, isSprint) => {
+    if(!isSprint){
         return dispatch => {
             return CallApi(`issues/createIssues`, 'POST',{
                 name: issue.name,
@@ -171,6 +170,7 @@ export const handleSaveName = (name,id) => {
     }
 }
 export const ShowListIssueInBackLog = (id, iduser = null) =>{
+    debugger
     return dispatch =>{
         return CallApi(`issues/viewListIssuesInBackLog/${id}`,'POST',{
             iduser:iduser
@@ -235,6 +235,7 @@ export const viewlistissuesinsprint = (idsprint, data) =>{
 }
 
 export const ViewListIssueInSprint = (idproject, idsprint = null, iduser = null) => {
+    console.log(idproject)
     return dispatch => {
         return CallApi(`sprint/viewListIssuesInSprint/${idproject}`,
         'POST',
@@ -256,7 +257,7 @@ export const ViewListIssueInSprint = (idproject, idsprint = null, iduser = null)
             }
         })
         .catch(error =>{
-            alert('2')
+            // alert('2')
             dispatch(Notification.ErrorAPI(error));
             setTimeout(() => {
                 dispatch(Notification.hideNotification())

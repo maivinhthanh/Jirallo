@@ -1,0 +1,1 @@
+let __SERVER__ = 'http://localhost:8088'

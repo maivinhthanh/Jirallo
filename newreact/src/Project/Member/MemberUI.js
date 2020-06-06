@@ -46,9 +46,8 @@ export default function ImageAvatars({listMember,selectUser}) {
                     // className={classes.large} >{item.name.charAt(0)}</Avatar>
                     // className={classes.large} ></Avatar>
               }
-              <p>{ _.get(item, ['id', 'name'])}</p>
+              <p> { _.get(item, ['id', 'name']) && _.get(item, ['id', 'name']).split(' ').pop()} </p>
             </div>
-            
             
           )
           

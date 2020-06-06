@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { createMuiTheme, withStyles } from "@material-ui/core/styles";
 import { green, purple } from "@material-ui/core/colors";
 import { ThemeProvider } from "@material-ui/styles";
+import { successModal } from "../../../Components/modalStatus";
 
 const ColorButton = withStyles(theme => ({
   root: {
@@ -67,6 +68,7 @@ function SimpleModal(props) {
     const idproject = props.idproject;
     props.handleSaveName(namesprint, idproject);
     handleClose();
+    successModal('Add sprint success')
   };
 
   const handleOpen = () => {

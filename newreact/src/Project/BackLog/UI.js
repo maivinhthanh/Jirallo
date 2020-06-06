@@ -15,7 +15,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function UI({idproject}) {
     const classes = useStyles();
-
     return (
             <Grid container spacing={0}>
               <BacklogContainer idproject={idproject} />
