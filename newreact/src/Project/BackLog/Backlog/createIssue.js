@@ -9,6 +9,8 @@ import * as action from "../Backlog/action";
 import { connect } from "react-redux";
 import { emphasize, withStyles } from "@material-ui/core/styles";
 import { Paper, Breadcrumbs, Link, Chip, Avatar, InputLabel, NativeSelect, InputBase, FormControl } from "@material-ui/core";
+import _ from 'lodash'
+import { successModal } from "../../../Components/modalStatus";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -116,6 +118,7 @@ function Modalcreate(props) {
     setOpen(false);
   };
   const submitIssue = () => {
+    const { project }  = props
     const issue = {
       name: name,
       process: process,
@@ -123,9 +126,10 @@ function Modalcreate(props) {
       tag: tag,
       priority: priority
     };
-    props.createIssue(issue, props.idproject);
-    props.ShowListIssueInBackLog(props.idproject, null);
+    props.createIssue(issue, _.get(project, '_id'), true);
+    props.ShowListIssueInBackLog(_.get(project, '_id'), null);
     handleClose();
+    successModal()
   };
 
   return (
@@ -249,13 +253,14 @@ function Modalcreate(props) {
 }
 const mapStateToProps = state => {
   return {
-    listsprint: state.listsprint
+    listsprint: state.listsprint,
+    project: state.project
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    createIssue: (issue, idproject) =>
-      dispatch(action.createIssue(issue, idproject)),
+    createIssue: (issue, idproject, isSprint) =>
+      dispatch(action.createIssue(issue, idproject, isSprint)),
     ShowListIssueInBackLog: (idproject, iduser) =>
       dispatch(action.ShowListIssueInBackLog(idproject, iduser))
   };

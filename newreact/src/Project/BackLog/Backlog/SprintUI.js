@@ -168,14 +168,15 @@ export default function PrimarySearchAppBar(props) {
   const handleChangeName = (e) => {
     setValueName(e.target.value)
   }
-  const SaveIssue = () => {
+  const SaveIssue = async() => {
     let issue = {
       name: nameIssue,
       type: optionType,
       priority: optionPriority,
       idsprint: props.sprint._id
     };
-    props.createIssue(issue);
+    await props.createIssue(issue, true);
+    handleClose()
   };
   const handleClick5 = event => {
     event.preventDefault();
@@ -325,19 +326,32 @@ export default function PrimarySearchAppBar(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             <form className={classes.root} noValidate autoComplete="off">
-              <TextField
-                style={{ marginBottom: "20px" }}
+            <Grid container>
+                <Grid item xs={3}>
+                <div style={{ marginTop: '30px'}}>
+                  Name Issue:
+                </div>
+                </Grid>
+                <Grid item xs={9}>
+                <TextField
+                style={{ marginBottom: "20px", width: '100%' }}
                 id="standard-basic"
                 label="name issue"
                 value={nameIssue}
                 onChange={handleChange}
               />
-              <br />
-              <Select
+              </Grid>
+              <Grid item xs={3}>
+                <div style={{ marginTop: '17px'}}>
+                 Type:
+                </div>
+                </Grid>
+                <Grid item xs={9}>
+                <Select
                 native
                 value={optionType}
                 onChange={handleChangeType}
-                style={{ marginBottom: "20px" }}
+                style={{ marginBottom: "20px", width: '100%' }}
                 inputProps={{
                   name: "age",
                   id: "age-native-simple"
@@ -347,12 +361,18 @@ export default function PrimarySearchAppBar(props) {
                 <option value="bug">Bug</option>
                 <option value="task">Task</option>
               </Select>
-              <br />
-              <Select
+              </Grid>
+              <Grid item xs={3}>
+                <div style={{ marginTop: '17px'}}>
+                 Priority:
+                </div>
+                </Grid>
+                <Grid item xs={9}>
+                <Select
                 native
                 value={optionPriority}
                 onChange={handleChangePriority}
-                style={{ marginBottom: "20px" }}
+                style={{ marginBottom: "20px", width: '100%' }}
                 inputProps={{
                   name: "age",
                   id: "age-native-simple"
@@ -365,15 +385,17 @@ export default function PrimarySearchAppBar(props) {
                 <option value="low">Low</option>
                 <option value="lowest">Lowest</option>
               </Select>
-              <br />
-              <Button
-                style={{ marginLeft: "80px" }}
+              </Grid>
+           <div style={{ marginLeft: 'auto'}}>
+           <Button
                 variant="contained"
                 onClick={SaveIssue}
                 color="primary"
               >
                 Save
               </Button>
+           </div>
+              </Grid>
             </form>
           </div>
         </Fade>

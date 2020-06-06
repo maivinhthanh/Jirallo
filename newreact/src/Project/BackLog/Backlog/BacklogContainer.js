@@ -17,8 +17,6 @@ import {
 import { ThemeProvider } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
 import { green } from "@material-ui/core/colors";
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import OpenIconSpeedDial1 from "../../../Core/Home/Menu/MenuUI2";
 import OpenIconSpeedDial from "../../../Core/Home/Menu/MenuProjectUI2";
 import { projectError } from "../../ConfigProject/AddMember/action";
@@ -66,7 +64,7 @@ class BacklogContainer extends Component {
     if (nextState.selectuser != this.state.selectuser) {
       this.props.ShowListIssueInBackLog(this.props.idproject, null);
       this.props.ShowListSprint(this.props.idproject, null);
-      // this.props.ViewListIssueInSprint(this.props.idproject, this.props.idsprint, this.props.selectuser)
+      this.props.ViewListIssueInSprint(this.props.idproject, this.props.idsprint, this.props.selectuser)
     }
   }
   // shouldComponentUpdate(nextProps, nextState){
@@ -93,9 +91,10 @@ class BacklogContainer extends Component {
               <span>{project.datecreate}</span>
             </div>
             <div className="item-third">
-              <h2> Status </h2>
+              <h2> Description </h2>
               <br />
-              <Select
+              <span>{project.description}</span>
+              {/* <Select
                 open={open}
                 onClose={this.handleClose}
                 onOpen={this.handleOpen}
@@ -115,13 +114,7 @@ class BacklogContainer extends Component {
                  )
                 })
               }
-                {/* <MenuItem value="Done">
-                  <em>Done</em>
-                </MenuItem>
-                <MenuItem value={'In process'}>In process</MenuItem>
-                <MenuItem value={'Done'}>Done</MenuItem>
-                <MenuItem value={'Process'}>Process</MenuItem> */}
-              </Select>
+              </Select> */}
             </div>
             <div className="item-four">
               <div className="list-btn">
@@ -163,7 +156,8 @@ const mapStateToProps = state => {
   return {
     note: state.note,
     // issueinbacklog: state.issueinbacklog,
-    listsprint: state.listsprint
+    listsprint: state.listsprint,
+    project: state.project
   };
 };
 
@@ -171,7 +165,8 @@ const mapDispatchToProps = dispatch => {
   return {
     ShowListSprint: (id, iduser) => dispatch(action.ShowListSprint(id, iduser)),
     ShowListIssueInBackLog: (id, iduser) =>
-      dispatch(action.ShowListIssueInBackLog(id, iduser))
+      dispatch(action.ShowListIssueInBackLog(id, iduser)),
+      ViewListIssueInSprint: (idproject, idsprint,selectuser) => dispatch(action.ViewListIssueInSprint(idproject, idsprint,selectuser))
   };
 };
 

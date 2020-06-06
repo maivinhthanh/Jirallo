@@ -70,9 +70,8 @@ export const showInfomationIssue = (id) => {
         })
     }
 }
-export const createIssue = (issue, idproject) => {
-    console.log(issue)
-    if(issue.idsprint === null){
+export const createIssue = (issue, idproject, isSprint) => {
+    if(!isSprint){
         return dispatch => {
             return CallApi(`issues/createIssues`, 'POST',{
                 name: issue.name,
@@ -171,6 +170,7 @@ export const handleSaveName = (name,id) => {
     }
 }
 export const ShowListIssueInBackLog = (id, iduser = null) =>{
+    debugger
     return dispatch =>{
         return CallApi(`issues/viewListIssuesInBackLog/${id}`,'POST',{
             iduser:iduser

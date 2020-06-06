@@ -32,7 +32,7 @@ class BackLogPage extends Component {
             <MenuHeader/>
             </div>
             <div className='col-md-11 item-right'>
-            <UI idproject={params.id} project={project} />
+            <UI idproject={params.id} />
                 <Toast open={note.show} message={note.message} type={note.type} />
             </div>
            </div>

@@ -21,6 +21,7 @@ import ConfigProject from '../../Project/ConfigProject/Page'
 import PrivateRoute from '../../PrivateRoute'
 
 import * as actions from './action';
+import { ToastContainer } from 'react-toastify';
 
 class App extends Component {
   
@@ -49,7 +50,7 @@ class App extends Component {
     console.log(isAuth)
     return (
       <DndProvider backend={HTML5Backend}>
-        <div className="App">
+        <div className="App" id='app_wrapper'>
           {/* <MenuUser/> */}
             <PrivateRoute path="/" isAuth={isAuth} exact component={HomePage} />
             <PrivateRoute path="/user" isAuth={isAuth} component={HomePage} />
@@ -63,6 +64,7 @@ class App extends Component {
             <PrivateRoute path="/issues/:idproject/:idissues" isAuth={isAuth} component={IssuesFilter} />
             <PrivateRoute path="/config/:id?" isAuth={isAuth} component={ConfigProject} />
             {/* <PrivateRoute path="/*" isAuth={isAuth} component={NotPage} /> */}
+            <ToastContainer/>
         </div>
       </DndProvider>
     );

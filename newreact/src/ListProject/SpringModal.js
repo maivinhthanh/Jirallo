@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -7,6 +7,12 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import * as actions from './ListProject/action'
 import { connect } from 'react-redux'
+import { successModal } from '../Components/modalStatus';
+import axios from 'axios'
+import { positions } from '@material-ui/system';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -39,6 +45,8 @@ function TransitionsModal(props) {
 
   const saveName = () => {
     props.handleSave(nameProject)
+    handleClose()
+    successModal()
   }
 
   const handleOpen = () => {
@@ -51,8 +59,9 @@ function TransitionsModal(props) {
 
   return (
     <div>
+     <ToastContainer />
       <button type="button" onClick={handleOpen}>
-      <i class="fas icon_add fa-plus-circle"></i>
+      <i className="fas icon_add fa-plus-circle"></i>
       <div className='text_add'>
       Add project
       </div>

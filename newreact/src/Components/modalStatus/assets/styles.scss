@@ -1,0 +1,60 @@
+/* style.css*/
+
+@keyframes showAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+.global-loading {
+  .loading-section {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    justify-content: center;
+    display: flex;
+    background-color: white;
+  }
+}
+
+.loading-wrapper {
+  position: fixed;
+  bottom: 70px;
+  width: 100%;
+  text-align: center;
+
+  .loading-border {
+    border-radius: 1px;
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .1), 0 2px 15px 0 rgba(0, 0, 0, .05);
+    width: 296px;
+    height: 90px;
+    padding: 5px 0 5px 0;
+    background-color: white;
+    display: inline-block;
+
+    .loading-content {
+      text-align: center;
+      color: #a2a2a6;
+    }
+
+    .spinner-line, .spinner-circle {
+      border-left-color: #a2a2a6;
+      color: #a2a2a6;
+    }
+  }
+}
+
+.loading-show {
+  opacity: 0.5;
+  animation: showAnimation 0.5s linear;
+}
+
+
+

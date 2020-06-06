@@ -34,8 +34,6 @@ class MemberContainer extends Component {
       return (
         <Grid container >
               <UI listMember={listMember} selectUser={(id, index, status)=>this.selectUser(id, index, status)} />
-            
-              
         </Grid>
       )
     

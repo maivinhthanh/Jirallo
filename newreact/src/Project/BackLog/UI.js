@@ -13,12 +13,11 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function UI({idproject, project}) {
+export default function UI({idproject}) {
     const classes = useStyles();
-    console.log(project)
     return (
             <Grid container spacing={0}>
-              <BacklogContainer idproject={idproject} project={project} />
+              <BacklogContainer idproject={idproject} />
             </Grid>
     )
 
