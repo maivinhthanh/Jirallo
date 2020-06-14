@@ -20,7 +20,6 @@ export const refreshToken = () =>{
             
         })
         .catch(err =>{
-           console.log(err)
         })
     }
 }

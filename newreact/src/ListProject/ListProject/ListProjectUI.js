@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom'
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
@@ -12,8 +11,6 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Grid from '@material-ui/core/Grid';
 import _ from 'lodash'
 import '../ListProject/style.css'
-import { textAlign } from '@material-ui/system';
-import UI from '../../../src/Project/Member/MemberUI'
 import SpringModal from '../SpringModal';
 import Avatar from '@material-ui/core/Avatar';
 import ModalAddMember from '../../Project/ConfigProject/AddMember/ModalAddMember';

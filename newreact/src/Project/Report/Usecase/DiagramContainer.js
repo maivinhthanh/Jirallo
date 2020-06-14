@@ -12,7 +12,6 @@ class DiagramContainer extends Component {
     }
     
     AddParagraph = (data, key) => { 
-        console.log(data, key)
         this.props.AddParagraph(data, key)
     }
     PushImageUsecase = (image, name, idusecase)=>{

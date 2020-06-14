@@ -54,7 +54,6 @@ class Calendar extends Component {
                 validate: false
             })
         }
-        console.log(this.state.avatar)
         // this.props.setAvatar(this.state.avatar)
 
     }

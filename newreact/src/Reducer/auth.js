@@ -34,11 +34,9 @@ const login = ( state, action ) => {
     Cookies.set('refreshtoken', refreshtoken, { expires: 365 });
     CallApi('auth/getMyInfo', 'GET',{},'token')
     .then( response => {
-        console.log(response)
         localStorage.setItem('user', JSON.stringify(response.data.result));
      } )
      .catch(error => {
-        console.log(error)
      } );
     return updateObject( state, {hasAuth : false} );
 };
@@ -64,7 +62,6 @@ const getListUserInProject = (state, action) => {
 const FindUserAction = (state, action) => {
     let listAuth = _.clone(state)
     listAuth = _.clone(action.data)
-    console.log(listAuth)
     return listAuth
 }
 const reducer = ( state = initialState, action ) => {

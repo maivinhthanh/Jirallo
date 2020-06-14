@@ -19,12 +19,9 @@ class InputField extends Component {
   }
   
   // shouldComponentUpdate(nextProps){
-  //   console.log(nextProps.sprint)
-  //   console.log(this.props.sprint)
   //   size = nextProps.sprint.size  +"px";
   //   arrow = nextProps.sprint.arrow + "px";
   //   font = nextProps.sprint.font;
-  //   //console.log(this.props.info);
   //   return true;
   // }
 //   componentWillMount(){

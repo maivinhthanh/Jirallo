@@ -175,7 +175,6 @@ const addSetting = (state, action)=>{
     const newState = _.cloneDeep(state)
     newState.setting[action.name] = 
     [...newState.setting[action.name],".........."]
-    console.log(newState)
     return newState
 }
 const addTesting = (state, action)=>{
@@ -187,7 +186,6 @@ const addTesting = (state, action)=>{
         expect: '',
         result: ''
     }]
-    console.log(newState)
     return newState
 }
 const addConclude = (state, action) =>{

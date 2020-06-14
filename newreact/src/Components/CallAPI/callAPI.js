@@ -32,7 +32,6 @@ export function callAPIget (_extendPath) {
     })
     .catch(err => {
       serverOffline(false)
-      console.log('Error: ', err)
     })
 }
 
@@ -53,7 +52,6 @@ export function callSecondaryAPIget (_extendPath) {
     })
     .catch(err => {
       serverOffline(false)
-      console.log('Error: ', err)
     })
 }
 
@@ -86,7 +84,6 @@ export function getFileFromServer (_extendPath, data = '') {
       return URL.createObjectURL(data)
     })
     .catch(err => {
-      console.log('Error: ', err.statusText)
       swal({
         title: 'Error',
         text: err.statusText,
@@ -112,7 +109,6 @@ export function getBlobFromServer (_extendPath, data = '') {
     return response.blob()
   })
   .catch(err => {
-    console.log('Error: ', err.statusText)
     swal({
       title: 'Error',
       text: err.statusText,
@@ -149,7 +145,6 @@ export function getFileFromServerByGet (_extendPath) {
       return URL.createObjectURL(data)
     })
     .catch(err => {
-      console.log('Error: ', err.statusText)
       swal({
         title: 'Error',
         text: err.statusText,
@@ -175,7 +170,6 @@ export function getHtmlFileFromServer (_extendPath) {
     }
   })
   .catch(err => {
-    console.log('Error: ', err.statusText)
     swal({
       title: 'Error',
       text: err.statusText,
@@ -204,7 +198,6 @@ export function callAPIpost (_extendPath, data = '', header = true) {
       return response.json()
     }).catch(err => {
       serverOffline(false)
-      console.log('Error: ', err)
     })
   } else {
     return fetch(url, {
@@ -222,7 +215,6 @@ export function callAPIpost (_extendPath, data = '', header = true) {
       return response.json()
     }).catch(err => {
       serverOffline(false)
-      console.log('Error: ', err)
     })
   }
 }
@@ -247,7 +239,6 @@ export function callAPIput (_extendPath, data, header = true) {
       return response.json()
     }).catch(err => {
       serverOffline(false)
-      console.log('Error: ', err)
     })
   } else {
     return fetch(url, {
@@ -265,7 +256,6 @@ export function callAPIput (_extendPath, data, header = true) {
       return response.json()
     }).catch(err => {
       serverOffline(false)
-      console.log('Error: ', err)
     })
   }
 }
@@ -286,7 +276,6 @@ export const callAPIdelete = (_extendPath) => {
     return response.json()
   }).catch(err => {
     serverOffline(false)
-    console.log('Error: ', err)
   })
 }
 

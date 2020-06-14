@@ -12,12 +12,10 @@ class DescriptionContainer extends Component {
     
     EditDescript = async (content, paragragh) =>{
         let descript = this.props.report.descriptionWebsite
-        console.log(content, paragragh)
         descript[paragragh] = content
         const data = {
             descript: descript
         }
-        console.log(data)
         await this.props.UpdateDescriptWebsite(this.props.report._id, data)
     }
     

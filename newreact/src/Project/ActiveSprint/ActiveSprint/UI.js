@@ -34,7 +34,6 @@ const useStyles = makeStyles(theme => ({
 const initialState = {start: 0}
 // const a = (state, action) =>{
 //   state.start + 1
-//   console.log(state, action)
 // }
 const todoReducer = (state, action) => {
   
@@ -52,7 +51,6 @@ export default function UI({idproject, project, listissues, ChangeProcessIssue})
     const classes = useStyles();
     let numberColumn = project.process.length
     let divineColumn = 12 / Number.parseInt(numberColumn)
-console.log(listissues)
     const [state, dispatch] = React.useReducer(todoReducer, initialState)
 
     if(numberColumn < 4){

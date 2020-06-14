@@ -1,10 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import _ from 'lodash'
-import DivAction from '../../../Components/InputEdit/DivActionUI'
 import ImageUpload from '../../../Components/ImageEditor/ImageUpload'
 import ImageEditor from '../../../Components/ImageEditor/ImageEditor'
-import { Icon } from '@material-ui/core';
 
 const useStyles = makeStyles({
   A4: {

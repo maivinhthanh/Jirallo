@@ -3,12 +3,7 @@ import _ from 'lodash';
 const updateArray = (oldObject, updatedProperties) => {
     return [...oldObject, ...updatedProperties]
 };
-const updateObject = (oldObject, updatedProperties) => {
-    return {
-        ...oldObject,
-        ...updatedProperties
-    };
-};
+
 const initialState = [{
     _id: null,
     idissues: [],
@@ -20,14 +15,12 @@ const initialState = [{
 
 const showListSprint = (state, action) =>{
     let cloneState = _.cloneDeep(state)
-    console.log(updateArray( [cloneState[0]], action.data))
     return updateArray( [cloneState[0]], action.data);
 }
 const viewListIssue = (state, action) =>{
     let cloneState = _.cloneDeep(state)
     const index = cloneState.findIndex(i=>i._id === action.idsprint)
     cloneState[index].listissues = action.data
-    // console.log(cloneState)
     return cloneState
 }
 const showListIssueInBackLog = (state, action) =>{
@@ -56,13 +49,11 @@ const createIssueBacklog = (state, action) => {
             item.listissues.push(action.data.newissues)
         }
     })
-    console.log(cloneState)
     return cloneState
 
 }
 const deleteSprint = (state, action) => {
     let cloneState = _.cloneDeep(state)
-     console.log(cloneState)
     return cloneState
 }
 const listsprint = ( state = initialState, action ) => {

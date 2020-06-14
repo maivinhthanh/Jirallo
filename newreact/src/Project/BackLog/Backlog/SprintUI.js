@@ -192,11 +192,9 @@ export default function PrimarySearchAppBar(props) {
     // props.updateSprint(activeSprint,sprint )
   }
   const setIdActive = (id) => {
-    console.log(id)
     setId(id)
   }
   const handleDeleteSprint = (id) => {
-    console.log(id, props.idproject)
     props.handleDeleteSprint(id, props.idproject)
   }
 

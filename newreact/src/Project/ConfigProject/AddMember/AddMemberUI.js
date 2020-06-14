@@ -5,7 +5,6 @@ import _ from 'lodash'
 
 import * as action from './action';
 import * as Config from '../../../Config';
-import ModalAddMember from './ModalAddMember';
 import Toast from '../../../Components/Toast'
 
 class AddMemberUI extends Component {
@@ -46,7 +45,7 @@ class AddMemberUI extends Component {
     this.props.AddMemberIntoProject(params, user)
   }
   render() {
-    const { params, auth, listMember, user, listuser, note } = this.props
+    const { params, auth, listMember, user, note } = this.props
     return (
       <div className="row">
           <div className="col-12">
@@ -69,7 +68,7 @@ class AddMemberUI extends Component {
                       return(
                         <tr>
                           <th scope="row">{index + 1}</th>
-                          <td><img className="img-thumbnail" height="20" width="20" src={_.get(item, ['id','image']) !== null? 
+                          <td><img className="img-thumbnail"  alt="avatar" height="20" width="20" src={_.get(item, ['id','image']) !== null? 
                                   Config.API_URL  + "/" + _.get(item, ['id','image']) : 'https://picsum.photos/200/300'}></img></td>
                          <td>{_.get(item, ['id', 'name'], 'default')}</td>
                           <td>{_.get(item, ['id', 'email'], 'default')}</td>
@@ -99,11 +98,11 @@ class AddMemberUI extends Component {
                       {
                         !user._id? 
                         (
-                          <img className="avatar-image" src={ Config.API_URL + "/" + user.image} height={40} width={40}/>
+                          <img className="avatar-image" alt="avatar" src={ Config.API_URL + "/" + user.image} height={40} width={40}/>
                         )
                         :
                         (
-                          <img className="avatar-image" src={Config.API_LOCAL + '/' + 'images/user-1.png' } height={40} width={40}/>
+                          <img className="avatar-image" alt="avatar" src={Config.API_LOCAL + '/' + 'images/user-1.png' } height={40} width={40}/>
                         )
                       }
                       

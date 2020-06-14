@@ -20,7 +20,6 @@ const ErrorAPI = (state, action) => {
     } );
 };
 const ErrorToast = (state, action) => {
-    console.log('vào đây')
     return updateObject( state, { 
         show: true,
         message: action.message,

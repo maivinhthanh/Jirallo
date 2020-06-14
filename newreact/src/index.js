@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { persistReducer, persistStore } from 'redux-persist'
 import { createFilter   } from 'redux-persist-transform-filter';
@@ -17,7 +17,6 @@ import Register from './Core/SignUp/RegisterContainer'
 import Login from './Core/Login/LoginContainer'
 import ForgotPassword from './Core/ForgotPassword/ForgotPassword'
 import ChangePassword from './Core/ChangPassword/ChangePassword'
-import Cookies from 'js-cookie'
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 

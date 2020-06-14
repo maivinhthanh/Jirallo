@@ -92,7 +92,6 @@ export default function ImageEditor(props ) {
             setAvatar(null)
         }
         dispatch({type: 'SAVE'})
-        // console.log(this.state.avatar)
         // props.saveImage(avatar, name)
 
     }

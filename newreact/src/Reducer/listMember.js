@@ -29,9 +29,7 @@ const getListUserInProject = (state, action) =>{
     //     let newdata = updateObject(item.id, {active: false})
     //     cloneState = cloneState.push(newdata)
     // })
-    console.log(cloneState)
     cloneState = _.clone(action.data)
-    console.log(cloneState)
    return cloneState
 }
 

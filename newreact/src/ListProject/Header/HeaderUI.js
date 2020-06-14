@@ -5,7 +5,6 @@ import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Grid from '@material-ui/core/Grid';
-import SpringModal from '../SpringModal'
 import _ from 'lodash'
 
 const useStyles = makeStyles(theme => ({
@@ -35,16 +34,7 @@ const useStyles = makeStyles(theme => ({
 export default function HeaderUI(props) {
 
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
     const [projectName, setProject] = React.useState('');
-
-    const handleOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = () => {
-      setOpen(false);
-    };
 
     const handleChange = (e) => {
         setProject(e.target.value)

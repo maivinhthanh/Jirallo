@@ -1,15 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 
 import UI from './UsecaseUI'
 import * as action from './action'
 
 class UsecaseContainer extends Component {
-    constructor(props) {
-        super(props)
-        
-    }
     
     AddParagraph = (data, key) => { 
         this.props.AddParagraph(data, key)

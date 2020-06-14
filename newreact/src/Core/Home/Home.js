@@ -15,8 +15,8 @@ class BannerLeft extends Component {
             <div className="intro-info">
               <h2>We provide<br /><span>solutions</span><br />for your business!</h2>
               <div>
-                <a href="#manual" className="btn-get-started scrollto">Manual</a>
-                <a href="#developer" className="btn-services scrollto">Developer</a>
+                <a href="/#manual" className="btn-get-started scrollto">Manual</a>
+                <a href="/#developer" className="btn-services scrollto">Developer</a>
               </div>
             </div>
 
@@ -38,26 +38,26 @@ class BannerLeft extends Component {
                 <div className="col-lg-6 content order-lg-1 order-2">
 
                   <div className="icon-box wow fadeInUp">
-                    <div className="icon"><img src="/logo-menu.jpg" width="40" height="40"/></div>
-                    <h4 className="title"><a href="">Home page</a></h4>
+                    <div className="icon"><img src="/logo-menu.jpg" alt="anh" width="40" height="40"/></div>
+                    <h4 className="title"><a href="/">Home page</a></h4>
                     <p className="description">Contains user instructions for the user</p>
                   </div>
 
                   <div className="icon-box wow fadeInUp" data-wow-delay="0.2s">
                     <div className="icon"><span className="fas fa-folder" /></div>
-                    <h4 className="title"><a href="">List Project</a></h4>
+                    <h4 className="title"><a href="/">List Project</a></h4>
                     <p className="description">Contains list your project</p>
                   </div>
 
                   <div className="icon-box wow fadeInUp" data-wow-delay="0.4s">
                     <div className="icon"><span className="fas fa-user" /></div>
-                    <h4 className="title"><a href="">User Page</a></h4>
+                    <h4 className="title"><a href="/">User Page</a></h4>
                     <p className="description">Contains your personal information and history</p>
                   </div>
 
                   <div className="icon-box wow fadeInUp" data-wow-delay="0.4s">
                     <div className="icon"><span className="fas fa-sign-out-alt" /></div>
-                    <h4 className="title"><a href="">Log out</a></h4>
+                    <h4 className="title"><a href="/">Log out</a></h4>
                   </div>
                 </div>
 
@@ -132,14 +132,14 @@ class BannerLeft extends Component {
                 <div className="col-md-6 col-lg-5 offset-lg-1 wow bounceInUp" data-wow-duration="1.4s">
                   <div className="box">
                     <div className="icon"><i className="ion-ios-analytics-outline" style={{color: '#ff689b'}}></i></div>
-                    <h4 className="title"><a href="">Lorem Ipsum</a></h4>
+                    <h4 className="title"><a href="/">Lorem Ipsum</a></h4>
                     <p className="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
                   </div>
                 </div>
                 <div className="col-md-6 col-lg-5 wow bounceInUp" data-wow-duration="1.4s">
                   <div className="box">
                     <div className="icon"><i className="ion-ios-bookmarks-outline" style={{color: '#e9bf06'}}></i></div>
-                    <h4 className="title"><a href="">Dolor Sitema</a></h4>
+                    <h4 className="title"><a href="/">Dolor Sitema</a></h4>
                     <p className="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
                   </div>
                 </div>
@@ -147,14 +147,14 @@ class BannerLeft extends Component {
                 <div className="col-md-6 col-lg-5 offset-lg-1 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
                   <div className="box">
                     <div className="icon"><i className="ion-ios-paper-outline" style={{color: '#3fcdc7'}}></i></div>
-                    <h4 className="title"><a href="">Sed ut perspiciatis</a></h4>
+                    <h4 className="title"><a href="/">Sed ut perspiciatis</a></h4>
                     <p className="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
                   </div>
                 </div>
                 <div className="col-md-6 col-lg-5 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
                   <div className="box">
                     <div className="icon"><i className="ion-ios-speedometer-outline" style={{color:'#41cf2e'}}></i></div>
-                    <h4 className="title"><a href="">Magni Dolores</a></h4>
+                    <h4 className="title"><a href="/">Magni Dolores</a></h4>
                     <p className="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
                   </div>
                 </div>
@@ -162,14 +162,14 @@ class BannerLeft extends Component {
                 <div className="col-md-6 col-lg-5 offset-lg-1 wow bounceInUp" data-wow-delay="0.2s" data-wow-duration="1.4s">
                   <div className="box">
                     <div className="icon"><i className="ion-ios-world-outline" style={{color: '#d6ff22'}}></i></div>
-                    <h4 className="title"><a href="">Nemo Enim</a></h4>
+                    <h4 className="title"><a href="/">Nemo Enim</a></h4>
                     <p className="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
                   </div>
                 </div>
                 <div className="col-md-6 col-lg-5 wow bounceInUp" data-wow-delay="0.2s" data-wow-duration="1.4s">
                   <div className="box">
                     <div className="icon"><i className="ion-ios-clock-outline" style={{color: '#4680ff'}}></i></div>
-                    <h4 className="title"><a href="">Eiusmod Tempor</a></h4>
+                    <h4 className="title"><a href="/">Eiusmod Tempor</a></h4>
                     <p className="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
                   </div>
                 </div>
@@ -194,7 +194,7 @@ class BannerLeft extends Component {
                     <div className="card-body">
                       <h5 className="card-title">Corporis dolorem</h5>
                       <p className="card-text">Deleniti optio et nisi dolorem debitis. Aliquam nobis est temporibus sunt ab inventore officiis aut voluptatibus.</p>
-                      <a href="#" className="readmore">Read more </a>
+                      <a href="/#" className="readmore">Read more </a>
                     </div>
                   </div>
                 </div>
@@ -205,7 +205,7 @@ class BannerLeft extends Component {
                     <div className="card-body">
                       <h5 className="card-title">Voluptates dolores</h5>
                       <p className="card-text">Voluptates nihil et quis omnis et eaque omnis sint aut. Ducimus dolorum aspernatur.</p>
-                      <a href="#" className="readmore">Read more </a>
+                      <a href="/#" className="readmore">Read more </a>
                     </div>
                   </div>
                 </div>
@@ -216,7 +216,7 @@ class BannerLeft extends Component {
                     <div className="card-body">
                       <h5 className="card-title">Eum ut aspernatur</h5>
                       <p className="card-text">Autem quod nesciunt eos ea aut amet laboriosam ab. Eos quis porro in non nemo ex. </p>
-                      <a href="#" className="readmore">Read more </a>
+                      <a href="/#" className="readmore">Read more </a>
                     </div>
                   </div>
                 </div>
@@ -292,27 +292,27 @@ class BannerLeft extends Component {
                         <div className="socials-footer d-flex justify-content-center">
                           <ul className="list-inline">
                             <li className="list-inline-item">
-                              <a href="#" className="link-one">
+                              <a href="/#" className="link-one">
                                 <i className="fa fa-facebook" aria-hidden="true"></i>
                               </a>
                             </li>
                             <li className="list-inline-item">
-                              <a href="#" className="link-one">
+                              <a href="/#" className="link-one">
                                 <i className="fa fa-twitter" aria-hidden="true"></i>
                               </a>
                             </li>
                             <li className="list-inline-item">
-                              <a href="#" className="link-one">
+                              <a href="/#" className="link-one">
                                 <i className="fa fa-instagram" aria-hidden="true"></i>
                               </a>
                             </li>
                             <li className="list-inline-item">
-                              <a href="#" className="link-one">
+                              <a href="/#" className="link-one">
                                 <i className="fa fa-pinterest-p" aria-hidden="true"></i>
                               </a>
                             </li>
                             <li className="list-inline-item">
-                              <a href="#" className="link-one">
+                              <a href="/#" className="link-one">
                                 <i className="fa fa-dribbble" aria-hidden="true"></i>
                               </a>
                             </li>
@@ -351,27 +351,27 @@ class BannerLeft extends Component {
                         <div className="socials-footer d-flex justify-content-center">
                           <ul className="list-inline">
                             <li className="list-inline-item">
-                              <a href="#" className="link-one">
+                              <a href="/#" className="link-one">
                                 <i className="fa fa-facebook" aria-hidden="true"></i>
                               </a>
                             </li>
                             <li className="list-inline-item">
-                              <a href="#" className="link-one">
+                              <a href="/#" className="link-one">
                                 <i className="fa fa-twitter" aria-hidden="true"></i>
                               </a>
                             </li>
                             <li className="list-inline-item">
-                              <a href="#" className="link-one">
+                              <a href="/#" className="link-one">
                                 <i className="fa fa-instagram" aria-hidden="true"></i>
                               </a>
                             </li>
                             <li className="list-inline-item">
-                              <a href="#" className="link-one">
+                              <a href="/#" className="link-one">
                                 <i className="fa fa-pinterest-p" aria-hidden="true"></i>
                               </a>
                             </li>
                             <li className="list-inline-item">
-                              <a href="#" className="link-one">
+                              <a href="/#" className="link-one">
                                 <i className="fa fa-dribbble" aria-hidden="true"></i>
                               </a>
                             </li>
@@ -400,9 +400,9 @@ class BannerLeft extends Component {
                 <div className="col-lg-3 col-md-6 footer-links">
                   <h4>Useful Links</h4>
                   <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#manual">Manual</a></li>
-                    <li><a href="#developer">Developer</a></li>
+                    <li><a href="/#">Home</a></li>
+                    <li><a href="/#manual">Manual</a></li>
+                    <li><a href="/#developer">Developer</a></li>
                   </ul>
                 </div>
 
@@ -417,11 +417,11 @@ class BannerLeft extends Component {
                   </p>
 
                   <div className="social-links">
-                    <a href="#" className="twitter"><i className="fa fas-twitter"></i></a>
-                    <a href="#" className="facebook"><i className="fa fas-facebook"></i></a>
-                    <a href="#" className="instagram"><i className="fa fas-instagram"></i></a>
-                    <a href="#" className="google-plus"><i className="fa fas-google-plus"></i></a>
-                    <a href="#" className="linkedin"><i className="fa fas-linkedin"></i></a>
+                    <a href="/#" className="twitter"><i className="fa fas-twitter"></i></a>
+                    <a href="/#" className="facebook"><i className="fa fas-facebook"></i></a>
+                    <a href="/#" className="instagram"><i className="fa fas-instagram"></i></a>
+                    <a href="/#" className="google-plus"><i className="fa fas-google-plus"></i></a>
+                    <a href="/#" className="linkedin"><i className="fa fas-linkedin"></i></a>
                   </div>
 
                 </div>
@@ -435,7 +435,7 @@ class BannerLeft extends Component {
               &copy; Copyright <strong>NewBiz</strong>. All Rights Reserved
             </div>
             <div className="credits">
-              Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+              Designed by <a href="/https://bootstrapmade.com/">BootstrapMade</a>
             </div>
           </div>
         </footer>

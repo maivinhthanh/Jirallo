@@ -298,7 +298,6 @@ exports.addAndSortIssuesInSprint = async (req, res, next) => {
         const list = listissues.filter(item => item !== '')
 
         if(idsprintgive === null || idsprintgive === 'null'){
-            console.log(list)
             await Sprint.findByIdAndUpdate(idsprinttake,
                 {
                     idissues: list  

@@ -40,7 +40,6 @@ export const findUserLikeEmail = data => {
       ).then(respone => {
         dispatch(getListUserInProjectSuccess(respone.data.listuser))
       }).catch(err => {
-        console.log(err)
       })
     }
   }
@@ -54,7 +53,6 @@ export const findUserLikeEmail = data => {
       },
       'token'
       ).then(response => {
-        console.log(response)
         if (response.status === 200){
           dispatch(addMemberSuccess(response.data))
         } else {

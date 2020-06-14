@@ -9,7 +9,6 @@ export const edituser = (data) =>{
 }
 
 export const getinfouser = (data) =>{
-    console.log(data)
     return {
         type:'GET_INFO_USER',
         data: data
@@ -26,7 +25,6 @@ export const ChangeInfoUser = (id, user) =>{
             lastname: user.lastname,
             birthdate: user.birthdate
         }).then (response =>{
-            console.log(response)
             if(response.status === 200){
                 dispatch(edituser(response.data));
                 dispatch(Notification.CreateSuccess({message: 'Sửa thành công'}))
@@ -50,7 +48,6 @@ export const ChangeInfoUser = (id, user) =>{
     }
 }
 export const GetInfoUser = (id) =>{
-    console.log(typeof id)
     return dispatch =>{
         return CallApi(`auth/findUserID/${id}`,
         'GET',

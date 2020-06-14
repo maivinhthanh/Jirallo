@@ -60,7 +60,6 @@ class EditProjectUI extends Component {
     });
   }
   editProject = () => {
-    console.log(this.state.image)
     let data = new FormData()
     data.append('avatar', this.state.image)
     data.append('dateedit', this.state.datecreate)

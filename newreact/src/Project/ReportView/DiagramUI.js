@@ -55,7 +55,7 @@ export default function DiagramUI(props) {
                       _.map(item.image, (image, ind)=>{
                         return(
                           <div key={ind}>
-                            <img src={`http://localhost:8088/${image.address}`} width="500" height="350"/>
+                            <img src={`http://localhost:8088/${image.address}`} alt="anh" width="500" height="350"/>
                             <p>{image.name}</p>
                           </div>
                         )

@@ -51,10 +51,8 @@ export const deleteSprint = (idSprint, idProject) => {
       {idSprint:idSprint},
       'token'
       ).then(respone => {
-        console.log(respone)
         // dispatch(deleteSprintSuccess(respone.data))
       }).catch(err => {
-        console.log(err)
       })
     }
   }
@@ -151,7 +149,6 @@ export const handleSaveName = (name,id) => {
             name: name,
             idproject: id
         }).then(response => {
-            console.log('200',response.data)
             if(response.status === 201){
                 dispatch(addNameSprint(response.data.newsprint));
             }
@@ -235,7 +232,6 @@ export const viewlistissuesinsprint = (idsprint, data) =>{
 }
 
 export const ViewListIssueInSprint = (idproject, idsprint = null, iduser = null) => {
-    console.log(idproject)
     return dispatch => {
         return CallApi(`sprint/viewListIssuesInSprint/${idproject}`,
         'POST',

@@ -48,7 +48,6 @@ function IssueAdd(props) {
             props.handleRemoveIssueIntoSprint(props.item)
         }
     })
-    // console.log(props)
     let item = props.item
     let modal = true
     const fill = props.white ? 'white' : 'white'

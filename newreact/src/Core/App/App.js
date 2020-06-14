@@ -36,8 +36,6 @@ class App extends Component {
     let isAuth = false
     let token
     
-    // console.log(Cookies.get('token')!= undefined )
-    // console.log(Cookies.get('token')!= undefined && Cookies.get('token')!= 'undefined')
     if (!(!Cookies.get('token') && !Cookies.get('refreshtoken')) ){
       if(Cookies.get('token')!= undefined && Cookies.get('token')!= 'undefined'){
         token = {
@@ -47,7 +45,6 @@ class App extends Component {
         isAuth = 1000 * token.refreshtoken.exp > (new Date()).getTime()
       }
     }
-    console.log(isAuth)
     return (
       <DndProvider backend={HTML5Backend}>
         <div className="App" id='app_wrapper'>

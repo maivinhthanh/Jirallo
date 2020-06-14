@@ -5,8 +5,6 @@ import Button from '@material-ui/core/Button';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField'
-import * as actions from './action'
-import { connect } from 'react-redux'
 import _ from 'lodash'
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
@@ -51,7 +49,6 @@ const useStyles = makeStyles(theme => ({
 export default function ModalAddMember(props) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState('')
   const [position, setPosition] = React.useState('')
@@ -66,13 +63,10 @@ export default function ModalAddMember(props) {
 
   const saveAddMember = async () => {
     await props.findUserLikeEmail(email)
-    console.log(props)
-    console.log(_.get(props.auth, ['0', '_id']))
     let user = {
       _id: _.get(props.auth, ['0', '_id']),
       position: position
     }
-    console.log(user)
     await props.AddMemberToProject(props.idProject, user)
     handleClose()
   }

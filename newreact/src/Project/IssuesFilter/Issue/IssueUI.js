@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import { Paper, Button } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -33,7 +33,6 @@ const useStyles = makeStyles(theme => ({
 export default function IssueUI({issue, EditDescriptIssues}) {
   const classes = useStyles();
   const [descript, setDescript] = React.useState(false);
-  console.log(issue)
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -61,7 +60,6 @@ export default function IssueUI({issue, EditDescriptIssues}) {
                             data={issue.descript}
                             onInit={ editor => {
                                 // You can store the "editor" and use when it is needed.
-                                // console.log( 'Editor is ready to use!', editor );
                             } }
                             onChange={ ( event, editor ) => {
                                 const data = editor.getData();
@@ -71,7 +69,6 @@ export default function IssueUI({issue, EditDescriptIssues}) {
                               EditDescriptIssues(descript)
                             } }
                             onFocus={ ( event, editor ) => {
-                                // console.log( 'Focus.', editor );
                             } }
                           />
                       

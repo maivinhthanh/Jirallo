@@ -454,9 +454,7 @@ exports.sendMail = async (req, res, next) => {
         }
         transporter.sendMail(mainOptions, function(err, info){
             if (err) {
-                console.log(err);
             } else {
-                console.log('Message sent: ' +  info.response);
             }
         });
         res.status(200).json({ statusCode: "ok" });
