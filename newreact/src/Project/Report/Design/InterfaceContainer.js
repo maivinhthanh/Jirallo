@@ -1,15 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 
 import UI from './InterfaceUI'
 import * as action from './action'
 
 class InterfaceContainer extends Component {
-    constructor(props) {
-        super(props)
-        
-    }
     
     AddGroup = () => { 
         this.props.AddGroup(this.props.report._id)

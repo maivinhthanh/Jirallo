@@ -37,7 +37,7 @@ class App extends Component {
     let token
     
     if (!(!Cookies.get('token') && !Cookies.get('refreshtoken')) ){
-      if(Cookies.get('token')!= undefined && Cookies.get('token')!= 'undefined'){
+      if(Cookies.get('token')!== undefined && Cookies.get('token')!== 'undefined'){
         token = {
           token : jwtDecode(Cookies.get('token')),
           refreshtoken : jwtDecode(Cookies.get('refreshtoken'))

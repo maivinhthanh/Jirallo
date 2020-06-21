@@ -1,25 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import _ from "lodash";
 
 import UI from "./BacklogUI";
 import * as action from "./action";
 import { Grid } from "@material-ui/core";
 import AddSprint from "./addSprint";
 import Member from "../../Member/MemberContainer";
-import Avatar from "@material-ui/core/Avatar";
 import "../../BackLog/assets/styles.css";
 import {
   createMuiTheme,
-  withStyles,
   makeStyles
 } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
 import { green } from "@material-ui/core/colors";
-import OpenIconSpeedDial1 from "../../../Core/Home/Menu/MenuUI2";
 import OpenIconSpeedDial from "../../../Core/Home/Menu/MenuProjectUI2";
-import { projectError } from "../../ConfigProject/AddMember/action";
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -61,18 +56,17 @@ class BacklogContainer extends Component {
     this.setState({ open: true})
   }
   componentWillUpdate(nextProps, nextState, snapshot) {
-    if (nextState.selectuser != this.state.selectuser) {
+    if (nextState.selectuser !== this.state.selectuser) {
       this.props.ShowListIssueInBackLog(this.props.idproject, null);
       this.props.ShowListSprint(this.props.idproject, null);
       this.props.ViewListIssueInSprint(this.props.idproject, this.props.idsprint, this.props.selectuser)
     }
   }
   // shouldComponentUpdate(nextProps, nextState){
-  //   return this.props.selectuser != nextProps.selectuser
+  //   return this.props.selectuser !== nextProps.selectuser
   // }
   render() {
     const { idproject, listsprint, project } = this.props;
-    const { status, open } = this.state
     return (
       <Grid container>
         <Grid item xs={12}>

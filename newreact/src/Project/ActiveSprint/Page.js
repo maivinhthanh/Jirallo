@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
-import { Redirect } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid';
 
 import UI from './UI'
@@ -14,7 +12,7 @@ class ActiveSprintPage extends Component {
     this.props.HasAuth(this.props.match.params.id)
   }
   shouldComponentUpdate(nextProps){
-    return nextProps.authProject.hasAuth != this.props.authProject.hasAuth
+    return nextProps.authProject.hasAuth !== this.props.authProject.hasAuth
   }
   componentDidMount(){
     document.title = "Active Sprint"

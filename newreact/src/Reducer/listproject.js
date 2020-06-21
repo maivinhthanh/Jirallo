@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 const initialState = []
 const listproject = (state, action) =>{
    return [ ...action.data ]

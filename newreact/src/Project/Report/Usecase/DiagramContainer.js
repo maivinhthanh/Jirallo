@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 
 import UI from './DiagramUI'
 import * as action from './action'
 
 class DiagramContainer extends Component {
-    constructor(props) {
-        super(props)
-        
-    }
-    
+   
     AddParagraph = (data, key) => { 
         this.props.AddParagraph(data, key)
     }

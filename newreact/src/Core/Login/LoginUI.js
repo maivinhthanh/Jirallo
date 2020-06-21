@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import GoogleLogin from 'react-google-login'
-import { Link, Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import FacebookLogin from 'react-facebook-login'
 import Tilt from 'react-tilt'
 

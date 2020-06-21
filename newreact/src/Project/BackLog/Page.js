@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 
 import UI from './UI'
 import MenuProject from '../../Core/Home/Menu/MenuProject'
@@ -8,14 +7,13 @@ import Toast from '../../Components/Toast'
 import * as action from './action'
 import MenuHeader from '../../Core/Home/Menu/MenuHeader'
 import Grid from '@material-ui/core/Grid';
-import CallAPI from '../../until/apiCaller'
 
 class BackLogPage extends Component {
   componentWillMount(){
     this.props.HasAuth(this.props.match.params.id)
   }
   shouldComponentUpdate(nextProps){
-    return nextProps.authProject.hasAuth != this.props.authProject.hasAuth
+    return nextProps.authProject.hasAuth !== this.props.authProject.hasAuth
   }
   componentDidMount(){
     const { match: { params } } = this.props
@@ -24,7 +22,7 @@ class BackLogPage extends Component {
   }
   render() {
       const { match: { params } } = this.props
-      const { note, authProject,project } = this.props
+      const { note, authProject } = this.props
       if(authProject.hasAuth === true){
         return (
           <div className='row'>

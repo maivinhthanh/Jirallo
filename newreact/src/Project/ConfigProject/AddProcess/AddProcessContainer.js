@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 
 import UI from './AddProcessUI'
 import ModalAddProcess from './ModalAddProcess'
-import * as action from './action'
 
 class AddProcessContainer extends Component {
   

@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 
 import UI from './SettingUI'
 import * as action from './action'
 
 class SettingContainer extends Component {
-    constructor(props) {
-        super(props)
-        
-    }
-
+    
     EditLanguage = (text, index)=>{
         let setting = this.props.report.setting
         setting.language[index] = text

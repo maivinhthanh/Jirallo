@@ -1,15 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 
 import UI from './DatabaseUI'
 import * as action from './action'
 
 class DatabaseContainer extends Component {
-    constructor(props) {
-        super(props)
-        
-    }
     
     PushImageDatabase = (image, name)=>{
         

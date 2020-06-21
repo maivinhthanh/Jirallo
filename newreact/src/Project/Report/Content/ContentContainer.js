@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 
 import ContentUI from './ContentUI'
-import * as action from './action'
 
 class ContentContainer extends Component {
   

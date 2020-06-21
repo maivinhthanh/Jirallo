@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import jwtDecode from 'jwt-decode'
@@ -39,7 +38,7 @@ class InfoUserContainer extends Component {
     let isAuth = false
     if (Cookies.get('refreshtoken') ){
         let token = jwtDecode(Cookies.get('refreshtoken'))
-        if(token.data.userId == params.id){
+        if(token.data.userId === params.id){
           isAuth = true
         }
       

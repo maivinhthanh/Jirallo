@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 import Grid from '@material-ui/core/Grid';
-import { Redirect } from 'react-router-dom'
 
 import UI from './UI'
 import MenuProject from '../../Core/Home/Menu/MenuProject'
@@ -15,7 +13,7 @@ class ConfigPage extends Component {
     this.props.ViewInfoProject(this.props.match.params.id)
   }
   shouldComponentUpdate(nextProps){
-    return nextProps.authProject.hasAuth != this.props.authProject.hasAuth
+    return nextProps.authProject.hasAuth !== this.props.authProject.hasAuth
   }
   componentDidMount(){
     document.title = "Setting"

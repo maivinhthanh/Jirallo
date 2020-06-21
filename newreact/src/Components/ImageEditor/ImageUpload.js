@@ -1,31 +1,8 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import _ from 'lodash'
 
 import './AddImage.css';
-// import AddImage from './AddImage'
 import { Icon } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '100%',
-        
-      },
-      
-    },
-    divUpload:{
-        padding: '20%',
-        border: '1px solid black',
-        borderRadius: 5
-    },
-    large: {
-        width: theme.spacing(7),
-        height: theme.spacing(7),
-    },
-
-}));
 const initialState = {isEdit: false}
 
 const todoReducer = (state, action) => {
@@ -40,7 +17,6 @@ const todoReducer = (state, action) => {
   }
 }
 export default function ImageEditor(props ) {
-    const classes = useStyles();
 
     const [state, dispatch] = React.useReducer(todoReducer, initialState)
     const [allFiles, setFile] = React.useState([]);
@@ -114,12 +90,12 @@ export default function ImageEditor(props ) {
             <div className="row">
                 <div className="col-12 hovereffect">
                     {allFiles.map((file, i) => {
-                        return <img key={i} src={file.base64} className="img-fluid" width="500" height="350" />
+                        return <img key={i} alt="a" src={file.base64} className="img-fluid" width="500" height="350" />
                     })}
-                    <img src="" />
+                    <img src="" alt="a"/>
                     <div className='overlay'>
                     {/* <h2>Hover effect 4</h2> */}
-                    <a class="info" onClick={deleteImage}>Remove</a>
+                    <a class="info" href=" " onClick={deleteImage}>Remove</a>
                     {/* <button className="btn btn-danger" onClick={deleteImage}><Icon className="fa fa-minus"></Icon></button> */}
                     </div>
                 </div>

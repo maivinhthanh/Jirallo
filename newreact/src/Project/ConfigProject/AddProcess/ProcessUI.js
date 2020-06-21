@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash'
 import { useDrag } from 'react-dnd'
 import { useDrop } from 'react-dnd'
 
@@ -11,7 +10,6 @@ export default function IssueAdd(props) {
         }),
     })
     let item = props.item
-    let modal = true
     const fill = props.white ? 'white' : 'white'
     const [{ isOver }, drop] = useDrop({
         accept: 'process',

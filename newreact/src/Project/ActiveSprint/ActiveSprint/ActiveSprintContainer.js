@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 
 import UI from './UI'
 import * as action from './action'
@@ -24,7 +23,7 @@ class ActiveSprintContainer extends Component {
     })
   }
   componentWillUpdate(nextProps, nextState, snapshot) {
-    if (nextState.selectuser != this.state.selectuser) {
+    if (nextState.selectuser !== this.state.selectuser) {
       this.props.GetIssuesInSprintActive(this.props.idproject, this.state.selectuser)
     }
   }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
@@ -21,7 +20,7 @@ class WatchInfoUI extends Component {
     this.activeId = ''
   }
   componentWillReceiveProps(nextProps) {
-    if(this.props != nextProps) {
+    if(this.props !== nextProps) {
       this.setState({
         firstname: nextProps.infouser.firstname,
         lastname: nextProps.infouser.lastname,
@@ -32,7 +31,6 @@ class WatchInfoUI extends Component {
   }
   
   render() {
-      const { iduser } = this.props
 
       return (
         <div >

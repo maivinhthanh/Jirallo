@@ -1,10 +1,7 @@
-import React, { Component, Fragment } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import { connect } from "react-redux"
 import UploadImage from './UploadImage'
 
@@ -103,7 +100,7 @@ class EditProjectUI extends Component {
                               <Radio
                                 name={'checked'}
                                 value={child._id}
-                                checked={checked == child._id}
+                                checked={checked === child._id}
                                 onChange={this.handleChange}
                                 inputProps={{ 'aria-label': 'primary checkbox' }}
                               />

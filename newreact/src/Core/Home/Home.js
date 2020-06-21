@@ -272,7 +272,7 @@ class BannerLeft extends Component {
                       <div className="card-header-d">
                         <div className="card-title-d align-self-center">
                           <h3 className="title-d">
-                            <a className="link-two">MAI VĨNH THÀNH
+                            <a className="link-two" href="/#">MAI VĨNH THÀNH
                               </a>
                           </h3>
                         </div>
@@ -331,7 +331,7 @@ class BannerLeft extends Component {
                       <div className="card-header-d">
                         <div className="card-title-d align-self-center">
                           <h3 >
-                            <a className="link-two">HUỲNH THỊ TUYẾT NHI
+                            <a className="link-two" href="/#">HUỲNH THỊ TUYẾT NHI
                               <br /> Ran</a>
                           </h3>
                         </div>

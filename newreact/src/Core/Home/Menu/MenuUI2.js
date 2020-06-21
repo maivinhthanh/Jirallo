@@ -12,7 +12,7 @@ import jwtDecode from 'jwt-decode'
 import Cookies from 'js-cookie'
 let userId = null
 if (!(!Cookies.get('token') && !Cookies.get('refreshtoken')) ){
-  if(Cookies.get('token')!= undefined && Cookies.get('token')!= 'undefined'){
+  if(Cookies.get('token')!== undefined && Cookies.get('token')!== 'undefined'){
     userId = jwtDecode(Cookies.get('refreshtoken')).data.userId
   }
 }

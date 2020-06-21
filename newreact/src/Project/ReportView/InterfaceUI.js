@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import _ from 'lodash'
 
@@ -60,7 +60,7 @@ export default function InterfaceUI(props) {
                             _.map(ui.image, (image, ind)=>{
                               return(
                                 <div key={ind}>
-                                  <img src={`http://localhost:8088/${image.address}`} width="500" height="350"/>
+                                  <img src={`http://localhost:8088/${image.address}`} alt="a" width="500" height="350"/>
                                   <p>{image.name}</p>
                                 </div>
                                 

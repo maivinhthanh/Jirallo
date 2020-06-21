@@ -16,16 +16,16 @@ class IssuesContainer extends Component {
     this.props.ViewListIssueInSprint(this.props.idproject, this.props.idsprint, null)
   }
   // shouldComponentUpdate(nextProps, nextState){
-  //   return this.props.selectuser != nextProps.selectuser 
+  //   return this.props.selectuser !== nextProps.selectuser 
   // }
   componentWillUpdate(nextProps, nextState, snapshot) {
-    if (nextProps.selectuser != this.props.selectuser) {
+    if (nextProps.selectuser !== this.props.selectuser) {
       this.props.ViewListIssueInSprint(this.props.idproject, this.props.idsprint, nextProps.selectuser)        
     }
   }
   IssueToSprint  = async (itemDrag, itemDrop) =>{
-    const { idproject, listissues } = this.props
-    let vtx, vty;
+    const { listissues } = this.props
+    let vtx;
     let listIssueId = []
 
     const haveInList = listissues.findIndex(i => i._id === itemDrop.issue._id)

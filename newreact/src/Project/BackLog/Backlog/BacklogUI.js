@@ -1,22 +1,10 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import _ from 'lodash';
 
 import Sprint from './Sprint'
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: 200,
-    },
-  },
-}));
-
-
 export default function UI({idproject, listsprint, selectuser}) {
-    const classes = useStyles();
 
     return (
         <div >

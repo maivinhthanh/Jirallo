@@ -1,6 +1,5 @@
 
 import React, { Component } from "react"
-import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css';
 
 class Calendar extends Component {
@@ -81,9 +80,9 @@ class Calendar extends Component {
                 <div className="row">
                     <div className="col-12">
                         {this.state.allFiles.map((file, i) => {
-                            return <img key={i} src={file.base64} class="avatar-image" width="100" height="100" />
+                            return <img key={i} alt="a" src={file.base64} class="avatar-image" width="100" height="100" />
                         })}
-                        <img src="" />
+                        <img src="" alt="a"/>
                     </div>
                 </div>
 

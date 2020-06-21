@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Link, Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import Tilt from 'react-tilt'
-import _ from 'lodash'
 
 import * as actions from './action';
 

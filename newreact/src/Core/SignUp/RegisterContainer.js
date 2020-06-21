@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react'
-import _ from 'lodash'
 
 import * as actions from './action';
 import Register from './RegisterUI'

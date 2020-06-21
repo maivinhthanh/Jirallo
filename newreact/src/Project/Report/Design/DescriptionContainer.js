@@ -1,14 +1,10 @@
-import React, { Component, createRef } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 
 import UI from './DescriptionUI'
 import * as action from './action'
 
 class DescriptionContainer extends Component {
-    constructor(props) {
-        super(props)    
-    }
     
     EditDescript = async (content, paragragh) =>{
         let descript = this.props.report.descriptionWebsite

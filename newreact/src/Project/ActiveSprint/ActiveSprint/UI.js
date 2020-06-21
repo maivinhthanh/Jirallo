@@ -47,7 +47,7 @@ const todoReducer = (state, action) => {
   }
 }
 
-export default function UI({idproject, project, listissues, ChangeProcessIssue}) {
+export default function UI({ project, listissues, ChangeProcessIssue}) {
     const classes = useStyles();
     let numberColumn = project.process.length
     let divineColumn = 12 / Number.parseInt(numberColumn)

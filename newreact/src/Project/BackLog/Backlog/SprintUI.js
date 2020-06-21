@@ -15,13 +15,9 @@ import Fade from "@material-ui/core/Fade";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Select from "@material-ui/core/Select";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
 
-import { Paper, Breadcrumbs, Link, Chip, Avatar } from "@material-ui/core";
-import NavigateNextIcon from "@material-ui/icons/NavigateNext";
+import { Paper, Breadcrumbs, Chip, Avatar } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
-import WhatshotIcon from "@material-ui/icons/Whatshot";
-import GrainIcon from "@material-ui/icons/Grain";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { emphasize, withStyles } from "@material-ui/core/styles";
 import CreateIssue from "./createIssue";
@@ -119,7 +115,6 @@ const StyledBreadcrumb = withStyles(theme => ({
 
 export default function PrimarySearchAppBar(props) {
   const [open, setOpen] = React.useState(false);
-  const [openedit, setOpenEdit] = React.useState(false);
   const classes = useStyles();
   const [nameIssue, setName] = React.useState("");
   const [optionType, setType] = React.useState("");
@@ -141,15 +136,11 @@ export default function PrimarySearchAppBar(props) {
   const handleOpen = () => {
     setOpen(true);
   };
-  const handleOpenEdit = () => {
-    setOpenEdit(true);
-  };
+
   const handleClose = () => {
     setOpen(false);
   };
-  const handleCloseEdit = () => {
-    setOpenEdit(false);
-  };
+
   const handleChange = e => {
     setName(e.target.value);
   };
@@ -183,12 +174,12 @@ export default function PrimarySearchAppBar(props) {
     alert("You clicked a breadcrumb.");
   };
   const handleSubmit = () => {
-    let sprint = 
-      {
-        name: valueName,
-        timebegin: selectedDate,
-        deadline: selectedDeadline
-      }
+    // let sprint = 
+    //   {
+    //     name: valueName,
+    //     timebegin: selectedDate,
+    //     deadline: selectedDeadline
+    //   }
     // props.updateSprint(activeSprint,sprint )
   }
   const setIdActive = (id) => {

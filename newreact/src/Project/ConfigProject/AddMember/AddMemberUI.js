@@ -45,7 +45,7 @@ class AddMemberUI extends Component {
     this.props.AddMemberIntoProject(params, user)
   }
   render() {
-    const { params, auth, listMember, user, note } = this.props
+    const { auth, listMember, note } = this.props
     return (
       <div className="row">
           <div className="col-12">
@@ -102,7 +102,7 @@ class AddMemberUI extends Component {
                         )
                         :
                         (
-                          <img className="avatar-image" alt="avatar" src={Config.API_LOCAL + '/' + 'images/user-1.png' } height={40} width={40}/>
+                          <img className="avatar-image" alt="avatar" src={Config.API_LOCAL + "/" + "images/user-1.png" } height={40} width={40}/>
                         )
                       }
                       

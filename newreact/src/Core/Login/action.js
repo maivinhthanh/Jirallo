@@ -1,6 +1,5 @@
 import CallApi from '../../until/apiCaller';
 import * as Notification from '../../until/Notification';
-import Cookies from 'js-cookie'
 
 export const login = ( data ) => {
     return {

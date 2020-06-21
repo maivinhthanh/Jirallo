@@ -1,10 +1,5 @@
 import _ from 'lodash'
-const updateObject = (oldObject, updatedProperties) => {
-    return {
-        ...oldObject,
-        ...updatedProperties
-    };
-};
+
 
 const initialState = []
 

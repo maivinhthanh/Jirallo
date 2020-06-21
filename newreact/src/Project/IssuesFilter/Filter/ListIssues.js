@@ -27,7 +27,7 @@ export default function SelectedListItem({idproject, listissues, selectIssues}) 
     <div className={classes.root}>
       <List component="nav" aria-label="main mailbox folders">
         {
-          listissues.length != 0 ?
+          listissues.length !== 0 ?
           _.map(listissues, (item, index) =>{
             return (
               <Link to={`/issues/${idproject}/${item._id}`} key={index}>

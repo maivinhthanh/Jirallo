@@ -1,6 +1,5 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import _ from 'lodash'
 
 import './AddImage.css';
 // import AddImage from './AddImage'
@@ -136,7 +135,7 @@ export default function ImageEditor(props ) {
             <div onMouseEnter={handleHover} onMouseLeave={handleHoverFalse} 
                 className={isHover ? classes.divParentHover : classes.divParent}>
                     <div class="upload-btn-wrapper">
-                        <img src={`http://localhost:8088/${props.image.address}`} width="500" height="350"/>
+                        <img src={`http://localhost:8088/${props.image.address}`} alt="a" width="500" height="350"/>
                         <p>{props.image.name}</p>
                     </div>   
                     {
@@ -157,7 +156,7 @@ export default function ImageEditor(props ) {
             <div onMouseEnter={handleHover} onMouseLeave={handleHoverFalse} 
             className={isHover ? classes.divParentHover : classes.divParent}>
                 <div class="upload-btn-wrapper">
-                    <img src={`http://localhost:8088/${props.image.address}`} width="500" height="350"/>
+                    <img src={`http://localhost:8088/${props.image.address}`} alt="a" width="500" height="350"/>
                     <TextField value={name} onChange={handleName} label="Name Image" />
                 </div>   
                 {
@@ -210,9 +209,9 @@ export default function ImageEditor(props ) {
             className={isHover ? classes.divParentHover : classes.divParent}>
                 <div class="upload-btn-wrapper">
                     {allFiles.map((file, i) => {
-                        return <img key={i} src={file.base64} className="img-fluid" width="500" height="350" />
+                        return <img key={i} src={file.base64} alt="a" className="img-fluid" width="500" height="350" />
                     })}
-                    <img src="" />
+                    <img src="" alt="a"/>
                     <TextField value={name} onChange={handleName} label="Name Image" />
                 </div>   
                 {

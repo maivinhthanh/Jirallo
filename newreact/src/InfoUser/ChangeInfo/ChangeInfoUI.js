@@ -34,7 +34,7 @@ class ChangeInfoUI extends Component {
 
   }
   componentWillReceiveProps(nextProps) {
-    if(this.props != nextProps) {
+    if(this.props !== nextProps) {
       this.setState({
         firstname: nextProps.infouser.firstname,
         lastname: nextProps.infouser.lastname,
@@ -64,8 +64,6 @@ class ChangeInfoUI extends Component {
     this.props.ChangeInfoUser(this.props.iduser,data)
   }
   render() {
-      const { iduser } = this.props
-
       return (
        <div > 
           <Grid container direction="row" spacing={3} justify="center" alignItems="center">

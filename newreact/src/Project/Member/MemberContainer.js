@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 import Grid from '@material-ui/core/Grid';
 
 import UI from './MemberUI'
 import * as action from './action'
-import AddSprint from '../BackLog/Backlog/addSprint';
-import Modalcreate from '../BackLog/Backlog/createIssue';
 import '../Member/style.css'
 
 

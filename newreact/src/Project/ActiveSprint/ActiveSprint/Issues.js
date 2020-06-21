@@ -40,13 +40,13 @@ export default function Issues({ info }) {
                   </Grid>
                   <Grid item xs={4}>
                   {
-                      info.priority == 'highest'  
+                      info.priority === 'highest'  
                         ?<Icon className="fas fa-arrow-up" color="secondary"></Icon>: 
-                      info.priority == 'high'
+                      info.priority === 'high'
                         ?<Icon className="fas fa-up" color="primary"></Icon>:
-                      info.priority == 'medium'
+                      info.priority === 'medium'
                         ?<Icon className="fas fa-minus" color="primary"></Icon>:
-                      info.priority == 'low'
+                      info.priority === 'low'
                         ?<Icon className="fas fa-arrow-down" color="primary"></Icon>:
                         <Icon className="fas fa-arrow-down" color="secondary"></Icon>
                     }

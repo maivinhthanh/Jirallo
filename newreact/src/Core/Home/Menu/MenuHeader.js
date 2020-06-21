@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
@@ -12,7 +11,7 @@ import jwtDecode from 'jwt-decode'
 import Cookies from 'js-cookie'
 let userId = null
 if (!(!Cookies.get('token') && !Cookies.get('refreshtoken')) ){
-  if(Cookies.get('token')!= undefined && Cookies.get('token')!= 'undefined'){
+  if(Cookies.get('token')!== undefined && Cookies.get('token')!== 'undefined'){
     userId = jwtDecode(Cookies.get('refreshtoken')).data.userId
   }
 }

@@ -1,6 +1,5 @@
 import React from 'react'
 import { useDrop } from 'react-dnd'
-import _ from 'lodash'
 
 export default function Process({ black, process, children, handleChange }) {
   let item = children

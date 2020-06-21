@@ -1,15 +1,10 @@
-import React, { Component, createRef } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 
 import UI from './TheoryUI'
 import * as action from './action'
 
 class TheoryContainer extends Component {
-    constructor(props) {
-        super(props)
-        
-    }
     
     EditContent = async (text, paragragh, key) =>{
         let content = this.props.report.theory[key].content
