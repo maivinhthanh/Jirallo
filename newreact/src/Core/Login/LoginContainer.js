@@ -32,15 +32,20 @@ class LoginContainer extends Component {
   }
   
   render() {
-    const { note } = this.props
-    return (
+    const { note, user,
+      location: { state } } = this.props
+      console.log(user )
+    return user.idtoken ? (
+      <Redirect to={state ? state.from : "/"} />
+    ) : (
+
       <div>
         <Login login={this.props.login}
             loginbyfacebook = {this.props.loginbyfacebook} loginbygoogle = {this.props.loginbygoogle}
         />
         <Toast open={note.show} message={note.message} type={note.type} />
         
-        {this.haveRedirect()}
+        {/* {this.haveRedirect()} */}
       </div>
     )
   }

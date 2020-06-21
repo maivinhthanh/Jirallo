@@ -21,8 +21,8 @@ const initialState = {
     },
     image: null,
     birthdate: null,
-    hasAuth: false
-    
+    hasAuth: false,
+    idtoken: null
 };
 
 const login = ( state, action ) => {
@@ -38,7 +38,7 @@ const login = ( state, action ) => {
      } )
      .catch(error => {
      } );
-    return updateObject( state, {hasAuth : false} );
+    return updateObject( state, {hasAuth : true, idtoken: token} );
 };
 
 const register = (state, action) =>{
