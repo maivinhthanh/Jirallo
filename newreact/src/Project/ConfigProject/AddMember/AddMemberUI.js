@@ -69,8 +69,8 @@ class AddMemberUI extends Component {
                       return(
                         <tr>
                           <th scope="row">{index + 1}</th>
-                          <td><img className="img-thumbnail" height="20" width="20" src={_.get(item, ['id','image']) !== null? 
-                                  Config.API_URL  + "/" + _.get(item, ['id','image']) : 'https://picsum.photos/200/300'}></img></td>
+                          <td><img className="img-thumbnail" height="80" width="40" src={_.get(item, ['id','image']) !== null? 
+                                  Config.API_URL  + "/" + _.get(item, ['id','image']) : Config.API_LOCAL + '/' + 'images/user-1.png'}></img></td>
                          <td>{_.get(item, ['id', 'name'], 'default')}</td>
                           <td>{_.get(item, ['id', 'email'], 'default')}</td>
                           <td>
@@ -80,7 +80,7 @@ class AddMemberUI extends Component {
                             <button style={{ marginLeft: '20px', fontFamily: 'fantasy'}} className="btn btn-primary" onClick={()=>this.addMember(item._id, 'developer')}>
                               Developer
                             </button>
-                            <button style={{ marginLeft: '20px', fontFamily: 'fantasy'}} className="btn btn-primary" onClick={()=>this.addMember(item._id, 'teacger')}>
+                            <button style={{ marginLeft: '20px', fontFamily: 'fantasy'}} className="btn btn-primary" onClick={()=>this.addMember(item._id, 'teacher')}>
                               Teacher
                             </button>
                           </td>

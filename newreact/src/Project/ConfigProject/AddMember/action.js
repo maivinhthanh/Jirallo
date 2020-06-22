@@ -57,6 +57,11 @@ export const findUserLikeEmail = data => {
         console.log(response)
         if (response.status === 200){
           dispatch(addMemberSuccess(response.data))
+          dispatch(Notification.CreateSuccess(response.data));
+          setTimeout(() => {
+            dispatch(Notification.CreateSuccess(response.data))
+        }, 5000)
+          
         } else {
           dispatch(Notification.Error(response.data));
           setTimeout(() => {
