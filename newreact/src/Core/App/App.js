@@ -49,7 +49,7 @@ class App extends Component {
       <DndProvider backend={HTML5Backend}>
         <div className="App" id='app_wrapper'>
           {/* <MenuUser/> */}
-            <PrivateRoute path="/" isAuth={isAuth} exact component={HomePage} />
+            <PrivateRoute path="/" isAuth={true} exact component={HomePage} />
             <PrivateRoute path="/user" isAuth={isAuth} component={HomePage} />
             <PrivateRoute path="/backlog/:id?" isAuth={isAuth} component={Backlog} />
             <PrivateRoute path="/report/:id?" isAuth={isAuth} component={Report} />
