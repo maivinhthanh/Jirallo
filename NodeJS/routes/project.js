@@ -55,4 +55,7 @@ router.get('/hasAuth/:idproject',isAuth,
 router.post('/getIssuesInSprintActive/:idproject',isAuth, hasAuthInProject,
     projectController.getIssuesInSprintActive,
 )
+router.put('/deleteProcess/:idproject',isAuth, hasAuthInProject,
+    projectController.deleteProcess,
+)
 module.exports = router

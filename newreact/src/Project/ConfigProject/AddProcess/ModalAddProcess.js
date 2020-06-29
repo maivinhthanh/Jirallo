@@ -7,6 +7,7 @@ import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField'
 import * as actions from './action'
 import { connect } from 'react-redux'
+import Toast from '../../../Components/Toast'
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -36,7 +37,7 @@ function SimpleModal(props) {
   }
 
   const saveName = () => {
-    let newlist = [...props.project.process, nameProcess ]
+    let newlist = [...props.project.process, nameProcess.toLowerCase() ]
     props.AddProcess(props.idproject, newlist)
   }
 
@@ -77,10 +78,15 @@ function SimpleModal(props) {
           </div>
         </Fade>
       </Modal>
+      <Toast open={props.note.show} message={props.note.message} type={props.note.type} />
     </div>
   );
 }
-
+const mapStateToProps = state => {
+  return {
+    note: state.note
+  }
+}
 const mapDispatchToProps = dispatch => {
   return {
     AddProcess: (id, process) => dispatch( actions.AddProcess(id, process) ),
@@ -88,4 +94,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps) (SimpleModal)
+export default connect(mapStateToProps, mapDispatchToProps) (SimpleModal)

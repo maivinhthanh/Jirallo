@@ -357,3 +357,20 @@ exports.getIssuesInSprintActive = async (req, res, next) => {
         next(err)
     }
 }
+exports.deleteProcess = async (req, res, next) => {
+    try{
+        const idproject = req.params.idproject
+
+        const nameProcess = req.body.nameProcess
+
+        const project = await Project.findByIdAndUpdate(idproject, {
+            $pull: { process: { $in: [ nameProcess ] } }
+        },{ new: true })
+
+        res.status(200).json(project)
+    }
+    catch(err) {
+        
+        next(err)
+    }
+}

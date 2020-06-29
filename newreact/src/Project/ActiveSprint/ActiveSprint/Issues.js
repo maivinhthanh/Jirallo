@@ -1,10 +1,6 @@
 import React from 'react'
 import { useDrag } from 'react-dnd'
 
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 
 export default function Issues({ info }) {
@@ -27,18 +23,18 @@ export default function Issues({ info }) {
           margin: '12px',
           borderRadius: '12px'
         }}>
-          <Card>
-              <CardHeader title={info.name}></CardHeader>
-              <CardContent>
-                <Grid container>
-                  <Grid item xs={4}>
+          <div>
+              <div>{info.name}</div>
+              <div>
+                <div className="row">
+                  <div className="col-4">
                     {
                       info.type === 'task'  
                         ?<Icon className="fas fa-tasks" color="primary"></Icon>
                         :<Icon className="fas fa-bug" color="secondary"></Icon>
                     }
-                  </Grid>
-                  <Grid item xs={4}>
+                  </div>
+                  <div className="col-4">
                   {
                       info.priority === 'highest'  
                         ?<Icon className="fas fa-arrow-up" color="secondary"></Icon>: 
@@ -50,13 +46,13 @@ export default function Issues({ info }) {
                         ?<Icon className="fas fa-arrow-down" color="primary"></Icon>:
                         <Icon className="fas fa-arrow-down" color="secondary"></Icon>
                     }
-                  </Grid>
-                  <Grid item xs={4}>
+                  </div>
+                  <div className="col-4">
                     <Icon className="fas fa-tag">{info.tag}</Icon>
-                  </Grid>
-                </Grid>
-              </CardContent>
-          </Card>
+                  </div>
+                </div>
+              </div>
+          </div>
       </div>
   )
 }

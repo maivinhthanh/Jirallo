@@ -14,11 +14,15 @@ class AddProcessContainer extends Component {
         arr[indexDrap] = drog.name
         this.props.AddProcess(this.props.idproject, arr)
     }
+    DeleteProcess = (name) =>{
+        console.log(name)
+        this.props.DeleteProcess(this.props.idproject,name)
+    }
     render() {
         const { name } = this.props
         return (
             <div >
-                <UI name={ name } changePosition={this.changePosition}/>
+                <UI name={ name } changePosition={this.changePosition} DeleteProcess={this.DeleteProcess}/>
                 
             </div>
         )
@@ -29,6 +33,7 @@ class AddProcessContainer extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         AddProcess: (id, process) => dispatch( action.AddProcess(id, process) ),
+        DeleteProcess: (id, process) => dispatch( action.DeleteProcess(id, process) ),
     }
 }
 

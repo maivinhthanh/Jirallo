@@ -167,7 +167,6 @@ export const handleSaveName = (name,id) => {
     }
 }
 export const ShowListIssueInBackLog = (id, iduser = null) =>{
-    debugger
     return dispatch =>{
         return CallApi(`issues/viewListIssuesInBackLog/${id}`,'POST',{
             iduser:iduser

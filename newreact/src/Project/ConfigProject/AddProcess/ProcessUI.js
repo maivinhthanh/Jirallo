@@ -1,8 +1,52 @@
 import React from 'react';
 import { useDrag } from 'react-dnd'
 import { useDrop } from 'react-dnd'
-
+import { makeStyles } from '@material-ui/core/styles';
+import Icon from '@material-ui/core/Icon';
+import Modal from '@material-ui/core/Modal';
+import { Button } from '@material-ui/core';
+function rand() {
+    return Math.round(Math.random() * 20) - 10;
+  }
+  
+  function getModalStyle() {
+    const top = 50 + rand();
+    const left = 50 + rand();
+  
+    return {
+      top: `${top}%`,
+      left: `${left}%`,
+      transform: `translate(-${top}%, -${left}%)`,
+    };
+  }
+  
+  const useStyles = makeStyles((theme) => ({
+    paper: {
+      position: 'absolute',
+      width: 400,
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
+  }));
 export default function IssueAdd(props) {
+    const [open, setOpen] = React.useState(false);
+    const [itemDetete, setItemDelete] = React.useState("")
+    const classes = useStyles();
+    const [modalStyle] = React.useState(getModalStyle);
+    const handleOpen = (name) => {
+        setOpen(true);
+        setItemDelete(name)
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const deleteItem = () => {
+        props.DeleteProcess(itemDetete)
+        setOpen(false)
+    };
     const [{ isDragging }, drag] = useDrag({
         item: { type: 'process', process: props.name },
         collect: monitor => ({
@@ -49,7 +93,8 @@ export default function IssueAdd(props) {
                         <span >
                             {props.name}
                         </span>
-                        
+                        <Icon className="fa fa-minus-circle" fontSize="small" 
+                        style={{float: "right"}} onClick={()=>handleOpen(props.name)}/>
                     </div>
                 </div>
                 {isOver && (
@@ -60,6 +105,17 @@ export default function IssueAdd(props) {
                     />
                 )}
             </div>
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <div style={modalStyle} className={classes.paper}>
+                    <h2 id="simple-modal-title">Are you delete item?</h2>
+                    <Button onClick={ deleteItem }>Yes</Button>
+                </div>
+            </Modal>
         </div>
 
     );

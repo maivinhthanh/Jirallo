@@ -433,7 +433,14 @@ exports.filterListIssues = async (req, res, next) => {
     
             res.status(200).json({ listissues: issues})
         }
-        else if(process === null){
+        else if(process.length === 0 && sprint.length === 0){
+            const issues = await Issues.find({
+                idproject: idproject
+            })
+    
+            res.status(200).json({ listissues: issues})
+        }
+        else if(process.length === 0){
             const issues = await Issues.find({
                 idproject: idproject,
                 idsprint: sprint
@@ -441,7 +448,7 @@ exports.filterListIssues = async (req, res, next) => {
     
             res.status(200).json({ listissues: issues})
         }
-        else if (sprint === null){
+        else if (sprint.length === 0){
             const issues = await Issues.find({
                 idproject: idproject,
                 process: process

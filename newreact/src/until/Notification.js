@@ -11,7 +11,6 @@ export const Error = ( data ) => {
     }
 }
 export const CreateSuccess = ( data ) => {
-    debugger
     return {
         type: 'CreateSuccess',
         data: data.message
