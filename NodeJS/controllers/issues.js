@@ -426,7 +426,7 @@ exports.filterListIssues = async (req, res, next) => {
         const idproject = req.params.idproject
         const process = req.body.process
         const sprint = req.body.sprint
-        if(process === null && sprint === null){
+        if(process === null || sprint === null){
             const issues = await Issues.find({
                 idproject: idproject
             })

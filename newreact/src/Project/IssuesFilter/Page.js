@@ -45,11 +45,9 @@ class IssuesFilterPage extends Component {
       else{
         return(
           <Grid  >
-            
-                <MenuProject idproject={params.idproject}/>
-                <p>Project không tồn tại</p>
-                <Toast open={note.show} message={note.message} type={note.type} />
-
+            <MenuProject idproject={params.idproject}/>
+            <p>Project không tồn tại</p>
+            <Toast open={note.show} message={note.message} type={note.type} />
           </Grid>
         )
       }

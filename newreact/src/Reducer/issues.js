@@ -52,6 +52,11 @@ const getInfoIssue = (state, action) => {
     let cloneState = _.clone(action.data.issues)
     return cloneState
 }
+const addComment = (state, action) =>{
+    let cloneState = _.clone(state)
+    cloneState.comment.push(action.data.newcomment)
+    return cloneState
+}
 
 const issuesReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
@@ -59,6 +64,7 @@ const issuesReducer = ( state = initialState, action ) => {
         case 'SELECT_ISSUES_IN_FILTER': return selectIssuesInFilter( state, action ); 
         case 'GET_COMMENT': return getComment( state, action ); 
         case 'GET_INFO_ISSUE': return getInfoIssue(state, action);
+        case 'ADD_COMMENT': return addComment( state, action ); 
         default: return state;
     }
 };

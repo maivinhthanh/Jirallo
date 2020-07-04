@@ -7,9 +7,7 @@ import ListCommentUI from './ListCommentUI'
 import * as action from './action'
 
 class CommentContainer extends Component {
-  componentWillUpdate(nextProps, nextState, snapshot) {
-    
-  }
+  
   changeContent = (data) =>{
     this.props.AddComment(this.props.idissue, data)
   }
