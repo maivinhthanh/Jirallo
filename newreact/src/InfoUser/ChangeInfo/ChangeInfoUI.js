@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -7,6 +8,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import DatePicker from '../../Components/DatePicker'
 import _ from 'lodash'
+import './assets/styles.scss'
+
 
 class ChangeInfoUI extends Component {
   constructor(props) {
@@ -82,8 +85,11 @@ class ChangeInfoUI extends Component {
             <Grid item xs={12} sm={8}>
               <p>Gender</p>
             </Grid>
-            <Grid justify="center" item xs={12} sm={8}>
+            <Grid justify="center" item xs={12} sm={8}
+             className='genderClass'
+             >
               <Select fullWidth
+                name='gender'
                 value={this.state.gender}
                 onChange={this.handleChange}
               >

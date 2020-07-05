@@ -77,7 +77,7 @@ function SimpleModal(props) {
     <Fragment style={{ marginTop: "30px", marginBottom: "20px" }}>
       <ColorButton
         variant="contained"
-        color="primary"
+        color="black"
         className={useStyles.margin}
         onClick={handleOpen}
       >

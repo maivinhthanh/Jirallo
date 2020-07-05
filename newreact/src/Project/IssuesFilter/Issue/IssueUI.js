@@ -10,6 +10,7 @@ import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import Comment from './CommentContainer'
+import { textAlign } from '@material-ui/system';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,6 +18,17 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+  },
+  issue: {
+    marginTop: '30px'
+  },
+  detail: {
+    paddingTop: '10px',
+    paddingLeft: '10px'
+  },
+  desc: {
+      marginTop: '10px',
+      textAlign: 'left'
   },
   descript:{
     display: 'flex',
@@ -57,7 +69,7 @@ export default function IssueUI({issue, EditDescriptIssues}) {
   const [descript, setDescript] = React.useState(false);
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.issue}>
         <Toolbar variant="dense">
           
           <Typography variant="h6" color="inherit">
@@ -65,13 +77,13 @@ export default function IssueUI({issue, EditDescriptIssues}) {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Grid container >
+      <Grid container>
             
             <Grid item xs={8}>
               
                 <Grid container>
                   <Grid item xs={12}>
-                    <h3>Descript</h3>
+                    <h3 className={classes.desc}>Descript</h3>
                   </Grid>
                 </Grid>
                 <Grid container>

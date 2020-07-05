@@ -23,6 +23,8 @@ import { emphasize, withStyles } from "@material-ui/core/styles";
 import CreateIssue from "./createIssue";
 import DatePicker from '../../../Components/DatePicker'
 
+import _ from 'lodash'
+
 const useStyles = makeStyles(theme => ({
   grow: {
     flexGrow: 2,
@@ -119,6 +121,7 @@ export default function PrimarySearchAppBar(props) {
   const [nameIssue, setName] = React.useState("");
   const [optionType, setType] = React.useState("");
   const [optionPriority, setPriority] = React.useState("");
+  let idActiveSprint = ''
   const [selectedDate, setSelectedDate] = React.useState(
     new Date("2014-08-18T21:11:54")
   );
@@ -174,16 +177,20 @@ export default function PrimarySearchAppBar(props) {
     alert("You clicked a breadcrumb.");
   };
   const handleSubmit = () => {
-    // let sprint = 
-    //   {
-    //     name: valueName,
-    //     timebegin: selectedDate,
-    //     deadline: selectedDeadline
-    //   }
-    // props.updateSprint(activeSprint,sprint )
+    let sprint = 
+      {
+        name: valueName,
+        timebegin: selectedDate,
+        deadline: selectedDeadline
+      }
+      console.log(idActiveSprint)
+      console.log(idActive)
+      console.log(document.getElementById('modal_edit'))
+    // props.updateSprint(props.sprint._id,sprint )
   }
   const setIdActive = (id) => {
-    setId(id)
+    idActiveSprint = _.cloneDeep(id)
+    setId(idActiveSprint)
   }
   const handleDeleteSprint = (id) => {
     props.handleDeleteSprint(id, props.idproject)
@@ -245,7 +252,7 @@ export default function PrimarySearchAppBar(props) {
                       data-target="#myModal"
                       id="modal_edit"
                       value={props.sprint._id}
-                      data-id={props.sprint._id}
+                      data={props.sprint._id}
                       onClick={() => setIdActive(props.sprint._id)}
                     />
                     <StyledBreadcrumb

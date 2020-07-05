@@ -19,11 +19,12 @@ export default class CustomizedSnackbars extends Component {
     });
   };
   render(){
+    console.log(this.props.message)
     return (
         <div >
           <Snackbar
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            open={this.props.open} autoHideDuration={3000} onClose={this.handleClose}>
+            open={this.props.open} onClose={this.handleClose}>
               <Alert  severity={this.props.type} onClose={this.handleClose}>
                   {this.props.message}
               </Alert>

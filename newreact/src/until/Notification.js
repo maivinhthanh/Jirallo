@@ -13,7 +13,7 @@ export const Error = ( data ) => {
 export const CreateSuccess = ( data ) => {
     return {
         type: 'CreateSuccess',
-        data: data.message
+        message: data.message
     }
 }
 export const hideNotification = (  ) => {

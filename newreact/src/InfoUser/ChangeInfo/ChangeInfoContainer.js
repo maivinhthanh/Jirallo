@@ -16,9 +16,10 @@ class ChangeInfoContainer extends Component {
     }
   }
   render() {
+    const { infouser, iduser } = this.props
       return (
         <div >
-          <UI iduser={this.props.iduser} infouser={this.props.infouser} ChangeInfoUser={this.props.ChangeInfoUser}/>
+          <UI iduser={iduser} infouser={infouser} ChangeInfoUser={this.props.ChangeInfoUser}/>
         </div>
       )
     
@@ -29,7 +30,7 @@ const mapStateToProps = (state) => {
     return {
       note: state.note,
       auth: state.auth,
-      infouser: state.infouser
+      infouser: state.infouser,
     }
 }
 
