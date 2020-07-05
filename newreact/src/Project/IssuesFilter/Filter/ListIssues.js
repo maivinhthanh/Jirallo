@@ -11,7 +11,12 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
+    overflowY: "scroll",
+    height: "600px",
   },
+  nameIssues:{
+    textAlign: "center"
+  }
 }));
 
 export default function SelectedListItem({idproject, listissues, selectIssues}) {
@@ -42,7 +47,7 @@ export default function SelectedListItem({idproject, listissues, selectIssues}) 
                       : <Icon className="fa fa-tasks" color="primary" />
                     }
                     
-                  <ListItemText primary={item.name} />
+                  <ListItemText primary={item.name} className={classes.nameIssues}/>
                 </ListItem>
               </Link>
             )

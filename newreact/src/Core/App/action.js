@@ -9,7 +9,6 @@ export const refreshToken = () =>{
         'token'
         ).then(response =>{
             if(response.status === 200){
-                // Cookies.set('token', response.data.accessToken, { expires: 1 });
             }
             else {
                 dispatch(Notification.Error(response.data))

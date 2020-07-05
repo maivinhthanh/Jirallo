@@ -8,6 +8,29 @@ const useStyles = makeStyles(theme => ({
   margin: {
     margin: theme.spacing(1),
   },
+  wrapComment :{
+    position: "relative",
+    height: "50px",
+    margin: "10px 0px"
+  },
+  avatarComment:{
+    position: "absolute"
+  },
+  nameComment:{
+    fontWeight: "bold",
+  },
+  contendComment:{
+    wordBreak: "break-all",
+  },
+  wrapContentComment:{
+    position: "absolute",
+    left: "10%",
+    top: "6%",
+    backgroundColor: "whitesmoke",
+    width: "85%",
+    borderRadius: "30px",
+    padding: "3px 25px",
+  }
 }));
 
 export default function ListCommentUI({listcomment}) {
@@ -20,14 +43,13 @@ export default function ListCommentUI({listcomment}) {
           listcomment.length !== 0 ?
           _.map(listcomment, (item, index)=>{
             return(
-              <Grid container spacing={1} alignItems="flex-end" key={index}>
-                <Grid item xs={2}>
-                  <Avatar alt="Avatar" src={item.author.image} />
-                  <p>{item.author.name}</p>
-                </Grid>
-                <Grid item xs={10}>
-                  <p>{item.content}</p>
-                </Grid>
+              <Grid className={classes.wrapComment} container spacing={1} alignItems="flex-end" key={index}>
+                <Avatar alt="Avatar" src={item.author.image} className={classes.avatarComment}/>
+                <div className={classes.wrapContentComment} >
+                  <p className={classes.nameComment}>{item.author.name}</p>
+                  <p className={classes.contendComment}>{item.content}</p>
+                </div>
+                
               </Grid>
             )
           })

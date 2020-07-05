@@ -36,7 +36,7 @@ export default function AddCommentUI({changeContent}) {
         </Grid>
         <Grid container spacing={1} alignItems="flex-end" justify="flex-end" >
           <Button variant="contained" color="primary" onClick={handleSubmit}>
-            Submit
+            Comment
           </Button>
         </Grid>
         
