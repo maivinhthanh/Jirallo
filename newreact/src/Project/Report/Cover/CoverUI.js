@@ -70,10 +70,10 @@ export default function ControlledTreeView(props) {
               return (
                 <div className="row">
                   <div className="col-6 text-right">
-                    <DivAction size={25} marginBottom={3} margin={3} >{item.name}</DivAction>
+                    <DivAction size={25} marginBottom={3} margin={3} changeText={(value)=>props.EditNameStudent(value,index)} >{item.name}</DivAction>
                   </div>
                   <div className="col-6 text-left">
-                    <DivAction size={25} marginBottom={3} margin={3} >{item.code}</DivAction>
+                    <DivAction size={25} marginBottom={3} margin={3} changeText={(value)=>props.EditCodeStudent(value,index)}>{item.code}</DivAction>
                   </div>
                 </div>
               )

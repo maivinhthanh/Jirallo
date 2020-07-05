@@ -11,7 +11,8 @@ class ContentContainer extends Component {
     render() {
         return (
             <div >
-                <ContentUI selectContent={this.selectContent} report={this.props.report}/>
+                <ContentUI selectContent={this.selectContent} report={this.props.report}
+                    history={this.props.history} idproject={this.props.idproject}/>
             </div>
         )
         
