@@ -11,10 +11,10 @@ import { successModal } from "../../../Components/modalStatus";
 
 const ColorButton = withStyles(theme => ({
   root: {
-    color: theme.palette.getContrastText(purple[500]),
-    backgroundColor: purple[500],
+    color: 'white',
+    backgroundColor: 'green',
     "&:hover": {
-      backgroundColor: purple[700]
+      backgroundColor: 'green'
     }
   }
 }))(Button);
@@ -77,7 +77,7 @@ function SimpleModal(props) {
     <Fragment style={{ marginTop: "30px", marginBottom: "20px" }}>
       <ColorButton
         variant="contained"
-        color="primary"
+        color="black"
         className={useStyles.margin}
         onClick={handleOpen}
       >

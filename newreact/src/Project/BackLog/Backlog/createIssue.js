@@ -89,10 +89,10 @@ function Modalcreate(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [name, setName] = React.useState("");
-  const [process, setProcess] = React.useState("");
-  const [type, setType] = React.useState("");
+  const [process, setProcess] = React.useState("todo");
+  const [type, setType] = React.useState("task");
   const [tag, setTag] = React.useState("");
-  const [priority, setPriority] = React.useState("");
+  const [priority, setPriority] = React.useState("medium");
 
   const handleChangePriority = e => {
     setPriority(e.target.value);
@@ -111,6 +111,11 @@ function Modalcreate(props) {
   };
 
   const handleOpen = () => {
+    setPriority('')
+    setTag('')
+    setType('')
+    setProcess('')
+    setName('')
     setOpen(true);
   };
 
@@ -156,7 +161,8 @@ function Modalcreate(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="transition-modal-title"> create issue</h2>
-            <form className={classes.root} noValidate autoComplete="off">
+            <form className={classes.root} noValidate autoComplete="off"
+            >
             <InputLabel htmlFor="age-customized-native-simple">
                   Name
                 </InputLabel>
@@ -167,8 +173,6 @@ function Modalcreate(props) {
                 label="Name issue"
                 variant="outlined"
               />
-              <br />
-              <br />
                 <InputLabel htmlFor="age-customized-native-simple">
                   Type
                 </InputLabel>
@@ -182,7 +186,6 @@ function Modalcreate(props) {
                     />
                   }
                 >
-                  <option value="" />
                   <option value={'task'}>Task</option>
                   <option value={'bug'}>Bug</option>
                 </NativeSelect>
@@ -200,7 +203,6 @@ function Modalcreate(props) {
                     />
                   }
                 >
-                  <option value="" />
                   <option value={'todo'}>To do</option>
                   <option value={'in process'}>In process</option>
                   <option value={'done'}>Done</option>
@@ -219,7 +221,6 @@ function Modalcreate(props) {
                     />
                   }
                 >
-                  <option value="" />
                   <option value={'medium'}>Medium</option>
                   <option value={'height'}>Height</option>
                   <option value={'low'}>Low</option>

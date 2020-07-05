@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 import WatchInfo from './WatchInfo/WatchInfoContainer'
+import ChangeInfoContainer from './ChangeInfo/ChangeInfoContainer';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -71,7 +72,7 @@ export default function FullWidthTabs(props) {
           aria-label="full width tabs example"
         >
           <Tab label="Watch Info" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
+          <Tab label="Edit Info" {...a11yProps(1)} />
           <Tab label="Item Three" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
@@ -84,7 +85,7 @@ export default function FullWidthTabs(props) {
           <WatchInfo iduser={props.iduser}/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          Item Two
+          <ChangeInfoContainer iduser={props.iduser}/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
           Item Three

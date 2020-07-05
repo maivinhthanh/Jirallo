@@ -42,6 +42,10 @@ const updateName = (state, action) => {
     })
     return cloneState
 }
+const updateSprint = (state, action) => {
+    let cloneState = _.cloneDeep(state)
+    debugger
+}
 const createIssueBacklog = (state, action) => {
     let cloneState = _.clone(state)
     _.map(cloneState, (item) => {
@@ -54,6 +58,7 @@ const createIssueBacklog = (state, action) => {
 }
 const deleteSprint = (state, action) => {
     let cloneState = _.cloneDeep(state)
+    debugger
     return cloneState
 }
 const listsprint = ( state = initialState, action ) => {
@@ -65,6 +70,7 @@ const listsprint = ( state = initialState, action ) => {
         case 'UPDATE_NAME' : return updateName(state, action);
         case 'CREATE_ISSUE_BACKLOG': return createIssueBacklog(state,action);
         case 'DELETE_SPRINT': return deleteSprint(state, action)
+        case 'UPDATE_SPRINT': return updateSprint(state, action)
 
         default: return state;
     }

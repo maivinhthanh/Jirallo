@@ -23,6 +23,9 @@ class Sprint extends Component {
   handleDeleteSprint = (id, idproject) => {
     this.props.handleDeleteSprint(id, idproject)
   }
+  updateSprint = (id, data) => {
+    this.props.updateSprint(id, data)
+  }
   render() {
       const { sprint, idproject, selectuser } = this.props
       return (
@@ -32,6 +35,7 @@ class Sprint extends Component {
               beginStatusSprint={this.beginStatusSprint}
               updateNameSprint={this.updateNameSprint}
               handleDeleteSprint={this.handleDeleteSprint}
+              updateSprint={this.updateSprint}
               createIssue={this.createIssue}/>
           </Grid>
         </div>
@@ -50,7 +54,8 @@ const mapDispatchToProps = dispatch => {
     updateNameSprint: (id, name) => dispatch(action.updateNameSprint(id, name)),
     createIssue : (issue, idproject, isSprint) => dispatch(action.createIssue(issue, idproject, isSprint)),
     handleDeleteSprint: (id, idproject) => dispatch(action.deleteSprint(id, idproject)),
-    ViewListIssueInSprint: (idproject, idsprint, user) => dispatch(action.ViewListIssueInSprint(idproject, idsprint, user))
+    ViewListIssueInSprint: (idproject, idsprint, user) => dispatch(action.ViewListIssueInSprint(idproject, idsprint, user)),
+    updateSprint: (id, data) => dispatch(action.updateSprint(id, data))
   }
 }
 

@@ -82,7 +82,7 @@ class BacklogContainer extends Component {
                 Active time 
               </h2>
               <br/>
-              <span>{project.datecreate}</span>
+              <span>{project.datecreate && project.datecreate.substring(0,10)}</span>
             </div>
             <div className="item-third">
               <h2> Description </h2>
@@ -114,16 +114,6 @@ class BacklogContainer extends Component {
               <div className="list-btn">
                 <h2>Action</h2> <br/>
                 <AddSprint idproject={this.props.idproject}/>
-                <ThemeProvider theme={theme}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    style={{marginLeft: '10px'}}
-                    className={useStyles.margin}
-                  >
-                    <i class="fas fa-plus"></i> Theme Provider
-                  </Button>
-                </ThemeProvider>
               </div>
             </div>
           </div>

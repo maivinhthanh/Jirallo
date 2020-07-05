@@ -26,6 +26,12 @@ export const updateName = (data) => {
         data
     }
 }
+export const updateNewSprint = (data) => {
+    return {
+        type: 'UPDATE_SPRINT',
+        data
+    }
+}
 export const getInfoIssue = (data) => {
     return {
         type: 'GET_INFO_ISSUE',
@@ -51,8 +57,12 @@ export const deleteSprint = (idSprint, idProject) => {
       {idSprint:idSprint},
       'token'
       ).then(respone => {
-        // dispatch(deleteSprintSuccess(respone.data))
+        dispatch(deleteSprintSuccess(respone.data))
       }).catch(err => {
+        dispatch(Notification.Error(err))
+        setTimeout(() => {
+            dispatch(Notification.hideNotification())
+        }, 5000)
       })
     }
   }
@@ -109,6 +119,21 @@ export const createIssue = (issue, idproject, isSprint) => {
         }
     }
 }
+ export const updateSprint = (id, data) => {
+     return dispatch => {
+         return CallApi(`sprint/editSprint/${id}`, 'PUT', {
+             data
+         }).then(respone => {
+             let data = respone.data.newsprint
+             dispatch(updateNewSprint(data))
+         }).catch(err => {
+            dispatch(Notification.Error(err))
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+         })
+     }
+ } 
 
 export const updateNameSprint = (id, name) => {
     return dispatch => {

@@ -63,7 +63,8 @@ class WatchInfoUI extends Component {
               <p>Birthdate</p>
             </Grid>
             <Grid justify="center" item xs={12} sm={8}>
-              <DatePicker label={""} date={this.state.birthdate} changedate={this.changedate}/>
+            <TextField disabled name="birthdate" fullWidth value={this.state.birthdate && this.state.birthdate.substring(0,10)} />
+              {/* <DatePicker label={""} date={this.state.birthdate} changedate={this.changedate}/> */}
             </Grid>
             <Grid justify="center" item xs={6} sm={6}>
             
