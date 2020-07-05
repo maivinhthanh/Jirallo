@@ -54,7 +54,7 @@ const getInfoIssue = (state, action) => {
 }
 const addComment = (state, action) =>{
     let cloneState = _.clone(state)
-    cloneState.comment.push(action.data.newcomment)
+    cloneState.comment.push(action.data.detailcomment)
     return cloneState
 }
 

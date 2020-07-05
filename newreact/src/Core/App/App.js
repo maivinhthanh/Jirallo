@@ -1,7 +1,6 @@
 import './App.css';
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import Cookies from 'js-cookie'
 import jwtDecode from 'jwt-decode'
 import { DndProvider } from 'react-dnd'
 
@@ -25,31 +24,30 @@ import { ToastContainer } from 'react-toastify';
 
 class App extends Component {
   
-  shouldComponentUpdate(nextProps, nextState){
-    return nextProps.user.code !== this.props.user.code
-  }
+  // shouldComponentUpdate(nextProps, nextState){
+  //   return nextProps.user.code !== this.props.user.code
+  // }
   componentDidMount(){
-    this.props.refreshToken()
-    setInterval(this.props.refreshToken(), 1000 * 60 * 60 * 24);
+    // this.props.refreshToken()
+    // setInterval(this.props.refreshToken(), 1000 * 60 * 60 * 24);
   }
   render(){
     let isAuth = false
+    const stringToken = localStorage.getItem('token')
     let token
     
-    if (!(!Cookies.get('token') && !Cookies.get('refreshtoken')) ){
-      if(Cookies.get('token')!== undefined && Cookies.get('token')!== 'undefined'){
+    if (stringToken){
         token = {
-          token : jwtDecode(Cookies.get('token')),
-          refreshtoken : jwtDecode(Cookies.get('refreshtoken'))
+          token : jwtDecode(stringToken),
         }
-        isAuth = 1000 * token.refreshtoken.exp > (new Date()).getTime()
-      }
+        isAuth = 1000 * token.token.exp > (new Date()).getTime()
+      
     }
     return (
       <DndProvider backend={HTML5Backend}>
         <div className="App" id='app_wrapper'>
           {/* <MenuUser/> */}
-            <PrivateRoute path="/" isAuth={true} exact component={HomePage} />
+            <PrivateRoute path="/" isAuth={isAuth} exact component={HomePage} />
             <PrivateRoute path="/user" isAuth={isAuth} component={HomePage} />
             <PrivateRoute path="/backlog/:id?" isAuth={isAuth} component={Backlog} />
             <PrivateRoute path="/report/:id?" isAuth={isAuth} component={Report} />

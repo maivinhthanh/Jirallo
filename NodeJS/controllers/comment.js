@@ -46,7 +46,10 @@ exports.createComment = async (req, res, next) => {
 
         await action.save()
 
-        res.status(201).json({ newcomment})
+        const detailcomment = await Comment.findById(newcomment._id).populate({
+            path: 'author'})
+
+        res.status(201).json({ detailcomment})
     }
     catch (error) {
         

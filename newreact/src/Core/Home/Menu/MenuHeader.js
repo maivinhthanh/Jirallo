@@ -8,12 +8,9 @@ import { Link } from 'react-router-dom'
 import Icon from '@material-ui/core/Icon';
 import Avatar from '@material-ui/core/Avatar';
 import jwtDecode from 'jwt-decode'
-import Cookies from 'js-cookie'
 let userId = null
-if (!(!Cookies.get('token') && !Cookies.get('refreshtoken')) ){
-  if(Cookies.get('token')!== undefined && Cookies.get('token')!== 'undefined'){
-    userId = jwtDecode(Cookies.get('refreshtoken')).data.userId
-  }
+if (localStorage.getItem('token')){
+  userId = jwtDecode(localStorage.getItem('token')).data.userId
 }
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,8 +29,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const logout =()=>{
-  Cookies.remove('token')
-  Cookies.remove('refreshtoken')
+  localStorage.clear('user')
+  localStorage.clear('token')
 }
 
 const actions = [

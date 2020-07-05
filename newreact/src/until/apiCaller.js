@@ -1,6 +1,5 @@
 import axios from 'axios';
 import * as Config from '../Config';
-import Cookies from 'js-cookie'
 
 export default function apiCaller(endPoint, method = "POST", body, headers = null){
   return axios({
@@ -14,6 +13,5 @@ export default function apiCaller(endPoint, method = "POST", body, headers = nul
 }
 
 function getCookie(name) {
-  const token = Cookies.get('token')
-  return token;
+  return localStorage.getItem('token');
 }
