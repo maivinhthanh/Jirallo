@@ -38,12 +38,6 @@ const store = createStore(reducer, composeEnhancers(
     applyMiddleware(thunk)
 ));
 persistStore(store)
-// if(Cookies.get('token') === undefined || Cookies.get('token') === 'undefined'){
-//     console.log(Cookies.get('token'))
-//     Cookies.remove('token')
-// }
-// Cookies.set('token', undefined, { expires: 1 });
-// Cookies.set('refreshtoken', undefined, { expires: 365 });
 
 const app = (
     <Provider store={store}>

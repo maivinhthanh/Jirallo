@@ -6,10 +6,6 @@ import * as action from './action'
 
 class IssueContainer extends Component {
   
-  componentWillUpdate(nextProps, nextState, snapshot) {
-    
-  }
-
   EditDescriptIssues = (data) =>{
     this.props.EditDescriptIssues(this.props.issues._id, data)
   }

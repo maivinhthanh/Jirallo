@@ -41,12 +41,12 @@ class FilterContainer extends Component {
         <div >
           <Grid container >
             
-            <Grid item xs={6}>
+            <Grid item xs={5}>
               <Filter idproject={ idproject } project={project} 
               listsprint={listsprint} getSelect={this.getSelect}/>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={7}>
               <ListIssues idproject={ idproject } listissues={listissues} selectIssues={this.selectIssues}/>
             </Grid>
 

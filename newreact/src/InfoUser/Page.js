@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import jwtDecode from 'jwt-decode'
-import Cookies from 'js-cookie'
 
 import InfoUserUI from './infoUserUI'
 import InfoMeUI from './infoMeUI'
@@ -35,14 +34,14 @@ class InfoUserContainer extends Component {
   render() {
     const { match: { params } } = this.props
     const { note } = this.props
-    let isAuth = false
-    if (Cookies.get('refreshtoken') ){
-        let token = jwtDecode(Cookies.get('refreshtoken'))
-        if(token.data.userId === params.id){
-          isAuth = true
-        }
-      
+    let isAuth = null
+    if (localStorage.getItem('token')){
+      const userId = jwtDecode(localStorage.getItem('token')).data.userId
+      if(userId === params.id){
+        isAuth = true
+      }
     }
+    
       return (
         <div >
           <MenuUser/>
