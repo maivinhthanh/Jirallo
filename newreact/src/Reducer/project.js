@@ -38,9 +38,20 @@ const deleteProcess = (state, action) => {
     data.process.splice(index, 1)
     return data
 }
+const addreport = (state, action) => {
+    let data = _.cloneDeep(state)
+    data.idreport = action.data._id
+    return data
+}
+const getInfoProject = (state, action) => {
+    state.idreport = null
+    let data = updateObject( state, action.data)
+    return data
+}
 const projectReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case 'GET_INFO_PROJECT': return updatestate( state, action );
+        case 'ADD_REPORT': return addreport( state, action );
+        case 'GET_INFO_PROJECT': return getInfoProject( state, action );
         case 'ADD_PROCESS': return addProcess( state, action );
         case 'ADD_MEMBER_SUCCESS' : return addMemberAct(state, action);
         case 'DELETE_PROCESS': return deleteProcess(state, action);

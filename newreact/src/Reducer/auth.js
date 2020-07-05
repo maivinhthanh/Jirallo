@@ -26,7 +26,6 @@ const initialState = {
 
 const login = ( state, action ) => {
     const token = action.token
-    const refreshtoken = action.refreshtoken
 
     localStorage && localStorage.setItem('token', token);
     CallApi('auth/getMyInfo', 'GET',{},'token')

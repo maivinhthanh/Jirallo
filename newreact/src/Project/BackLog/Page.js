@@ -26,7 +26,7 @@ class BackLogPage extends Component {
       if(authProject.hasAuth === true){
         return (
           <div className='row'>
-            <div className='col-md-1 item-left' style={{ background: 'blue'}}>
+            <div className='col-md-1 item-left' style={{ background: '#6A8DCD'}}>
             <MenuHeader/>
             </div>
             <div className='col-md-11 item-right'>

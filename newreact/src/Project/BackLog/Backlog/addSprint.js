@@ -12,9 +12,9 @@ import { successModal } from "../../../Components/modalStatus";
 const ColorButton = withStyles(theme => ({
   root: {
     color: theme.palette.getContrastText(purple[500]),
-    backgroundColor: purple[500],
+    backgroundColor: "#6A8DCD",
     "&:hover": {
-      backgroundColor: purple[700]
+      backgroundColor: "#3060BB"
     }
   }
 }))(Button);

@@ -216,8 +216,14 @@ const addReference = (state, action) =>{
     
     return newState
 }
+const addreport = (state, action) =>{
+    console.log(action.data)
+    
+    return action.data
+}
 const reportReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
+        case 'ADD_REPORT': return addreport( state, action );
         case 'GET_REPORT_IN_PROJECT': return updatestate( state, action );
         case 'EDIT_COVER': return updatestate( state, action );
         case 'ADD_PARAGRAPH_INTRODUCE': return addIntroduce( state, action );

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import moment from "moment"
 import UI from "./BacklogUI";
 import * as action from "./action";
 import { Grid } from "@material-ui/core";
@@ -73,57 +73,20 @@ class BacklogContainer extends Component {
           <div className="wrapper-header">
             <div className="item-first">
               <h2>
-                Welcome to project
+                {project.name}
               </h2><br/>
-              <span>{project.name}</span>
+              <span>{project.description}</span>
             </div>
             <div className="item-second">
               <h2>
                 Active time 
               </h2>
               <br/>
-              <span>{project.datecreate}</span>
+              <span>{moment(project.datecreate).format("DD/MM/YYYY")}</span>
             </div>
             <div className="item-third">
-              <h2> Description </h2>
-              <br />
-              <span>{project.description}</span>
-              {/* <Select
-                open={open}
-                onClose={this.handleClose}
-                onOpen={this.handleOpen}
-                value={status}
-                onChange={this.handleChange}
-                inputProps={{
-                  name: "age",
-                  id: "demo-controlled-open-select"
-                }}
-              >
-              {
-                _.map(project.process, (item) => {
-                 return (
-                  <MenuItem value={item}>
-                  <em>{item}</em>
-                </MenuItem>
-                 )
-                })
-              }
-              </Select> */}
-            </div>
-            <div className="item-four">
               <div className="list-btn">
-                <h2>Action</h2> <br/>
                 <AddSprint idproject={this.props.idproject}/>
-                <ThemeProvider theme={theme}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    style={{marginLeft: '10px'}}
-                    className={useStyles.margin}
-                  >
-                    <i class="fas fa-plus"></i> Theme Provider
-                  </Button>
-                </ThemeProvider>
               </div>
             </div>
           </div>
