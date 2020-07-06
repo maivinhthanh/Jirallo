@@ -8,6 +8,7 @@ import * as action from './action'
 
 class CommentContainer extends Component {
   
+  
   changeContent = (data) =>{
     this.props.AddComment(this.props.idissue, data)
   }
@@ -31,7 +32,7 @@ class CommentContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-      issues: state.issues
+      issues: state.issues,
     }
 }
 

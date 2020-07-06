@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import { Paper } from '@material-ui/core';
+import { Paper, Select, MenuItem } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import Comment from './CommentContainer'
-import { textAlign } from '@material-ui/system';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -61,12 +60,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function IssueUI({issue, EditDescriptIssues}) {
+export default function IssueUI({issue, EditDescriptIssues, listMember, EditAssignee}) {
   const classes = useStyles();
+  const [user] = useState()
   useEffect(() => {
     
   }, [issue])
-  const [descript, setDescript] = React.useState(false);
+  const [descript, setDescript] = useState(false);
+
+  const handleChange = (e) =>{
+    EditAssignee(e.target.value)
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.issue}>
@@ -137,6 +142,24 @@ export default function IssueUI({issue, EditDescriptIssues}) {
                   <Avatar alt="Assignee" src={issue.assignee.image} className={classes.avatarInfo}/>
                   <h6 className={classes.nameInfo}>{issue.assignee.name}</h6>
                 </Grid>
+                <Grid item xs={12} className={classes.wrapInfoContent}>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={user}
+                    onChange={handleChange}
+                  >
+                    {
+                      listMember.map((item, index)=>{
+                        return (
+                          item.id && <MenuItem value={item.id._id} key={index}>{item.id.name}</MenuItem>
+                        )
+                      })
+                    }
+                    
+                  </Select>
+                </Grid>
+                
               </Grid>
             </Grid>
           </Grid>

@@ -254,7 +254,7 @@ exports.assignforUser = async (req, res, next) => {
             assignee: iduser
         }
 
-        await Issues.findByIdAndUpdate(idissues, dataupdate)
+        await Issues.findByIdAndUpdate(idissues, dataupdate, {new: true})
 
         const action = new Activities({
             action: 'assignforUser',

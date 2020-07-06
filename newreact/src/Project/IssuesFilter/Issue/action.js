@@ -98,3 +98,29 @@ export const EditDescriptIssues = (idissues, data) =>{
         })
     }
 }
+
+export const AssignforUser = (idissues, iduser) =>{
+    return dispatch =>{
+        return CallApi(`issues/assignforUser/${idissues}`,'PUT',{
+            iduser: iduser,
+        }).then (response =>{
+            if(response.status === 201){
+                
+                dispatch(editdescriptissues(response.data));
+                
+            }
+            else {
+                dispatch(Notification.Error(response.data.newcomment))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}

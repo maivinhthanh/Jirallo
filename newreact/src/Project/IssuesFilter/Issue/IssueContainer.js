@@ -10,12 +10,18 @@ class IssueContainer extends Component {
     this.props.EditDescriptIssues(this.props.issues._id, data)
   }
 
+  EditAssignee = (iduser) =>{
+    console.log(iduser)
+    this.props.AssignforUser(this.props.issues._id, iduser)
+  }
+
   render() {
-      const { issues } = this.props
+      const { issues, listMember } = this.props
       return (
         <div >
-          <IssueUI issue={issues}
-          EditDescriptIssues={this.EditDescriptIssues}/> 
+          <IssueUI issue={issues} listMember={listMember}
+            EditDescriptIssues={this.EditDescriptIssues}
+            EditAssignee={this.EditAssignee}/> 
           
         </div>
       )
@@ -25,13 +31,15 @@ class IssueContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-      issues: state.issues
+      issues: state.issues,
+      listMember: state.listMember
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-      EditDescriptIssues: (id, data) => dispatch(action.EditDescriptIssues(id, data))
+      EditDescriptIssues: (id, data) => dispatch(action.EditDescriptIssues(id, data)),
+      AssignforUser: (id, iduser) => dispatch(action.AssignforUser(id, iduser)),
     }
 }
 

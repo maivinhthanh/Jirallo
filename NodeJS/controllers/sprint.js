@@ -276,7 +276,7 @@ exports.viewListIssuesInSprint = async (req, res, next) => {
                     }
                 })
             }
-            
+            console.log(sprint)
     
             res.status(200).json({  listissues: sprint.idissues })
         }
