@@ -44,7 +44,7 @@ const updateName = (state, action) => {
 }
 const updateSprint = (state, action) => {
     let cloneState = _.cloneDeep(state)
-    debugger
+    return cloneState
 }
 const createIssueBacklog = (state, action) => {
     let cloneState = _.clone(state)

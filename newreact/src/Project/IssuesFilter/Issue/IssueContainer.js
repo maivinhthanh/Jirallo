@@ -11,7 +11,6 @@ class IssueContainer extends Component {
   }
 
   EditAssignee = (iduser) =>{
-    console.log(iduser)
     this.props.AssignforUser(this.props.issues._id, iduser)
   }
 

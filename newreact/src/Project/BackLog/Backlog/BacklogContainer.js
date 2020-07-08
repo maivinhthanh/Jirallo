@@ -7,26 +7,9 @@ import { Grid } from "@material-ui/core";
 import AddSprint from "./addSprint";
 import Member from "../../Member/MemberContainer";
 import "../../BackLog/assets/styles.css";
-import {
-  createMuiTheme,
-  makeStyles
-} from "@material-ui/core/styles";
-import { ThemeProvider } from "@material-ui/styles";
-import Button from "@material-ui/core/Button";
-import { green } from "@material-ui/core/colors";
+
 import OpenIconSpeedDial from "../../../Core/Home/Menu/MenuProjectUI2";
 
-const useStyles = makeStyles(theme => ({
-  margin: {
-    margin: theme.spacing(1)
-  }
-}));
-
-const theme = createMuiTheme({
-  palette: {
-    primary: green
-  }
-});
 class BacklogContainer extends Component {
   constructor(props) {
     super(props);

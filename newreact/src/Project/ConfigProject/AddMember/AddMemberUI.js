@@ -102,7 +102,7 @@ class AddMemberUI extends Component {
                         )
                         :
                         (
-                          <img className="avatar-image" alt="avatar" src={Config.API_LOCAL + "/" + "images/user-1.png" } height={40} width={40}/>
+                          <img className="avatar-image" alt="avatar" src={Config.API_LOCAL + "/images/user-1.png" } height={40} width={40}/>
                         )
                       }
                       

@@ -22,9 +22,6 @@ const initialState = {
     image: '',
 };
 
-const updatestate = (state, action) =>{
-   return updateObject( state, action.data);
-}
 const addProcess = (state, action) =>{
     return updateObject( state, action.data);
 }

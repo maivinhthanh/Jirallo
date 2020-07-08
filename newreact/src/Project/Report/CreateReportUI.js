@@ -18,7 +18,6 @@ function CreateReportUI({idproject, CreateReport}) {
   )
 
   const handleChange = (e) =>{
-    console.log(e.target.name,e.target.value )
     const fname = e.target.name
     const fvalue = e.target.value
     setState((state) => ({

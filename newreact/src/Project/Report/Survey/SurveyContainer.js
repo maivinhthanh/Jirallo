@@ -61,7 +61,7 @@ class SurveyContainer extends Component {
     }
     render() {
         const { report } = this.props
-        let { props, ref } = React.forwardRef((props, ref) => ({ props, ref }))
+        let { ref } = React.forwardRef((ref) => ({ ref }))
         return (
             <div >
                 <UI info={report} ref={ref}

@@ -53,7 +53,6 @@ export default function IssueAdd(props) {
             isDragging: !!monitor.isDragging(),
         }),
     })
-    let item = props.item
     const fill = props.white ? 'white' : 'white'
     const [{ isOver }, drop] = useDrop({
         accept: 'process',

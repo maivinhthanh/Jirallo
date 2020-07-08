@@ -42,7 +42,7 @@ const actions = [
 
 export default function OpenIconSpeedDial() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open] = React.useState(true);
 
   return (
     <div className={classes.root}>

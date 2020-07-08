@@ -8,7 +8,6 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import _ from 'lodash'
 import { Button } from '@material-ui/core';
-import { Redirect } from "react-router-dom"
 
 const useTreeItemStyles = makeStyles(theme => ({
   root: {
@@ -129,7 +128,6 @@ export default function ContentUI({selectContent, report, idproject, history}) {
   }
   const ViewReport = () =>{
     history.push(`/reportview/${idproject}`)
-    // return <Redirect to={`/reportview/${idproject}`} />
   }
   return (
     <>

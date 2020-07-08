@@ -217,7 +217,6 @@ const addReference = (state, action) =>{
     return newState
 }
 const addreport = (state, action) =>{
-    console.log(action.data)
     
     return action.data
 }
