@@ -14,6 +14,7 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import ListProject from '../../ListProject/Page'
 import IssuesFilter from '../../Project/IssuesFilter/Page'
 import ConfigProject from '../../Project/ConfigProject/Page'
+import Statistical from '../../Project/Statistical/Page'
 import PrivateRoute from '../../PrivateRoute'
 
 import * as actions from './action';
@@ -43,6 +44,7 @@ class App extends Component {
             <PrivateRoute path="/active/:id?" isAuth={isAuth} component={ActiveSprint} />
             <PrivateRoute path="/reportview/:id?" isAuth={isAuth} component={ReportView} />
             <PrivateRoute path="/infouser/:id" isAuth={isAuth} component={InfoUser} />
+            <PrivateRoute path="/statistical/:id" isAuth={isAuth} component={Statistical} />
             <PrivateRoute path="/viewAll" isAuth={isAuth} component={ListProject} />
             <PrivateRoute path="/issues/:idproject/:idissues" isAuth={isAuth} component={IssuesFilter} />
             <PrivateRoute path="/config/:id?" isAuth={isAuth} component={ConfigProject} />

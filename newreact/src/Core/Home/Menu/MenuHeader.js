@@ -46,20 +46,20 @@ export default function OpenIconSpeedDial() {
 
   return (
     <div className={classes.root}>
-            <SpeedDial
-                ariaLabel="SpeedDial openIcon example"
-                className={classes.speedDial}
-                icon={<SpeedDialIcon openIcon={<EditIcon />} />}
-                open={open}
-            >
-                {actions.map(action => (
-                        <SpeedDialAction
-                            key={action.name}
-                            icon={action.icon}
-                            tooltipTitle={action.name}
-                        />
-                ))}
-            </SpeedDial>
+      <SpeedDial
+        ariaLabel="SpeedDial openIcon example"
+        className={classes.speedDial}
+        icon={<SpeedDialIcon openIcon={<EditIcon />} />}
+        open={open}
+      >
+        {actions.map(action => (
+          <SpeedDialAction
+            key={action.name}
+            icon={action.icon}
+            tooltipTitle={action.name}
+          />
+        ))}
+      </SpeedDial>
     </div>
   );
 }

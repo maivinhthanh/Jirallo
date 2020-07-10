@@ -58,7 +58,6 @@ const createIssueBacklog = (state, action) => {
 }
 const deleteSprint = (state, action) => {
     let cloneState = _.cloneDeep(state)
-    debugger
     return cloneState
 }
 const listsprint = ( state = initialState, action ) => {

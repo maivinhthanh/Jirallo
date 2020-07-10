@@ -20,6 +20,7 @@ const initialState = {
     activesprint: '',
     description: '',
     image: '',
+    chart: {count: 0, length: 1},
 };
 
 const addProcess = (state, action) =>{
@@ -45,6 +46,10 @@ const getInfoProject = (state, action) => {
     let data = updateObject( state, action.data)
     return data
 }
+const chart = (state, action) => {
+    state.chart = action.data
+    return state
+}
 const projectReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'ADD_REPORT': return addreport( state, action );
@@ -52,6 +57,7 @@ const projectReducer = ( state = initialState, action ) => {
         case 'ADD_PROCESS': return addProcess( state, action );
         case 'ADD_MEMBER_SUCCESS' : return addMemberAct(state, action);
         case 'DELETE_PROCESS': return deleteProcess(state, action);
+        case 'GET_INFO_PROJECT_CHART': return chart(state, action);
         default: return state;
     }
 };

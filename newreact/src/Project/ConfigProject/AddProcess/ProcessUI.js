@@ -92,8 +92,12 @@ export default function IssueAdd(props) {
                         <span >
                             {props.name}
                         </span>
-                        <Icon className="fa fa-minus-circle" fontSize="small" 
-                        style={{float: "right"}} onClick={()=>handleOpen(props.name)}/>
+                        {
+                            (props.name !== "todo" && props.name !== "done") &&
+                            <Icon className="fa fa-minus-circle" fontSize="small" 
+                                style={{float: "right"}} onClick={()=>handleOpen(props.name)}/>
+                        }
+                        
                     </div>
                 </div>
                 {isOver && (
