@@ -7,8 +7,7 @@ import { Grid } from "@material-ui/core";
 import AddSprint from "./addSprint";
 import Member from "../../Member/MemberContainer";
 import "../../BackLog/assets/styles.css";
-
-import OpenIconSpeedDial from "../../../Core/Home/Menu/MenuProjectUI2";
+import { Card } from "antd";
 
 class BacklogContainer extends Component {
   constructor(props) {
@@ -52,35 +51,21 @@ class BacklogContainer extends Component {
     const { idproject, listsprint, project } = this.props;
     return (
       <Grid container>
-        <Grid item xs={12}>
-          <div className="wrapper-header">
-            <div className="item-first">
-              <h2>
-                {project.name}
-              </h2><br/>
-              <span>{project.description}</span>
-            </div>
-            <div className="item-second">
-              <h2>
-                Active time 
-              </h2>
-              <br/>
-              <span>{moment(project.datecreate).format("DD/MM/YYYY")}</span>
-            </div>
-            <div className="item-third">
-              <div className="list-btn">
-                <AddSprint idproject={this.props.idproject}/>
-              </div>
-            </div>
-          </div>
-        </Grid>
         <Grid item xs={6}>
-        <OpenIconSpeedDial idproject={idproject}/>
+          <Card title={project.name} bordered={false} size="small">
+            <p>Description: {project.description}</p>
+            <p>Date create: {moment(project.datecreate).format("DD/MM/YYYY")}</p>
+          </Card>
         </Grid>
-          <Grid item xs={6}>
-          <Member idproject={idproject} selectUser={this.selectUser} />
-          </Grid>
-        <Grid item xs={12} style={{ marginTop: "20px" }}>
+        
+        <Grid item xs={6}>
+          <Card title="List Member" bordered={false} size="small">
+            <Member idproject={idproject} selectUser={this.selectUser} />
+            <AddSprint idproject={this.props.idproject}/>
+          </Card>
+        </Grid>
+
+        <Grid item xs={12}>
           <UI
             idproject={idproject}
             listsprint={listsprint}

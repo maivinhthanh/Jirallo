@@ -5,9 +5,9 @@ import BacklogContainer from './Backlog/BacklogContainer'
 
 export default function UI({idproject}) {
     return (
-            <Grid container spacing={0}>
-              <BacklogContainer idproject={idproject} />
-            </Grid>
+      <Grid container spacing={0}>
+        <BacklogContainer idproject={idproject} />
+      </Grid>
     )
 
   

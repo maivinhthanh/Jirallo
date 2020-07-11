@@ -385,13 +385,20 @@ async function calculatorProgressProject(idproject){
 
     const length = project.idissues.length === 0 ? 1 : project.idissues.length
     let count = 0
+    let obj = {}
     await project.idissues.forEach((item, index) => {
-        if(item.process === "done"){
-            count++
+        if(Object.keys(obj).includes(item.process)){
+            obj[item.process] = obj[item.process] + 1
         }
+        else{
+            obj[item.process] = 1
+        }
+        // if(item.process === "done"){
+        //     count++
+        // }
     })
 
-    return  {length, count}//Math.round(count/length*100)
+    return  {length, obj}//Math.round(count/length*100)
 
 }
 

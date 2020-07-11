@@ -69,6 +69,7 @@ export default function OpenIconSpeedDial() {
                 onClose={handleClose}
                 onOpen={handleOpen}
                 open={open}
+                direction="up"
             >
                 {actions.map(action => (
                         <SpeedDialAction

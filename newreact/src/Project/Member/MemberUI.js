@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+import {Row, Col} from "antd";
 import _ from 'lodash'
 
 const useStyles = makeStyles(theme => ({
@@ -26,12 +27,12 @@ export default function ImageAvatars({listMember,selectUser}) {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <Row gutter={24}>
       {
         _.map(listMember, (item,index) =>{
           return(
-            <div key={index} onClick={()=>selectUser(item._id, index, item.active)} 
-              style={item.active ? { backgroundColor :'#6A8DCD'}:{}, { marginTop: '10px'}}>
+            <Col xs={3} key={index} onClick={()=>selectUser(item._id, index, item.active)} 
+              style={item.active ? { backgroundColor :'#6A8DCD'}:{}}>
                {
                 _.get(item, ['id', 'image'])
                 ? <Avatar alt={ _.get(item, ['id', 'name'])} src={'/image/'+_.get(item, ['id', 'image'])} 
@@ -40,13 +41,13 @@ export default function ImageAvatars({listMember,selectUser}) {
                  
               }
               <p> { _.get(item, ['id', 'name']) && _.get(item, ['id', 'name']).split(' ').pop()} </p>
-            </div>
+            </Col>
             
           )
           
         })
       }
       
-    </div>
+    </Row>
   );
 }

@@ -11,7 +11,7 @@ import Issues from './Issues'
 const useStyles = makeStyles(theme => ({
     root: {
       '& > *': {
-        margin: theme.spacing(1),
+        margin: theme.spacing(0),
         width: '100%',
       },
       
@@ -56,7 +56,7 @@ export default function UI({ project, listissues, ChangeProcessIssue}) {
     if(numberColumn < 4){
       return (
         <Grid className={classes.root}>
-            <Grid container spacing={2}>
+            <Grid container spacing={1}>
               {
                 _.map(project.process, (ip, idp) =>{
                   return(

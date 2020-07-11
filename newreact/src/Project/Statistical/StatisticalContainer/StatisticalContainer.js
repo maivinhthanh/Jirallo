@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import CircularProgress from '@material-ui/core/CircularProgress';
 import CallApi from '../../../until/apiCaller';
 
 import UI from './UI'
@@ -11,7 +10,7 @@ class StatisticalContainer extends Component {
   constructor(props){
     super(props);
     this.state={
-      chart: {count: 0, length: 1}
+      chart: {obj: {}, length: 1}
     }
   }
   // shouldComponentUpdate
@@ -25,7 +24,6 @@ class StatisticalContainer extends Component {
     })
   }
   render() {
-      const { idproject, project } = this.props
       const { chart } = this.state
       return (
         <div>

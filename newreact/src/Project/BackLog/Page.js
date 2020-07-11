@@ -27,7 +27,7 @@ class BackLogPage extends Component {
         return (
           <div className='row'>
             <div className='col-md-1 item-left' style={{ background: '#6A8DCD'}}>
-            <MenuHeader/>
+            <MenuProject idproject={params.id}/>
             </div>
             <div className='col-md-11 item-right'>
             <UI idproject={params.id} />

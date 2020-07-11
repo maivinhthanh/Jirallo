@@ -63,7 +63,7 @@ export default function HeaderUI(props) {
             <Grid container spacing={0}>
                 <Grid item xs={6}>
                     <Paper component="form" className={classes.root}>
-                        <InputBase
+                        {/* <InputBase
                             value={projectName}
                             onChange={handleChange}
                             className={classes.input}
@@ -72,7 +72,7 @@ export default function HeaderUI(props) {
                         />
                         <IconButton onClick={handleSearchProject} type="button" className={classes.iconButton} aria-label="search">
                             <SearchIcon />
-                        </IconButton>
+                        </IconButton> */}
                     </Paper>
                 </Grid>
             </Grid>

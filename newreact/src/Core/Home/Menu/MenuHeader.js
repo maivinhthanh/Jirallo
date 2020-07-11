@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
@@ -42,24 +42,26 @@ const actions = [
 
 export default function OpenIconSpeedDial() {
   const classes = useStyles();
-  const [open] = React.useState(true);
-
+  const [open] = useState(true);
   return (
     <div className={classes.root}>
-      <SpeedDial
-        ariaLabel="SpeedDial openIcon example"
-        className={classes.speedDial}
-        icon={<SpeedDialIcon openIcon={<EditIcon />} />}
-        open={open}
-      >
-        {actions.map(action => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-          />
-        ))}
-      </SpeedDial>
+      {/* <Affix offsetBottom={bottom}> */}
+        <SpeedDial
+          ariaLabel="SpeedDial openIcon example"
+          className={classes.speedDial}
+          icon={<SpeedDialIcon openIcon={<EditIcon />} />}
+          open={open}
+          direction="up"
+        >
+          {actions.map(action => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              tooltipTitle={action.name}
+            />
+          ))}
+        </SpeedDial>
+      {/* </Affix> */}
     </div>
   );
 }
