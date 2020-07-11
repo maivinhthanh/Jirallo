@@ -5,7 +5,6 @@ import UI from './UI'
 import MenuProject from '../../Core/Home/Menu/MenuProject'
 import Toast from '../../Components/Toast'
 import * as action from './action'
-import MenuHeader from '../../Core/Home/Menu/MenuHeader'
 import Grid from '@material-ui/core/Grid';
 
 class BackLogPage extends Component {

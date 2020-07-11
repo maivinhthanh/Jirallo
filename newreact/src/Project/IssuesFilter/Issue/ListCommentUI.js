@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Avatar from '@material-ui/core/Avatar';
 import _ from 'lodash'
+import { Comment, Avatar } from 'antd';
+import moment from "moment";
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -43,14 +43,22 @@ export default function ListCommentUI({listcomment}) {
           listcomment.length !== 0 ?
           _.map(listcomment, (item, index)=>{
             return(
-              <Grid className={classes.wrapComment} container spacing={1} alignItems="flex-end" key={index}>
-                <Avatar alt="Avatar" src={item.author.image} className={classes.avatarComment}/>
-                <div className={classes.wrapContentComment} >
-                  <p className={classes.nameComment}>{item.author.name}</p>
-                  <p className={classes.contendComment}>{item.content}</p>
-                </div>
-                
-              </Grid>
+              <Comment
+                author={<h6>{item.author.name}</h6>}
+                avatar={
+                  <Avatar
+                    src={item.author.image}
+                    alt={item.author.name}
+                  />
+                }
+                content={
+                  <p>{item.content}</p>
+                }
+                datetime={
+                  <span>{moment(item.datecreate).fromNow()}</span>
+                }
+              />
+              
             )
           })
           :<div></div>
