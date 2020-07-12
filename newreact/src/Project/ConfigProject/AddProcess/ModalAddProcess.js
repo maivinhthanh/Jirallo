@@ -39,6 +39,7 @@ function SimpleModal(props) {
   const saveName = () => {
     let newlist = [...props.project.process, nameProcess.toLowerCase() ]
     props.AddProcess(props.idproject, newlist)
+    handleClose()
   }
 
   const handleOpen = () => {
