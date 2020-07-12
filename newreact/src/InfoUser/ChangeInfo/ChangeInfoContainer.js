@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import UI from './ChangeInfoUI'
 import * as action from './action'
+import _ from 'lodash'
 
 class ChangeInfoContainer extends Component {
   componentWillMount(){
@@ -13,6 +14,12 @@ class ChangeInfoContainer extends Component {
     if(this.props.infouser.name){
       document.title = this.props.infouser.name
 
+    }
+  }
+  componentDidUpdate(prevProps) {
+    const { iduser } = this.props
+    if (!_.isEqual(prevProps.infouser, this.props.infouser)) {
+      this.props.GetInfoUser(iduser)
     }
   }
   render() {
