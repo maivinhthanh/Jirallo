@@ -10,6 +10,7 @@ import * as action from './action'
 import './project.css'
 import _ from 'lodash'
 import Radio from '@material-ui/core/Radio';
+import { successModal } from '../../../Components/modalStatus';
 
 class EditProjectUI extends Component {
   constructor(props) {
@@ -37,6 +38,17 @@ class EditProjectUI extends Component {
     this.props.ViewListProject()
 
   }
+  componentDidUpdate(preProps){
+    const { project } = this.props
+    if(!_.isEqual(preProps.project, project)) {
+      this.setState({
+        nameproject: project.name,
+        image: project.image,
+        description: project.description,
+        datecreate: project.datecreate,
+      })
+    }
+  }
   handleChangeName(e) {
     this.setState({ nameproject: e.target.value })
   }
@@ -63,9 +75,12 @@ class EditProjectUI extends Component {
     data.append('name', this.state.nameproject)
     if (!_.isEqual(this.props.project._id, this.state.checked)) {
       this.props.EditProject(this.state.checked._id, data)
+      successModal()
     }
     else {
       this.props.EditProject(this.props.project._id, data)
+      successModal()
+
     }
   }
   handleChange = (e) => {

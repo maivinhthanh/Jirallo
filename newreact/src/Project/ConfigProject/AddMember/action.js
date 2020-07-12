@@ -53,14 +53,16 @@ export const findUserLikeEmail = data => {
       },
       'token'
       ).then(response => {
-        if (response.status === 200){
-          dispatch(addMemberSuccess(response.data))
-        } else {
-          dispatch(Notification.Error(response.data));
-          setTimeout(() => {
-            dispatch(Notification.hideNotification())
-        }, 5000)
-        }
+        // if (response.status === 201){
+        //   dispatch(Notification.CreateSuccess({message: 'Thành công'}))
+        //   dispatch(addMemberSuccess(response.data))
+        // } else {
+        //   dispatch(Notification.Error(response.data));
+        //   setTimeout(() => {
+        //     dispatch(Notification.hideNotification())
+        // }, 5000)
+        // }
+        dispatch(addMemberSuccess(response.data))
       }).catch(err => {
         dispatch(Notification.Error(err));
         setTimeout(() => {
