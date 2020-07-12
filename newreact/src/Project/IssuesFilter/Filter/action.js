@@ -12,9 +12,7 @@ export const SelectIssues = (idissues, ) =>{
         return CallApi(`issues/getInfoIssues/${idissues}`,'GET',{
         }).then (response =>{
             if(response.status === 200){
-                
                 dispatch(selectIssues(response.data.issues));
-                
             }
             else {
                 dispatch(Notification.Error(response.data))

@@ -1,168 +1,114 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import { Paper, Select, MenuItem } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
-import CKEditor from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Card, Row, Col, Select, Input, Button } from 'antd';
+import Comment from './CommentContainer';
 
-import Comment from './CommentContainer'
-
+const { TextArea } = Input;
+const { Option } = Select;
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
   issue: {
     marginTop: '30px'
-  },
-  detail: {
-    paddingTop: '10px',
-    paddingLeft: '10px'
   },
   desc: {
       marginTop: '10px',
       textAlign: 'left'
   },
-  descript:{
-    display: 'flex',
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '100%',
-      height: theme.spacing(16),
-      border: '1px black solid',
-      borderRadius: '5px'
-    },
-  },
-  textEditor:{
-    width: "100%"
-  },
-  wrapInfo: {
-    border: "1px solid black",
-    borderRadius: "5px"
-  },
-  wrapInfoContent :{
-    position: "relative",
-    height: "50px",
-  },
-  avatarInfo:{
-    position: "absolute"
-  },
-  nameInfo:{
-    position: "absolute",
-    left: "50px",
-    top: "10px",
-  }
+  
 }));
 
 export default function IssueUI({issue, EditDescriptIssues, listMember, EditAssignee}) {
   const classes = useStyles();
-  const [user] = useState()
-  useEffect(() => {
-    
-  }, [issue])
   const [descript, setDescript] = useState(false);
 
   const handleChange = (e) =>{
-    EditAssignee(e.target.value)
+    EditAssignee(e)
+  }
+
+  const handleChangeDescription = (e) =>{
+    setDescript(e.target.value)
+  }
+
+  const submitDescript = () =>{
+    EditDescriptIssues(descript)
   }
 
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.issue}>
         <Toolbar variant="dense">
-          
           <Typography variant="h6" color="inherit">
             {issue.name}
           </Typography>
         </Toolbar>
       </AppBar>
       <Grid container>
+        <Grid item xs={8}>
+            <Grid container>
+              <Grid item xs={12}>
+                <h6 className={classes.desc}>Descript</h6>
+              </Grid>
+            </Grid>
+            <Grid container>
+              <Grid item xs={12}>
+                <TextArea defaultValue={issue.descript} key={issue.descript}
+                  onChange={handleChangeDescription} />
+                <Button type="primary" onClick={submitDescript} style={{float: "right"}}>
+                  Save
+                </Button>
+              </Grid>
+            </Grid>
             
-            <Grid item xs={8}>
+            <Grid container>
+              <Grid item xs={12}>
+                <Comment idissue={issue._id}/>
+              </Grid>
+            </Grid>
+        </Grid>
+        <Grid item xs={4}>
+          <Card title="Reporter">
+            <Row>
+              <Col sm={4}>
+                <Avatar alt="Reporter" src={issue.repoter.image}/>
+              </Col>
+              <Col sm={20}>
+                <h6>{issue.repoter.name}</h6>
+              </Col>
+            </Row>
+          </Card>
+          <Card title="Assignee">
+            <Row>
+              <Col sm={4}>
+                <Avatar alt="Assignee" src={issue.assignee.image} /> {issue.assignee.name}
+              </Col>
+              <Col sm={20}>
+                <Select style={{ width: "80%" }} key={issue.assignee.name}
+                  defaultValue={issue.assignee.name}
+                  onChange={handleChange}
+                >
+                  {
+                    listMember.map((item, index)=>{
+                      return (
+                        item.id && <Option value={item.id._id} key={index}>{item.id.name}</Option>
+                      )
+                    })
+                  }
+                </Select>
+              </Col>
+            </Row>
+            <Row>
               
-                <Grid container>
-                  <Grid item xs={12}>
-                    <h3 className={classes.desc}>Descript</h3>
-                  </Grid>
-                </Grid>
-                <Grid container>
-                  <Grid item xs={12}>
-                    <Paper className={classes.descript}>
-                      <CKEditor 
-                        editor={ ClassicEditor }
-                        data={issue.descript}
-                        onInit={ editor => {
-                          editor.setData( '' )
-                            // You can store the "editor" and use when it is needed.
-                        } }
-                        onChange={ ( event, editor ) => {
-                            const data = editor.getData();
-                            setDescript(data)
-                        } }
-                        onBlur={ ( event, editor ) => {
-                          EditDescriptIssues(descript)
-                        } }
-                        onFocus={ ( event, editor ) => {
-                        } }
-                      />
-                      
-                    </Paper>
-                   
-                  </Grid>
-                </Grid>
-                
-                <Grid container>
-                  <Grid item xs={12}>
-                    <Comment idissue={issue._id}/>
-                  </Grid>
-                </Grid>
-            </Grid>
-            <Grid item xs={4}>
-              <Grid container className={classes.wrapInfo}>
-                <Grid item xs={12}>
-                  <b>Reporter</b>
-                </Grid>
-                <Grid item xs={12} className={classes.wrapInfoContent}>
-                  <Avatar alt="Reporter" src={issue.repoter.image} className={classes.avatarInfo}/>
-                  <h6 className={classes.nameInfo}>{issue.repoter.name}</h6>
-                </Grid>
-              </Grid>
-              <br/>
-              <Grid container className={classes.wrapInfo}>
-                <Grid item xs={12} >
-                  <b>Assignee</b>
-                </Grid>
-                <Grid item xs={12} className={classes.wrapInfoContent}>
-                  <Avatar alt="Assignee" src={issue.assignee.image} className={classes.avatarInfo}/>
-                  <h6 className={classes.nameInfo}>{issue.assignee.name}</h6>
-                </Grid>
-                <Grid item xs={12} className={classes.wrapInfoContent}>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={user}
-                    onChange={handleChange}
-                  >
-                    {
-                      listMember.map((item, index)=>{
-                        return (
-                          item.id && <MenuItem value={item.id._id} key={index}>{item.id.name}</MenuItem>
-                        )
-                      })
-                    }
-                    
-                  </Select>
-                </Grid>
-                
-              </Grid>
-            </Grid>
-          </Grid>
+            </Row>
+          </Card>
+        </Grid>
+      </Grid>
     </div>
   );
 }

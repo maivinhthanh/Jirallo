@@ -353,12 +353,6 @@ exports.getInfoIssues = async (req, res, next) => {
             },
             select:['idsprint','name']
         }).populate({
-            path: 'idepic',
-            match:{
-                hidden: false,
-            },
-            select:['idepic','name']
-        }).populate({
             path: 'idproject',
             match:{
                 hidden: false,
