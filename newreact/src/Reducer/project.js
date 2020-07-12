@@ -20,11 +20,9 @@ const initialState = {
     activesprint: '',
     description: '',
     image: '',
+    chart: {count: 0, length: 1},
 };
 
-const updatestate = (state, action) =>{
-   return updateObject( state, action.data);
-}
 const addProcess = (state, action) =>{
     return updateObject( state, action.data);
 }
@@ -38,12 +36,28 @@ const deleteProcess = (state, action) => {
     data.process.splice(index, 1)
     return data
 }
+const addreport = (state, action) => {
+    let data = _.cloneDeep(state)
+    data.idreport = action.data._id
+    return data
+}
+const getInfoProject = (state, action) => {
+    state.idreport = null
+    let data = updateObject( state, action.data)
+    return data
+}
+const chart = (state, action) => {
+    state.chart = action.data
+    return state
+}
 const projectReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case 'GET_INFO_PROJECT': return updatestate( state, action );
+        case 'ADD_REPORT': return addreport( state, action );
+        case 'GET_INFO_PROJECT': return getInfoProject( state, action );
         case 'ADD_PROCESS': return addProcess( state, action );
         case 'ADD_MEMBER_SUCCESS' : return addMemberAct(state, action);
         case 'DELETE_PROCESS': return deleteProcess(state, action);
+        case 'GET_INFO_PROJECT_CHART': return chart(state, action);
         default: return state;
     }
 };

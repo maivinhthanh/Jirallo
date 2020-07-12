@@ -18,6 +18,7 @@ import Login from './Core/Login/LoginContainer'
 import ForgotPassword from './Core/ForgotPassword/ForgotPassword'
 import ChangePassword from './Core/ChangPassword/ChangePassword'
 
+import 'antd/dist/antd.css';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

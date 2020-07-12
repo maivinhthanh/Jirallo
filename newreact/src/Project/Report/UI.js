@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default React.forwardRef( function UI({idproject}) {
+export default React.forwardRef( function UI({idproject, history}) {
     const classes = useStyles();
     
     // const [selected, setSelected] = React.useState(null);
@@ -115,7 +115,7 @@ export default React.forwardRef( function UI({idproject}) {
             <div className="row">
               <div className="col-3" >
                 <div className={`position-fixed + ${classes.content}`} >
-                  <Content idproject={idproject} selectContent={handleSelect}/>
+                  <Content idproject={idproject} history={history} selectContent={handleSelect}/>
                 </div>
               </div>
 

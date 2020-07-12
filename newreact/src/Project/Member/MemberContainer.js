@@ -12,9 +12,9 @@ class MemberContainer extends Component {
   componentWillMount() {
     this.props.GetListUserInProject(this.props.idproject)
   }
-  // shouldComponentUpdate(nextProps, nextState){
-  //     return this.props.listMember != nextProps.listMember 
-  //   }
+  shouldComponentUpdate(nextProps, nextState){
+    return this.props.listMember !== nextProps.listMember 
+  }
   selectUser = (id, index, status) =>{
     if(status === true){
       this.props.selectUser(null)
@@ -27,10 +27,9 @@ class MemberContainer extends Component {
   }
   render() {
       const { listMember } = this.props
-
       return (
         <Grid container >
-              <UI listMember={listMember} selectUser={(id, index, status)=>this.selectUser(id, index, status)} />
+          <UI listMember={listMember} selectUser={(id, index, status)=>this.selectUser(id, index, status)} />
         </Grid>
       )
     

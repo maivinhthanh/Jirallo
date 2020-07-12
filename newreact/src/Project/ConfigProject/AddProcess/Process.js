@@ -15,7 +15,6 @@ class AddProcessContainer extends Component {
         this.props.AddProcess(this.props.idproject, arr)
     }
     DeleteProcess = (name) =>{
-        console.log(name)
         this.props.DeleteProcess(this.props.idproject,name)
     }
     render() {

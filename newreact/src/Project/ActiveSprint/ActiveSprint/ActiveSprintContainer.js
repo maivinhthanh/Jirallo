@@ -30,15 +30,15 @@ class ActiveSprintContainer extends Component {
   render() {
       const { idproject, project, listissues, ChangeProcessIssue } = this.props
       return (
-        <div>
-          <Grid item xs={12} >
+        <Grid container>
+          <Grid item xs={12} style={{margin: '10px'}}>
             <Member idproject={idproject} selectUser={this.selectUser}/>
           </Grid>
-          <Grid item xs={12} style={{marginTop: '20px'}}>
+          <Grid item xs={12}>
             <UI idproject={idproject} project={project} listissues={listissues} ChangeProcessIssue={ChangeProcessIssue}/>
           </Grid>
           
-          </div>
+        </Grid>
       )
     
   }

@@ -1,11 +1,11 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
+// import InputBase from '@material-ui/core/InputBase';
+// import IconButton from '@material-ui/core/IconButton';
+// import SearchIcon from '@material-ui/icons/Search';
 import Grid from '@material-ui/core/Grid';
-import _ from 'lodash'
+// import _ from 'lodash'
 
 const useStyles = makeStyles(theme => ({
     main: {
@@ -34,28 +34,28 @@ const useStyles = makeStyles(theme => ({
 export default function HeaderUI(props) {
 
     const classes = useStyles();
-    const [projectName, setProject] = React.useState('');
+    // const [projectName, setProject] = React.useState('');
 
-    const handleChange = (e) => {
-        setProject(e.target.value)
-    }
+    // const handleChange = (e) => {
+    //     setProject(e.target.value)
+    // }
     
-    const handleSearchProject = () => {
-        const { handleSearch, ViewListProject } = props
+    // const handleSearchProject = () => {
+    //     const { handleSearch, ViewListProject } = props
         
-        if (!_.isEmpty(projectName)) {
-            let filter = _.filter(props.listproject, (item) => item.name === projectName.replace(/\s/g, '') )
-            if (!_.isEmpty(filter)) {
-                handleSearch(filter[0]._id)
-            }
-            else {
-                ViewListProject()
-            }
-        }
-        else {
-            ViewListProject()
-        }
-    }
+    //     if (!_.isEmpty(projectName)) {
+    //         let filter = _.filter(props.listproject, (item) => item.name === projectName.replace(/\s/g, '') )
+    //         if (!_.isEmpty(filter)) {
+    //             handleSearch(filter[0]._id)
+    //         }
+    //         else {
+    //             ViewListProject()
+    //         }
+    //     }
+    //     else {
+    //         ViewListProject()
+    //     }
+    // }
   
 
     return (
@@ -63,7 +63,7 @@ export default function HeaderUI(props) {
             <Grid container spacing={0}>
                 <Grid item xs={6}>
                     <Paper component="form" className={classes.root}>
-                        <InputBase
+                        {/* <InputBase
                             value={projectName}
                             onChange={handleChange}
                             className={classes.input}
@@ -72,7 +72,7 @@ export default function HeaderUI(props) {
                         />
                         <IconButton onClick={handleSearchProject} type="button" className={classes.iconButton} aria-label="search">
                             <SearchIcon />
-                        </IconButton>
+                        </IconButton> */}
                     </Paper>
                 </Grid>
             </Grid>

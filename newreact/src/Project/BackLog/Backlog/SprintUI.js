@@ -102,7 +102,7 @@ const useStyles = makeStyles(theme => ({
 const StyledBreadcrumb = withStyles(theme => ({
   root: {
     backgroundColor: theme.palette.grey[100],
-    height: 24,
+    height: 20,
     color: theme.palette.grey[800],
     fontWeight: theme.typography.fontWeightRegular,
     "&:hover, &:focus": {
@@ -177,15 +177,15 @@ export default function PrimarySearchAppBar(props) {
     alert("You clicked a breadcrumb.");
   };
   const handleSubmit = () => {
-    let sprint = 
-      {
-        name: valueName,
-        timebegin: selectedDate,
-        deadline: selectedDeadline
-      }
-      console.log(idActiveSprint)
+    // let sprint = 
+    //   {
+    //     name: valueName,
+    //     timebegin: selectedDate,
+    //     deadline: selectedDeadline
+    //   }
+    //   console.log(idActiveSprint)
       console.log(idActive)
-      console.log(document.getElementById('modal_edit'))
+    //   console.log(document.getElementById('modal_edit'))
     // props.updateSprint(props.sprint._id,sprint )
   }
   const setIdActive = (id) => {
@@ -204,9 +204,9 @@ export default function PrimarySearchAppBar(props) {
             <InputField
               nameInput={"issue"}
               sprint={props.sprint}
-              size="30px"
+              size="20px"
               arrow="10px"
-              margin="10px"
+              margin="5px"
               changeName={(data, name) =>
                 updateNameSprint(data, props.sprint._id)
               }

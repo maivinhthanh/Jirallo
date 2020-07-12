@@ -16,7 +16,7 @@ export default function UI({idproject}) {
             </Grid>
 
             <Grid item xs={9}>
-              <Issue />
+              <Issue idproject={idproject}/>
             </Grid>
 
           </Grid>

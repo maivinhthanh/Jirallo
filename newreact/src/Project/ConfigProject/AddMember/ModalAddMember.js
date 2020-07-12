@@ -9,11 +9,6 @@ import _ from 'lodash'
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 
-
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',

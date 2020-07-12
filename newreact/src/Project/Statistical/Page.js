@@ -15,33 +15,30 @@ class ActiveSprintPage extends Component {
     return nextProps.authProject.hasAuth !== this.props.authProject.hasAuth
   }
   componentDidMount(){
-    document.title = "Active Sprint"
+    document.title = "Statistical"
   }
   render() {
-      const { match: { params } } = this.props
-      const { note, authProject } = this.props
-      if(authProject.hasAuth === true){
-        return (
-          <div className='row'>
-            <div className='col-md-1 item-left' style={{ background: '#6A8DCD'}}>
-              <MenuProject idproject={params.id}/>
-            </div>
-            <div className='col-md-11 item-right' style={{ padding: '0 0px'}}>
-              <UI idproject={params.id}/>
-              <Toast open={note.show} message={note.message} type={note.type} />
-            </div>
-          </div>
-        )
-      }
-      else{
-        return(
-          <Grid >
-            <MenuProject idproject={params.id}/>
-            <p>Project không tồn tại</p>
-            <Toast open={note.show} message={note.message} type={note.type} />
-          </Grid>
-        )
-      }
+    const { match: { params } } = this.props
+    const { note, authProject } = this.props
+    if(authProject.hasAuth === true){
+      return (
+        <div >
+          
+          <MenuProject idproject={params.id}/>
+          <UI idproject={params.id}/>
+          <Toast open={note.show} message={note.message} type={note.type} />
+        </div>
+      )
+    }
+    else{
+      return(
+        <Grid  >
+          <MenuProject idproject={params.id}/>
+          <p>Project không tồn tại</p>
+          <Toast open={note.show} message={note.message} type={note.type} />
+        </Grid>
+      )
+    }
     
   }
 }

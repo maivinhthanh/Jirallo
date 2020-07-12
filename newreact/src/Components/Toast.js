@@ -19,7 +19,6 @@ export default class CustomizedSnackbars extends Component {
     });
   };
   render(){
-    console.log(this.props.message)
     return (
         <div >
           <Snackbar

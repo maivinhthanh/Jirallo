@@ -26,11 +26,11 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.background.paper,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
+        padding: theme.spacing(2, 4, 2),
     },
     root: {
         '& > *': {
-          margin: theme.spacing(1),
+          margin: theme.spacing(0),
           width: 400,
         },
       },
@@ -49,7 +49,6 @@ function IssueAdd(props) {
         }
     })
     let item = props.item
-    let modal = true
     const fill = props.white ? 'white' : 'white'
     const [{ isOver }, drop] = useDrop({
         accept: 'issue',
@@ -61,7 +60,6 @@ function IssueAdd(props) {
         }),
     })
     const showInfomation = (id) => {
-        modal = true
         props.showInfomationIssue(id)
         setOpen(true);
     }
@@ -73,7 +71,7 @@ function IssueAdd(props) {
             position: 'relative',
             width: '100%',
             height: '100%',
-            padding: '7px 0px',
+            padding: '1px 0px',
         }}>
 
             <div ref={drop} style={{ position: 'relative', width: '100%', height: '100%', }} >

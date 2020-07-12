@@ -177,7 +177,6 @@ exports.ViewListProject = async (req, res, next) => {
 
         const iduser = req.userId
         const user = await User.findById(iduser).populate('idproject')
-        
         res.status(200).json({ listproject: user.idproject})
     }
     catch(err) {
@@ -368,6 +367,48 @@ exports.deleteProcess = async (req, res, next) => {
         },{ new: true })
 
         res.status(200).json(project)
+    }
+    catch(err) {
+        
+        next(err)
+    }
+}
+
+async function calculatorProgressProject(idproject){
+    const project = await Project.findById(idproject).populate({
+        path: 'idissues',
+        match:{
+            hidden: false,
+        },
+        select:['idissues','name', 'assignee', 'process', 'type', 'priority', 'tag']
+    })
+
+    const length = project.idissues.length === 0 ? 1 : project.idissues.length
+    let count = 0
+    let obj = {}
+    await project.idissues.forEach((item, index) => {
+        if(Object.keys(obj).includes(item.process)){
+            obj[item.process] = obj[item.process] + 1
+        }
+        else{
+            obj[item.process] = 1
+        }
+        // if(item.process === "done"){
+        //     count++
+        // }
+    })
+
+    return  {length, obj}//Math.round(count/length*100)
+
+}
+
+exports.calProgressProject = async (req, res, next) => {
+    try{
+        const idproject = req.params.idproject
+
+        const progress = await calculatorProgressProject(idproject)
+
+        res.status(200).json(progress)
     }
     catch(err) {
         

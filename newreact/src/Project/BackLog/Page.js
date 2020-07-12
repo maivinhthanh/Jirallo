@@ -5,7 +5,6 @@ import UI from './UI'
 import MenuProject from '../../Core/Home/Menu/MenuProject'
 import Toast from '../../Components/Toast'
 import * as action from './action'
-import MenuHeader from '../../Core/Home/Menu/MenuHeader'
 import Grid from '@material-ui/core/Grid';
 
 class BackLogPage extends Component {
@@ -26,8 +25,8 @@ class BackLogPage extends Component {
       if(authProject.hasAuth === true){
         return (
           <div className='row'>
-            <div className='col-md-1 item-left' style={{ background: 'blue'}}>
-            <MenuHeader/>
+            <div className='col-md-1 item-left' style={{ background: '#6A8DCD'}}>
+            <MenuProject idproject={params.id}/>
             </div>
             <div className='col-md-11 item-right'>
             <UI idproject={params.id} />

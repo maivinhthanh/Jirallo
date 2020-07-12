@@ -20,10 +20,6 @@ const changeActive = (state, action) =>{
 
 const getListUserInProject = (state, action) =>{
     let cloneState = _.clone(state)
-    // action.data.map((item, index) =>{
-    //     let newdata = updateObject(item.id, {active: false})
-    //     cloneState = cloneState.push(newdata)
-    // })
     cloneState = _.clone(action.data)
    return cloneState
 }

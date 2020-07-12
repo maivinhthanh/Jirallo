@@ -1,32 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import moment from "moment"
 import UI from "./BacklogUI";
 import * as action from "./action";
 import { Grid } from "@material-ui/core";
 import AddSprint from "./addSprint";
 import Member from "../../Member/MemberContainer";
 import "../../BackLog/assets/styles.css";
-import {
-  createMuiTheme,
-  makeStyles
-} from "@material-ui/core/styles";
-import { ThemeProvider } from "@material-ui/styles";
-import Button from "@material-ui/core/Button";
-import { green } from "@material-ui/core/colors";
-import OpenIconSpeedDial from "../../../Core/Home/Menu/MenuProjectUI2";
+import { Card } from "antd";
 
-const useStyles = makeStyles(theme => ({
-  margin: {
-    margin: theme.spacing(1)
-  }
-}));
-
-const theme = createMuiTheme({
-  palette: {
-    primary: green
-  }
-});
 class BacklogContainer extends Component {
   constructor(props) {
     super(props);
@@ -69,62 +51,21 @@ class BacklogContainer extends Component {
     const { idproject, listsprint, project } = this.props;
     return (
       <Grid container>
-        <Grid item xs={12}>
-          <div className="wrapper-header">
-            <div className="item-first">
-              <h2>
-                Welcome to project
-              </h2><br/>
-              <span>{project.name}</span>
-            </div>
-            <div className="item-second">
-              <h2>
-                Active time 
-              </h2>
-              <br/>
-              <span>{project.datecreate && project.datecreate.substring(0,10)}</span>
-            </div>
-            <div className="item-third">
-              <h2> Description </h2>
-              <br />
-              <span>{project.description}</span>
-              {/* <Select
-                open={open}
-                onClose={this.handleClose}
-                onOpen={this.handleOpen}
-                value={status}
-                onChange={this.handleChange}
-                inputProps={{
-                  name: "age",
-                  id: "demo-controlled-open-select"
-                }}
-              >
-              {
-                _.map(project.process, (item) => {
-                 return (
-                  <MenuItem value={item}>
-                  <em>{item}</em>
-                </MenuItem>
-                 )
-                })
-              }
-              </Select> */}
-            </div>
-            <div className="item-four">
-              <div className="list-btn">
-                <h2>Action</h2> <br/>
-                <AddSprint idproject={this.props.idproject}/>
-              </div>
-            </div>
-          </div>
-        </Grid>
         <Grid item xs={6}>
-        <OpenIconSpeedDial idproject={idproject}/>
+          <Card title={project.name} bordered={false} size="small">
+            <p>Description: {project.description}</p>
+            <p>Date create: {moment(project.datecreate).format("DD/MM/YYYY")}</p>
+          </Card>
         </Grid>
-          <Grid item xs={6}>
-          <Member idproject={idproject} selectUser={this.selectUser} />
-          </Grid>
-        <Grid item xs={12} style={{ marginTop: "20px" }}>
+        
+        <Grid item xs={6}>
+          <Card title="List Member" bordered={false} size="small">
+            <Member idproject={idproject} selectUser={this.selectUser} />
+            <AddSprint idproject={this.props.idproject}/>
+          </Card>
+        </Grid>
+
+        <Grid item xs={12}>
           <UI
             idproject={idproject}
             listsprint={listsprint}

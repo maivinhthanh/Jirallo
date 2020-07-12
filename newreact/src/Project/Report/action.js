@@ -61,6 +61,8 @@ export const GetReportInProject = (id) =>{
     }
 }
 
+
+
 export const auth = (hasAuth,position) => {
     return {
         type: 'AUTHORIZATION',
@@ -73,6 +75,40 @@ export const HasAuth = (idproject) => {
         .then (response =>{
             if(response.status === 200){
                 dispatch(auth(response.data.hasAuth, response.data.position));
+            }
+            else {
+                dispatch(Notification.Error(response.data))
+                setTimeout(() => {
+                    dispatch(Notification.hideNotification())
+                }, 5000)
+            }
+        })
+        .catch(error =>{
+            dispatch(Notification.ErrorAPI(error));
+            setTimeout(() => {
+                dispatch(Notification.hideNotification())
+            }, 5000)
+        })
+    }
+}
+export const addreport = (data) =>{
+    return {
+        type:'ADD_REPORT',
+        data: data
+    }
+}
+
+export const CreateReport = (id, report) =>{
+    return dispatch =>{
+        return CallApi(`report/createReport/${id}`,'POST',{
+            name: report.name,
+            author: report.author,
+            teacher: report.teacher,
+            year: report.year,
+        }).then (response =>{
+            if(response.status === 200){
+                dispatch(addreport(response.data.newreport));
+                
             }
             else {
                 dispatch(Notification.Error(response.data))

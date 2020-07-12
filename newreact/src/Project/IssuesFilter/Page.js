@@ -9,10 +9,12 @@ import * as action from './action'
 import * as actionFilter from './Filter/action'
 
 class IssuesFilterPage extends Component {
+
   async componentWillMount(){
     this.props.HasAuth(this.props.match.params.idproject)
     this.props.ViewInfoProject(this.props.match.params.idproject)
     this.props.ShowListSprint(this.props.match.params.idproject)
+    this.props.GetListUserInProject(this.props.match.params.idproject)
     if(this.props.match.params.idissues === 'null')
     {
 
@@ -68,6 +70,8 @@ const mapDispatchToProps = dispatch => {
       SelectIssues:(issue) => dispatch( actionFilter.SelectIssues(issue) ),
       GetComment:(idissue) => dispatch( actionFilter.GetComment(idissue) ),
       ShowListSprint:(idproject) => dispatch( action.ShowListSprint(idproject) ),
+      GetListUserInProject: (id) =>dispatch( action.GetListUserInProject(id) ), 
+
     }
 }
 

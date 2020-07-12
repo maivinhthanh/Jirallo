@@ -18,25 +18,23 @@ class ReportPage extends Component {
   }
   render() {
       const { match: { params } } = this.props
-      const { note, project, authProject, report} = this.props
+      const { note, project, authProject, report, history} = this.props
       if(authProject.position === 'manager'){
         if(project.idreport === null){
           return (
             <div >
-              
-                  <MenuProject idproject={params.id}/>
-                  <CreateReport idproject={params.id}/>
-                  <Toast open={note.show} message={note.message} type={note.type} />
+              <MenuProject idproject={params.id}/>
+              <CreateReport idproject={params.id}/>
+              <Toast open={note.show} message={note.message} type={note.type} />
             </div>
           )
         }
         else{
           return (
             <div >
-              
-                  <MenuProject idproject={params.id}/>
-                  <EditUI idproject={params.id}/>
-                  <Toast open={note.show} message={note.message} type={note.type} />
+              <MenuProject idproject={params.id}/>
+              <EditUI idproject={params.id} history={history} />
+              <Toast open={note.show} message={note.message} type={note.type} />
             </div>
           )
         }
@@ -44,10 +42,9 @@ class ReportPage extends Component {
       else{
         return(
           <div >
-              
-                <MenuProject idproject={params.id}/>
-                <ViewUI idproject={params.id} report={report}/>
-                <Toast open={note.show} message={note.message} type={note.type} />
+            <MenuProject idproject={params.id}/>
+            <ViewUI idproject={params.id} report={report}/>
+            <Toast open={note.show} message={note.message} type={note.type} />
           </div>
         )
       }

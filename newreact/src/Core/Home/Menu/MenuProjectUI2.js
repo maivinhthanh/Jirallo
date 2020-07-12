@@ -33,7 +33,8 @@ export default function OpenIconSpeedDial({idproject}) {
     { icon: <Link to={`/active/${idproject}`}><Icon className="fas fa-columns" /></Link>, name: 'Active Sprint' },
     { icon: <Link to={`/config/${idproject}`}><Icon className="fas fa-cog" /></Link>, name: 'Config' },
     { icon: <Link to={`/issues/${idproject}/null`} ><Icon className="fas fa-tasks" /></Link>, name: 'Issues' },
-    { icon: <Link to={`/report/${idproject}`} ><Icon className="fas fa-book" /></Link>, name: 'Report' }
+    { icon: <Link to={`/report/${idproject}`} ><Icon className="fas fa-book" /></Link>, name: 'Report' },
+    { icon: <Link to={`/statistical/${idproject}`} ><Icon className="fas fa-chart-area" /></Link>, name: 'Statistical' }
   ];
 
   const handleVisibility = () => {
@@ -50,27 +51,26 @@ export default function OpenIconSpeedDial({idproject}) {
 
   return (
     <div className={classes.root}>
-            
-            <SpeedDial
-                ariaLabel="SpeedDial openIcon example"
-                className={classes.speedDial}
-                hidden={hidden}
-                icon={<SpeedDialIcon icon={<Icon className="fas fa-folder" />} openIcon={<EditIcon />} />}
-                onClose={handleClose}
-                onOpen={handleOpen}
-                open={open}
-                direction={'right'}
-            >
-                {actions.map(action => (
-                        <SpeedDialAction
-                            key={action.name}
-                            icon={action.icon}
-                            tooltipTitle={action.name}
-                            onClick={handleClose}
-                        />
-                ))}
-            </SpeedDial>
-            <Button onClick={handleVisibility}></Button>
+      <SpeedDial
+        ariaLabel="SpeedDial openIcon example"
+        className={classes.speedDial}
+        hidden={hidden}
+        icon={<SpeedDialIcon icon={<Icon className="fas fa-folder" />} openIcon={<EditIcon />} />}
+        onClose={handleClose}
+        onOpen={handleOpen}
+        open={open}
+        direction={'right'}
+      >
+        {actions.map(action => (
+          <SpeedDialAction
+            key={action.name}
+            icon={action.icon}
+            tooltipTitle={action.name}
+            onClick={handleClose}
+          />
+        ))}
+      </SpeedDial>
+      <Button onClick={handleVisibility}></Button>
     </div>
   );
 }

@@ -35,6 +35,30 @@ class ContentContainer extends Component {
         }
         this.props.EditCover(this.props.report._id, data)
     }
+    EditNameStudent = (value, index) =>{
+        let author = this.props.report.author
+        author[index].name = value
+        const data = {
+            name: this.props.report.name,
+            author: author,
+            teacher: this.props.report.teacher,
+            year: this.props.report.year,
+            preface: this.props.report.preface
+        }
+        this.props.EditCover(this.props.report._id, data)
+    }
+    EditCodeStudent = (value, index) =>{
+        let author = this.props.report.author
+        author[index].code = value
+        const data = {
+            name: this.props.report.name,
+            author: author,
+            teacher: this.props.report.teacher,
+            year: this.props.report.year,
+            preface: this.props.report.preface
+        }
+        this.props.EditCover(this.props.report._id, data)
+    }
     render() {
         const { report } = this.props
         return (
@@ -42,7 +66,9 @@ class ContentContainer extends Component {
                 <UI info={report} 
                     EditName={this.EditName}
                     EditYear={this.EditYear}
-                    EditTeacher={this.EditTeacher}/>
+                    EditTeacher={this.EditTeacher}
+                    EditNameStudent={this.EditNameStudent}
+                    EditCodeStudent={this.EditCodeStudent}/>
             </div>
         )
         

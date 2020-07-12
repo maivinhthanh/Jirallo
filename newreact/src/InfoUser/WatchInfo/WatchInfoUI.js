@@ -4,8 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import DatePicker from '../../Components/DatePicker'
-
 class WatchInfoUI extends Component {
   constructor(props) {
     super(props);  
@@ -64,7 +62,6 @@ class WatchInfoUI extends Component {
             </Grid>
             <Grid justify="center" item xs={12} sm={8}>
             <TextField disabled name="birthdate" fullWidth value={this.state.birthdate && this.state.birthdate.substring(0,10)} />
-              {/* <DatePicker label={""} date={this.state.birthdate} changedate={this.changedate}/> */}
             </Grid>
             <Grid justify="center" item xs={6} sm={6}>
             

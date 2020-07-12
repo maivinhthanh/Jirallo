@@ -40,8 +40,19 @@ const changeProcessIssue = (state, action) =>{
     return updateObject(state,action.data )
 }
 const selectIssuesInFilter = (state, action) =>{
-    let issue = updateObject(state,action.data )
-    issue.comment = state.comment
+    let issue = action.data
+    console.log(issue)
+    if(!issue.descript){
+        issue.descript = ""
+    }
+    if(!issue.assignee){
+        issue.assignee = {
+            image: null,
+            name: null,
+            _id: null
+        }
+    }
+    
     return issue
 }
 const getComment = (state, action) =>{

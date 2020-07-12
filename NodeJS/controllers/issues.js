@@ -254,7 +254,7 @@ exports.assignforUser = async (req, res, next) => {
             assignee: iduser
         }
 
-        await Issues.findByIdAndUpdate(idissues, dataupdate)
+        await Issues.findByIdAndUpdate(idissues, dataupdate, {new: true})
 
         const action = new Activities({
             action: 'assignforUser',
@@ -352,12 +352,6 @@ exports.getInfoIssues = async (req, res, next) => {
                 hidden: false,
             },
             select:['idsprint','name']
-        }).populate({
-            path: 'idepic',
-            match:{
-                hidden: false,
-            },
-            select:['idepic','name']
         }).populate({
             path: 'idproject',
             match:{

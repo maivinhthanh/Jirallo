@@ -33,7 +33,6 @@ class LoginContainer extends Component {
   render() {
     const { note, user,
       location: { state } } = this.props
-      console.log(user )
     return user.idtoken ? (
       <Redirect to={state ? state.from : "/"} />
     ) : (
