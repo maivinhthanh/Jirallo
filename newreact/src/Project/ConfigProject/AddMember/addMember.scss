@@ -1,0 +1,20 @@
+.collapse_list {
+    border: 1px solid #ced4da;
+    padding: 10px;
+    border-top: none;
+    .fa-user-plus {
+        margin-left: 20px;
+    }
+    .item_hover {
+        text-align: left;
+        padding: 10px;
+        cursor: pointer;
+        &:hover{
+            border: 1px solid black;
+            border-style: dashed;
+            background: aliceblue;
+            cursor: pointer;
+        }
+    }
+
+}

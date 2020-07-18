@@ -31,6 +31,56 @@ export const findUserLikeEmail = data => {
       data
     }
   }
+  export const getProjectLikeName = (data) => {
+    return {
+      type: 'GET_PROJECT_LIKE_NAME',
+      data
+    }
+  }
+  export const editSuccess = (data) => {
+    return {
+      type: 'EDIT_PERMISSION_SUCCESS',
+      data
+    }
+  }
+
+  export const editPermission = (iduser, position) => {
+    return dispatch => {
+      return CallApi(`auth/editPermission/${iduser}`,
+      'PUT',
+      {
+        position
+      },
+      'token'
+      ).then(res => {
+        dispatch(editSuccess(res.data))
+      }).catch(err => {
+        dispatch(Notification.Error(err));
+        setTimeout(() => {
+          dispatch(Notification.hideNotification())
+      }, 5000)
+      })
+    }
+  }
+  export const findProjectLikeName = (name) => {
+    return dispatch => {
+      return CallApi('project/findProjectLikeName',
+      'POST',
+      {
+        name
+      },
+      'token'
+      ).then(respone => {
+        dispatch(getProjectLikeName(respone.data))
+      }).catch(err => {
+        dispatch(Notification.Error(err));
+        setTimeout(() => {
+          dispatch(Notification.hideNotification())
+      }, 5000)
+      })
+    }
+  }
+
   export const getListUserInProject = (id) => {
     return dispatch => {
       return CallApi(`project/getListUserInProject/${id}`,
@@ -53,15 +103,6 @@ export const findUserLikeEmail = data => {
       },
       'token'
       ).then(response => {
-        // if (response.status === 201){
-        //   dispatch(Notification.CreateSuccess({message: 'Thành công'}))
-        //   dispatch(addMemberSuccess(response.data))
-        // } else {
-        //   dispatch(Notification.Error(response.data));
-        //   setTimeout(() => {
-        //     dispatch(Notification.hideNotification())
-        // }, 5000)
-        // }
         dispatch(addMemberSuccess(response.data))
       }).catch(err => {
         dispatch(Notification.Error(err));

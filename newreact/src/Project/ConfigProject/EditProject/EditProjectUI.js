@@ -93,7 +93,7 @@ class EditProjectUI extends Component {
     return (
       <div >
         <div className='row'>
-          <div className='col-md-6'>
+          {/* <div className='col-md-6'>
             <div className="card"><div className="card-header"><i className="fa fa-align-justify" /> List Project</div>
               <div className="card-body"><div className="table-responsive">
                 <table className="table">
@@ -135,8 +135,8 @@ class EditProjectUI extends Component {
               </div>
               </div>
             </div>
-          </div>
-          <div className='col-md-6'>
+          </div> */}
+          <div className='col-md-12'>
             <Grid container direction="row" spacing={3} justify="center" alignItems="center">
               <Grid item xs={12} sm={8}>
                 <p>Name project</p>

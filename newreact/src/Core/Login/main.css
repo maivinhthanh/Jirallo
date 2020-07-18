@@ -454,7 +454,13 @@ iframe {
   -moz-transition: all 0.4s;
   transition: all 0.4s;
 }
-
+.wrapper_login_in {
+  display: flex;
+}
+.container_item {
+  display: flex;
+  justify-content: space-between;
+}
 .btn-face {
   color: #fff;
   background-color: #3b5998;

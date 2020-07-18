@@ -23,7 +23,7 @@ class ConfigPage extends Component {
       const { note, authProject } = this.props
       if(authProject.hasAuth === true){
         return (
-          <Grid  >
+          <Grid style={{ height: '100%'}}>
             
                 <MenuProject idproject={params.id}/>
                 <UI idproject={params.id}/>
@@ -34,7 +34,7 @@ class ConfigPage extends Component {
       }
       else{
         return(
-          <Grid  >
+          <Grid style={{ height: '100%'}}>
             
                 <MenuProject idproject={params.id}/>
                 <p>Project không tồn tại</p>

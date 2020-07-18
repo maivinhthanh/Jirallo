@@ -85,6 +85,14 @@ class Login extends Component {
                   <i className="fa fa-lock" aria-hidden="true"></i>
                 </span>
               </div>
+              <div className="container_item">
+                <div className='sign_up'>
+                <Link to="/register">Don't have an account ? </Link>
+                </div>
+                <div className="forgot_pass">
+                <Link to="/fogotpassword">Forgot Password ?</Link>
+              </div>
+              </div>
               
               <div className="container-login100-form-btn">
                 <button className="btn-login login100-form-btn" onClick={this.handleSubmit}>
@@ -92,14 +100,11 @@ class Login extends Component {
                   Login
                 </button>
               </div>
-              <div className=" container-login100-form-btn">
-
-                  <FacebookLogin cssClass="btn-face login100-form-btn"
-                    fields="name,email,picture" textButton="Facebook" icon="fab fa-facebook"
-                    callback={this.responseFacebook}
-                  />
+              <div className='text-center mt-2'>
+                <h3 style={{ color: 'red' }}>OR</h3>
               </div>
-
+           
+              <div className='wrapper_login_in'>
               <div className="container-login100-form-btn">
                 <GoogleLogin
                   className="btn-google login100-form-btn" buttonText="Google" 
@@ -108,15 +113,12 @@ class Login extends Component {
                   onFailure={this.responseGoogle}
                 />
               </div>
-
-              <div className="text-center p-t-12">
-                
-                <Link to="/fogotpassword">Forgot Password</Link>
-                
+              <div className=" container-login100-form-btn">
+                  <FacebookLogin cssClass="btn-face login100-form-btn"
+                    fields="name,email,picture" textButton="Facebook" icon="fab fa-facebook"
+                    callback={this.responseFacebook}
+                  />
               </div>
-
-              <div className="text-center p-t-136">
-                <Link to="/register">Sign up</Link>
               </div>
             </form>
           </div>

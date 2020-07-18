@@ -79,7 +79,7 @@ export default function ModalAddMember(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             <form className={classes.root} noValidate autoComplete="off">
-              <p>Modal add member</p>
+              <h4>Modal add member</h4>
               <TextField id="standard-basic" label="Email" value={email} onChange={handleChangeEmail} /><br />
               <Select
                 value={position}
@@ -94,9 +94,11 @@ export default function ModalAddMember(props) {
                 <MenuItem value={'Manager'}>Manager</MenuItem>
               </Select><br/>
               {/* <TextField id="standard-basic" label="Position" value={position} onChange={handleChangePosition} /><br /> */}
+              <div className='btn_save'>
               <Button variant="contained" onClick={saveAddMember} color="primary" style={{ marginTop: '20px' }}>
                 Save
               </Button>
+              </div>
             </form>
           </div>
         </Fade>
