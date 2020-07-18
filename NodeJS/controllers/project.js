@@ -195,6 +195,23 @@ exports.FindProjectByID = async (req, res, next) => {
         next(err)
     }
 }
+
+exports.findProjectLikeName = async (req, res, next) => {
+    try{
+        const name = req.body.name
+        const project = await Project.find({ name: name })
+        if (!project) {
+            res.status(203).json({message: 'Not found project'})
+            return
+        }
+        res.status(200).json({project})
+    }
+    catch (error) {
+        
+        next(error)
+    }
+}
+
 exports.viewListIssuesInProject = async (req, res, next) => {
     try{
         const idproject = req.params.idproject

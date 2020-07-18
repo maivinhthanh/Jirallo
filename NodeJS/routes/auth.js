@@ -36,6 +36,9 @@ router.put('/editProfile/:iduser', upload.single('avatar'),
     
     authController.editProfile,
 )
+router.put('/editPermission/:iduser', upload.single('avatar'),
+    authController.editPermission,
+)
 router.post('/findUserLikeEmail',upload.single('avatar'),isAuth,
     
     authController.findUserLikeEmail,
