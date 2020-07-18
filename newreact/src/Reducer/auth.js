@@ -26,7 +26,6 @@ const initialState = {
 
 const login = ( state, action ) => {
     const token = action.token
-
     localStorage && localStorage.setItem('token', token);
     CallApi('auth/getMyInfo', 'GET',{},'token')
     .then( response => {
@@ -66,7 +65,7 @@ const reducer = ( state = initialState, action ) => {
         case 'Register' : return register(state,action);
         case 'EditUserSuccess' : return EditUserSuccess(state, action);
         case 'LogOut' : return LogOut(state,action)
-        case 'FIND_USER_LIKE_EMAIL': return FindUserAction(state, action)
+        case 'FIND_USER_LIKE_EMAIL': return FindUserAction(state, action);
         // case 'GET_LIST_USER_IN_PROJECT' : return getListUserInProject(state,action)
 
         default: return state;

@@ -1,3 +1,38 @@
 .MuiSelect-select {
     text-align: left;
 }
+.wrapper_total {
+    display: flex;
+    .wrapper-avatar, .info-content {
+        padding: 30px; 
+    }
+    .info-content {
+       p:first-child {
+        span {
+            font-size: 20px;
+        }
+       }
+       p{
+           color: black;
+       }
+    }
+}
+.content_profile {
+    margin: 40px;
+    background-color: #F2F2F2;
+    border: 2px solid;
+    
+}
+.list-icon {
+    ul {
+        display: inline-flex;
+        li {
+            font-size: 30px;
+             padding: 30px;
+            }
+        }
+    }
+.btn_submit {
+    float: left;
+    display: contents;
+}

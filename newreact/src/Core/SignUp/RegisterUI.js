@@ -101,8 +101,8 @@ class Register extends Component {
                 </button>
               </div>
 
-              <div className="text-center p-t-136">
-                <Link to="/login">Log in</Link>
+              <div className="text-right mt-3">
+                <Link to="/login">Log in <i className="fas fa-sign-in-alt"></i></Link>
               </div>
             </form>
           </div>

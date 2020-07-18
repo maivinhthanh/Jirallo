@@ -6,8 +6,8 @@ import * as action from './action'
 import * as actions from '../../Project/ConfigProject/AddMember/action'
 
 class ListProjectContainer extends Component {
-  componentWillMount(){
-     this.props.ViewListProject()
+  componentDidMount() {
+    this.props.ViewListProject()
   }
 
   render() {
@@ -15,6 +15,8 @@ class ListProjectContainer extends Component {
       return (
         <div >
           <ListProjectUI 
+          ViewListProject={this.props.ViewListProject}
+          findProjectLikeName={this.props.findProjectLikeName}
           auth={this.props.auth}
           AddMemberToProject={this.props.AddMemberToProject}
           findUserLikeEmail={this.props.findUserLikeEmail} note={this.props.note} listproject={this.props.listproject} />
@@ -36,7 +38,8 @@ const mapDispatchToProps = dispatch => {
     return {
       ViewListProject: () => dispatch( action.ViewListProject() ),
       findUserLikeEmail: (email) => dispatch(actions.findUserLikeEmailAct(email)),
-      AddMemberToProject: (idProject, user) => dispatch(actions.AddMemberAct(idProject, user))
+      AddMemberToProject: (idProject, user) => dispatch(actions.AddMemberAct(idProject, user)),
+      findProjectLikeName: (name) => dispatch(actions.findProjectLikeName(name))
     }
 }
 

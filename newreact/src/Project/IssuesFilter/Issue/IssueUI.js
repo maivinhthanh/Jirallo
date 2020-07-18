@@ -13,6 +13,7 @@ const { Option } = Select;
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    padding: '20px'
   },
   issue: {
     marginTop: '30px'
@@ -50,7 +51,7 @@ export default function IssueUI({issue, EditDescriptIssues, listMember, EditAssi
         </Toolbar>
       </AppBar>
       <Grid container>
-        <Grid item xs={8}>
+        <Grid item xs={8} style={{ padding: '10px'}}>
             <Grid container>
               <Grid item xs={12}>
                 <h6 className={classes.desc}>Descript</h6>
@@ -60,7 +61,7 @@ export default function IssueUI({issue, EditDescriptIssues, listMember, EditAssi
               <Grid item xs={12}>
                 <TextArea defaultValue={issue.descript} key={issue.descript}
                   onChange={handleChangeDescription} />
-                <Button type="primary" onClick={submitDescript} style={{float: "right"}}>
+                <Button type="primary" onClick={submitDescript} style={{float: "right", marginTop: '10px'}}>
                   Save
                 </Button>
               </Grid>
