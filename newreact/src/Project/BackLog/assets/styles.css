@@ -31,3 +31,13 @@
 .list-btn {
     justify-content: space-between
 }
+.ant-card-head-title {
+    font-size: 25px;
+}
+
+.MuiToolbar-root.MuiToolbar-regular.MuiToolbar-gutters {
+    background-color: cornflowerblue;
+}
+.MuiPaper-root.MuiPaper-elevation0.MuiPaper-rounded  {
+    background-color: cornflowerblue;
+}

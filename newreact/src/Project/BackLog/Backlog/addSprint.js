@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2, 4, 3)
   },
   margin: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
   }
 }));
 
@@ -75,15 +75,9 @@ function SimpleModal(props) {
 
   return (
     <Fragment style={{ marginTop: "30px", marginBottom: "20px" }}>
-      <ColorButton
-        variant="contained"
-        color="black"
-        className={useStyles.margin}
-        onClick={handleOpen}
-      >
-        <i class="fas fa-plus"></i> Add sprint
-      </ColorButton>
-      {/* <button class="btn btn-custom btn-outline-warning btn-lg btn-block" onClick={handleOpen}> Add Sprint</button> */}
+      <Button variant="outlined" color="primary" style={{ float: 'right'}} onClick={handleOpen}>
+      <i class="fas fa-plus"></i> Add sprint
+      </Button>
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
