@@ -31,7 +31,7 @@ export default function ImageAvatars({listMember,selectUser}) {
       {
         _.map(listMember, (item,index) =>{
           return(
-            <Col xs={3} key={index} onClick={()=>selectUser(item._id, index, item.active)} 
+            <Col xs={4} key={index} onClick={()=>selectUser(item._id, index, item.active)} 
               style={item.active ? { backgroundColor :'#6A8DCD'}:{}}>
                {
                 _.get(item, ['id', 'image'])
