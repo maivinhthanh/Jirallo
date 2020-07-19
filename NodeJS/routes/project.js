@@ -61,4 +61,7 @@ router.put('/deleteProcess/:idproject',isAuth, hasAuthInProject,
 router.get('/calProgressProject/:idproject',isAuth,
     projectController.calProgressProject,
 )
+router.post('/findProjectLikeName',upload.single('avatar'),
+    projectController.findProjectLikeName,
+)
 module.exports = router

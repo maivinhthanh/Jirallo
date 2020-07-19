@@ -13,7 +13,7 @@ class BannerLeft extends Component {
             </div>
 
             <div className="intro-info">
-              <h2>We provide<br /><span>solutions</span><br />for your business!</h2>
+              <h2>Jirallo provide<br /><span>solutions</span><br />for your business!</h2>
               <div>
                 <a href="/#manual" className="btn-get-started scrollto">Manual</a>
                 <a href="/#developer" className="btn-services scrollto">Developer</a>
@@ -293,27 +293,27 @@ class BannerLeft extends Component {
                           <ul className="list-inline">
                             <li className="list-inline-item">
                               <a href="/#" className="link-one">
-                                <i className="fa fa-facebook" aria-hidden="true"></i>
+                                <i className="fab fa-facebook" aria-hidden="true"></i>
                               </a>
                             </li>
                             <li className="list-inline-item">
                               <a href="/#" className="link-one">
-                                <i className="fa fa-twitter" aria-hidden="true"></i>
+                                <i className="fab fa-twitter" aria-hidden="true"></i>
                               </a>
                             </li>
                             <li className="list-inline-item">
                               <a href="/#" className="link-one">
-                                <i className="fa fa-instagram" aria-hidden="true"></i>
+                                <i className="fab fa-instagram" aria-hidden="true"></i>
                               </a>
                             </li>
                             <li className="list-inline-item">
                               <a href="/#" className="link-one">
-                                <i className="fa fa-pinterest-p" aria-hidden="true"></i>
+                                <i className="fab fa-pinterest-p" aria-hidden="true"></i>
                               </a>
                             </li>
                             <li className="list-inline-item">
                               <a href="/#" className="link-one">
-                                <i className="fa fa-dribbble" aria-hidden="true"></i>
+                                <i className="fab fa-dribbble" aria-hidden="true"></i>
                               </a>
                             </li>
                           </ul>
@@ -390,7 +390,7 @@ class BannerLeft extends Component {
         <footer id="footer">
           <div className="footer-top">
             <div className="container">
-              <div className="row">
+              <div className="row" style={{ textAlign: 'left'}}>
 
                 <div className="col-lg-6 col-md-6 footer-info">
                   <h3>JIRALLO</h3>
@@ -408,7 +408,7 @@ class BannerLeft extends Component {
 
                 <div className="col-lg-3 col-md-6 footer-contact">
                   <h4>Contact Us</h4>
-                  <p>
+                  <p style={{ color: 'white'}}>
                     01 vo van ngan <br />
                     Linh Chieu, Thu Duc<br />
                     TPHCM <br />
@@ -417,11 +417,11 @@ class BannerLeft extends Component {
                   </p>
 
                   <div className="social-links">
-                    <a href="/#" className="twitter"><i className="fa fas-twitter"></i></a>
-                    <a href="/#" className="facebook"><i className="fa fas-facebook"></i></a>
-                    <a href="/#" className="instagram"><i className="fa fas-instagram"></i></a>
-                    <a href="/#" className="google-plus"><i className="fa fas-google-plus"></i></a>
-                    <a href="/#" className="linkedin"><i className="fa fas-linkedin"></i></a>
+                    <a href="/#" className="twitter"><i className="fab fa-twitter"></i></a>
+                    <a href="/#" className="facebook"><i className="fab fa-facebook"></i></a>
+                    <a href="/#" className="instagram"><i className="fab fa-instagram"></i></a>
+                    <a href="/#" className="google-plus"><i className="fab fa-google-plus"></i></a>
+                    <a href="/#" className="linkedin"><i className="fab fa-linkedin"></i></a>
                   </div>
 
                 </div>

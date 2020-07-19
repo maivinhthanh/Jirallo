@@ -8,6 +8,7 @@ import InfoUserUI from './infoUserUI'
 import InfoMeUI from './infoMeUI'
 import MenuUser from '../Core/Home/Menu/Menu'
 import Toast from '../Components/Toast'
+import Profile from './Profile/Profile';
 
 class InfoUserContainer extends Component {
   show = (isAuth, id)=>{
@@ -15,7 +16,8 @@ class InfoUserContainer extends Component {
       
       return(
         <Grid>
-            <Paper style={{height: '60px'}} />
+            {/* <Paper style={{height: '60px'}} /> */}
+            <Profile/>
             <InfoUserUI iduser={id}/>
             
         </Grid>
@@ -25,7 +27,8 @@ class InfoUserContainer extends Component {
     else{
       return (
         <Grid>
-            <Paper style={{height: '60px'}} />
+            {/* <Paper style={{height: '60px'}} /> */}
+            <Profile/>
             <InfoMeUI iduser={id}/>
         </Grid>
       )

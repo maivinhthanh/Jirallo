@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { Table } from "reactstrap";
 import _ from "lodash";
@@ -8,6 +8,12 @@ import * as Config from "../../../Config";
 import Toast from "../../../Components/Toast";
 import Select from 'react-select';
 import { successModal } from "../../../Components/modalStatus";
+import ListMember from "./ListMember";
+import './addMember.scss'
+import InputField from "../../BackLog/Backlog/inputField";
+import Button from '@material-ui/core/Button';
+import SaveIcon from '@material-ui/icons/Save';
+import Radio from '@material-ui/core/Radio';
 
 // const options = [
 //   {  name: 'select_option', value: 'manager', label: 'Manager' },
@@ -23,13 +29,14 @@ class AddMemberUI extends Component {
       selectedOption: '',
       name: '',
       options: { value: '', label: ''},
-      note: ''
+      note: '',
+      auth: {},
+      selectedValue: ''
     };
   }
   componentWillMount() {
     const { project } = this.props;
     this.props.getListUserInProject(project._id);
-    this.props.findUserLikeEmail('a')
   }
 
   componentDidUpdate(nextProps){
@@ -39,28 +46,25 @@ class AddMemberUI extends Component {
       _.map(auth, (child, index) => {
         custom.push({ value: child.lastname, label: child.lastname, id: child._id })
       })
-      this.setState({ options: custom })
+      this.setState({ options: custom, auth: this.props.auth })
     } 
-    if(_.isEqual(nextProps.project, project)) {
+    if(!_.isEqual(nextProps.project, project)) {
       this.props.getListUserInProject(project._id);
     }
   }
  
 
 
-  // shouldComponentUpdate(nextProps, nextState){
-  //   return nextProps.user !== this.props.user ||
-  //         this.props.listuser != nextProps.listuser
-  // }
   handleChangeEmail = e => {
-    if (e.target.value.length > 4) {
+    if (e.target.value.length > 2) {
       this.setState({
         email: e.target.value
       });
-      this.props.findUserLikeEmail(this.state.email);
+      this.props.findUserLikeEmail(e.target.value)
     } else {
       this.setState({
-        email: e.target.value
+        email: e.target.value,
+        auth: ''
       });
     }
   };
@@ -69,38 +73,86 @@ class AddMemberUI extends Component {
     const user = { _id: id, position: 'developer' };
     this.props.AddMemberIntoProject(params, user);
   };
-  handleChange = (e)  => {
-    this.addMember(e.id)
-    successModal()
-    this.setState(
-      { selectedOption : e }
-    );
-  };  
+  // handleChange = (e)  => {
+  //   this.addMember(e.id)
+  //   successModal()
+  //   this.setState(
+  //     { selectedOption : e }
+  //   );
+  // };
+  
+  handleAddMember = () => {
+    const { selectedValue } = this.state
+    this.addMember(selectedValue)
+  }
+  updatePosition = (id, pos) => {
+    console.log(id, pos)
+    this.props.editPermission(id, pos)
+  }
+  handleChange = (e) => {
+    this.setState({ selectedValue: e.target.value})
+  }
+
   
   render() {
-    const { auth, listMember } = this.props;
-    const { options, selectedOption, note } = this.state;
+    const { listMember } = this.props;
+    const { options, selectedOption, note, auth, selectedValue } = this.state;
     return (
       <div className="row">
         <div className="col-12">
-          {/* <input
+          <input
             className="form-control"
             value={this.email}
             onChange={this.handleChangeEmail}
             placeholder="search"
             data-toggle="collapse" data-target="#demo"
-          ></input> */}
-         <Select
+          ></input>
+         {/* <Select
           name="form-field-name"
           value={selectedOption}
           onChange={this.handleChange}
           options={options}
-          />
-          <div id="demo" class="collapse">
+          /> */}
+          <div id='demo' class="collapse collapse_list">
               {
-                !_.isEmpty(auth) && _.map(auth, (item, key) => {
-                return <p>{item.firstname} - {item.lastname}</p>
-                })
+                !_.isEmpty(auth) ?
+                <Fragment>
+                  {
+                     _.map(auth, (item, key) => {
+                      return (
+                        <Fragment>
+                          <div>
+                            <div key={item._id} className="item_hover">
+                            <Radio
+                            checked={selectedValue === item._id}
+                            onChange={this.handleChange}
+                            value={item._id}
+                            name="radio-button-demo"
+                            inputProps={{ 'aria-label': 'A' }}
+                            />
+                            {item.name}
+                            </div>
+                          </div>
+                          {/* <p key={item._id}>{item.name} 
+                          <i className="fas fa-user-plus" onClick={() => this.handleAddMember(item._id)}></i></p> */}
+                        </Fragment>
+                      )
+                      
+                     })
+                  }
+                   <div style={{ textAlign: 'end'}}>
+                   <Button
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    startIcon={<SaveIcon />}
+                    onClick={this.handleAddMember}
+                    >
+                    Save
+                  </Button>
+                   </div>
+                </Fragment>
+                : <span className='text-center'>Don't have any user </span>
               }
           </div>
           <Table style={{ marginTop: "30px" }}>
@@ -111,7 +163,6 @@ class AddMemberUI extends Component {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Permission</th>
-                {/* <th>Action</th> */}
               </tr>
             </thead>
             <tbody>
@@ -136,7 +187,20 @@ class AddMemberUI extends Component {
                     </td>
                     <td>{_.get(item, ["id", "name"], "default")}</td>
                     <td>{_.get(item, ["id", "email"], "default")}</td>
-                    <td>{_.get(item, 'position')}</td>
+                    <td>
+                      <InputField
+                       nameInput={"issue"}
+                      //  sprint={props.sprint}
+                       size="20px"
+                       arrow="10px"
+                       margin="5px"
+                       changeName={(data, name) =>
+                         this.updatePosition(_.get(item, ["id", "_id"]),data)
+                       }
+                       >
+                        {_.get(item, 'position')}
+                       </InputField>
+                   </td>
                     {/* <td>
                       <button
                         style={{ fontFamily: "fantasy" }}
@@ -155,7 +219,7 @@ class AddMemberUI extends Component {
                       <button
                         style={{ marginLeft: "20px", fontFamily: "fantasy" }}
                         className="btn btn-primary"
-                        onClick={() => this.addMember(item._id, "teacger")}
+                        onClick={() => this.addMember(item._id, "teacher")}
                       >
                         Teacher
                       </button>
@@ -217,7 +281,8 @@ const mapDispatchToProps = dispatch => {
     findUserLikeEmail: email => dispatch(action.findUserLikeEmailAct(email)),
     AddMemberIntoProject: (idproject, user) =>
       dispatch(action.AddMemberAct(idproject, user)),
-    getListUserInProject: id => dispatch(action.getListUserInProject(id))
+    getListUserInProject: id => dispatch(action.getListUserInProject(id)),
+    editPermission: (iduser, pos) => dispatch(action.editPermission(iduser, pos))
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AddMemberUI);

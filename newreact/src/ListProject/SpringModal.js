@@ -7,9 +7,10 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import * as actions from './ListProject/action'
 import { connect } from 'react-redux'
-import { successModal } from '../Components/modalStatus';
+import { successModal, errorModal } from '../Components/modalStatus';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import _ from 'lodash'
 
 
 const useStyles = makeStyles(theme => ({
@@ -42,9 +43,15 @@ function TransitionsModal(props) {
   }
 
   const saveName = () => {
-    props.handleSave(nameProject)
-    handleClose()
-    successModal()
+    if (!_.isEmpty(nameProject)) {
+      props.handleSave(nameProject)
+      handleClose()
+      successModal()
+    }
+    else {
+      errorModal('Please enter name project')
+    }
+    
   }
 
   const handleOpen = () => {
@@ -80,9 +87,11 @@ function TransitionsModal(props) {
           <div className={classes.paper}>
             <form className={classes.root} noValidate autoComplete="off">
               <TextField id="standard-basic" label="Name project" value={nameProject}  onChange={handleChangeName}/>
+              <div className='btn_save'>
               <Button variant="contained" onClick={saveName} color="primary">
                 Save
               </Button>
+              </div>
             </form>
           </div>
         </Fade>

@@ -156,7 +156,7 @@ function errorModal (message) {
       <div className='toast-image'><i className='fas fa-minus-circle' /></div>
       <div className='toast-loading-content'>{message || '入力（選択）にエラーがあります'}</div>
     </div>, {
-      position: 'bottom-center',
+      position: toast.POSITION.TOP_RIGHT,
       autoClose: 2000,
       hideProgressBar: true,
       closeOnClick: true,

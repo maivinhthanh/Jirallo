@@ -198,6 +198,32 @@ exports.findUser = async (req, res, next) => {
         next(error)
     }
 }
+exports.editPermission = async (req, res, next) => {
+    try{
+        const iduser = req.params.iduser
+        const position = req.body.position
+        const newUser = {
+            position,
+        } 
+        const user = await User.findByIdAndUpdate(iduser, newUser, { new: true })
+        console.log(user)
+        const action = new Activities({
+            action: 'editPermission',
+            content: 'auth/editPermission/' + iduser,
+            olddata:user,
+            newdata: newUser
+        })
+
+        await action.save()
+
+        res.status(201).json({ user})
+    }
+    catch(err) {
+        
+        next(err)
+    }
+}
+
 exports.editProfile = async (req, res, next) => {
     try{
         

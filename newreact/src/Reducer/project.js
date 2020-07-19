@@ -58,6 +58,7 @@ const projectReducer = ( state = initialState, action ) => {
         case 'ADD_MEMBER_SUCCESS' : return addMemberAct(state, action);
         case 'DELETE_PROCESS': return deleteProcess(state, action);
         case 'GET_INFO_PROJECT_CHART': return chart(state, action);
+
         default: return state;
     }
 };

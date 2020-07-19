@@ -53,3 +53,18 @@
 .img-avatar {
     width:30px;
 }
+.MuiPaper-elevation1:hover {
+    background-color: cornflowerblue;
+    transition: 2s;
+}
+.btn_save {
+    text-align: end;
+    margin-top: 10px;
+}
+label + .MuiInput-formControl {
+    width: 300px;
+}
+.MuiSelect-select.MuiSelect-select {
+    width: 280px;
+    margin-top: 20px;
+}

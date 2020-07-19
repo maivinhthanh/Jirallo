@@ -13,10 +13,15 @@ import _ from 'lodash'
 import '../ListProject/style.css'
 import SpringModal from '../SpringModal';
 import Avatar from '@material-ui/core/Avatar';
-import ModalAddMember from '../../Project/ConfigProject/AddMember/ModalAddMember';
 import Toast from '../../Components/Toast'
+import ModalAddMember from '../../Project/ConfigProject/AddMember/ModalAddMember';
+import AvatarGroup from '@material-ui/lab/AvatarGroup';
+import Search from './Search';
 
 const useStyles = makeStyles(theme => ({
+  container_wr: {
+    background: '#F2F2F2'
+  },
   card: {
     maxWidth: 345,
     width: 285,
@@ -24,7 +29,8 @@ const useStyles = makeStyles(theme => ({
     marginTop: 22,
     border: '1px solid cornflowerblue',
     textAlign: 'left',
-    position: "relative"
+    position: "relative",
+    boxShadow: '0px 2px 10px 1px rgba(0, 0, 0, 0.13)',
   },
   media: {
     height: 0,
@@ -48,8 +54,16 @@ const useStyles = makeStyles(theme => ({
 export default function ListProjectUI(props) {
   const classes = useStyles();
   return (
+    <Grid container className={classes.container_wr}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+      <div>
+      <h4 style={{ margin: '40px'}}>Project list and Create </h4>
+      </div>
+      <Search findProjectLikeName={props.findProjectLikeName} ViewListProject={props.ViewListProject}/>
+      </div>
+     
     <Grid container direction="row" spacing={3} justify="center" alignItems="center">
-      <Card className={classes.card} style={{ height: '357px', position: 'relative' }}>
+      <Card className={classes.card} style={{ height: '357px', position: 'relative', borderStyle: 'dashed' }}>
         <CardHeader />
         <CardContent>
           <div className='text'>
@@ -101,7 +115,9 @@ export default function ListProjectUI(props) {
                           return <Fragment>
                           { index < 2 &&
                           <li>
-                          <Avatar className={classes.large} ></Avatar>
+                          <AvatarGroup max={4}>
+                            <Avatar className={classes.large} ></Avatar>
+                          </AvatarGroup>
                           </li>
                           }
                           </Fragment>
@@ -153,6 +169,7 @@ export default function ListProjectUI(props) {
           )
         })
       }
+    </Grid>
     </Grid>
   );
 }
