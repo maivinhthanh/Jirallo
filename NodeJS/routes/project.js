@@ -61,6 +61,12 @@ router.put('/deleteProcess/:idproject',isAuth, hasAuthInProject,
 router.get('/calProgressProject/:idproject',isAuth,
     projectController.calProgressProject,
 )
+router.put('/deleteMember/:idproject',isAuth,
+    projectController.deleteMember,
+)
+router.put('/editPositionMember/:idproject',isAuth,
+    projectController.editPositionMember,
+)
 router.post('/findProjectLikeName',upload.single('avatar'),
     projectController.findProjectLikeName,
 )

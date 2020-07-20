@@ -1,6 +1,6 @@
 const { validationResult } = require("express-validator/check")
 const {ObjectId} = require('mongodb')
-
+const {_} = require("lodash")
 const Project = require('../models/project')
 const Sprint = require('../models/sprint')
 const User = require('../models/user')
@@ -113,7 +113,11 @@ exports.AddMember = async (req, res, next) => {
         const idproject = req.params.idproject
         const iduser = req.body.iduser
         const position = req.body.position
-        
+        const projectCheck = await Project.findById(idproject)
+        if(_.find(projectCheck.idmembers, function(o) {return o.id == iduser })){
+            res.status(201).json({ projectCheck})
+            return
+        }
         const project = await Project.findByIdAndUpdate(idproject, { 
                 $push: { 
                     idmembers: {
@@ -383,6 +387,54 @@ exports.deleteProcess = async (req, res, next) => {
             $pull: { process: { $in: [ nameProcess ] } }
         },{ new: true })
 
+        res.status(200).json(project)
+    }
+    catch(err) {
+        
+        next(err)
+    }
+}
+exports.deleteMember = async (req, res, next) => {
+    try{
+        const idproject = req.params.idproject
+
+        const iduser = req.body.iduser
+
+        const project = await Project.findByIdAndUpdate(idproject, {
+            $pull: { idmembers: { $in: [ ObjectId(iduser) ] } }
+        },{ new: true })
+
+        res.status(200).json(project)
+    }
+    catch(err) {
+        
+        next(err)
+    }
+}
+
+exports.editPositionMember = async (req, res, next) => {
+    try{
+        const idproject = req.params.idproject
+
+        const iduser = req.body.iduser
+        const position = req.body.position
+
+        await Project.update(
+            {
+                '_id' : ObjectId(idproject)
+            },{
+                $set:{
+                    "idmembers.$[i].position": position
+                }
+                
+            },{
+                arrayFilters: [
+                {
+                    'i.id' : ObjectId(iduser)
+                }
+            ]}
+        )
+        const project = await Project.findById(idproject)
         res.status(200).json(project)
     }
     catch(err) {

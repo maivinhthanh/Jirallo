@@ -90,7 +90,7 @@ exports.viewListSprint = async (req, res, next) => {
                 path: 'idsprint',
                 match:{
                     hidden: false,
-                    assignee: iduser
+                    assignee: ObjectId(iduser)
                 }
             })
         }
@@ -243,15 +243,15 @@ exports.viewListIssuesInSprint = async (req, res, next) => {
             if(iduser !== null){
                 issues = await Issuses.find({
                     $or: [ { "idsprint":{$exists:false} }, { "idsprint": null } ] ,
-                    idproject: idproject,
-                    assignee: iduser,
+                    idproject: ObjectId(idproject),
+                    assignee: ObjectId(iduser),
                     hidden: false
                 })
             }
             else{
                 issues = await Issuses.find({
                     $or: [ { "idsprint":{$exists:false} }, { "idsprint": null } ] ,
-                    idproject: idproject,
+                    idproject: ObjectId(idproject),
                     hidden: false
                 })
             }
@@ -264,7 +264,7 @@ exports.viewListIssuesInSprint = async (req, res, next) => {
                     path: 'idissues',
                     match:{
                         hidden: false,
-                        assignee: iduser,
+                        // assignee: ObjectId(iduser),
                     }
                 })
             }

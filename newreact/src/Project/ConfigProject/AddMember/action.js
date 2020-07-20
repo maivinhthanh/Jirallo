@@ -44,11 +44,12 @@ export const findUserLikeEmail = data => {
     }
   }
 
-  export const editPermission = (iduser, position) => {
+  export const editPositionMember = (idproject, iduser, position) => {
     return dispatch => {
-      return CallApi(`auth/editPermission/${iduser}`,
+      return CallApi(`project/editPositionMember/${idproject}`,
       'PUT',
       {
+        iduser,
         position
       },
       'token'
