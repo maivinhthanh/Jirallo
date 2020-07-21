@@ -6,7 +6,20 @@ import MenuProject from '../../Core/Home/Menu/MenuProject'
 import Toast from '../../Components/Toast'
 import * as action from './action'
 import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    height: 140,
+    width: 100,
+  },
+  control: {
+    padding: theme.spacing(2),
+  },
+}));
 class BackLogPage extends Component {
   componentWillMount(){
     this.props.HasAuth(this.props.match.params.id)
@@ -24,20 +37,29 @@ class BackLogPage extends Component {
       const { note, authProject } = this.props
       if(authProject.hasAuth === true){
         return (
-          <div className='row'>
-            <div className='col-md-1 item-left' style={{ background: 'cornflowerblue'}}>
-            <MenuProject idproject={params.id}/>
-            </div>
-            <div className='col-md-11 item-right'>
-            <UI idproject={params.id} />
+          <Grid container className={useStyles.root} spacing={2}>
+             <Grid item xs={1} style={{ background: 'cornflowerblue'}}>
+             <MenuProject idproject={params.id}/>
+             </Grid>
+             <Grid item xs={11}>
+             <UI idproject={params.id} />
                 <Toast open={note.show} message={note.message} type={note.type} />
-            </div>
-           </div>
+             </Grid>
+          </Grid>
+          // <div className='row'>
+          //   <div className='col-md-1 item-left' style={{ background: 'cornflowerblue'}}>
+          //   <MenuProject idproject={params.id}/>
+          //   </div>
+          //   <div className='col-md-11 item-right'>
+          //   <UI idproject={params.id} />
+          //       <Toast open={note.show} message={note.message} type={note.type} />
+          //   </div>
+          //  </div>
         )
       }
       else{
         return(
-          <Grid  >
+          <Grid>
                 <MenuProject idproject={params.id}/>
                 <p>Project không tồn tại</p>
                 <Toast open={note.show} message={note.message} type={note.type} />
