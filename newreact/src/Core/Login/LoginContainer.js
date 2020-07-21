@@ -6,7 +6,7 @@ import * as actions from './action'
 import Login from './LoginUI'
 import Toast from '../../Components/Toast'
 
-class LoginContainer extends Component {
+class LoginContainer extends React.Component {
   constructor(props){
     super(props);
     this.state ={

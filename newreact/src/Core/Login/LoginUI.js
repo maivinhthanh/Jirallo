@@ -6,7 +6,7 @@ import Tilt from 'react-tilt'
 
 import './main.css'
 
-class Login extends Component {
+class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -63,7 +63,7 @@ class Login extends Component {
                 <input className="input100" type="text" required
                 placeholder="Enter email"
                 name="email"
-                value={this.state.email}
+                value={this.state.email || ''}
                 onChange={this.handleEmail}
                 maxLength='30'
                 minLength='9' />
@@ -76,7 +76,7 @@ class Login extends Component {
               <div className="wrap-input100 validate-input" data-validate = "Password is required">
                 <input className="input100" required
                 placeholder="Enter password"
-                value={this.state.password}
+                value={this.state.password || ''}
                 onChange={this.handlePass}
                 maxLength='30'
                 minLength='5' type="password" name="pass" />
