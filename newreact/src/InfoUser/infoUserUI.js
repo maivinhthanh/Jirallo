@@ -10,6 +10,7 @@ import Box from '@material-ui/core/Box';
 
 import WatchInfo from './WatchInfo/WatchInfoContainer'
 import ChangeInfoContainer from './ChangeInfo/ChangeInfoContainer';
+import ActivitiesContainer from './Activity/ActivitiesContainer';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -73,7 +74,7 @@ export default function FullWidthTabs(props) {
         >
           <Tab label="Watch Info" {...a11yProps(0)} />
           <Tab label="Edit Info" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="History" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -88,7 +89,7 @@ export default function FullWidthTabs(props) {
           <ChangeInfoContainer iduser={props.iduser}/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
+          <ActivitiesContainer/>
         </TabPanel>
       </SwipeableViews>
     </div>
