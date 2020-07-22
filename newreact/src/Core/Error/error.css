@@ -1,0 +1,21 @@
+.artwork-404{
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.artwork-404 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 100px;
+    height: 500px;
+  }
+  .artwork-404 img {
+    max-height: 100%;
+  }

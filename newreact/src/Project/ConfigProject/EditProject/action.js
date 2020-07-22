@@ -130,10 +130,10 @@ export const EditProject = (id, project) => {
             }
         })
         .catch(error =>{
-            dispatch(Notification.ErrorAPI(error));
-            setTimeout(() => {
-                dispatch(Notification.hideNotification())
-            }, 5000)
+            // dispatch(Notification.ErrorAPI(error));
+            // setTimeout(() => {
+            //     dispatch(Notification.hideNotification())
+            // }, 5000)
         })
     }
 }

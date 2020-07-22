@@ -115,21 +115,11 @@ const useStyles2 = makeStyles({
 
 export default function CustomPaginationActionsTable(props) {
   const classes = useStyles2();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [page] = React.useState(0);
+  const [rowsPerPage] = React.useState(5);
   const activity = props.activity
  
-
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, activity.length - page * rowsPerPage);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
 
   return (
     <TableContainer component={Paper}>

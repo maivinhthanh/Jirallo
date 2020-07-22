@@ -5,19 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import * as actions from "./action";
 import { connect } from "react-redux";
-import { withStyles } from "@material-ui/core/styles";
-import { purple } from "@material-ui/core/colors";
 import { successModal } from "../../../Components/modalStatus";
-
-const ColorButton = withStyles(theme => ({
-  root: {
-    color: theme.palette.getContrastText(purple[500]),
-    backgroundColor: "#6A8DCD",
-    "&:hover": {
-      backgroundColor: "#3060BB"
-    }
-  }
-}))(Button);
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;

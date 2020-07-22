@@ -1,6 +1,5 @@
 import _ from 'lodash'
 
-
 const initialState = []
 
 const changeActive = (state, action) =>{
@@ -24,11 +23,6 @@ const getListUserInProject = (state, action) =>{
    return cloneState
 }
 
-const FindUserAction = (state, action) => {
-    let listAuth = _.clone(state)
-    listAuth = _.clone(action.data)
-    return listAuth
-}
 const editPermission = (state, action ) => {
     // return [...action.data.newUser]
     return state
@@ -38,8 +32,6 @@ const listUserReducer = ( state = initialState, action ) => {
         case 'GET_LIST_USER_IN_PROJECT': return getListUserInProject( state, action ); 
         case 'CHANGE_ACTIVE': return changeActive( state, action ); 
         case 'EDIT_PERMISSION_SUCCESS': return editPermission(state, action)
-
-        // case 'FIND_USER_LIKE_EMAIL': return FindUserAction(state, action)
 
         default: return state;
     }

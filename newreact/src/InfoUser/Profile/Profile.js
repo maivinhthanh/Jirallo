@@ -1,23 +1,9 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import { connect } from 'react-redux'
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    },
-  }));
-
 function Profile(props) {
-    const classes = useStyles();
     const { infouser } = props
         return (
             <div className='profile_wrapper'>

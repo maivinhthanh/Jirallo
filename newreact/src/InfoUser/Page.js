@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import jwtDecode from 'jwt-decode'
 
 import InfoUserUI from './infoUserUI'
@@ -16,7 +15,6 @@ class InfoUserContainer extends Component {
       
       return(
         <Grid>
-            {/* <Paper style={{height: '60px'}} /> */}
             <Profile/>
             <InfoUserUI iduser={id}/>
             
@@ -27,7 +25,6 @@ class InfoUserContainer extends Component {
     else{
       return (
         <Grid>
-            {/* <Paper style={{height: '60px'}} /> */}
             <Profile/>
             <InfoMeUI iduser={id}/>
         </Grid>

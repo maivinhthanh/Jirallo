@@ -9,7 +9,6 @@ import DatePicker from '../../../../src/Components/DatePicker'
 import * as action from './action'
 import './project.css'
 import _ from 'lodash'
-import Radio from '@material-ui/core/Radio';
 import { successModal } from '../../../Components/modalStatus';
 
 class EditProjectUI extends Component {
@@ -21,11 +20,6 @@ class EditProjectUI extends Component {
       description: _.get(this.props.project, 'description') || '',
       datecreate: _.get(this.props.project, 'datecreate') || '',
       dateedit: Date.now(),
-      // nameproject: this.props.projectAct.name,
-      // image: this.props.projectAct.image,
-      // description: this.props.projectAct.description || 'Not value',
-      // datecreate: this.props.projectAct.datecreate,
-      // dateedit: this.props.projectAct.hasOwnProperty('dateedit') ? this.props.projectAct.dateedit.slice(0, 10) : 'Not value',,
       flag: false,
       clearData: false,
       checked: this.props.id
@@ -83,59 +77,11 @@ class EditProjectUI extends Component {
 
     }
   }
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
 
   render() {
-    const { checked } = this.state
-    const { listproject } = this.props
     return (
       <div >
         <div className='row'>
-          {/* <div className='col-md-6'>
-            <div className="card"><div className="card-header"><i className="fa fa-align-justify" /> List Project</div>
-              <div className="card-body"><div className="table-responsive">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Check</th>
-                      <th>Name Project</th>
-                      <th>Leader</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                      _.map(listproject, (child, index) => {
-                        return (
-                          <tr>
-                            <td>
-                              <Radio
-                                name={'checked'}
-                                value={child._id}
-                                checked={checked === child._id}
-                                onChange={this.handleChange}
-                                inputProps={{ 'aria-label': 'primary checkbox' }}
-                              />
-                            </td>
-                            <td>{child.name}</td>
-                            <td>Member</td>
-                            <td><span className="badge badge-success">Active</span></td>
-                          </tr>
-                        )
-                      })
-                    }
-
-                  </tbody>
-                  <Button variant="outlined" color="primary">
-                    Edit
-                 </Button>
-                </table>
-              </div>
-              </div>
-            </div>
-          </div> */}
           <div className='col-md-12'>
             <Grid container direction="row" spacing={3} justify="center" alignItems="center">
               <Grid item xs={12} sm={8}>

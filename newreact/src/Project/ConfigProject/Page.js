@@ -6,6 +6,7 @@ import UI from './UI'
 import MenuProject from '../../Core/Home/Menu/MenuProject'
 import Toast from '../../Components/Toast'
 import * as action from './action'
+import Error from "../../Core/Error/error"
 
 class ConfigPage extends Component {
   componentWillMount(){
@@ -21,25 +22,21 @@ class ConfigPage extends Component {
   render() {
       const { match: { params } } = this.props
       const { note, authProject } = this.props
-      if(authProject.hasAuth === true){
+      if(authProject.hasAuth === true && authProject.position === "manager"){
         return (
           <Grid style={{ height: '100%'}}>
-            
-                <MenuProject idproject={params.id}/>
-                <UI idproject={params.id}/>
-                <Toast open={note.show} message={note.message} type={note.type} />
-
+            <MenuProject idproject={params.id}/>
+            <UI idproject={params.id}/>
+            <Toast open={note.show} message={note.message} type={note.type} />
           </Grid>
         )
       }
       else{
         return(
           <Grid style={{ height: '100%'}}>
-            
-                <MenuProject idproject={params.id}/>
-                <p>Project không tồn tại</p>
-                <Toast open={note.show} message={note.message} type={note.type} />
-
+            <MenuProject idproject={params.id}/>
+            <Error />
+            <Toast open={note.show} message={note.message} type={note.type} />
           </Grid>
         )
       }

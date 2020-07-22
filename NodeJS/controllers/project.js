@@ -401,7 +401,7 @@ exports.deleteMember = async (req, res, next) => {
         const iduser = req.body.iduser
 
         const project = await Project.findByIdAndUpdate(idproject, {
-            $pull: { idmembers: { $in: [ ObjectId(iduser) ] } }
+            $pull: { idmembers: { $in: {id: iduser} } }
         },{ new: true })
 
         res.status(200).json(project)

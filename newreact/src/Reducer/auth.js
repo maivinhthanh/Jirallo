@@ -48,12 +48,6 @@ const LogOut = (state, action) =>{
     return updateObject(state,{error : true})
 }
 
-const getListUserInProject = (state, action) => {
-    let cloneState = _.clone(state)
-    cloneState = _.clone(action.data)
-    return cloneState
-}
-
 const FindUserAction = (state, action) => {
     let listAuth = _.clone(state)
     listAuth = _.clone(action.data)

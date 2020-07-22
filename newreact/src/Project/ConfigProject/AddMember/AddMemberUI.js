@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Table } from "reactstrap";
 import _ from "lodash";
@@ -7,10 +7,10 @@ import * as Config from "../../../Config";
 import CallApi from '../../../until/apiCaller';
 import Toast from "../../../Components/Toast";
 import './addMember.scss'
-import InputField from "../../BackLog/Backlog/inputField";
-import { Select, Spin  } from 'antd';
+import { Select, Spin, Modal  } from 'antd';
 
 const { Option } = Select;
+const { confirm } = Modal;
 
 class AddMemberUI extends Component {
   constructor(props) {
@@ -45,28 +45,11 @@ class AddMemberUI extends Component {
     }
   }
 
-  addMember = (id, position) => {
-    const params = this.props.project._id;
-    const user = { _id: id, position: 'developer' };
-    this.props.AddMemberIntoProject(params, user);
-  };
-  
-  handleAddMember = () => {
-    const { selectedValue } = this.state
-    this.addMember(selectedValue)
-  }
-  updatePosition = (id, pos) => {
-    this.props.editPermission(id, pos)
-  }
-  handleChange = (e) => {
-    this.setState({ selectedValue: e.target.value})
-  }
   handleChangeSelect = (e, item) =>{
     this.props.editPositionMember(this.props.project._id,_.get(item, ["id", "_id"]),e)
   }
   fetchUser = value => {
     this.lastFetchId += 1;
-    const fetchId = this.lastFetchId;
     this.setState({ data: [], fetching: true });
     CallApi('auth/findUserLikeEmail', 'POST',{email:value},'token')
     .then( response => {
@@ -91,11 +74,22 @@ class AddMemberUI extends Component {
       fetching: false,
     });
   };
+
+  showConfirm(iduser, deleteMember) {
+    const idproject = this.props.project._id
+    confirm({
+      title: 'Bạn có muốn xóa thành viên này',
+      onOk() {
+        deleteMember(idproject, iduser)
+      }
+    });
+  }
   
   render() {
     const { listMember } = this.props;
-    const { note, auth, selectedValue } = this.state;
+    const { note} = this.state;
     const { fetching, data, value } = this.state;
+    const idMe = JSON.parse(localStorage.getItem("user"))._id
     return (
       <div className="row">
         <div className="col-12">
@@ -148,12 +142,16 @@ class AddMemberUI extends Component {
                     <td>{_.get(item, ["id", "email"], "default")}</td>
                     <td>
                       <Select defaultValue={_.get(item, ["position"])} style={{ width: 120 }} onChange={(v)=>this.handleChangeSelect(v, item)}>
-                        <Option value="develeper">Develeper</Option>
+                        <Option value="developer">Developer</Option>
                         <Option value="manager">Manager</Option>
                         <Option value="teacher" >Teacher</Option>
                       </Select>
-                   </td>
-                    
+                    </td>
+                    <td> {
+                      idMe !== _.get(item, ["id", "_id"], "default") && <i className="fa fa-trash" 
+                        onClick={()=>this.showConfirm(_.get(item, ["id"], "default"), this.props.deleteMember)}></i>
+                      }
+                    </td>
                   </tr>
                 );
               })}
@@ -175,10 +173,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     findUserLikeEmail: email => dispatch(action.findUserLikeEmailAct(email)),
-    AddMemberIntoProject: (idproject, user) =>
-      dispatch(action.AddMemberAct(idproject, user)),
+    AddMemberIntoProject: (idproject, user) => dispatch(action.AddMemberAct(idproject, user)),
     getListUserInProject: id => dispatch(action.getListUserInProject(id)),
-    editPositionMember: (idproject, iduser, pos) => dispatch(action.editPositionMember(idproject, iduser, pos))
+    editPositionMember: (idproject, iduser, pos) => dispatch(action.editPositionMember(idproject, iduser, pos)),
+    deleteMember: (idproject, iduser) => dispatch(action.DeleteMemberAct(idproject, iduser)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AddMemberUI);
