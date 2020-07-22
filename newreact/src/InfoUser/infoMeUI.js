@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 import ChangeInfo from './ChangeInfo/ChangeInfoContainer'
+import ActivitiesContainer from './Activity/ActivitiesContainer';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -72,7 +73,7 @@ export default function FullWidthTabs(props) {
         >
           <Tab label="Change Info" {...a11yProps(0)} />
           <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="History" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -87,7 +88,7 @@ export default function FullWidthTabs(props) {
           Item Two
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
+          <ActivitiesContainer/>
         </TabPanel>
       </SwipeableViews>
     </div>
