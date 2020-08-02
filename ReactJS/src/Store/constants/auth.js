@@ -1,7 +1,0 @@
-export const Login = 'Login'
-export const LoginFail = 'LoginFail'
-export const Register = 'Register'
-export const RegisterFail = 'RegisterFail'
-export const EditUserSuccess = 'EditUserSuccess'
-export const EditUserFail = 'EditUserFail'
-export const LogOut = 'LogOut'

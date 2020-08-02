@@ -1,5 +1,0 @@
-export const getGroup = 'getGroup'
-export const getGroupAction = 'getGroupAction'
-export const createGroup = 'createGroup'
-export const createError = 'createError'
-export const getListGroup ='getListGroup'
