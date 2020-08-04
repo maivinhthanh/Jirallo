@@ -46,15 +46,7 @@ class BackLogPage extends Component {
                 <Toast open={note.show} message={note.message} type={note.type} />
              </Grid>
           </Grid>
-          // <div className='row'>
-          //   <div className='col-md-1 item-left' style={{ background: 'cornflowerblue'}}>
-          //   <MenuProject idproject={params.id}/>
-          //   </div>
-          //   <div className='col-md-11 item-right'>
-          //   <UI idproject={params.id} />
-          //       <Toast open={note.show} message={note.message} type={note.type} />
-          //   </div>
-          //  </div>
+         
         )
       }
       else{

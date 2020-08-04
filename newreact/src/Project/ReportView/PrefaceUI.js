@@ -31,23 +31,13 @@ const useStyles = makeStyles({
 
 export default function PrefaceUI(props) {
   const classes = useStyles();
-  
   return (
     <div className="Cover">
       <div className={classes.A4} >
         <div className={classes.coverTitle}>
           LỜI CÁM ƠN
         </div>  
-        <div className={classes.coverContent}>
-        {
-            _.map(props.info.preface, (item, index)=>{
-              return(
-                <div key={index}>{item}</div>
-              )
-            })
-          }
-          
-        </div> 
+        <div className={classes.coverContent}>{props.info.preface}</div> 
         <div className={classes.coverFooter}>
           Xin chân thành cảm ơn!
         </div> 
