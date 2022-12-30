@@ -20,7 +20,7 @@
     "googleapis": "^42.0.0",
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.19",
-    "mocha": "^6.2.0",
+    "mocha": "^10.2.0",
     "mockgoose": "^8.0.3",
     "mongoose": "^5.3.2",
     "multer": "^1.4.0",
